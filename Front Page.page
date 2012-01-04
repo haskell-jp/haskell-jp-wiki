@@ -1,12 +1,20 @@
-# Welcome to Gitit!
+# ようこそHaskellJP wikiへ!
 
-This is the front page of your new gitit wiki.  You can edit this
-page by clicking on the "edit" tab at the top of the screen.
-For instructions on how to make a link to another wiki page, see [the
-Help page](Help#wiki-links). To create a new wiki page, just create a
-link to it and follow the link.
+まだベータ試験中です。
+[sampou.org](http://www.sampou.org/cgi-bin/haskell.cgi)
+からの移行作業中です。
+ひょっとすると現在保存しているデータは消えるかもしれないです。
 
-Help is always available through the "Help" link in the sidebar.
-More details on installing and configurating gitit are available
-in the [Gitit User's Guide]().
+## このサイトについて
+このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。
+ユーザアカウントさえ取っていただければ、どなたでも自由に書き込んでください。
 
+このWikiは
+[gitit](http://gitit.net/)
+というWikiエンジンで運用されています。
+gititの使い方は左サイドバーの
+"Help"
+リンクを見てください。
+もっと詳細な解説が
+[Gitit User's Guide]()
+にあります。
