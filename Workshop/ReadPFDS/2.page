@@ -1,0 +1,29 @@
+# 調整
+[Purely Functional Data Structures読書会 第2回 - [PARTAKE]](http://partake.in/events/6384dcac-be21-4cdd-8d8f-1e543fe13d0b)
+
+# スケジュール
+* ネタ発表: HaskellのData.Mapについて @dekosuke
+* 練習問題発表: 各自
+
+# 資料
+* [Data.mapについて](http://www.slideshare.net/dekosuke/datamap)
+* [Exercise 2.2-2.5: yuga/readpfds - GitHub](https://github.com/yuga/readpfds)
+* [Exercise 3.1: kazu-yamamoto's gist: 1378600 — Gist](https://gist.github.com/1378600)
+* [その他フォロー: khibino/pfds-read - GitHub](https://github.com/khibino/pfds-read)
+
+## 補足資料
+* [Exercise 3.2 imusuten さんの資料(未発表)](http://blog-ja.intransient.info/2011/11/leftistheap-in-haskell.html)
+* [Exercise 2.1 のコード例](https://github.com/seizans/pfds/blob/master/2/suffixes.hs)
+
+# 議事録
+## 録画と写真
+[録画1](http://ja.justin.tv/kiwamu/b/300397547)
+[録画2](http://ja.justin.tv/kiwamu/b/300397577)
+
+[写真](http://www.flickr.com/photos/masterq/sets/72157628050610677/)
+
+## ネタ案出し
+![](http://farm7.staticflickr.com/6096/6363106371_2aecf8b73e.jpg)
+
+# 次回
+[3]()
