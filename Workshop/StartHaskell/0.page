@@ -1,0 +1,24 @@
+# 第0回スタートHaskellまとめ
+
+## 事前アンケート
+* [事前アンケート結果](https://docs.google.com/viewer?a=v&pid=explorer&chrome=true&srcid=0BxDzSpQck49WYjNhNzE4YjAtZWU0Zi00ODY5LThmM2QtMmMyOWQxYjUyMjMx&hl=en_US)
+
+## プレゼン資料
+* トラビスさんの[『Haskell紹介』](http://groups.google.com/group/start-haskell/browse_thread/thread/93ef301b4168fceb)
+* @tanakh さんの[『Haskellアプリ紹介（お楽しみ会）』](http://groups.google.com/group/start-haskell/browse_thread/thread/782124d66eef9b6d)
+* トラビスさんの[『Haskell Platform インストール Linux編』](http://groups.google.com/group/start-haskell/browse_thread/thread/5230952afae92349)
+* @shelarcy さんの[『Haskell Platform インストール Mac編』](http://groups.google.com/group/start-haskell/browse_thread/thread/176c6251bdbec68b)
+* @tanakh さんの[『Haskell Platform インストール Windows編』](http://groups.google.com/group/start-haskell/browse_thread/thread/f31af0c86742e746)
+* トラビスさんの[『Haskellサンプルプログラミング』](http://groups.google.com/group/start-haskell/browse_thread/thread/3ddb946f3ff9e619)
+* @masterq さんのLT『CairoでほっかりGUIプログラミング』[スライド](http://www.slideshare.net/master_q/cairogui), [ソース](https://gitorious.org/carettah)
+* @tanakh さんのLT[『Cloud Haskell』](http://groups.google.com/group/start-haskell/browse_thread/thread/1621977f1669632e)
+* @kazu_yamamoto さんの[『(続) Haskell でWeb サーバーを実装してみました』](http://www.mew.org/~kazu/material/2011-mighttpd2.pdf)
+* @pi8027 さんの[『型から項を作る』](https://github.com/downloads/pi8027/docs/2011-07-24.pdf)
+
+## 写真と動画
+* @master_q さんが [当日の写真](http://www.flickr.com/groups/start_haskell/pool/) をまとめてくださいました。
+* @master_q さんと @takatayoshitake さんが当日のUstreamを流してくださいました。[master_qさん](http://www.ustream.tv/channel/start-haskell),[takatayoshitakeさん](http://www.ustream.tv/channel/start-haskell-b)
+* @h_hirai さんの動画[『Mac に Haskell を入れる 』](http://www.youtube.com/watch?v=gPGBQWoBaV4)
+
+## その他
+* @primnumさんの『「第0回 スタートHaskell　まとめ＃０」をトゥギャりました。』[#0](http://togetter.com/li/165547),[#0-1](http://togetter.com/li/165606)
