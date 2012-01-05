@@ -1,0 +1,176 @@
+![](http://farm4.static.flickr.com/3184/5758670438_6756914019.jpg)
+
+# 調整
+## 出欠確認
+[初心者Haskell勉強会第3回 - PARTAKE](http://partake.in/events/2e985699-5b67-4948-a1b4-1810b652971e)
+
+## 日時
+2011/05/25(水) 19:00-22:00
+
+## 場所
+[喫茶室ルノアール 横浜関内駅前店 マイスペース1号室](http://www.ginza-renoir.co.jp/myspace/mys078.htm)
+
+# 資料
+## 宿題 (出題:@yuzutechnology)
+[StackとQueueを作ってみよう](https://github.com/yuzutechnology/Community-Okabe2011/blob/master/HW001-StacksAndQueues.md)
+
+## 宿題回答
+### @seizans
+[queue.hs](https://github.com/seizans/Algorithms-in-Haskell/blob/master/queue.hs)
+[stack.hs](https://github.com/seizans/Algorithms-in-Haskell/blob/master/stack.hs)
+
+### @master_q
+[20110525_StackAndQueue/](https://github.com/master-q/Haskell-Homework/tree/master/20110525_StackAndQueue)
+
+### @s_h_i_g_e_chan
+["Stack.hs" :: a note in allegronontroppo's Springpad](http://springpadit.com/allegronontroppo/7d8c441e/159c/4bdb/9c1c/789698290570)
+["Queue.hs" :: a note in allegronontroppo's Springpad](http://springpadit.com/allegronontroppo/f6adf53a/5514/4806/ae8b/bb004254d0a3)
+
+## Arrowの簡単な説明 (解説:@khibino)
+[スライド(pdf)](https://github.com/master-q/Haskell-Homework/raw/master/20110525_Arrow/arrow.pdf)
+[khibino / haskell-beginner / overview – Bitbucket](https://bitbucket.org/khibino/haskell-beginner)
+
+# 議事録
+## 録画と写真
+[録画](http://www.ustream.tv/recorded/14946412)
+[写真](http://www.flickr.com/photos/masterq/sets/72157626683782687/)
+
+## 宿題回答について
+### @seizans
+(感想として)classの作り方がむずかしかった。
+
+~~~ { .haskell }
+class Stack s where
+  empty :: s b
+  isempty :: s b -> Bool
+  cons :: s b -> b -> s b
+~~~
+
+の場合のbっていきなり出てきていいの？(<=慣れるしかない。。。)
+isEmptyはパターンマッチを使っても書ける。↓の例だと順序に注意。
+
+~~~ { .haskell }
+isEmpty (MakeStack []) = True
+isEmpty _ = False
+~~~
+
+pop関数のパターンマッチには失敗することがあるので、
+失敗するパターンにはerror関数で拾うと人間にわかりやすい実行時エラーが出る。
+また、ghcの-Wallオプションを有効にするとコンパイル時にさえ警告になる。
+というか-Wallオプションは常時使えよ！(by @khibino)
+
+~~~ { .haskell }
+pop :: Stack a -> (a, Stack a)
+pop (MakeStack []) = error "attempt to pop an empty stack" -- <= この行が必要
+pop (MakeStack (x:xs)) = (x, MakeStack xs)
+~~~
+
+どうしてもパターンの前に"~"を付けて、反駁不能であることを宣言すること。("反駁不能"についてまとめ中 by @master_q)
+
+    @master_q groupBy' のように内側のパターン照合と if を交換すれば止まるようにできますが、そうではなくて groupBy'' のように書きたいとき には ~ が使えるという話です。わかりにくいかな...
+    khibino 2 日前
+    @master_q PreludeのgroupByと同じものを書こうとしてみたときに、groupByBad のように書くと、無限リストの入力を与えたときに止まりません (testBad2)
+    khibino 2 日前
+    @master_q さきほどの話の例ですが、こんなのはどうでしょう。 http://ideone.com/6nST9
+    khibino 2 日前
+
+詳しくは
+[A Gentle Introduction to Haskell: Patterns](http://www.sampou.org/haskell/tutorial-j/patterns.html)
+を参照。
+
+Queueを↓のようにBatchedQueueな構造にした場合、同じ意味でも異なる構造を取ることがある。
+そのためderivingによる自動導出は正しい意味を持たない。自分で同等の関数を実装するべき。
+
+~~~ { .haskell }
+data Queue a = MakeQueue ([a], [a])
+       deriving (Eq, Ord, Show, Read)
+~~~
+
+isEmptyが↓のように定義されているということは、
+MakeQueueの右側リストに要素が存在する場合には左側リストが空になってはいけないということになる。(不変条件)
+
+~~~ { .haskell }
+isEmpty (MakeQueue (xs, _)) = null xs
+~~~
+
+dequeue関数は↓のように書かれているが、冗長かもしれない。
+
+~~~ { .haskell }
+dequeue (MakeQueue (xs, ys)) = (queueHead (xs, ys), MakeQueue (queueTail (xs, ys) ) )
+~~~
+
+↓のように簡潔に書ける。
+
+~~~ { .haskell }
+dequeue (MakeQueue (x:xs, ys)) = (x, MakeQueue (valid (xs, ys) ) )
+~~~
+
+### @master_q
+
+公開インターフェイスはStackのみ全公開にすること。カプセル化がくずれてしまう。
+
+~~~ { .haskell }
+module Stack (Stack(..), SimpleStack(..)) where -- SimpleStackの中を弄れてしまうので、、、
+module Stack (Stack(..), SimpleStack) where -- Stack経由でSimpleStackを使うように直す
+~~~
+
+全体的に不要な括弧が多すぎる。関数適用は演算子よりも優先度が高いので、↓の例では括弧が不要。
+(空白に対する恐怖が。。。 by @master_q)
+
+~~~ { .haskell }
+-- 括弧が多い例
+  isEmpty :: (s a) -> Bool
+  cons    :: a -> (s a) -> (s a)
+  head    :: (s a) -> a
+  tail    :: (s a) -> (s a)
+-- ↑のような括弧ははずすことができる
+  isEmpty :: s a -> Bool -- "s a"は関数適用、"->"演算子のようなもの、関数適用の方が優先度が上 慣れろ!!!!
+  cons    :: a -> s a -> s a
+  head    :: s a -> a
+  tail    :: s a -> s a
+~~~
+
+上記のような冗長な記述はhlintコマンドを使えば自動的に教えてくれる。
+よくMakefileのtestターゲットにHUnitのテストと共にhlintの適用も入れることがある。(by @yuzutechnology)
+
+今回の例で、isEmpty関数はempty関数を使って実現できるはずだが、
+↓の例だと"SS ss"のssの型が推論できずにコンパイルエラーになってしまう。
+Haskellには型推論があるが、人間で書けるところは人力で書く癖を付けておいた方が(人間の)混乱が少ない。
+
+~~~ { .haskell }
+   isEmpty (SS ss) = null ss -- これは↓のように記述できるはずだが、、、
+   isEmpty = ( == empty) -- これは推論できない？うわーん
+~~~
+
+"="の右辺で使わないパターンは"_"を使うようにすること。例えば、、、
+
+~~~ { .haskell }
+    head (SS (x:xs)) = x -- <= xsは使わないよね？
+    head (SS (x:_)) = x -- <= 使わないなら明示的に"_"で捨てること
+~~~
+
+前回も指摘したが、「呼び出される回数が多いモノ」から順番にパターンマッチを書くように気をつけること。
+errorで拾うパターンは明らかに実行される頻度が低いはず。
+
+さきほど、括弧が多いと指摘したが、
+↓の例の場合"(Maybe s) a"と解釈されないようにするために"Maybe (s a)"と書かなければならない。
+
+~~~ { .haskell }
+  tail    :: s a -> Maybe (s a) -- Maybeとsがくっつかないようにカッコつける!
+~~~
+
+## Arrowの簡単な説明 (解説:@khibino)
+xxxxxxxxxxxx
+
+## ネタ案出し
+* 宿題第二回のネタは既にある (@yuzutechnology)
+* pandocかgititの利用者として困りネタ説明 (@master_q)
+* Stateモナドについて (@master_q)
+
+## 会計
+![ルノアールのレシート](http://farm6.static.flickr.com/5103/5758673614_82336d58bf_m.jpg)
+
+(9140円 - 1000円(前回からの繰り越し)) / 7人 = 1200円/人
+
+# 次回
+[4]()
