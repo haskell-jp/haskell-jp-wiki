@@ -1,19 +1,8 @@
 # このWiki全体のライセンス
 本サイトに掲載された情報は特に明記や出自がない場合
-[BSD3ライセンス](License/BSD3)
+[HaskellWikiのライセンス](http://www.haskell.org/haskellwiki/HaskellWiki:Copyrights)
 を適用するものとします。
 
 # このWikiのロゴのライセンス
-Travis Cardwellさんに確認中。
-
-~~~ { .text }
-> 虎さんが作成されたスタートHaskellロゴですが、ライセンスはどのようになっているでしょうか。
-
-すみません。柚子テクノロジーのウェブサイトはまだ終わってないです…
-終わったら、ロゴの情報を発行します。
-ライセンスは「(CC) BY-NC-SA」の方をする予定です：
-
-http://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja
-
-著作権者は「Yuzu Technology」です。
-~~~
+「Haskell書道ロゴ」の著作権は[柚子テクノロジー](http://www.yuzutechnology.com/)が所有いたします。
+[CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja)のライセンスでリリースされています。
