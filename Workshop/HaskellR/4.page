@@ -1,0 +1,57 @@
+# 調整
+## 出欠確認
+[初心者Haskell勉強会第4回 - [PARTAKE]](http://partake.in/events/8ccdc151-b758-47af-9ff2-91216bd5d3c4)
+
+## 日時
+2011/06/08(水) 19:00-22:00
+
+## 場所
+喫茶室ルノアール 横浜関内駅前店 マイスペース
+
+# 資料
+
+## 宿題 (出題:@yuzutechnology)
+* [課題2：「number」と「rpncalc」](https://github.com/yuzutechnology/Community-Okabe2011/blob/master/HW002-NumberAndRPNCalc.md)
+
+## gititとpandocについて (解説:@master_q)
+* [Wiki設置するならgitit!](http://www.slideshare.net/master_q/20110528-qpstudy)
+* [わかった気になるgitit-0.8](http://www.slideshare.net/master_q/20110608-haskell-rgitit)
+
+# 議事録
+## 録画
+* [録画1](http://www.ustream.tv/recorded/15241619)
+* [録画2](http://www.ustream.tv/recorded/15242011)
+* [録画3](http://www.ustream.tv/recorded/15242986)
+
+## 宿題答えあわせ
+### @s_h_i_g_e_chan
+* ["宿題： number" :: a note in allegronontroppo's Springpad](http://springpadit.com/allegronontroppo/5a4946fd/5d53/4e9b/85ea/532b5efe5d9c)
+
+### @seizans
+* [20110608_StateMonad/seizans_rpn.hs at master from master-q/Haskell-Homework - GitHub](https://github.com/master-q/Haskell-Homework/blob/master/20110608_StateMonad/seizans_rpn.hs)
+
+### @shokos
+* [20110608_StateMonad/shokos_number.hs at master from master-q/Haskell-Homework - GitHub](https://github.com/master-q/Haskell-Homework/blob/master/20110608_StateMonad/shokos_number.hs)
+
+### @khibino
+* [khibino / haskell-beginner / source – Bitbucket](https://bitbucket.org/khibino/haskell-beginner/src/724bab8b8e39/exercise/2/)
+
+### @master_q
+* [Projects/number at feature/HW002-answer from master-q/Community-Okabe2011 - GitHub](https://github.com/master-q/Community-Okabe2011/tree/feature%2FHW002-answer/Projects/number)
+* [Projects/rpncalc at feature/HW002-answer from master-q/Community-Okabe2011 - GitHub](https://github.com/master-q/Community-Okabe2011/tree/feature%2FHW002-answer/Projects/rpncalc)
+
+### @yuzutechnology
+
+## gititとpandocについて (解説:@master_q)
+
+## ネタ案出し
+次回は1.5ヶ月後ぐらい。
+@master_q の都合でちょっとお休み。
+
+## 会計
+![ルノアールのレシート](http://farm6.static.flickr.com/5113/5811491599_d097353de6_m.jpg)
+
+7010円 / 6人 = 1200円/人
+
+# 次回
+[5]()
