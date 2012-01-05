@@ -1,0 +1,35 @@
+# 調整
+[Purely Functional Data Structures読書会 第3回 - [PARTAKE]](http://partake.in/events/1b102ef9-f1ee-48a3-991b-7bdded376a7d)
+
+# スケジュール
+## 練習問題回答発表
+* 2.6: @1to100pen (バックアップ: @khibino)
+* 3.2: @imsuten
+* 3.4: @khibino
+* 3.5: @master_q
+* 3.6: @seizans
+* 3.7: @nobsun
+* 3.8: @finalfusion
+* 3.9: @shTaag
+* 3.10: @ope
+
+## 4章について解説: @master_q
+
+# 資料
+* [4章のStreamをOCamlで書いてみた](https://github.com/master-q/readPurelyFunctionalDataStructures/tree/master/LazyEvaluation)
+* [LeftistHeap in Haskell | Success is a Journey, not a Destination](http://blog-ja.intransient.info/2011/11/leftistheap-in-haskell.html)
+* [2/BinomialHeap.hs at master from seizans/pfds - GitHub](https://github.com/seizans/pfds/blob/master/2/BinomialHeap.hs)
+* [test/Test.hs at master from kazu-yamamoto/bst - GitHub](https://github.com/kazu-yamamoto/bst/blob/master/test/Test.hs)
+* [Test.QuickCheck.All](http://hackage.haskell.org/packages/archive/QuickCheck/2.4.1.1/doc/html/Test-QuickCheck-All.html)
+* [pfds/RedBlackSet.hs at master from shtaag/Haskell - GitHub](https://github.com/shtaag/Haskell/blob/master/pfds/RedBlackSet.hs)
+* [Data/RBTree/Original.hs at master from kazu-yamamoto/llrbtree - GitHub](https://github.com/kazu-yamamoto/llrbtree/blob/master/Data/RBTree/Original.hs)
+* [ch03/ex34 at master from khibino/pfds-read - GitHub](https://github.com/khibino/pfds-read/tree/master/ch03/ex34)
+* [PFDS exercise3.8 - Google ドキュメント](https://docs.google.com/document/d/1MfH9-GXHzemYUaM3LagyBcN12GdyPPxeyvJ3VyQAoAo/edit?hl=ja)
+
+# 議事録
+## 録画と写真
+
+## ネタ案出し
+
+# 次回
+[4]()
