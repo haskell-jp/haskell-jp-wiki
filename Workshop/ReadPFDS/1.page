@@ -1,0 +1,84 @@
+![](http://farm7.static.flickr.com/6162/6222753355_58bf784169_m.jpg)
+
+# 調整
+[Purely Functional Data Structures読書会 第1回 - PARTAKE](http://partake.in/events/a4cd0438-7ca8-4d82-bda8-a2dc330e4a97)
+
+# スケジュール
+↑のpartakeに書いた。
+
+# 資料
+
+* [Weight-Balanced Trees](http://www.mew.org/~kazu/proj/weight-balanced-tree/)
+* [2章について @master_q](http://www.slideshare.net/master_q/readpfds1)
+* [Leftist Heap - 言語ゲーム](http://d.hatena.ne.jp/propella/20091123/p1)
+* [PFDSの例をOCamlで Functor使って実装してみた @khibino](https://github.com/khibino/pfds)
+* ["Efficient sets: a balancing act" をもとに DData というライブラリを作成。（現在は containers パッケージに収録）](http://legacy.cs.uu.nl/daan/ddata.html)
+* ["Trends in Functional Programming 2011" の "Adams' Trees Revisited - Correct and Efficient Implementation"](http://fox.ucw.cz/papers/bbtree/)
+* [Matthieu Sozeau :: Dependent Finger Trees in Coq](http://mattam.org/research/russell/fingertrees.en.html)
+* [Matthieu Sozeau :: Coq stuff](http://mattam.org/research/coq.en.html)
+* [sneezy.cs.nott.ac.uk/darcs/DTP08/slides/Matthieu.pdf](http://sneezy.cs.nott.ac.uk/darcs/DTP08/slides/Matthieu.pdf)
+* [2-3 フィンガーツリーを図で説明](http://ja.wikipedia.org/wiki/2-3_%E3%83%95%E3%82%A3%E3%83%B3%E3%82%AC%E3%83%BC%E3%83%84%E3%83%AA%E3%83%BC)
+* [Animated working of a Two-Three-Four tree - a kind of B-Tree](http://www.cse.ohio-state.edu/~bondhugu/acads/234-tree/index.shtml)
+* [Haskellの正格フラグについて](http://www.sampou.org/haskell/report-revised-j/decls.html#strictness-flags)
+* [優先度付きキューの実装に FingerTree を使 ...](https://twitter.com/#!/shelarcy/status/10306836600)
+* [この辺りの議論は Trac ではなく librari ...](https://twitter.com/#!/shelarcy/status/10306935686)
+* [HackageDB: PSQueue-1.1](http://hackage.haskell.org/package/PSQueue)
+* [GHC/Event/PSQ.hs](http://www.haskell.org/ghc/docs/7.2.1/html/libraries/base-4.4.0.0/src/GHC-Event-PSQ.html)
+* [ちなみに pqueue パッケージの実装は binomial heap ベースです。](http://hackage.haskell.org/package/pqueue)
+* [Missing method: How to delete from Okasaki's red-black trees](http://matt.might.net/articles/red-black-delete/)
+* [Chris Okasaki ファンなら、EdisonCoreも見ておくと良い](http://hackage.haskell.org/package/EdisonCore)
+* [永続二色木 - あどけない話](http://d.hatena.ne.jp/kazu-yamamoto/20111012/1318389975)
+
+# 議事録
+## 録画と写真
+[録画1](http://ja.justin.tv/kiwamu/b/296970235)
+[録画2](http://ja.justin.tv/kiwamu/b/296970317)
+[録画3](http://ja.justin.tv/kiwamu/b/296970354)
+
+[写真](http://www.flickr.com/photos/masterq/sets/72157627845381244/)
+
+## Weight-Balanced TreesのパラメータをCoqによる証明で決定する話 @kazu_yamamoto
+[Weight-Balanced Trees](http://www.mew.org/~kazu/proj/weight-balanced-tree/)
+
+Coqを学ぶ必要性が理解できた。
+今は型を使ってアルゴリズム同士の界面のインピーダンスミスマッチを防止しているが、
+アルゴリズムそのもののエラーチェックをすうためには証明が非常に重要。
+
+## 2章 @master_q
+[2章について](http://www.slideshare.net/master_q/readpfds1)
+
+「Persistenceとはgitのようなバージョン管理システムと似ている」とブチあげたが、あえなく撃沈。。。 orz
+
+## 3-1章 Leftist Heaps @master_q
+[Leftist Heap - 言語ゲーム](http://d.hatena.ne.jp/propella/20091123/p1)
+
+Haskellerにとってはすんなり理解できるWebページ。さすが @propella さん。
+@master_q は時間がなくって資料作成をサボったらしい。
+
+## 3-2章 Binomial Heaps @imsuten
+[ホワイトボード](http://www.flickr.com/photos/masterq/6223272990/)
+
+ツリーがリストになっていて、リストの1要素がbitのように振る舞うのが面白い。
+
+## 3-3章 Red-Black Trees @kazu_yamamoto
+[永続二色木 - あどけない話](http://d.hatena.ne.jp/kazu-yamamoto/20111012/1318389975)
+
+Persistenceな実装と破壊的な実装では異なる赤黒木ができる。
+赤黒木はツリーが一意に決まるような規則ではないので、解釈によって異なるツリーができあがることはある。
+Persistenceは非破壊はので、関数型と相性が良いことがメリットだが、
+この例ではさらにアルゴリズムが単純化できるというメリットもおまけで付いてくることがある、
+ということを学んだ。
+
+## ネタ案出し
+![](http://farm7.static.flickr.com/6094/6222756685_8641128d71.jpg)
+
+とりあえず「演習問題の答あわせ+ネタ発表(あれば)」という勉強会スタイルにすることにした。
+
+# 次回
+[2]()
+
+![分担](http://farm7.static.flickr.com/6116/6223274228_33ea2a85fe.jpg)
+
+演習問題によって難易度がばらばらなので、わからないことは
+[Chaton haskell-ja](http://practical-scheme.net/chaton/haskell-ja/)
+で聞いてください。
