@@ -1,3 +1,4 @@
+# このWikiの運用について
 いまのところ @master_q が管理していまいます。
 もっとサーバサイドに詳しい人一緒にメンテしましょう！
 
@@ -14,3 +15,13 @@
 今のところ
 [gitit-wikidata](https://gitorious.org/wiki-haskell-jp/gitit-wikidata)
 へのpullリクエストは禁止しています。
+
+# このWikiで使っているgititプラグイン
+
+## TwitterUrl.hs
+
+    * まさか @master_q が変態だったなんて！
+
+と書くと以下のようにtwitterへのリンクになります。
+
+* まさか @master_q が変態だったなんて！
