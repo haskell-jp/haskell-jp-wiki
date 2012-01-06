@@ -1,9 +1,13 @@
 # ようこそHaskellJP wikiへ!
 
 まだベータ試験中です。
-[sampou.org](http://www.sampou.org/cgi-bin/haskell.cgi)
-からの移行作業中です。
 ひょっとすると現在保存しているデータは消えるかもしれないです。
+
+[sampou.org](http://www.sampou.org/cgi-bin/haskell.cgi)
+から
+[Old/sampou.org/]()
+カテゴリへデータを移管中です。
+移管中データの不備などありましたら @master_q まで連絡をください。
 
 ## このサイトについて
 このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。
