@@ -1,0 +1,16 @@
+いまのところ @master_q が管理していまいます。
+もっとサーバサイドに詳しい人一緒にメンテしましょう！
+
+本Wiki関連データは
+[gitorious.org](https://gitorious.org/wiki-haskell-jp/)
+にまとめて置いてあります。
+一日一度gititのgitリポジトリが
+[gitit-wikidata](https://gitorious.org/wiki-haskell-jp/gitit-wikidata)
+に自動pushされます。
+
+今のところWikiの更新はWebブラウザ経由のみです。
+技術的にはgit経由で更新することもできるかもしれません。
+サーバ側でコンフリクトが発生した場合にどうすればいいのかわからないので、
+今のところ
+[gitit-wikidata](https://gitorious.org/wiki-haskell-jp/gitit-wikidata)
+へのpullリクエストは禁止しています。
