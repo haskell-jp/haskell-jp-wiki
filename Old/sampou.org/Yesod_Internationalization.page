@@ -1,0 +1,87 @@
+# [Yesod\_Internationalization]()
+
+[Yesod]():Internationalization
+
+* * * * *
+
+## 国際化
+
+Yesod 0.8から多言語対応(言語カタログ的なもの)をサポートしてくれている。 使い方は簡単。
+
+### 準備
+
+まずアプリのソースMyApp.hsにMultiParamTypeClasses言語拡張を付ける。
+
+    {-# LANGUAGE MultiParamTypeClasses #-}
+
+モジュールをインポートしておく。
+
+    import Text.Hamlet.NonPoly (IHamlet, ihamletFile)
+
+このihamletFileがhamletFileの国際化版。
+また、hamletToRepHtmlとかの国際化版であるihamletToRepHtmlというのもある。
+
+### mkMessage
+
+次にmkMessageする。 こいつはStaticFilesなんかと似たようなものみたい。
+
+    mkMessage "MyApp" "messages" "en"
+
+とかする。引数はアプリの名前、メッセージファイルを置くディレクトリ、デフォルト言語かな。
+これやると勝手にMyAppMessageという型が出来るっぽい。 ハンドラとかはMyAppをインポートしてると思うのでexportリストに追加。
+
+         :
+      , MyAppMessage (..)
+         :
+
+### ihamletFile,ihamletToRepHtml
+
+例えば、MyAppのYesod instance宣言で
+
+        defaultLayout widget = do
+            mmsg <- getMessage
+            pc <- widgetToPageContent $ do
+                widget
+                addCassius $(Settings.cassiusFile "default-layout")
+            ihamletToRepHtml $(ihamletFile "hamlet/default-layout.hamlet")
+
+こんな感じにihamlet\*に書き換える。 ファイルパスは相対でしかもフルネームで(つまり拡張子を付けて)指定する。
+hameltの中は次のようにする。
+
+    !!!
+    <html
+        <head
+            <title>#{pageTitle pc}
+            ^{const $ pageHead pc}
+        <body
+            $maybe msg <- mmsg
+                <div #message>#{msg}
+            <div> _{MsgXxx}
+            <div> _{MsgYyy}
+            ^{const $ pageBody pc}
+
+使う場合の記法としては\_{MsgHoge}という風に\_(アンダースコア)を先頭に付けてから、 カーリーブレースで式を囲めば良い。
+プレフィックスとしてMsgを付ける必要があるので注意。 この様に書いておくと、上の方でmkMessageの第二引数で指定したフォルダ中で、
+ja.msgとかen.msgとかのファイルを用意しておけば適当に置換してくれるっぽい。 なお、国際化版では{pageHead
+pc}とか{pageBody pc}は {const $ pageHead pc}のように書き換えること。
+
+### メッセージカタログファイル
+
+ちなみにja.msgファイルは
+
+    Xxx: ほげほげ
+    Yyy: フガフガ
+
+とか書いておけばXxxがMsgXxxとしてhamlet中で参照できる。
+
+あと、引数を取るようなケースはこうやる。
+
+    WelcomeUser name@Text: ようこそ #{name}
+
+hamletの中では普通に\#{}なんかと同様に引数に渡せばいい。
+
+    <div>_{MsgWelcomeUser $ userFullName u}
+
+* * * * *
+
+Last modified : 2011/06/07 14:37:47 JST

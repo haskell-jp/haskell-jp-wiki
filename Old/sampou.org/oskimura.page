@@ -1,0 +1,50 @@
+# [oskimura]()
+
+* * * * *
+
+[あとでかく] 素人です。よろしくお願いします。
+
+-   プロフィール
+    -   名前: きむら おさむ
+    -   生年月日: 1981/01/19
+
+-   計算機関連参加コミュニティー
+    -   RHG (Ruby,Haskell,Gauche user's Group)
+    -   TLUG (Tokyo Linux User Group)
+    -   YLUG (Yokohama Linux User Group 別名:カーネル読書会)
+    -   Debian勉強会
+    -   素人くさいSICP
+    -   仮想化技術友の会
+    -   圏論勉強会
+    -   暗黒通信団
+
+-   Web
+    -   [はてなダイアリー](http://d.hatena.ne.jp/oskimura)
+    -   [はてなブックマーク](http://b.hatena.ne.jp/oskimura)
+    -   [Twitter](http://twitter.com/oskimura)
+    -   [たまにミーティングの動画中継してる](http://ustream.tv/oskimura)
+    -   [I Know!
+        (友達が開発してる英語学習SNS)](http://www.iknow.co.jp/user/oskimura)
+
+-   memo
+    -   2009/4/29
+
+Control.Monad.Transをインポートしたソースをコンパイルしようとしたら次のようなエラーがでた
+
+        Could not find module `Control.Monad.Trans':
+          it was found in multiple packages: transformers-0.1.4.0 mtl-1.1.0.2
+
+なのでGoogle先生にお伺いを立てると次のページがヒットした
+
+[http://www.nabble.com/-GHC---3183:-unhelpful-wording-in-module-error-message-td23160690.html](http://www.nabble.com/-GHC---3183:-unhelpful-wording-in-module-error-message-td23160690.html)
+
+     We might also want the message to suggest the flags `-hide-all-packages`,
+      `-hide-package` and/or `-package` as part of the solution. 
+
+とのことなので、
+
+オプションに"-hide-package transformers"をつけることで解決した。
+
+* * * * *
+
+Last modified : 2009/04/29 03:38:04 JST

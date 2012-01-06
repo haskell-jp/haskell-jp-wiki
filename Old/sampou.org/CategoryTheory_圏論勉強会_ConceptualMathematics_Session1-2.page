@@ -1,0 +1,63 @@
+# [CategoryTheory\_圏論勉強会\_ConceptualMathematics\_Session1-2]()
+
+[CategoryTheory]():[圏論勉強会]():[ConceptualMathematics]():Session1-2
+
+* * * * *
+
+## 第一回圏論勉強会
+
+2004-11-20 (土) タイムインターメディアにて 13:00 -
+
+出席者
+
+           山下     酒井   |ス
+          +-------------+  |ク
+          |             |  |リ
+          +-------------+  |｜
+           Shelarcy 豊福   |ン
+
+### 始まる前
+
+-   パーサジェネレータは Happy と Parsec のどっちがよい？
+-   Sコンビネータは標準モジュールに入ってない
+-   変数消去してると flip と (.) の使い方に慣れる
+-   Haskell で名前つきパラメータ
+
+<!-- -->
+
+          func (a=x, b=y, c=z)
+
+をやるにはタプルや Assoclist
+として渡してやればいいけど、渡す順序によって型が変わっちゃう。文字列として渡すなら型が変わることはないけど……
+
+### Session 1
+
+-   p14. oatmeal はチャーリー＝ブラウンの嫌いな食べ物
+    -   みんな oatmeal は嫌いなんだ
+
+-   1950 年代の映画のプロット - 三角関係
+-   p.16 irrelevant 関心のある
+-   ingredient 合成要素
+-   f o g o John という書き方ができるんだ (p.19 で説明)
+    -   f o g → (Computer Science) g : f
+
+-   この=の定義は A=B, B=A の同値関係を満たしている
+-   p.20 Exercise 6,7 については Everyday:2004-11-21およびそのコメントを参照
+-   p.21 BOOKKEEPING 貸方と借方が一致
+
+### Session 2
+
+-   p.30 空集合から空集合への写像の数は一つ。0\^0 = 1 が都合がいいのか。
+
+### 二次会
+
+-   Everyday Haskell みんなも書いてね。本当に everyday にしましょう
+-   平衡木
+-   単相性制限
+-   s k i と Unlambda
+-   レイアウト規則
+-   Programming:玉手箱:組合せの \*\*\* xs 1 のパターンの定義はいらないのが多いのでは
+
+* * * * *
+
+Last modified : 2006/06/15 01:58:44 JST

@@ -1,0 +1,23 @@
+# [ikegami]()
+
+* * * * *
+
+## Zsh completion for Haskell
+
+### ghc
+
+I wrote a completion function for ghc. (['\_ghc' file
+here](http://madscientist.jp/~ikegami/sources/_ghc))
+
+### darcs
+
+See [DarcsWiki for zsh
+completion](http://darcs.net/DarcsWiki/ShellCompletion).
+
+* * * * *
+
+Ike
+
+* * * * *
+
+Last modified : 2006/06/13 14:33:51 JST

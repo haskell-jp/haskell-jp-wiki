@@ -1,0 +1,138 @@
+# [Yesod\_0.6.7to0.7.1]()
+
+[Yesod]():0.6.7to0.7.1
+
+* * * * *
+
+## 0.6.7から0.7.1への移行
+
+[Migration
+Guide](http://docs.yesodweb.com/book/migrate6to7)は一度ざっと目を通しておく。
+全部をこの段階で理解する必要はない。 キーワードだけ知っておくと、あとで修正の時にここに戻ってきて対応方法が分る。
+
+* * * * *
+
+#### 1. まずは.cablと.ghcをバックアップとっておく
+
+    $ tar zcvf .cabal.tgz ~/.cabal
+    $ tar zcvf .ghc.tgz ~/.ghc
+
+これさえとっておけば、いつでも現環境に戻れる。
+
+#### 2. 0.6.7でtestプロジェクトをscaffoldしておく
+
+    $ yesod
+       :
+
+これは後でyesod-.0.7.1をインストールした時に全く同じtestプロジェクトをscaffoldしてdiff
+-rすることでロジックの手動変更点を知るのに使うことになる。
+
+#### 3. alex/happyやhaskell-platformからクリーンインストール
+
+    $ rm -rf ~/.cabal ~/.ghc
+
+一応yesod-0.7.1にupdateして作業しても行けるらしいけど、 最初にうまくいかなかったので私はクリーンインストールしなおした。
+以下を再インストール。
+
+    cabal-install-0.8.2
+    alex-2.3.3
+    happy-1.18.5
+    haskell-platform-2010.2.0.0
+    haskell-mode
+    ghc-mod
+    yesod
+
+としたところでソースの修正
+
+#### 4. yesod-0.7.1によりtestプロジェクトをscaffold
+
+    $ yesod
+      :
+
+これで先に0.6.7でscaffoldしたものとディレクトリ再帰diffして、差分を適用していく。hamletなどのテンプレートにある差は後で一括に自動変換するので今は無視してよい。
+Control.hsやSettings.hsなどの修正が発生する。
+また、production.hsなどの新しいファイルがあったりするのでそこもcabal化するなら用 意する。
+
+実はMigration
+Guideの説明はほぼこの差分に終始しているのでGuideは読み込む必要はなくて、この段階で見返せば意味が分かりやすいかも。
+
+#### 5. hamlet/cassius/juliusテンプレートの変換
+
+yesod-0.7.\*を入れると付いてくるhamlet6to7という変換ツールで行うが、 その前に
+
+    $ grep -r '^#if' *
+
+でひっかかたもののうち、hamletのGHC7分岐だけは手で補正する必要がある。
+
+    #if GHC7
+      [hamlet|
+    #else
+      [$hamlet|
+    #endif
+    ...
+    |]
+
+というやつが<div id="else"...\>と解釈しようとして [$hamlet|にぶつかることでエラーになるので事前に除去するのが楽。
+私の場合はGHC6.12.3を使っているので
+
+      [$hamlet|
+    ...
+    |]
+
+としてGHC7分岐を除去しました。一通り対応したらhamlet6to7を掛ける。
+
+    $ hamlet6to7 *.hs
+    $ hamlet6to7 Handler/*.hs
+    $ hamlet6to7 hamlet/*.hamlet
+    $ hamlet6to7 cassius/*.cassius
+    $ hamlet6to7 julius/*.julius
+
+当然だけど、2回実行するとコードが変ってしまうのでくれぐれも1回だけやること。:-) 終ったらさっきのGHC7分岐を戻したきゃ戻せばいい。
+
+#### 6. ライブラリ/プラグインのインストール
+
+ここで一応走らせてみる。
+
+    runhaskell devel-server.hs
+
+あとは順にエラーがおきているライブラリをinstallしていく。 なお、ライブラリのバージョンも以前のバージョンに合わせておいた方がよい。
+ライブラリバージョンの相違でハマるとワケワカになる。
+以前のバージョンが不明なら.cabal.tgzをどこかに展開して.cabal.old/libの下を確認すれば良い。
+私のアプリの場合は以下なんかを入れた。
+
+    cabal install persistent-postgresql
+    cabal install web-encodings-0.3.0.4
+    cabal install split-0.1.3
+    cabal install highlighting-kate-0.2.7.1
+    cabal install texmath-0.4
+    cabal install pandoc-1.6.0.1
+    cabal install yesod-newsfeed
+    cabal install Diff-0.1.2
+    cabal install utility-ht-0.0.5.1
+    cabal install yesod-sitemap
+    cabal install mtl-2.0.1.0
+
+postgresqlのバインディングなどyesodプロジェクトからの配布物は最新のを使う。
+
+ちなみにOAuthは0.6.7を入れてしまうのでソースからtwitterAuthとimportを除去しちゃう。
+つまりとりあえず対応せず、後日プラグインが0.7.\*対応したらあらためて取り込む。
+
+#### 7. ロジックの修正
+
+あとは自分の書いたコードでエラーが発生した所をデバッグしていく。 ただひたすらゴリゴリと。 ブラウザでの動作確認は必要。
+例えば、\*.hsがMyApp/Helpers/...とかにもあって、hamletテンプレを含んでいるのに
+変換し忘れてた場合、コンパイルは通るけど動作はアウトになるはず。 また、旧テンプレートで空行は暗黙的なインデントがあるように見做されていたが、
+新テンプレートではインデントがトップにリセットされるのでここも注意。
+事前に空行をつぶしておいても良いし、hamlet6to7を掛けてから目視で修正してもいい。
+新テンプレでは**\\**がついてて目で分りやすくなっているから私は後で修正した。
+
+#### 8. 備考
+
+おそらくある程度の規模のアプリの場合は一発ではうまくいかないと思う。 特にライブラリやプラグインは対応してなかったり、 ghc-pkg
+hideしたりしないといけなかったりで何度かやり直すハメになる。
+それでも.cabalと.ghcをバックアップしておけばやり直せるので何度でもチャレンジできるので恐れずにやってしまいましょう。
+私は結局調査やらやりなおしやらで2つのアプリの移行に3晩ついやしました。 最後は手慣れたので作業自体は1-2時間程度で済みましたが。
+
+* * * * *
+
+Last modified : 2011/02/22 10:30:43 JST

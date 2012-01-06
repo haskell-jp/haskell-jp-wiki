@@ -1,0 +1,140 @@
+# [Programming\_玉手箱\_整数論]()
+
+[Programming]():[玉手箱]():整数論
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+-   [素因数分解]()
+-   [既約分数]()
+-   [拡張ユークリッドの互除法]()
+
+* * * * *
+
+## 素因数分解
+
+ついでに、素因数分解
+
+    primes = map head $ iterate sieve [2..]
+    sieve (p:xs) = [ x | x <- xs, x `mod` p /= 0]
+
+    factors n = fc [] (prms n primes) n
+                where
+                 prms n ps = takeWhile (ceiling (sqrt (fromInteger (n+1))) > ) ps
+                 fc rs [] n         = reverse (n:rs)
+                 fc rs pps@(p:ps) n = case n `divMod` p of
+                                        (1,0) -> reverse (n:rs)
+                                        (m,0) -> fc (p:rs) (prms m pps) m
+                                        _     -> fc rs ps n 
+
+-   篩で無駄な割り算を減らしてみる。
+
+        primes' :: [Integer]
+        primes' = 2:sieve' [3] [5,7..]
+
+        sieve' :: [Integer] -> [Integer] -> [Integer]
+        sieve' (p:ps) xs = p:sieve' (ps++ps') [x | x <- qs, mod x p /= 0]
+          where (ps', qs) = span (<(p*p)) xs
+
+-   primesが全然primesになっていないのと、素数の2乗の素因数分解ができないのが気になる
+
+-   修正しますた
+-   primes をまじめに計算すると遅いので、これで十分かも
+
+        primes' = 2 : zipWith (+) primes' (1 : 2 : cycle [2, 4])
+
+    -   primes' = 2:3:(3の倍数を除く奇数)ですか。オーダとしては、primes'' = 2:[3,5..]
+        としてもいいのか、なるほど。
+
+-   primes''' = 2:3:5:scanl (+) 7 (cycle [4,2,4,2,4,6,2,6]) --
+    やりすぎですか、そうですか。
+
+prms っていらないんじゃないの？
+
+    factors n = fc [] primes n
+                where
+                   fc rs pps@(p:ps) n = case n `divMod` p of
+                                          (1,0) -> reverse (n:rs)
+                                          (q,0) -> fc (p:rs) pps q
+                                          _     -> fc rs ps n 
+
+でいいような。
+
+-   prms なくてもいいけど、ないと遅くなるでしょう。 n の平方根より大きい値で割っても意味ないし
+
+-   reverseはいらないし(lazyにfactoring)、(1, 0)とのマッチはおこりません。 -- yts
+
+        primes = sieve [2..] 
+          where sieve (p:xs) = p:sieve [x | x <- xs,  x `mod` p /= 0]
+        factors n = f n (g n primes)
+          where f x [] = [x]
+                f x pps@(p:ps) = case x `divMod` p of
+                    (m, 0) -> p:f m (g m pps)
+                    _      -> f x ps
+                g n = takeWhile ((<= n).(^2))
+
+-   f x pps の定義で、x が変化しない場合も takeWhile を実行するのは無駄ではないでしょうか
+    -   確かに。スタートアップで削っておけば十分ですね。修正しました。 --yts
+
+-   sieve の中と factors で 2 回割り算するのはもったいない。
+
+        factors n = f n (2:[3,5..])
+          where
+            f n (m:ms) | n <= 1         = []
+                       | n < m * m      = [n]
+                       | n `mod` m == 0 = m:f (n `div` m) (m:ms)
+                       | otherwise      = f n ms
+
+* * * * *
+
+## 既約分数
+
+[結城浩の日記](http://www.hyuki.com/diary/dia0312.html#i30)より
+
+> 問題：正の整数Nが与えられているとき、以下の条件を満たす既約分数p/qを「すべて」求めるアルゴリズムを示してください。条件は：
+>
+> -   p, qは整数(pは0以上で、qは1以上N以下).
+> -   gcd(p, q) = 1 (pとqの最大公約数は1).
+> -   0 <= p/q <= 1.
+
+    ss = map s [0..]
+
+    s 0 = False : True : cycle [False]
+    s n = cycle $ map (!! n) $ take n ss
+
+    irr 0 = []
+    irr n = irr (n-1) ++ [(n,i) | (p,i) <- zip (ss !! n) [0..n], p]
+
+『算譜の記』のコメントにかかれたssを利用しない版 s を利用したもの
+
+    s 0 = False : True : cycle [False]
+    s 1 = cycle [True]
+    s n = map (!! n) $ map s $ cycle [0..n-1]
+
+    irr 0 = []
+    irr 1 = [(1,0),(1,1)]
+    irr n = irr (n-1) ++ [(n,i) |  (p,i) <- zip (s n) [0..n-1], p]
+
+強引に一行化
+
+    irr n = concat $ foldl (\x n -> [(n,i) | i <- [1..n-1], (\y -> elem y $ map snd $ x !! (y-1)) $ min i (n-i)] : x) [[(1,0),(1,1)]] [2..n]
+
+    irr n = foldl (\x n -> [(n,i) | i <- [1..n-1], (\y -> elem (n-y,y) x) $ min i (n-i)] ++ x) [(1,0),(1,1)] [2..n]
+
+* * * * *
+
+## 拡張ユークリッドの互除法
+
+    euclid x y = euclid' x y 1 0 0 1
+      where
+        euclid' x 0 a b _ _ = ((a, b), x)
+        euclid' x y a b c d = euclid' y r c d (a-c*q) (b-d*q)
+          where (q, r) = quotRem x y
+
+    Main> euclid 5 7
+    ((3,-2),1)    -- 5 * 3 - 7 * 2 == 1
+
+* * * * *
+
+Last modified : 2006/06/13 07:36:19 JST

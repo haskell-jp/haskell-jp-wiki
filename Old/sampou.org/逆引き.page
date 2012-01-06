@@ -1,0 +1,131 @@
+# [逆引き]()
+
+* * * * *
+
+-   数
+    -   加算、足し算
+        -   (+)
+
+    -   減算、引き算
+        -   (-) subtract
+
+    -   乗算、掛け算
+        -   (\*)
+
+    -   除算、割り算
+        -   (/) div divMod quot quotRem
+
+    -   余り
+        -   mod divMod rem quotRem
+
+    -   べき乗
+        -   (\^) (\*\*)
+
+    -   符号（正負）
+        -   signum
+
+    -   絶対値
+        -   abs
+
+    -   符号（正負）を逆に
+        -   negate
+
+    -   逆数
+        -   recip
+
+    -   奇数、偶数
+        -   odd even
+
+    -   平方根
+        -   sqrt
+
+    -   π、円周率
+        -   pi
+
+    -   三角関数
+        -   sin cos tan asin acos atan
+
+    -   双曲線関数
+        -   sinh cosh tanh asinh acosh atanh
+
+    -   指数関数
+        -   exp
+
+    -   対数
+        -   log logBase
+
+    -   有理数
+        -   有理数の項目へ
+
+    -   複素数
+        -   複素数の項目へ
+
+-   リスト
+    -   長さ
+        -   length
+
+    -   先頭の要素
+        -   head
+
+    -   先頭の要素を除いた残りのリスト
+        -   tail
+
+    -   先頭からのｎ個の要素からなるリスト
+        -   take
+
+    -   先頭からのｎ個の要素を除いた残りのリスト
+        -   drop
+
+    -   先頭から連続して条件が成り立つ要素からなるリスト（説明が下手なので誰か直して）
+        -   takeWhile
+
+    -   先頭から連続して条件が成り立つ要素を除いた残りのリスト（説明が下手なので誰か直して）
+        -   dropWhile
+
+    -   分割
+        -   splitAt
+
+    -   各要素に関数を適用
+        -   map
+
+    -   条件を満たす要素だけ取り出す
+        -   filter
+
+    -   逆順にする
+        -   reverse
+
+    -   並べ替え（ソート）
+        -   sort sortBy
+
+    -   （Perl,Python,Ruby,Javascriptなどの）join
+        -   intercalate(Data.Listに入っている)
+
+    -   順列
+        -   permutations(Data.Listに入っている)
+
+-   Maybe
+-   順序
+    -   指定した関数を適用した値で比較する
+        -   comparing（Data.Ordに入っている）
+
+-   有理数
+-   複素数
+-   配列
+-   入出力
+-   ディレクトリ
+-   システム
+-   日付と時刻
+-   乱数
+-   構文
+    -   条件
+        -   if式 case式 ガード パターン
+
+-   Applicative (Control.Applicative)
+    -   Sコンビネータ
+        -   <\*\>
+
+-   その他
+
+* * * * *
+
+Last modified : 2008/12/25 19:49:36 JST

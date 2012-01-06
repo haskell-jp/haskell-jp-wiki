@@ -1,0 +1,108 @@
+# [HowTo\_GHC-HEAD]()
+
+[HowTo]():GHC-HEAD
+
+* * * * *
+
+## GHC-HEAD の追っかけ
+
+この情報は 2008/09/22 13:38:12 JST 時点のものです。 Ubuntu 8.04 Linux (i386)
+上に[HowTo\_ProgrammingEnvironment]()にある 環境を構築ずみであることを前提としています。
+
+* * * * *
+
+### 事前準備
+
+ここは必須ではないがやっておく方が便利。
+
+#### 端末制御系のライブラリ群
+
+現HEADではreadlineではなくeditlineが採用されている。
+libedit-devをインストールするとlibedit2とlibncurses5-devが入るはず。
+この後でインストールすればghciでターミナル起動すると行編集が出来たりC-cでプロンプトから抜けられる。
+
+    $ sudo apt-get install libedit-dev
+
+#### hscolourのインストール
+
+ghcはビルドするのにghcを利用するが、そのghcにhscolourパッケージがインストールされていると、
+作成されるhtmlドキュメントにソースへのリンクが作成されてソースの閲覧も出来るのでオススメ。
+
+    % wget http://hackage.haskell.org/packages/archive/hscolour/1.10.1/hscolour-1.10.1.tar.gz
+    % tar xvf hscolour-1.10.1.tar.gz
+    % cd hscolour-1.10.1/
+    % runghc Setup.hs configure
+    % runghc Setup.hs build
+    % runghc Setup.hs install
+
+* * * * *
+
+### ghc-HEAD tarball を取得
+
+darcs では全リポジトリは巨大すぎて持ってこれない。ある時点でのリポジトリを 固めた tarball があるので、それを取得する。
+
+    $ wget http://darcs.haskell.org/ghc-HEAD-2008-09-07-ghc-corelibs-testsuite.tar.gz
+
+展開
+
+    $ tar xvf ghc-HEAD-2008-09-07-ghc-corelibs-testsuite.tar.gz
+
+### リポジトリを最新状態に同期する
+
+    $ cd ghc
+    $ darcs pull -av
+    $ ./darcs-all --extra --dph get
+    $ ./darcs-all pull -av
+
+### ビルド
+
+    $ echo "XMLDocWays   = html" > mk/build.mk
+    $ echo "HADDOCK_DOCS = YES" >> mk/build.mk
+    $ sh boot
+    $ ./configure --prefix=$HOME/ghc-HEAD
+    $ make
+
+インストール
+
+    $ make install
+
+docのインストール
+
+    $ make install-docs
+
+* * * * *
+
+### 2 回目以降のリポジトリ同期とビルド
+
+#### 同期
+
+    $ darcs pull -av
+    $ ./darcs-all pull -av
+
+#### ビルドとインストール
+
+    $ make distclean
+    $ sh boot
+    $ ./configure --prefix=$HOME/ghc-HEAD
+    $ make
+    $ make install
+    $ make install-docs
+
+* * * * *
+
+#### 議論
+
+-   [shelarcy]() (2008/09/23 13:46:00 JST): GHC 6.10 からは GHC のビルド時に
+    haddock がビルドされるようになっているので、別途インストールする必要はないはずです。あと、GHC インストール時に
+    haddock もインストールされるようになっていますね。
+-   ここは前提が[HowTo\_ProgrammingEnvironment]()なので6.8.3です。なので6.8.3を踏み台にするなら必要ってことで正しいのでは？
+-   [shelarcy](): ええと、GHC 6.10 がどうのこうのと書くのは、良くありませんでしたね。
+-   「GHC HEAD (つまり GHC 6.9-6.11?)では stage-2 の GHC を使って haddock
+    (utils/haddock) をビルドし、その haddock
+    を使ってドキュメントを生成するようになっているので別途インストールする必要ないのでは？」ということなのですが、どうでしょうか？
+    [http://darcs.haskell.org/ghc/compiler/Makefile](http://darcs.haskell.org/ghc/compiler/Makefile)
+-   了解。インストールする人が見やすいようにコメントを下に移します。hscolourはインストールする方向で。
+
+* * * * *
+
+Last modified : 2008/10/09 23:32:17 JST

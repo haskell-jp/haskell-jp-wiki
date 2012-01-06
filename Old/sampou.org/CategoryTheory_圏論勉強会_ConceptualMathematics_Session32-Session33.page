@@ -1,0 +1,220 @@
+# [CategoryTheory\_圏論勉強会\_ConceptualMathematics\_Session32-Session33]()
+
+[CategoryTheory]():[圏論勉強会]():[ConceptualMathematics]():Session32-Session33
+
+* * * * *
+
+## 第二十三回圏論勉強会
+
+2006-11-12(日) [男女共同参画センター4F
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html) 9：00〜17:00
+
+写真：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200611/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/)
+
+出席者
+
+          　　 中村　今井   　　 |ス
+      　+-----------------+ 　　 |ク
+      　|            　　 | 　　 |リ
+      　|       　    　　| 　　 |｜
+      　+-----------------+  　　|ン
+         shelarcy　rpf　酒井 　　|
+
+### Session 32
+
+-   Exercise 2 (a)
+    -   [解答1（全部）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0147.JPG)、[２（(i)のみ）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0148.JPG)、[３（(ii)のみ）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0149.JPG)
+
+-   Exercise 2 (b)
+    -   [解答1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0151.JPG)、[2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0152.JPG)
+
+-   テキストに出てくる subobject classifier いろいろ
+    -   ※ "classifier" の名前はテキスト未出
+
+-   [集合の圏における subobject
+    classifier](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0153.JPG)
+-   [グラフの圏における subobject
+    classifier](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0155.JPG)
+-   [dynamical system における、"chaotic" な subobject classifier
+    を考えてみた](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0157.JPG)
+    ... よくわからない
+
+-   Exercise 3
+    -   全く手付かず。というか手が出なさそう。
+    -   「sub-dynamical system of Ｎ = (N,σ) which contains the element
+        0」は 「dynamical system Ｘ = (X,σ') およびＮへの injective射 i: X → N で
+        i(x) = 0 となる x ∈ X がある」 と解釈する。
+        -   その i(x) = 0 となる x を 0' と書く。
+        -   以下利用する等式は
+            -   σ(n) = n+1
+            -   i(0') = 0
+            -   i(σ'(x)) = σ(i(x)) （i は dynamical system の射だから）
+
+        -   射 r: N → X を
+            -   r(0) = 0'
+            -   r(n+1) = σ'(r(n))
+            -   で定める。（r が dynamical system の射である条件 r(σ(n)) = σ'(r(n))
+                は後者の式そのもの)
+
+        -   i・r = id\_N の証明
+            -   i(r(0)) = i(0') = 0
+            -   i(r(n)) = n と仮定すると i(r(n+1)) = i(σ'(r(n))) = σ(i(r(n)))
+                = σ(n) = n+1
+            -   数学的帰納法より i(r(x)) = x。よって i・r = id\_N
+
+        -   r・i = id\_X の証明
+            -   r(i(x)) = y として両辺を i すると 【\*】i(r(i(x))) = i(y)
+            -   上記で示した i・r = id\_N を【\*】に使うと i(x) = i(y)
+            -   i は injective なので x = y。よって r(i(x)) = y = x。よって r・i =
+                id\_X
+
+-   Exercise 4
+    -   [会場での格闘の跡](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200611/ct/RIMG0159.JPG)
+        ... 解まで到達せず
+    -   その後各自で勝手に解いた解答（の一部）
+        [1](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20061112#p01)、[2](http://d.hatena.ne.jp/bonotake/20061113/1163430031)
+        -   問題のうち、inclusion が symmetric ならば、2つの characteristic map
+            から得られる Y → Ω\^Y が等しくなることだけを示している。
+
+## 第二十四回圏論勉強会
+
+2006-12-10(日) [男女共同参画センター4F
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html) 10：00〜17:00
+
+写真：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200612/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200612/ct/)
+
+出席者
+
+             日下部  田中  久井     |ス
+      　+-----------------------+   |ク
+      　|              　　     |   |リ
+      　|         　    　　    |   |｜
+      　+-----------------------+   |ン
+         豊福 shelarcy 酒井 今井 　 |
+
+### 始まる前の雑談
+
+-   継続の話
+    -   2chの「ここまで読んだ」は実は継続だったのだ！
+        -   な、なんだってー？！（AA略
+        -   それって要は栞のことじゃないのか
+            -   栞も継続
+
+        -   [ソーシャルブックマークを使って「ここまで読んだ」を共有すると便利じゃないかな？](http://page.freett.com/shelarcy/log/2006/diary_12.html#sharing_kokomadeyonda)
+
+    -   データベースカーソルも継続？
+
+-   PS3 はオーディオ機器として優秀らしい（こちらか2次会か昼食時か、どのタイミング話したか忘れたのでとりあえずこちらに書いておきます。）
+    -   [PS3の音がいい理由](http://homepage3.nifty.com/kanaimaru/PS3/a1.htm)
+    -   [SACD
+        が再生できる](http://pc.watch.impress.co.jp/docs/2006/1122/mobile357.htm)
+
+### Session 32 Exercise 4
+
+-   前半（復習）
+    -   subobject, characteristic map, s : Y×Y → Y×Y の導入 →
+        [図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200612/ct/988388_3609279763.html)
+    -   f,g: X → Y が symmetric なら、2つの Y → Ω\^Y は等しくなる →
+        [図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200612/ct/988388_298334865.html)
+
+-   後半
+    -   問題を整理→
+        [図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200612/ct/988388_756052186.html)
+        -   最終的に求めるべきは、e : 1 → Ω\^Y に対して、以下のAとBが同値であること
+            -   A) ∃z : 1 → Z . e = i o z
+            -   B) e が f,g: X → Y のグラフの連結成分を指す
+
+    -   まずは、φx : Y → Ω\^Y が coequalizer q で、factorize できる (i.e. φx = i o
+        q) ことを示す
+        -   [解答を試みた図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200612/ct/988388_2310556753.html)
+            -   見事失敗に終わる。時間内に解けず。
+
+### 2次会
+
+-   巴の由来
+    [http://ja.wikipedia.org/wiki/%E5%B7%B4](http://ja.wikipedia.org/wiki/巴)
+-   勾玉の形の由来は?
+    [http://ja.wikipedia.org/wiki/%E5%8B%BE%E7%8E%89](http://ja.wikipedia.org/wiki/勾玉)
+-   New Zealand の Zealand って?
+    [http://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B8%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%89](http://ja.wikipedia.org/wiki/ニュージーランド)
+-   [「本物のプログラマはHaskellを使う」第5回のListではなくMaybeを使う意義](http://itpro.nikkeibp.co.jp/article/COLUMN/20061205/255992/)について
+    -   どっかの日記で、難し過ぎるって書いてなかった？
+        -   いや、あれは勘違いでしょう。[F-algebra とかが関係あると思っていたようだけど、あとで自分で F-algebra
+            関係なかったって追記している](http://d.hatena.ne.jp/xAloe/20061207)
+
+    -   Maybe で３ページ使うのはやりすぎ
+        -   印刷用のページにいけば分かるように、実際には前回と分量は変わらない
+        -   でも、だからこそやり過ぎとも言える
+
+    -   これって注釈に書くべきことじゃない？
+        -   編集の方があんまり注釈に書くのを好まない
+        -   注釈に書くくらいなら、本文中に書けというスタンス
+
+    -   runInteractiveProcess という長い名前がダメ
+        -   Java プログラマなら平気かも
+        -   ここの部分が全体を長くしている原因
+            -   他に Maybe をオプションを与えるために使うような関数が、GHC や Hugs などのライブラリにはない。
+                -   別のライブラリを使わせようとすると、インストールさせたりしないといけなくて面倒
+                -   そういう関数が無いのはある意味当然。「hoge :: Maybe B -\>
+                    A」という関数よりも、「hoge :: A」と「hogeWithB :: B -\>
+                    A」という関数を提供することが好まれるので。
+
+            -   もっと簡単に使える関数があれば、それを使っていたんだけど……
+            -   何か適当な関数を作成して、ライブラリに取り入れてもらうべし。そうすれば、その関数を使って（短く）原稿を書くことができる
+                -   説明のために関数が必要なのって、ライブラリに取り入れる正当な理由になるかしらん
+                    -   Control.Monad に forM\_ という前例がある
+
+        -   同じく System.Process にある runProcess は余計に使うための説明が面倒
+
+## 第二十五回圏論勉強会
+
+2007-1-21(日) [男女共同参画センター4F
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html) 10：00〜17:00
+
+出席者（午前）
+
+        久井 田中 フランクおおざっぱ    |ス
+      　+---------------------------+   |ク
+      　|                  　　     |   |リ
+      　|             　    　　    |   |｜
+      　+---------------------------+   |ン
+            shelarcy     シ     今井 　 |
+
+出席者（午後）
+
+        久井 田中 フランクおおざっぱ    |ス
+      　+---------------------------+   |ク
+      中|                  　　     |   |リ
+      村|             　    　　    |   |｜
+      　+---------------------------+   |ン
+           日下部 shelarcy 酒井 今井 　 |
+
+写真 :
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200701/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200701/ct/)
+
+### 始まる前
+
+-   数学の本を書いてコミケで売ろう
+
+### Session 33
+
+-   Exercise 1
+    -   [解答（ピンボケ）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200701/ct/RIMG0263.html)
+        -   任意のT、任意のx:T→Xについてx ∈ B が成り立っているから、白板真ん中下の図式が任意のTで可換
+        -   T＝A、x＝αとおけば、A→Bが存在
+
+-   Exercise 2
+    -   [解答（途中経過、煮詰まる）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200701/ct/RIMG0265.html)、[解答（最終）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200701/ct/RIMG0267.html)
+
+-   Exercise 3
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200701/ct/RIMG0269.html)
+        -   確かに、A ⊆ not not A になっている
+
+-   Exercise 4 は時間切れ
+    -   [勝手に解いてみました。](http://d.hatena.ne.jp/bonotake/20070121/1169399900)
+
+### ２次会
+
+* * * * *
+
+Last modified : 2007/02/26 02:08:17 JST

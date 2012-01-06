@@ -1,0 +1,368 @@
+# [HaskellClub]()
+
+* * * * *
+
+Haskell同好会のページ
+
+* * * * *
+
+## 開催概要
+
+-   関西を中心にHaskellerと交流を深める会
+-   隔月開催を予定
+-   連絡、相談は haskell-ja [MailingList]()で
+
+* * * * *
+
+## Haskell 同好会 2008
+
+関西オープンソース2008 & 関西Ruby会議01 (同時開催)
+  ~ 2008-11-07(金), 2008-11-08(土) 大阪南港ATC ITM棟 6F マーレギャラリー（受付・展示会場）
+    〒559-0034 大阪市住之江区南港北2-1-10
+    [http://k-of.jp/2008/index.html](http://k-of.jp/2008/index.html)
+
+企画立ち上げの段階です 2008-10-02
+
+## Haskell 同好会 2007
+
+オープンソースカンファレンス 2007 Hokkaido
+  ~ 2007-06-30(土) 北海道大学 学術交流会館 (JR札幌駅北口 徒歩7分) 10:00〜17:00
+    [http://www.ospn.jp/osc2007-do/](http://www.ospn.jp/osc2007-do/)
+
+オープンソースカンファレンス 2007 Kansai
+  ~ 2007-07-20(金)〜21(土) 京都コンピュータ学院 京都駅前校 (JR京都駅そば) 10:00〜17:00
+    [http://www.ospn.jp/osc2007-kansai/](http://www.ospn.jp/osc2007-kansai/)
+
+今年は北海道<del\>と関西</del\>のオープンソースカンファレンスに参加する予定です。
+北海道のほうは、申し込みが受理されました。関西のほうは、まだ発表申し込みをしていません。講演側に回りたい方は、是非[Haskellメーリングリスト](http://www.sampou.org/cgi-bin/haskell.cgi?MailingList)で表明してください。
+
+近況は、このページとメーリングリストで随時報告いたします(このページがspamに荒らされませんように...)。
+
+何かコメントがありましたら、このページをご自由に編集して下さってかまいません。
+
+### [オープンソースカンファレンス2007関西](http://www.ospn.jp/osc2007-kansai)
+
+なんか北海道で気管支炎をもらって帰りました。いけがみは今年のOSC2007関西の幹事を降ります。どうもすみません。誰か音頭取りたいなら、ここのスペースやHaskellメーリングリストを使ったらいいと思うよ。
+
+### [オープンソースカンファレンス2007北海道](http://www.ospn.jp/osc2007-do)
+
+日時
+  ~ 2007-06-30(土) 10:00〜17:00
+
+会場
+  ~ [北海道大学学術交流会館(JR札幌駅北口徒歩7分)](http://www.hokudai.ac.jp/bureau/map/map4.htm)
+
+プログラム
+  ~ 
+
+    -   [45分セミナー](http://www.ospn.jp/osc2007-do/modules/eventrsv/index.php?id=1&noform=1)(無料,
+        登録制, 14:30-15:15 第5会議室)
+    -   ミニセミナー(無料, 15:35-15:45 展示ブースエリア)
+    -   Lightening Talk(有料, 登録制, 懇親会の中で行われるそうです)
+
+参加するには
+  ~ 45分セミナーとLightening
+    Talkは登録制みたいです。[新規登録画面](http://www.ospn.jp/osc2007-do/register.php)から登録してください。Lightening
+    Talk は懇親会のときに行われます。懇親会は有料です。
+
+#### 発表概要
+
+45分セミナー
+  ~ 関数型プログラミング言語 Haskell
+    [http://www.haskell.org/](http://www.haskell.org/) の紹介をします。
+
+    -   Haskell の紹介
+    -   The twelfth edition (May 2007) of the Haskell Communities and
+        Activities Report をかいつまんで紹介
+        [http://www.haskell.org/communities/](http://www.haskell.org/communities/)
+    -   Haskell in /Practice/
+    -   How to learn Haskell (the latest and shortest way)
+    -   Live Q & A
+
+ミニトーク
+  ~ 展示ブースエリア（北大 学術交流会館 1階 ホール）にて行う、ショートプレゼンです。時間は 15:35 - 15:45
+    に決まりました。ゲーム三題([Monadius](http://www.geocities.jp/takascience/haskell/monadius_ja.html),
+    [samegame](http://book.mycom.co.jp/support/e2/haskell/),
+    [SpaceInvadors(in afrp-0.4)](http://haskell.org/yampa/))を手短に紹介いたします。
+    [WebFunctions](http://www.cs.uu.nl/wiki/WebFunctions)はデモの時間にムービー流してます。
+
+Lightening Talk
+  ~ 懇親会のなかで行う5分間のプレゼンです。去年のKOF2006のRubyセッションの私の発表が案外評判よかったので、今年もそれでやらせていただきます。女子十二楽坊の「自由('4:12)」で。「みてえッ、早くッ」と思っていただけたら幸いです。題材は[QuickCheck](http://www.cs.chalmers.se/~rjmh/QuickCheck/)を始めとしたランダムテストと仕様駆動テストの紹介です。去年のKOF2006も同じ事言ったけど、それに出てた人はいないよね?
+
+2007-07-01 無事、終わりました。参加してくださった皆様ありがとうございます。資料は以下の4つです。
+
+-   [http://www.slideshare.net/ikegami\_\_/introduction-to-haskellopen-source-conference-2007-hokkaido/1](http://www.slideshare.net/ikegami__/introduction-to-haskellopen-source-conference-2007-hokkaido/1)
+-   [http://www.slideshare.net/ikegami\_\_/advanced-topics-in-haskell/1](http://www.slideshare.net/ikegami__/advanced-topics-in-haskell/1)
+-   [http://www.slideshare.net/ikegami\_\_/introduction-to-haskell-games-in-open-source-conference-2007-hokkaido/1](http://www.slideshare.net/ikegami__/introduction-to-haskell-games-in-open-source-conference-2007-hokkaido/1)
+-   [http://www.slideshare.net/ikegami\_\_/lightening-talk-at-open-source-conference-2007/1](http://www.slideshare.net/ikegami__/lightening-talk-at-open-source-conference-2007/1)
+
+いけがみ
+
+* * * * *
+
+## KOF 2006 Haskell 同好会
+
+日時
+  ~ 2006-11-18 (土) 13:00 - 13:50
+
+場所
+  ~ [大阪南港ATC-ITM棟 アジア太平洋トレードセンターインターナショナルトレードマート の5F-部屋
+    N-9](http://www.atc-co.com/s_access/index.html)
+
+タイトル
+  ~ プログラミング言語 Haskell 紹介
+
+内容
+  ~ 去年の KOF に引き続いて今年も Haskell の紹介をいたします。今年は日本語による解説書が次々と出版され、Haskell
+    を聞いたことがある方が増えてきたのではないでしょうか。本セッションでは、紹介プレゼンとともに、参加された皆様からの質問にお答えする時間を長く取りたいとおもいます。Haskell
+    について興味をより深めていきましょう。
+
+発表予定
+  ~ 
+
+    -   [プログラミング言語Haskell紹介
+        (いけがみ)](http://madscientist.jp/~ikegami/diary/20061107.html#p02)
+        [発表スライド](http://madscientist.jp/~ikegami/diary/20061119.html#p02)
+    -   [GHC as a library 紹介 (Shelarcy
+        さん)](http://page.freett.com/shelarcy/log/2006/diary_11.html#simotuki22006)
+        [発表スライド](http://page.freett.com/shelarcy/log/2006/diary_11.html#simotuki182006)
+    -   聴衆からの自由な質問(Haskellに関連した)に答えるコーナー
+
+参考リンク
+
+-   [KOF2006ユーザ企画](http://k-of.jp/2006/user_program.html#B27)
+-   [KOF2006-11/18プログラム](http://k-of.jp/2006/1118.html)
+
+発表者を募集します。Haskell に関する話題でしたらなんでもかまいません。発表していただけるかたは
+[Haksell-jpメーリングリスト](http://www.sampou.org/cgi-bin/haskell.cgi?MailingList)で表明してください。発表時間を固定するために、発表の申し込みは11/10(金)でいったん締め切ります。もしも11/10より後に発表したい人はメーリングリストに入ってダメもとで相談してください。できるだけみんなの希望にこたえます。
+
+発表はしないけど、聞くほうに参加される方もどうぞお気楽にお越しください。そのときに、ふだんからお持ちの、あるいは今からひねりだす疑問/質問を持ってきてください。Haskell
+に対する疑問に答えるコーナーを用意しています。時間は短いので、その場で考えてもらう暇がないかもしれないです。質問を紙に書いて会場に持ってくるなどの方法は賢明です。
+
+全体で 50 分の発表時間を与えられています。この50分をどのように使うかについてメーリングリストで議論します。最終結果はこの Wiki
+でもお伝えいたします。気になる人はこのページをしばらくチェックしてください。
+
+* * * * *
+
+## 第3回Haskell同好会
+
+日時
+  ~ 2006-1-14 (土)
+
+場所
+  ~ 京都付近（後日決定されます）
+
+reactive programming について
+
+* * * * *
+
+## 第2回Haskell同好会
+
+日時
+
+  --------------- ------ -------------
+  2005-12-03(土)   午前の部   09:30-12:00
+                  午後の部   12:00-??
+  --------------- ------ -------------
+
+場所
+
+  ------ ------------------------------------------------------------
+  午前の部   大阪産業創造館 5F パソコン実習室1
+         [アクセス](http://www.sansokan.jp/shisetsu/access.php)地下鉄堺筋本町駅
+         堺筋線12番出口あるいは地下鉄中央線2番出口より徒歩数分
+  午後の部   とりあえずお昼ご飯を堺筋本町の界隈でとります。午後も場所を変えて続きます。
+  ------ ------------------------------------------------------------
+
+参加者(ご自分で書き足してください)
+
+-   ikegami
+-   kawaji
+-   oxy
+-   hanyawn
+-   ohai
+-   henkma <<< メーリングリストアーカイブより抜粋
+    [HaskellJP:753](http://blade.nagaokaut.ac.jp/haskell/haskell-jp/753)
+    [HaskellJP:754](http://blade.nagaokaut.ac.jp/haskell/haskell-jp/754)
+    [HaskellJP:755](http://blade.nagaokaut.ac.jp/haskell/haskell-jp/755)
+    [HaskellJP:756](http://blade.nagaokaut.ac.jp/haskell/haskell-jp/756)
+    \>\>\>
+
+### 内容
+
+#### 午前
+
+-   自己紹介
+-   本の紹介
+    -   [Haskell: The Craft of Functional
+        Programming](http://www.amazon.co.jp/exec/obidos/ASIN/0201342758/philoprogramm-22)
+        -   堅い本。入門に最適。
+
+    -   [The Haskell School of Expression: Learning Functional
+        Programming Through
+        Multimedia](http://www.amazon.co.jp/exec/obidos/ASIN/0521644089/philoprogramm-22)
+        -   「Haskellを使ってこんなことが出来る」という感じ。入門にはならないけど、おすすめ。
+
+-   [Haskellプログラミング](http://www.sampou.org/haskell/ipsj/)の話
+    -   プログラムで問題は生成できても、人間が解いて面白いかは別の話。
+    -   ニコリでは結局、人間が「良い問題かどうか」を調べている。
+    -   数独は早い解法が存在するが、ナンバーリンクにはまだ無い。
+
+-   sort のオーダーの話
+    -   sort !! 5 とした場合のオーダーは、sort と同じ?
+    -   ためしに、insert sort の実装を作ってみて、それで考えよう。
+    -   全部の順番を確定しないことには !! 5 が効かないので、やっぱり sort と同じかな。
+    -   実は途中までの計算で済むので、オーダーは小さくなる(O(n))
+    -   [Hat - the Haskell tracer](http://www.haskell.org/hat/)
+
+-   Haskellでのスレッドの動作がわかんない
+    -   Control.Concurrent の forkIO は、明示的にコンテキストを切り替えないといけないので、使えない。
+    -   その言い訳がページ下に書いてある。
+        -   Hugsはともかく、GHCなら(メモリ確保が起きないような場合を除いて)問題ないと思います。 -- sakai
+
+    -   forkOS を使うがよろし（ただし、環境に依存する）。
+        -   forkIO でダメで forkOS
+            で大丈夫というケースが想像できないです。現在のGHCでは、同時にHaskellコードを実行するネイティブスレッドはただ一つだけだったと思いますし。
+            -- sakai
+
+-   テキスト処理といえば
+    -   一般的には[Happy](http://www.haskell.org/happy/)の方が使いやすい。
+    -   ステータスを持ち回りしないといけない場合は[Parsec](http://www.cs.uu.nl/~daan/parsec.html)で。
+    -   Happy も bison も
+        LALR(1)。けれど、bisonは必要な時しか先読みしないのに、Happyは常に先読みしてしまう。
+    -   bisonを使っている ruby は、その「先読みをしたかどうか」で処理を変えている。
+    -   [Rtype](http://mono.kmc.gr.jp/~oxy/hiki.cgi?rtype)は Happy
+        なので、常に先読みしているという前提で ruby の実装に合わせるのに苦労した。
+    -   Happy
+        は正確には[GLR](http://www.haskell.org/happy/doc/html/sec-glr.html)というらしい。
+
+### 昼食(近くの[ベルギー料理店](http://www.dolphins.co.jp/mise/sakai.htm)にて)
+
+-   MonadIO って、使いやすい？
+    -   使うことだけ考えたら、使いやすい
+
+-   同好会に別名があった方がいいんじゃない?
+    -   何か格好いいのを。
+    -   [Rabbit](http://raa.ruby-lang.org/project/rabbit/)のユーザーグループ名の[ショッカー](http://www.cozmixng.org/~rwiki/index.rb?cmd=view;name=Rabbit::UsersGroup.ja)は格好いい。
+
+### 午後(近くの[スターバックス](http://www.starbucks.co.jp/cgi-bin/Kstore_locator_prefcode?lang=jp&mcodes=027020)にて)
+
+-   ghcをUTF8対応にしたい。日本語文字のリテラルが書けないのは不便。
+-   Cabal … PerlのCPANみたいな、ライブラリ集。
+-   合宿([HaskellCamp]())をしたい。
+    -   2006 3/2〜3/5 にやりたい。(これ以上遅くなると社会人の参加が難しくなる)
+    -   一人一泊一万円程度で計画したい。
+    -   温泉がいい。
+    -   学生を割安にして、その分を社会人が負担する形にしよう。
+
+* * * * *
+
+## 第1回Haskell同好会
+
+[k-of](http://k-of.jp/kof.html)に便乗
+
+日時
+  ~ 2005-10-29(土) 16:00-17:00
+
+場所
+  ~ 大阪産業創造館 5F D 会議室
+
+どうやって会場まで行くかは、[k-of](http://k-of.jp/)のページ を参照してください
+
+### プレゼン資料
+
+-   吉田 悠一(oxy)
+    -   Haskell同好会BOF
+
+-   木戸 崇裕 aka shelarcy
+    -   [http://page.freett.com/shelarcy/programm/K-OF2005/reactive-pan.pdf](http://page.freett.com/shelarcy/programm/K-OF2005/reactive-pan.pdf)
+    -   ページ内の Referrer がないと取ってこれないので、念のため。
+        [http://page.freett.com/shelarcy/diary\_2005-10.html\#pan\_in\_yampa\_2](http://page.freett.com/shelarcy/diary_2005-10.html#pan_in_yampa_2)
+
+-   村主
+    -   モナディウス
+    -   Haskell案内地図
+
+### お題
+
+次のような感じでどうでしょうか:
+
+1.  Haskell の紹介 前半 20 分
+    -   Haskell だと何が嬉しいか
+    -   Haskell のインストール/勉強のしかた
+
+2.  デモ / プロジェクト紹介 後半 40 分
+    -   ソフトウエア / プロジェクト紹介
+    -   ライブラリ紹介 \#その他
+    -   今後の予定
+    -   質疑応答
+    -   当日の懇親会(?) の案内 <-- 当日、懇親会はありませんでした。
+
+### 実際の発表
+
+-   Haskell 及び同好会の紹介
+-   Monadius
+-   Haskell in practical use
+-   Functional Reactive Programming (Pan and Fran in Yampa)
+    -   時間がなくてスライド以上のことはあまり語れなかった
+    -   肝心の Reactive Programming についての説明をし損なう
+    -   Yampa を使ってみて難しいと言っているところで挙げてある特徴は、Haskell に共通するもの
+        -   あんまし語る時間がなかったので言えなかったんだけど、要するに本に載っていたり解説ドキュメントの充実している Monad
+            と比べて、ということ
+
+    -   wxFruit の paddle のソースコードは 94 行でした
+
+### コーヒータイム
+
+大阪産創館の近くのドトール 17:30 - 18:00
+
+参加者: いけがみ, 花谷, nobsun, shelarcy, tanakah, nushio
+
+#### 内容
+
+-   Reactive programming
+-   mutable Array と immutable Array
+-   IO monad は美しくない
+    -   たとえば、IO がいらない処理の間に random が必要になったとき
+    -   IO monad を直接使わずに IO 処理を一旦別の関数内に包んでおいて、トップレベルで評価させる
+        -   WASH、Panic、Yampa などがそういうテクニックを使っている
+
+-   Haskell で仕事をできる環境を作る
+    -   ただ Haskell を知っている人の絶対数がまだまだ少ないので難しい
+
+-   今年の 3 月に Haskell 合宿 ([HaskellCamp]())
+    -   GHC の Unicode/m17n hack 続き (GHCHacking[?]())
+    -   その他、好きなプロジェクトを持ちこむ
+
+-   Haskell 勉強会の最初は 11 月
+
+* * * * *
+
+## 第0回Haskell同好会飲み会
+
+2005-09-18(日) 四条のとある飲み屋 18:00〜
+
+参加者:henkma, nushio, ohai, tanakah, いけがみ, 田畑, 吉田(lexical order)
+
+### 内容
+
+-   RTypeの名前の由来
+    -   わたしゃ、Rubyが好きだ
+    -   Monadiusに対抗
+        -   シューティングにしてくれたら遊べたのに
+
+    -   型(Type)を導入しようとも考えた
+
+-   cyclicなimport
+    -   hs-boot使おう (ghc のマニュアル 4.6.9 How to compile mutually recursive
+        modules)
+
+-   data constructor の名前付けに関する不満 (?) <-- これなかったっけ?
+    -   module と qualified で解決する?
+
+-   Monadiusという2ch発祥のプロジェクトが実はあった
+-   Haskell を仕事に使っている人が二人いた
+
+* * * * *
+
+Last modified : 2008/10/06 13:44:07 JST

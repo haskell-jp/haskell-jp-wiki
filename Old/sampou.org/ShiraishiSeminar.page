@@ -1,0 +1,76 @@
+# [ShiraishiSeminar]()
+
+* * * * *
+
+## 白石さんを質問攻めにしてみようの会 企画のページ
+
+     本物のプログラマは本当にHaskellを使うのか？
+
+詳細決まりました。[ShelarcySeminar]()を見てください。
+
+* * * * *
+
+### タイトル： 『本物のプログラマはHaskellを使う』読者の集い
+
+参考：[http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248215/](http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248215/)
+
+連載記事筆者のshelarcyさん（白石さん）を囲んで何か楽しいことをする会です。
+
+(a.k.a. 白石さんを質問攻めにしてみようの会）
+
+参加表明はこちらへ
+
+-   [http://atnd.org/events/580](http://atnd.org/events/580)
+
+懇親会も募集中
+
+-   [http://atnd.org/events/605](http://atnd.org/events/605)
+
+### アンケート
+
+-   [https://spreadsheets.google.com/viewform?hl=en&formkey=cjFWbmNoYmpTc2lISE9QaVQ1b1ZNYWc6MA..](https://spreadsheets.google.com/viewform?hl=en&formkey=cjFWbmNoYmpTc2lISE9QaVQ1b1ZNYWc6MA..)
+
+### ネタとか
+
+-   何やる？
+    -   連載記事のどれか3つとか4つくらいをピックアップしてみるとか？
+    -   これまでの発表の不明点について
+        -   型レベルプログラミングの会 「Haskell, Type Function 派」
+            [http://page.freett.com/shelarcy/log/2009/diary\_04.html\#uduki182009](http://page.freett.com/shelarcy/log/2009/diary_04.html#uduki182009)
+        -   LLFuture 「未来の並列プログラミング言語としての Haskell」
+            [http://page.freett.com/shelarcy/log/2008/diary\_08.html\#haduki302008](http://page.freett.com/shelarcy/log/2008/diary_08.html#haduki302008)
+
+### 予習用資料
+
+-   「状態」を扱うモナド
+    -   [第6回
+        局所的な「状態」を利用するためのStateモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20070109/258229/)
+    -   [第15回
+        Haskellでのデバッグのコツをつかむ](http://itpro.nikkeibp.co.jp/article/COLUMN/20071204/288630/)
+    -   [第29回
+        グローバル変数の代わりに使えるReaderモナドとWriterモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20090303/325807/)
+    -   [第30回
+        状態を扱う複数のモナドを合成したRWSモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20090407/327904/)
+    -   [第20回
+        更新を高速化するためのSTモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20080603/305833/)
+    -   [第21回
+        更新操作を一般化するためのSTモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20080630/309793/)
+
+-   並列・並行処理／例外
+    -   [第12回 Haskellで学ぶ並列プログラミング（その3）
+        並行プログラミングと並列処理](http://itpro.nikkeibp.co.jp/article/COLUMN/20070703/276517/)
+    -   [第26回
+        例外の「中断・終了処理」としての側面](http://itpro.nikkeibp.co.jp/article/COLUMN/20081201/320478/)
+
+### shelarcyさんに聞いてみたい事
+
+-   Haskellの未来
+    -   並列処理
+    -   依存型
+
+-   余は如何にしてHaskellerとなりし乎
+-   Haskellで飯を食うには
+
+* * * * *
+
+Last modified : 2009/05/04 01:50:20 JST

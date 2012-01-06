@@ -1,0 +1,111 @@
+# [Yesod\_0.8.2to0.9.3]()
+
+[Yesod]():0.8.2to0.9.3
+
+* * * * *
+
+## 0.8.2から0.9.3への移行
+
+[Migration
+Guide](http://www.yesodweb.com/home/snoyberg/blogs/2011/08/yesod-0-9-release-candidate/announcing-yesod-090-release-candidate/migration-guide-yesod-08-to-09.dita)をざっと見ておく。
+
+* * * * *
+
+#### 1. 今回はGHCのバージョンを6.12.3から7.0.3にupdateする
+
+7.0.\*系では7.0.4が最新だけど、Haskell
+Platformのダウンロードのところで7.0.3でって書かれてるので7.0.3を入れる。
+
+    $ wget http://haskell.org/ghc/dist/7.0.3/ghc-7.0.3-x86_64-unknown-linux.tar.bz2
+    $ ./configure
+    $ make
+    $ sudo make install
+
+#### 2. Haskell Platform 2011.2.0.1をinstall
+
+##### cabal-installをinstallする
+
+    $ wget http://hackage.haskell.org/packages/archive/cabal-install/0.10.2/cabal-install-0.10.2.tar.gz
+    $ tar xf cabal-install-0.10.2.tar.gz
+    $ cd cabal-install-0.10.2
+    $ sh bootstrap.sh
+
+installできたらcabal updateしておく。
+
+    $ cabal update
+
+#### 3. cabal-devのinstall
+
+cabal-devをinstallしておく。 こいつはcabalなんだけど、プロジェクト毎にcabal
+installされたような環境を作って試せるもので、 yesodの開発者が0.8系の開発の際に作ったもの(だったと思う)。
+sandbox的な環境の中でやれるので本来のcabal環境を汚さないのが売りかな？ とりあえずyesod的にはyesod
+develでインタラクティブ開発が出来るんだけど、 yesod --dev
+develとすることでcabal-devが使われるので安心していろんなライブラリを使ったアプリを試せる。
+というわけでyesod的にあった方が便利ってことで入れておく。
+
+    $ cabal install cabal-dev
+
+#### 4. yesodのinstall
+
+    $ cabal install yesod
+    $ sudo apt-get install sqlite3 postgresql libpq-dev
+    $ cabal install persistent-sqlite persistent-postgresql
+
+yesodとsqliteやpostgresqlのinstall。 さらにmongodbなんかもサポートされているので入れてもいい。
+けど、ここはmigrateのページなので過去にサポされてなかったDBで作ってるってことは考えない。
+
+次にscaffoldしたようなコードが必要とするライブラリを入れる。
+つまりyesodが必要とするものではなく、scaffoldedなyesodアプリが必要とするライブラリね。
+
+    cabal install hjsmin
+    cabal install yesod-default
+    cabal install yesod-static
+    cabal install web-encodings
+    cabal install yesod-newsfeed
+    cabal install yesod-sitemap
+
+#### 5. 修正箇所
+
+1.  GHCのupdateによるものだけどTHの[$xhamlet|...|]とかを[xhamlet||]に修正。**$**を消す。
+2.  Migration GuideにもあるけどYesod.Helpers.\*がYesod.\*になった。つまりHelpersが不要になる。
+    1.  ただし、Crudは現状無い。近々にyesod-crud/adminというパッケージが出るらしいので乞うご期待だそうな。
+
+3.  preEscapedTextがText.HamletからText.Blazeに移動
+4.  Migration
+    Guideにまとめられているけど、runFormPost'やstringInput,maybeStringInput,intInputなどが変った。
+    基本的にはtextFieldとかintFieldと名前を変えた上にmaybeがあるかないかでioptにするかireqが付きます。
+    たぶんoptional(Maybeの場合)、require(Maybeが無い場合)でしょう。
+    一方、stringFieldみたいなWidgetになってたものはtextFieldのところはstringInputと同じtextFieldにしてioptやireqのところがaoptとかareqになる模様。
+5.  Migration
+    Guideにある通りSQLのDSLが大幅に変更。これもstringInputなどと同様変更箇所が多いと思うけど難しくないと思います。
+    Migration Guideに書いてないものを補足しておくと、IN句やNOT IN句は*<-.*とか*/<-.*とします。
+    リスト内包表記の*<-*のニュアンスかなーと。
+6.  KeyがShow/Readできなくなってる。
+    Keyの構造自体は0.8に上った時に変ったんだったと思うけど、データ構成子を使ったパターンマッチをしてたところは修正対象になる。
+    例えば、
+
+        getUserR :: UserId -> Handler RepHtml
+        getUserR (UserId uid) = do
+           ....
+
+    というコードがあったらマッチできなくてエラーになる。 もし本当に中の数字が必要ならunKeyで取り出すなどしてください。
+
+        getUserR uid = do
+           let uid' = unKey uid
+
+    でも実際にはこんなことせずにuidのまま使っていいはず。
+    問題になるとしたらunKeyした時に得られるような値をコンテンツなどにシリアライズしている場合。
+    その場合にはunKeyしてこれまで通りにするか、データ移行できないかを検討する。
+    私の場合にはアップロードファイルのファイル名をIdで管理していたのでファイル名を変更するsh scriptを書いてデータ移行します。
+
+7.  FilterやOrderもShow/Readできなくなってる。
+    これは私のアプリの場合だけだけど、カラムによるソートテーブルがあった時にソート情報をクエリパラメータにしてたんだけど、これがread/showで済まなくなったという。
+    アドバイスを求めたら、手で書いて。って言われたので手で書いてマッピングした。
+8.  Model.hsにGADTs拡張が必要だとかYesodPersistクラスのYesodDB型族はYesodPersistBackendになったよとかRenderMessageのインスタンスにする必要あるよとかはMigration
+    Guideに書いてある通りなんで書き換えるなり追加する。
+
+#### 6. 最新のscaffolded styleヘ
+
+* * * * *
+
+Last modified : 2011/11/11 08:30:34 JST

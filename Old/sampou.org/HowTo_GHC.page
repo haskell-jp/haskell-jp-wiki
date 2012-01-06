@@ -1,0 +1,71 @@
+# [HowTo\_GHC]()
+
+[HowTo]():GHC
+
+* * * * *
+
+## GHCの使い方
+
+### GHCのバージョン
+
+現時点(2011/11/23 14:14:29 JST)での安定版は 7.0.3 または 7.0.4 です（最新の 7.2.2
+はいつもの安定版ではなく、"technology preview" という扱いです。）
+
+### ユーザーガイド
+
+-   [The User's
+    Guide](http://www.haskell.org/ghc/docs/latest/html/users_guide/index.html)
+-   [栄光のグラスゴーHaskellコンパイルシステム利用の手引き
+    バージョン6.8.2](http://www.kotha.net/ghc_users_guide_ja/)
+
+### インストール on Ubuntu-8.04
+
+Ubuntuにはghc6というパッケージがあって、これを使うと簡単にghc-6.4.2がインストールできるのだが
+[nobsun]()は(安定版の)最新をつねに追い掛けたいとか、ライブラリは野良ビルドしたいとか、いろいろで、
+tarボールで最新版を/usr/local/以下にインストールすることにしている。
+
+    % wget http://www.haskell.org/ghc/dist/6.8.3/ghc-6.8.3-i386-unknown-linux.tar.bz2
+    % tar xvf ghc-6.8.3-i386-unknown-linux.tar.bz2
+    % cd ghc-6.8.3
+    % ./configure
+    % sudo make install
+
+Ubuntu 8.04をデフォルトでインストールした直後の状態でghcをインストールしようとしても、
+いくつかのライブラリやツールがないためにちゃんとインストールできないはず。これについては **あとで書く**
+
+### インストール on Microsoft Windows XP/Vista/7
+
+[Haskell Platform の Windows
+版バイナリ](http://hackage.haskell.org/platform/windows.html)に GHC
+が同梱されています。これをインストールしましょう。
+
+### インストール on MacOS X 10.6
+
+[Haskell Platform の Mac OS X
+版バイナリ](http://hackage.haskell.org/platform/mac.html)に GHC
+が同梱されています。これをインストールしましょう。64 bit 版は Experimental なので、32 bit
+版をインストールした方が良いでしょう。
+
+### GHCi の起動と終了
+
+**起動**: シェルでghciコマンドをタイプ
+
+    % ghci
+    GHCi, version 7.0.4: http://www.haskell.org/ghc/  :? for help
+    Loading package ghc-prim ... linking ... done.
+    Loading package integer-gmp ... linking ... done.
+    Loading package base ... linking ... done.
+    Loading package ffi-1.0 ... linking ... done.
+    Prelude> 
+
+プロンプト Prelude\> が表示されればOK
+
+**終了**: プロンプトに対してコマンド :quit または :q をタイプ。コマンドは : (コロン)ではじまるので 忘れずに。
+
+    Prelude> :quit
+    Leaving GHCi.
+    %   
+
+* * * * *
+
+Last modified : 2011/11/23 14:18:03 JST

@@ -1,0 +1,1366 @@
+# [Programming\_玉手箱]()
+
+[Programming]():玉手箱
+
+* * * * *
+
+ちょっとしたお題やパズル，クイズなどを集めたものです．
+
+[リストの長さの比較]()
+
+[pos+]()
+
+[連続した n 要素のリストのリスト]()
+
+[Graph の統合]()
+
+-   [木の統合]()
+
+[集合の統合]()
+
+[xzip]()
+
+[リストをグループ化する]()
+
+-   [n 番飛ばし毎にグループに分ける]()
+-   [n 個ずつグループ化する]()
+
+[組合せ論的な生成関数]()
+
+-   [リストの二分割の生成]()
+-   [順列の生成]()
+-   [重複順列の生成]()
+-   [組合せの生成]()
+-   [重複組合せの生成]()
+
+[順列の生成]()
+
+-   [素因数分解]()
+-   [既約分数]()
+-   [拡張ユークリッドの互除法]()
+
+[コメントの除去]()
+
+[コメント対応read]()
+
+[正規表現置換]()
+
+[words4ApacheLog]()
+
+[文字列の先頭から等しい文字列を抜き出す]()
+
+-   [お約束の末尾再帰版]()
+
+[文字列から一致する部分文字列を抽出する]()
+
+[CSV]()
+
+[自分自身のソースコードをプリントするプログラム]()
+
+[文字列 C が文字列 A, B から構成されているか]()
+
+[関数型表]()
+
+[上向きにも辿れる木]()
+
+[平衡木]()
+
+-   [赤黒木]()
+-   [AVL 木]()
+
+[データタイプから再帰を分離]()
+
+[探索]()
+
+-   [深さ優先探索]()
+-   [幅優先探索]()
+
+[Graphical Sequence]()
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+[リストの長さの比較]()
+
+[pos+]()
+
+[連続した n 要素のリストのリスト]()
+
+[Graph の統合]()
+
+-   [木の統合]()
+
+[集合の統合]()
+
+[xzip]()
+
+[リストをグループ化する]()
+
+-   [n 番飛ばし毎にグループに分ける]()
+-   [n 個ずつグループ化する]()
+
+* * * * *
+
+## リストの長さの比較
+
+リスト同士の長さを比較するというより、むしろ指定した値と指定したリスト の長さを比較するという方がよくありそう。これならリストに無限リストを渡
+されても大丈夫。
+
+    shorterThan, longerThan :: Int -> [a] -> Bool 
+    shorterThan n = null . drop (n-1)
+    longerThan  n = not . null . drop n
+
+あれっ。これ名前は逆の方がいいかな？ Curry 化されてなきゃ。逆だろうな。 逆にするなら、
+
+    cmpLen :: Int -> [a] -> Ordering
+    cmpLen 0 [] = EQ 
+    cmpLen n ls = case splitAt (n-1) ls of
+                    (_,[])  -> GT
+                    (_,[_]) -> EQ
+                    _       -> LT
+
+というのを定義しておけばいいかな。
+
+* * * * *
+
+## pos+
+
+整数のリストをもらって、おのおのの要素にその位置を示す数を加えてかえす -- Ansi Common Lisp Ex 3.5
+
+    posAdd :: [Int] -> [Int]
+    posAdd = zipWith (+) [0..]
+
+* * * * *
+
+## 連続した n 要素のリストのリスト
+
+    contElems 3 [1,2,3,4,5] → [ [1,2,3],[2,3,4],[3,4,5] ]
+
+2ch よりの話題 80さんと同じもの
+
+    contElems :: Int -> [a] -> [[a]]
+    contElems n = (!! n) . transpose . map inits . tails
+
+* * * * *
+
+## Graph の統合
+
+[WiLiKi:Scheme:リスト処理](http://practical-scheme.net/wiliki/wiliki.cgi?Scheme:�ꥹ�Ƚ���)「木の統合」での話題から。
+
+> ノード(シンボル)の親子関係の集合が与えられているとき、それらを全て満たす木の集合を求める。
+>
+> 親子関係はこんなリストで与えられている:
+>
+> (親 子1 子2 …)
+>
+> 子の親は常にユニーク。循環は無いものとする。兄弟関係(親を共有する子の順序)は保存する。入力には同じシンボルが「親」に二度以上出現しないものとする。
+>
+> 例えば、最初のセットが ((A B C) (B D E) (F G) (H F I) (J A))の場合、出力は：
+>
+> ((J (A (B (D) (E)) (C))) (H (F (G)) (I)))
+
+### 木の統合
+
+先ずは簡単な木の場合
+
+    import List
+    type Vertex = Char
+    type Relation = (Vertex, [Vertex])
+
+    data Tree a =  Tree a [Tree a] deriving (Show, Read)
+
+    roots :: [Relation] -> [Vertex]
+    roots rels = filter (not . flip elem children) parents
+                 where children = nub $ concat $ map snd rels
+                       parents  = map fst rels
+
+    makeTree :: [Relation] -> Vertex -> Tree Char
+    makeTree rels v = Tree v $ map (makeTree rels) $ lookupTos v rels
+
+    lookupTos :: Vertex -> [Relation] -> [Vertex]
+    lookupTos v []                  = []
+    lookupTos v (r:rs) | v == fst r = snd r
+                       | otherwise  = lookupTos v rs
+
+    makeForest :: [Relation] -> [Tree Char]
+    makeForest rels = map (makeTree rels) $ roots rels
+
+* * * * *
+
+## 集合の統合
+
+[はずかしいだいありー](http://www.namikilab.tuat.ac.jp/~sasada/diary/200308.html#d20)、[ヒビルテ](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20030821#p02)、[WiLiKi:Scheme:リスト処理](http://practical-scheme.net/wiliki/wiliki.cgi?Scheme:�ꥹ�Ƚ���)より、
+
+> (子)リストのリストがあって、子リストにはシンボルが2個以上入ってたとする。たとえば、((A B) (C D) (E F) (A G) (H
+> F I)) のような感じ。
+>
+> これを、同じシンボルを含む子リストはまとめたいとする。たとえば、例で言えば ((A B G) (C D) (E F H I))
+> のようなリストを返す。
+
+nobsun の解
+
+    import List
+
+    solve :: Eq a => [[a]] -> [[a]]
+    solve = foldr foo [] 
+
+    foo :: Eq a => [a] -> [[a]] -> [[a]]
+    foo x [] = [x]
+    foo x ccs@(c:cs)
+     = case bar x c of
+         [] -> c:foo x cs
+         xc -> foo xc cs
+
+    bar :: Eq a => [a] -> [a] -> [a]
+    bar ps qs = case intersect ps qs of
+                  [] -> []
+                  is -> union ps qs
+
+[Y. Hanatani
+さんによるスマートな解](http://www.lab2.kuis.kyoto-u.ac.jp/~hanatani/tdiary/?date=20030822)
+
+    import List
+     
+    solve xs = foldr solve' xs (concat xs)
+     
+    solve' x xs = case partition (elem x) xs of
+                  (p, q) -> foldl union [] p : q
+
+-   (concat xs) の代わりに (nub (concat xs)) あるいは (foldl union [] xs)
+    でもいいっかもしれない。-- nobsun
+
+* * * * *
+
+## xzip
+
+[ヒビルテ](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20030617)より
+
+> 長さの等しい二つのリスト[a1; a2...; an]と [b1; b2...; bn]を受け取って, [(a1, bn); (a2, bn
+> - 1); ...; (an, b1)] を返す関数を書きなさい。ただし、
+>
+> -   nをあらかじめ知ることはできない
+> -   与えられた二つのリスト以外のリストを使ってはならない
+> -   再帰呼び出しは高々(n + 1)回しか行ってはならない
+> -   全体の計算量はO(n)でなければならない
+
+nobsun の最初の解
+
+    xzip xs ys = zip xs (reverse ys)
+
+(reverse ys) で中間リストをつくっているので駄目？再帰呼び出しも2n回になるのかなぁ
+
+あおきさんの解
+
+    xzip xs ys = f where (f,s) = xzip' xs ys
+
+    xzip' [] ys = ([], ys)
+    xzip' (x:xs) ys = ((x,y):list, ys')
+                      where (list, (y:ys')) = xzip' xs ys 
+
+なるほどですね。
+
+で、nobsun の改良解？
+
+    import List (mapAccumR)
+    xzip xs ys = snd $ xzip' xs ys
+                 where xzip' = flip $ mapAccumR f 
+                       f (y:ys) x = (ys,(x,y))
+
+* * * * *
+
+## リストをグループ化する
+
+### n 番飛ばし毎にグループに分ける
+
+blog:Everyday:2005-01-11
+
+    f n = foldr (\x y -> (x:last y):init y) (replicate n [])
+
+    f5 n = transpose . unfoldr phi
+        where phi [] = Nothing
+              phi xs = Just $ splitAt n xs
+
+### n 個ずつグループ化する
+
+blog:Everyday:2005-01-13
+
+    f1 n = unfoldr phi
+        where phi [] = Nothing
+              phi xs = Just $ splitAt n xs
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+[組合せ論的な生成関数]()
+
+-   [リストの二分割の生成]()
+-   [順列の生成]()
+-   [重複順列の生成]()
+-   [組合せの生成]()
+-   [重複組合せの生成]()
+
+[順列の生成]()
+
+* * * * *
+
+## 組合せ論的な生成関数
+
+「順列の生成」に触発されて、いろいろつくってみた。2003/11/24 08:09:32 JST--nobsun
+
+### リストの二分割の生成
+
+たとえば、[1,2,3]というリストの全二分割は、
+[([],[1,2,3]),([1],[2,3]),([1,2],[3]),([1,2,3],[])]
+
+    divid :: [a] -> [([a],[a])]
+
+    divid xxs@(x:xs) = ([],xxs) : [(x:ys,zs) | (ys,zs) <- divid xs]
+    divid []         = [([],[])]
+
+あれっ。これでいいじゃん。
+
+    divid xs = zip (inits xs) (tails xs)
+
+えっ。なに？逆？
+
+    inits = map fst . divid
+    tails = map snd . divid
+
+### 順列の生成
+
+n 種類のものから、r 個取り出して並べる。辞書順に生成される。
+
+    perm :: [a] -> Int -> [[a]]
+    perm [] _ = []
+    perm xs 0 = [[]]
+    perm xs 1 = map (:[]) xs
+    perm xs n = concatMap (pm n) $ divid xs
+     where pm _ (_,[])      = []
+           pm n (hs,(t:ts)) = map (t:) $ perm (hs ++ ts) (n-1)
+
+> length (perm ns r) == nＰr (n = length ns)
+
+別の書き方で
+
+    perm [] = [[]]
+    perm xs = concat [map (x:) (perm xs') | (x, xs') <- f xs]
+      where f [] = []
+            f (x:xs) = (x, xs):[(x', x:xs') | (x', xs') <- f xs]
+
+Eq a なときの順列
+
+    perm' :: Eq a => [a] -> [[a]]
+    perm' [] = [[]]
+    perm' xs = concat [map (x:) (perm' xs') | (x, xs') <- nubBy g $ f xs]
+      where f [] = []
+            f (x:xs) = (x, xs):[(x', x:xs') | (x', xs') <- f xs]
+            g (x, _) (y, _) = x == y
+
+### 重複順列の生成
+
+n 種類のものから、重複を許して、r 個取り出してならべる。
+
+    rperm :: [a] -> Int -> [[a]]
+    rperm [] _ = []
+    rperm xs 0 = [[]]
+    rperm xs 1 = [[x] | x <- xs]
+    rperm xs n = [ x:ys | x <- xs, ys <- rperm xs (n-1) ]
+
+> length (rperm ns r) == nΠr (n = length ns) == n\^r
+
+-   2ch で覚えた方法
+
+        rperm = ((foldl ((=<<) . (. (return .) . (:)) . (>>=) ) [[]]) .) . (flip replicate) 
+
+    -   邪悪な香りがして、ぞくぞくきますねぇ。\^\^；
+    -   rperm [] 0 の結果が上と違うけど、どちらが正しいの?
+        -   0\^0 は 0 か 1 かと同じ話ですよね。不定ということでどうでしょうか。
+        -   空集合から空集合への写像の数は１つらしいので rperm [] \_ の行はない方がいいでしょうか。それと rperm
+            xs 1 の行も必要ないですよね。他のほとんどの項目の \*\*\* xs 1 の行についても同様です。
+
+-   HHLに同じ事をする関数があった
+
+        import Control.Monad
+        rperm = flip replicateM
+
+### 組合せの生成
+
+n 種類のものから、r 個取り出して組み合せる。
+
+    comb :: [a] -> Int -> [[a]]
+    comb [] _     = []
+    comb xs 0     = [[]]
+    comb xs 1     = map (:[]) xs
+    comb (x:xs) n = map (x:) (comb xs (n-1)) ++ comb xs n
+
+    comb xs 1 のパターンを外せるが他のパターンの順序を変えないといけない。
+
+    comb _ 0     = [[]]
+    comb [] _     = []
+    comb (x:xs) n = map (x:) (comb xs (n-1)) ++ comb xs n
+
+> length (comb ns r) == nＣr (n = length ns)
+
+選んだ残りのものも利用したいとき
+
+    choice  :: Int -> [a] -> [([a], [a])]
+    choice 0 xs = [([], xs)]
+    choice n [] = []
+    choice n (x:xs) = [(x:ys, zs) | (ys, zs) <- choice (n-1) xs] ++
+                      [(ys, x:zs) | (ys, zs) <- choice n xs]
+
+### 重複組合せの生成
+
+n 種類のものから、重複を許して、r 個取り出して組み合わせる。
+
+    rcomb :: [a] -> Int -> [[a]]
+    rcomb [] _ = []
+    rcomb xs 0 = [[]]
+    rcomb xs 1 = [[x] | x <- xs]
+    rcomb xxs@(x:xs) n = map (x:) (rcomb xxs (n-1)) ++ rcomb xs n
+
+> length (rcomb ns r) == nＨr (n = length ns)
+
+    rcomb' [] _ = []
+    rcomb' xs 0 = [[]]
+    rcomb' xs n = xs >>= (flip map (rcomb xs (n-1))) . (:)
+    -- rcomb' xs n = xs >>= (rcomb xs (n-1) >>=) . ((flip (:) [] .) . (:))
+
+* * * * *
+
+## 順列の生成
+
+かってに書いてもいいのかな? 問題があったら消して下さい \>\> nobsun
+
+-   Welcome! Wikiなんですから、どんどん書いちゃってくださいな。--nobsun
+
+2chの[関数型プログラミング言語Haskell](http://pc2.2ch.net/test/read.cgi/tech/1013846140/819-)
+で話題になっているものを転記。
+
+819
+
+    permutation' [] = [[]]
+    permutation' xs = foldr (++) [] (map f (rotate_list xs))
+      where
+      f (x:xs) = map (x:) (permutation' xs)
+      rotate_list xs = take (length xs) (iterate rotate_left xs)
+        where
+        rotate_left [] = []
+        rotate_left (x:xs) = xs ++ [x]
+
+    permutation [] = [[]]
+    permutation xs = foldr (++) [] (map f (selected_list xs))
+      where
+      f (x:xs) = map (x:) (permutation xs)
+      selected_list xs = take (length xs) (zipWith select (repeat xs) [0..])
+        where
+        select [] _ = []
+        select xs n = z : ys ++ zs
+          where
+          (ys,(z:zs)) = splitAt n xs
+
+    上の permutation' は速いですが順列が昇順に出力されません．下の
+    permutation は昇順に出力されますが， splitAt のあたりが遅いのか，速度
+    で劣ります．
+
+821
+
+    permutation [] = [[]]
+    permutation xs = concat [map (x:) $ permutation (delete x xs) | x <- xs]
+
+823
+
+    deleteの2倍以上速いと思う。
+
+    permutations :: [a] -> [[a]]
+    permutations (x:xs) = concat $ map (insap [] x) $ permutations xs
+    where
+      insap :: [a] -> a -> [a] -> [[a]]
+      insap xs y (z:zs) = (xs ++ [y] ++ (z:zs)):(insap (xs ++ [z]) y zs)
+      insap xs y [] = [xs ++ [y]]
+    permutations [] = [[]]
+
+826
+
+     insap xs y zzs@(z:zs) = (xs++y:zzs):insap (xs++[z]) y zs
+
+    とやると僅かだけど、早くなるかも。
+
+828
+
+    permutation xs = p xs []
+     where
+      p [] [] = [[]]
+      p [] ys = []
+      p (x:xs) ys = (map (x:) $ p (xs ++ reverse ys) []) ++ p xs (x:ys)
+
+    deleteより少し速い。xs ++ reverse ysを効率的にやればもう少しいけるかもね。
+
+830
+
+    Haskellよく知らないけど前にLispでやったから多分
+
+     permutation' [] = [[]]
+     permutation' xs = foldr (++) [] (map rotate_list (f xs))
+       where
+       f (x:xs) = map (x:) (permutation' xs)
+       rotate_list xs = take (length xs) (iterate rotate_left xs)
+         where
+         rotate_left [] = []
+         rotate_left (x:xs) = xs ++ [x]
+
+830
+
+    末尾再帰はループになるのかな？
+
+    selected-list xs = p xs [] []
+     where
+      p [] ys r = reverse r
+      p (x:xs) ys r = p xs (x:ys) ((x:((reverse ys) ++ xs)):r)
+
+* * * * *
+
+-   [Programming\_玉手箱]()
+
+    -   [素因数分解]()
+    -   [既約分数]()
+    -   [拡張ユークリッドの互除法]()
+
+    * * * * *
+
+    ## 素因数分解
+
+    ついでに、素因数分解
+
+        primes = map head $ iterate sieve [2..]
+        sieve (p:xs) = [ x | x <- xs, x `mod` p /= 0]
+
+        factors n = fc [] (prms n primes) n
+                    where
+                     prms n ps = takeWhile (ceiling (sqrt (fromInteger (n+1))) > ) ps
+                     fc rs [] n         = reverse (n:rs)
+                     fc rs pps@(p:ps) n = case n `divMod` p of
+                                            (1,0) -> reverse (n:rs)
+                                            (m,0) -> fc (p:rs) (prms m pps) m
+                                            _     -> fc rs ps n 
+
+    -   篩で無駄な割り算を減らしてみる。
+
+            primes' :: [Integer]
+            primes' = 2:sieve' [3] [5,7..]
+
+            sieve' :: [Integer] -> [Integer] -> [Integer]
+            sieve' (p:ps) xs = p:sieve' (ps++ps') [x | x <- qs, mod x p /= 0]
+              where (ps', qs) = span (<(p*p)) xs
+
+    -   primesが全然primesになっていないのと、素数の2乗の素因数分解ができないのが気になる
+
+    -   修正しますた
+    -   primes をまじめに計算すると遅いので、これで十分かも
+
+            primes' = 2 : zipWith (+) primes' (1 : 2 : cycle [2, 4])
+
+        -   primes' = 2:3:(3の倍数を除く奇数)ですか。オーダとしては、primes'' = 2:[3,5..]
+            としてもいいのか、なるほど。
+
+    -   primes''' = 2:3:5:scanl (+) 7 (cycle [4,2,4,2,4,6,2,6]) --
+        やりすぎですか、そうですか。
+
+prms っていらないんじゃないの？
+
+    factors n = fc [] primes n
+                where
+                   fc rs pps@(p:ps) n = case n `divMod` p of
+                                          (1,0) -> reverse (n:rs)
+                                          (q,0) -> fc (p:rs) pps q
+                                          _     -> fc rs ps n 
+
+でいいような。
+
+-   prms なくてもいいけど、ないと遅くなるでしょう。 n の平方根より大きい値で割っても意味ないし
+
+-   reverseはいらないし(lazyにfactoring)、(1, 0)とのマッチはおこりません。 -- yts
+
+        primes = sieve [2..] 
+          where sieve (p:xs) = p:sieve [x | x <- xs,  x `mod` p /= 0]
+        factors n = f n (g n primes)
+          where f x [] = [x]
+                f x pps@(p:ps) = case x `divMod` p of
+                    (m, 0) -> p:f m (g m pps)
+                    _      -> f x ps
+                g n = takeWhile ((<= n).(^2))
+
+-   f x pps の定義で、x が変化しない場合も takeWhile を実行するのは無駄ではないでしょうか
+    -   確かに。スタートアップで削っておけば十分ですね。修正しました。 --yts
+
+-   sieve の中と factors で 2 回割り算するのはもったいない。
+
+        factors n = f n (2:[3,5..])
+          where
+            f n (m:ms) | n <= 1         = []
+                       | n < m * m      = [n]
+                       | n `mod` m == 0 = m:f (n `div` m) (m:ms)
+                       | otherwise      = f n ms
+
+* * * * *
+
+## 既約分数
+
+[結城浩の日記](http://www.hyuki.com/diary/dia0312.html#i30)より
+
+> 問題：正の整数Nが与えられているとき、以下の条件を満たす既約分数p/qを「すべて」求めるアルゴリズムを示してください。条件は：
+>
+> -   p, qは整数(pは0以上で、qは1以上N以下).
+> -   gcd(p, q) = 1 (pとqの最大公約数は1).
+> -   0 <= p/q <= 1.
+
+    ss = map s [0..]
+
+    s 0 = False : True : cycle [False]
+    s n = cycle $ map (!! n) $ take n ss
+
+    irr 0 = []
+    irr n = irr (n-1) ++ [(n,i) | (p,i) <- zip (ss !! n) [0..n], p]
+
+『算譜の記』のコメントにかかれたssを利用しない版 s を利用したもの
+
+    s 0 = False : True : cycle [False]
+    s 1 = cycle [True]
+    s n = map (!! n) $ map s $ cycle [0..n-1]
+
+    irr 0 = []
+    irr 1 = [(1,0),(1,1)]
+    irr n = irr (n-1) ++ [(n,i) |  (p,i) <- zip (s n) [0..n-1], p]
+
+強引に一行化
+
+    irr n = concat $ foldl (\x n -> [(n,i) | i <- [1..n-1], (\y -> elem y $ map snd $ x !! (y-1)) $ min i (n-i)] : x) [[(1,0),(1,1)]] [2..n]
+
+    irr n = foldl (\x n -> [(n,i) | i <- [1..n-1], (\y -> elem (n-y,y) x) $ min i (n-i)] ++ x) [(1,0),(1,1)] [2..n]
+
+* * * * *
+
+## 拡張ユークリッドの互除法
+
+    euclid x y = euclid' x y 1 0 0 1
+      where
+        euclid' x 0 a b _ _ = ((a, b), x)
+        euclid' x y a b c d = euclid' y r c d (a-c*q) (b-d*q)
+          where (q, r) = quotRem x y
+
+    Main> euclid 5 7
+    ((3,-2),1)    -- 5 * 3 - 7 * 2 == 1
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+[コメントの除去]()
+
+[コメント対応read]()
+
+[正規表現置換]()
+
+[words4ApacheLog]()
+
+[文字列の先頭から等しい文字列を抜き出す]()
+
+-   [お約束の末尾再帰版]()
+
+[文字列から一致する部分文字列を抽出する]()
+
+[CSV]()
+
+[自分自身のソースコードをプリントするプログラム]()
+
+[文字列 C が文字列 A, B から構成されているか]()
+
+* * * * *
+
+## コメントの除去
+
+    {-# LANGUAGE EmptyDataDecls #-}
+    module Text.Decomment (CommentStyle(..), QuoteStyle(..), decomment) where
+
+    import Control.Arrow
+    import Data.List
+    import Data.Maybe
+
+    class CommentStyle c where
+      commentLeadings  :: c -> [String]
+      commentOpenings  :: c -> [String]
+      commentClosing   :: c -> String -> String
+      commentNestable  :: c -> Bool
+
+    class QuoteStyle q where
+      quoteOpenings  :: q -> [Char]
+      quoteClosing   :: q -> Char -> Char
+      quoteEscape    :: q -> Char
+
+    splitWithPrefix :: Eq a => [a] -> [a] -> Maybe ([a],[a])
+    splitWithPrefix [] xs = Just ([],xs)
+    splitWithPrefix (p:ps) xxs@(x:xs)
+      | p == x     = splitWithPrefix ps xs >>= return . ((x:) *** id)
+      | otherwise  = Nothing
+
+    splitQuoted :: Eq a => a -> a -> [a] -> ([a], [a])
+    splitQuoted esc qm []   = ([],[])
+    splitQuoted esc qm (c:cs)
+               | c == qm    = ([],cs)    
+               | c == esc   = case cs of 
+                                []     -> ([c],[])
+                                c':cs' -> ((c:).(c':) *** id) $ splitQuoted esc qm cs'
+               | otherwise  = ((c:) *** id) $ splitQuoted esc qm cs
+
+    decomment :: (CommentStyle s, QuoteStyle s) => s -> String -> String
+    decomment s ""         = ""
+    decomment s ccs@(c:cs) = case mapMaybe (flip splitWithPrefix ccs) $ commentLeadings s of
+      (_,xs):_ -> decomment s $ snd $ break ('\n'==) xs
+      []       -> case mapMaybe (flip splitWithPrefix ccs) $ commentOpenings s of
+                    (p,xs):_ -> decommentC s [p] xs
+                    []       -> if elem c (quoteOpenings s) then c:decommentQ s c cs 
+                                else c:decomment s cs
+
+    decommentC :: (CommentStyle s, QuoteStyle s) => s -> [String] -> String -> String
+    decommentC s [] xs = ' ':decomment s xs
+    decommentC s pps@(p:ps) xxs@(x:xs)
+      | commentNestable s  = case splitWithPrefix (commentClosing s p) xxs of
+          Just (_,ys) -> decommentC s ps ys
+          Nothing     -> case mapMaybe (flip splitWithPrefix xxs) $ commentOpenings s of
+                           [] -> decommentC s pps xs
+                           (p',yys):_ -> decommentC s (p':pps) yys
+      | otherwise   = case mapMaybe (splitWithPrefix (commentClosing s p)) $ tails xs of
+          (_,ys):_ -> ' ':decomment s ys
+          []       -> ""
+
+    decommentQ :: (CommentStyle s, QuoteStyle s) => s -> Char -> String -> String
+    decommentQ s c xs = case splitQuoted (quoteEscape s) (quoteClosing s c) xs of
+                          (ys,zs) -> ys ++ '"':decomment s zs
+
+[nobsun\_decomment]()参照
+
+## コメント対応read
+
+    read' :: Read a => String -> a
+    read' = read . uncomment
+
+    uncomment :: String -> String
+    uncomment ""                 = ""
+    uncomment ('-':'-':rs)       = case break ('\n'==) rs of (ss,ts) -> uncomment ts
+    uncomment ('{':'-':rs)       = uncommentC 1 rs
+    uncomment ('\'':'"':'\'':rs) = '\'':'"':'\'':uncomment rs
+    uncomment ('\\':'"':rs)      = '\\':'"':uncomment rs
+    uncomment ('"':rs)           = '"':uncommentQ rs
+    uncomment (c:rs)             = c : uncomment rs
+
+    uncommentQ :: String -> String
+    uncommentQ ""             = ""
+    uncommentQ ('\\':'"':rs)  = '\\':'"':uncommentQ rs
+    uncommentQ ('"':rs)       = '"': uncomment rs
+    uncommentQ (c:rs)         = c:uncommentQ rs
+
+    uncommentC :: Int -> String -> String
+    uncommentC _ ""            = ""
+    uncommentC 0 rs            = uncomment rs
+    uncommentC k ('-':'}':rs)  = uncommentC (k-1) rs
+    uncommentC k ('{':'-':rs)  = uncommentC (k+1) rs
+    uncommentC k (c:rs)        = uncommentC k rs
+
+    sample0 = "[1 -- hoge\n,2\n,3\n{- ,4 \n -}\n]"
+
+実行例
+
+    *Main> putStrLn sample0
+    [1 -- hoge
+    ,2
+    ,3
+    {- ,4 
+     -}
+    ]
+    *Main> read' sample0 :: [Int]
+    [1,2,3]
+
+* * * * *
+
+## 正規表現置換
+
+    import Text.Regex
+
+    sub re s str = case matchRegexAll re str of
+                      Just (b, _, a, _) -> b ++ s ++ a
+                      _ -> str
+
+    gsub re s str = case matchRegexAll re str of
+                      Just (b, _, a, _) -> b ++ s ++ gsub re s a
+                      _ -> str
+
+* * * * *
+
+## words4ApacheLog
+
+前に挙げたdividWithQuoteByをつかうとApacheのcombined 形式の access.log
+の項目も分解できる。単純な空白区切りの words に
+
+    testdata = "127.0.0.1 - - [12/Dec/2003:16:07:36 +0900] \"GET /cgi-bin/kahua.cgi HTTP/1.1\" 200 2301 \"-\" \"Mozilla/5.0 (X11; U; Linux i686; ja-JP; rv:1.5) Gecko/20031127 Firebird/0.7\""
+
+を食わせると
+
+    Main> mapM_ putStrLn $ words testdata
+    127.0.0.1
+    -
+    -
+    [12/Dec/2003:16:07:36
+    +0900]
+    "GET
+    /cgi-bin/kahua.cgi
+    HTTP/1.1"
+    200
+    2301
+    "-"
+    "Mozilla/5.0
+    (X11;
+    U;
+    Linux
+    i686;
+    ja-JP;
+    rv:1.5)
+    Gecko/20031127
+    Firebird/0.7"
+
+でも、
+
+    words4ApacheLog :: String -> [String]
+    words4ApacheLog = dividWithQuoteBy [('\"', '\"'),('[',']')] isSpace
+
+としておいて、これをくわせると。
+
+    Prelude> mapM_ putStrLn $ words4ApacheLog testdata
+    127.0.0.1
+    -
+    -
+    [12/Dec/2003:16:07:36 +0900]
+    "GET /cgi-bin/kahua.cgi HTTP/1.1"
+    200
+    2301
+    "-"
+    "Mozilla/5.0 (X11; U; Linux i686; ja-JP; rv:1.5) Gecko/20031127 Firebird/0.7"
+
+-   つまり、dividWithQuoteBy の逆を書けば汎用 encoding 関数が書けるんですね -- shelarcy
+
+* * * * *
+
+## 文字列の先頭から等しい文字列を抜き出す
+
+[rwiki](http://rwiki.jin.gr.jp/cgi-bin/rw-cgi.rb?cmd=view;name=2�Ĥ�ʸ�������Ƭ������ʸ�����ȴ���Ф�)より。ナイーブな実装
+
+    same_prefix xs ys = map fst $ takeWhile (uncurry (==)) $ zip xs ys
+
+ちょっとだけはやいかも
+
+    same_prefix (x:xs) (y:ys) | x == y    = x : same_prefix xs ys
+                              | otherwise = []
+    same_prefix _ _ = []
+
+### お約束の末尾再帰版
+
+    same_prefix = same_prefix_iter []
+     where
+      same_prefix_iter xiferp (x:xs) (y:ys) | x == y    = same_prefix_iter (x:xiferp) xs ys
+                                            | otherwise = reverse xiferp
+      same_prefix_iter xiferp _  _ = reverse xiferp
+
+* * * * *
+
+## 文字列から一致する部分文字列を抽出する
+
+    import List
+
+    main :: IO ()
+    main = getContents >>= mapM_ print . sameString
+
+    sameString :: String -> [(String, Int)]
+    sameString = sortBy (\(_,x) (_,y) -> compare y x)
+               . map (rv . last)
+               . groupBy similar
+               . sort . map (rv . last)
+               . groupBy similar
+               . getPrefix . sort . tails
+
+    rv :: (String, Int) -> (String, Int)
+    rv (s, i) = (reverse s, i)
+
+    similar :: (String, Int) -> (String, Int) -> Bool
+    similar (s1, i1) (s2, i2)
+        | i1 /= i2 = False
+        | otherwise = and $ map (uncurry (==)) $ zip s1 s2
+
+    getPrefix :: [String] -> [(String, Int)]
+    getPrefix ss = concat $ snd $ mapAccumL f ([], []) ss
+
+    f :: (String, [Int]) -> String -> ((String, [Int]), [(String, Int)])
+    f (cs, xs) ss = ((ss, p), q)
+      where (p, q) = g cs xs ss
+
+    g :: String -> [Int] -> String -> ([Int], [(String, Int)])
+    g (c:cs) (x:xs) (s:ss) | c == s = ((x+1):p, map (\(s, n) -> (c:s, n)) q)
+      where (p, q) = g cs xs ss
+    g cs xs ss = (map (\_ -> 1) ss, zip (drop 1 $ inits cs) (takeWhile (1<) xs))
+
+* * * * *
+
+## CSV
+
+一年以上まえの「算譜の記」より。
+
+> 「データ行を与えられたセパレータ文字(CSVの場合は',')で区切られた値を表現する文字列に分解する」関数。ただし、引用内のセパレータ文字はセパレータとしない。引用を表現する文字対(引用開始文字、引用終了文字)は複数与えることができるものとする。
+>
+>     dividWithQuoteBy :: [(Char,Char)] -> (Char -> Bool) -> String -> [String]
+>     dividWithQuoteBy _ _ "" = [""]
+>     dividWithQuoteBy qs p ccs@(c:cs)
+>      = if p c
+>          then "" : dividWithQuoteBy qs p cs
+>          else case break (pOr p q) ccs of
+>                 (_,[]) -> [ccs]
+>                 (xs,yys@(y:ys)) 
+>                   -> case lookup y qs of
+>                        Nothing -> xs : dividWithQuoteBy qs p ys
+>                        Just eq 
+>                          -> case break (eq ==) ys of
+>                               (_,[])   -> error ("Invalid format: no "++show eq)
+>                               (zs,w:ws)-> case dividWithQuoteBy qs p ws of
+>                                             []     -> [ccs]
+>                                             ts:uus -> (xs++[y]++zs++[w]++ts) : uus
+>        where q x = case lookup x qs of {Nothing -> False; _-> True}
+>              pOr f g x = if f x then True else g x
+>
+> これを利用すると CSVフォーマットのデータ行を分解するのは例えば、
+>
+>     readCSVLine :: String -> [String]
+>     readCSVLine = dividWithQuoteBy [('\"','\"'),('\'','\'')] (','==)
+
+* * * * *
+
+## 自分自身のソースコードをプリントするプログラム
+
+    main=putStr(x++show x);x="main=putStr(x++show x);x="
+
+* * * * *
+
+## 文字列 C が文字列 A, B から構成されているか
+
+ML[Haskell-jp:485](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/485)より
+
+文字列 C の要素を二つに分けたとき、それらが C 上の順序を保って A, B と等しいか。
+
+    f xs ys = elem (Just ([], [])) . foldl g [Just (xs, ys)]
+      where
+        g xy z = [ case (l, r) of (Just (x:xs, ys), _) | x == z -> Just (xs, ys)
+                                  (_, Just (xs, y:ys)) | y == z -> Just (xs, ys)
+                                  _ -> Nothing
+                 | (l, r) <- zip (xy++[Nothing]) (Nothing:xy)
+                 ]
+
+    Main> f "aaaaaaaaaa" "aaaaaaaaaab" "aaaaaaaaaaaaaaaaaaaaa"
+    False
+    (1732 reductions, 5108 cells)
+    Main> f "chocolate" "chips" "cchochiolpaste"
+    True
+    (532 reductions, 1625 cells)
+
+-   末広がりにならないように斜めにみる。 -- yts
+
+        check xs ys zs = last $ next ys zs $ True:zipWith (==) xs zs
+          where
+            next [] zs bs = if length zs == length xs then bs else [False]
+            next (y:ys) (z:zs) (b:bs)
+              = next ys zs $ fix (\bls ->
+                    (b && z == y):[ (bl && z == x) || (bd && z == y) 
+                        | (bd, (bl, (x, z))) <- zip bs $ zip bls $ zip xs zs])
+
+-   Exploit lazyness! fibなんかもこういうふうにbuild DOWNできます。 -- yts
+
+        data Tree a = T a (Tree a) (Tree a)
+        check xs ys zs = b
+          where end = T False end end
+                t@(T b _ _) = checks xs ys zs t
+                checks [] [] [] _ = T True end end
+                checks [] [] _ _ = end
+                checks _ _ [] _ = end
+                checks (x:xs) [] (z:zs) ~(T _ l@(T a al ar) _)
+                    = T (z == x && a) (checks xs [] zs l) (T False ar end)
+                checks [] (y:ys) (z:zs) ~(T _ _ r@(T b bl br))
+                    = T (z == y && b) (T False end bl) (checks [] ys zs r)
+                checks xxs@(x:xs) yys@(y:ys) (z:zs) ~(T _ l@(T a al ar) r@(T b bl br))
+                    = T (z == x && a || z == y && b)
+                          (checks xs yys zs (T a al ar))
+                          (checks xxs ys zs (T b ar br)) -- "ar"
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+[関数型表]()
+
+[上向きにも辿れる木]()
+
+[平衡木]()
+
+-   [赤黒木]()
+-   [AVL 木]()
+
+[データタイプから再帰を分離]()
+
+[探索]()
+
+-   [深さ優先探索]()
+-   [幅優先探索]()
+
+[Graphical Sequence]()
+
+* * * * *
+
+## 関数型表
+
+関数型の表(Table)。結構、味があるとおもいません？
+
+    type Table k v = k -> Maybe v
+     
+    emptyTable :: Table k v
+    emptyTable = const Nothing
+
+    lookup :: Table k v -> k -> Maybe v
+    lookup = id
+     
+    insert :: Eq k => Table k v -> (k,v) -> Table k v
+    insert tbl (k,v) key = if k == key then Just v else tbl key
+     
+    remove :: Eq k => Table k v -> k -> Table k v
+    remove tbl k key = if k == key then Nothing else tbl key
+
+* * * * *
+
+## 上向きにも辿れる木
+
+zipper代わりに。-- yts
+
+    import Data.Maybe (isJust, fromJust)
+    data Tree a = Tree a [Tree a] deriving Show
+
+    data TreeP a =  TreeP { parent :: Maybe (TreeP a), value :: a, children :: [TreeP a] } 
+    mkTreeP pmb (Tree a cs)   = let x = TreeP pmb a (map (mkTreeP (Just x)) cs) in x
+    parents = map fromJust . takeWhile isJust . iterate (>>= parent) . return
+
+    instance Show a => Show (TreeP a) where
+      showsPrec d (TreeP p a cs) = showParen (d > 10) $ 
+          ("TreeP " ++) . (f p ++) . showsPrec 11 a . (" " ++) . showList cs
+          where f (Just _) = "(Just <parent>) "; f Nothing = "Nothing "
+
+    test00 = Tree 0 [Tree 1 [Tree 2 [Tree 3 []], Tree 4 []]]
+    test01 = mkTreeP Nothing test00
+    test02 = head . children . head . children $ test01
+    test03 = parent test02
+    test04 = parents test02
+
+-   [HaWiki:TheZipper](http://www.haskell.org/hawiki/TheZipper)
+
+* * * * *
+
+## 平衡木
+
+### 赤黒木
+
+[Haskell Red-Black
+Set](http://www.cse.ogi.edu/~hook/cse532f98/haskell1.htm)より。 [Red Black
+Trees](http://www.cs.kent.ac.uk/people/staff/smk/redblack/) に deletion
+付きのものがある。
+
+    data Color = R | B
+    data RedBlackSet a = E | T Color (RedBlackSet a) a (RedBlackSet a)
+
+    balance B (T R (T R a x b) y c) z d = T R (T B a x b) y (T B c z d)
+    balance B (T R a x (T R b y c)) z d = T R (T B a x b) y (T B c z d)
+    balance B a x (T R (T R b y c) z d) = T R (T B a x b) y (T B c z d)
+    balance B a x (T R b y (T R c z d)) = T R (T B a x b) y (T B c z d)
+    balance color a x b = T color a x b
+
+    empty = E
+
+    member x E = False
+    member x (T _ a y b)
+       | x < y  = member x a
+       | x > y  = member x b
+       | True   = True
+       
+    insert x s = T B a y b
+      where 
+        T _ a y b = ins s
+        ins E = T R E x E
+        ins s@(T color a y b) 
+          | x < y  = balance color (ins a) y b
+          | x > y  = balance color a y (ins b)
+          | True   = s
+
+balance が美しい。
+
+### AVL 木
+
+    data AVLSet a = E | T H (AVLSet a) a (AVLSet a) deriving Show
+    data H = L | B | R deriving Show
+
+    balanceL R a x b = (False, T B a x b)
+    balanceL B a x b = (True,  T L a x b)
+    balanceL L (T L a x b) y c = (False, T B a x (T B b y c))
+    balanceL L (T B a x b) y c = (True,  T R a x (T L b y c))
+    balanceL L (T R a x (T h b y c)) z d = (False, T B (T h' a x b) y (T h'' c z d))
+      where (h', h'') = case h of L -> (B, R); B -> (B, B); R -> (L, B)
+
+    balanceR L a x b = (False, T B a x b)
+    balanceR B a x b = (True,  T R a x b)
+    balanceR R a x (T R b y c) = (False, T B (T B a x b) y c)
+    balanceR R a x (T B b y c) = (True,  T L (T R a x b) y c)
+    balanceR R a x (T L (T h b y c) z d) = (False, T B (T h' a x b) y (T h'' c z d))
+      where (h', h'') = case h of R -> (L, B); B -> (B, B); L -> (B, R)
+
+    member x E = False
+    member x (T _ a y b)
+        | x < y = member x a
+        | x > y = member x b
+        | True  = True
+
+    insert x E = T B E x E
+    insert x t = snd $ ins x t
+
+    ins x E = (True, T B E x E)
+    ins x t@(T h l v r)
+        | x < v = case ins x l of
+                    (True,  l) -> balanceL h l v r
+                    (False, l) -> (False, T h l v r)
+        | x > v = case ins x r of
+                    (True,  r) -> balanceR h l v r
+                    (False, r) -> (False, T h l v r)
+        | True  = (False, t)
+
+    delete x t = snd $ del x t
+
+    del x E = (True, E)
+    del x (T h l y r)
+        | x < y = case del x l of
+                    (False, l) -> balanceR h l y r
+                    (True,  l) -> (True, T h l y r)
+        | x > y = case del x r of
+                    (False, r) -> balanceL h l y r
+                    (True,  r) -> (True, T h l y r)
+        | True  = case l of
+                    E -> (False,r)
+                    l -> case rightElem l of
+                           (z, (False, l)) -> balanceR h l z r
+                           (z, (True,  l)) -> (True, T h l z r)
+
+    rightElem (T h l x E) = (x, (False,l))
+    rightElem (T h l x r) = case rightElem r of
+                              (z, (False, r)) -> (z, balanceL h l x r)
+                              (z, (True,  r)) -> (z, (True, T h l x r))
+
+    height E = 0
+    height (T _ l _ r) = 1 + max (height l) (height r)
+
+    toList E = []
+    toList (T _ a x b) = toList a ++ [x] ++ toList b
+
+    check = snd . check'
+
+    check' E = (0, True)
+    check' (T h l _ r) =
+        ( 1 + max a c
+        , b && d && (case h of
+                     L -> a == c + 1
+                     R -> a + 1 == c
+                     B -> a == c
+                    )
+        )
+      where ((a, b), (c, d)) = (check' l, check' r)
+
+    permutation [] = [[]]
+    permutation xs = concat [map (x:) $ permutation (List.delete x xs) | x <- xs]
+
+    test = and $ map (check . foldl (flip insert) E) $ permutation [1..8]
+    test' = and [check $ delete x t | t <- map (foldl (flip insert) E) $ permutation [1..7], x <-[1..7]]
+
+Red-Black Tree をまねしてみたけど、場合分けが多くなってしまった。 -- y.hanatani
+
+    height E = 0
+    height (T L l _ _) = 1 + height l
+    height (T _ _ _ r) = 1 + height r
+
+これを使ってGADTで遊ばせてもらいました。その際に気付いたのですが、「balanceL L (T B a x b) y c = (True,
+T L (T B a x b) y c)」は「balanceL L (T B a x b) y c = (True, (T R a x (T L
+b y c)」ではないでしょうか。-- sakai
+
+あ、insert だけだとこの規則は使われないですね。delete のときにはsakai氏のおっしゃるとおりです。 -- y.hanatani
+
+    data Z = Z
+    data S n = S n
+
+    data (Ord a) => T a n where
+        E :: T a Z
+        T :: H l r n -> T a l -> a -> T a r -> T a n
+
+    data H l r n where
+        B :: H a a (S a)
+        L :: H (S a) a (S (S a))
+        R :: H a (S a) (S (S a))
+
+    balanceL :: H l r n -> T a (S l) -> a -> T a r -> Either (T a n) (T a (S n))
+    balanceL R a x b = Left  (T B a x b)
+    balanceL B a x b = Right (T L a x b)
+    balanceL L (T B a x b) y c = Right (T R a x (T L b y c))
+    balanceL L (T L a x b) y c = Left  (T B a x (T B b y c))
+    balanceL L (T R a x (T h b y c)) z d =
+        case h of
+        L -> Left (T B (T B a x b) y (T R c z d))
+        B -> Left (T B (T B a x b) y (T B c z d))
+        R -> Left (T B (T L a x b) y (T B c z d))
+
+    balanceR :: H l r n -> T a l -> a -> T a (S r) -> Either (T a n) (T a (S n))
+    balanceR L a x b = Left  (T B a x b)
+    balanceR B a x b = Right (T R a x b)
+    balanceR R a x (T B b y c) = Right (T L (T R a x b) y c)
+    balanceR R a x (T R b y c) = Left  (T B (T B a x b) y c)
+
+    balanceR R a x (T L (T h b y c) z d) =
+        case h of
+        R -> Left (T B (T L a x b) y (T B c z d))
+        B -> Left (T B (T B a x b) y (T B c z d))
+        L -> Left (T B (T B a x b) y (T R c z d))
+
+    ins :: (Ord a) => a -> T a n -> Either (T a n) (T a (S n))
+    ins x E = Right (T B E x E)
+    ins x t@(T h l v r) =
+        case x `compare` v of
+        EQ -> Left t
+        LT -> case ins x l of
+              Left l'  -> Left (T h l' v r)
+              Right l' -> balanceL h l' v r
+        GT -> case ins x r of
+              Left r'  -> Left (T h l v r')
+              Right r' -> balanceR h l v r'
+
+    data (Ord a) => AVLSet a = forall n. AVLSet (T a n)
+
+    emptySet :: (Ord a) => AVLSet a
+    emptySet = AVLSet E
+
+    insert :: (Ord a) => a -> AVLSet a -> AVLSet a
+    insert x (AVLSet t) =
+        case ins x t of
+        Left u  -> AVLSet u
+        Right u -> AVLSet u
+
+    toList :: (Ord a) => AVLSet a -> [a]
+    toList (AVLSet t) = f t
+        where f :: forall a n. T a n -> [a]
+              f E = []
+              f (T _ l x r) = f l ++ [x] ++ f r
+
+    height :: (Ord a) => AVLSet a -> Int
+    height (AVLSet t) = f t
+        where f :: forall a n. T a n -> Int
+              f E = 0
+              f (T L l _ r) = 1 + f l
+              f (T _ _ _ r) = 1 + f r
+
+    test = height $ foldl (flip insert) emptySet [1..100]
+
+foldによって書いてみる -- yts
+
+    fold :: (forall l n r. H l n r -> b -> a -> b -> b) -> b -> T a d -> b
+    fold f z x@(T h l a r) = f h (g l) a (g r) where g = fold f z
+    fold f z E = z
+
+    member :: (Ord a) => a -> AVLSet a -> Bool
+    member (x :: a) (AVLSet t) = fold f False t
+      where f :: H l r n -> Bool -> a -> Bool -> Bool
+            f _ l a r = case compare x a of
+            EQ -> True; LT -> l; GT -> r
+
+    -- toList (AVLSet t) = fold (\h l a r -> l ++ [a] ++ r) [] t
+    -- height (AVLSet t) = <snip>
+
+* * * * *
+
+## データタイプから再帰を分離
+
+    newtype Fix f = Fix (f (Fix f)) 
+    type Rec r = r (Fix r)
+    type Stream a = Rec ((,) a)
+
+    stream (x:xs) = (x, Fix (stream xs))
+    tolist (a, (Fix b)) = a:tolist b
+
+    test = take 10 $ tolist $ stream [1..]
+
+もっといい項目名をつけたかったのだけど… -- yts
+
+* * * * *
+
+## 探索
+
+### 深さ優先探索
+
+    dfs :: (a -> [a]) -> a -> [a]
+    dfs f x = x:(f x >>= dfs f)
+
+### 幅優先探索
+
+    bfs :: (a -> [a]) -> a -> [a]
+    bfs f = bfs' . (:[])
+      where bfs' [] = []
+            bfs' xs = xs ++ bfs' (xs >>= f)
+
+    -- 一行で書くと
+    bfs f = concat . takeWhile (not.null) . iterate (>> f) . (:[])
+
+* * * * *
+
+## Graphical Sequence
+
+[mputの日記](http://mput.dip.jp/mput/?date=20051007#p01)より
+
+    isGraphic []     = True
+    isGraphic (x:xs) = or [isGraphic $ map (subtract 1) xs ++ ys | (xs,ys) <- choice x xs]
+
+choice の定義は[Programming\_玉手箱\_組合せ]()にある．
+
+--nobsun
+
+    splitAt' :: Int -> [a] -> Maybe ([a], [a])
+    splitAt' 0 xs = Just ([], xs)
+    splitAt' _ [] = Nothing
+    splitAt' n (x:xs) = splitAt' (n-1) xs >>= \(ys, zs) -> Just (x:ys, zs)
+     
+    isGraphical :: [Int] -> Bool
+    isGraphical = isGraphical' . reverse . sort
+      where
+        isGraphical' []     = True
+        isGraphical' (x:xs) = case splitAt' x xs of
+                              Just (ys, zs) -> isGraphical $ map (subtract 1) ys ++ zs
+                              Nothing       -> False
+
+グラフ的な列を列挙。
+
+    genGraphical :: Int -> [[Int]]
+    genGraphical 0 = [[]]
+    genGraphical n = nub $ concat [[ins m $ map (+1) ys ++ zs | (m, (ys, zs)) <- zip [0..] (splits xs)] | xs <- genGraphical (n-1)]
+      where splits xs = zip (inits xs) (tails xs)
+            ins a [] = [a]
+            ins a xxs@(x:xs) | x <= a = a:xxs
+                             | True   = x:ins a xs
+
+    graphicals :: [[Int]]
+    graphicals = concatMap genGraphical [0..]
+
+* * * * *
+
+Last modified : 2006/06/13 07:49:57 JST

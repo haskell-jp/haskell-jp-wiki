@@ -1,0 +1,136 @@
+# [CategoryTheory\_圏論勉強会\_ConceptualMathematics\_Session26]()
+
+[CategoryTheory]():[圏論勉強会]():[ConceptualMathematics]():Session26
+
+* * * * *
+
+## 第十五回圏論勉強会
+
+2006-3-4(土) [男女共同参画センター
+学習室E](http://www.kissport.or.jp/sisetu/libra/index.html) 13:00〜19:30
+
+写真
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200603/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200603/ct/)
+
+出席者
+
+             shelarcy 久井  　　 |ス
+           +--------------+ 　　 |ク
+         豊|              | 　　 |リ
+         福|              | 　　 |｜
+           +--------------+  　　|ン
+                 酒井 今井   　　|
+
+### 雑談
+
+-   SICP読書会
+    -   [素人くさいSICP](http://www.csus4.net/hiki/SICPReading/)に行った
+        -   結構淡々と進む。現場での自己紹介やらも特になし。
+
+    -   [タイムインターメディア](http://www.javaopen.org/jfriends/bookmeeting.html)の方は5章をやっている
+        -   Lispマシンってあるの？
+            -   現存するみたい。結構でかい。
+            -   今ならFPGAで実装できる？
+                -   作ってみてもいいかも。
+
+-   熱力学のGCへの応用？
+    -   Thermodynamics and Garbage Collection
+        -   [http://home.pipeline.com/\~hbaker1/ThermoGC.html](http://home.pipeline.com/~hbaker1/ThermoGC.html)
+        -   [http://home.pipeline.com/\~hbaker1/ThermoGC.ps.gz](http://home.pipeline.com/~hbaker1/ThermoGC.ps.gz)
+
+-   ハワイか温泉で合宿やりたい
+    -   今のペースだと終了が11月以降に
+        -   合宿で一気にやってしまいたい
+
+    -   ハワイ温泉とかあるんじゃない？・・・[あった。](http://www.google.co.jp/search?hl=ja&c2coff=1&rls=GGGL,GGGL:2005-09,GGGL:ja&q=羽合温泉&spell=1)
+        -   じゃあ、今度羽合温泉で合宿を。
+            -   鳥取ですよ。
+                -   本物のハワイよりは近いよ。
+
+### Session 26
+
+-   linear category
+    -   p280. sum of maps
+        が実際にテキスト通りの形になっているかの確認。[板書1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200603/ct/IMG_0668.html),
+        [板書2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200603/ct/IMG_0669.html),
+        [板書3](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200603/ct/IMG_0670.html)
+        -   matrix の sum になっている部分以外のみを取り出す操作をして、その式の一部が identity matrix
+            と α（identity matrix の inverse)の合成＝identity と同等になる事を利用している。
+
+-   Exercise 1 ... はタイムアップ、宿題。
+    -   [αがnaturalである事を仮定して、functorとnatural
+        transformationを利用した解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200603/ct/IMG_0673.html)。
+        -   しかし、このテキストではfunctorとか登場しないので、もっと簡単な解答があるはず…？
+        -   ちなみに、natural transformation の inverse なので、natural なのは当たり前。
+        -   解答の筋は同じですが functor
+            を表にださずに整理したものを[CategoryTheory\_圏論勉強会ノート]()の Session 26
+            Exercise 1 に書きました。
+
+-   Exercise 2
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200603/ct/IMG_0671.html)
+
+-   zero map があって、initial object / terminal object が存在しない例はある？
+    -   [例の１つ](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200603/ct/IMG_0672.html)。object
+        間に自然数（0含む）のラベルがついたmapが自然数個存在
+    -   nのラベルのmap と、mのラベルのmapのcompositionはn×mになる
+    -   で、zero map は0のラベルがついたmap
+
+-   object は１つでよい。つまり、モノイドでよい。
+
+### 二次会
+
+-   次回はExerciseが12個もあるので、分担してやってくるというのは？
+    -   始め・真ん中・終わりの4つずつに分けて、自分が来る時間帯に合わせてやってくる
+        -   終わり頃をやっていきます -- t15u
+
+-   mixi
+    -   技
+    -   λ系コミュニティは不活発
+
+-   xyzzy
+    -   ライセンスは？
+        -   最近修正BSDになったはず。
+        -   移植して配布して（もしかしてお金貰って）もＯＫなのかな？
+
+    -   Common LispはSchemeやらEmacs Lispと違うの？
+        -   Schemeは大分違うような。
+        -   xyzzy のLispはフルセットのCommon Lispじゃない。CLOSとかないし。
+        -   setf が充実
+
+    -   本体を移植する話ってあまりないけど…？
+        -   オープンソースになったのはつい最近。それまでは改変したバイナリやソースコードの再配布が認められていなかった。
+        -   LinuxにはEmacsがあるし
+        -   MacにはCarbon Emacsとかあるし
+
+-   「チャングムの誓い」とか結構面白いよ。設定とか色々無茶苦茶だとは思うけど。
+    -   フォースの韓国面に堕ちたか・・・
+
+-   NHKは女子フィギュアスケート金メダリスト荒川静香の日の丸ウィニングランを放映自粛した疑惑
+    -   [http://arakawasizuka.seesaa.net/](http://arakawasizuka.seesaa.net/)
+
+-   数学の問題
+    -   [http://www.nyasoku.com/archives/50352203.html](http://www.nyasoku.com/archives/50352203.html)
+    -   囚人の話
+    -   2つの箱（from mixi）
+        -   2つの箱に現金が入ってる。片方にはもう片方の二倍の金額の現金が入っている。ひとつを開けたら5万円入っていた。そのまま5万円を手に入れるか、あるいはもう一方を開けて、そっちに入っている現金（2万5千円か10万円のどちらかになる）をもらってもいい。・・・そのまま5万円をもらう方が得か、もう一方の箱を開けた方が得か？
+
+    -   数列のクイズ（from mixi）
+        -   1, 11, 12, 1121, 1321, 122131, の次は？
+
+-   アクセス元によってGoggleの検索結果が変わる？？
+    -   同じキーワードでも家のパソコンから検索するとトップにでてくるサイトがそれ以外（家以外のパソコン、携帯）から検索すると１０回に１回くらいしか出てこない。偶然？？？
+
+-   ミステリー
+    -   古畑任三郎
+        -   最終回の松島奈々子のエピソードは、たぶん「刑事コロンボ」第一回のインスパイヤ
+            -   この時の監督はS・スピルバーグ、「うちのかみさん」は「女房」と呼ばれていた。
+            -   「刑事コロンポ」の「うちのかみさん」が番外編で登場したことがある。
+                -   [『ミセス・コロンボ』](http://www.google.co.jp/search?hl=ja&rls=GGLD,GGLD:2005-05,GGLD:ja&q=%22ミセス・コロンボ%22&lr=)。不評で、これが「うちのかみさん」であることは原作者にもファンにも否定されている。
+
+    -   20のnot?
+    -   犯人はヤス
+    -   子供の頃おどろおどろしさが怖くて（江戸川乱歩とか）まず最後の方から読んで犯人を知った上で読んでた。(;\_;)
+
+* * * * *
+
+Last modified : 2006/06/15 01:43:57 JST

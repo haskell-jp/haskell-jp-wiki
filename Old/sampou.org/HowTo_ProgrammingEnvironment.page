@@ -1,0 +1,204 @@
+# [HowTo\_ProgrammingEnvironment]()
+
+[HowTo]():ProgrammingEnvironment
+
+* * * * *
+
+**Haskellプログラミング環境のSetup**
+
+ghc の HEAD の追っかけをするには [HowTo\_GHC-HEAD]() を参照のこと．
+
+-   現時点(2010/09/18 00:53:16 JST)では[HowTo\_GHC-HEAD]()の記述は古い．近々更新する予定．
+
+[Ubuntu 10.04 LTS (i386版) Desktop（日本語 Remix CD
+版）上にHaskellプログラミング環境を作る]()
+
+[環境の前準備]()
+
+[zsh のインストール]()
+
+[emacs のインストール]()
+
+[日本語環境]()
+
+-   [ホームディレクトリ下の日本語名ディレクトリを英語名にする]()
+-   [M+IPAフォント]()
+-   [skk]()
+-   [ibus-skk]()
+
+[Haskell の言語処理系のインストール]()
+
+[前準備]()
+
+[ghc-6.12.3]()
+
+[Haskell-Platform-2010]()
+
+-   [前準備]()
+-   [cabal版のhaskell-platform]()
+
+[分散バージョン管理システム]()
+
+[haskell-mode]()
+
+[ghc-mod\_ Happy Haskell Programming on Emacs]()
+
+-   [HowTo\_ProgrammingEnvironment\_Ubuntu9.04]()
+-   [HowTo\_ProgrammingEnviornment\_Ubuntu8.10]()
+-   [HowTo\_ProgrammingEnviornment\_Ubuntu8.04]()
+
+* * * * *
+
+以下は2010/09/18 00:53:16 JST現在の情報である．
+
+## Ubuntu 10.04 LTS (i386版) Desktop（日本語 Remix CD 版）上にHaskellプログラミング環境を作る
+
+ここに書いてあるのは Ubuntu 10.04 をクリーンインストールしてから生活(?)環境を作るまでです．
+この通りにしなければならないわけではなく，単なる一例，あるいは参考例として見てください． ここの情報の利用はあくまでも on own risk
+でお願いします．
+
+Haskell 環境とは直接関係のない部分もありますが，その直接関係のない部分を構成するときに依存関係によりインストールされたライブラリが
+Haskell 環境を構成するのに必要であるものもあります．
+
+以下は2010/09/18 00:53:16 JST現在の情報です．
+
+### 環境の前準備
+
+#### zsh のインストール
+
+    $ sudo apt-get install zsh
+    $ chsh -s /bin/zsh
+    Password: xxxxxxxx
+
+#### emacs のインストール
+
+Ubuntu 10.04 LTS では Emacs 23 がインストールされる． Elisp のパッケージをインストールしておく．
+
+    % sudo apt-get install emacs emacs-goodies-el
+
+#### 日本語環境
+
+これも Haskell とは関係ない．
+
+##### ホームディレクトリ下の日本語名ディレクトリを英語名にする
+
+    % LANG=C xdg-user-dirs-gtk-update
+
+##### M+IPAフォント
+
+デフォルトのフォントでは \\ が¥になってしまうので，M+IPA合成フォントを使う． 在処は「M+IPAフォント」でググるとわかる．
+ダウンロードしてきたら展開して，フォントデータを /usr/share/fonts/truetype/m+ipa/ 以下にコピー
+
+    % tar xvf mixfont-mplus-ipa-TrueType-20060520p1.tar.bz2
+    % sudo cp -a mixfont-mplus-ipa-TrueType-20060520p1/opfc-ModuleHP-1.1.1_withIPAFonts_and_Mplus/fonts /usr/share/fonts/truetype/m+ipa
+
+[システム]-[設定]-[外観の設定]メニューから[フォント]タブを開いて，フォントを設定する． 筆者の場合は，M+1P+IPAG circle
+と M+1VM+IPAG circle（固定幅のフォント）を使っている．
+
+##### skk
+
+Emacs では SKK を使うのでインストールする．
+
+    % sudo apt-get install ddskk
+
+##### ibus-skk
+
+Ubuntu 10.04 のパッケージはバージョンが古いのでインストールせず，github にあるものを取得して野良ビルド． ビルドのためには
+git-core といくつかライブラリパッケージが必要になるので前もってインストールする．
+
+    % sudo apt-get install git-core libgtk2.0-dev gnome-common libibus-dev skkdic
+
+ビルド & インストール
+
+    % git clone http://github.com/ueno/ibus-skk.git
+    % cd ibus-skk
+    % ./autogen.sh --prefix=/usr
+    % make
+    % sudo make install
+
+ibusの設定は，[システム]-[IBusの設定]メニュー，
+
+-   [一般]でキーボードショートカット，切り替えに Shift+space を割り当てる．
+-   [インプットメソッド]で「日本語-SKK」を追加して，リストのトップにしておく．
+
+### Haskell の言語処理系のインストール
+
+Haskell-Platform-2010 の deb パッケージをインストールするという手もありますが，ghc と
+Haskell-Platform-2010
+は別々にインストールしたほうが融通が効きそうなので（単なる思い込みの可能性大:p），別々にインストールする．
+
+#### 前準備
+
+いくつかのライブラリパッケージを予めインストールしておく．
+
+    % apt-get install libgmp3-dev libcurl4-gnutls-dev libncurses5-dev libncursesw5-dev libglut3-dev
+
+#### ghc-6.12.3
+
+もうすぐメジャーバージョンアップがありそうだが，とりあえず 6.12.3
+
+    % wget http://darcs.haskell.org/download/dist/6.12.3/ghc-6.12.3-i386-unknown-linux-n.tar.bz2
+    % tar xf ghc-6.12.3-i386-unknown-linux-n.tar.bz2
+    % cd ghc-6.12.3
+    % ./configure
+    % sudo make install
+
+#### Haskell-Platform-2010
+
+cabalパッケージからインストールする．前準備が必要．
+
+##### 前準備
+
+まず cabal-install をインストールする．
+
+    % wget http://hackage.haskell.org/packages/archive/cabal-install/0.8.2/cabal-install-0.8.2.tar.gz
+    % tar xf cabal-install-0.8.2.tar.gz
+    % cd cabal-install-0.8.2
+    % sh bootstrap.sh
+
+PATH を $HOME/.cabal/bin に通す．
+
+    export PATH=$HOME/.cabal/bin:$PATH
+
+次に cabal コマンドを使ってツールやライブラリをインストールする． alex/happyともにバージョン指定。
+これしてないと最新のバージョンがインストールされてhaskell-platformのinstallでこける。
+
+    % cabal update
+    % cabal install alex-2.3.3
+    % cabal install happy-1.18.5
+
+##### cabal版のhaskell-platform
+
+アーカイブファイルをダウンロードしてインストールする．
+
+    % wget http://hackage.haskell.org/platform/2010.2.0.0/cabal/haskell-platform-2010.2.0.0.tar.gz
+    % tar xvf haskell-platform-2010.2.0.0.tar.gz
+    % cd haskell-platform-2010.2.0.0
+    % cabal install
+
+#### 分散バージョン管理システム
+
+Haskeller なら darcs にきまっとる ;)
+
+    % cabal install darcs
+
+#### haskell-mode
+
+Ubuntu には haskell-mode というパッケージがあるが，これはインストールせず，最新版をダウンロードして野良インストールする．
+現時点での最新は 2.8.0
+
+    % wget http://projects.haskell.org/haskellmode-emacs/haskell-mode-2.8.0.tar.gz
+
+あとは展開して README に従ってインストール．
+
+#### ghc-mod: Happy Haskell Programming on Emacs
+
+山本和彦さん作．もうこれなしではコードは書きたくなくなりつつある．
+
+    % cabal install ghc-mod
+
+設定，使い方については，[山本さんのサイト](http://www.mew.org/~kazu/proj/ghc-mod/)を参照してください．
+
+* * * * *
+
+Last modified : 2011/01/28 15:35:23 JST

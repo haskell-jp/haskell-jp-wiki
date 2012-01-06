@@ -1,0 +1,484 @@
+# [CategoryTheory\_圏論勉強会\_CategoriesTypesAndStructures\_Chapter2]()
+
+[CategoryTheory]():[圏論勉強会]():[CategoriesTypesAndStructures]():Chapter2
+
+* * * * *
+
+## 第二十九回圏論勉強会
+
+2007-5-20(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+10：00〜17:00 の予定
+
+            スクリーン
+          -------------
+           豊福  日下部   
+           +----------+ 
+     檜山  |          | 
+           +----------+ 
+          久井 shelarcy 
+
+### "Categories, Types and Structures" Chapter 2より
+
+写真：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200705/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200705/ct/)
+
+## 第三十回圏論勉強会
+
+2007-6-24(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+10：00〜19:09
+
+            スクリーン
+          -------------
+           shelarcy   
+           +----------+ 
+     酒井  |          |
+     檜山  |          | 
+           +----------+ 
+           日下部 
+
+-   今井さんはSkypeで参加
+
+写真：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200706/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/)
+
+### Skype
+を使って遠隔地と連携（[会場の様子](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350232.JPG)）
+
+-   今回初めてやったということもあって、色々と手間取った
+-   会場側に満足なビデオとマイクを完備しているノート PC がなかった
+    -   マイクの音声にノイズが……
+    -   Mac (PowerBook) の内臓マイクは案外使えた
+        -   音声がクリア
+        -   周囲で話しても、音声を拾ってくれる
+
+    -   ただし、Mac では USB カメラが使えなかった
+        -   ドライバがないせい？ メーカー未確認品
+        -   USB カメラとは認識されるけど、Skype のビデオデバイスに出てこない
+
+-   プロジェクター + Skype の環境に不慣れ
+    -   プロジェクター向けの画面は狭いので、ビデオが大きいと画面を占領してしまう (文字でのチャットが見えない)
+    -   かといって必要ないときに画面を隠してしまうと、今度は通話を切って再度通話を行おうとする時に、通話のためのダイアログも隠れてしまう
+        -   この結果、通話をつなげれないことが何度かあった
+
+### "Categories, Types and Structures" Section 2.2
+
+-   2.2.3
+    -   Exercise
+        [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image0.jpg)
+        -   この図が可換であることを示せばOK
+
+-   2.2.4
+    -   Exercise
+        -   1.
+            [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image1.jpg)
+        -   2.
+            [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image2.jpg)
+            -   h' o h = id を示している。h o h' = id も同様。
+
+-   2.2.5
+    -   Exercise 1こめ
+        -   1.+ 2.
+            [解答1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image3.jpg),
+            [解答2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image4.jpg),
+            -   n個の直積について示すのが面倒なので、とりあえず3個の直積について、結合的であることを示す。
+
+        -   後は同様に、k個の直積に対して k+1個の直積が帰納的に作れることを言えば、2の証明も言えたことになる。
+        -   3.
+            [解答1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350234.JPG),
+            [解答2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350235.JPG)
+            -   解答１：a → a×t と、 a×t → a を縦に並べてお絵かきしてみる
+            -   解答２：２つをつなげると、２つの恒等射が作れる
+
+-   Exercise 2こめ
+    -   1.
+        [板書1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350236.JPG)、[解答2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350237.JPG)
+        -   いきなり問題がハードに…
+        -   acceptable Goedel numbering とか、type two recursive functional
+            とかが謎
+
+    -   2.
+        [板書1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350238.JPG),
+        [板書2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350239.JPG)
+        -   突然、直接関係のない問題へ
+            -   上の問題考えてるときに突然思いついた？
+
+        -   例えば、2つの整数の組を1次元に落とし込むようなイメージで考えるとわかりやすいかも
+
+2.2.6
+
+-   Examples
+    -   3つめの例の意図はつかめるが、文章が意味不明…
+        -   coalesced ＝ こうあれすど
+        -   やっぱこのテキストはよくない？
+
+ここで time up
+
+## 第三十一回圏論勉強会
+
+2007-7-8(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+10：00〜19:10
+
+            スクリーン
+          -------------
+           shelarcy   
+           +----------+ 
+     豊福  |          |
+     酒井  |          | 
+           +----------+ 
+           檜山 久井
+
+写真：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200707/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200707/ct/)
+
+### "Categories, Types and Structures" Section 2.3より
+
+### 2次会
+
+-   最近の興味
+    -   問題を解くのに Arrow を使っている人をよく見かけるので、気になっている
+        -   Arrow って何に使える？
+            -   問題を解くのに！ コードをきれいにできそう
+            -   [GUI（Functional Reactive
+                Programming）では使ってる](http://page.freett.com/shelarcy/log/2007/diary_05.html#grapefruit)けど、他の場面では使っていない。連載で触れるのは、まだまだ先にかな？
+                -   （モナド変換子とか [MonadFix
+                    （μdo）](http://mono.kmc.gr.jp/~oxy/w/?Recursive+Monads)とかの話をまだやっていないし……）
+
+    -   Template Haskell が気になっている
+        -   そういえば、[GHC 6.6.1 では型に対する quote
+            が使えるのに、ドキュメントではまだ実装されていないというように書かれている](http://www.haskell.org/pipermail/cvs-ghc/2007-June/036147.html)……
+
+    -   MIT の Eager Haskell
+        -   [pH : Parallel
+            Haskell](http://csg.csail.mit.edu/projects/languages/ph.shtml)の前身
+            -   逆でした。[Eager Haskell の方が pH
+                より後](http://portal.acm.org/citation.cfm?id=581690.581694)
+            -   Parallel Haskell とは言っても、GHC とか GPH の拡張機能とは別のものなので注意
+            -   どちらかというと、データ並列 Haskell や並行 Haskell、Fortress などの間を取った感じ
+
+        -   GHC の最近の実装のように、Semantics を変えずに eager にしているわけじゃない
+        -   lenient evaluation（ゆるゆる評価、って訳す？） と言って、確か「カリー化などの変数の束縛は lazy
+            に行うけれど、let 式など式の評価は eager に行う」という感じになっている
+            -   "Implicit Parallel Programming in pH"
+                ([amazon.co.jp](http://www.amazon.co.jp/Implicit-Parallel-Programming-Rishiyur-Nikhil/dp/1558606440))
+                に詳しい説明があったはず
+
+        -   ↑はpHの説明で Eager Haskell は semantics を変えていないと思うけど? -- sakai
+            -   はい、そうですね。Eager Haskell を基にして pH
+                を作ったと思ってたので、すっかり勘違いしていました。
+            -   [http://csg.csail.mit.edu/pubs/haskell.html](http://csg.csail.mit.edu/pubs/haskell.html)
+                の The Eager Haskell Evaluation Mechanism に説明がありますね。確かに
+                lazy に fallback されるなら、semantics は変えなくて良さそうです。
+
+-   最近の haskell-jp の話題
+    -   (この話題は始める前や昼食前にもでたのですが、散らばると分かりにくいので一箇所にまとめておきます。)
+    -   [haskellに対する"4F"](http://d.hatena.ne.jp/takkan_m/20070704)
+        -   [本物のプログラマはHaskellを使う]()は、背景を含めた解説をやっているので重い
+        -   連載とは別に、クックブックとかレシピブックとか、その辺のものがあると良いかも
+
+    -   テスト・デバッグの話題
+        -   新しいメーリング・リストになってからのアーカイブがないせいで、「どんな方法がありますか？」的な話題が何度も繰り返されるのはもったいないかも。
+            -   でっちあげました。[http://www.tom.sfc.keio.ac.jp/\~sakai/w3ml/w3ml.cgi/haskell-jp-2/](http://www.tom.sfc.keio.ac.jp/~sakai/w3ml/w3ml.cgi/haskell-jp-2/)
+
+        -   連載で重い解説が続いたし、[プログラムにミスがあった](http://page.freett.com/shelarcy/log/2007/diary_07.html#huduki42007)ので、このあたりで軽くテストの話をやっておくかな？
+            -   デバッガはそれだけで一つの話になりそうなので、別の回に分ける必要があるだろうけれど
+            -   [データの一貫性(Consistency)の話](http://article.gmane.org/gmane.comp.lang.haskell.general/14356/)とかやろうとすると、どのみちテストの話は避けて通れないし
+            -   でも、せっかく並行 Haskell
+                の話をやったんだし、先にもう少しライブラリの解説をした方が話が良いかも。（並列プログラミングの技法を解説した前回とは違い、そう重くはならないだろうし。）
+
+        -   豊福さんはこの辺の話題には特に興味なし。主に問題を解くのにしか使っていないせい？
+
+-   デバッグにも色々と方法はある
+    -   print デバッグ
+        -   [Trace]()
+        -   モナド
+            -   モナド変換子を使う
+                -   [lift や
+                    liftIO](http://www.haskell.org/ghc/docs/6.6.1/html/libraries/mtl/Control-Monad-Trans.html)
+
+                        Control.Monad.State> runStateT ((return 22) >>= \x -> lift (print x) >> return (x + 1)) 33
+                        22
+                        (23,33)
+                        Control.Monad.State> runStateT ((return 22) >>= \x -> liftIO (print x) >> return (x + 1)) 33
+                        22
+                        (23,33)
+
+            -   unsafe\*\*
+                -   e.g.
+                    [unsafeIOToST](http://www.haskell.org/ghc/docs/6.6.1/html/libraries/base/Control-Monad-ST.html#v:unsafeIOToST)
+
+    -   デバッガ
+        -   [Hugs
+            Hood](http://cvs.haskell.org/Hugs/pages/users_guide/observe.html)
+        -   GHC 6.8 から使える [GHCi
+            Debugger](http://www.haskell.org/ghc/dist/current/docs/users_guide/ghci-debugger.html)
+
+## 第三十二回圏論勉強会
+
+2007-8-12(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+10：00〜18:30
+
+            スクリーン
+          -------------
+         shelarcy   
+     +----------+    +----------+
+     |          |    |          |
+     |          |    +----------+
+     +----------+      檜山
+             酒井    +----------+ 
+                     |スパゲティ|
+                     +----------+
+                       豊福
+
+-   今井さん、久井さんはSkypeで参加
+
+### 今回のトラブル
+
+-   エアコンがつかない
+    -   ブレーカーが落ちている？
+        -   会場を去るときに確認したところ、落ちてはいなかった
+
+    -   エアコンが壊れている？
+    -   室温
+        -   午前中、一人でいるときはまだましだった。
+        -   人数が増え、PC も増え、外の気温がピークに達することで、非常に蒸すことに
+        -   なので、16:30には喫茶店に会場を移しました
+
+### "Categories, Types and Structures" Section 2.3.2 の Excercise
+
+## 第三十三回圏論勉強会
+
+2007-9-9(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+10：00〜17:00
+
+### "Categories, Types and Structures" Section 2.3.3 の Excercise より
+
+## 第三十四回圏論勉強会
+
+2007-10-28(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+14：30〜19:30
+
+            スクリーン
+          -------------
+       shelarcy    檜山   
+     +--------------------+
+     |                    |
+     +--------------------+
+      豊福    今井   酒井
+
+-   久井さんはSkypeで参加
+
+写真(板書):
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200710/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200710/ct/)
+
+写真(お絵かき):
+[http://picasaweb.google.co.jp/takeo.bono/Kenron071028](http://picasaweb.google.co.jp/takeo.bono/Kenron071028)
+
+### "Categories, Types and Structures" Section 2.3.6 の Proposition
+
+-   （最近皆さんマンネリのせいか書き込みないですね。見ててつまらないのでもうちょっと書いて。という私もあまり書かないですが以下ネタふりだけ）
+    -   マンネリっつか、忙しくて書く暇がなかなか。
+        -   ２次会を無線LAN入るところにして、その場で書くとかすると…良いかなぁ。飲めないなぁ。
+
+-   はすケロ
+    -   [http://www.tom.sfc.keio.ac.jp/\~sakai/d/?date=20060803\#p02](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20060803#p02)
+
+-   CCCの絵算の出典は？
+-   不動点
+
+### 二次会
+
+-   Morph Endo (IFPC 2007) 今頃読んでます
+    -   KMP検索
+        -   [一応 BysteString の findSubstring、findSubstrings は KMP
+            検索](http://www.haskell.org/ghc/docs/6.8.1/html/libraries/bytestring-0.9.0.1/Data-ByteString.html#18)
+            -   でも、[Api
+                を変える予定があるので非推奨になっている](http://darcs.haskell.org/ghc-6.8/libraries/bytestring/Data/ByteString.hs)
+
+        -   [より高速な実装 + Lazy ByteString と Data.Sequence の Seq に対する KMP
+            検索の実装](http://www.haskell.org/pipermail/haskell-cafe/2007-September/031609.html)
+
+-   もやしもん
+-   Haskell-jp ML 不活発
+-   モナドを構成する随伴関手
+    -   Eilenberg-Moore Construction
+    -   Kleisli Constuction
+    -   任意のモナドは随伴関手対に分解できるらしい
+        -   逆は当然成り立ちます。（任意の随伴関手対からモナドが構成できる）
+
+## 第三十五回圏論勉強会
+
+2007-12-9(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:30
+
+            スクリーン
+          -------------
+      梅沢 shelarcy  日下部  穂苅
+     +------------------------------+
+     |                              |
+     +------------------------------+
+              今井   酒井 檜山/豊福
+
+-   久井さんはSkypeで参加
+
+写真 :
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200712/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/)
+
+### 雑談
+
+-   domain theory
+    -   横内『プログラム意味論』
+        -   いつの間にか絶版に。
+        -   龍田先生の『型理論』も絶版になったらしい。
+
+    -   Gunter『Semantics of Programming Languages』
+        （[amazon](http://www.amazon.co.jp/o/ASIN/0262071436/249-5785574-9933122)）
+
+-   ネットゲーム
+    -   [http://www.4gamer.net/games/044/G004408/20071026031/](http://www.4gamer.net/games/044/G004408/20071026031/)
+        ←きれい
+        -   3Dアニメーションの技術はどうたらこうたら
+            -   LOD (Level of Detail)
+                ([板書（？）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0001.JPG))
+                -   いつの間にか衝突判定の話に
+
+    -   セカンドライフ？
+        -   日本でもアメリカでもこけたらしい
+            -   でも、電通も企業もそれなりの利益はあったらしい
+                -   セカンドライフに島を出すと、それが新聞・雑誌に露出するので、間接的に広告効果が
+
+-   論理と計算と圏の関係（[板書](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0007.JPG)）
+    -   シーケント計算は何に対応するの？
+
+### "Categories, Types and Structures" Section 2.3 ちょっと復習
+
+-   前回までやってた V×V ＜ V は、Church encoding の話だったのでは
+    （[板書](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0003.JPG)）
+
+### "Categories, Types and Structures" Section 2.4
+
+-   compact
+    とは？（[板書](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0009.JPG)）
+    -   compact ＝ finite？
+        -   自然数のイメージなのか （板書右）
+
+-   Exercise
+    -   1. {{y|x0≦y}|x0∈X0} がScott Domain上のT0位相の基底となっていることを示せ。
+        -   [Scott
+            Domain上にあることを示す解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0011.JPG)
+        -   [T0位相になっていることを示す解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0015.JPG)
+
+    -   2. finiteな要素の有限集合のleast upper bound は、存在すれば常にfiniteであることを示せ。
+        -   1, で Scott Domain であることを示す際にすでに示した。のでパス。
+
+    -   3.
+        下記命題の反例を示せ。（[解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0017.JPG)）
+        -   i. x0 が compact なら {y|y≦x0} は有限
+            -   反例：解答上部
+
+        -   ii. x0 が compact かつ y ≦ x0 なら y は compact
+            -   反例：解答下部
+                -   ω+1は compact だが、ω は compact でない
+
+## 第三十六回圏論勉強会
+
+2008-1-13(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜19:00
+
+            スクリーン
+          -------------
+      梅沢  shelarcy
+     +----------------------+
+     |                      |
+     +----------------------+
+      酒井 今井 日下部 檜山
+
+-   久井さんはSkypeで参加
+
+写真（仮） :
+[http://picasaweb.google.co.jp/takeo.bono/Kenron080113](http://picasaweb.google.co.jp/takeo.bono/Kenron080113)
+
+写真（ミラー）：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200801/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200801/ct/)
+
+### 雑談
+
+-   exponentialとは？([板書](http://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154857606663228434))
+    -   射 A → B としてとりうる全体を対象B\^Aとして表す
+        -   直積との対応がcurry化に相当
+
+    -   メタプログラム？
+        -   具体的な射だったものをひっくるめて対象として扱っているあたりはメタといえばメタ
+        -   そういや最近[オブジェクトとクラスとメタクラス](http://d.hatena.ne.jp/m-hiyama/20080109/1199863428)の話が
+            -   レイフィケーション は初めて知った
+                -   reification ... メタな世界→メタでない世界
+                -   c.f. reflection ... メタでない世界→メタな世界
+
+-   復習：["Conceptual
+    Mathematics"](http://www.amazon.co.jp/dp/0521478170/)
+    -   objective category と subjective category? (Session 6)
+        -   現実世界の圏（objective category）の中に、それを観測し、考察する圏（subjective
+            category）がある
+            -   Science（実際にはscience"s"）とは、現実世界をある側面から見て統一的な法則をsubjective
+                categoryにて求めたもの
+
+        -   たとえば、現実世界の圏がSetで、それをより小さな圏にて考察する
+            -   で、現実世界の圏で対象Xだったものが、考察対象の圏ではドメインとしての対象Aと、コドメインとしての対象Bとの間の"map"として捉えられる事がある
+            -   このとき、Aは対象とするもののリストであり、Bは対応する性質とみなすことができる
+                -   こう考えると、h:A→Bは、もはや「インデックスと値の組」以上の意味を持つ
+
+        -   この勉強会でやったとき、確か米田の補題の話になったようなならなかったような
+            -   もう覚えてない
+
+-   ブチ切り
+    -   どういう意味？
+        -   強制リセット
+
+-   静止画のストリーミングがほしい
+    -   Skypeビデオなんかは画質が荒くて勉強会のやり取りに向かない
+        -   30秒に1枚でもいいので、高画質＋音声でやり取りしたい
+
+-   [イタリア人の書いた世界地図](http://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154880473069112354)
+    -   脈絡不明
+
+### "Categories, Types and Structures" Section 2.4.1.2
+
+-   （順序関係に基づいての）関数の単調性、連続性の定義
+-   Exercise: この連続性の定義と、Scott位相で関数が連続であることが同値になる事を証明せよ
+    -   参考：[位相空間での continous
+        map](http://mathworld.wolfram.com/ContinuousMap.html)
+    -   解答
+        -   [順序関係で連続 ならば
+            Scott位相としても連続](http://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154852517126982658)
+        -   Scott位相として連続 ならば 順序関係でも連続
+            -   [１．背理法を使って](http://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154880481659046978)
+            -   [２．背理法を使わずに](http://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154885317792222290)
+
+        -   補足：上記証明で使った定理とその証明（[板書](http://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154893521179757666)）
+
+-   前回の復習（2.4.1.1）
+    -   algebraicでない位相のtrivialでない例？
+        -   実数直線 ... algebraicでないが、そもそもコンパクトでない
+
+    -   Exercise の3の反例？（前回のログ参照）
+        -   (i)の例：王様と、無限にいる平民
+            -   王様はコンパクト（数学的な意味で）
+            -   王様と平民との間には絶対的な格差がある
+                -   平民の間に序列があろうがなかろうがそれは問題ではない
+
+        -   (ii)の例：(i)の例＋王様同士の間の序列
+            -   王様よりちょっと偉い別の王様がいる
+                -   明治以前は天皇が存命中に退位して、更に上の上皇になる事があったが、そんな感じ
+
+### 2次会
+
+-   今回5行しか進まなかった…
+    -   このテキストいつ終わるんだろう
+        -   というか、最後までやるの？
+
+* * * * *
+
+Last modified : 2008/06/11 13:48:49 JST

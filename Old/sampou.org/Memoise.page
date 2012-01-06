@@ -1,0 +1,337 @@
+# [Memoise]()
+
+* * * * *
+
+Memoi[sz]e、Memoi[sz]ation、メモ化の話題
+
+-   [メモ化ってなぁに？]()
+-   [関数のメモ化]()
+-   [memoise は特殊な ($) かも？]()
+-   [Memo モジュール]()
+-   [実装を共有する魔法]()
+
+### メモ化ってなぁに？
+
+フィボナッチ関数を考えてみよう、定義は
+
+    fib 0 = 0
+    fib 1 = 1
+    fib n = fib (n-1) + fib (n-2)
+
+これを使って、fib 7 を計算すると
+
+    fib 7 -- fib 6 -- fib 5 -- fib 4 -- fib 3 -- fib 2 -- fib 1 -- 1 
+      |        |        |        |        |        |                 
+      |        |        |        |        |      fib 0 -- 0          
+      |        |        |        |        |                          
+      |        |        |        |      fib 1 -- 1                   
+      |        |        |        |                                   
+      |        |        |      fib 2 -- fib 1 -- 1                   
+      |        |        |        |                                   
+      |        |        |      fib 0 -- 0                            
+      |        |        |                                            
+      |        |      fib 3 -- fib 2 -- fib 1 -- 1                   
+      |        |        |        |                                   
+      |        |        |      fib 0 -- 0                            
+      |        |        |                                            
+      |        |      fib 1 -- 1                                     
+      |        |
+      |      fib 4 -- fib 3 -- fib 2 -- fib 1 -- 1
+      |        |        |        |
+      |        |        |      fib 0 -- 0
+      |        |        |
+      |        |      fib 1 -- 1
+      |        |
+      |      fib 2 -- fib 1 -- 1
+      |        |
+      |      fib 0 -- 0
+      |
+    fib 5 -- fib 4 -- fib 3 -- fib 2 -- fib 1 -- 1 
+      |        |        |        |                 
+      |        |        |      fib 0 -- 0          
+      |        |        |                          
+      |        |      fib 1 -- 1                   
+      |        |                                   
+      |      fib 2 -- fib 1 -- 1                   
+      |        |                                   
+      |      fib 0 -- 0                            
+      |                                            
+    fib 3 -- fib 2 -- fib 1 -- 1                   
+      |        |                                   
+      |      fib 0 -- 0                            
+      |                                            
+    fib 1 -- 1                                     
+
+のような計算の樹系図になるでしょう。これを見ると fib 5 は 2 度計算して いるし、fib 4 は 3
+度計算していますね。これはなんだか、とっても無駄な 気がします。
+
+この無駄を省くには、
+
+> 一度計算した結果を覚えておいて、二度目以降は律義に再計算しないで、覚え ていたものを再利用する
+
+という手法がありそうですね。このような計算の最適化の技法を「メモ化
+(memoisation)」といいます。結果を覚えたり、再利用の際に検索したりする のに、表(table)
+を使うような場合には、「テーブル化(tabulation)」という 用語を使うこともあります。
+
+もちろん、メモ化が最適化技法として意味があるためには、
+
+> 律義に再計算するよりも、一度計算したものを覚えておいて、それを再利用す る方が安価
+
+という前提があります。
+
+### 関数のメモ化
+
+関数にこの性質を持たせることを、関数を「メモ化する」 (memoise あるいは
+memoize)といいます。そして、この性質を持たされた関数を「メモ化された」 関数といいます。
+
+さて、上の fib がメモ化されていれば、
+
+    fib 7 -- fib 6 -- fib 5 -- fib 4 -- fib 3 -- fib 2 -- fib 1 -- 1 
+      |        |        |        |        |        |                 
+      |        |        |        |        |      fib 0 -- 0          
+      |        |        |        |        |                          
+      |        |        |        |      fib 1 -- 1                   
+      |        |        |        |                                   
+      |        |        |      fib 2 -- 1
+      |        |        |
+      |        |      fib 3 -- 2
+      |        |
+      |      fib 4 -- 3
+      |  
+    fib 5 -- 5
+
+となることを期待するわけです。これならば、結果を覚えるのと、検索するコ ストが、定数オーダなら、fib 全体としては、n
+の線型オーダで計算ができる ことになります。
+
+Haskell では変更可能な関数の内部状態というのを持てませんので、関数の引 数をひとつ増して、
+
+    fib :: Integer -> Integer
+    fib = fst . flip memofib []
+
+    type Table = [(Integer,Integer)]
+
+    memofib :: Integer -> Table -> (Integer,Table)
+    memofib 0 mt = (0, (0,0):mt)
+    memofib 1 mt = (1, (1,1):mt)
+    memofib n mt = case prev of 
+                       Just r    -> (r , mt)
+                       Nothing   -> (r1+r2, (n,r1+r2):tb2)
+                     where
+                       prev = lookup n mt
+                       (r1,tb1) = memofib (n-1) mt
+                       (r2,tb2) = memofib (n-2) tb1
+
+として、表を明示的にもちまわす方法にするか、 State モナドを使って、 SICPの Exercise 3.27 にある、memoize
+に相当する memoise を
+
+    import Control.Monad.State
+
+    memoise f x = find x                  >>= \ prev ->
+                  case prev of
+                    Just r  -> return r
+                    Nothing -> f x        >>= \ r ->
+                               ins (x, r) >>  return r
+    ins item = get >>=  put . (item:)
+    find n = get >>= return . lookup n
+
+    infixl 6 |+|
+    (|+|) = liftM2 (+)
+
+のように定義して、
+
+    type Table = [(Integer,Integer)]
+
+    (|+|) :: State Table Integer -> State Table Integer -> State Table Integer
+
+    memofib :: Integer -> State Table Integer
+    memofib 0 = return 0
+    memofib 1 = return 1
+    memofib n = memoise (\ x -> memofib (x-1) |+| memofib (x-2)) n
+
+    fib :: Integer -> Integer                           
+    fib = flip evalState [] . memofib
+
+のように定義することが可能です。
+
+> ところで、fib に関しては、メモ化は最適化手法に一つにしかすぎません。たとえば、末尾再帰で書いた fib
+>
+> fib n = iter 0 1 n
+>
+>       where iter a _ 0 = a
+>             iter _ b 1 = b
+>             iter a b c = iter b (a+b) (c-1)
+>
+> これは、O(n) で計算できる例です。
+>
+> さらに、
+>
+> fib n = iter 1 0 0 1 n
+>
+>       where iter a b p q c
+>               | c == 0    = b
+>               | even c    = iter a b (p*p+q*q) (2*p*q+q*q) (c`div`2)
+>               | otherwise = iter (b*q+a*q+a*p) (b*p+a*q) p q (c-1)
+>
+> とすると O(log n) で計算ができます。これらは、元のナイーブな fib の定 義とは構造の違う定義になっており、
+> memoisation とは別の最適化手法と考 えてよいと思います。
+
+### memoise は特殊な ($) かも？
+
+上のコードをもうすこし整理して
+
+    import Control.Monad.State
+
+    memoise f x = find x                  >>= \ prev ->
+                  case prev of
+                    Just r  -> return r
+                    Nothing -> f x        >>= \ r ->
+                               ins (x, r) >>  return r
+
+    ins item = get >>=  put . (item:)
+    find n = get >>= return . lookup n
+
+    type Table = [(Integer,Integer)]
+
+    memofib :: Integer -> State Table Integer
+    memofib 0 = fromInteger 0
+    memofib 1 = fromInteger 1
+    memofib n = memoise (\ x -> memofib (x-1) +  memofib (x-2)) n
+
+    fib :: Integer -> Integer                           
+    fib = flip evalState [] . memofib
+
+とします。ほとんど変っていませんが、|+| がなくなって、+ になってますね。 これをちゃんと動かすには、(State Table
+Integer) が Num クラスのインス タンスであることを宣言すればよいのです。
+
+    instance Show (State Table Integer) where
+      show = const "<State Table Integer>"
+
+    instance Eq (State Table Integer) where
+      s == t = evalState s [] == evalState t []
+
+    instance Num (State Table Integer) where
+      (+) = liftM2 (+)
+      (-) = liftM2 (-)
+      (*) = liftM2 (*)
+      negate = liftM negate
+      abs = liftM abs
+      signum = liftM signum
+      fromInteger = return
+
+さて、さて、
+
+    memofib n = memoise (\ x -> memofib (x-1) +  memofib (x-2)) n
+
+この部分を見ると、memoise が特殊な ($) に見えてきませんか。
+
+* * * * *
+
+### Memo モジュール
+
+Memo というモジュールを作ってみました．
+
+    module Memo where
+
+    import Control.Monad.State
+
+    class Table t where
+      emptyTable  :: Ord a => t a b
+      lookupTable :: Ord a => a -> t a b -> Maybe b
+      insertTable :: Ord a => a -> b -> t a b -> t a b
+
+
+    instance (Table t, Ord a, Num b) => Eq (State (t a b) b) where
+      sx == sy = evalState sx emptyTable == evalState sy emptyTable
+
+    instance (Table t, Ord a, Num b) => Show (State (t a b) b) where
+      show sx = show (evalState sx emptyTable)
+
+    instance (Table t, Ord a, Num b) => Num (State (t a b) b) where
+      (+)    = liftM2 (+)
+      (-)    = liftM2 (-)
+      (*)    = liftM2 (*)
+      negate = liftM negate
+      abs    = liftM abs
+      signum = liftM signum
+      fromInteger = return . fromInteger
+
+    type Memo t a b = a -> State (t a b) b
+
+    memoise :: (Table t, Ord a) => Memo t a b -> Memo t a b
+    memoise mf x = do prev <- find x
+                      case prev of
+                        Just y  -> return y
+                        Nothing -> do y    <- mf x
+                                      ins x y
+                                      return y
+                   where find x  = get >>= return . lookupTable x
+                         ins x y = get >>= put . insertTable x y
+
+    evalMemo :: (Table t, Ord a) => (Memo t) a b -> (->) a b
+    evalMemo m v = evalState (m v) emptyTable
+
+これで，メモに使う Table も少し抽象化できますね．
+
+### 実装を共有する魔法
+
+さて，memofib はもともとの fib と形は似ています．しかし，memofib は fib
+の定義を使って定義されているわけではありません．すんごく惜しい，は がゆい感じがしませんか？
+
+再帰形式で定義を書く以上しかたがないですか？
+
+ではこんなのはどうでしょう．
+
+    fix f = let x = f x in x
+
+という最小不動点オペレータ(？) fix があれば，明示的な再帰を使わず(fix 自身は再帰定義ですが)に関数が定義できます．
+
+    fibF f 0 = 0
+    fibF f 1 = 1
+    fibF f n = f (n-2) + f (n-1)
+
+という定義は再帰ではありませんよね．
+
+    fib = fix fibF
+
+ちょっと面白いでしょ．これで通常定義する Fibonacci 関数ができます．さ て，ここからさらにマジックです．
+
+    gfun = (fix .) . (.)
+
+というのを考えます．そうすると通常の Fibonacci 関数は，
+
+    ifib :: (->) Integer Integer
+    ifib = gfun ($) fibF
+
+そして，memo化した Fibonacci 関数は，
+
+    mfib :: Table t => (Memo t) Integer Integer
+    mfib = gfun memoise fibF
+
+と定義できます．これを見ると，($) と memoise とが対応し，型の上でも， (-\>) と Memo t
+とがそれぞれ対応しているのが解りますよね．
+
+実際に計算させるには，
+
+    memofib :: Integer -> Integer
+    memofib = evalMemo (mfib :: (Memo M.Map) Integer Integer)
+
+としてテーブルの型を確定してから使います．
+
+    *Main> memofib 100
+    354224848179261915075
+
+マジックですねぇ．．．
+
+-   M.Map の定義はどのようになっているのでしょう？(定義がないので動かせません)
+    -   Data.Mapモジュールを使っているのではないでしょうか。
+
+              import qualified Data.Map as M
+
+              instance Table M.Map where
+                emptyTable  = M.empty
+                lookupTable = M.lookup
+                insertTable = M.insert
+
+* * * * *
+
+Last modified : 2006/06/11 23:08:39 JST

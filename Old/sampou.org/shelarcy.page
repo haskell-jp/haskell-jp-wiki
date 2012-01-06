@@ -1,0 +1,193 @@
+# [shelarcy]()
+
+* * * * *
+
+-   本名:木戸崇裕
+-   [wxHaskell
+    の開発者の一人](http://haskell.org/haskellwiki/WxHaskell/Development)
+-   [mixi:Haskell Game
+    Magazine](http://mixi.jp/view_community.pl?id=901947) の現管理人(引継ぎ)
+-   手に合う道具を模索の末、Haskell に辿りつく
+    -   [Merd](http://www.kmonos.net/alang/etc/merd.php)
+        では[「X.a.b.c」と書ける](http://www.shiro.dreamhost.com/scheme/wiliki/wiliki.cgi?p=Scheme:���֥������Ȼظ�ɽ��&l=jp#1)ようですね。
+
+-   Web サイト
+    -   [声なき言葉](http://page.freett.com/shelarcy/)
+
+-   twitter アカウント
+    -   [twitter:shelarcy](http://twitter.com/shelarcy)
+
+-   関連ページ
+    -   [WiLiKi:shelarcy](http://practical-scheme.net/wiliki/wiliki.cgi?shelarcy)
+    -   [HaskellWiki:User:Shelarcy](http://www.haskell.org/haskellwiki/User:Shelarcy)
+
+* * * * *
+
+## WiLiKi の内容復旧のためのスクリプト
+
+本家 WiLiKi
+とは違って、リリースされているもの（およびここで使っているもの）にはまだ前のバージョンに戻る機能がないので(2007/04/21
+10:38:27 JST)。
+
+-   (2008/06/26 14:17:35
+    JST)追記:一ヵ月（二ヵ月？）くらい前から新しいバージョンに移行したようなので、今となってはこのスクリプトは不要です。とはいえ、遅延I/Oを適切に扱う方法として参考になると思うので、このテキストは残しておきます。
+
+<!-- -->
+
+    import Control.Parallel.Strategies (sforce)
+    import System.Environment
+    import System.IO
+
+    main = do
+        args <- getArgs
+        let file = head args
+            process = unlines . map (drop 2) . lines
+        h <- openFile file ReadMode
+        dat <- hGetContents h
+        return $! sforce dat ()
+        hClose h
+        writeFile file $ process dat
+
+readFile と writeFile で同じファイル名を使うと、[遅延 IO
+のためそれぞれの操作が衝突してしまいます](http://itpro.nikkeibp.co.jp/article/COLUMN/20070305/263828/?ST=ittrend&P=2)。[この問題の解決方法については向井さんのページに書いてあります](http://www.jmuk.org/diary/2005/11/01/2)が、[seq
+や $! による簡約の強制は WHNF
+までにしか簡約してくれない](http://itpro.nikkeibp.co.jp/article/COLUMN/20070305/263828/?ST=ittrend&P=2)ので全てのデータを取得することはできません。
+
+…というわけで、先行評価させるために Control.Parallel.Strategies モジュールの sforce 関数（いわゆる
+deepseq 関数です。微妙な違いはありますが。）を使いました。
+
+(2007/11/04 00:39:31 JST)追記：GHC 6.8.1 では sforce 関数や force 関数等は非推奨になりました。
+
+    $ runhaskell Restore.hs test.txt
+
+    Restore.hs:1:36:
+        Warning: Deprecated use of `sforce'
+                 (imported from Control.Parallel.Strategies):
+                 Lolita-specific hacks.
+
+なので、今後は [NFData クラスの rnf
+メソッド](http://itpro.nikkeibp.co.jp/article/COLUMN/20070605/273615/?P=2&ST=ittrend)を使うようにした方が良いと思います。
+
+rnf メソッドを使うようにした修正版
+
+    import Control.Parallel.Strategies (rnf)
+    import System.Environment
+    import System.IO
+
+    main = do
+        args <- getArgs
+        let file = head args
+            process = unlines . map (drop 2) . lines
+        h <- openFile file ReadMode
+        dat <- hGetContents h
+        return $! rnf dat
+        hClose h
+        writeFile file $ process dat
+
+(2010/10/19 00:44:29 JST)追記：parallel 3.0.0.0 では NFData クラスが parallel
+パッケージの Control.Parallel.Strategies モジュールから再エクスポートされなくなりました。なので、rdeepseq
+関数か、deepseq パッケージの DeepSeq モジュールを使う必要があります。
+
+rdeepseq 関数を使うようにした修正版
+
+    import Control.Parallel.Strategies (rdeepseq, withStrategy)
+    import System.Environment
+    import System.IO
+
+    main = do
+        args <- getArgs
+        let file = head args
+            process = unlines . map (drop 2) . lines
+        h <- openFile file ReadMode
+        dat <- hGetContents h
+        return $! withStrategy rdeepseq dat
+        hClose h
+        writeFile file $ process dat
+
+deepseq パッケージを使うようにした修正版
+
+    import Control.DeepSeq (rnf)
+    import System.Environment
+    import System.IO
+
+    main = do
+        args <- getArgs
+        let file = head args
+            process = unlines . map (drop 2) . lines
+        h <- openFile file ReadMode
+        dat <- hGetContents h
+        return $! rnf dat
+        hClose h
+        writeFile file $ process dat
+
+## 連載
+
+ITpro の方に目次ができたので、とりあえずここに載せておきます。とりあえず、つっこみが多くなるまでは別ページには分けないという形で。
+
+-   [連載:「本物のプログラマはHaskellを使う」の目次](http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248215/)
+
+何か連載をさすページ名を作って、「Haskellプログラミング」ともどもその下におくという形にしてしまった方が良いのかもしれませんが、適当な名前がちょっと思い浮かびません。ITpro
+は Magazine には分類できなそうですし。Article かなぁ？
+
+(2007/03/07 09:03:56
+JST)追記:ここに書いていても（あんまり）見ている人がいないとの意見を聞いたため、ページを作成することにしました。
+
+-   [本物のプログラマはHaskellを使う]()
+
+## 未踏
+
+未踏でやっていることが分かるように、リンクを張っておきます。
+
+-   [IPA
+    の2004年度第2回未踏ソフトウェア創造事業採用概要](http://www.ipa.go.jp/jinzai/esp/2004mito2/gaiyou/9-6.html)
+-   [2004年度第２回未踏ソフトウェア創造事業
+    開発成果＆PMの評価](http://www.ipa.go.jp/jinzai/esp/2004mito2/kaihatuseika.html)
+    -   [2004年度第2回未踏ソフトウェア創造事業
+        採択案件評価書](http://www.ipa.go.jp/jinzai/esp/2004mito2/mdata/9-6.html)
+
+-   [@IT
+    の未踏ソフトウェア創造事業の告知記事](http://www.atmarkit.co.jp/ad/ipa/mitou0408/pj06/framework.html)
+    -   [開発者まとめアンケートと酒井PMの「総評」](http://www.atmarkit.co.jp/ad/ipa/mitou0408/top/enquete0508_index.html)
+
+-   [Preview Version of Kamiraiduki Released
+    (2006年6月2日)](http://page.freett.com/shelarcy/log/2006/diary_06.html#preview_release_of_kamiariduki)
+    -   Preview のコードの重複部とか FFmpeg の膨大な無駄部分とか要整備
+
+## Haskell にまつわる誤解
+
+Haskell では正格評価ができない。
+
+-   この噂はどこからでてきたんでしょうか？
+    [正格性フラグ](http://www.sampou.org/haskell/report-revised-j/decls.html#strictness-flags)や[正格適用関数](http://www.sampou.org/haskell/report-revised-j/basic.html#sect6.2)を使うことで正格評価を強制することができます。
+
+Clean は Haskell の XX を解決するために……
+
+-   不正確な議論。Haskell は非正格純粋関数型言語の共通の汎用言語基盤に位置付けられているので、当然ながら Clean
+    からも成果を取り入れています。
+-   むしろ Lisp と Scheme の関係だと捉えたほうが良いかもしれません。
+-   Clean 1.0 が Uniqueness Type を導入したのと Haskell 1.3 が Monad
+    を導入したのは、ほぼ同時期です。
+
+-   [WiLiKi:Shiro](http://practical-scheme.net/wiliki/wiliki.cgi?Shiro):
+    私はCleanは知らないのですが、最近c.l.lispで話題になって、
+    そこでc.l.functionalでのHaskellとCleanの比較の記事が紹介されていました→
+    [http://groups.google.com.au/groups?selm=3D2D52DE.93BEF1B1%40info.unicaen.fr](http://groups.google.com.au/groups?selm=3D2D52DE.93BEF1B1@info.unicaen.fr)
+    -   そこでも正格性という言葉が……どうしてみんなそれを強調するんだろうと思っていたのですが、そういえば Clean
+        にはいくつか正格文脈と遅延文脈を分ける規則や正格性 analyzer
+        による自動正格性解析があるんでしたね。この辺りにも記事で指摘されている主義の違いがよく現れています。--shelarcy
+
+## Haskell の記事のためのメモ
+
+fix
+  ~ 
+
+繰り返しと再帰
+  ~ 
+
+継続
+  ~ [WiLiKi:iriyak](http://practical-scheme.net/wiliki/wiliki.cgi?iriyak)
+    でリファレンスのポインタを列挙
+
+* * * * *
+
+Last modified : 2010/10/19 00:55:08 JST

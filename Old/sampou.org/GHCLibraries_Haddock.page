@@ -1,0 +1,62 @@
+# [GHCLibraries\_Haddock]()
+
+[GHCLibraries]():Haddock
+
+* * * * *
+
+## Haddock
+
+* * * * *
+
+### haddock
+
+[最新のHaddock](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/haddock)
+
+以下はすでに古い情報です
+
+* * * * *
+
+### ghc-6.8.3 用に Haddock-2.2.0 がリリースされました．(2008/07/26 11:52:40 JST)
+
+[http://hackage.haskell.org/cgi-bin/hackage-scripts/package/haddock-2.2.0](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/haddock-2.2.0)
+
+というわけで，以下の問題は解決．メデタシ，メデタシ
+
+* * * * *
+
+### ghc-6.8.3 で Haddock-2.1.0 がビルドできない件(2008/06/26 09:59:47 JST)
+
+[http://trac.haskell.org/haddock/ticket/18](http://trac.haskell.org/haddock/ticket/18)
+
+とりあえず、Distribution.Haddock モジュールはあきらめて haddockコマンドだけつかうというなら、ghc-6.8.2
+でビルドするという手も あるかも。
+
+    % wget http://haskell.org/ghc/dist/6.8.2/maeder/ghc-6.8.2-i386-unknown-linux.tar.bz2
+    % tar xvf ghc-6.8.2-i386-unknown-linux.tar.bz2
+    % cd ghc-6.8.2
+    % ./configure --prefix=$HOME/ghc-6.8.2
+    % make install
+    % export $PATH=$HOME/ghc-6.8.2/bin:$PATH
+
+    % darcs get http://code.haskell.org/haddock/
+    % cd haddock
+    % runghc Setup.lhs configure
+    % runghc Setup.lhs build
+    % runghc Setup.lhs install
+
+PATHを元にもどす．
+
+たぶんこれでいいじゃないかなぁ．とりあえず．2.2.0 で直る予定らしいのでそれまでのつなぎということで．．．
+
+-   だめじゃん!! (2008/06/30 16:43:56 JST)
+
+        Setup.lhs: Haddock's internal GHC version must match the configured GHC version
+
+    だって!!!
+
+-   回避方法がでてますね(2008/07/09 10:28:17 JST)
+    [http://trac.haskell.org/haddock/ticket/18](http://trac.haskell.org/haddock/ticket/18)
+
+* * * * *
+
+Last modified : 2008/08/08 14:27:04 JST

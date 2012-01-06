@@ -1,0 +1,351 @@
+# [Programming\_玉手箱\_文字列]()
+
+[Programming]():[玉手箱]():文字列
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+[コメントの除去]()
+
+[コメント対応read]()
+
+[正規表現置換]()
+
+[words4ApacheLog]()
+
+[文字列の先頭から等しい文字列を抜き出す]()
+
+-   [お約束の末尾再帰版]()
+
+[文字列から一致する部分文字列を抽出する]()
+
+[CSV]()
+
+[自分自身のソースコードをプリントするプログラム]()
+
+[文字列 C が文字列 A, B から構成されているか]()
+
+* * * * *
+
+## コメントの除去
+
+    {-# LANGUAGE EmptyDataDecls #-}
+    module Text.Decomment (CommentStyle(..), QuoteStyle(..), decomment) where
+
+    import Control.Arrow
+    import Data.List
+    import Data.Maybe
+
+    class CommentStyle c where
+      commentLeadings  :: c -> [String]
+      commentOpenings  :: c -> [String]
+      commentClosing   :: c -> String -> String
+      commentNestable  :: c -> Bool
+
+    class QuoteStyle q where
+      quoteOpenings  :: q -> [Char]
+      quoteClosing   :: q -> Char -> Char
+      quoteEscape    :: q -> Char
+
+    splitWithPrefix :: Eq a => [a] -> [a] -> Maybe ([a],[a])
+    splitWithPrefix [] xs = Just ([],xs)
+    splitWithPrefix (p:ps) xxs@(x:xs)
+      | p == x     = splitWithPrefix ps xs >>= return . ((x:) *** id)
+      | otherwise  = Nothing
+
+    splitQuoted :: Eq a => a -> a -> [a] -> ([a], [a])
+    splitQuoted esc qm []   = ([],[])
+    splitQuoted esc qm (c:cs)
+               | c == qm    = ([],cs)    
+               | c == esc   = case cs of 
+                                []     -> ([c],[])
+                                c':cs' -> ((c:).(c':) *** id) $ splitQuoted esc qm cs'
+               | otherwise  = ((c:) *** id) $ splitQuoted esc qm cs
+
+    decomment :: (CommentStyle s, QuoteStyle s) => s -> String -> String
+    decomment s ""         = ""
+    decomment s ccs@(c:cs) = case mapMaybe (flip splitWithPrefix ccs) $ commentLeadings s of
+      (_,xs):_ -> decomment s $ snd $ break ('\n'==) xs
+      []       -> case mapMaybe (flip splitWithPrefix ccs) $ commentOpenings s of
+                    (p,xs):_ -> decommentC s [p] xs
+                    []       -> if elem c (quoteOpenings s) then c:decommentQ s c cs 
+                                else c:decomment s cs
+
+    decommentC :: (CommentStyle s, QuoteStyle s) => s -> [String] -> String -> String
+    decommentC s [] xs = ' ':decomment s xs
+    decommentC s pps@(p:ps) xxs@(x:xs)
+      | commentNestable s  = case splitWithPrefix (commentClosing s p) xxs of
+          Just (_,ys) -> decommentC s ps ys
+          Nothing     -> case mapMaybe (flip splitWithPrefix xxs) $ commentOpenings s of
+                           [] -> decommentC s pps xs
+                           (p',yys):_ -> decommentC s (p':pps) yys
+      | otherwise   = case mapMaybe (splitWithPrefix (commentClosing s p)) $ tails xs of
+          (_,ys):_ -> ' ':decomment s ys
+          []       -> ""
+
+    decommentQ :: (CommentStyle s, QuoteStyle s) => s -> Char -> String -> String
+    decommentQ s c xs = case splitQuoted (quoteEscape s) (quoteClosing s c) xs of
+                          (ys,zs) -> ys ++ '"':decomment s zs
+
+[nobsun\_decomment]()参照
+
+## コメント対応read
+
+    read' :: Read a => String -> a
+    read' = read . uncomment
+
+    uncomment :: String -> String
+    uncomment ""                 = ""
+    uncomment ('-':'-':rs)       = case break ('\n'==) rs of (ss,ts) -> uncomment ts
+    uncomment ('{':'-':rs)       = uncommentC 1 rs
+    uncomment ('\'':'"':'\'':rs) = '\'':'"':'\'':uncomment rs
+    uncomment ('\\':'"':rs)      = '\\':'"':uncomment rs
+    uncomment ('"':rs)           = '"':uncommentQ rs
+    uncomment (c:rs)             = c : uncomment rs
+
+    uncommentQ :: String -> String
+    uncommentQ ""             = ""
+    uncommentQ ('\\':'"':rs)  = '\\':'"':uncommentQ rs
+    uncommentQ ('"':rs)       = '"': uncomment rs
+    uncommentQ (c:rs)         = c:uncommentQ rs
+
+    uncommentC :: Int -> String -> String
+    uncommentC _ ""            = ""
+    uncommentC 0 rs            = uncomment rs
+    uncommentC k ('-':'}':rs)  = uncommentC (k-1) rs
+    uncommentC k ('{':'-':rs)  = uncommentC (k+1) rs
+    uncommentC k (c:rs)        = uncommentC k rs
+
+    sample0 = "[1 -- hoge\n,2\n,3\n{- ,4 \n -}\n]"
+
+実行例
+
+    *Main> putStrLn sample0
+    [1 -- hoge
+    ,2
+    ,3
+    {- ,4 
+     -}
+    ]
+    *Main> read' sample0 :: [Int]
+    [1,2,3]
+
+* * * * *
+
+## 正規表現置換
+
+    import Text.Regex
+
+    sub re s str = case matchRegexAll re str of
+                      Just (b, _, a, _) -> b ++ s ++ a
+                      _ -> str
+
+    gsub re s str = case matchRegexAll re str of
+                      Just (b, _, a, _) -> b ++ s ++ gsub re s a
+                      _ -> str
+
+* * * * *
+
+## words4ApacheLog
+
+前に挙げたdividWithQuoteByをつかうとApacheのcombined 形式の access.log
+の項目も分解できる。単純な空白区切りの words に
+
+    testdata = "127.0.0.1 - - [12/Dec/2003:16:07:36 +0900] \"GET /cgi-bin/kahua.cgi HTTP/1.1\" 200 2301 \"-\" \"Mozilla/5.0 (X11; U; Linux i686; ja-JP; rv:1.5) Gecko/20031127 Firebird/0.7\""
+
+を食わせると
+
+    Main> mapM_ putStrLn $ words testdata
+    127.0.0.1
+    -
+    -
+    [12/Dec/2003:16:07:36
+    +0900]
+    "GET
+    /cgi-bin/kahua.cgi
+    HTTP/1.1"
+    200
+    2301
+    "-"
+    "Mozilla/5.0
+    (X11;
+    U;
+    Linux
+    i686;
+    ja-JP;
+    rv:1.5)
+    Gecko/20031127
+    Firebird/0.7"
+
+でも、
+
+    words4ApacheLog :: String -> [String]
+    words4ApacheLog = dividWithQuoteBy [('\"', '\"'),('[',']')] isSpace
+
+としておいて、これをくわせると。
+
+    Prelude> mapM_ putStrLn $ words4ApacheLog testdata
+    127.0.0.1
+    -
+    -
+    [12/Dec/2003:16:07:36 +0900]
+    "GET /cgi-bin/kahua.cgi HTTP/1.1"
+    200
+    2301
+    "-"
+    "Mozilla/5.0 (X11; U; Linux i686; ja-JP; rv:1.5) Gecko/20031127 Firebird/0.7"
+
+-   つまり、dividWithQuoteBy の逆を書けば汎用 encoding 関数が書けるんですね -- shelarcy
+
+* * * * *
+
+## 文字列の先頭から等しい文字列を抜き出す
+
+[rwiki](http://rwiki.jin.gr.jp/cgi-bin/rw-cgi.rb?cmd=view;name=2�Ĥ�ʸ�������Ƭ������ʸ�����ȴ���Ф�)より。ナイーブな実装
+
+    same_prefix xs ys = map fst $ takeWhile (uncurry (==)) $ zip xs ys
+
+ちょっとだけはやいかも
+
+    same_prefix (x:xs) (y:ys) | x == y    = x : same_prefix xs ys
+                              | otherwise = []
+    same_prefix _ _ = []
+
+### お約束の末尾再帰版
+
+    same_prefix = same_prefix_iter []
+     where
+      same_prefix_iter xiferp (x:xs) (y:ys) | x == y    = same_prefix_iter (x:xiferp) xs ys
+                                            | otherwise = reverse xiferp
+      same_prefix_iter xiferp _  _ = reverse xiferp
+
+* * * * *
+
+## 文字列から一致する部分文字列を抽出する
+
+    import List
+
+    main :: IO ()
+    main = getContents >>= mapM_ print . sameString
+
+    sameString :: String -> [(String, Int)]
+    sameString = sortBy (\(_,x) (_,y) -> compare y x)
+               . map (rv . last)
+               . groupBy similar
+               . sort . map (rv . last)
+               . groupBy similar
+               . getPrefix . sort . tails
+
+    rv :: (String, Int) -> (String, Int)
+    rv (s, i) = (reverse s, i)
+
+    similar :: (String, Int) -> (String, Int) -> Bool
+    similar (s1, i1) (s2, i2)
+        | i1 /= i2 = False
+        | otherwise = and $ map (uncurry (==)) $ zip s1 s2
+
+    getPrefix :: [String] -> [(String, Int)]
+    getPrefix ss = concat $ snd $ mapAccumL f ([], []) ss
+
+    f :: (String, [Int]) -> String -> ((String, [Int]), [(String, Int)])
+    f (cs, xs) ss = ((ss, p), q)
+      where (p, q) = g cs xs ss
+
+    g :: String -> [Int] -> String -> ([Int], [(String, Int)])
+    g (c:cs) (x:xs) (s:ss) | c == s = ((x+1):p, map (\(s, n) -> (c:s, n)) q)
+      where (p, q) = g cs xs ss
+    g cs xs ss = (map (\_ -> 1) ss, zip (drop 1 $ inits cs) (takeWhile (1<) xs))
+
+* * * * *
+
+## CSV
+
+一年以上まえの「算譜の記」より。
+
+> 「データ行を与えられたセパレータ文字(CSVの場合は',')で区切られた値を表現する文字列に分解する」関数。ただし、引用内のセパレータ文字はセパレータとしない。引用を表現する文字対(引用開始文字、引用終了文字)は複数与えることができるものとする。
+>
+>     dividWithQuoteBy :: [(Char,Char)] -> (Char -> Bool) -> String -> [String]
+>     dividWithQuoteBy _ _ "" = [""]
+>     dividWithQuoteBy qs p ccs@(c:cs)
+>      = if p c
+>          then "" : dividWithQuoteBy qs p cs
+>          else case break (pOr p q) ccs of
+>                 (_,[]) -> [ccs]
+>                 (xs,yys@(y:ys)) 
+>                   -> case lookup y qs of
+>                        Nothing -> xs : dividWithQuoteBy qs p ys
+>                        Just eq 
+>                          -> case break (eq ==) ys of
+>                               (_,[])   -> error ("Invalid format: no "++show eq)
+>                               (zs,w:ws)-> case dividWithQuoteBy qs p ws of
+>                                             []     -> [ccs]
+>                                             ts:uus -> (xs++[y]++zs++[w]++ts) : uus
+>        where q x = case lookup x qs of {Nothing -> False; _-> True}
+>              pOr f g x = if f x then True else g x
+>
+> これを利用すると CSVフォーマットのデータ行を分解するのは例えば、
+>
+>     readCSVLine :: String -> [String]
+>     readCSVLine = dividWithQuoteBy [('\"','\"'),('\'','\'')] (','==)
+
+* * * * *
+
+## 自分自身のソースコードをプリントするプログラム
+
+    main=putStr(x++show x);x="main=putStr(x++show x);x="
+
+* * * * *
+
+## 文字列 C が文字列 A, B から構成されているか
+
+ML[Haskell-jp:485](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/485)より
+
+文字列 C の要素を二つに分けたとき、それらが C 上の順序を保って A, B と等しいか。
+
+    f xs ys = elem (Just ([], [])) . foldl g [Just (xs, ys)]
+      where
+        g xy z = [ case (l, r) of (Just (x:xs, ys), _) | x == z -> Just (xs, ys)
+                                  (_, Just (xs, y:ys)) | y == z -> Just (xs, ys)
+                                  _ -> Nothing
+                 | (l, r) <- zip (xy++[Nothing]) (Nothing:xy)
+                 ]
+
+    Main> f "aaaaaaaaaa" "aaaaaaaaaab" "aaaaaaaaaaaaaaaaaaaaa"
+    False
+    (1732 reductions, 5108 cells)
+    Main> f "chocolate" "chips" "cchochiolpaste"
+    True
+    (532 reductions, 1625 cells)
+
+-   末広がりにならないように斜めにみる。 -- yts
+
+        check xs ys zs = last $ next ys zs $ True:zipWith (==) xs zs
+          where
+            next [] zs bs = if length zs == length xs then bs else [False]
+            next (y:ys) (z:zs) (b:bs)
+              = next ys zs $ fix (\bls ->
+                    (b && z == y):[ (bl && z == x) || (bd && z == y) 
+                        | (bd, (bl, (x, z))) <- zip bs $ zip bls $ zip xs zs])
+
+-   Exploit lazyness! fibなんかもこういうふうにbuild DOWNできます。 -- yts
+
+        data Tree a = T a (Tree a) (Tree a)
+        check xs ys zs = b
+          where end = T False end end
+                t@(T b _ _) = checks xs ys zs t
+                checks [] [] [] _ = T True end end
+                checks [] [] _ _ = end
+                checks _ _ [] _ = end
+                checks (x:xs) [] (z:zs) ~(T _ l@(T a al ar) _)
+                    = T (z == x && a) (checks xs [] zs l) (T False ar end)
+                checks [] (y:ys) (z:zs) ~(T _ _ r@(T b bl br))
+                    = T (z == y && b) (T False end bl) (checks [] ys zs r)
+                checks xxs@(x:xs) yys@(y:ys) (z:zs) ~(T _ l@(T a al ar) r@(T b bl br))
+                    = T (z == x && a || z == y && b)
+                          (checks xs yys zs (T a al ar))
+                          (checks xxs ys zs (T b ar br)) -- "ar"
+
+* * * * *
+
+Last modified : 2008/06/19 03:30:16 JST

@@ -1,0 +1,45 @@
+# [CategoryTheory\_圏論勉強会\_ConceptualMathematics\_Session27-Test5]()
+
+[CategoryTheory]():[圏論勉強会]():[ConceptualMathematics]():Session27-Test5
+
+* * * * *
+
+## 第十七回圏論勉強会
+
+2006-5-28(日) [男女共同参画センター
+集会室2](http://www.kissport.or.jp/sisetu/libra/index.html) 8:45〜16:30
+
+写真：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200605/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200605/ct/)
+
+出席者
+
+         今井       久井         　　 |ス
+      +------------------------+ 　　 |ク
+      |                        | 　　 |リ
+      |                        | 　　 |｜
+      +------------------------+  　　|ン
+       竹内/豊福 shelarcy 酒井    　　|
+
+### Session27 Exercise 4の最後から
+
+Session 28 Exercise 1 - Test 5 は宿題
+
+-   ここか mixi で解く？
+    -   ここと[CategoryTheory\_圏論勉強会ノート]()で解きましょう。
+
+-   Session 28 Exercise 1 (a)
+    -   category of pointed sets では 0 = 1 なので 0×A = 1×A = A。A
+        として例えば２要素からなる pointed set をとると 0×A = A の要素数は２、一方 0 = 1 の要素数は１なので
+        isomorphic ではない。
+
+-   Session 28 Exercise 1 (b)
+    -   B1 = 1、B2 = 1、A を２要素からなる pointed set とすると、A×B1 ＋ A×B2 = A＋A
+        の要素数は３。一方 1＋1 = 1 なので A×(B1＋B2) = A×1 = A の要素数は２。よって A×B1 ＋ A×B2
+        と A×(B1＋B2) は isomorphic ではない。
+
+-   取り敢えず Test 3 の 1,2,3 は [1..100]\>\>=pen が担当します。
+    -   他の問題もみなさんお願いします。
+
+* * * * *
+
+Last modified : 2006/07/13 20:25:41 JST

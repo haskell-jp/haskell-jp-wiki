@@ -1,0 +1,70 @@
+# [HaskellEvent]()
+
+* * * * *
+
+## Haskell に関連したイベントと関連情報
+
+[HaskellEvent\_Finished]():過去のイベント
+
+2010年のイベント
+
+* * * * *
+
+終了しました。
+
+Functional Programming Meeting 2010
+  ~ 
+
+    -   **[Oleg](http://okmij.org/ftp/) さんや [單中杰（Chung-chieh
+        Shan）](http://www.cs.rutgers.edu/~ccshan/)さんを交えての会合**
+    -   **朝の部**
+        -   **日時: 2010-4-24 10:00 - 12:00**
+        -   **場所: [IIJ](http://www.jinbochomitsui.com/) 会議室**
+        -   **注意:["1F
+            のピアノの古楽器"](http://www.jinbochomitsui.com/event/index.html)の前に集合。休日につき施錠されているため、集合時間（開始時刻）までに来ないと入れません。途中お昼休みの時間を設けるので、遅れてきた場合にはお昼まで待って下さい。**
+        -   **議題**
+            -   **[限定継続を使う言語学 (OCaml)](http://okmij.org/ftp/gengo/)**
+
+    -   **昼休み**
+        -   **日時: 2010-4-24 12:00 - 13:00**
+
+    -   **昼の部**
+        -   **日時: 2010-4-24 13:00 - 14:00**
+            -   途中でお昼休憩（12:00-13:00?）を挟む予定。
+
+        -   **場所: [IIJ](http://www.jinbochomitsui.com/) 会議室**
+        -   **注意:1F
+            のピアノの古楽器の前に集合。休日につき施錠されているため、集合時間（開始時刻）までに来ないと入れません。**
+        -   **Oleg さん達に質問**
+            -   のんびりおしゃべり
+            -   発表は特になし？
+                -   時間的に無理そう
+
+            -   **議題候補**
+                -   限定継続を使う言語学 (OCaml)についての質問等
+                -   OCamlの於ける限定継続についてFLOPSの話 (OCaml)
+                -   Light- and heavy- weight static guarantees (Haskell)
+                    いわゆるlow-level Haskell programming + 型レベルハッキング
+                -   Monadic regions (Haskell)
+                -   Probabilistic programming (OCaml)
+                -   Code generation with delimited control (OCaml)
+                -   Iteratee (Haskell)
+                -   その他
+
+    -   **昼-夜の部**
+        -   **日時: 2010-4-24 15:00 - 20:00**
+        -   **場所:
+            [東京大学大学院情報理工学系研究科の秋葉原拠点](http://www.i.u-tokyo.ac.jp/map/index.shtml#aki)
+            会議室 (13F)**
+        -   **議題**
+            -   **[Tagless typed interpreters
+                (Haskell)](http://okmij.org/ftp/tagless-final/course/)**
+                Oxfordの講義、TDPE, CPS transform, type checking, linear
+                lambda計算含めて
+
+    -   **二次会?**
+        -   未定
+
+* * * * *
+
+Last modified : 2010/04/25 01:16:17 JST

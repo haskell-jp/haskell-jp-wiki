@@ -1,0 +1,73 @@
+# [CategoryTheory\_圏論関係リンク集]()
+
+[CategoryTheory]():圏論関係リンク集
+
+* * * * *
+
+圏論関係で役立ちそうなところをがしがしリンク
+
+## テキストなど
+
+### 数学テキスト
+
+-   S.マックレーン (著), 三好 博之 (翻訳), 高木 理 (翻訳), 『圏論の基礎』
+    -   amazon.co.jp
+    -   バイブルの日本語訳
+    -   数学（代数）のバックグラウンドがしっかりある人向け
+
+### CS向け
+
+-   Steven Awodey, "Categories for Everybody "
+    -   [http://www.andrew.cmu.edu/course/80-413-713/notes/draft/](http://www.andrew.cmu.edu/course/80-413-713/notes/draft/)
+
+-   Andrea Asperti and Giuseppe Longo, "Categories, Types and
+    Structures"
+    -   [http://www.di.ens.fr/users/longo/download.html](http://www.di.ens.fr/users/longo/download.html)
+
+-   Rydeheard and Burstall, "Computational Category Theory"
+    -   [http://www.cs.man.ac.uk/\~david/categories/](http://www.cs.man.ac.uk/~david/categories/)
+
+-   横内寛文, 『プログラム意味論』
+    -   カテゴリーの解説は必要最低限に抑えられている。
+
+-   Benjamin C. Pierce, "Basic Category Theory for Computer Scientists"
+    -   薄いしexampleやexcersiceもコンピュータ関係ネタになっているので、とっつきやすいかも。
+    -   でも多分、この本まででは物足りないと思われ。
+
+-   Roy L. Crole, "Categories for Types"
+    -   [amazon.co.jp](http://www.amazon.co.jp/gp/product/0521457017/249-0737854-9368351?v=glance&n=52033011)
+    -   カテゴリーの解説が充実。
+
+-   J. lambek and p.J.Scott, "Introduction to Higher Order Categorical
+    Logic"
+
+-   Michael Barr and Charles Wells, "Category Theory for Computing
+    Science"
+    -   [http://www.cwru.edu/artsci/math/wells/pub/ctcs.html](http://www.cwru.edu/artsci/math/wells/pub/ctcs.html)
+    -   安い。
+
+-   "Categories for Software Engineering"
+    -   [amazon.co.jp](http://www.amazon.co.jp/gp/product/3540209093/249-0737854-9368351?v=glance&n=52033011)
+    -   ソフトウェア工学向けのカテゴリーのテキスト。異色。
+
+### モナド関係論文
+
+-   "Monads and Effects"
+    -   APPSEM'00 Summer School, LNCS 2395, 2002.
+
+-   "Notions of computation and monads"
+    -   Information And Computation, 93(1), 1991.
+
+### その他
+
+-   ロットマン, 『改訂新版ガロア理論』
+    -   [http://www.springer-tokyo.co.jp/mailnews/math/isbn4-431-70890-1.html](http://www.springer-tokyo.co.jp/mailnews/math/isbn4-431-70890-1.html)
+    -   代数関係の復習用
+
+-   足立恒雄, 『ガロア理論講義（増補版）』
+    -   [http://218.216.69.73/nippyo/books/bookinfo.asp?No=2113](http://218.216.69.73/nippyo/books/bookinfo.asp?No=2113)
+    -   この本もいいかも
+
+* * * * *
+
+Last modified : 2007/02/07 20:53:52 JST

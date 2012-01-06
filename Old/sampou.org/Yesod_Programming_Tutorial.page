@@ -1,0 +1,216 @@
+# [Yesod\_Programming\_Tutorial]()
+
+[Yesod]():[Programming]():Tutorial
+
+* * * * *
+
+## [Yesod]()プログラミング手習い
+
+[Yesodプログラミング手習い]()
+
+[Hello World]()
+
+[中身を少しだけチェック]()
+
+[パスパラメータの利用]()
+
+[hamletテンプレート]()
+
+-   [HTMLエスケープしないで埋め込み]()
+
+[クエリパラメータの利用]()
+
+[ついでにhamletテンプレート中での制御構造]()
+
+[Yammerをいじってみよう]()
+
+* * * * *
+
+## Hello World
+
+まずはscaffoldせずにhello worldしてみる。 helloworld.hsを作成して中身はこんな感じ。
+
+    {-# LANGUAGE TypeFamilies, QuasiQuotes #-}
+    import Yesod
+    data HelloWorld = HelloWorld
+    mkYesod "HelloWorld" [$parseRoutes|
+    / HomeR GET
+    |]
+    instance Yesod HelloWorld where approot _ = ""
+    getHomeR = defaultLayout [$hamlet|こんにちわ、世界!|]
+    main = basicHandler 3000 HelloWorld
+
+    $ runhaskell helloworld.hs
+    http://localhost:3000
+
+と起動できたらブラウザからアクセスしてみると「こんにちわ、世界!」とだけ表示されているはず。
+なお、helloworld.hsの起動フォルダにはclient\_session\_key.aesというセッション情報と思われるファイルが生成されている。
+
+* * * * *
+
+### 中身を少しだけチェック
+
+-   アプリケーション(ここではHelloWorld)をdataで型宣言
+-   アプリケーションをYesodのインスタンスにする。とりあえず必要なのはapprootのみ。
+-   mkYesod "HelloWorld"でリソース(URL)とハンドラのマッピング
+    -   ここでは/にアクセスしたらHomeRという内部オブジェクトが対応付けられてる
+        -   HomeRにはGETリクエストを貰ったときのハンドラであるgetHomeRが必要とされる
+        -   getHomeRは標準的なHTMLページを返すんだけど、body部分にhamletテンプレートで書いた内容を埋め込む
+
+-   mailは3000ポートでHelloWorldアプリを起動
+
+だいたいこんな感じらしい。
+特にGETとリクエストメソッドを書くならgetHomeRが必要となるようにリクエストメソッドごとに定義することになる。\
+ もし
+
+    mkYesod "HelloWorld" [$parseRoutes|
+    / HomeR GET POST
+    |]
+
+って書けば
+
+    postHomeR = ...
+
+が必要になる。
+
+* * * * *
+
+### パスパラメータの利用
+
+型安全なパスパラメータの利用とやらをやってみる。
+
+リソースとして/usr/cut-sea/39みたくアクセスしたら「こんにちわ、cut-sea(39)さん」って出すようにしてみる。
+
+    {-# LANGUAGE TypeFamilies, QuasiQuotes #-}
+    import Yesod
+    data HelloWorld = HelloWorld
+    mkYesod "HelloWorld" [$parseRoutes|
+    /user/#String/#Int NameR GET
+    / HomeR GET
+    |]
+    instance Yesod HelloWorld where approot _ = ""
+    getHomeR :: GHandler sub HelloWorld RepHtml
+    getHomeR = defaultLayout [$hamlet|こんにちわ、世界!|]
+    getNameR :: String -> Int -> GHandler sub HelloWorld RepHtml
+    getNameR name age = defaultLayout [$hamlet|こんにちわ、$name$ ($show.age$)さん|]
+
+    main :: IO ()                                  
+    main = basicHandler 3000 HelloWorld
+
+helloworld.hsを書き換えて保存後にrunhaskellを再起動すると動作確認できる。
+
+mkYesodにリソースマッピングを追加。 でもって、getNameRを定義する。
+パスパラメータは引数で渡ってくるので、もし/usr/\#String/\#Stringとしてれば"39"という文字列で渡ってくるし、今みたく\#Intにしてれば39という数字で渡してくれる。
+
+* * * * *
+
+### hamletテンプレート
+
+**[$hamlet|**からはじめて**|]**までがテンプレート部分。
+scaffoldとかで自動生成したりすると、別ファイルにされてたりする。 $で前後を挟むと、その部分は評価されて置き換えられる。
+
+これが基本なんだけど、HTMLに特有の記法が使えるのでここで好きにHTMLを書けば良い。 たとえば、
+
+    getNameR name age = defaultLayout [$hamlet|
+    %div こんにちわ、$name$ ($show.age$)さん
+    %a!href=@HomeR@ 世界へ  
+    |]
+
+こんな感じに再度helloworld.hsを書き換えて保存後にrunhaskellを再起動すると動作確認できる。
+
+-   %aとか%divでHTMLのaタグやdivタグになる。
+-   %a!href=...!class=...!name=... のように!attr=valueとすると属性が付く
+-   @HomeR@とかするとそのエントリポイントのURLになる
+
+インデントつけたりすれば子ノード扱いになったり、色々できるけどとりあえずここまで。
+
+#### HTMLエスケープしないで埋め込み
+
+WysiWygエディタを利用する機会も多くなってきてる。 JQueryから使えるものも利用したことがあるけど、
+こいつをそのまま表示する方法が必要で、[Yesod]()ではこうやる。
+
+    getNameR name age = 
+      let myDiv = preEscapedString "<div style='color:green'><b><i>HTML埋め込み</i></b><div>"
+      in
+          defaultLayout [$hamlet|
+    %div こんにちわ、$name$ ($show.age$)さん
+    %a!href=@HomeR@ 世界へ
+    $myDiv$
+    |]
+
+helloworld.hsを書き換えて保存後にあらためてrunhaskellを再起動すると動作確認できる。
+
+要はpreEscapedStringで包んでおいてやるだけ。
+なので、WysiWygエディタで入力されたHTMLをそのままDBなどに保存してたら、
+その文字列をpreEscapedStringで包んでおいて、まんまhamletテンプレに埋めてやればOK。
+
+* * * * *
+
+### クエリパラメータの利用
+
+次にクエリパラメータを取得してみる。
+
+    getNameR name age = do
+         px <- lookupGetParam "x"
+         py <- lookupGetParams "y"
+         defaultLayout [$hamlet|
+    %div こんにちわ、$name$ ($show.age$)さん
+    %a!href=@HomeR@ 世界へ
+
+    %ul
+      $maybe px x
+        %li x = $x$.
+      $nothing
+        %li x is Nothing.
+      $forall py y
+        %li y = $y$.
+    |]
+
+helloworld.hsを書き換えて保存後にあらためてrunhaskellを再起動すると動作確認できる。
+
+     http://localhost:3000/user/cut-sea/39/?y=3&x=123&y=4&y=5&y=6
+
+というURLにアクセスすると
+
+> こんにちわ、cut-sea (39)さん\
+>  [世界へ](http://localhost:3000)
+>
+> -   x = 123.
+> -   y = 3.
+> -   y = 4.
+> -   y = 5.
+> -   y = 6.
+
+という風に表示される。
+
+-   lookupGetParam "key"で取得できる。
+-   lookupGetParams "key"ってのもあって、こっちはkey=1&key=2&key=3みたいなのに対応しているらしい。
+-   lookupPostParamやlookupPostParamsというのもあって、GETとPOSTで区別されている。
+-   テンプレートでもインデントが意味を持ってます。ツリーだし。
+
+と、まぁこんな感じで取得できる。
+
+* * * * *
+
+### ついでにhamletテンプレート中での制御構造
+
+さっきの例のついでにhamletで使える制御構造をいくつか確認しておく。
+
+-   $maybe-$nothingを使うと$maybe px
+    xでpxがJustならxにMaybeモナドの中の値を取り出してくれるのでそのまま$x$とすれば良い。
+-   $nothingは無くてもOK。
+-   $forall py yでpyの要素を順にyに束縛しつつイテレーションを回してくれる。
+-   ほかにも$if-$elseif-$elseもあって、そのまま直感的に書けば良い。
+
+ここまでやってうれしいのはやっぱりhamletが**E**DSLであるがゆえに、 きっちりHaskellの型チェックの恩恵を受けており、
+テンプレート中とはいえ型的に変なものを書いてると キッチリコンパイル時に弾いてくれるところ。\
+
+さらにghc-modを使っていれば、 pxとかpyなどをテンプレート中で使ってなければ、それも指摘してくれる。
+
+* * * * *
+
+## Yammerをいじってみよう
+
+* * * * *
+
+Last modified : 2010/10/29 18:18:22 JST

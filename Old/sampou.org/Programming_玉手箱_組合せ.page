@@ -1,0 +1,238 @@
+# [Programming\_玉手箱\_組合せ]()
+
+[Programming]():[玉手箱]():組合せ
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+[組合せ論的な生成関数]()
+
+-   [リストの二分割の生成]()
+-   [順列の生成]()
+-   [重複順列の生成]()
+-   [組合せの生成]()
+-   [重複組合せの生成]()
+
+[順列の生成]()
+
+* * * * *
+
+## 組合せ論的な生成関数
+
+「順列の生成」に触発されて、いろいろつくってみた。2003/11/24 08:09:32 JST--nobsun
+
+### リストの二分割の生成
+
+たとえば、[1,2,3]というリストの全二分割は、
+[([],[1,2,3]),([1],[2,3]),([1,2],[3]),([1,2,3],[])]
+
+    divid :: [a] -> [([a],[a])]
+
+    divid xxs@(x:xs) = ([],xxs) : [(x:ys,zs) | (ys,zs) <- divid xs]
+    divid []         = [([],[])]
+
+あれっ。これでいいじゃん。
+
+    divid xs = zip (inits xs) (tails xs)
+
+えっ。なに？逆？
+
+    inits = map fst . divid
+    tails = map snd . divid
+
+### 順列の生成
+
+n 種類のものから、r 個取り出して並べる。辞書順に生成される。
+
+    perm :: [a] -> Int -> [[a]]
+    perm [] _ = []
+    perm xs 0 = [[]]
+    perm xs 1 = map (:[]) xs
+    perm xs n = concatMap (pm n) $ divid xs
+     where pm _ (_,[])      = []
+           pm n (hs,(t:ts)) = map (t:) $ perm (hs ++ ts) (n-1)
+
+> length (perm ns r) == nＰr (n = length ns)
+
+別の書き方で
+
+    perm [] = [[]]
+    perm xs = concat [map (x:) (perm xs') | (x, xs') <- f xs]
+      where f [] = []
+            f (x:xs) = (x, xs):[(x', x:xs') | (x', xs') <- f xs]
+
+Eq a なときの順列
+
+    perm' :: Eq a => [a] -> [[a]]
+    perm' [] = [[]]
+    perm' xs = concat [map (x:) (perm' xs') | (x, xs') <- nubBy g $ f xs]
+      where f [] = []
+            f (x:xs) = (x, xs):[(x', x:xs') | (x', xs') <- f xs]
+            g (x, _) (y, _) = x == y
+
+### 重複順列の生成
+
+n 種類のものから、重複を許して、r 個取り出してならべる。
+
+    rperm :: [a] -> Int -> [[a]]
+    rperm [] _ = []
+    rperm xs 0 = [[]]
+    rperm xs 1 = [[x] | x <- xs]
+    rperm xs n = [ x:ys | x <- xs, ys <- rperm xs (n-1) ]
+
+> length (rperm ns r) == nΠr (n = length ns) == n\^r
+
+-   2ch で覚えた方法
+
+        rperm = ((foldl ((=<<) . (. (return .) . (:)) . (>>=) ) [[]]) .) . (flip replicate) 
+
+    -   邪悪な香りがして、ぞくぞくきますねぇ。\^\^；
+    -   rperm [] 0 の結果が上と違うけど、どちらが正しいの?
+        -   0\^0 は 0 か 1 かと同じ話ですよね。不定ということでどうでしょうか。
+        -   空集合から空集合への写像の数は１つらしいので rperm [] \_ の行はない方がいいでしょうか。それと rperm
+            xs 1 の行も必要ないですよね。他のほとんどの項目の \*\*\* xs 1 の行についても同様です。
+
+-   HHLに同じ事をする関数があった
+
+        import Control.Monad
+        rperm = flip replicateM
+
+### 組合せの生成
+
+n 種類のものから、r 個取り出して組み合せる。
+
+    comb :: [a] -> Int -> [[a]]
+    comb [] _     = []
+    comb xs 0     = [[]]
+    comb xs 1     = map (:[]) xs
+    comb (x:xs) n = map (x:) (comb xs (n-1)) ++ comb xs n
+
+    comb xs 1 のパターンを外せるが他のパターンの順序を変えないといけない。
+
+    comb _ 0     = [[]]
+    comb [] _     = []
+    comb (x:xs) n = map (x:) (comb xs (n-1)) ++ comb xs n
+
+> length (comb ns r) == nＣr (n = length ns)
+
+選んだ残りのものも利用したいとき
+
+    choice  :: Int -> [a] -> [([a], [a])]
+    choice 0 xs = [([], xs)]
+    choice n [] = []
+    choice n (x:xs) = [(x:ys, zs) | (ys, zs) <- choice (n-1) xs] ++
+                      [(ys, x:zs) | (ys, zs) <- choice n xs]
+
+### 重複組合せの生成
+
+n 種類のものから、重複を許して、r 個取り出して組み合わせる。
+
+    rcomb :: [a] -> Int -> [[a]]
+    rcomb [] _ = []
+    rcomb xs 0 = [[]]
+    rcomb xs 1 = [[x] | x <- xs]
+    rcomb xxs@(x:xs) n = map (x:) (rcomb xxs (n-1)) ++ rcomb xs n
+
+> length (rcomb ns r) == nＨr (n = length ns)
+
+    rcomb' [] _ = []
+    rcomb' xs 0 = [[]]
+    rcomb' xs n = xs >>= (flip map (rcomb xs (n-1))) . (:)
+    -- rcomb' xs n = xs >>= (rcomb xs (n-1) >>=) . ((flip (:) [] .) . (:))
+
+* * * * *
+
+## 順列の生成
+
+かってに書いてもいいのかな? 問題があったら消して下さい \>\> nobsun
+
+-   Welcome! Wikiなんですから、どんどん書いちゃってくださいな。--nobsun
+
+2chの[関数型プログラミング言語Haskell](http://pc2.2ch.net/test/read.cgi/tech/1013846140/819-)
+で話題になっているものを転記。
+
+819
+
+    permutation' [] = [[]]
+    permutation' xs = foldr (++) [] (map f (rotate_list xs))
+      where
+      f (x:xs) = map (x:) (permutation' xs)
+      rotate_list xs = take (length xs) (iterate rotate_left xs)
+        where
+        rotate_left [] = []
+        rotate_left (x:xs) = xs ++ [x]
+
+    permutation [] = [[]]
+    permutation xs = foldr (++) [] (map f (selected_list xs))
+      where
+      f (x:xs) = map (x:) (permutation xs)
+      selected_list xs = take (length xs) (zipWith select (repeat xs) [0..])
+        where
+        select [] _ = []
+        select xs n = z : ys ++ zs
+          where
+          (ys,(z:zs)) = splitAt n xs
+
+    上の permutation' は速いですが順列が昇順に出力されません．下の
+    permutation は昇順に出力されますが， splitAt のあたりが遅いのか，速度
+    で劣ります．
+
+821
+
+    permutation [] = [[]]
+    permutation xs = concat [map (x:) $ permutation (delete x xs) | x <- xs]
+
+823
+
+    deleteの2倍以上速いと思う。
+
+    permutations :: [a] -> [[a]]
+    permutations (x:xs) = concat $ map (insap [] x) $ permutations xs
+    where
+      insap :: [a] -> a -> [a] -> [[a]]
+      insap xs y (z:zs) = (xs ++ [y] ++ (z:zs)):(insap (xs ++ [z]) y zs)
+      insap xs y [] = [xs ++ [y]]
+    permutations [] = [[]]
+
+826
+
+     insap xs y zzs@(z:zs) = (xs++y:zzs):insap (xs++[z]) y zs
+
+    とやると僅かだけど、早くなるかも。
+
+828
+
+    permutation xs = p xs []
+     where
+      p [] [] = [[]]
+      p [] ys = []
+      p (x:xs) ys = (map (x:) $ p (xs ++ reverse ys) []) ++ p xs (x:ys)
+
+    deleteより少し速い。xs ++ reverse ysを効率的にやればもう少しいけるかもね。
+
+830
+
+    Haskellよく知らないけど前にLispでやったから多分
+
+     permutation' [] = [[]]
+     permutation' xs = foldr (++) [] (map rotate_list (f xs))
+       where
+       f (x:xs) = map (x:) (permutation' xs)
+       rotate_list xs = take (length xs) (iterate rotate_left xs)
+         where
+         rotate_left [] = []
+         rotate_left (x:xs) = xs ++ [x]
+
+830
+
+    末尾再帰はループになるのかな？
+
+    selected-list xs = p xs [] []
+     where
+      p [] ys r = reverse r
+      p (x:xs) ys r = p xs (x:ys) ((x:((reverse ys) ++ xs)):r)
+
+* * * * *
+
+Last modified : 2006/06/13 07:30:44 JST

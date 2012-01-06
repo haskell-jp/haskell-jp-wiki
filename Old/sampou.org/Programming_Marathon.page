@@ -1,0 +1,81 @@
+# [Programming\_Marathon]()
+
+[Programming]():Marathon
+
+* * * * *
+
+## Lost Pages
+
+サーバクラッシュにより大事なページが失われてしまいました。残念。
+
+## **Attention, Please**
+
+> 2004/07/31 09:46:39 JST --nobsun
+>
+> Sampou.Org は回線が細いので、Haskell:Marathon
+> では臨時に、(株)タイムインターメディア様のサーバを利用することにします。
+>
+> [http://openspace.timedia.co.jp/\~nobsun/marathon.cgi](http://openspace.timedia.co.jp/~nobsun/marathon.cgi)
+> にアクセスしてください。
+
+## どんな風にやろうか？
+
+-   Programming Haskell に、課題ごとのページを用意
+-   課題に着手前に、その課題のページをチェック
+-   未着手なら、そのページでとりかかることを宣言してから着手
+-   とりあえず、動作するコードができたらそのコードを貼り付ける
+-   貼り付けられたコードをみんなでリファクタリング
+-   リファクタリングの過程がわかるように、古いコードは残す
+-   議論はページ上、IRC(誰かチャネルを用意してくださいな)、その場で、行なう
+-   ページ上以外でおこなわれた議論はあとでできるだけ、ページに転記する
+-   30分に一度程度の頻度で、IRCなどに進捗を報告
+
+リファクタリングって何？
+
+## Perl Cookbook
+
+『[Perl
+クックブック](http://www.amazon.co.jp/exec/obidos/ASIN/4873110378/ref=ase_philoprogramm-22/250-1633549-0848242)』
+[Oreilly](http://www.oreilly.co.jp/BOOK/pcook/)
+
+## Ruby Recipebook
+
+『[Ruby レシピブック
+268の技](http://www.amazon.co.jp/exec/obidos/ASIN/4797324295/249-7774198-7519539)』
+[サポートページ](http://www.notwork.org/rubyrecipebook/)
+
+* * * * *
+
+## お知らせ (2004-07-16)
+
+### Call For Participation
+
+下記の通り Haskell Marathon をやります． 興味のある方はご参加ください．
+
+私ひとりでもやります．
+
+途中参加，もちろん大歓迎． 途中退場，もちろんあり． 興味があれば、初心者も大歓迎．
+
+プログラミング用のNotePCは御自分のものを持ち込んでください。
+
+ひやかしも大歓迎． やり方の提案だけというのも大歓迎．
+
+                            記
+
+    題目: Haskell Marathon (Haskell のコード書きちらかし大会)
+    日時: 2004年07月31日(土)，2004年08月01日(日)の2日間
+          両日とも 10:00 スタート 17:00頃まで
+    場所: (株)タイムインターメディア 2F会議室
+    地図: http://www.timedia.co.jp/company/map
+
+ネタは
+
+-   [「Perlクックブック」](http://www.amazon.co.jp/exec/obidos/ASIN/4873110378/philoprogramm-22)
+-   [「Ruby
+    レシピブック」](http://www.amazon.co.jp/exec/obidos/ASIN/4797324295/philoprogramm-22)
+
+です
+
+* * * * *
+
+Last modified : 2006/07/03 21:03:00 JST

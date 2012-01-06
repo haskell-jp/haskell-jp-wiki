@@ -1,0 +1,73 @@
+# [HowTo\_ProgrammingEnvironment\_Ubuntu9.04]()
+
+[HowTo]():[ProgrammingEnvironment]():Ubuntu9.04
+
+* * * * *
+
+以下は2009/08/06 02:40:44 JST現在の情報である．
+
+## Ubuntu 9.04 (i386)上にHaskellプログラミング環境を作る
+
+### ghc-6.10.4のインストール
+
+ubuntuのパッケージにghc6というのがあるのだが，最新のリリースバージョンではないとか，最小構成になっているので少し使いにくいとか，いろいろ不満がでる．それで，コンパイル済のバイナリがはいった，tarballからインストールする．これは非常に簡単です．
+
+#### tarballを取得，展開，設定，インストール
+
+    % wget http://www.haskell.org/ghc/dist/6.10.4/ghc-6.10.4-i386-unknown-linux-n.tar.bz2
+    % tar xf ghc-6.10.4-i386-unknown-linux-n.tar.bz2
+    % cd ghc-6.10.4
+    % ./configure
+    % sudo make install
+
+* * * * *
+
+### 開発用のライブラリ環境
+
+    % sudo apt-get install libgmp3-dev
+    % sudo apt-get install zlib1g-dev
+    % sudo apt-get install freeglut3-dev
+
+* * * * *
+
+### cabal コマンドのインストール
+
+これは必須
+
+#### cabal-install パッケージのインストール
+
+    % wget http://hackage.haskell.org/packages/archive/cabal-install/0.6.2/cabal-install-0.6.2.tar.gz
+    % tar xf cabal-install-0.6.2.tar.gz
+    % cd cabal-install-0.6.2/
+    % ./bootstrap.sh
+
+#### $HOME/.cabal/bin にPATHを通す
+
+    % export PATH=$HOME/.cabal/bin:$PATH
+    % echo 'export PATH=$HOME/.cabal/bin:$PATH' >> ~/.zshrc
+
+* * * * *
+
+### darcs のインストール
+
+これも必須
+
+    % sudo apt-get install libncurses5-dev libcurl4-gnutls-dev
+    % cabal update
+    % cabal install darcs
+
+* * * * *
+
+### パーザジェネレータ
+
+    % cabal install alex happy
+
+* * * * *
+
+### そのほかのライブラリ
+
+    % cabal install cgi fgl GLUT haskell-src-exts html HUnit hscolour
+
+* * * * *
+
+Last modified : 2010/09/18 00:54:29 JST

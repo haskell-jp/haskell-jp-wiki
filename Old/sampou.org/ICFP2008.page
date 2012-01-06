@@ -1,0 +1,85 @@
+# [ICFP2008]()
+
+* * * * *
+
+     sqsum x y = x^2 + y^2
+
+-   中心座標 (x1,y1) 半径 r1 進行角度 th1 進行速度 v1 の物体ともう一つの物体が時間 t
+    までの間にぶつかるかの判定関数。(t \> 0 が前提)
+    -   軌跡は直線じゃないので役に立たなそう。直線じゃないと積分使わないとダメかな。
+
+<!-- -->
+
+     f ((x1,y1),r1,th1,v1) ((x2,y2),r2,th2,v2) t = distance2 t' <= (r1+r2)^2  where
+       vx = v1 * cos th1 - v2 * cos th2
+       vy = v1 * sin th1 - v2 * sin th2
+       distance2 u = sqsum (x1+u*vx-x2) (y1+u*vy-y2)
+       vv = sqsum vx vy
+       t' = if (vv == 0) then 0 else max 0 (min t s)
+
+-   ハンドル角度一定のときの軌跡
+
+<!-- -->
+
+     toRad x = x / 180 * pi
+     
+     -- f 座標 速度 加速度 向き ハンドル角度
+     
+     maxSpeed = 20.0
+     accel = 2.0
+     k = accel / maxSpeed^2
+     n = 10 -- １秒の分割数
+     
+     -- シンプソンを使ってみた
+     
+     foo (x,y) s a dir th = iterate f ((x,y),s,dir) where
+       dt = 0.5 / n
+       f ((x,y),s,dir) = ((x',y'),s',dir') where
+         g (s,dir) = (max 0 $ s + dt*(a - k*s^2), dir + th * dt)
+         sdirs@(_:_:(s',dir'):[]) = take 3 $ iterate g (s,dir)
+         h (s,dir) = let rad = toRad dir in (s * cos rad, s * sin rad)
+         [(x0,y0),(x1,y1),(x2,y2)] = map h sdirs
+         x' = x + (x0 + 4*x1 + x2) / 3 * dt
+         y' = y + (y0 + 4*y1 + y2) / 3 * dt
+     
+     {-
+     -- Hard Right でスピード加速
+     > take 10 $ foo (-24.96,25.04) 0.2 2.0 (-60.0)
+     
+     -- Hard Left でブレーキング
+     > take 10 $ foo (-0.804,-6.552) 15.342 (-3.0) (-4.5) 60.0
+     -}
+
+-   加速０のときのt秒後のスピード
+
+<!-- -->
+
+     c = 1 / s(0) -- 初速の逆数
+     s(t) = 1 / (k*t + c)
+
+-   加速a \> 0 のときのt秒後のスピード
+    -   ds/dt = a - k\*s\^2 を解いたつもり
+    -   検証あまりしてない
+
+<!-- -->
+
+     a2 = sqrt(a)
+     k2 = sqrt(k)
+     s0 = s(0)
+     c = log |(a2+k2*s0)/(a2-k2*s0)| / (2*a2*k2)
+     s(t) = a2/k2 * tanh(2*a2*k2*(t+c)) 
+
+-   加速a < 0 のときのt秒後のスピード
+    -   検証あまりしてない
+
+<!-- -->
+
+     a2 = sqrt(-a)
+     k2 = sqrt(k)
+     s0 = s(0)
+     c = atan(s0*k2/a2) / (a2*k2)
+     s(t) = -a2/k2 * tan(a2*k2*(t+c)) 
+
+* * * * *
+
+Last modified : 2008/07/23 21:26:33 JST

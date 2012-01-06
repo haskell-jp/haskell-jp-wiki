@@ -1,0 +1,30 @@
+# [Tutorial]()
+
+* * * * *
+
+### Haskellに関するチュートリアルなど
+
+-   [A Gentle Introduction to Haskell
+    98](http://www.haskell.org/tutorial/)
+    -   [やさしいHaskell 98 入門](http://www.sampou.org/haskell/tutorial-j/)
+        日本語訳
+    -   [Tutorial\_AGentleIntroductionToHaskell]() 日本語訳にツッコミをいれるページ
+
+-   [All About Monads](http://www.nomaware.com/monads/index.html)
+    -   [モナドのすべて](http://www.sampou.org/haskell/a-a-monads/) 日本語訳
+    -   [Tutorial\_AllAboutMonads]() 日本語訳にツッコミをいれるページ
+
+-   [Why Functional Programming
+    Matters](http://www.md.chalmers.se/~rjmh/Papers/whyfp.html) Chalmers
+    大学 John Hughes 教授のペーパー
+    -   [なぜ関数プログラミングは重要か](http://www.sampou.org/haskell/article/whyfp.html)
+        日本語訳
+    -   [Tutorial\_WhyFunctionalProgrammingMatters]() 日本語訳にツッコミをいれるページ
+
+-   [Write Yourself a Scheme in 48
+    Hours](http://halogen.note.amherst.edu/~jdtang/scheme_in_48/tutorial/overview.html)
+    by Jonathan Tang
+
+* * * * *
+
+Last modified : 2007/01/21 00:19:47 JST

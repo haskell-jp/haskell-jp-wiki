@@ -1,0 +1,71 @@
+# [nobsun\_memo]()
+
+[nobsun]():memo
+
+* * * * *
+
+**無保証**
+
+Memoisation
+
+[Control.Memo]()
+
+-   [概略]()
+-   [インストールの概略]()
+-   [使い方の概略]()
+-   [注意]()
+-   [コメント]()
+
+* * * * *
+
+## Control.Memo
+
+### 概略
+
+関数をメモ化する高階関数 memo
+
+[Memoise]()参照
+
+### インストールの概略
+
+    % darcs get http://darcs.sampou.org/memo
+    % cd memo
+    % emacs memo.cabal
+    % runhaskell Setup.lhs configure --prefix=$HOME
+    % runhaskell Setup.lhs build
+    % runhaskell Setup.lhs install
+
+### 使い方の概略
+
+    {-# OPTIONS_GHC -fglasgow-exts #-}
+
+    import Control.Memo
+    import Data.Map
+
+    fibF :: (Num a, Num b) => (a -> b) -> a -> b
+    fibF f 0 = 0
+    fibF f 1 = 1
+    fibF f n = f (n-2) + f (n-1)
+
+    fib :: Integer -> Integer
+    fib = memo (undefined :: (Memo Map) Integer Integer) fibF
+
+実行結果
+
+    % ghci -v0 fib.hs
+    *Main> :set +s
+    *Main> fib 1000
+    43466557686937456435688527675040625802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322471161642996440906533187938298969649928516003704476137795166849228875
+    (0.03 secs, 1171224 bytes)
+
+### 注意
+
+-   無保証
+-   memo の第1引数はメモ表の型を処理系に教えるための kluge
+-   memo の第2引数の関数の不動点がメモ化される
+
+### コメント
+
+* * * * *
+
+Last modified : 2007/04/05 11:36:51 JST

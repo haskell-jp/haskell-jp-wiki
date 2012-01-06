@@ -1,0 +1,59 @@
+# [ICFP2009]()
+
+* * * * *
+
+## ICFP プログラミングコンテスト 2009
+
+ホーマン軌道
+[http://aero.kouku-k.ac.jp/nakano/rocket/OD2.htm](http://aero.kouku-k.ac.jp/nakano/rocket/OD2.htm)
+
+μの値は
+[http://aero.kouku-k.ac.jp/nakano/rocket/OD.htm](http://aero.kouku-k.ac.jp/nakano/rocket/OD.htm)
+
+地球の静止軌道の半径 42164キロメートル = 4.2164e7メートル
+
+待機軌道の半径 6557キロメートル
+
+ケプラーの法則
+[http://ja.wikipedia.org/wiki/%E3%82%B1%E3%83%97%E3%83%A9%E3%83%BC%E3%81%AE%E6%B3%95%E5%89%87](http://ja.wikipedia.org/wiki/ケプラーの法則)
+
+軌道解析・制御（３ホーマンが書いてある）
+[http://www.koalanet.ne.jp/\~anoda/space/mlab06/mlab06.htm](http://www.koalanet.ne.jp/~anoda/space/mlab06/mlab06.htm)
+
+２ホーマンで狙う Meet and Greet の遷移開始のタイミング
+
+自衛星の円軌道半径 r1 とすると
+
+周期は 2π\*sqrt(r1\^3/μ)
+
+よって角速度ω1 は 2πをそれで割って ω1 = sqrt(μ/r1\^3)
+
+同様に目標衛星の円軌道半径を r2 とするとその角速度 ω2 = sqrt(μ/r2\^3)
+
+自衛星と目標衛星の初期角度をそれぞれ θ1、θ2 とする。
+
+r1 から r2 までのホーマン遷移時間 t2 は t2 = π\*sqrt(r3\^3/μ) （ここで r3 = (r1+r2)/2）
+
+t秒後に遷移を始めてさらにt2秒後に遷移を終えたときのそれぞれの角度は
+
+自衛星： θ1 + t\*ω1 + π
+
+目標衛星： θ2 + (t + t2)\*ω2
+
+これが mod 2π で等しくならないといけないので
+
+θ1 + t\*ω1 + π ≡ θ2 + (t + t2)\*ω2 (mod 2π)
+
+t\*(ω1 - ω2) ≡ θ2 - θ1 - π + t2\*ω2 (mod 2π)
+
+ここで
+
+x ≡ θ2 - θ1 - π + t2\*ω2 (mod 2π)
+
+となる最小の正数 x を決めて
+
+t = x / (ω1 - ω2)
+
+* * * * *
+
+Last modified : 2009/06/29 09:26:17 JST

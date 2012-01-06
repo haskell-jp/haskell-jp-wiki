@@ -1,0 +1,25 @@
+# [ICFP2007]()
+
+* * * * *
+
+## ICFP プログラミングコンテスト 2007
+
+[ICFP プログラミングコンテスト 2007](http://www.icfpcontest.org/)に
+参加してみました．日頃全然鍛えていなかったので，案の定，碌な貢献はでき ませんでした．チームとしても成果がバッチリというわけにはいきませんでし
+たが，それでもずいぶん楽しかったです．また勉強にもなりました．来年もぜ ひ参加してみたいと思います． --nobsun
+
+プログラムの課題は現時点(2007/07/25 01:56:52 JST)ではだれでもダウンロード可能なので
+是非読んで考えてみることをおすすめします．
+
+-   [課題](http://www.icfpcontest.org/Endo.pdf)
+-   [Endo's DNA](http://www.icfpcontest.org/endo.zip)
+-   [元になる画](http://www.icfpcontest.org/source.png)
+-   [目指す画](http://www.icfpcontest.org/target.png)
+
+以下に学んだことを記録しておきます．(これから自分で考えたい人にはネタ ばれになっているので注意してください)
+
+-   [ICFP2007\_execute]() DNA から RNA を取り出すプログラムのリファクタリング
+
+* * * * *
+
+Last modified : 2007/07/25 01:57:42 JST

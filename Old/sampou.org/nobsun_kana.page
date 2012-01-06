@@ -1,0 +1,51 @@
+# [nobsun\_kana]()
+
+[nobsun]():kana
+
+* * * * *
+
+**無保証**
+
+文字が仮名かどうかを判定する述語
+
+[Data.Char.Kana]()
+
+-   [概略]()
+-   [インストールの概略]()
+-   [使い方の概略]()
+-   [注意]()
+-   [コメント]()
+
+* * * * *
+
+## Data.Char.Kana
+
+### 概略
+
+kana-1.0.0
+
+-   Data.Char.Kana
+
+### インストールの概略
+
+    % darcs get http://darcs.sampou.org/kana
+    % cd kana
+    % runhaskell Setup.lhs configure
+    % runhaskell Setup.lhs build
+    % runhaskell Setup.lhs install
+
+### 使い方の概略
+
+    isKana :: Char -> Bool     -- 仮名か？
+    isHiragana :: Char -> Bool -- 平仮名か？
+    isKatakana :: Char -> Bool -- 片仮名か？
+
+### 注意
+
+-   無保証
+
+### コメント
+
+* * * * *
+
+Last modified : 2008/06/30 17:08:02 JST

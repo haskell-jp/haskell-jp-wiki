@@ -1,0 +1,232 @@
+# [nobsun\_gentree]()
+
+[nobsun]():gentree
+
+* * * * *
+
+**無保証**
+
+Tree ジェネレータ
+
+[Debug.GenTree]()
+
+-   [概略]()
+-   [インストールの概略]()
+-   [使い方の概略]()
+-   [注意]()
+-   [コメント]()
+
+* * * * *
+
+## Debug.GenTree
+
+### 概略
+
+Data.Tree.Tree 型のツリーデータを生成するユーティリティ． プログラムのテスト用，プロファイル用のデータを生成するのに便利．
+
+### インストールの概略
+
+    % darcs get http://darcs.sampou.org/gentree
+    % cd gentree
+    % emacs gentree.cabal
+    % runhaskell Setup.lhs configure --prefix=$HOME
+    % runhaskell Setup.lhs build
+    % runhaskell Setup.lhs install
+
+### 使い方の概略
+
+    {-# OPTIONS_GHC -fglasgow-exts #-}
+    {- gentree.hs -}
+    module Main where
+
+    import Data.Tree
+    import System.Random
+    import Debug.GenTree
+
+    type Depth = Int
+    type Count = Int
+    type DC = (Depth,Count)
+
+    instance TreeSeed DC where
+      leaf (0,_) = True
+      leaf _     = False
+      children   = const 2
+      up   (d,c) = (d+1,c)
+      down (d,c) = (d-1,c+1)
+      
+    rg0 :: StdGen
+    rg0 = mkStdGen 0
+
+    rs :: [Int]
+    rs = randomRs (0,3) rg0
+
+    type RC = ([Int],DC)
+
+    instance TreeSeed RC where
+      leaf (_,(d,c))   = d < 1
+      children (r:_,_) = r+1
+      up (r:rc,(d,c))  = (rc,(if r == 0 then d+2 else d+1,c))
+      down (r:rc,(d,c))= (rc,(if r == 0 then d-2 else d-1,c+1))
+
+    test0,test1 :: Tree Int
+    test0 = genTree snd ((3,1)::DC)
+    test1 = genTree (snd . snd) ((rs,(5,0))::RC)
+
+    main :: IO ()
+    main =  (putStr $ drawTree $ fmap show $ test0) 
+         >> (putStr $ drawTree $ fmap show $ test1) 
+
+実行結果
+
+    % runhaskell gentree.hs
+    1
+    |
+    +- 2
+    |  |
+    |  +- 3
+    |  |  |
+    |  |  +- 4
+    |  |  |
+    |  |  `- 5
+    |  |
+    |  `- 6
+    |     |
+    |     +- 7
+    |     |
+    |     `- 8
+    |
+    `- 9
+       |
+       +- 10
+       |  |
+       |  +- 11
+       |  |
+       |  `- 12
+       |
+       `- 13
+          |
+          +- 14
+          |
+          `- 15
+    0
+    |
+    +- 1
+    |  |
+    |  +- 2
+    |  |  |
+    |  |  +- 3
+    |  |  |  |
+    |  |  |  `- 4
+    |  |  |
+    |  |  `- 5
+    |  |     |
+    |  |     +- 6
+    |  |     |
+    |  |     +- 7
+    |  |     |
+    |  |     +- 8
+    |  |     |
+    |  |     `- 9
+    |  |
+    |  +- 10
+    |  |  |
+    |  |  +- 11
+    |  |  |  |
+    |  |  |  +- 12
+    |  |  |  |
+    |  |  |  +- 13
+    |  |  |  |  |
+    |  |  |  |  `- 14
+    |  |  |  |
+    |  |  |  `- 15
+    |  |  |     |
+    |  |  |     `- 16
+    |  |  |
+    |  |  +- 17
+    |  |  |  |
+    |  |  |  +- 18
+    |  |  |  |
+    |  |  |  +- 19
+    |  |  |  |
+    |  |  |  `- 20
+    |  |  |
+    |  |  +- 21
+    |  |  |  |
+    |  |  |  +- 22
+    |  |  |  |  |
+    |  |  |  |  +- 23
+    |  |  |  |  |  |
+    |  |  |  |  |  +- 24
+    |  |  |  |  |  |
+    |  |  |  |  |  +- 25
+    |  |  |  |  |  |  |
+    |  |  |  |  |  |  +- 26
+    |  |  |  |  |  |  |
+    |  |  |  |  |  |  `- 27
+    |  |  |  |  |  |
+    |  |  |  |  |  `- 28
+    |  |  |  |  |
+    |  |  |  |  +- 29
+    |  |  |  |  |  |
+    |  |  |  |  |  `- 30
+    |  |  |  |  |
+    |  |  |  |  +- 31
+    |  |  |  |  |
+    |  |  |  |  `- 32
+    |  |  |  |     |
+    |  |  |  |     +- 33
+    |  |  |  |     |
+    |  |  |  |     `- 34
+    |  |  |  |
+    |  |  |  +- 35
+    |  |  |  |  |
+    |  |  |  |  +- 36
+    |  |  |  |  |  |
+    |  |  |  |  |  `- 37
+    |  |  |  |  |
+    |  |  |  |  `- 38
+    |  |  |  |
+    |  |  |  +- 39
+    |  |  |  |
+    |  |  |  `- 40
+    |  |  |
+    |  |  `- 41
+    |  |     |
+    |  |     `- 42
+    |  |
+    |  +- 43
+    |  |
+    |  `- 44
+    |
+    `- 45
+       |
+       +- 46
+       |  |
+       |  `- 47
+       |
+       +- 48
+       |  |
+       |  +- 49
+       |  |
+       |  `- 50
+       |
+       +- 51
+       |  |
+       |  +- 52
+       |  |
+       |  +- 53
+       |  |
+       |  `- 54
+       |
+       `- 55
+
+### 注意
+
+-   無保証
+-   シードの作り方によっては停止しないこともありえる
+
+### コメント
+
+* * * * *
+
+Last modified : 2007/04/05 11:08:42 JST

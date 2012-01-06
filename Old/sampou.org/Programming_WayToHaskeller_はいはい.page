@@ -1,0 +1,1421 @@
+# [Programming\_WayToHaskeller\_はいはい]()
+
+[Programming]():[WayToHaskeller]():はいはい
+
+* * * * *
+
+## はいはい
+
+([「はいはい」を編集する](http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:�Ϥ��Ϥ�&c=e&l=jp))|([Haskellerへの道](http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&l=jp))
+
+### Hello, World! プログラム
+
+さぁ寝返りもうてるようになった（どういう基準だよ？）ところで、地べたは いずっちゃいましょう！
+やっぱりプログラミングを始める場合には、どんな言語でも Hello, World で しょう。 LL Weekend 2004
+では[LL侍にブラックボックスと称された](http://www014.upp.so-net.ne.jp/tetryl/llw2004/ll-samurai.txt)
+Haskell の Hello, World です。ちょっと緊張しますね。あんな人達の集まる場でブラッ
+クボックスって言われる様なシロモノを私なんかが書けるわけねーんじゃねー かって？！でも今の世の中便利なもので、google
+で検索するとありました。
+[このサイト](http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=Haskell)
+面白そうなんで、しばらくは参照させてもらってお勉強を進めましょう。
+
+    > main = putStrLn "Hello, World!"
+
+これ結構簡単じゃねぇすか？これを emacs 上で評価してやると、
+
+    Main> main
+    Hello, World!
+
+こんな感じで挨拶してくれましたよ。どもこんちわ。m(\_\_)m
+
+    > main = putStrLn "Hello, ほげさん!"
+
+と書き換えて評価してやると、日本語も大丈夫！ すごいすごい。
+
+ふと、これに型を記述しておいてやろうと思ったんだが、よう分からん。こう いう時はわざとエラーを発生させてやるのが正しいやり方です。嘘ですよ、も
+ちろん。(\^\^;
+
+    Main> main 123
+    ERROR - Type error in application
+    *** Expression     : main 123
+    *** Term           : main
+    *** Type           : IO ()
+    *** Does not match : a -> b
+
+あえて不必要な引数 123 を渡してやると Type error ってエラーが出ました。 その下に Type ってとこに IO ()
+って出てますね。 フツーは逆で型の指定っ てチェックのためにするんだろうけど、初心者の内はこういうナサケナイ使い 方もアリでしょ。じゃぁ
+Haskell の教えてくれた型を書いてみましょう。
+
+    > main :: IO ()
+    > main = putStrLn "Hello, ほげさん!"
+
+んで、C-c C-l してから評価してやると、
+
+    Main> main
+    Hello, ほげさん!
+
+わーい、ぱちぱちぱち！
+
+### 実行ファイルにしてみよう
+
+・・・で？(\^\^;; ここでさぁ、やっぱり emacs 上だけじゃなくて実行ファイルにしたいじゃん？
+やってみましょう。・・・さて、どうやるんだろ？
+
+    #! /usr/pkg/bin/hugs
+
+    > main :: IO ()
+    > main = putStrLn "Hello, ほげさん!"
+
+こんな感じに hello.lhs で保存してみて、パーミッションを実行可能にしてみた。
+
+    cut-sea@jini> ./hello.lhs 
+    __   __ __  __  ____   ___      _________________________________________
+    ||   || ||  || ||  || ||__      Hugs 98: Based on the Haskell 98 standard
+    ||___|| ||__|| ||__||  __||     Copyright (c) 1994-2001
+    ||---||         ___||           World Wide Web: http://haskell.org/hugs
+    ||   ||                         Report bugs to: hugs-bugs@haskell.org
+    ||   || Version: December 2001  _________________________________________
+
+    Haskell 98 mode: Restart with command line option -98 to enable extensions
+
+    Reading file "/usr/pkg/share/hugs/lib/Prelude.hs":
+    Reading file "./hello.lhs":
+                       
+    Hugs session for:
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    ./hello.lhs
+    Type :? for help
+    Main>
+
+あらら・・・。一応 Main\> にプロンプトが変わってはいるんだけど、だめか。っつーか、hugs ん中に入っちゃってるじゃん。(T\^T)
+もしかしたら hello.hs ファイルにせにゃならんかな？
+
+    #! /usr/pkg/bin/hugs
+
+    main :: IO ()
+    main = putStrLn "Hello, ほげさん!"
+
+今度は lhs じゃないので、各行頭の \> を外してます。・・・が、無駄な努力 でした。結果は同じ。
+
+すごすごと man hugs ってしてみたけど、何かそれっぽ いのもないぞ。困ったな。とりあえず、先頭の \#! 行を取り除いて ghc でコ
+ンパイルしてみることにしようか。
+
+    cut-sea@jini> ghc hello.hs
+    cut-sea@jini> ll
+    total 370
+    drwxr-xr-x  2 cut-sea  users     512 Sep 18 22:36 .
+    drwxr-xr-x  4 cut-sea  users     512 Aug  5 21:05 ..
+    -rw-r--r--  1 cut-sea  users     287 Sep 18 22:36 Main.hi       <= コレ
+    -rwxr-xr-x  1 cut-sea  users  353908 Sep 18 22:36 a.out         <= コレ
+    -rwxr-xr-x  1 cut-sea  users      50 Sep 18 22:36 hello.hs
+    -rwxr-xr-x  1 cut-sea  users      79 Sep 18 22:16 hello.lhs
+    -rw-r--r--  1 cut-sea  users      31 Sep 18 21:43 hello.lhs~
+    -rw-r--r--  1 cut-sea  users    1956 Sep 18 22:36 hello.o       <= コレ
+    -rw-r--r--  1 cut-sea  users     364 Aug 31 21:42 test.lhs
+    -rw-r--r--  1 cut-sea  users     203 Aug 31 21:08 test.lhs~
+    cut-sea@jini> file *
+    Main.hi:    raw G3 data, byte-padded
+    a.out:      ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), for NetBSD, dynamically linked (uses shared libs), not stripped
+    hello.hs:   ISO-8859 text
+    hello.lhs:  a /usr/pkg/bin/hugs script text executable
+    hello.lhs~: ASCII text, with no line terminators
+    hello.o:    ELF 32-bit LSB relocatable, Intel 80386, version 1 (SYSV), not stripped
+    test.lhs:   ASCII text
+    test.lhs~:  ASCII text
+
+おおっ！出来てる出来てる。 file でチェックすると executable な ELF バイナリが！
+
+    cut-sea@jini> ./a.out 
+    Hello, ほげさん!
+
+わーい！ちゃんと走りましたよ〜(T\^T)感無量。
+
+でもさぁ、やっぱりスクリプトで動かしてみたくないっすか？あと、Main.hi
+ってのもよー分からんファイルだし。なんだこりゃ？謎がいっぱいあるけど、 あんまり細かいこたぁ気にしなぁい気にしなぁい。
+
+しばらくコンパイルするんじゃなくて、ソースのまんま実行する方法ないか探 してみましょう。 google よ！教えておくれっ！！
+
+### runhugs
+
+さんざん色々試して探しまくった挙げ句にようやく出会ったのが、これでした。 この中にちゃんと書いてありまんがな。もう感涙！何十年も会ってなかった肉
+親に会ったかのような感動モノの出会いです。
+
+説明するよかコードを書く方がめんどくさくないので書いちゃいます。
+
+    cut-sea@jini> cat hello.lhs
+    #! /usr/pkg/bin/runhugs
+
+    > main :: IO ()
+    > main = putStrLn "Hello, ほげさん!"
+
+literate 形式のプログラムにしておいて、hugs じゃなくて runhugsを呼び出 してやるんだってさ。っつーわけで、えいやっ！
+
+    cut-sea@jini> ./hello.lhs 
+    Hello, ほげさん!
+
+動いてくれましたよ〜。あぁむせび泣き。
+
+### やはりブラックボックスなのか？
+
+ではじっくり hello.lhs を読んでみましょうか？たった２行で何がじっくり
+じゃぁっっ！！ってツッコまれそうですけど、いいんです。何事も最初が肝心 です。でもヤバそうになったら無理せずに裸足で逃げ出します。コレ肝心！挫
+折するより、経験値積み上げてから出直しってやつです。（伏線だったり）
+
+    #! /usr/pkg/bin/runhugs
+
+    > main :: IO ()
+    > main = putStrLn "Hello, ほげさん!"
+
+lhs 形式になっていることで、\#!行がHaskellには無視されるわけですね。 hs 形式じゃないのは、まさにこのためですね。
+
+1.  さぁshellから実行されたぞ〜
+2.  最初に\#!があるじゃん！
+3.  何々？/usr/pkg/bin/runhugsを呼べってか？
+4.  /usr/pkg/bin/runhugs召喚！
+5.  へいへ〜い！呼ばれて飛び出てじゃじゃじゃじゃーん！（by runhugs）
+6.  何々？コメントコメント・・・（最初の２行を読み飛ばし）
+7.  おっと、"\> "があった！！この行は本体だねぇ
+8.  んじゃまぁ、評価すっか
+
+とりあえず、こんな具合でしょうか。でもさ、これって不思議じゃないですか？ Schemeで言えば(define main
+...)があるだけですよ？ (main)とかって関数呼 び出ししないで走りはったがな、このシト(\^\^;ナシテ？
+
+（注）Schemeでもmain関数を定義してあるだけで、最初にmainがcallされる仕 組みがある。でもこれってやっぱ特例だよね？
+
+> nobsun(2004/09/22 10:38:27 JST): う〜ん。そんなことないと思うけど。コ
+> ンパイラを持つ言語なら普通、エントリポイントになる関数の名前は仕様で決 まっているよね。main とは限らないかもしれないけど。
+>
+> Haskell では、プログラム(算譜)は、定義が書いてあるだけだよね。で、 Haskell
+> のプログラムの実行は、式を評価することだったよね。インタープリ タ内部に居るときには、評価する式を指定することが普通だけど、インタープ
+> リタ外部に居るときには、評価する式を決めておいた方が便利でしょ。それが main というわけ。
+
+実は上のコード書いてたときにも
+
+    #! /usr/pkg/bin/runhugs
+
+    > main :: IO ()
+    > main = putStrLn "Hello, ほげさん!"
+    > main              <= コレは間違いっす
+
+なんて書いてて、きっちりエラーを喰らってたんで、気づいちゃいたんだけど 知らんプリして、ここまで延ばしてました。 LL Weekend でも
+Haskeller な 方が「Haskellの場合はmainから始まります」って何度かコード解説してた様 に思います。しかも先程神の声が
+main がエントリポイントになるんだよ っ て囁いてたんで間違いありません。
+
+じゃぁ次にHaskellに教えてもらって追加した行です。
+
+    > main :: IO ()
+
+・・・すんません。早速わかりません。降参デス。なんで main 関数のデータ 型が IO なの？しかも IO
+のバックに変なシトが取り憑いてます。ナニこれ？ nil(?.?)
+
+IO () ってどんなデータ型？
+
+> nobsun(2004/09/22 10:24:21 JST): ものすごく、はしょって言うと、main は
+> プログラム外部へ出力するアクションだからです。外部へ出力するアクション は IO () 型です。
+
+お？神の声が聞こえてきました。そういうことらしいです。 この部分はなんとなくボスキャラが潜んでそうなので、そういうものって事で
+素通りすることにして、次いきましょう次。
+
+    > main = putStrLn "Hello, ほげさん!"
+
+これはなんとなくわかる気がする。 put string line の略でしょうね。この 部分は調べてる最中に他で出会ったパターンでは
+
+    > main = putStr "Hello, ほげさん!\n"
+
+こんなんもアリらしいです。 put string の略と思われます。これも分かりま
+すよね。動作的には明示的に改行を入れるかどうかの違いでしょうか。最初の 印象としては関数名としては PutStrLn とか PutStr
+の方が良くないか？と思っ たりしますが、
+[やさしいHaskell入門](http://www.sampou.org/haskell/tutorial-j/goodies.html)
+とかを見ると以下の様な文面に出会います。
+
+> [読者のみなさんは気づいたでしょうか、特定の型を表わす識別子は大文字で はじまっています。たとえば、Integer や Char
+> です。また、 inc のような 値を表わす識別子は小文字ではじまっています。これは単なる習慣ではありま せん。Haskell
+> の構文規則でそうすることになっているのです。また、先頭の 文字だけではなく、そのほかの文字も、大文字か小文字かということは重要で、 foo
+> と fOo と fOO はすべて違う識別子として区別されます。]
+
+だそうです。まぁ関数もファーストクラスデータオブジェクトなわけで、それ を束縛しただけの識別子である
+putStrLnやputStrも小文字スタートって訳な んでしょうね。
+
+では、ほんのちょびっとだけ遊んでみましょう。
+
+    > main = putStr ("Hello," ++ " ほげさん!\n")
+
+結果としてはまるで変わりませんけどね。 ++ ってのはとりあえずは文字列を
+連結してくれる中置演算子と思っておきます。はい。そんなことより重要なの はカッコです。これが無いと型が違うって叱られます。
+
+> nobsun(2004/09/23 00:54:22 JST): 括弧なしで、
+>
+> \> main = putStr "Hello," ++ " ほげさん!\\n"
+>
+> と書くと何故、叱られるかというと。関数適用の結合力は、二項演算子 ++ の 結合力より強いので、上は
+>
+> \> main = (putStr "Hello,") ++ " ほげさん!\\n"
+>
+> と解釈されてしまいます。(putStr "Hello,") の型は IO () で、" ほげさん! \\n" の型は String
+> です。これは、++ の型 [a] -\> [a] -\> [a] というのに矛 盾します。で、エラー。
+>
+> Haskellの型推論のシステムが、上のように型を推論してくれて、プログラマ
+> の意図と実際に書かれたプログラムとの齟齬を教えてくれます。こんなのが実 行時エラーだったらやだよねぇ。型推論マンセー！
+>
+> WiLiKi:Shiro (2004/09/23 11:24:53 JST): でもでも、最初の関数の型が [Char] -\>
+> [Char] だったら、エラーは出ないよね。プログラマの意図を完全 に表現しきるのは無理なんだから、結局程度問題ってことにならない?
+> (いや、 型推論があるのはうらやましいんだけどさ。) 議論になりそうなら別ページに 行きましょう。
+>
+> -   続きは [Type]() にてやりましょう (2004/09/24 15:53:18 JST)
+
+    > main = putStr ((("Hello," ++ " ほげさん!\n")))
+
+無いとまずいんだけど、余分にある分には一向に構わないみたいで、こんな風 にカッコ連発しても大丈夫です。なんかＣの式みたい。
+
+ちょっと興味が出てきたので ++ に寄り道してみましょう。 ++ は中置演算子 なんだけど、敢えて前置演算ぽく使うことも出来ちゃいます。
+
+    > main = putStr ((++) "Hello," " ほげさん!")
+
+こんな風に(++)ってカッコで囲ってやるだけですが、やっぱりputStrに対して
+は引数全体をカッコでくるんでやる必要がある。カッコを外す方法は無いんか いなと思うのだが、こんな風にすると出来るらしい。
+
+    > main = putStr $ (++) "Hello," " ほげさん!"
+
+この $ってやつを使うとカッコを省略できるみたいだ。正直に白状すると、コ レも LL Weekend
+行った時に仕入れたネタだったりする。いや、セッションじゃ ないんだけどね。(\^\^)v さらに調子に乗ってこうやってみる。
+
+    > main = putStr $ (++) "ども〜, " $ (++) "どもども," " ほげさん!"
+
+これは
+
+    > main = putStr ((++) "ども〜, " ((++) "どもども," " ほげさん!"))
+
+これと同じことのようだ。
+
+> nobsun(2004/09/23 01:09:27 JST): $ は ++ より結合力が弱いから
+>
+>     > main = putStr $ "ども〜, " ++ "どもども," ++ " ほげさん!"
+>
+> でも、おっけぇよん。
+
+これ見てようやくGauche の部分適用の関数名の末尾に $ がついている意味が 分かったりとかね。
+
+> ソウダッタンダァー
+
+### さらに echo.lhs とかね
+
+    #! /usr/pkg/bin/runhugs
+
+    > --
+    > -- simple echo command in Haskell
+    > --
+    >
+    > module Main where
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+
+続いて echo.lhs も読んでみましょう。これも このサイト から拝借しちゃい ます。
+
+まず実行してみましょーかね。レッツエバル！ emacs 上で走らせると、いや、 走ってないんだけど・・・
+
+    Main> main
+
+    Main> main 1 2 3
+    ERROR - Type error in application
+    *** Expression     : main 1 2 3
+    *** Term           : main
+    *** Type           : IO ()
+    *** Does not match : a -> b -> c -> d
+
+    Main> main "1 2 3"
+    ERROR - Type error in application
+    *** Expression     : main "1 2 3"
+    *** Term           : main
+    *** Type           : IO ()
+    *** Does not match : a -> b
+
+    Main> 
+
+あでででで。ダメですね。最初なんも引数与えてないのですが、そうするとな んも言わないんですよね。 引数を 1 2 3
+って与えてやると、エラーが出ましたね。 Does not match : a -\> b -\> c -\> d ってあるのは引数 1 2 3
+って適用する形で呼び出したから型 がちゃうよって叱ってるんだよね。 これは 1適用 -\> 2適用 -\> 3適用 -\>
+mainの返値である何か てな間違った呼 び出しになってるよ〜って主張されておられる。ふむ。
+
+で、浅知恵なんだけど、 main "1 2 3" って引数を一個のものにしてみたんだ けど、 Does not match : a -\> b
+ってやっぱり間違ってるよって叱られます ね。多分やっぱり IO () ってのが分からないとダメなような気がします。い
+ずれにせよ、mainの引数は無いような気がします。だって -\> が型に無いもん ねぇ。
+
+考えててもしょうがないからコマンドラインから実行してみましょう。
+
+    cut-sea@jini> ./echo.lhs
+    cut-sea@jini> ./echo.lhs 1 2 3
+    1
+    2
+    3
+    cut-sea@jini> ./echo.lhs はろ〜 もーにんぐ 娘。
+    はろ〜
+    もーにんぐ
+    娘。
+    cut-sea@jini> 
+
+こんな風に引数で与えたモノ(文字列臭い気がするけど、まだ不明)が一行ずつ 印字されますね。ふーん。じゃあ、これをふまえて！コードの方を読んでみま
+しょうか。
+
+まず最初の "\> " で始まる行の内先頭三行はコメントだそうです。 Haskellの コメントは --
+で始まる所から行末尾までがコメントになります。あと、ブロッ ク的にコメントを入れる手段もあるそうです。今まであんまり言語仕様書って
+見たくなかったんだけど、この辺りから参照させてもらった方がよさげかな〜。
+と。いや、Lisp?を初めて勉強する時に、いきなりCLtL2ってマクラみたいな本 を手に取ったことがあって心的外傷にね、ちょっとね。うん。
+[この辺](http://www.sampou.org/haskell/report-j/lexemes.html#sect2.3)を参照するとネストしたコメントは
+{- から -} までよんって書いて ます。「おいおい、literate 形式だったら "\> " で始まってない行はどうせ
+コメント扱いだろうが〜」ってツッコミありそうですが、丁重に無視。
+
+    > module Main where
+
+あ、なんかモジュールだ。・・・ぢぐぢょうぅぅ！！(T\^T)
+[またこれ](http://www.sampou.org/haskell/report-revised-j/modules.html)
+かよ。しかも案の定理解できねぇ。なんとなく名前空間を分ける、正確には制
+御するか？そういうモンらしいのは分かったけどさ。とりあえず、Gaucheに
+もあるモジュールと同じようなもんと思ってみるか。・・・ってオレGauche のモジュールシステム使いこなしてねーじゃんっ！切腹！！
+
+しかもこの辺で道草食ってたら
+
+    (^^)             :: (Fractional a, Integral b) => a -> b -> a           negative exponent allowed
+
+なんてのを見つけて「やるじゃんHaskell（なにがやねん）」とかボソッとつ ぶやいてみたり。こんなんが、 $ や ++ や !!
+なんかに混じってコードに入っ てたら、なぜスマイルマーク？？って幻惑されることうけあい！なかなかイカ ス（死語）じゃん。
+
+おっと、いかんいかん。モジュールだった。こういう時は必殺技
+
+コードにエラー仕込んで処理系を怒らせてヒントをもらおう作戦です。
+
+先の一行を削ってHaskellの怒りっぷリを静かに拝見させていただきましょう。
+
+    #! /usr/pkg/bin/runhugs
+
+    > --
+    > -- simple echo command in Haskell
+    > --
+    >
+     module Main where
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+
+コメントアウトして（うわ、簡単だわこりゃ）、んで、まずはロード！！
+
+    Main> :load /home/cut-sea/script/haskell/echo.lhs
+    Reading file "/home/cut-sea/script/haskell/echo.lhs":
+    Parsing.................
+    ERROR "/home/cut-sea/script/haskell/echo.lhs":7 - Program line next to comment
+    Prelude>
+
+ありゃ？なんで？ Program line next to comment
+ってどういう意味だ？コメントの次にプログラム行が来てる？確かにそうなってますよ。
+あれ、もしかして7行目ってコメントアウトした行自身か。ってことはもしかして "\> " 行って途切れたらダメなの？
+
+じゃあ今度はこうしてみよう。
+
+    #! /usr/pkg/bin/runhugs
+
+    > --
+    > -- simple echo command in Haskell
+    > --
+    >
+
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+
+・・・うーん。予想が外れました。ちゃんとロードできるねぇ。なんでだろ。 で、色々試したんだけどようやく分かりました！はい。さっきの誤訳してま
+した。すまねぇだ。 Program line next to comment はコメントの隣、つま
+り隣接する行にプログラム行があるって仰っているんですね。 module Main where
+の前後に空行を入れたり入れなかったりしてようやく判明しました。
+
+    #! /usr/pkg/bin/runhugs
+
+    > --
+    > -- simple echo command in Haskell
+    > --
+    >
+
+     module Main where
+
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+
+これでおっけーです！ドン！
+
+    cut-sea@jini> ./echo.lhs 1 2 3
+    1
+    2
+    3
+
+わーい！！ぱちぱちぱち・・・・って違うっ。そうじゃなくて、 module Main where
+が何してるか調べてたんじゃん。無くても良いって事だよ？ いや、実は予想してたんだけどさ、マジ要らないみたいね。多分単に Main モ
+ジュール内で定義するよって言っているだけなんでしょう。無きゃないでい いんでしょう。したらば！
+
+> モジュールヘッダ部(moduleで始まる行)が無い場合、\`module Main(main) \>
+> where'があるものとして処理されます
+> ([ここ参照](http://www.sampou.org/haskell/report-revised-j/modules.html#sect5.1))
+
+    #! /usr/pkg/bin/runhugs
+
+    > --
+    > -- simple echo command in Haskell
+    > --
+    >
+    > module Foo where
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+
+って Main を Foo モジュールにしてみよう。
+
+    Foo> main
+
+    Foo> 
+
+ちゃんと emacs 上ではロードできるし何か走りそう・・・って思ったら。
+
+    cut-sea@jini> ./echo.lhs 1 2 3
+    runhugs: compileExpr: invalid module
+
+おーいっっ。無効なモジュールだって叱られちゃいますね。 main ってのがエ ントリポイントとして働くのは Main
+モジュールだけらしい。ちなみに Main を Prelude にしてやると、
+
+    cut-sea@jini> ./echo.lhs 1 2 3
+    runhugs: Error occurred
+    Reading file "./echo.lhs":
+    Parsing
+
+    ERROR "./echo.lhs" - Module "Prelude" already loaded
+
+すでに Prelude モジュールはロードされとるって叱られます。これはなんと なく分かる気がしたんだけどさ〜。さらに Main を List
+にしても
+
+    cut-sea@jini> ./echo.lhs 1 2 3
+    runhugs: Error occurred
+    Reading file "./echo.lhs":
+    Parsing
+    ERROR "./echo.lhs" - Module "List" already loaded
+
+ナゼ？？とりあえず Main じゃなきゃマトモに動作してくれないのは分かった けどエラーメッセージに謎が残っちゃいましたね。ボーゼン。
+
+えっと、Main じゃなきゃダメだってことだけ押えといて、次の行にいきましょうか。
+
+    > import System
+
+ハイ！これは System モジュールをインポートしてるんだね。多分以降のコー ドで System
+モジュールで定義された関数を使ってるんでしょう。おおよその アタリをつけて :find で見てみましょう。えーっとー、 :find
+getArgs か な？・・・ビンゴ！
+
+先生！すんません！割り込みますけど気になったんでちょっと試させてくださ い。 :find getArgs ってしたら getProgName
+ってのが見えるんですよね。こ れ試させてください。
+
+    #! /usr/pkg/bin/runhugs
+
+    > module Main where
+    > import System
+    > main = do args <- getProgName       <= ここを変えた
+    >           mapM_ (putStrLn) args
+
+でロードしてみると・・・
+
+    Dependency analysis............................................................
+    Type checking
+    ERROR "/home/cut-sea/script/haskell/echo.lhs":9 - Type error in application
+    *** Expression     : mapM_ putStrLn args
+    *** Term           : putStrLn
+    *** Type           : String -> IO ()
+    *** Does not match : Char -> IO ()
+
+    System> 
+
+んーと、何か型が違うって叱られるな。再度 :find getProgName すると
+
+    getArgs                     :: IO [String]
+    getArgs                      = do argc <- primArgc
+                                      mapM primArgv [1..argc-1]
+
+    getProgName                 :: IO String
+    getProgName                  = primArgv 0
+
+仲良く並んでこうなってます。なんとなくだけど getArgs は引数を複数取れ るんで IO [String] になってるんだろう。一方
+getProgName は get Program Name の略だろうからプログラム名は一個しかない。だから IO String になっ
+てます。ってところじゃないかしらん。
+
+類推すると、 IO () は IO を通して何の受渡しもしないってことじゃなかろーか？
+
+とりあえず、 型が違うって言われてるんでさらにイジイジしてみます。
+
+    #! /usr/pkg/bin/runhugs
+
+    > module Main where
+    > import System
+    > main = do args <- getProgName
+    >           putStrLn args        <= さらにここも変えた。
+
+    Main> main
+    Hugs
+
+よし！さらにコマンドラインから実行！
+
+    cut-sea@jini> ./prog.lhs
+    ./prog.lhs
+
+あ！・・・一瞬びっくりしたけど、そっか。そうだね。でも結構嬉しいぞ。初 めて自分で書いた気がするし。何の役にも立たんけどね。(\^\^;
+
+じゃあちょっとした満足感が得られたところで元の echo.lhs のコード読み込 みを続行しましょう。
+
+### do しましょ
+
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+
+はい、この部分ですね。実は emacs でコードをいじっていると気付くんだけ ど、どのシンボルでもって訳ではないんだけど、word
+の上にカーソルを持っ ていくとミニバッファのところに型を表示してくれます。実に親切ですね。す ばらしい。
+
+じゃあ色々カーソルを移動させて調べてみましょう。すると getArgs が IO [String] であることや putStrLn が
+String-\>IO () であることが判ります。 じゃあ mapM\_ にカーソルを持っていくと・・・
+
+    Monad m => (a -> m b) -> [a] -> m ()
+
+って感じにボスキャラが姿を見せますのでこっちは無視しましょう。多分マッ プ関数の一種だと思うんだよね。動作からして。あとは、args
+が何の型も持っ てない(？)のが気になりますね。なんとなく getArgs の返値と同じ型になる んでねーか？と思うんですけど。さらに難解なのが
+do だったりします。
+
+    do { stmts [;] } stmts -> exp [; stmts] | pat <- exp ; stmts | let decllist ; stmts
+
+って書いてますね。どうも[このあたり](http://www.sampou.org/haskell/report-revised-j/lexemes.html)を先に見ておいた方がよさそうな感触
+です。あくまでさらっとね、さらっと。あまり真剣になると挫折しちゃいそう なんで。
+
+で、一行だと分かりにくいので結局助けを求めて、[ここ](http://www.sampou.org/haskell/report-revised-j/exps.html#sect3.14)を見ると
+
+    exp     ->      do { stmts }    (do expression)
+    stmts   ->      stmt1 ... stmtn exp [;]         (n>=0)
+    stmt    ->      exp ;
+            |       pat <- exp ;
+            |       let decls ;
+            |       ;       (empty statement)
+
+BNFとかとは違うけど、知ってると勘が働くな。
+
+この場合には stmt(statement)がつらつら書かれてて、その内の最初の stmt が pat <- exp なんだな。もちろん pat
+が args になってて、 exp 式が getArgs で。その次の stmt が mapM\_ (putStrLn) argsになってると。
+pat <- exp は exp を評価した返値を pat に束縛してるみたい。しかも stmts の 定義をみると stmt
+はいくつ書いたって良いということだ。
+
+    #! /usr/pkg/bin/runhugs
+
+    > --
+    > -- simple echo command in Haskell
+    > --
+    >
+    > module Main where
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+    >           mapM_ (putStr) args
+
+じゃあお言葉に甘えて、早速。
+
+    cut-sea@jini> ./echo.lhs 1 2 3
+    1
+    2
+    3
+    cut-sea@jini> ./echo.lhs はろ〜 もーにんぐ 娘。
+    はろ〜
+    もーにんぐ
+    娘。
+    はろ〜もーにんぐ娘。cut-sea@jini> 
+
+やったね。
+
+余談だけど、新たに行を追加する時に、わざわざ \> ... って書かなくてもい きなり tab キーを押すと勝手に \>
+を追加してインデントしてくれます。 面白いのは、そのインデントです。今回のケースでは３種類のインデントを順 にやってくれます。おそらく
+レイアウト ってやつに連動しているんじゃねー かなーと思います。
+
+最初のインデントに任せると、
+
+    > module Main where
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+    >         mapM_ (putStr) args
+
+こうなってしまい、ロードすると
+
+    System> :load /home/cut-sea/script/haskell/echo.lhs
+    Reading file "/home/cut-sea/script/haskell/echo.lhs":
+    Parsing........................................................................
+    Reading file "/usr/pkg/share/hugs/lib/System.hs":
+    Parsing........................................................................
+    Dependency analysis............................................................
+    Type checking..................................................................
+    Compiling......................................................................
+    Reading file "/home/cut-sea/script/haskell/echo.lhs":
+    Parsing..................................................
+    ERROR "/home/cut-sea/script/haskell/echo.lhs":11 - Syntax error in input (unexpected symbol "mapM_")
+    System> 
+
+コマンドラインから実行すると
+
+    cut-sea@jini> ./echo.lhs はろ〜 もーにんぐ 娘。
+    runhugs: Error occurred
+    Reading file "./echo.lhs":
+    Reading file "/usr/pkg/share/hugs/lib/System.hs":
+    Reading file "./echo.lhs":
+    Parsing
+    ERROR "./echo.lhs":11 - Syntax error in input (unexpected symbol "mapM_")
+
+って構文エラー発生しちゃいます。二番目のインデントに任せると
+
+    > module Main where
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+    >    mapM_ (putStr) args
+
+こうなって、ロードもコマンドラインからの実行も同じ結果です。最後のイン デントだと、
+
+    > module Main where
+    > import System
+    > main = do args <- getArgs
+    >           mapM_ (putStrLn) args
+    > mapM_ (putStr) args
+
+こうなって、ロード時とコマンドラインから実行した場合のエラーはってーと、
+
+    ERROR "/home/cut-sea/script/haskell/echo.lhs":13 - Syntax error in declaration (unexpected `}', possibly due to bad layout)
+
+    cut-sea@jini> ./echo.lhs はろ〜 もーにんぐ 娘。
+    runhugs: Error occurred
+    Reading file "./echo.lhs":
+    Reading file "/usr/pkg/share/hugs/lib/System.hs":
+    Reading file "./echo.lhs":
+    ERROR "./echo.lhs":13 - Syntax error in declaration (unexpected `}', possibly due to bad layout)
+
+こうなります。ってワケで結局自分でインデントしました(-,-\#) エラーメッセージをちゃんと読んで、
+[レイアウト](http://www.sampou.org/haskell/report-revised-j/lexemes.html#sect2.7)をちょいと眺めれば、そこ
+はかとなく漂う雰囲気で「はは〜ん」って外人風にうなずいている自分がいる ことでしょう。
+
+じゃあ、ここまで来たら多少工夫した Hello, World! を作ってみましょう。
+
+    #! /usr/pkg/bin/runhugs
+
+    > module Main where
+    > import System
+    > main :: IO ()
+    > main = do arg <- getArgs
+    >           putStr (head arg)
+    >           putStrLn "さん、こんちわ！！"
+
+一応 main のデータ型もつけました。
+
+    cut-sea@jini> ./hello2.lhs ほげ 
+    ほげさん、こんちわ！！
+    cut-sea@jini> ./hello2.lhs ほげ ふが
+    ほげさん、こんちわ！！
+
+こんな感じです。ん〜っん、ん、ん(\^-\^)いいですねぇ。 なんかいっぱしにHaskellでコード書けてる気分になって来ましたぞ。
+
+さらに調子に乗っちゃいましょう。
+
+    > module Main where
+    > import System
+    > main :: IO ()
+    > main = do [arg:rest] <- getArgs
+    >           putStr arg
+    >           putStrLn "さん、こんちわ！！"
+
+なんとなく、 pat がパターンになるならこういうのも出来るんじゃねーか？ と思ったんです。つまり、 String の配列だから最初の
+String にマッチすん じゃない？ってゆーわけですね。 getArgs の返値が ["arg1","arg2", ...]
+という風になりますからね。これって結局 [x:xs]ってのでマッチさせたら x
+に最初の引数が渡されるだろうと。そういうこってす。・・・が、前置きが長 い割に失敗しました、コレ。
+
+    Dependency analysis............................................................
+    Type checking
+    ERROR "/home/cut-sea/script/haskell/hello2.lhs":7 - Type error in application
+    *** Expression     : putStr arg
+    *** Term           : arg
+    *** Type           : Char
+    *** Does not match : [Char]
+
+調子に乗りすぎると鼻っパシラをメキっていわされました。はひ。多分なんかを勘違いしてるんでしょう。
+
+> [arg:rest] :: [String] == Char[?]() arg:rest :: [Char] arg :: Char,
+> rest :: [Char] になってしまいます。 それを putStr に渡すと…
+>
+> Haskell とよく似た Clean なんかではリストを [1:2:[]] などと書くようですが。-- Y. Hanatani
+
+なるほど、そうか。神のお告げによると、型も単純に置き換えを考えればいい と。ってことは・・・こうか。
+
+    #! /usr/pkg/bin/runhugs
+
+    > module Main where
+    > import System
+    > main :: IO ()
+    > main = do arg:rest <- getArgs
+    >           putStr arg
+    >           putStrLn "さん、こんちわ！！"
+
+これで思惑通り動作！しかし、このパターンが書けるってのは、強力だのう。
+
+てなわけで do を使ったら、なんかブロック構造みたいのが使えるっちゅうこ とで、ちゃんちゃん。
+
+### あっちゃの世界の引数とこっちゃの世界の引数
+
+今まで考えたことなかったんだけど Haskell触っているうちに気になってきた んで、ちょっと実験してみましょう。Ｃ言語で少し書いてみます。
+
+    #include <stdio.h>
+
+    int main ()
+    {
+      static cycle = 1;
+      printf("Hello,world! %d \n", cycle);
+      cycle += 1;
+      main();
+    }
+
+そう、実は main を再帰的に呼び出したこと無かったです。まずは第一段階と してコレが出来るか確認してみます。
+
+    cut-sea@jini> cc test.c -o test
+    cut-sea@jini> ./test
+    Hello,world! 1 
+    Hello,world! 2 
+    Hello,world! 3 
+    Hello,world! 4 
+    Hello,world! 5 
+    Hello,world! 6 
+    Hello,world! 7 
+    Hello,world! 8 
+    Hello,world! 9 
+    Hello,world! 10 
+    ^D
+
+おおっ、行けますな。うん。まあアセンブラレベルで考えりゃmainラベルへジャ ンプするだけだから行けるだろ。じゃー本題だ。
+
+    #include <stdio.h>
+
+    int main (int argc)
+    {
+      printf("Hello,world! %d \n", argc);
+      main(argc+1);
+    }
+
+さあ、これはどうだ？なんせ再帰呼び出しがオモロイことになっとるぞ！？
+
+    cut-sea@jini> cc test2.c -o test2
+
+    cut-sea@jini> ./test2
+    Hello,world! 1 
+    Hello,world! 2 
+    Hello,world! 3 
+    Hello,world! 4 
+    Hello,world! 5 
+    Hello,world! 6 
+    Hello,world! 7 
+    Hello,world! 8 
+    Hello,world! 9 
+    Hello,world! 10 
+    ^D
+    cut-sea@jini> ./test2 1 2 3 4 5
+    Hello,world! 6 
+    Hello,world! 7 
+    Hello,world! 8 
+    Hello,world! 9 
+    Hello,world! 10 
+    Hello,world! 11 
+    Hello,world! 12 
+    Hello,world! 13 
+    ^D
+    cut-sea@jini> ./test2 foo bar moo dar goo
+    Hello,world! 6 
+    Hello,world! 7 
+    Hello,world! 8 
+    Hello,world! 9 
+    Hello,world! 10 
+    Hello,world! 11 
+    Hello,world! 12 
+    Hello,world! 13 
+    ^D
+
+まぁ予想した通りに動いてくれたじゃないの。でも、やっぱし奇妙っちゃ奇妙だよ〜。 そのココロは？って聞いたらＣ言語はなんと答えてくれるじゃろ。
+
+こうなるとＣにおけるmainの引数argcやargv,envpといった引数とそれがスター
+トアップルーチンで渡されるメカニズムってやつとＣプログラマが引数を渡す メカニズムってやつが混同してません？
+そういう気になるってHaskellに洗脳されかかってますか？ワタクシ？
+
+じゃあもう少し愚考してみちゃおうか。
+
+    #include <stdio.h>
+
+    int main (int argc, char **argv, char **envp, int rest)
+    {
+      printf("Hello,world! %d\n", rest);
+      main(0, NULL, NULL, rest+1);
+    }
+
+これはどうでしょう？これも自分的には初体験。四つ目の引数を渡しちゃいま した。さすがにこれはコンパイルエラーかなぁと思ったら、
+
+    cut-sea@jini> cc test3.c -o test3
+    cut-sea@jini> ./test3
+
+    Hello,world! 7597888
+    Hello,world! 7597889
+    Hello,world! 7597890
+    Hello,world! 7597891
+    Hello,world! 7597892
+    Hello,world! 7597893
+    Hello,world! 7597894
+    Hello,world! 7597895
+    Hello,world! 7597896
+    Hello,world! 7597897
+    ^D
+    cut-sea@jini> ./test3 1 2 3
+    Hello,world! 7597888
+    Hello,world! 7597889
+    Hello,world! 7597890
+    Hello,world! 7597891
+    Hello,world! 7597892
+    Hello,world! 7597893
+    Hello,world! 7597894
+    Hello,world! 7597895
+    Hello,world! 7597896
+    Hello,world! 7597897
+    ^D
+
+ほう？これまた奇っ怪なっ。(\^\^; いやいや機っ械なというべきか。まぁこれが main じゃなくて hoge なんて関
+数なら単に初期化してないからとかなんとかって考えて初期化しちゃうんだけ ど、今回は初期化なんかしちゃったら、ある意味ここで気になってる肝心の部
+分、つまり外部からの引数の受け渡しと内部での引数の受け渡し云々について 思いをめぐらすことができねぇっす。
+
+じーっと考えるとやっぱりＣ言語の方が変に思えます。なんとなく気持ち悪さ の根源らしきところと、
+Haskellのプログラムロード時とコマンドラインから の実行時の引数の与え方、渡り方ってのにかすった手応えがあるんだけど。
+
+どうやらHaskellはある意味で main を特別扱いしてないんだね。もちろん、 main に与える引数の扱いについてって意味でだけど。
+
+Haskellでは、あの世（外界）との専用チャネルはイタコ（何者よ？）を使う
+様にしてて、決して関数呼び出しにおける引数渡しのチャネルは使わない様に してる、ってゆーか、それはもう別口なんだなぁ、きっと。確かにいっしょく
+たにすると無理が出る気がする。Ｃ言語でも何かキテレツな扱いになってたし さ。
+でも、そうすっと入出力なんかも同じだな。ファイルディスクリプタっちゅー 専用のチャネルを使ってやり取りするんだよねぇ。 DB
+アクセスだってそーだ な。ソケットだってそーだ。・・・ってことは単にＣ言語の（ってかHaskell
+以外の言語の）コマンド引数だけが扱いが違ってたの？そ、そーなんか？ (@\_@;)
+
+> WiLiKi:Shiro(2004/09/24 18:39:53 JST): C/C++の処理系の場合、\_start
+> という隠れたルーチンがあって、それがgetArgs相当の動作を行った上で、「普通の関数」であるmainを呼ぶことになっていますな。(\_start
+> は言語規格内には無いですが、その存在は規格でimplyされていると思います。特にC++のstatic変数のconstructor/destructor関連。)
+> この\_startが、Haskellではmainになっている、と思えば良いのでは…
+>
+> こんな感じかしらん。
+>
+>     #!/usr/local/bin/runhugs
+>
+>     \begin{code}
+>
+>     import System
+>     import IO
+>     import List
+>
+>     main :: IO Int
+>     main = _start
+>
+>     _start :: IO Int
+>     _start =   getArgs >>= cmain
+>
+>
+>     cmain :: [String] -> IO Int
+>     cmain args = mapM_ (putStrLn . greeting) args >> return 0
+>
+>     greeting :: String -> String
+>     greeting = concat . flip intersperse ["もうかりまっか、","はん"]
+>
+>     \end{code}
+>
+> でもって、
+>
+>     % ./greeting.lhs カットシ ノブオ
+>     もうかりまっか、カットシはん
+>     もうかりまっか、ノブオはん
+
+### モナドを遠目に見る
+
+神の啓示された高度なコードが(シャレ？)あるので、そっちを見てみることにする。
+
+    #!/usr/local/bin/runhugs
+
+    \begin{code}
+
+    高度なコード
+
+    \end{code}
+
+まず、いちいち "\> " な行にしなくても \\begin{code} から \\end{code} で括っ
+てやると同じことが実現できるってことらしい。
+
+    import System
+    import IO
+    import List
+
+うーむ、いきなり三つもモジュールをインポートしましたね。 System はさっ きも出て来てたからいいとして、 IO ってやつは手ごわそうだ。
+List はリス ト演算だから concat や intersperse をロードしようとしてるんだろう。 :find concat してやると
+List モジュールのソースが出て来る。そんなかに intersperse もある。
+
+で、IO については分からない。 return かな？と思ったら、:find return し ても Prelude
+が引っ張られる。うーっむ。getArgs は System だしなぁ。
+
+じゃあ例のナサケナイ作戦で確認してみましょう。
+
+    #! /usr/pkg/bin/runhugs
+
+    > import System
+
+     import IO    <= こんな風にはずしてみる
+
+    > import List
+    >      
+    > main :: IO Int
+    > main = _start
+    >
+    > _start :: IO Int
+    > _start = getArgs >>= cmain
+    >  
+    > cmain :: [String] -> IO Int
+    > cmain args = mapM_ (putStrLn . greeting) args >> return 0
+    >      
+    > greeting :: String -> String
+    > greeting = concat . flip intersperse ["もうかりまっか","はん"]
+    >    
+
+んで、ロード！コマンドラインから実行！・・・問題なく動作しますな。って ことは import IO
+はいらなそうね。じゃぁ、まぁ要らないんだろうってこ とでうっちゃっておいて、以降のコードを読んでみましょう。
+
+    > main :: IO Int
+    > main = _start
+
+C言語をエミュレートしてるんでしょう。 main は Int を返す関数にしてるの かな？で、main はってーと \_start
+だよって丸投げしてます。どこぞの国の 建設業界みたいですね。
+
+んじゃ、仕事をまかされた \_start は？
+
+    > _start :: IO Int
+    > _start = getArgs >>= cmain
+
+こんなんです。当然 main と同じなんだから型も同じじゃなきゃ矛盾しますな。 IO Int 型って書かれてます。
+
+んで、注目の本体は？
+
+    > _start = getArgs >>= cmain
+
+getArgs はさっきと同じですよね。 :find getArgs で復習することにします。 実は重度に忘れっぽいです、ワタシ。はい。
+
+    getArgs                     :: IO [String]
+    getArgs                      = do argc <- primArgc
+                                      mapM primArgv [1..argc-1]
+
+あ、そうそうこんなんだった。primArgc ってのはその直前に書いてあるんだけど
+
+    primitive primArgc          :: IO Int
+    primitive primArgv          :: Int -> IO String
+
+こんなんです。行頭の primitive ってのがなんとなく、その名称といい、型 しかなくて実体が無いところといい、
+こっから先は関係者以外立ち入り禁止 みたいな香ばしい雰囲気を醸し出してます。根性無しの私はすごすごと引き下
+がることにします。えぇ、根性無しですとも。
+
+> **NOTABENE：** primitive とか、primHogeHage は Hugs 特有のものです。 Haskell 98
+> の仕様にはありません。また、GHCでも見えないはずです。
+
+でも Argc/Argv と言えばなんとなく分かると思います。 primArgc/primArgv
+の型がなんでこうなるのかは、まるで分かりません。しょーがないです。今の 私の経験値ではスライムとかゴブリンあたりが相手です。体力の限界！千代の
+富士っす。
+
+それでもこのコードからすっと、
+
+    getArgs                     :: IO [String]
+    getArgs                      = do argc <- primArgc
+                                      mapM primArgv [1..argc-1]
+
+1.  primArgc からの返り値は多分 Int で引数の個数だろ。
+2.  それを argc に束縛してるね。(argc <- primArgc)
+3.  mapM が微妙に mapM\_ と違うけど気にしない
+4.  [1..argc-1] は argc が仮に 10 なら [1..9] だから 1 から 9 までのリストになる
+5.  primArgv って関数に引数の個数-1までの数値を与えて評価させてる。
+6.  primArgv は？
+7.  Int -\> IO String ってなっとるってことは数値をもらって文字列を返してる。
+8.  その返り値が各引数そのものになってんだね。
+9.  マップ関数だからそれがさらにリストになるんで、文字列リスト[String]だね。
+
+って感じでざっくりと分かる気がします。んじゃ、元のコードに戻りましょう。
+
+    > _start = getArgs >>= cmain
+
+これでした。 getArgs は [String] を返すんだけど、その次の \>\>= ってのが
+確かバインドとかって演算だったと思います。まるで分かりません。また降参 です。ただ、周辺のコードとなによりも動作そのものから推測するに
+getArgs の返した値を cmain に渡しているんじゃないかと思ったりします。
+
+んじゃ、なんで cmain (getArgs)みたいになってねーんだよ？わざわざ \>\>= なんて記号でごまかすなよ〜っ！って思いませんか？
+思いますよね？じゃぁ試してみましょう。
+
+    > _start = cmain (getArgs)
+
+んで、ロードしてくれっ！
+
+    ERROR "/home/cut-sea/script/haskell/greeting.lhs":13 - Type error in application
+    *** Expression     : cmain getArgs
+    *** Term           : getArgs
+    *** Type           : IO [String]
+    *** Does not match : [String]
+
+うーむ、世の中辛口です。型が違うって言われます。確かにちゃんと見ると getArgs は 何か -\> [String] じゃなくて IO
+[String] なんでした。 単なる [String] が渡ってるんじゃないんですねぇ、どうやら。しかも返す返 すって言ってたけど、何か
+-\> [String] じゃなくて IO [String] ってことは getArgs が [String]
+を返すっていう表現は非常に怪しい感触ですねぇ。つま り関数呼び出しの引数や返り値とは別口くさいです。
+広い意味で情報の渡し方には色々あり得て、関数の引数を通じた渡し方とか返 り値を使った渡し方ってのは、その内の一種に過ぎないってことでしょうか。
+
+まぁ今後も色々実験することで、そのうち敵の姿が捕らえられる様になるでしょ う。楽観主義の O 型です。 IO 型じゃないです。・・・ハァ。
+
+おっと自分の親父ギャグで自らダメージ受けて気死してる場合じゃないよっ。 まぁ、 \>\>=
+ってのは引数のメカニズムで返り値を渡すんじゃなくてなんかイ タコのチャネルを駆使して cmain に渡している様なものと解釈することにし
+ましょう。その方向の理解で押し切れない時がきたら、その時点で自分の認識 を修正していくと。
+
+んじゃ、cmain はどうなっとんの？
+
+    > cmain :: [String] -> IO Int
+    > cmain args = mapM_ (putStrLn . greeting) args >> return 0
+
+うーん、型は[String]これはコマンドライン引数のリストですねぇ、こいつを 受け取って IO Int
+を返す、と。なんだか意識が遠のいて来ましたよ。トホホ。
+
+実体だけみると、 args ってのが [String] になるんでしょう。こいつにマッ
+プ関数を適用してますな。コマンドライン引数の各引数に対して作用させる関 数は (putStrLn . greeting) ってことのようです。
+
+この . ってのが関数合成ってやつでしょう。基本的には
+
+    (f . g) arg == f (g arg)
+
+と同じことだと思います。ってことはコマンドライン引数の一つに対して、 greeting を適用してそいつの返す値に対して putStrLn
+を適用すると。って こたぁ greeting は当然 String を受け取って String を返すんでしょう？
+
+    > greeting :: String -> String
+    > greeting = concat . flip intersperse ["もうかりまっか","はん"]
+
+ビンゴ！正解！！すげぇ、型推論できたよ。んじゃ、もうちょっとだ。
+
+    List> concat "はろ" "世界"
+    ERROR - Type error in application
+    *** Expression     : concat "はろ" "世界"
+    *** Term           : concat
+    *** Type           : [[d]] -> [d]
+    *** Does not match : a -> b -> c
+
+あ、d[?]() -\> [d] か。
+
+    List> concat ["はろ","世界"]
+    "\164\207\164\237\192\164\179\166"
+
+あり？なんで？突如日本語を解さなくなったぞ？！気分悪くしたか？
+
+    Main> putStr $ concat ["はろ","世界"]
+    はろ世界
+
+ふうん。どうやら putStr とかを通さないとダメみたいっすね。
+
+    List> concat ["Hello,","World!"]
+    "Hello,World!"
+
+ま、まぁいいか。こいつで動作確認しとこう。とりあえず、concat ってのは 連結ですね。
+
+flip はってーと、:find flip すると
+
+    flip           :: (a -> b -> c) -> b -> a -> c
+    flip f x y      = f y x
+
+ふむ。型を見るとごちゃごちゃしてるけど、定義を見ると簡単ですね。
+
+    List> flip (++) "Hello," "World!"
+    "World!Hello,"
+    List> flip (++) "World!" "Hello,"
+    "Hello,World!"
+
+とまぁこんだけの事の様です。単に関数の引数順序をひっくり返すってのをや るだけです。後で分かるけど、interperse
+の引数順と関係あるみたいです。
+
+じゃぁラスト intersperse は確か HowTo:Listで見掛けましたね。リストの各 要素間にある要素を差し込んでたと思います。
+
+    intersperse             :: a -> [a] -> [a]
+    intersperse sep []       = []
+    intersperse sep [x]      = [x]
+    intersperse sep (x:xs)   = x : sep : intersperse sep xs
+
+そんな難しい定義では無いようです。じゃ、自分で書けって言われたら「無理！ ごめんなさい！！」って即答ですけど。
+
+    List> intersperse " " ["Hello,","World!"]
+    ["Hello,"," ","World!"]
+
+んじゃ、これを組合せるトコにいきましょうかね。
+
+    > greeting = concat . flip intersperse ["もうかりまっか","はん"]
+
+interperse '何か' ["もうかりまっか","はん"]ってのが本来の使い方なので、 flip することで interperse
+["もうかりまっか","はん"] '何か' って形に持 ち込んでいると思われる。つまり
+
+    g = flip interperse ["もうかりまっか","はん"]
+    g arg = flip interperse ["もうかりまっか","はん"] arg
+          = interperse arg ["もうかりまっか","はん"]
+          = ["もうかりまっか",arg,"はん"]
+
+って感じですね。まぁこんな風に Curry 化するために flip って関数を使っ てたんですな。そうして出来た関数 g と concat
+の関数合成なので結局は " もうかりまっか arg はん"っていう String になるわけかぁ。
+
+・・・おっと、忘れてたっっ！！
+
+    > cmain args = mapM_ (putStrLn . greeting) args >> return 0
+
+\>\> return 0 がまだでした。うぅぅ。(--; また出たよ、記号が・・・ \>\> って \>\>=
+とどう違うんだよ〜単に結果を左から右に引き渡さないだけか？
+
+emacs 上で \>\>= とか \>\> とかにカーソルをあわせてみる。
+
+    >>=   :: Monad m => m a -> (a -> m b) -> m b
+    >>    :: Monad m => m a -> m b -> m b
+
+となります。例のボスキャラです。正直分からないので、真正面から対決せず、 遠方からその立ち姿を眺めるだけにします。
+
+    > _start = getArgs >>= cmain
+
+ここで getArgs が IO [String] 型で cmain は [String] -\> IO Int 型です。 上の \>\>=
+の型は Monad m =\> って見たこと無いのが付いてますけど、:find \>\>=
+ってやれば分かるように型そのものを意味するものでは無いようですね。 単に m はモナドってやつを意味してるよってことらしい。
+
+これで \>\>= の、この局面での型に当てはめてみると、
+
+    m  は  IO
+    a  は  [String]
+    b  は  Int
+
+    getArgs :: IO [String]
+    cmain   :: [String] -> IO Int
+    >>=     :: IO [String] -> ([String] -> IO Int) -> IO Int
+                   ↑                   ↑
+                  getArgs              cmain
+
+ってことで \>\>= は、やはり中置演算子くさいです。んじゃ、確認しましょう。
+
+    > _start = (>>=) getArgs cmain
+
+こんな風に書き換えて、同じ動作をすれば、取り合えずは良いんじゃないでしょうか？
+
+    cut-sea@jini> ./greeting.lhs カットシ ノブオ
+    もうかりまっかカットシはん
+    もうかりまっかノブオはん
+
+ぱちぱちぱち。予想的中。そんじゃ \>\> の方も確認して心を落ち着かせてみます。
+
+    m  は  IO
+    a  は  String
+    b  は  Int
+
+    greeting  ::  String -> String
+    putStrLn  ::  String -> IO ()
+    (putStrLn . greeting)  ::  Sting -> IO ()
+    mapM_  :: (String -> IO ()) -> [String] -> IO ()
+                      ↑              ↑
+             (putStrLn . greeting)   args
+
+    mapM_ (putStrLn . greeting) args  :: IO ()
+    return  :: Int -> IO Int    <= return の型は a -> m a なんだけど b -> m b です
+                                   この辺は周囲の型との関係からね
+    >>  :: IO () -> IO Int -> IO Int
+             ↑        ↑       ↑
+      mapM_ ... args   ｜       ｜     
+                    return 0   _start
+
+とまぁ、多分こんなんでしょうか？んーーーー、だからどーした系の後味。(--; 要は mapM\_ ... args の部分は IO
+の絡むアクションをするけど、値は渡さず () っていう(ユニット型っていうらしい)ものを渡して、 \>\> の右項は IO Int って感じで
+Int を返す？というか渡す？よと。 どうも左項の mapM\_ ... args の結果を無視して右項だけでテキトーに結果を
+作っちゃってます。全然協調してません。 \>\> ってのは。えぇ、全然パスが通っ てないです。実際 m a -\> m b -\> m b
+って事なんで、 m a と m b の二つの 引数をもらってながら、 m b 型が返値になってるんで、m a が消失してて全
+然脈絡がないっす。ひどいヤツです。 \>\> は。 こういう奴がクラスに一人いると、雨の日に遠足の準備をして学校に来てしま
+い、一日中授業で肩身の狭い思いをする生徒が出て来てしまうんです。パスを もらえなかった可哀想な return
+は、自分の判断でオヤツとか「遠足のしおり」 しか持って来てなかったりします。この場合は 0 です。どっから出て来た？っ て数字です。ホントひどい
+\>\> ですね。えぇ、私がまさにそうでした。\>\> な 奴でした。ごめんなさい。m(\_\_)m
+
+え、えっと、一方で \>\>= はってーと、
+
+    >>=   :: Monad m => m a -> (a -> m b) -> m b
+
+って事なんで、一応 (a -\> m b) ってところで a から b への関係を持ってま
+す。一応パスが通ってます。（実は細かくツッコまれると自信ないんだけ ど・・・）そういう関数を取っているところが、私と、いや \>\>
+と違うところ の様です。
+
+まだまだ、ナットクいかねぇってところも有りますが、無理は禁物。肩の力を 抜いて、いい加減なノリで勉強を進めましょう。ユースケサンタマリアに成り
+切ると丁度いいです。多分。なんせ、敵は[LL侍](http://www014.upp.so-net.ne.jp/tetryl/llw2004/ll-samurai.txt)も恐れるモナドです。じっく
+り行きます。モナドは理解するより、どう使うのかを考えた方か幸せになれる と、
+[どっか](http://i.loveruby.net/w/HaskellFAQ.html)に書いてありましたしね。
+
+あ、最後に一応
+
+    > cmain args = (>>) (mapM_ (putStrLn . greeting) args) (return 0)
+
+を確認しておきましょう。
+
+    cut-sea@jini> ./greeting.lhs カットシ ノブオ
+    もうかりまっかカットシはん
+    もうかりまっかノブオはん
+
+はい、ぱちぱちぱち〜！
+
+### cat.lhs とかもみとく
+
+    #! /usr/pkg/bin/runhugs
+
+    > --
+    > -- cat.hs
+    > --
+    > -- A simple cat command in Haskell.
+    > --
+    >
+    >module Main where
+    >     
+    >import System
+    >import IO
+    >    
+    >main :: IO ()
+    >main = do args <- getArgs
+    >          case args of
+    >            [] -> catFile stdin
+    >            _ -> mapM_ (\a -> do f <- openFile a ReadMode
+    >                                 catFile f
+    >                                 hClose f) args
+    >         
+    >catFile :: Handle -> IO ()
+    >catFile f = do eof <- hIsEOF f
+    >               if eof then return () else
+    >                  do c <- hGetChar f
+    >                     putChar c
+    >                     catFile f
+
+これです。ほとんどの部分はこれまでの読み込みで理解できます。新たに出て 来たのが、case ってやつと (\\a -\> do ...)
+の部分の \\ です。また記号。あ と、 catFile の型に現れる Handle や hIsEOF とか hGetChar hPutChar
+って やつ。名前からおおよそ予想はつきますけど、一応見て行きます。cat は基本 中の基本ですし。
+
+case については emacs 上でカーソルをあわせると、
+
+    case exp of { alts [;] }
+
+ってなってます。おそらく args の値に応じて場合分けしてるんでしょ。
+
+[] だったら catFile って関数に stdin を引数に与えて呼び出します。要は
+コマンドライン引数が無かった場合は標準入力から読み込むんですね。一方 \_
+ってのは、なんでしょーか。訳分かんないのがぞくぞく出て来る。でも、どっ かで見たこと有ります。いろいろやって思い出しました。 :find
+head してみ ると、
+
+    head             :: [a] -> a
+    head (x:_)        = x
+
+    last             :: [a] -> a
+    last [x]          = x
+    last (_:xs)       = last xs
+
+    tail             :: [a] -> [a]
+    tail (_:xs)       = xs
+
+    (snip)
+
+    null             :: [a] -> Bool
+    null []           = True
+    null (_:_)        = False
+
+こんな感じです。どうやら任意の値にマッチするようなもののようです。特殊 なシンボルってより、慣用的に用いられるシンボルでしょうか。試してみましょ
+う。
+
+    >            x:xs -> mapM_ (\a -> do f <- openFile a ReadMode
+
+としたり、
+
+    >            _:_ -> mapM_ (\a -> do f <- openFile a ReadMode
+
+としてみたり、いずれも問題なく動作します。どうやら -\> の右側で参照され ることのない任意のシンボルを \_
+で書きゃいい様です。実際後の例で、もし 右側で \_ を参照したら \_:\_ のどっちなのか分かんないしね。ちなみに
+[ワイルドカード](http://www.sampou.org/haskell/tutorial-j/patterns.html)って言うらしいです、コレ。
+
+    (\a -> do f <- openFile a ReadMode
+              catFile f
+              hClose f)
+
+お次はこれですね。たびたび出て来る、この手の式はλ式らしいです。 \\ a -\> ... ってのは引数が一個 a
+ってのを取る匿名の関数を作ってるみたい。
+
+    (lambda (a) (let1 f (openFile a ReadMode)
+                   (catFile f)
+                   (hClose f)))
+
+Scheme風に書くとこんな感じでしょう。もち、単なる擬似コードなんですけど。 これもなんとなく a がコマンドライン引数の一つになるので
+String だと思 いますが (実はハズレ)、こいつを openFile の第一引数に与えて、第二引数 を ReadMode
+つまり読み取り専用モードにしている。返って来たファイルディ スクリプタらしいものが、f に束縛されます。
+おおっ！！出て来ました。ファイルディスクリプタ！これの型は？これの型！ emacs でカーソルをあわせても何にも出ません。しょーがないので
+:find openFile します。えいや！
+
+    primitive stdin       :: Handle
+    primitive stdout      :: Handle
+    primitive stderr      :: Handle
+    primitive openFile    :: FilePath -> IOMode -> IO Handle  <= コレ
+    primitive hClose      :: Handle -> IO ()
+
+    primitive hFileSize   :: Handle -> IO Integer
+
+    primitive hIsEOF      :: Handle -> IO Bool
+
+ん〜、 取り合えず IO Handle ってのがファイルディスクリプタに相当する型 くさい。ってことは、 catFile f や hClose
+f ってのは IO Handle -\> 何か なはず！！
+
+・・・って思ったら、オレってホント学習能力ないです。うーん。そうか、 Handle か。ますます分からなくなった。ガク。
+
+と、とりあえずファイルディスクリプタってのは Handle 型みたいだ。うーん。 そういや、上の方の primitive を見てみても
+stdin とか stdout なんかが Handle って書いてあるじゃねーの。
+
+まぁいいです。とにかくこのλ式はファイル開いて書き出してクローズしてる と。そんだけです。で、「書き出して」の部分をやってる catFile
+はってー と、
+
+    >catFile :: Handle -> IO ()
+    >catFile f = do eof <- hIsEOF f
+    >               if eof then return () else
+    >                  do c <- hGetChar f
+    >                     hPutChar stdout c
+    >                     catFile f
+
+これですね。この辺もさして難しくないように思うんだよね。他の言語の知識 があれば、およそは分かった気になれそう。 if then else
+もあるんだぁって のがささやかなへぇ〜っです。 ただ一点、しつこいようですが、ディスクリプタを返す openFile の返り値が Handle
+でいーじゃん！単に Handle を返すんじゃダメなの？なんで？ってト コだけナットクできねっす。(--; do
+ってのはモナド演算の構文糖衣って書いてあるってことは、実質 \>\> とか \>\>=
+なんかで繋げられたブロックだと思うので、型としての辻褄がそうなって いるらしいのはいいんだけど、ここを IO Handle じゃなくて
+Handle にする と何か問題でも？！全体としてそれだと、どっかで矛盾が発生するのだろう
+か？ってゆー疑問を抱きつつ、そろそろつかまり立ち（だから、どういう基準 だよっ？）へＧＯ！
+
+> こんな問題が・・・と言っても分かりづらいと思うので、簡単な説明を。
+>
+> 例えば、getChar :: IO Char の IO を外した readChar :: Char を定義してみます。
+>
+>     import System.IO.Unsafe
+>
+>     readChar :: Char
+>     readChar = unsafePerformIO getChar
+>
+>     main :: IO ()
+>     main = putStrLn [readChar, readChar]
+>
+> このコードを実行すると、最初に入力した文字が2回出力されます。 readChar で一度計算された値がキャッシュされるからです。
+>
+> Haskell は、参照透明性(ある式の値をいつ評価しても変わらないという性質)
+> を前提として作られています。そのおかげで、評価を必要になるまで遅らせた
+> り、一度評価した結果をキャッシュしておいたりすることが可能になるのです。
+>
+> しかし、そのせいで、readChar のように、評価するたびに値が異なる式をう まく扱う事ができなくなっているのです。
+
+まぁ一応 cat.lhs も読めました。(\^\^)v ・・・まだ、自分じゃ書けないけどね。
+
+### 【ちょっとひとやすみ】ピュアな怠け者
+
+> 作成中。。。
+
+([「はいはい」を編集する](http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:�Ϥ��Ϥ�&c=e&l=jp))|([Haskellerへの道](http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&l=jp))
+
+* * * * *
+
+Last modified : 2009/12/13 20:53:24 JST

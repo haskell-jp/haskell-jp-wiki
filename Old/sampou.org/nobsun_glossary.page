@@ -1,0 +1,68 @@
+# [nobsun\_glossary]()
+
+[nobsun]():glossary
+
+* * * * *
+
+**無保証**
+
+用語集ツール
+
+-   簡単なスクリプトで書いた単純なツール．ちょっとしたマニュアルの翻訳な どで訳語を統一するためなどに使っていて意外に重宝(自画自賛:p)
+
+[glossary]()
+
+-   [概略]()
+-   [インストールの概略]()
+-   [使い方の概略]()
+-   [注意]()
+-   [コメント]()
+
+* * * * *
+
+## glossary
+
+### 概略
+
+用語集を引く，作るためのツール
+
+### インストールの概略
+
+    % darcs get http://darcs.sampou.org/glossary
+    % cd glossary
+    % emacs glossary.cabal
+    % runhaskell Setup.lhs configure
+    % runhaskell Setup.lhs build
+    % runhaskell Setup.lhs install
+
+### 使い方の概略
+
+    % glossary                     # コマンドラインから glossary を起動
+    ? simple                       # simple を検索
+    単純な                         # ヒットすれば検索結果が表示される
+    ? instantiation                # instantiation を検索
+    ! 具体化                       # ヒットしないときは挿入モードになる．! がプロンプトなのでここで説明を入れる．
+    ? instantiation                # 再検索
+    具体化
+    ? :u                           # 説明の変更コマンド
+    ! 具現化                       # 新しい説明を入力
+    ? instantiation                # 再検索    
+    具現化
+    ? :a                           # 説明の追加
+    ! 具体化                       # 追加説明を入力
+    ? instantiation                # 再検索
+    具体化, 具現化
+    :q                             # 終了コマンド
+    %                              # コマンドラインのプロンプト
+
+### 注意
+
+-   無保証
+-   日本語はUTF-8を想定
+-   辞書はカレントディレクトリにある glossary.dict なければ作る．
+
+### コメント
+
+* * * * *
+
+Last modified : 2007/07/02 11:30:22 JST

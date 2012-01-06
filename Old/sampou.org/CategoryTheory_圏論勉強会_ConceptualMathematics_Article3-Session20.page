@@ -1,0 +1,162 @@
+# [CategoryTheory\_圏論勉強会\_ConceptualMathematics\_Article3-Session20]()
+
+[CategoryTheory]():[圏論勉強会]():[ConceptualMathematics]():Article3-Session20
+
+* * * * *
+
+## 第七回圏論勉強会
+
+2005-6-11 (土) [SFC τ：タウ館（大学院棟) 二階
+τ22](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/661)
+13:00-18:00
+
+出席者
+
+            今井    酒井        |ス
+          +------------------+  |ク
+          |                  |  |リ
+          |                  |  |｜
+          +------------------+  |ン
+           田中 Shelarcy 豊福 　|
+
+写真
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200506/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200506/ct/)
+
+### ArticleⅢ
+
+-   英単語とか定義とか
+    -   cohesive ... ???
+    -   smooth ... 微分可能
+    -   arbitrary map ... domain の 任意の point に対して codomain
+        のvalueがuniqueに定まる
+
+-   カテゴリSの右肩にあるマークをなんと読む？？
+-   人狼BBSは面白いよ
+
+-   Excersise で下にないものは写真を参照
+-   Excersise 4
+    -   involution
+    -   不動点：0
+
+-   Excersise 5
+    -   idempotent
+    -   不動点：0以上
+
+-   Excersise 6
+    -   α\^(-1) (x) = x - 3
+
+-   Excersise 7
+    -   automorphism ではない
+
+-   Excersise 10
+    -   b
+    -   No
+
+-   components (pp.142) の意味
+    -   ... グラフの連結成分
+
+-   Excersise 18 x1 = pa(x1) = p(ax2) = x2
+-   Excersise 20
+    -   a(x) = y, a(0) = 0 より x0 ≠ x1 ⇒ a(x0) ≠ a(x1) (x0, x1 ∈ X)
+
+-   Excersise 22
+    -   p(y\^) のために p のretraction が定義できない （y\^ ... y の上に棒）
+
+-   Excersise 23
+    -   2通り
+
+### 余談
+
+-   下記漸化式を解く良い方法は？ f(n) = \^(n-1)\_{i=1} f(i)f(n-i)
+    -   [「木で遊ぶ」](http://www.ruby-talk.org/cgi-bin/scat.rb/haskell/haskell-jp/662)の証明のための計算
+
+-   [Clean 2.1.1 に入った Editor 開発のためのライブラリで
+    Arrow](http://page.freett.com/shelarcy/diary_2005-06.html#hray_and_clean_2_1_1)
+    及び (Haskell や Generic Haskell で言う) Generic classes などを使っているようだ。
+    -   [Graphical Editor Programming
+        Toolkit](http://www.cs.ru.nl/~clean/gec/)
+    -   [第７章
+        総称プログラミング](http://sky.zero.ad.jp/~zaa54437/programming/clean/LanguageReport21/Chap7.html)
+
+### 二次会
+
+-   読み終わった後どうするか？
+    -   論文をサーベイする回を作る
+        -   みんなで集まってサーベイするだけでは意味ないような……
+
+    -   だれかがサーベイして、それに必要な知識を補ってから読んでいくというのはどうだろうか？
+        -   一人で読むと自分だけでやっていってどんどん先に進めてしまうような感じでむなしいような…
+        -   でも、それを後で他の人に教えるというやり方もありでは？
+
+    -   読みたい論文をまず決めて、それに必要な知識という風に地点を定めてやっていくのはどうだろうか？
+    -   酒井さんの日記にある論文を読んでいく？
+        -   [ヒビルテ:圏論](http://www.tom.sfc.keio.ac.jp/~sakai/d/?category=����)
+        -   [ヒビルテ:論文](http://www.tom.sfc.keio.ac.jp/~sakai/d/?category=��ʸ)
+
+-   [まだだれも試していない……というか試せているはずもない Intel Mac 版
+    GHC](http://www.haskell.org//pipermail/cvs-ghc/2005-June/025451.html)
+    -   いや、Apple の人が試すという可能性がっ!
+    -   GHC が標準開発ツールに…だったらかっこいいな。
+
+-   [Haskell
+    の求人は池上さんの投稿のおかげで](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/620)倍率が高かった模様
+    -   昨日一次面接があった
+
+-   カテゴリの規則はなぜ identity law と associative law なんだろう？
+    -   半群(結合則)＜モノイド（単位元＋結合則）＜群（単位元＋結合則＋逆元）となるけど、identityをなくしたカテゴリとか別に規則を追加したカテゴリとかもあっておかしくないのでは
+        -   カテゴリはUniversalだから
+        -   逆元の規則を追加したものはある。つまり、mapが全てisomorphism。groupoid
+        -   identityを減らしたものは...???
+        -   モノイドをカテゴリとみなすことができる。オブジェクトはモノイドそのもの(1つだけ）mapはモノイド上の演算。
+        -   逆に対象が唯一つしかない圏をmonoidと定義できる。
+        -   monoidかつgroupoidである圏を群と定義
+
+-   geocity のページを放っておいて消滅 -\> 番号なので再利用される
+    -   失恋のメッセージが貼り付けてあって、知らぬ間に自分が失恋したことにされてる
+    -   番号再利用のアルゴリズムは？
+
+## 第八回圏論勉強会
+
+2005-7-2(土) [コールドブレス](http://www.coldbreath.jp/access.php) 10:00-18:00
+
+出席者
+
+           フク 酒井 久井 　　 |ス
+          +-------------+ 　　 |ク
+     豊福 |             | 　　 |リ
+          |             | 　　 |｜
+          +-------------+  　　|ン
+           今井 Shelarcy   　　|
+
+写真
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200507/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200507/ct/)
+
+### Article Ⅲ、p148 より
+
+### Session 13
+
+### Session 14
+
+### Session 15
+
+### 二次会
+
+-   今後の予定として圏論の基礎を読んでいくのはどうだろうか？
+    -   院生向けにかかれているので、数学の知識がさらりとでてくるので読みこなすのは難しい。
+    -   豊福さんがそういった部分について解説してくれるなら、やってもいいかも。
+
+-   圏論の基礎知識について初心者にわかりやすく書いたページはあるの？
+    -   なければつくりたい。
+    -   Category の図とかを書くには？
+        -   Visio なんてどうだろうか？
+        -   SVG を使って書くという手も。でも対応しているブラウザが Opera と Amaya くらいで…… Firefox
+            へのサポートってもう入ったっけ？
+
+-   こないだの SICP
+    の飲み会でも話題になったし、[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/684](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/684)
+    にも書いたけど、Haskell Hacks が欲しいな。
+    -   そういう実用的な本も一冊あっても良いかも。
+
+* * * * *
+
+Last modified : 2006/06/15 02:12:01 JST

@@ -1,0 +1,198 @@
+# [dekudekuplex]()
+
+* * * * *
+
+#### プロフィール
+
+-   生年月日:
+    -   1968/11/09
+
+-   URL:
+    -   [http://d.hatena.ne.jp/DekuDekuplex/](http://d.hatena.ne.jp/DekuDekuplex/)
+
+-   職業：
+    -   特許明細書の日英翻訳家
+
+-   好きなプログラミング言語：
+    -   Haskell、Scheme
+
+-   自然言語：
+    -   英語、日本語
+
+* * * * *
+
+DekuDekuplexです。
+
+主に、Haskell言語とScheme言語を勉強中です。
+
+最近、[PLT Scheme](http://plt-scheme.org/)の[Typed
+Scheme](http://www.ccs.neu.edu/home/samth/typed-scheme/)を少し使っています。
+
+#### 「ハノイの塔」の問題
+
+好きな電気計算科学関連の問題は[ハノイの塔](http://ja.wikipedia.org/wiki/ハノイの塔)です。以下に僕の作った「ハノイの塔」の問題を解決する為のプログラムをHaskell言語とPLT
+Typed Scheme言語で紹介させて頂きます：
+
+##### Haskell言語
+
+※このhanoiプログラムは、必ず「putStr (hanoi\_shower (hanoi 1 2 3 n))」または「putStr
+(hanoi\_shower (hanoi 'a' 'b' 'c' n))」のように使ってください。
+
+    -- hanoi_general_merged_v1.1.hs
+    -- Revised version of hanoi_general.hs, which was a Haskell function to compute the Towers 
+    -- of Hanoi problem recursively, merging hanoi and hanoi_helper
+    -- 
+    -- Usage: putStr (hanoi_shower (hanoi 1 2 3 n)), or 
+    --        putStr (hanoi_shower (hanoi 'a' 'b' 'c' n)), 
+    --        where the first three arguments of hanoi may be polymorphic types
+    --        (i.e., Chars, Ints, or any other suitable type), and n is the number
+    --        of discs to move from the source peg to the destination peg
+    -- 
+    -- Copyright(c) April 17, 2008, at 15:47, 
+    -- by Benjamin L. Russell
+    -- 
+    -- Update History:
+    -- 
+    -- Version 1.1
+    -- Added usage information.
+    -- April 22, 2008, at 21:47
+
+    hanoi :: a -> a -> a -> Int -> [(a, a)]
+    hanoi source using dest n
+        | n == 1 = [(source, dest)]
+        | otherwise = hanoi source dest using (n-1) 
+                      ++ hanoi source using dest 1
+                             ++ hanoi using source dest (n-1)
+
+    hanoi_shower :: Show a => [(a, a)] -> String
+    hanoi_shower moves = unlines ["Move " ++ show a ++ " to "++ show b ++ "." | (a, b) <- moves]
+
+実行例：
+
+    __   __ __  __  ____   ___      _______________________________________________
+    ||   || ||  || ||  || ||__      Hugs 98: Based on the Haskell 98 standard
+    ||___|| ||__|| ||__||  __||     Copyright (c) 1994-2005
+    ||---||         ___||           World Wide Web: http://haskell.org/hugs
+    ||   ||                         Bugs: http://hackage.haskell.org/trac/hugs
+    ||   || Version: Sep 2006       _______________________________________________
+
+    Haskell 98 mode: Restart with command line option -98 to enable extensions
+
+    Type :? for help
+    Hugs>:load "C:\\Program Files\\WinHugs\\hanoi_general_merged_v1.1.hs"
+    Main>putStr (hanoi_shower (hanoi 'a' 'b' 'c' 3))
+    Move 'a' to 'c'.
+    Move 'a' to 'b'.
+    Move 'c' to 'b'.
+    Move 'a' to 'c'.
+    Move 'b' to 'a'.
+    Move 'b' to 'c'.
+    Move 'a' to 'c'.
+     :: IO ()
+    Main>
+
+##### PLT Typed Scheme言語
+
+###### 普通のPLT Typed Scheme言語関数
+
+    ;; hanoi-typed.ss
+    ;; Typed Scheme version of Towers of Hanoi
+    ;; 
+    ;; Based on regular-plus function by Carl Eastlund.
+    ;; Copyright(C) October 16, 2008, at 20:54, 
+    ;; by Benjamin L. Russell
+
+    #lang typed-scheme
+
+    (: hanoi-typed (Number -> Void))
+    (define (hanoi-typed n)
+      (hanoi-helper-typed 'A 'B 'C n))
+
+    (: hanoi-helper-typed (Symbol Symbol Symbol Number -> Void))
+    (define (hanoi-helper-typed source using destination n)
+      (cond ((= n 1)
+             (printf "Moving from disc ~a to ~a.\n" source destination))
+            (else
+             (hanoi-helper-typed source destination using (- n 1))
+             (hanoi-helper-typed source using destination 1)
+             (hanoi-helper-typed using source destination (- n 1)))))
+
+実行例：
+
+    Welcome to DrScheme, version 4.1.1 [3m].
+    Language: Module.
+    > (hanoi-typed 3)
+    Moving from disc A to C.
+    Moving from disc A to B.
+    Moving from disc C to B.
+    Moving from disc A to C.
+    Moving from disc B to A.
+    Moving from disc B to C.
+    Moving from disc A to C.
+    > 
+
+###### カリー化されたPLT Typed Scheme言語関数
+
+    ;; hanoi-curried.ss
+    ;; Curried Typed Scheme version of Towers of Hanoi
+    ;; 
+    ;; Based on curried-plus function by Carl Eastlund.
+    ;; Copyright(C) October 16, 2008, at 20:54, 
+    ;; by Benjamin L. Russell
+
+    #lang typed-scheme
+
+    (: hanoi-curried (Number -> Void))
+    (define (hanoi-curried n)
+      ((((hanoi-helper-curried 'A) 'B) 'C) n))
+
+    (: hanoi-helper-curried (Symbol -> (Symbol -> (Symbol -> (Number -> Void)))))
+    (define ((((hanoi-helper-curried source) using) destination) n)
+      (cond ((= n 1)
+             (printf "Moving from disc ~a to ~a.\n" source destination))
+            (else
+
+             ((((hanoi-helper-curried source) destination) using) (- n 1))
+             ((((hanoi-helper-curried source) using) destination) 1)
+             ((((hanoi-helper-curried using) source) destination) (- n 1)))))
+
+実行例：
+
+    Welcome to DrScheme, version 4.1.1 [3m].
+    Language: Module.
+    > (hanoi-curried 3)
+    Moving from disc A to C.
+    Moving from disc A to B.
+    Moving from disc C to B.
+    Moving from disc A to C.
+    Moving from disc B to A.
+    Moving from disc B to C.
+    Moving from disc A to C.
+    > 
+
+#### これから・・・・・・
+
+現在（平成２０年１０月１７日（金曜日）現在）、回帰的な定義の「ハノイの塔」に代わる、高等関数的な定義の究極の面白い、創造しやすい、魔法的なプログラミング問題を模索中です。数値をいじるだけでは面白くありません。何か、もっと代表的でカタチとして想像し易い、楽しくて不思議な問題を探しています。見つけましたら、またここで報告させて頂きます。御楽しみに・・・・・・。
+
+#### 好きなことば
+
+-   「古池や蛙飛びこむ水の音」--- 松尾芭蕉
+-   "Common sense is the collection of prejudices acquired by age
+    eighteen." --- Albert Einstein (US (German-born) physicist (1879 -
+    1955)), (attributed)
+-   "Any sufficiently advanced technology is indistinguishable from
+    magic." --- Arthur C. Clarke (English physicist & science fiction
+    author (1917 - )), "Profiles of The Future", 1961 (Clarke's third
+    law)
+-   "Computer Science is no more about computers than astronomy is about
+    telescopes." --- E. W. Dijkstra
+
+#### 関連ページ
+
+-   他のサイトでのDekuDekuplexのユーザーページ
+    -   [HaskellWiki](http://www.haskell.org/haskellwiki/User:DekuDekuplex)
+    -   [Wikipedia](http://en.wikipedia.org/wiki/User:DekuDekuplex)
+
+* * * * *
+
+Last modified : 2008/11/20 11:54:57 JST

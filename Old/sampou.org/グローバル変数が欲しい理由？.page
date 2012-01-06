@@ -1,0 +1,795 @@
+# [グローバル変数が欲しい理由？]()
+
+* * * * *
+
+### グローバル変数が欲しい理由？
+
+[グローバル変数が欲しい理由](http://d.hatena.ne.jp/kazu-yamamoto/20090110/1231552839)っていうエントリを見まして，忙しかったのでズイブン遅くなっちゃったけど，ちょっと考えてみます．
+
+実はコメントしている[nobsun]()が話をした同僚ってのは私です．
+で，[nobsun]()は完成したプログラムを公開してこうすればいいんじゃない的なブログを書いてますけど，
+これでは多分相手はナットクしないんじゃねーかなーと思うわけ． だってグローバル変数を避けて実装すりゃ，そらそうでしょうよって思うだけだもの．
+
+そうじゃなくて[nobsun]()をはじめとしてHaskellerがグローバル変数を欲しくならないのか，
+それとも禁欲的に自分に制約をかけてるだけなのかを示さなきゃならんと思うわけですよ．
+
+確かにグローバル変数が欲しいとか引数に持ち回らなきゃいけないのってイマイチとか， どっかで聞いたようなセリフだよなぁ．(\^\^;)\
+ いや，言いましたよワタシも．
+
+でも，別に「昔はオレもそうだった」とカッコつけて悦に入りたいわけじゃなくて，
+今でもどうかすると同じジレンマっていうかストレスを感じる可能性はあると思ってて，
+この際「グローバル変数が欲しくなるホントの理由」を明確にしておきたいと思うわけです．
+
+ですが，机上の空論で議論しても無駄だと思うんですよね．\
+ 実は自分なりには結論がすでにあって，そのためにはあーだこーだと抽象的な議論をしてもムダと思ってるわけです．
+その自分なりの結論がホントかどうか改めて再確認したいわけです．
+
+つーわけで，簡単なアプリを実装します． Haskellにおけるプログラミングスタイルというやつに沿って実況中継的に説明します．
+で，このような開発の仕方をするとどうなるか？というのを皆さんにもトレースしてもらって， それでもグローバル変数を欲しくなるのか？
+ならないとしたらなんでなのかを考察あーんど議論しましょうよ．というのが今回のモチベーションでつ．
+
+#### とりあえずざっくり型で設計
+
+とりあえず作ろうとしてるのはcatにします． オプションとして-nくらい持つようにしてみようか． 先頭に行カウントを出すやつ．
+そこまでやっておけば増やすのは勝手にしてってことで(投げやり)．
+
+    main :: IO ()
+    main = undefined
+
+これはいいっすよね． お約束ってことで．
+
+で，フィルタプログラムってどういう型になるかなーって考えると
+
+    prog :: String -> String
+    prog = undefined
+
+って感じですかね？ まーいいんじゃないでしょうか．
+
+とりあえずC-c,C-lでロードして型チェックする． 型チェックできるものなんて無いんだけど，もう癖にしちゃっておく．
+手が止まったらC-c,C-lです．
+
+えっとオプションを取って，それによって振る舞いをかえたいんだからオプションに依存するんだろう．
+いやいや，それはフィルタプログラムの型じゃなくてフィルタプログラムを生成する関数か．
+
+    genProg :: [Option] -> (String -> String)
+    genProg = undefined
+
+こんな感じ？ あ，ここでいきなり[Option]とかリストに決めちゃうのはやめ．
+
+    genProg :: Options -> (String -> String)
+    genProg = undefined
+
+キモチ的にはオプションの集まりをもらってそれに応じたフィルタプログラムを 返してくれるものってことでこうかなとりあえず．
+型の宣言にある-\>は右結合だから(String -\> String)のカッコは不要だけどなんかprogと同じ型だよってつもり．
+だったらなんか名前つけれーってことで．
+
+    type FilterProgram = String -> String
+
+これでC-c,C-lでロード．
+
+    *Main> :load "/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs"
+    [1 of 1] Compiling Main             ( /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs, interpreted )
+
+    /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:7:11:
+        Not in scope: type constructor or class `Options'
+    Failed, modules loaded: none.
+    Prelude> 
+
+あーそっか\^\^;\
+ Optionsなんてデッチアゲだった．
+
+    type Options = [Option]
+    data Option = CFlag | File String
+
+まー全然考えてないから後で別ものになるかもしれないけど． とりあえずCオプションだけ対応しておこう．
+あとは入力ファイル名を引数でもらうはずなのでFileというデータ構成子も用意しておく． これでC-c,C-lは通った．
+
+Optionsはどっから？ということでgetArgsがソースになるはずなんだけど． とりあえず型を見ておく．
+
+まずgetArgsを使うためにSystemをimportすっかな．
+
+    import System
+
+これ書いてからロードして型をチェック．
+
+    *Main> :t getArgs
+    getArgs :: IO [String]
+    *Main> 
+
+あーそうだったそうだった．IO [String]なんだよな． これ見ていきなりIOがついてるーって戦々恐々になるヒトもいるけど，
+どーってことはない． 引数をもしHaskellプログラマが自分で与えられるとしたら，
+
+    args :: [String]
+    args = ["file.-c", "txt",...]
+
+みたいに書くじゃん？ でもさー与えられないんだよね．だってプログラムの実行時に実行する人が与えるものだから．
+つまりHaskellプログラムの外のリソースなわけですよ．
+だから[String]ってわけにはいかず，**外部リソースにある[String]**ってコトになっちゃうわけ．
+もちっと俗っぽく(？)言えば**入出力して手に入いる[String]**って型なんだよね．
+IOってのはそういう修飾がついたものだと思えばよろしい． だからコード書くときにはそれがプログラムの外部リソースにあるなーって思ったら
+IOつけとけってことで割り切っちゃってください．
+
+ともかくgetArgsで取れるのがIO [String]なんだけど[String]が相手なので，
+こいつからOptionsを構成できる関数がありゃいーわけだよね．
+
+    parseOpt :: [String] -> Options
+    parseOpt = undefined
+
+これでいいっしょ． OptionsがparseOptで作れたとしようか． そうすっと次に欲しくなるのはなんだろ．
+あー入力ストリームっつーか入力文字列を作る部分だよね． OptionsにはFile "text.txt"みたいのがあるハズだから，
+
+    getInputs :: Options -> [String]
+    getInputs = undefined
+
+こうかな． 与えられた入力ファイルが複数あるかもしれないので[String]ってリストになってる． リスト内の要素一つで1ファイルの中身全部ね．
+
+あー!メンゴメンゴ(死語)． さっき自分で言ったばっかじゃん．(ｗ 入力文字列はファイルから取るんだから外部リソースにあるんだった．
+
+    -- キモチ的には外にある文字列のリストだよーん
+    getInputs :: Options -> IO [String]
+
+これでまたC-c,C-l．
+
+あと何が足りないものは．．．． あーフィルタプログラムを入力に適用してあげなきゃ．
+良い名前が思い浮かばないけどとりあえずrunProgjで勘弁．
+
+    runProg :: FilterProgram -> String -> IO ()
+    runProg = undefined
+
+フィルタプログラムをもらって処理対象の文字列をもらってIO ()で外の世界に書き出しちゃうってことで． IO
+()は外部のリソース()が欲しいわけじゃないんで，さっきの説明がすでに破綻してっけどゴメンね．
+書き出すときは欲しいものがないから()とか強引にナットクしてくれませんか．
+
+今のところこんな感じでなんか全体としては揃ってそうだからいいかな．
+
+    import System
+
+    main :: IO ()
+    main = undefined
+
+    prog :: FilterProgram
+    prog = undefined
+
+    -- genProg :: Options -> (String -> String)
+    genProg :: Options -> FilterProgram
+    genProg = undefined
+
+    type FilterProgram = String -> String
+
+    type Options = [Option]
+    data Option = CFlag | File String
+
+    parseOpt :: [String] -> Options
+    parseOpt = undefined
+
+    getInputs :: Options -> IO [String]
+    getInputs = undefined
+
+    runProg :: FilterProgram -> String -> IO ()
+    runProg = undefined
+
+一応String -\> StringをFilterProgramに書きかえたんだけど，progって必要か？とか思ってしまった．
+だってさーこれをgenProgが生成するんでしょ？ 一個じゃなくてオプションによって選択するわけだから今書かなくていーじゃん．
+ってことで削っちゃえ．ということで削りました．
+
+    import System
+
+    type FilterProgram = String -> String
+
+    type Options = [Option]
+    data Option = CFlag | File String
+
+    genProg :: Options -> FilterProgram
+    genProg = undefined
+
+    parseOpt :: [String] -> Options
+    parseOpt = undefined
+
+    getInputs :: Options -> IO [String]
+    getInputs = undefined
+
+    runProg :: FilterProgram -> String -> IO ()
+    runProg = undefined
+
+    main :: IO ()
+    main = undefined
+
+順番とか整理してこんな感じ．
+
+#### とりあえずrunProgを実装
+
+じゃあイメージ出来てそうな所から実装します． まずrunProgかな．
+
+    runProg :: FilterProgram -> String -> IO ()
+    runProg f inp = putStr $ f inp
+
+フィルタプログラムにソースになる文字列を与えてputStrすればおしまい． これを
+
+    runProg f = putStr . f
+
+と書いてもよい． これは「**runProg**は**f**でフィルタしてから**putStr**する」というキモチで書いてる．
+(.)は右してから左するっていう処理を繋ぐものだからunixの**|**みたいなもんだと思えば当たらずとも遠からず．
+ここではカッコつけずに最初の形でいきまーす． C-c,C-lでロードもできるしおっけーでーす． 酒入ってるからハイテンションでーす．
+プログラム書くときはアルコール入れるとキモチいーでーす．
+
+#### mainを実装しましょう
+
+えっと，じゃあ次は個人的にはmainを書かないと他がイメージできないのでmainを実装すっかな．
+
+    main = getArgs >>=
+           \argv -> let ...
+
+えーと，getArgsでIO [String]な引数が貰えるでしょ．
+そいつを(\>\>=)でつないで[String]にして，こいつをargvとしておくか．
+
+    main = getArgs >>=
+           \argv -> let ...
+                    in mapM_ (runProg f) inputs
+
+本体はこんな感じだよな． inputsは入力ファイルのストリームのリスト[IO String]だろうか． あれ？なんか違う？
+
+    *Main> :t mapM_
+    mapM_ :: (Monad m) => (a -> m b) -> [a] -> m ()
+
+mapM\_はこーゆー型だから，inputsは[String]じゃないとダメか． runProg fの型は大丈夫かいな？
+
+    *Main> :t runProg id
+    runProg id :: String -> IO ()
+
+これが(a -\> m b)の部分なのでaがString，mがIO,bが()だ． そーすっとinputsは[String]であってるかな．
+
+うーん．なんかファイルの中身は外部にあるからIOがどっかで絡むはずだけど，とりあえずこのまま進めよう．
+
+    main = getArgs >>=
+           \argv -> let f = genProg opts        -- フィルタ f はoptsで決まる(optsはOptionsをもらえるつもり)
+                        opts = parseOpt argv    -- parseOptにargvくわせてOptions型のoptsがもらえる
+                        inputs = getInputs opts -- getInputsでIO [String]ができる
+                    in mapM_ (runProg f) inputs -- あら？
+
+キモチ的には横にコメント書いたとおり． で，ここで気付くんだよなーアホですが． こう書いておいて，C-c,C-lした時に
+[String]を期待してんのにIO [String]が来てるよクソヤロウと叱られて気付く．
+
+    Prelude> :load "/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs"
+    [1 of 1] Compiling Main             ( /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs, interpreted )
+
+    /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:25:37:
+        Couldn't match expected type `[String]'
+               against inferred type `IO [String]'
+        In the second argument of `mapM_', namely `inputs'
+        In the expression: mapM_ (runProg f) inputs
+        In the expression:
+            let
+              f = genProg opts
+              opts = parseOpt argv
+              inputs = getInputs opts
+            in mapM_ (runProg f) inputs
+    Failed, modules loaded: none.
+    Prelude> 
+
+inputsはIO [String]だからmapM\_式の形が違うわ． まーこれは簡単だけどな．
+
+    main :: IO ()
+    main = getArgs >>=
+           \argv -> let f = genProg opts
+                        opts = parseOpt argv
+                        inputs = getInputs opts
+                    in mapM_ (runProg f) =<< inputs -- =<<を入れただけ
+
+これでC-c,C-lでうまくロードでけたー． mainができたってことでいいのかな．
+
+#### parseOptの実装
+
+じゃあparseOptを作ろうか． これがないとgenProgとかgetInputsとかがどうやって作れんのかわかんないし．
+
+    parseOpt :: [String] -> Options
+    parseOpt (x:xs) = ...
+
+うーんと，順番に文字列をOptionに置き換えていって， 最後に蓄積したやつを返すんだよな．
+ここで(x:xs)とかパターンマッチしちゃうとよくないかな． parse'をつかって累積変数を用意するか．(なんかfoldlでいけそうだけど)
+
+    parseOpt :: [String] -> Options
+    parseOpt argv = parse' argv []
+        where parse' []        opts = opts
+              parse' ("-c":xs) opts = parse' xs (CFlag:opts)
+              parse' (x:xs)    opts = parse' xs (File x:opts)
+
+これでいけたか． これでもいいんだけど，fold系で書けるよな．
+
+    *Main> :t foldr
+    foldr :: (a -> b -> b) -> b -> [a] -> b
+
+[Option](つまりOptions)がseedになって[String]が処理対象リストになって
+返して欲しいのが[Option]ってことですね． じゃあとりあえずfoldrでいっとこう． これが大抵天然自然だからね． そうすると型としては
+
+    foldr :: (String -> [Option] -> [Option]) -> [Option] -> [String] -> [Option]
+
+って感じになるってことでファイナルアンサー？
+
+    parseOpt :: [String] -> Options
+    parseOpt argv = foldr f [] argv
+        where f = undefined
+
+型だけ見てそれっぽくやるとするとこんな感じかな． fはまだ決めてない(ｗ\
+ とりあえずundefinedのままでC-c,C-lで型チェックOKなんだから安心して進めちゃう．
+
+    parseOpt :: [String] -> Options
+    parseOpt argv = foldr f [] argv
+        where f :: (String -> [Option] -> [Option])
+              f "-c" opts = CFlag:opts
+              f x    opts = (File x):opts
+
+こうなりますね．うーんあんま最初のとかわりバエしない．．． ってことで，まーどっちでもいーや． じゃあ試してみよう!
+
+    *Main> parseOpt ["-c","file.txt"]
+
+    <interactive>:1:0:
+        No instance for (Show Option)
+          arising from a use of `print' at <interactive>:1:0-25
+        Possible fix: add an instance declaration for (Show Option)
+        In a stmt of a 'do' expression: print it
+
+う？，あーshowできないって言ってんのね．
+
+ってことで，ここに至って
+
+    data Option = CFlag | File String deriving Show
+
+という風にOptionをShowできるようにします． それから改めてC-c,C-lでロードしてから試す．
+
+    *Main> parseOpt ["-c","file.txt"]
+    [CFlag,File "file.txt"]
+    *Main> 
+
+おし．
+
+#### getInputsの実装
+
+じゃあgetInputsを実装てみよう．
+
+    getInputs :: Options -> IO [String]
+    getInputs opts = let ...
+                     in mapM_ readFile fpaths
+
+なんとなくこんな感じかしら．
+
+    *Main> :t readFile
+    readFile :: FilePath -> IO String
+
+readFileの型はファイルの名前を与えればその名前の外部リソースであるファイルの中身であるIO Stringを返すわけでしょ．
+fpathsというのが[String](つまり[FilePath]だと思うもの)のつもりなので，
+えーっといいのかな．わからんわ．つか考えるの邪魔くせ．
+
+    getInputs opts = let fpaths :: [String]
+                         fpaths = undefined
+                     in mapM_ readFile fpaths
+
+こうしておいて，C-c,C-lしてみよっと．型チェックまんせー．
+
+    Prelude> :load "/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs"
+    [1 of 1] Compiling Main             ( /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs, interpreted )
+
+    /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:14:20:
+        Couldn't match expected type `[String]' against inferred type `()'
+          Expected type: IO [String]
+          Inferred type: IO ()
+        In the expression: mapM_ readFile fpaths
+        In the expression:
+            let
+              fpaths :: [String]
+              fpaths = undefined
+            in mapM_ readFile fpaths
+    Failed, modules loaded: none.
+
+あらら？えーっと14行目の20文字目ってmapM\_のところか． なんでだ？外部リソースな[String]が欲しいのに()だからか．
+mapMの方だね．了解，了解．
+
+    getInputs :: Options -> IO [String]
+    getInputs opts = let fpaths :: [String]
+                         fpaths = undefined
+                     in mapM readFile fpaths -- mapM_じゃなくてmapMの方だったorz
+
+おっけー，これでロードでけた． じゃあとはfpathsを定義すればおしまい？
+
+    getInputs :: Options -> IO [String]
+    getInputs opts = let fpaths :: [String]
+                         fpaths = getFileNames fopts -- File xxxなOptionのリストからファイル名のリストを返す
+                         fopts = filter isFileName opts -- File xxxなOptionだけを取り出してリストにする
+                     in mapM readFile fpaths
+
+こんな風になってくれればいいかな，とか． ってするとisFielNameとgetFileNamesが必要になりますた．
+
+    isFileName :: Option -> Bool
+    isFileName = undefined
+
+    getFileNames :: Options -> [String]
+    getFileNames = undefined
+
+今度はこいつらを実装する必要がでてきちゃったね． つっても簡単簡単． なんてこたぁない．
+
+    isFileName :: Option -> Bool
+    isFileName (File _) = True
+    isFileName _        = False
+
+    getFileNames :: Options -> [String]
+    getFileNames opts = map getFileName opts
+        where getFileName (File f) = f
+              getFileName _        = error "Should not reach here."
+
+これはパツイチですな． ロードもできました．
+
+#### genProgの実装
+
+あとはgenProgか．とりあえずこいつは最初はオプション無視のidでしょ．
+
+    genProg :: Options -> FilterProgram
+    genProg = const id
+
+これでとりあえずcatになるんじゃね？
+
+    *Main> :main Cmd.hs
+    ....
+
+というわけで基本路線はおっけーじゃん．
+
+#### オプション対応
+
+じゃあgenProgをオプションでちょっと動作を切り換えてみようか．
+
+    genProg :: Options -> FilterProgram
+    genProg opts = if elem CFlag opts
+                   then ccat
+                   else id
+        where ccat = undefined
+
+まーこんな感じでさぁね． 例によってccatはundefinedだけど．型チェックします．
+
+    Prelude> :load "/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs"
+    [1 of 1] Compiling Main             ( /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs, interpreted )
+
+    /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:9:18:
+        No instance for (Eq Option)
+          arising from a use of `elem'
+                       at /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:9:18-32
+        Possible fix: add an instance declaration for (Eq Option)
+        In the expression: elem CFlag opts
+        In the expression: if elem CFlag opts then ccat else id
+        In the definition of `genProg':
+            genProg opts
+                      = if elem CFlag opts then ccat else id
+                      where
+                          ccat :: FilterProgram
+                          ccat s = unlines
+                                 $ zipWith ((++) . (++ "\t") . show) ([1 .. ]) (lines s)
+    Failed, modules loaded: none.
+    Prelude> 
+
+あれーっ!？ なになに？elemがダメポ？ えーっとEqクラスのインスタンスになってねーってブータレてんのか．
+さっき，Showクラスをderivingしたけど，あん時についでにやっておけば良かったのね．
+
+    data Option = CFlag | File String deriving (Show, Eq)
+
+という風に修正してから再度C-c,C-lだ． オッケー! じゃあccatを実装しましょっかね．
+
+    genProg :: Options -> FilterProgram
+    genProg opts = if elem CFlag opts
+                   then ccat
+                   else id
+        where ccat :: FilterProgram
+              ccat s = unlines $ zipWith ((++).show) [1..] (lines s)
+
+こんな感じざんす． zipWithに渡してる関数は行番号をshowして数字の文字列にしてから(++)に適用することで
+さらに文字列をもらったらそれに連結するような関数にしてる． 分りにくいなら本当に泥臭く書いても全然良い．
+自分で分りにくいくらいならその方がずっと幸せなので好きにしてーん．
+
+じゃあ実行してみる．
+
+    *Main> :main -c Cmd.hs
+    1import System
+    2
+    3type FilterProgram = String -> String
+    4
+    5type Options = [Option]
+    6data Option = CFlag | File String deriving (Show, Eq)
+    7
+    8genProg :: Options -> FilterProgram
+    ....
+
+いえーい．とりあえず完成だね． といいたいけど，行番号と行の間にスペース欲しいな． というわけでさらに文字列を連結するように修正．
+
+    genProg :: Options -> FilterProgram
+    genProg opts = if elem CFlag opts
+                   then ccat
+                   else id
+        where ccat :: FilterProgram
+              ccat s = unlines $ zipWith ((++).(++"\t").show) [1..] (lines s)
+
+うーん．こうなるとzipWithの関数はすでにイミフですが放置プレイで．
+
+#### オプションを増やそっと
+
+えっと，これで済ませようと思ったんだけど， オプションが一個とオプション二個以上ってのはもしかして本質的に違うかも？!
+とか思い直しまして，複数のオプションに対応してみます．ええ． man catとかして，使ってことのありそうな改行位置に**$**を表示したり，
+タブを**\^I**と表示したり，ヘルプを出すなんてのを対応したり，その辺やってみます．
+
+まずはオプションを追加．
+
+    data Option = CFlag | TFlag | EFlag | HFlag | File String deriving (Show,Eq)
+
+TFlagはタブを表示するやつ，EFlagは行末を表示するやつ，HFlagはヘルプを出すやつのつもりです．
+
+    parseOpt argv = parse' argv []
+        where parse' []        opts = opts
+              parse' ("-c":xs) opts = parse' xs (CFlag:opts)
+              parse' ("-e":xs) opts = parse' xs (EFlag:opts)
+              parse' ("-t":xs) opts = parse' xs (TFlag:opts)
+              parse' ("-h":xs) opts = parse' xs (HFlag:opts)
+              parse' (x:xs)    opts = parse' xs (File x:opts)
+
+parseOptはそのままこうなりますねぇ． なんの工夫もなさげです． まぁGetOptだっけ？そういうライブラリを使ってもいいけど，
+マニアル読むのマンドクセってことで． そのせいで，-ceみたいな書き方はできません．ゴメンネ．
+
+genProgなんだけど，複数のオプションを同時に指定した時に死ぬよね．今の実装ではさ．
+でも，FilterProgramってString-\>Stringだからこれって閉じてるって感じしねぇ？ SICPの言うところのClosure
+Propertyってやつね．あのクロージャじゃないよ． つまり普通に(.)で繋いじゃえばいいんじゃね？ってことですわ．
+そらそうですよね．フィルタなんだから，そうなるのが天然自然だわさ．
+
+じゃあ、こうしましょう． progFusionerって関数にオプション個別の処理を複数ならべて繋いだ関数を作ってもらいます．
+たとえば，行番号を振るFilterProgramと行末に$を表示するFilterProgramを(.)で繋いだ
+FilterProgramを作成してもらうのですよ． 直感的に繋ぐ順番は重要な気がしますけどネ．
+
+    progFusioner :: Options -> FilterProgram -> FilterProgram
+    progFusioner = undefined
+
+こいつはオプションを情報源としてFilterProgramがすでに与えられてるとしたら，そいつに(.)でさらにオプションに対応したFilterProgramを接続して，
+そうやって合成したFilterProgramを返すってキブンです． ってことは，genProgはこうなるよね．
+
+    genProg :: Options -> FilterProgram
+    genProg opts = progFusioner opts id
+
+なぜidかっていうと，String -\> Stringな型でcatのデフォの動作を表現しているのがidだからですよ．念の為．
+で，具体的にprogFusionerを実装する．
+
+    progFusioner :: Options -> FilterProgram -> FilterProgram
+    progFusioner opts f | elem TFlag opts = progFusioner (delete TFlag opts) (tabConv . f)
+                        | elem EFlag opts = progFusioner (delete EFlag opts) (lineSepConv . f)
+                        | elem CFlag opts = progFusioner (delete CFlag opts) (lineCount . f)
+                        | elem HFlag opts = progFusioner (delete HFlag opts) helpMessage
+                        | otherwise       = f
+
+あれ，意外に簡単そうだ． 新しくスタブが増えちゃったけど． なんかゴールに近付いたと思ったらゴールが離れていきます．
+実質は別に離れちゃいないんだけど．
+
+とりあえず、これでよさげ？
+deleteはData.Listとかにあるかな．Preludeにあっても良さげな気もするけど，ないようなのでData.Listをインポート．
+
+    import Data.List
+
+tabConvとlineSepConvとlineCountとhelpMessageを実装する必要あるけど，まずはスタブで．
+
+    lineCount :: FilterProgram
+    lineCount = undefined
+
+    tabConv :: FilterProgram
+    tabConv = undefined
+
+    lineSepConv :: FilterProgram
+    lineSepConv = undefined
+
+    helpMessage :: FilterProgram
+    helpMessage = undefined
+
+C-c,C-lでロードしたらこれまたパツイチでいけました． じゃあそれぞれ実装しよう．
+
+まずコレ．一番簡単なやつ
+
+    helpMessage :: FilterProgram
+    helpMessage = const "cat [-ecth] filename1 filename2 ...\n"
+
+オッケーですね． lineCountはそのまま移植．
+
+    lineCount :: FilterProgram
+    lineCount s = unlines $ zipWith ((++).(++" ").show)  [1..] (lines s)
+
+lineConvを実装してみよう．
+
+    lineSepConv :: FilterProgram
+    lineSepConv [] = ""
+    lineSepConv (c:cs) | c=='\n' = "$"++lineSepConv cs
+                       | otherwise = c:lineSepConv cs
+
+これはもう最初に勉強するパターンだよなぁ． これもハマることないない．ありえない．
+
+    tabConv :: FilterProgram
+    tabConv [] = ""
+    tabConv (c:cs) | c=='\t' = "^I"++tabConv cs
+                   | otherwise = c:tabConv cs
+
+じゃあC-c,C-lでロードしたらうまくいったので動作確認してみよう．
+
+    *Main> :main FilterCmd.hs -c -e
+    1 #! /usr/bin/env runghc$module Main where$$import System$import Data.List$$main :: IO ()$main = getArgs >>=$       \argv -> let f = genProg opts$                    opts = parseOpt argv$                    i
+    ...
+
+あら？(\^\^； ハマることないない，ありえない．って言っておいたけど，コレかよ． そっか，置換しちゃダメなんだ．$を挿入するんだね．
+
+    lineSepConv :: FilterProgram
+    lineSepConv [] = ""
+    lineSepConv (c:cs) | c=='\n' = "$\n"++lineSepConv cs
+                       | otherwise = c:lineSepConv cs
+
+これで行けるハズ．
+
+    *Main> :main FilterCmd.hs -c -e
+    1 #! /usr/bin/env runghc$
+    2 module Main where$
+    3 $
+    4 import System$
+    ...
+
+最後がtabConvかな．こいつは置換でいいハズ．
+
+    tabConv :: FilterProgram
+    tabConv [] = ""
+    tabConv (c:cs) | c=='\t' = "^I"++tabConv cs
+                   | otherwise = c:tabConv cs
+
+これで良さげな模様．
+
+#### Data.List.deleteダメじゃん．
+
+完成したと思ったら同じオプションを複数回指定したらダメじゃん．
+
+    *Main> :main FilterCmd.hs -c -e -e -c
+    1 1 #! /usr/bin/env runghc$$
+    2 2 module Main where$$
+    3 3 $$
+
+もしかしてdeleteって最初に見つけたヤツしか除去しねーの？ なんか全部除去するのありそうだけど探すよか作る方が早いわ!プンプン．
+
+    delete :: (Eq a) => a -> [a] -> [a]
+    delete _ [] = []
+    delete x (c:cs) = if c==x then delete x cs else (c:delete x cs)
+
+今度こそうまくいきますた． 名前衝突するからimport Data.Listはお役御免ってことで削除しちゃっおっと．
+
+    *Main> :main FilterCmd.hs -c -e -e -c
+    1 #! /usr/bin/env runghc$
+    2 module Main where$
+    3 $
+    4 import System$
+
+#### 複数ファイル指定したらダメじゃん．
+
+ガーン!複数ファイル指定したらまだ複数回処理されてやがる．
+
+    *Main> :main FilterCmd.hs FilterCmd.hs -h
+    cat [-ecth] filename1 filename2 ...
+    cat [-ecth] filename1 filename2 ...
+    *Main> 
+
+これはmainだな．
+
+    main :: IO ()
+    main = getArgs >>=
+           \argv -> let f = genProg opts
+                        opts = parseOpt argv
+                        inputs = getInputs opts
+                    in mapM_ (runProg f) =<< inputs
+
+この最後のmapM\_で文字列のリストに対して個別に処理してるのがマズいんだ．
+ってことは行番号を打ってた時もファイル個別に1から順に番号打ち直されてたんだろうな． そらダメだわ．
+
+    main :: IO ()
+    main = getArgs >>=
+           \argv -> let f = genProg opts
+                        opts = parseOpt argv
+                        inputs = getInputs opts
+                    in (runProg f) . concat =<< inputs
+
+ってわけでmapM\_廃止してrunProg fする前にconcatで一個のストリームにしちゃいます． これでようやく完成しました．
+
+    #! /usr/bin/env runghc
+    module Main where
+
+    import System
+
+    main :: IO ()
+    main = getArgs >>=
+           \argv -> let f = genProg opts
+                        opts = parseOpt argv
+                        inputs = getInputs opts
+                    in (runProg f) . concat =<< inputs
+
+    type FilterProgram = String -> String
+
+    runProg :: FilterProgram -> String -> IO ()
+    runProg f inp = putStr $ f inp
+
+    genProg :: Options -> FilterProgram
+    genProg opts = progFusioner opts id
+
+    progFusioner :: Options -> FilterProgram -> FilterProgram
+    progFusioner opts f | elem TFlag opts = progFusioner (delete TFlag opts) (tabConv . f)
+                        | elem EFlag opts = progFusioner (delete EFlag opts) (lineSepConv . f)
+                        | elem CFlag opts = progFusioner (delete CFlag opts) (lineCount . f)
+                        | elem HFlag opts = progFusioner (delete HFlag opts) helpMessage
+                        | otherwise       = f
+
+    delete :: (Eq a) => a -> [a] -> [a]
+    delete _ [] = []
+    delete x (c:cs) = if c==x then delete x cs else (c:delete x cs)
+
+    lineCount :: FilterProgram
+    lineCount s = unlines $ zipWith ((++).(++" ").show)  [1..] (lines s)
+
+    tabConv :: FilterProgram
+    tabConv [] = ""
+    tabConv (c:cs) | c=='\t' = "^I"++tabConv cs
+                   | otherwise = c:tabConv cs
+
+    lineSepConv :: FilterProgram
+    lineSepConv [] = ""
+    lineSepConv (c:cs) | c=='\n' = "$\n"++lineSepConv cs
+                       | otherwise = c:lineSepConv cs
+
+    helpMessage :: FilterProgram
+    helpMessage = const "cat [-ecth] filename1 filename2 ...\n"
+    {--
+    genProg opts = if elem CFlag opts
+                   then ccat
+                   else id
+        where ccat :: FilterProgram
+              ccat s = unlines $ zipWith ((++).(++"\t").show) [1..] (lines s)
+    --}
+
+    getInputs :: Options -> IO [String]
+    getInputs opts = let fopts = filter isFileName opts
+                         fpaths = getFileNames fopts
+                     in mapM readFile fpaths
+
+    isFileName :: Option -> Bool
+    isFileName (File _) = True
+    isFileName _        = False
+
+    getFileNames :: Options -> [String]
+    getFileNames opts = map getFileName opts
+        where getFileName (File f) = f
+              getFileName _        = error "Should not reach here."
+
+    parseOpt :: [String] -> Options
+    parseOpt argv = parse' argv []
+        where parse' []        opts = opts
+              parse' ("-c":xs) opts = parse' xs (CFlag:opts)
+              parse' ("-e":xs) opts = parse' xs (EFlag:opts)
+              parse' ("-t":xs) opts = parse' xs (TFlag:opts)
+              parse' ("-h":xs) opts = parse' xs (HFlag:opts)
+              parse' (x:xs)    opts = parse' xs (File x:opts)
+
+    data Option = CFlag | TFlag | EFlag | HFlag | File String deriving (Show,Eq)
+    type Options = [Option]
+
+#### ご意見有用
+
+最後までちゃんと読んだ人に．
+
+さて，ここまで進めて少なくとも実装者の個人的見解としては， グローバル変数を欲しい思う瞬間は意外にもなかったようです．
+正直どっかで一回くらい思うかなーって思ってたし，以前は結構思ってたハズなんだけどさ．
+
+ちなみに別に意図して避けてないからね． そんな制約ワザと作ってコード書ける程ボクチン頭良くありましぇーん．
+
+じゃあなぜグローバル変数を欲しいと思わなかったんだろうか？ あとなぜ余分な引数を引き回しているとは思わなかったんだろうか？
+
+いやいや，これとか余分に引き回してるじゃん．アンタがそれに気付いてないだけじゃんとかのツッコミもありです．
+考察したやつをどんどんコメントしてちょ．
+
+私の意見はしばらく待ってから書くことにします． 酒飲んでしまって眠いしさ．オヤスミ．[cut-sea]():2009/02/04
+00:06:51 JST
+
+-   cat のオプションは比較的 fusion しやすいですが grep の -i (--ignore-case)オプションなんかは
+    fusion しづらそうな気がします。
+-   スピードを求めるときは Filter をつなげずに一度にやらせたくなります。
+-   delete x = filter (/=x) ですね。 -- [1..100]\>\>=pen
+
+* * * * *
+
+Last modified : 2009/02/06 18:28:49 JST

@@ -1,0 +1,286 @@
+# [Books\_RWH\_読書会]()
+
+[Books]():[RWH]():読書会
+
+* * * * *
+
+## RWH読書会
+
+"Real World Haskell" を読む
+
+### 第15回
+
+日時 2011-2-?(?) 13:00-18:00 場所 タイムインターメディア 2F大会議室
+
+『第17章 Cとのインタフェース：FFI』から読み進めます。
+
+### 第14回
+
+日時 2011-1-23(日) 13:00-18:00 場所 タイムインターメディア 2F大会議室
+
+『第16章 Parsec を使う』まで読了。
+
+参加は[こちら](http://paina.kahua.org/party?code=RWH201101)から。
+
+-   Chaton
+    での実況:[http://practical-scheme.net/chaton/haskell-ja/a/2011/01/23\#entry-4d3bbb0f-799b4](http://practical-scheme.net/chaton/haskell-ja/a/2011/01/23#entry-4d3bbb0f-799b4)
+
+### 第13回
+
+日時 2010-12-5(日) 13:00-18:00 場所 タイムインターメディア 2F大会議室
+
+第15章まで読了
+
+-   Chaton
+    での実況:[http://practical-scheme.net/chaton/haskell-ja/a/2010/12/05\#entry-4cfb2c87-613bf](http://practical-scheme.net/chaton/haskell-ja/a/2010/12/05#entry-4cfb2c87-613bf)
+
+### 第12回
+
+日時 2010-08-14(土) 13:00-18:00 場所 タイムインターメディア 2F大会議室
+
+-   Writer モナドでログにリストを使う場合、mappend (++)が遅くなる
+    -   [リストの代わりに差分リストをログに使え](http://practical-scheme.net/chaton/haskell-ja/a/2010/08/16)
+    -   HackageDB には、Monoid クラスのインスタンスを定義となる差分リストを提供した [dlist
+        パッケージ](http://hackage.haskell.org/package/dlist)がある
+
+-   [Maybe モナドの \>\>= を使った計算は、短絡評価するよう GHC
+    が最適化してくれる](http://practical-scheme.net/chaton/haskell-ja/a/2010/08/14)
+-   xs ++ ys ++ ... ++ zs という ++ 演算子の連なりは？
+    -   [現在の base パッケージ使われている fold/build
+        だと融合変換されずに最適化されない](http://practical-scheme.net/chaton/haskell-ja/a/2010/08/15)
+
+### 第11回
+
+日時 2010-07-31(土) 13:00-18:00 場所 タイムインターメディア 2F大会議室
+
+第13章から第14章の途中まで
+
+読書会での質問、回答、コメントの[メモ](http://bit.ly/RWH201007)です。
+
+上のメモの補足
+
+-   スタックトレースが欲しい
+    -   [GHC
+        にスタックトレースを入れようとした試み](http://hackage.haskell.org/trac/ghc/wiki/ExplicitCallStack)はある
+    -   結局、現在の GHC には入ってないけど……
+
+-   DbC のような制約がかければ……
+    -   [関数に対する制約を指示文（pragma）の形で書いて、エラーを発生させるコードをコンパイル時に検出させようとした試み](http://research.microsoft.com/en-us/um/people/simonpj/papers/verify/index.htm)もある
+    -   "Static Contract Checking for Haskell" の Technical Report/博士論文版の
+        9.2 節に、どうやって実現しているかの説明がある
+        -   GHCの最適化（Core-to-Core）パスにVerifyパスを追加し、Verifyパスで
+            [Simplify](http://secure.ucd.ie/products/opensource/Simplify/)
+            などの定理証明器を使って検証する
+
+    -   こっちも、現在の GHC には入ってないけど……
+        -   コンパイルが明らかに遅くなるせいかも
+
+### 第10回
+
+2010-05-22
+
+第12章の途中（12.9）から読み進めます。
+
+### 第9回
+
+2010-04-17
+
+前日の [擬データを使った Santa Claus
+problem](http://d.hatena.ne.jp/nobsun/20100417) の話
+
+-   "擬データを用いた対話的関数プログラミングに関する研究", 石井裕一郎
+    -   [http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/421](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/421)
+    -   [mergeR
+        はちゃんと動かない](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20040802)
+
+-   要するにセッション型（Session Type）だよね。
+    -   そう。だから、セッション型についてちゃんと勉強しようと考えてる。
+    -   セッション型の話は、今回の講演ではやらなかった [Fun With Type
+        Functions](http://haskell.org/haskellwiki/Simonpj/Talk:FunWithTypeFuns)
+        に出てくる
+        -   スライドの pp.21-25
+        -   論文だと 3.4 Session types and their duality
+
+第12章
+
+-   12.2.3 Data.Array.Diff モジュール
+    -   GHC 6.12.1 で、効率の悪い [Data.Array.Diff モジュールは array
+        パッケージから削除されました](http://www.haskell.org/ghc/docs/6.12.1/html/users_guide/release-6-12-1.html#id2890250)。
+        -   代わりに Data.Array.Diff のみを収録した diffarray
+            パッケージが作られましたが、HackageDB には登録されていませんし、その後開発も続いていません……
+            [http://code.haskell.org/diffarray/](http://code.haskell.org/diffarray/)
+            -   2010/12/06 02:18:09 JST 追記：その後、HackageDB
+                に登録されました。メンテされてないので、やはり vector を使った方が良いと思いますが……。
+                [http://hackage.haskell.org/package/diffarray](http://hackage.haskell.org/package/diffarray)
+
+    -   今はより効率的な [vector
+        パッケージ](http://hackage.haskell.org/package/vector)があるので、変更コストを下げたければこちらを使いましょう。
+        -   第25章で紹介されている uvector は、vector に取って代わられたので注意。
+        -   [vector を使って DPH ライブラリ（dph-\*
+            パッケージ）を書き直す予定](http://pls.posterous.com/version-05-of-package-vector-high-performance)があるようなので、将来的には
+            vector が GHC や Haskell Platform にバンドルされるかも
+
+### 第8回
+
+2010-03-27
+
+第10章から第11章まで読了。
+
+### 第7回
+
+2010-01-16
+
+第9章
+
+### 第6回
+
+2009-10-31
+
+第7章の途中から第8章まで読了。
+
+Chaton
+での実況:[http://practical-scheme.net/chaton/haskell-ja/a/2009/10/31\#entry-4aebc797-4d367](http://practical-scheme.net/chaton/haskell-ja/a/2009/10/31#entry-4aebc797-4d367)
+
+### 第5回
+
+2009-08-23
+
+第6章と第7章の途中まで
+
+Chaton
+での実況:[http://practical-scheme.net/chaton/haskell-ja/a/2009/08/23](http://practical-scheme.net/chaton/haskell-ja/a/2009/08/23)
+
+### 第4回
+
+2009-07-20
+
+第5章
+
+### 第３回
+
+2009-06-27
+
+第3章の途中から第4章まで読了。
+
+### 第２回
+
+2009-05-17
+
+#### 原書p.69 練習問題
+
+1.，2.
+
+    numOfElems :: [a] -> Int
+    numOfElems (_:xs) = 1 + numOfElems xs     -- right wing :)
+    numOfElems _      = 0
+
+    numOfElems' :: [a] -> Int
+    numOfElems' (_:xs) = numOfElems' xs + 1    -- left wing :)
+    numOfElems' _      = 0
+
+    {-
+    numOfElems = foldr  (\ _ l -> 1 + l) 0 
+    numOfElems = foldl' (\ l _ -> l + 1) 0
+    -}
+
+3.
+
+    mean xs = sum xs / fromIntegral (length xs)
+    {-
+    -- 1パス
+    mean = uncurry (/) . foldl' acc (0,0) 
+      where acc (s,l) x = (s+x,l+1)
+    -}
+
+4.
+
+    -- パターンマッチを使う
+    mkPalindrome :: [a] -> [a]
+    mkPalindrome (x:xs) = x : (mkPalindrome xs ++ [x])
+    mkPalindrome _      = []
+
+    -- 以下は蛇足．．．
+    -- Sコンビネータを使う
+    mkPalindrome' = s (++) reverse
+    s :: (a -> b -> c) -> (a -> b) -> (a -> c)
+    s f g x = f x (g x)
+
+    -- 与えられたリストを1度だけ辿る（ように見えるだけ?）
+    mkPalindrome'' = uncurry ($) . foldl f (id, [])
+      where f (g,xs) x = (g . (x:), x : xs)
+
+    mkPalindrome''' xs = foldr (\x b -> b++[x]) xs xs
+
+5.
+
+    palindrome :: Eq a => [a] -> Bool
+    palindrome xs = xs == reverse xs
+
+    -- S
+    palindrome' = s (==) reverse
+
+    -- 1パス?
+    palindrome'' xs = fst $ foldr check (True,xs) xs
+      where check x (p,y:ys) = (x == y && p,ys)
+
+6.
+
+    import Data.Ord (comparing)
+
+    sortByLength :: [[a]] -> [[a]]
+    sortByLength = map snd . sortBy (comparing snd) . map (s (,) length)
+
+7.,8.
+
+    intersperse :: a -> [[a]] -> [a]
+    intersperse s []     =  []
+    intersperse s [x]    =  [x]
+    intersperse s (x:xs) =  x:s: intersperse s xs
+
+    intersperse' s []       = []
+    intersperse' s (xs:xss) = xs ++ concatMap (s:) xss
+
+9.
+
+    depth (Node _ l r) = 1 + max (depth l) (depth r)
+    depth _            = 0
+
+10.
+
+    data Direction = CCW | CW | OnLine
+
+11.
+
+    data Vec2D = C Double Double
+    type Point = Vec2D
+
+    sub :: Vec2D -> Vec2D -> Vec2D
+    sub (C x y) (C x' y') = C (x-x') (y-y')
+
+    prd :: Vec2D -> Vec2D -> Double
+    prd (C x y) (C x' y') = x*y' - x'*y
+
+    direction :: Point -> Point -> Point -> Direction
+    direction x y z = case sign (prd (sub y x) (sub z y)) of
+                        1 -> CCW
+                        0 -> OnLine
+                        _ -> CW
+
+#### 原書p.63 練習問題
+
+1.
+
+    toList :: List a -> [a]
+    toList (Cons x xs) = (:) x (toList xs)
+
+2.
+
+    data Tree a = Node (Maybe (Tree a)) (Maybe (Tree a))
+
+### 第１回
+
+2009-04-18
+
+* * * * *
+
+Last modified : 2011/01/23 23:38:28 JST

@@ -1,0 +1,117 @@
+# [CategoryTheory\_CLTTr]()
+
+[CategoryTheory]():CLTTr
+
+* * * * *
+
+## CLTT読書会
+
+### 開催概要
+
+-   毎月第三土曜 17:00 から開催予定
+-   [予定＠Googleカレンダー](http://www.google.com/calendar/embed?src=61jgs049qr04qa9qf5hspavhl8@group.calendar.google.com&ctz=Asia/Tokyo)
+
+-   B. Jacobs "Categorical Logic and Type Theory" (CLTT) を読む
+-   詳しくは[こちら](http://groups.google.co.jp/group/kenron-sesh/web/cltt読書会)
+
+### 前身
+
+-   [CategoryTheory\_圏論勉強会]()
+
+## 第3回（2010/6/26）
+
+### 1.4 Cloven and split fibrations
+
+#### 予習メモ
+
+-   reindexing (substitution) functor
+-   cloven / cleavage
+-   split / splitting
+-   indexed category
+    -   pseudo functor
+    -   split indexed category
+
+-   UFam(ω-Sets)
+
+### 1.5 Change-of-base and composition for fibrations
+
+#### 予習メモ
+
+-   change-of-base
+    -   scone / injective scone
+    -   UFam(PER)
+
+-   strict initial object
+    -   exercise 1.5.6
+
+## 第2回（2010/5/15）
+
+-   [板書](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100515)
+
+### 1.3 Some general examples
+
+#### Exercises
+
+-   1.3.1
+    -   [only
+        ifの証明（hirataraさんまとめ）](http://d.hatena.ne.jp/hiratara/20100515/1273929540)
+    -   [ifの証明（hirataraさんまとめ）](http://d.hatena.ne.jp/hiratara/20100516/1274009676)
+
+## 第1回（2010/4/17）
+
+-   [板書](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100417#)
+
+### 1.1 Fibrations
+
+#### 予習メモ
+
+-   indexing
+    -   (a) Pointwise (or split) indexing
+    -   (b) display indexing
+        -   Sets\^→
+
+-   substitution
+    -   weakening
+    -   contraction
+
+-   cartesian morphism
+-   fibration (or fibred category)
+    -   codomain functor
+    -   slice category
+
+#### Exercises
+
+-   Prop 1.1.4, Prop 1.1.6
+    -   [板書1](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100417#5461121095041435570)
+    -   [板書2](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100417#5461121108799009490)
+
+-   1.1.1, 1.1.2
+    -   [板書](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100417#5461121121648144386)
+
+### 1.2 Some concrete examples: sets, ω-sets and PERs
+
+#### 予習メモ
+
+-   Set-indexed families
+-   ω-Sets
+-   PER
+    -   c.f.
+        [wikipedia](http://en.wikipedia.org/wiki/Partial_equivalence_relation)
+
+#### Exercises
+
+-   p32 真ん中
+    -   [板書](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100417#5461121127377050338)
+
+-   1.2.6
+    -   [板書](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100417#5461121143737479154)
+
+### 2次会
+
+-   わびしい姿
+    [1](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100417#5461121145650728562),
+    [2](http://picasaweb.google.co.jp/takeo.bono/Cltt_20100417#5461121149810969506)
+
+* * * * *
+
+Last modified : 2010/06/25 16:43:31 JST

@@ -1,0 +1,61 @@
+# [nobsun\_interact]()
+
+[nobsun]():interact
+
+* * * * *
+
+**無保証**
+
+Prelude.interact :: (String -\> String) -\> IO () の拡張版
+
+[Interact]()
+
+-   [概略]()
+-   [インストールの概略]()
+-   [使い方の概略]()
+-   [注意]()
+-   [コメント]()
+
+* * * * *
+
+## Interact
+
+### 概略
+
+interact-0.0
+
+-   Interact
+
+### インストールの概略
+
+    % darcs get http://darcs.sampou.org/interact
+    % cd kana
+    % runhaskell Setup.lhs configure
+    % runhaskell Setup.lhs build
+    % runhaskell Setup.lhs install
+
+### 使い方の概略
+
+    type Contents     = String
+    type ProgName     = String
+    type Args         = [String]
+    type Environment  = [(String,String)]
+
+    type Service = String -> String
+
+    interactWithProgName :: (ProgName -> Service) -> IO ()
+    interactWithArgs :: (Args -> Service) -> IO ()
+    interactWithEnv :: (Environment -> Service) -> IO ()
+    interactWithProgNameAndArgs :: (ProgName -> Args -> Service) -> IO ()
+    interactWithArgsAndEnv :: (Args -> Environment -> Service) -> IO ()
+    interactWithProgNameAndArgsAndEnv :: (ProgName -> Args -> Environment -> Service) -> IO ()
+
+### 注意
+
+-   無保証
+
+### コメント
+
+* * * * *
+
+Last modified : 2008/07/02 17:50:37 JST

@@ -1,0 +1,136 @@
+# [HowTo\_ProgrammingEnviornment\_Ubuntu8.04]()
+
+[HowTo]():[ProgrammingEnviornment]():Ubuntu8.04
+
+* * * * *
+
+以下は 2008/09/22 14:02:44 JST 現在の情報である。
+
+## Ubuntu 8.04 上にHaskellプログラミング環境を作る
+
+Ubuntu 8.04 をインストールした直後の状態からHaskellプログラミング環境を作る。 Ubuntu には ghc6
+というパッケージおよびghc関連のパッケージが数多く用意されて いるが、これらはどれも最新ではない。自分でいろいろなパッケージを持ってきて、
+自分でコンパイルして使いたいので、ghc 関連のものはUbuntuパッケージを使わない
+方針でいく。それ以外のツールは最新を追いかけることはないので、 Ubuntuのパッケージを使う。
+
+### コンパイラのインストール
+
+Glasgow Haskell Compiler を使う
+
+#### libc6
+
+まず最初は、ghc-6.8.3 をバイナリ tarball からインストールするのであるが、 libc
+ヘッダファイルなどがなかったりするので、ghc-6.8.3 のインストール前の configure
+スクリプトが途中でこける。なにはともあれ、libc6-dev
+
+    $ sudo apt-get install libc6-dev
+
+#### patch
+
+2008/11/12現在ではHEADのビルドにpatchが使われるようなのでインストールしておく。
+
+    $ sudo apt-get install patch
+
+#### ghc 6.8.3 のインストール
+
+最初はi386-Linux汎用版のバイナリをインストールする(Ubuntuのghc6パッケージは使わない)
+
+    $ wget http://www.haskell.org/ghc/dist/6.8.3/ghc-6.8.3-i386-unknown-linux.tar.bz2
+    $ cd ghc-6.8.3
+    $ ./configure
+    $ sudo make install
+
+### 開発用ツールおよびライブラリ群
+
+#### GNUの開発ツール群
+
+    $ sudo apt-get install autoconf
+    $ sudo apt-get install automake
+    $ sudo apt-get install libtool 
+
+#### ドキュメント系のライブラリ群
+
+    $ sudo apt-get install zlib1g-dev
+    $ sudo apt-get install curl
+    $ sudo apt-get install docbook-xsl
+
+#### 分散バージョン管理システム
+
+darcs を使うことが多い(git も最近使われつつある)。
+最新のdarcsをインストールする(Ubuntuのdarcsパッケージは**使わない**)
+
+darcs-2.1.0 をインストール(2008/10/12 13:44:45 JSTバージョンを変更)
+
+    $ wget http://darcs.net/darcs-2.1.0.tar.gz
+    $ cd darcs-2.1.0
+    $ autoconf
+    $ ./configure
+    $ make
+    $ sudo make install
+
+#### 字句解析器生成器 Alex
+
+最新のAlexをソースからビルドする(Ubuntu の alex パッケージは**使わない**)
+
+alex 2.2
+
+    $ wget http://www.haskell.org/alex/dist/2.2/alex-2.2.tar.gz
+    $ tar xvf alex-2.2.tar.gz
+    $ cd alex-2.2
+    $ runghc Setup configure
+    $ runghc Setup build
+    $ sudo runghc Setup install
+
+#### 構文解析器生成器 Happy
+
+最新のHappyをソースからビルドする(Ubuntu の happy パッケージは**使わない**)
+
+happy 1.17
+
+    $ wget http://haskell.org/happy/dist/1.17/happy-1.17.tar.gz
+    $ tar xvf happy-1.17.tar.gz 
+    $ cd happy-1.17
+    $ runghc Setup configure
+    $ runghc Setup build
+    $ sudo runghc Setup install
+
+### エディタ
+
+Emacs と haskell-mode を使う
+
+#### Emacs 23
+
+[nobsun]() の単なる好みにより Emacs 22 ではなく、Emacs 23 を使うことにする。
+
+    $ sudo apt-get install emacs-snapshot
+    $ sudo apt-get install emacs-snapshot-el
+
+#### haskell-mode
+
+Emacs を使ってプログラムを書くなら必須でしょう。
+
+    $ sudo apt-get install haskell-mode
+
+.emacs の設定例。
+
+    (append auto-mode-alist
+            '(("\\.hs$" . 'haskell-mode)
+              ("\\.hi$" . 'haskell-mode)
+              ("\\.lhs$" . 'literate-haskell-mode))))
+
+    (autoload 'haskell-mode "haskell-mode"
+      "Majour mode for editing Haskell scripts." t)
+    (autoload 'literate-haskell-mode "haskell-mode"
+      "Majour mode for editing literate Haskell scripts." t)
+
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
+
+    (setq haskell-literate-default 'latex)
+    (setq haskell-doc-idle-delay 0)
+
+* * * * *
+
+Last modified : 2009/08/05 22:39:46 JST

@@ -1,0 +1,22 @@
+# [Introduction]()
+
+* * * * *
+
+## Haskell とはどのような言語か
+
+Haskell は汎用の純粋関数型プログラミング言語で、プログラミング言語設計 の分野での最近の革新の多くが取入れられています。Haskell
+が提供するのは、 高階関数、非正格の意味論、静的多相型付け、利用者定義の代数的データ型、
+パターン照合、リストの内包表記、モジュールシステム、モナド I/O システ
+ムです。また、さらに次のような豊かなプリミティブデータ型が用意されてい ます。リスト、配列、任意倍長整数、固定倍長整数、浮動小数点数。
+Haskell は遅延評価型関数型言語に関する長年の研究を凝縮したものであり、また、そ の頂点にたつものです。("The Haskell 98
+Report" 1. Introduction より)
+
+-   [Introduction](http://www.haskell.org/haskellwiki/Introduction) [The
+    Haskell Home Page](http://www.haskell.org/) にある短いイントロダクション
+-   [About
+    Haskell](http://web.yl.is.s.u-tokyo.ac.jp/~ganat/memo/aboutHaskell.html)
+    上の記事を永田章人さんが訳したもの
+
+* * * * *
+
+Last modified : 2006/06/11 20:45:52 JST

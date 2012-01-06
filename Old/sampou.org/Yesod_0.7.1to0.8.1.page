@@ -1,0 +1,132 @@
+# [Yesod\_0.7.1to0.8.1]()
+
+[Yesod]():0.7.1to0.8.1
+
+* * * * *
+
+## 0.7.1から0.8.1への移行
+
+[Migration Guide](http://www.yesodweb.com/book/migrate7to8)をざっと見ておく。
+
+* * * * *
+
+#### 1. まずは.cabalと.ghcのバックアップを取っておく
+
+    $ tar zcvf .cabal.tgz ~/.cabal
+    $ tar zcvf .ghc.tgz ~/.ghc
+
+いつでも現環境に戻れるようにしておいた方がいざというとき安心。
+
+#### 2. 0.7.1でプロジェクトをscaffoldしておく
+
+    $ yesod
+       :
+
+これは後でyesod-0.8.1でも同じプロジェクト名とかでscaffoldしてdiff -rで変更点を確認するのに使う。
+
+#### 3. alex/happyやhaskell-platformからクリーンインストール
+
+    $ rm -rf ~/.cabal ~/.ghc
+
+今回も一応updateで作業できるらしいけど、yesod以外のライブラリなんかでも結構ハマったりするのでクリーンインストールの方が結局楽だったように思う。
+
+ちなみに私は事情があって未だにghc-6.12.3でまだ7系に移行してないので、
+これはこれで色々あるけど、やっぱり一気にアップデートしすぎると問題点が分らなくなってしまうので、今回もyesodのみのアップデートを進める。
+以下を順に再インストール。
+
+> -   cabal-install-0.8.2
+> -   alex-2.3.3
+> -   happy-1.18.5
+> -   haskell-platform-2010.2.0.0
+> -   haskell-mode
+> -   ghc-mod-0.5.5
+> -   **file-embed-0.0.3.1**
+> -   yesod
+
+file-embedとかはここでこのバージョンを入れておかないと後のyesodのインストールでこけたので。
+ただしこれは私の環境がGHC6.12.3という古い状態だからかも。\
+ あとは自分のアプリがどんなライブラリを使っているかによる。
+私の場合で言えば、pandocの1.6系を使ってたんだけど、こいつをインストールした瞬間にHTTPライブラリが壊れるってことでHTTP-4000.1.1をインストールしてからyesod以下のライブラリ群をインストールするなどした。\
+ 古い環境を引きずっているのが逆に足を引っぱっているだけなのかもしれないけど、
+使っているライブラリによっては何度か環境構築をやり直すことにはなると思う。
+
+#### 4. yesod-0.8.1でテストアプリをscaffoldしてみる
+
+    $ yesod
+    Usage: yesod <command>
+    Available commands:
+        init         Scaffold a new site
+        build        Build project (performs TH dependency analysis)
+        devel        Run project with the devel server
+    $ yesod init
+
+0.8.1からはyesodにはinit/build/develの引数がサポート。
+説明のまんまだけど、以前はwai-handler-develで使えるようになったインタラクティブ開発のための機能が標準サポートされるようになっている。\
+ scaffoldするにはyesod initとする。 あとは0.7.1の頃とほとんど一緒。
+
+#### 5. 修正箇所
+
+0.7.1と0.8.1のscaffolded codeのdiff -rを見ると結構変っているが、
+変更として最もインパクトの大きいのはStringをTextにするというミッション。
+
+というわけで、
+
+    {-# LANGUAGE OverloadedStrings #-}
+     
+    import Data.Text (Text)
+    import qualified Data.Text as T
+
+あたりの追加は必要になることが多い。 \
+ 多分たいていの実用的なアプリを書いてたら関係しそうな点を書いておくと、
+
+-   Model.hsではStringなフィールドをすべてTextに変更。
+-   Controller.hsをscaffoldしたコードを見て修正。（合わせちゃっていい）
+-   setTitleとかsetMessageでstringしてから渡してた部分はstring不要になる。 setTitle $ string
+    "サイトタイトル" =\> setTitle "サイトタイトル"みたく。
+    ただしこれはワーニングが出るだけなので最後でもかまわないと思う。
+-   ルートの型も変わってきている。クエリパラメータは[(String,String)]から[(Text,Text)]とか。
+    当然getUrlRenderで取得したレンダラ—を使っている箇所に修正が入ることもある。
+    具体的にはData.Text.unpackすればいい。
+-   jsonScalarやatomLinkなどyesod-newsfeedやyesod-jsonなどがまだStringなので、こいつ周辺ではunpackが要る。
+-   redirectStringに対してはredirectTextが用意されているのでそっちに書き換え。
+-   lines,unlines,(++),head,tailの他にintercalateのようにリスト操作関数なんだけど文字列を文字のリストとして仮定して使っている箇所があったら変更がいる。
+    ただしData.Textに必要そうな関数がほとんどそろっているのでそういうのはそっちに切り替えればよい。
+-   Web.EncodingsからencodeUrlを使っている人もいるはず。 その場合には
+
+        import Web.Encodings.StringLike ()
+        import Data.Text (Text)
+
+    により、encodeUrlをTextに対して適用できるのでpack/unpackはいらないはず。
+
+-   文字列に対してパターンマッチを使っている部分についてはしょうがないのでガード式に書き換える。 ほとんど機械的にできると思う。
+-   preEscapedStringもpreEscapedTextとかpreEscapedLazyTextがあるのでこっちで代用できる。
+-   MultiPieceの型とかもEitherからMaybeに変わったのでRightをJustにする。
+-   永続データのuidにあたるfooIdがIntとはかぎらなくなった影響でYesodAuthとかでshowAuthIdやreadAuthIdがなくなったので消す。
+-   Settings.hsなどがconfigディレクトリ以下に移動になっているので移してもいい。
+
+あとは結構頻繁に使ったのは以下のラッパー。
+
+    import qualified Data.Text as T
+
+    (+++) :: Text -> Text -> Text
+    (+++) = T.append
+    showText :: (Show a) => a -> Text
+    showText = T.pack . show
+    readText :: (Read a) => Text -> a
+    readText = read . T.unpack
+
+基本的にはyesodの本体に関してはText化されているけど、使っているライブラリが全てそうなっているわけはなく、yesodの周辺ライブラリでもjsonScalarやatomLinkなんかがまだStringだったりするので頻出する。
+
+devel-server.hsは不要になったけど、yesod develとコマンドを入力すると、
+distディレクトリ以下にビルドしつつdevel.hsとかを作ってこいつで走らせるようになる。
+こいつが正常に機能するにはcabalファイルにいくつか記述する必要がある。
+
+-   yesodは0.8以上0.9未満にする。
+-   cabalのlibraryセクションでControllerをexposeする。
+-   other-modulesにも開発したモジュールを全部列挙しておく。
+
+ざっとこんなところだけど、基本的にはscaffoldしたプロジェクトのcabalファイルを参考に修正すれば良い。
+
+* * * * *
+
+Last modified : 2011/06/06 00:25:56 JST

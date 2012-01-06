@@ -1,0 +1,246 @@
+# [Books\_FOP\_練習問題]()
+
+[Books]():[FOP]():練習問題
+
+* * * * *
+
+みんなでFOP（『関数プログラミングの楽しみ』）の練習問題の解答集を作りましょう。
+
+* * * * *
+
+### 第1章
+
+### 第2章
+
+### 第3章
+
+### 第4章
+
+### 第5章
+
+机上で全てやるよりも実際のシステムを使えた方が良いと思うので、とりあえず MAG の使い方に関するページを作っておきました。
+
+-   [Books\_FOP\_MAG]()
+
+### 第6章
+
+### 第7章
+
+### 第8章
+
+#### 練習問題 8.16
+
+[http://hackage.haskell.org/packages/archive/Wired/0.2/doc/html/src/Lava-Patterns.html](http://hackage.haskell.org/packages/archive/Wired/0.2/doc/html/src/Lava-Patterns.html)
+より
+
+     zipp :: ([a],[b]) -> [(a,b)]
+     zipp ([],[])      = []
+     zipp (a:as, b:bs) = (a,b) : zipp (as, bs)
+     zipp _ = error "Lava.Patterns.zipp: Different lengths"
+     
+     unpair :: [(a,a)] -> [a]
+     unpair []          = []
+     unpair ((x,y):xys) = x : y : unpair xys
+     
+     riffle :: [a] -> [a]
+     riffle = halveList ->- zipp ->- unpair
+
+#### 練習問題 8.17
+
+[http://hackage.haskell.org/packages/archive/Wired/0.2/doc/html/src/Lava-Patterns.html](http://hackage.haskell.org/packages/archive/Wired/0.2/doc/html/src/Lava-Patterns.html)
+より
+
+     
+     unzipp :: [(a,b)] -> ([a],[b])
+     unzipp = unzip
+     
+     pair :: [a] -> [(a,a)]
+     pair (x:y:xs) = (x,y) : pair xs
+     pair _        = []
+     
+     unriffle :: [a] -> [a]
+     unriffle = pair ->- unzipp ->- append
+
+#### 練習問題 8.18
+
+-   簡単のためトランプカードを 0番目、1番目、2番目... と 0から番号を数えることにする。
+-   １回 riffle するとi番目のカードは i < 2\^(n-1) のときは 2\*i番目に移り、2\^(n-1) <= i <
+    2\^n-1 のときは 2\*i-2\^n+1 番目に移り、i == 2\^n-1 のときは 2\^n-1番目のままになる。
+-   まとめると i < 2\^n-1 のときは 2\*i mod (2\^n-1) 番目に移り、i == 2\^n-1 のときは
+    2\^n-1番目のままになる。
+-   1番目のカードに注目すると riffle １回で 2\^1番目に移り、riffle ２回目で 2\^2番目に移り、riffle
+    m回目（ただし m < n）で 2\^m番目に移り、n回目で初めて 1番目に戻る。（2\^n == 1 mod (2\^n-1)
+    なので）
+-   i番目（i < 2\^n-1 とする）のカードは riffle １回で 2\^1\*i mod (2\^n-1)番目に移り、riffle
+    ２回目で 2\^2\*i mod (2\^n-1)番目に移り、riffle m回目（ただし m < n）で 2\^m\*i mod
+    (2\^n-1)番目に移り、n回目は i番目に戻っている。（2\^n\*i == i mod (2\^n-1) なので）
+-   2\^n-1番目のカードはずっと同じ位置なので riffle n回目でも同じ位置のままである。
+-   まとめると、すべてのカードが揃って元の位置に戻るのは riffle を n回繰り返したときである。
+
+#### 練習問題 8.19
+
+two と ilv が可換
+
+     two(ilv f) = ilv(two f)
+
+と ilv と two の直列合成に関する分配
+
+     ilv (f->-g) = ilv f ->- ilv g
+     two (f->-g) = two f ->- two g
+
+を使って n に関する帰納法で
+
+     bfly n f = bfly1 n f
+
+を証明する。
+
+n = 1 のとき
+
+     bfly 1 f = f = bfly1 1 f
+
+n = 2 のとき
+
+     bfly 2 f = ilv (bfly 1 f) ->- twoN 1 f
+       = ilv f ->- two f
+     bfly1 2 f = ilvN 1 f ->- two (bfly1 1 f)
+       = ilv f ->- two f
+
+n = k, k-1 のときの
+
+     bfly k f = bfly1 k f
+     bfly (k-1) f = bfly1 (k-1) f
+
+が成り立つとする。
+
+     bfly (k+1) f = ilv (bfly k f) ->- twoN k f   （bfly の定義）
+       = ilv (bfly1 k f) ->- twoN k f   （n = k のときの仮定）
+       = ilv (ilvN (k-1) f ->- two (bffy1 (k-1) f)) ->- twoN k f   （bfly1 の定義）
+       = ilv (ilvN (k-1) f) ->- ilv (two (bfly1 (k-1) f)) ->- twoN k f   （ilv に関する分配）
+       = ilvN k f ->- ilv (two (bfly1 (k-1) f)) ->- twoN k f   （ilvN の定義）
+
+     bfly1 (k+1) f = ilvN k f ->- two (bfly1 k f)   （bfly1 の定義）
+       = livN k f ->- two (bfly k f)   （n = k のときの仮定）
+       = ilvN k f ->- two (ilv (bfly (k-1) f) ->- twoN (k-1) f)   （bfly の定義）
+       = ilvN k f ->- two (ilv (bfly (k-1) f)) ->- two (twoN (k-1) f)   （two に関する分配）
+       = ilvN k f ->- two (ilv (bfly (k-1) f)) ->- twoN k f   （twoN の定義）
+
+二つの結果を見比べて ilv と two の可換と n = k-1 のときの仮定から
+
+     bfly (k+1) f = bfly1 (k+1) f
+
+#### 練習問題 8.20
+
+     bfly n f = ilv (bfly (n-1) g) ->- twoN (n-1) g   （bfly の定義）
+       = unriffle ->- two (bfly (n-1) g) ->- riffle ->- twoN (n-1) g   （ilv の定義）
+       = unriffle ->- two (ilv (bfly (n-2) g ->- twoN (n-2) g) ->- riffle ->- twoN (n-1) g   （bfly の定義）
+       = unriffle ->- two (ilv (bfly (n-2) g)) ->- two (twoN (n-2) g)  ->- riffle ->- twoN (n-1) g   （two に関する分配）
+       = unriffle ->- ilv (two (bfly (n-2) g)) ->- twoN (n-1) g  ->- riffle ->- twoN (n-1) g   （ilv と two の可換と twoN の定義）
+       = unriffle ->- unriffle ->- two (two (bfly (n-2) g)) ->- riffle ->- twoN (n-1) g  ->- riffle ->- twoN (n-1)   （ilv の定義）
+       = composeN 2 unriffle ->- twoN 2 (bfly (n-2) g)) ->- composeN 2 (riffle ->- twoN (n-1) g)   （composeN の定義）
+       = composeN 2 unriffle ->- unriffle ->- twoN 2 (two (bfly (n-3) g))) ->- riffle ->- twoN 2 (twoN (n-3) g)  ->- composeN 2 (riffle ->- twoN (n-1) g)   （上記と同様のことを繰り返す）
+       = composeN 3 unriffle ->- twoN 3 (bfly (n-3) g) ->- composeN 3  (riffle ->- twoN (n-1) g)   （composeN の定義を twoN と two の関係）
+       …   （上記と同様のことを繰り返す）
+       = composeN (n-1) unriffle ->- twoN (n-1) (bfly 1 g) ->- composeN (n-1)  (riffle ->- twoN (n-1) g)
+       = composeN (n-1) unriffle ->- twoN (n-1) f ->- composeN (n-1)  (riffle ->- twoN (n-1) g)   （bfly 1 の定義）
+       = composeN (n-1) unriffle ->- unriffle ->- riffle ->- twoN (n-1) f ->- composeN (n-1) (riffle ->- twoN (n-1) g)   （unriffle ->- riffle は id なるので）
+       = composeN n unriffle ->- composeN n (riffle ->- twoN (n-1) g)   （composeN の定義）
+       = composeN n (riffle ->- twoN (n-1) g)   （練習問題 8.18 と同様に unriffle を n回繰り返すと id になるので）
+       = shuffleEx n g
+
+#### 練習問題 8.22
+
+     odds c (x:xs) = x: odds' xs
+       where
+         odds' (x1:x2:xs) = let [y1,y2] = c [x1,x2] in y1:y2: odds' xs
+         odds' xs = xs
+
+### 第9章
+
+### 第10章 アローと計算
+
+#### 練習問題 10.1
+
+#### 練習問題 10.2
+
+#### 練習問題 10.3
+
+#### 練習問題 10.4
+
+     (f1>>>f2) |× (g2.g1) == (f1 |× g1) >>> (f2 |× g2)
+
+を示す。
+
+     左辺 = first (f1>>>f2) >>> pure (id × (g2.g1))   （|× の定義）
+       = first f1 >>> first f2 >>> pure (id × (g2.g1))   （first の関手則）
+       = first f1 >>> first f2 >>> pure ((id × g2).(id × g1))
+       = first f1 >>> first f2 >>> pure (id × g1) >>> pure (id × g2)   （pure の関手則）
+       = first f1 >>> pure (id × g1) >>> first f2 >>> pure (id × g2)   （first の交換則）
+       = 右辺   （|× の定義）
+
+#### 練習問題 10.5
+
+#### 練習問題 10.6
+
+#### 練習問題 10.7
+
+#### 練習問題 10.8
+
+#### 練習問題 10.9
+
+#### 練習問題 10.10
+
+#### 練習問題 10.11
+
+#### 練習問題 10.12
+
+     loop (first f) = loop (first f >>> idA)   （idA の恒等性）
+       = f >>> loop idA   （loop の左結合則）
+       = f >>> loop (pure id)   （idA の定義）
+       = f >>> pure (trace id)   （loop の拡張則）
+       = f >>> pure (\b -> let (c,d) = id (b,d) in c)   （trace の定義）
+       = f >>> pure (\b -> b)
+       = f >>> pure id
+       = f >>> idA   （idA の定義）
+       = f   （idA の恒等性）
+
+#### 練習問題 10.13
+
+#### 練習問題 10.14
+
+     pure (\p -> a) >>> f == pure (\p -> (f,a)) >>> app
+
+を示す。
+
+     左辺 = pure (\p -> a) >>> mkPair f >>> app    （外延性則）
+       = pure (\p -> a) >>> pure (\a -> (f,a)) >>> app    （mkPair の定義）
+       = pure ((\a -> (f,a)).(\p -> a)) >>> app    （pure の関手則）
+       = pure (\p -> (f,a)) >>> app    （関数の合成）
+       = 右辺
+
+#### 練習問題 10.15
+
+#### 練習問題 10.16
+
+#### 練習問題 10.17
+
+     (><) :: (a -> b) -> (c -> d) -> (a,c) -> (b,d)
+     (f >< g) (x,y) = (f x, g y)
+     
+     (*#*) :: Hom a b -> Hom a b -> Hom (Pair a) (Pair b)
+     (f :&: fs) *#* (g :&: gs) = (f >< g) :&: (fs *#* gs)
+     
+     -- 「8.8 Batcher のマージャとソータ」の sortB 参照
+     sort :: Ord a => Hom a a
+     sort = (id :&: (sort *#* (sort >>> rev))) >>> bisort
+
+#### 練習問題 10.18
+
+#### 練習問題 10.19
+
+### 第11章
+
+### 第12章
+
+* * * * *
+
+Last modified : 2011/02/04 19:07:05 JST

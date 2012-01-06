@@ -1,0 +1,966 @@
+# [Books\_FOP\_BugReport]()
+
+[Books]():[FOP]():BugReport
+
+* * * * *
+
+翻訳やコードのミスなどを報告していただけると嬉しいです。
+
+新しい報告ほど上になるように以下に書いてください． また，日付けを入れてくださいませ。日付は[[$date]]で入れられます。 --
+nobsun
+
+* * * * *
+
+2011/12/03 01:07:10 JST -- gotoki\_no\_joe
+
+#### p.20 l.15
+
+     2.5 節では、テスト中に性質のカバレッジを監視する方法を示す。
+
+カバレッジはテストの実施に対して測るもの。 Section 2.5 shows how to monitor the test coverage
+of a property under test.
+
+     2.5 節では、性質によるテストのカバレッジを監視する方法を示す。
+
+#### p.21 l.4
+
+     多重定義がされているからである。
+
+because it is overloaded
+
+     型のオーバーロードがある(ため、テストでどの型の値を与えるべきか決定できない)からである。
+
+#### p.22 l.7
+
+     明示的に整列したものだけを限量化
+
+     明示的に整列したものだけに対して限量化
+
+この辺りの「限量化する」を「限量する」としたい。
+
+#### p.22 リスト
+
+orderdLists はp.30にようやく定義が現れる。 p.31の訳注5をポイントすると親切かと。
+
+#### p.27 タイトル
+
+×代数仕様 “algebraic specification” ○代数的仕様
+
+#### p.27 「さらに、それぞれの観察結果の…」の行
+
+前の行から続いているので段下げなし。次の「当該の等式の左辺を」も同様。
+
+#### p.27 l.-8
+
+△「それぞれのキュー操作により」○「それぞれのキュー操作について」
+
+#### p.29 l.-8
+
+     また、do { x ← s; e} は {e|x ∈ s} だと考えられる。
+
+and do { x ← s; e} can be thought of as {e|x ∈ s}.
+
+     また、do { x ← s; e} は {e|x ∈ s} とみなせる。
+
+#### p.29 choose の式
+
+× \\Longrightarrow ○ \\Rightarrow
+
+#### 上の式の直前の文章
+
+× 基本的は関数は ○ 基本的な関数は
+
+#### p.30 l.9
+
+     多重定義された生成器 arbitrary が、型を基盤にして生成を実行する。これを他と一緒に使うと性質の引数を生成できる。
+
+Type-based generation is performed by the overloaded generator
+arbitrary. It is used, among other things, to generate the arguments of
+properties.
+
+     多重定義された生成器 arbitrary は、型 (のみ) に基づいて生成を実行する。これは他の生成器とも併用して性質の引数を生成する。
+
+#### p.30 l.15
+
+     もう1つの応用として、以下のように集合 {y|y ≧ x} を生成する手段がある。
+
+As another application, here is one way to generate the set {y|y ≧ x}.
+
+     arbitrary の別の利用法として、以下のように集合 {y|y ≧ x} を生成する事に使える。
+
+#### 上の直後
+
+「これは…だからである」は前から続いているので段落を切らない。
+
+#### p.31 l.9
+
+     新しい型を定義する (Haskell の newtype 宣言を使う) と便利である。生成器を新しい型のデフォルト生成器とするわけである。
+
+it is convenient to define a new type (using Haskell’s newtype
+facility), and make the generator the default generator for the new
+type.
+
+     Haskell の newtype 宣言を用いて新しい型を定義し、自作の生成器をその型のデフォルト生成器とすると便利である。
+
+#### p.32 l.2
+
+     型を基盤にしてテストデータを生成すると
+
+Type-based test data generation can ...
+
+     型のみを基準にしたテストデータの生成では
+
+#### p.32 l.21
+
+「生成される値のサイズを」の行は段落が変わるので字下げする。
+
+#### p.32最後の式
+
+× fromInt ○ fromIntegral (原著も)
+
+#### p.33 l.14
+
+     回避している。
+
+回避はできていないので、原文は目的表現になっている。
+
+     回避しようとしている。しかし
+
+#### p.34 l.16
+
+     自明 (ユーザが定義できるという意味で)
+
+trivial (in some user-definable sense)
+
+     (ユーザが定義する何らかの意味で)自明
+
+#### p.35 l.4
+
+     もっと詳しく知るには、classify を複数回使ってみれば良い。
+
+これでは「習うより慣れろ」という意味になってしまう。 To get more information, we can use the
+function classify multiple times:
+
+     より多くの情報を得るために、classify を同時に複数使用できる。
+
+#### 問題 2.5
+
+     2.3 節の Queue の例で使われていたテストデータをねじ曲げてしまわない性質を検査せよ。そのために適切にテストデータを監視する部分を追加せよ。
+
+Check that the properties used in the Queue example in Section 2.3 do
+not skew the test data unacceptably, by adding appropriate test data
+monitors.
+
+     2.3 節の Queue の例で使われていた性質へ、適切なデータ監視部を追加して、テストデータが過度にねじ曲げられていないか調べよ。
+
+#### p.37 l.4
+
+     次に論理式を見てどのように知識を収集するかを理解する。
+
+「理解する」の主語は読者？ Then, we look at the formula to see how to gather
+knowledge.
+
+     次に、知識をどう集めるか知るために論理式を見る。
+
+#### 続き
+
+     必ず真になる論理式 / 可能なモデル
+
+a formula which must be true, / possible models
+
+     値を真にすることが目標の論理式 / モデルの候補
+
+#### p.37 l.-9,-8
+
+×「p を通じて伝播」○「p(の構造) の中を伝播」
+
+#### p.38 Arbitrary Name の式
+
+文字リテラルのクオートは \`a'..\`z'ではなく'a'..'z' (LaTeXのミス)
+
+#### p.39 l.11
+
+「mはpを満たすと読む」の『満たす』は強調
+
+#### p.39 l.-4
+
+× |=(satisfy) 関数は時として部分付値を生成する ○ models関数は...
+
+#### p.40 l.-9
+
+     このような部分付値のリストが完全であることを検証するためには、少なくとも 1 つの付値が、p を満たすあらゆる全域付値を覆うことができることを確認しなくてはならない。
+
+To check that a list of such partial valuations is complete, we need to
+check that any total valuation satisfying p is covered by at least one
+of the valuations.\
+ 限量の順序が逆。 ∃v∈vs, ∀v' satisfies p, v \`covers\` v' ではなく ∀v' satisfies p,
+∃v∈vs, v \`covers\` v'
+
+     このような部分付値のリストが完全であることを検証するためには、p を満たす任意の全域付値を、リスト中の少なくとも一つの部分付値が覆うことができることを確認しなくてはならない。
+
+#### p.42 l.10
+
+prop\_Exclusiveの定義中 any ではなく or
+
+#### p.43 l.12
+
+     しかしながら今見てきたように、仕様を形式化しようという最初の試みは正しいものではなかった。不完全な仕様の価値はあまりない。
+
+Yet, as we have seen, the first attempt to formalise a specification is
+likely to be incorrect, and the value of a faulty specification is
+limited.
+
+     …、仕様を形式化しようとすると最初は正しくないものになりがちであり、そのような不完全な仕様の価値はあまりない。
+
+#### p.43 l.-11
+
+     ランダムテストで 20% 余計に点を取れば分割テストの優位性はきれいになくなっていただろう
+
+By taking 20% more points in a random test, any advantage a partition
+test might have had is wiped out.
+
+     ランダムテストのテストケースを 20% 増しにしたところ、分割テストが持っていたかもしれない優位性はすっかりなくなった。
+
+ちなみに訳本(↓)p.1508には「典型的に、ランダムテストに20%多くポイントをとることによって、分割テストが享受する優位は帳消しになる。」とありました。
+
+#### 参考文献[51]
+
+訳本があります。
+
+     ソフトウェア工学大事典, 監訳 片山卓也, 土居範久, 鳥居宏次, 朝倉書店, 1998
+
+ランダムテストの項目はpp.1503--1513
+
+* * * * *
+
+2011/10/28 17:20:37 JST -- gotoki\_no\_joe
+
+#### p.274
+
+    二分木写像の直列化によって得られる。
+
+(The type of format is) essentially obtained by linearizing the binary
+tree mapping,\
+ (:\^:)という構成子が二分木を作る。 format (d1 :\^: d2) は、format d1 という写像と format d2
+という写像の直列化である。 例えば\
+ format d1 :: t1 -\> t2 -\> String\
+ format d2 :: t3 -\> String\
+ のとき\
+ format (d1:\^:d2) :: t1-\>t2-\>t3-\>String\
+ のようになる。
+
+    二分木で構造化された写像の直列化によって得られる。
+
+#### p.275 typo
+
+誤
+
+     format (d1:^:d2)はformat d1・format d2に単純化できる。
+
+正
+
+     format' (d1:^:d2)はformat' d1・format' d2に単純化できる。
+
+* * * * *
+
+2011/10/22 18:13:51 JST -- gotoki\_no\_joe
+
+#### p.240
+
+    インデントは文字列の先頭ではなく明示的な改行箇所のみに追加される。
+
+Note that indentation is added only at an explicit newline, not at the
+beginning of a string.\
+ 「普通に考えると先頭と改行後の両方に入れるはずだが、前者には入れない」という意図があるので
+
+    インデントは明示的な改行箇所のみに追加され、文字列の先頭には入れない。
+
+#### p.241
+
+    これらの関数は以下のように書くこともできる。
+
+Alternatively, here is a variant of the above function.\
+
+このvariantは「少し動作は違うが同じ(木をドキュメントに変換するという)仕事をする別の関数」の意味なのに日本語は「同一の結果を返す関数の別の書き方」と読めてしまう。
+
+    木をドキュメントに変換するやり方は他にも考えられる。
+
+#### p.241
+
+    さらに別のスタイルを生成すべく、変形版の形式化について考えよう。
+
+It is easy to formulate variants to generate yet other styles.\
+ formulateとformalizeの取り違い？\
+ formulateは等式でプログラミングするHaskellという感覚ではないか。
+
+    さらに別のスタイルを生成する変種を作ることも容易である。
+
+#### p.242 l.-9以降
+
+nestingの直接の訳は「入れ子」だが、この文脈では「インデントの入れ子」「インデント」に意味がずれている。
+訳語は「インデント」で統一できる。 (p.240 でnestを導入するとき「インデント」と説明している。)
+
+#### p.243 l.1
+
+    その意味でlayoutはtextの逆であり、それは次の規則が示すものにほかならない。
+
+指示語が重複して、後半の「それ」が何を指しているか不明。実際には「その次の規則」\
+ In this sense, layout is the inverse of text, which is precisely what
+the next law states.
+
+    その意味でlayoutはtextの逆関数である。
+    この事実は、3つめの規則がさらに明白に示している。
+
+#### p.243
+
+    これらの構成子は以下のようにドキュメント演算子と関連している。
+
+These constructors relate to the document operators as follows.
+
+    これらの構成子はドキュメント演算子と以下のような関係がある。
+
+#### p.245以降
+
+ここのinvariantは「常に満たされる (べき) 性質、条件」で「不変性」ではない。 loop invariantとか。
+
+#### p.247
+
+    〈〉およびnestを拡張してUnionと対話する方法を指定するところもそのままである。
+
+そのままではない。 (The definitions of nil, text, line, <\>, and nest remain
+exactly as before,) save that <\> and nest must be extended to specify
+how they interact with Union.\
+ 辞書的には現在分詞だけで用いる saving ... 「除外する」の用法が広がったものではないかと想像する。
+
+    ただし、〈〉とnestはUnion構成子を扱えるように拡張する。
+
+#### p.250 l.-11
+
+    各演算を一般化して、連結されたドキュメントのリスト上で動作させることである。
+
+(A possible fix for the first problem is to add an explicit
+representation for concatenation,) and to generalize each operation to
+act on a list of concatenated documents.
+
+    各演算を一般化して、ドキュメントを連結したリストに対して適用できるようにすることである。
+
+#### p.250 l.-8
+
+    この現在のインデントは、入れ子になった演算子が処理されるたびに増加させる。
+
+(,and maintain a current indentation) which is incremented as nesting
+operators are processed.\
+ nesting operatorとはnestという名前のここで定義するHaskell関数のこと。 "nested operator"ではない。
+
+    この現在のインデント(量)は、(以下で定義する)nest演算子が処理されるたびに増加させる。
+
+前の文の「インデント」も「インデント量」に直したい。
+
+#### p.251 be の式
+
+    (前提条件)
+
+(hypothesis)\
+ 5章の用語の「仕様」がしっくりくる。
+
+#### p.254 l.1
+
+前の行の続きだからインデントしては おかしい。
+
+#### p.254 l.2
+
+「このfillwords関数」→「以下のfillwords関数」
+
+#### p.257 l.4
+
+    最適化されている
+
+optimal
+
+    最善である
+
+optimized ではない。
+
+#### .p.257 l.6
+
+    Hughes は…アルゴリズムはないとしている。
+
+のに実は存在する、と続くと、Hughes の論文の証明に誤りがあるように読める。\
+ Hughes notes that there is no algorithm to choose line breaks for his
+combinators that is optimal and bounded,\
+ この“his”が重要。that 以下がかかる対象も、前を読めばおかしいとわかる。
+
+    Hughes のライブラリで用いたコンビネータに関して、改行を選択する最善かつ有界なアルゴリズムは存在しないと述べている。
+
+#### p.257 l.-4
+
+×「出版」publish ○「論文を発表」
+
+#### p.263 l.3
+
+    真偽値を Val データ型に投入する
+
+interpreter (...) has to inject the Boolean into the Val data type.\
+ "inject" は集合論の単射のことだと思われる。 ("Data type a la carte" でも同じような用語を使っていた。)
+具体的には、\
+ data Val = BoolVal Bool | IntVal Int とすると、\
+ BoolVal :: Bool -\> Val は真偽値の集合をVal型の要素に単射している。\
+ IntVal :: Int -\> Val も同様。\
+ このことを表す用語として「投入」は適当でしょうか？
+
+#### p.263 l.-11
+
+×「コンテナの型」container type ○「コンテナ型」
+
+#### p.263 l.-10
+
+    他の多くのデータ型と同様に、(α → β) → (Term α → Term β) という関数は定義できない
+
+「他の多くのデータ型」ではそれができるのかできないのか、いずれにも解釈できる。
+
+    他の多くのデータ型では可能な、(α → β) → (Term α → Term β) というような型の関数が定義できない
+
+#### p.269 リスト 2 l.2 誤植
+
+× (tick "Richard" (RList RPerson)) \
+ ○ (tick "Richard") (RList RPerson)
+
+#### p.271
+
+    まずは特殊な問い合わせ age および sizeof を定義する。
+
+もう終盤なのに「まずは」とは？\
+ It remains to define the ad-hoc queries age and sizeof .
+
+    残っている作業は興味のある仕事だけをする問い合わせ関数 age および sizeof を定義することである。
+
+#### p.271 l.-4
+
+    Haskellにおいて関数の型の値を
+
+今まで「型のrepresentation」のような話題が続いていたところにこの言い回しは混乱させる。
+
+#### p.272 l.14
+
+    正規形は、適切な式のデータ型の要素として与えられているものとする。
+
+(関数 reify は型表現を引数にとり、その型の Haskell 値の正規形を生成する、) where the normal form is
+given as an element of a suitable expression data type.\
+ この give の主語は reify の呼び出し元ではなく reify そのもの。 正規形を呼び出し元が与えるなら、reify
+は何をするのかわからなくなる。
+
+    ここで、正規形は適切な「式を表す」データ型の要素として返される。
+
+#### 練習問題12.12
+
+    Term τ に対する表示関数を実装せよ。
+
+Implement a show function for Term t.\
+ 例えば、型表現も引数に要求する displayTerm :: Type τ → Term τ → String はこの要求を満たさない。 必ず
+Show クラスのインスタンスにしなければならない。
+
+    型 Term τ を Show クラスのインスタンスにせよ。(すなわち、Term τ に対する show 関数を実装せよ。)
+
+#### p.276 節タイトル
+
+    関数逆パース
+
+Functional unparsing\
+ 参考文献[31]のタイトルであるが、 ここで重要なのは functional ではなく statically typed だと思われる。
+
+    「静的型付き printf」もしくは「関数的逆パース」
+
+#### p.277
+
+    C に結びついた with 節
+
+The with clause associated with C
+
+    C に付けられた with 節
+
+#### p.278 リスト LaTeX
+
+Pair1, Pair2の行 2 箇所 × ph ○ \\phi
+
+* * * * *
+
+2011/10/21 16:43:34 JST -- ksmakoto
+
+#### p.185 訳注11
+
+試してみればわかることではあるのですが、追加して main = vhdl のような行があると親切ではないかと思います。
+
+* * * * *
+
+2011/09/03 18:06:46 JST -- gotoki\_no\_joe
+
+#### p.62
+
+    より正確に言うと、フィールドを取り出す関数のリストについて辞書順になるような順列生成アルゴリズムを2つ調べることになる。
+
+To be more precise, we will look at two algorithms for permuting a list
+so that it is lexically ordered with respect to a list of
+field-extracting functions.
+
+    もっと具体的にいえば、以降では
+    「フィールドを取り出す関数のリストに基づいて辞書順にリストをpermuteする」
+    2つのアルゴリズムについて考える。
+
+#### p.1
+
+priority queue は「順位付きキュー」より「優先度付き」の方が一般的では。
+
+#### p.3
+
+    全ての子ノードのラベルは少なくとも親のラベルと同じ大きさでなければならない。
+
+     the label of every child node must be at least as big as its parent’s.
+
+「同じだけ大きくなければならない」としないと、 「少なくとも同じ大きさか、それより小さい」でも意味が通じるので読みにくい。
+洒落た訳をしなくてよければ、
+
+    全ての子ノードのラベルは親のラベルと等しいか、それより大きくなければならない。
+
+#### p.7
+
+    複数の値_で_意図せぬ変更を
+
+「に」または「へ」
+
+#### p.9
+
+    実装では、cをaあるいはbとマージし、次に備えて色を変更する。
+
+     The implementation is straightforward,
+     with the join function using the colour to determine whether
+     to merge c with a or b and then changing the colour for next time.
+
+2行目を落としています。
+
+    実装は今の説明そのままである。
+    ここで、join関数(図1.4の join (Fork 色 x a b) c)は
+    cに対してaとbのどちらをマージするかを決める材料として色を利用し、
+    また次に備えて色を変更する。
+
+#### p.11
+
+    演習問題1.5の演算列で木を構成すると、...O(n)時間で済む。
+
+O(n)で済むのは何をすることが、なのか不明。
+
+     the sequences of operations leading up to the trees in Exercise 1.5 take only O(n) time,
+
+    問題1.5の木を構成する演算列そのものはO(n)時間で評価できる。
+
+#### p.12
+
+     ということは、T1はlog m1回を超えることはなく
+
+This can happen to T\_1 no more than log m\_1 times,
+
+主語はT\_1ではなくThis、つまり前の文で述べている再帰呼び出しのこと。 「ということは」という接続もおかしい。
+
+#### ex1.8
+
+     すなわち、それぞれのノード内に小型FIFOキューへのスロットを追加せよ。
+
+     In other words, add a third slot to the miniature FIFO queue in each node.
+
+     すなわち、それぞれのノード内の小型FIFOキューに3つめの場所を追加せよ。
+
+* * * * *
+
+2011/07/22 16:56:48 JST -- gotoki\_no\_joe
+
+#### 練習問題 3.29
+
+誤 List b → 正 List β
+
+#### p.58 l.3
+
+誤 要素のリストを生成するではなく → 正 …するのではなく
+
+#### 練習問題3.37
+
+    ほかには、Hughesのリスト表現をプログラムの型から導出して直接リスト変換子として表現する方法がある。
+
+"As an alternative, use Hughes' representation of lists as list
+transformers directly, deriving programs of type ..."\
+ この "use" は問題文の要求の一つ。
+
+    別の方法として、「リストをリスト変換子で表す」というHughesの表現を直接的に使って、以下の型を持つプログラムを導け。
+
+#### 練習問題3.40
+
+    結合的なfに対してlzwの重要な性質が与えられれば、これは実のところunfoldLの普遍性から簡単に導き出せる。
+
+"In fact, it is a simple consequence of the universal property of
+unfoldL, given the crucial property of lzw that, for associative f,"
+
+    これは実のところ、unfoldL の普遍性と''以下の'' lzw に関する重要な性質から簡単に導き出せる。
+    結合律をみたす f (と任意の e,x,xs,ys) について以下が成り立つ:
+
+* * * * *
+
+2011/06/27 15:57:35 JST -- gotoki\_no\_joe
+
+#### 練習問題 3.24
+
+logN :: Nat → Nat だと自然対数になってしまうが、それは無理難題。 logN :: Nat → Nat → Nat such
+that logN a b = c where a\^c <= b < a\^(c+1) と、
+型がtypoだったことにしておくのが無難かと思います。
+
+#### 同 ヒント
+
+誤
+  ~ 丸めるように定義せよ。
+
+正
+  ~ 誤差を切り捨てるように定義せよ。
+
+round downは「切り捨て」で、「丸める」は端数処理全般を指す。
+
+#### 練習問題 3.26
+
+    引数の２つの複製を分けた版を定義する
+
+何を分けるのか意味がわかりません。 "We define a version that separates the two copies of
+the argument"
+
+    1つの引数を複製する代わりに2つの引数に分けた版を定義する
+
+#### 同
+
+deduce
+
+誤
+  ~ 推論せよ
+
+正
+  ~ 導け
+
+#### p.172
+
+誤
+  ~ 2n-1まで行ったら
+
+正
+  ~ 2\^n-1まで行ったら
+
+#### 練習問題8.13
+
+誤
+  ~ plus
+
+正
+  ~ puls
+
+* * * * *
+
+2011/06/15 18:58:41 JST
+
+#### p.201
+
+remaining task, arrange, right way などいろいろ意訳もして
+  ~ 
+
+        After this first step, the remaining task is to arrange the results in the right way.
+        We can next use a function concatAll to concatenate the results in each row of the outer matrix:
+
+        この最初のステップを行なえば*後は*結果を*適した状態（Stream [β]型に）*に*整理*するだけである.
+        *それには*関数 concatAll を使って外側のマトリックスの各行*ごとに*結果を連結する.
+
+* * * * *
+
+2011/06/15 18:06:16 JST
+
+#### p.200
+
+but は「以外」と訳した方がよいか
+  ~ 
+
+        that does the same job, but without the distraction of the MkMatrix constructor.
+
+        この関数は MkMatrix 構成子に煩わされなくて済む点以外は束縛演算と同じ仕事をする。
+
+apply を「適用」、according to を「ごとに」（やや意訳）
+  ~ 
+
+        The job of bindm xm f is to apply f to all the values in the matrix xm,
+        and to collect together the results into a matrix according to their total cost
+
+        bindm xm f の仕事は,マトリックス xm のすべての値に f を適用し,結果を
+        全コストごとにまとめて集めてマトリックスとする.
+
+plus の訳の抜け？
+  ~ 
+
+        total cost: that is, the cost of the argument of f given by the matrix xm
+        plus the cost of computing the result of f .
+
+        ・・・引数のコストと f の結果を計算するコスト*の和*である.
+
+* * * * *
+
+2011/06/10 16:20:08 JST -- gotoki\_no\_joe
+
+#### p.106 l.5
+
+    を縛る
+
+これだと「縛る」が何か既出のtechnical termに見えます。 奇をてらわず
+
+    新たな範囲についてcにboundを適用する
+
+とした方がよいのではないでしょうか。
+
+#### p.106 末尾
+
+    以下のプログラムが得られる。
+
+得られません。最後のパターンは
+
+    fastflipeval′(t : ts) a b = if a′== b then b else fastflipeval′ts a′b
+       where a′= negate (fastflipeval t (negate b) (negate a))
+
+が正しいです。(原文も誤り)
+
+#### 練習問題3.3
+
+誤
+  ~ map g
+
+正
+  ~ mapL g
+
+#### p.48最終行
+
+原文
+  ~ Here, an instance of the type Maybe α may or may not have an
+    instance of the type α：
+
+訳例
+  ~ ここで、Maybe α型のインスタンス(型)は、 α型の**値**を持っても持たなくてもよい(という値をもつ型である)。
+
+端的には2つめのinstanceが誤訳。
+
+* * * * *
+
+2011/05/20 20:03:06 JST -- gotoki\_no\_joe
+
+#### p.96以降
+
+o.005で宣言しているので誤植とはいえないかもしれませんが、 関数合成は\\cdotでなく\\circで統一して欲しかったところです。
+原文の5章は\\circにしてあるものをあえて変更したのは理由があるのでしょうか。
+
+#### p.98 練習問題5.16
+
+誤
+  ~ 拡張
+
+正
+  ~ 展開
+
+#### p.99 下から3行目
+
+     「sum, foldr, fstの定義と同様、using節は省略する。」
+
+『アクティブソースではこれらを省略せよ』という意味にとれる。 また、as well as を誤訳。
+
+     「紙面節約のためここではusing節およびsum, foldr, fstの定義は示さない(がアクティブソースには必要である)。」
+
+という意味合い。
+
+#### p.101 練習問題5.23
+
+誤
+  ~ 浮動let式に対する
+
+正
+  ~ let式を移動させる (原文では floating **a** let expression となっている。)
+
+#### p.102
+
+     「MAGを使った作業では、いつも定義を調整するための実験を繰り返す必要がある。」
+
+これは上の(変な)lzwの定義を持ち出す言い訳なので、段落を変えるのはおかしい。
+
+     「MAGを使った作業では、このように対話的に定義を調整しては実験する必要がしばしば生じる。」
+
+というニュアンス。
+
+* * * * *
+
+2011/05/07 02:00:56 JST -- gotoki\_no\_joe
+
+#### p.89 図5.2
+
+誤
+  ~ 
+
+         definition mindepthp
+
+正
+  ~ 
+
+         definition mindepth
+
+    (最後のpが余計)
+
+#### p.93 最終行の文
+
+     「〜出現するわけではない」
+
+は、原文から推測するに
+
+     「(上で『yが式f yの中だけで使われている式を見つける必要がある』としたが)
+     (書き換え後の式で)xsの出現は、付帯条件の右辺から(そうなって欲しいと)希望する
+     fastreverse xsという形ではなかった」
+
+というような意味だと思います。
+
+#### p.94 の式2つ
+
+誤
+  ~ 
+
+         foldr (λa b zs → b (a:zs)) (λzs → zs)
+         fastreverse = foldr (λa b zs → b (a:zs)) (λzs → zs) ys
+
+正
+  ~ 
+
+         foldr (λa b zs → b (a:zs)) (λzs → zs) xs
+         fastreverse xs ys = foldr (λa b zs → b (a:zs)) (λzs → zs) xs ys
+
+    原文も間違っています。
+
+#### 練習問題5.12
+
+誤
+  ~ 
+
+         flatten (Leaf a) = a
+
+正
+  ~ 
+
+         flatten (Leaf a) = [a]
+
+#### 同、最後の文
+
+repeatが誤訳
+
+     「fastreverseに対して行った上述の導出を繰り返し用いよ。」
+
+ではなく
+
+     「本文でfastreverseに対して行ったような導出を(ここで再度)行え。」
+
+というニュアンス。
+
+* * * * *
+
+2011/04/15 11:56:42 JST -- gotoki\_no\_joe
+
+p.86 最終行
+
+誤
+  ~ mid d m
+
+正
+  ~ min d m
+
+p.87 下から4行目
+
+誤
+  ~ ことに上ではmdの定義を
+
+正
+  ~ ことに上ではmdの仕様を
+
+* * * * *
+
+2011/02/06 16:05:44 JST -- sakai
+
+p.217
+
+誤
+  ~ addの写像変換子への一般化では，ポイントワイズにした関数を足し合わせる．
+
+正
+  ~ addの写像変換子への一般化では，関数をポイントワイズに足し合わせる．
+
+* * * * *
+
+2010/08/02 15:44:44 JST
+
+FOP のサイトにある mag-2.10 のプログラムを GHC 6.12.x でビルドするための patch です。
+
+-   (2010/12/08 20:08:29) JST [Books\_FOP\_MAG]() に移動しました。
+
+* * * * *
+
+2010/07/06 11:50:09 JST
+
+サポートページに対するつっこみはどこでやったら良いかしら？
+
+とりあえず第１０章の関連サイトとして、以下のページが挙げられますね。
+
+Arrow
+
+-   [Arrow のページ](http://www.haskell.org/arrows/)
+
+Arrow 変換子
+
+-   [arrows: Arrow classes and
+    transformers](http://hackage.haskell.org/package/arrows)
+
+Arrow 記法
+
+-   [arrowp: preprocessor translating arrow notation into Haskell
+    98](http://hackage.haskell.org/package/arrowp)
+
+GHC での Arrow の定義
+
+-   [Control.Category
+    モジュール](http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Control-Category.html)
+-   [Control.Arrow
+    モジュール](http://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Control-Arrow.html)
+
+arrows パッケージと arrowp パッケージはいずれも第１０章の著者が作ったパッケージで、かつ [元々は Arrow
+のページで紹介されていたソフトウェア](http://www.haskell.org/arrows/download.html)なので関連サイトとして紹介しておく必要があると思います。
+
+-   一部をのぞいて反映しました。--nobsun(2010/07/09 19:07:48 JST)
+
+* * * * *
+
+2010/06/18 10:33:57 JST --nobsun
+
+p.iv 4行目
+
+誤
+  ~ ついてのが理解だけが
+
+正
+  ~ ついての理解だけが
+
+* * * * *
+
+2010/06/03 09:00:03 JST --nobsun
+
+p.42 prop\_Exclusive の型
+
+誤
+  ~ 
+
+         prop_Exclusive :: Form -> Property 
+
+正
+  ~ 
+
+         prop_Exclusive :: Form -> Bool 
+
+* * * * *
+
+Last modified : 2011/12/05 08:59:00 JST

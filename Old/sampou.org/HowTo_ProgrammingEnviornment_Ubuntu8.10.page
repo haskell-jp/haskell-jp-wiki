@@ -1,0 +1,274 @@
+# [HowTo\_ProgrammingEnviornment\_Ubuntu8.10]()
+
+[HowTo]():[ProgrammingEnviornment]():Ubuntu8.10
+
+* * * * *
+
+以下は 2009/02/04 16:03:25 JST 現在の情報である。
+
+## Ubuntu 8.10 (i386版)上にHaskellプログラミング環境を作る
+
+### ghc-6.10.1のインストール
+
+ubuntuのパッケージにghc6というのがあるのだが，最新のリリースバージョンではないとか，最小構成になっているので少し使いにくいとか，いろいろ不満がでる．それで，コンパイル済のバイナリがはいった，tarballからインストールする．これは非常に簡単です．
+
+#### libedit2版のtarballを取得
+
+いきなりダウンロードするならwgetで
+
+      $ wget http://www.haskell.org/ghc/dist/6.10.1/ghc-6.10.1-i386-unknown-linux-libedit2.tar.bz2
+
+#### 展開，移動
+
+      $ tar xf ghc-6.10.1-i386-unknown-linux-libedit2.tar.bz2
+      $ cd ghc-6.10.1
+
+#### configure と make install
+
+/usr/local配下へのインストールでよいなら，引数なしで configure
+
+      $ ./configure
+      $ sudo make install
+
+本体のインストールはこれで終り
+
+#### バージョンチェック
+
+インストールが終了したら一応確認
+
+      $ ghc -V
+      The Glorious Glasgow Haskell Compilation System, version 6.10.1
+
+これでOK
+
+### すぐにも使いそうなライブラリの開発用パッケージ
+
+libgmp3-dev 多倍長整数演算ライブラリ
+
+      $ sudo apt-get install libgmp3-dev
+
+zlib1g-dev データ圧縮伸長ライブラリ
+
+      $ sudo apt-get install zlib1g-dev
+
+libedit-dev 行編集用ライブラリ
+
+      $ sudo apt-get install libedit-dev
+
+libcurl4-gnutls-dev curl関連ライブラリ．darcsの構築インストールに必要
+
+      $ sudo apt-get install libcurl4-gnutls-dev
+
+### Haskellのパッケージツール．
+
+cabalコマンドはaptシステムに似たツールで，Haskellの種々のパッケージのインストールなどに便利．これをインストールしておくと，cabal
+install <package\>
+でパッケージがインストールできる．このときHaskellのライブラリについてだけだが，依存関係をチェックして，必要なパッケージをダウンロードしてインストールすることまでやってくれる．ぜひインストールする．
+
+      $ wget http://hackage.haskell.org/packages/archive/cabal-install/0.6.0/cabal-install-0.6.0.tar.gz
+      $ tar xf cabal-install-0.6.0.tar.gz
+      $ cd cabal-install-0.6.0
+      $ sh bootstrap.sh
+
+cabalおよび，cabalコマンドを使ってインストールされるライブラリ，実行ファイルはデフォルトでは $HOME/.cabal/
+配下に置かれる．そこの bin/ へ PATH を通しておく．
+
+      $ export PATH=$HOME/.cabal/bin:$PATH
+
+cabalはHackage Databaseの情報を取得する．これを更新しておく．
+
+      $ cabal update
+
+ローカルにインストールしたパッケージを最新の状態にしておきたければ，cabal upgrade を使えばよい．
+
+      $ cabal upgrade
+
+### ドキュメント作成関連
+
+hscolour：Haskellのソースコードを色付きのHTMLにしてくれるので，Hack用ドキュメントを作るときなどに便利
+
+      $ cabal install hscolour
+
+### 分散バージョン管理システム
+
+Haskeller なら darcs にきまっとる ;)
+
+      $ cabal install darcs
+
+### 日本語
+
+UTF8限定だけど，とりあえずこれをインストールしておこう．それ以外のエンコードについては iconv
+というパッケージを使うという手もあるかも．
+
+      $ cabal install utf8-string
+
+### Emacs
+
+Haskellで開発するならエディタはEmacs + haskell-modeがよいと思う．で，nobsun
+の好みにより，emacs-snapshot をインストールする．
+
+      $ sudo apt-get install emacs-snapshot emacs-snapshot-el
+
+#### haskell-mode
+
+Ubuntu 8.10 には haskell-mode というパッケージがあるんだが，ふつうにこれを入れようとすると，ghc6
+を入れられてしまう．そこで tarball からインストールする．
+
+      $ cd lib/elisp
+      $ wget http://www.iro.umontreal.ca/~monnier/elisp/haskell-mode.tar.gz
+      $ tar xvf haskell-mode.tar.gz
+
+/lib/elisp 配下に展開されたとして，\~/.emacs の設定は
+
+      (load "~/lib/elisp/haskell-mode-2.4/haskell-site-file")
+      (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+      (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+      (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
+とする．
+
+#### ghci-haskeline
+
+編集する分にはhaskell-modeは快適なんだが，バッファ内でのghciセッションの時に妙な \^J が入っておもしろくない．これは
+libedit の問題らしい．そこで，Emacsのバッファ内では，ghci-haskeline を使うようにする．
+
+      $ cabal install ghci-haskeline
+
+で .emacs に以下を追加する
+
+      (setq haskell-program-name "~/.cabal/bin/ghci-haskeline")
+
+これで \^J は駆逐できるはず．
+
+* * * * *
+
+以下は 2008/09/22 14:02:44 JST 現在の情報である。
+
+## Ubuntu 8.04 上にHaskellプログラミング環境を作る
+
+Ubuntu 8.04 をインストールした直後の状態からHaskellプログラミング環境を作る。 Ubuntu には ghc6
+というパッケージおよびghc関連のパッケージが数多く用意されて いるが、これらはどれも最新ではない。自分でいろいろなパッケージを持ってきて、
+自分でコンパイルして使いたいので、ghc 関連のものはUbuntuパッケージを使わない
+方針でいく。それ以外のツールは最新を追いかけることはないので、 Ubuntuのパッケージを使う。
+
+### コンパイラのインストール
+
+Glasgow Haskell Compiler を使う
+
+#### libc6
+
+まず最初は、ghc-6.8.3 をバイナリ tarball からインストールするのであるが、 libc
+ヘッダファイルなどがなかったりするので、ghc-6.8.3 のインストール前の configure
+スクリプトが途中でこける。なにはともあれ、libc6-dev
+
+    $ sudo apt-get install libc6-dev
+
+#### patch
+
+2008/11/12現在ではHEADのビルドにpatchが使われるようなのでインストールしておく。
+
+    $ sudo apt-get install patch
+
+#### ghc 6.8.3 のインストール
+
+最初はi386-Linux汎用版のバイナリをインストールする(Ubuntuのghc6パッケージは使わない)
+
+    $ wget http://www.haskell.org/ghc/dist/6.8.3/ghc-6.8.3-i386-unknown-linux.tar.bz2
+    $ cd ghc-6.8.3
+    $ ./configure
+    $ sudo make install
+
+### 開発用ツールおよびライブラリ群
+
+#### GNUの開発ツール群
+
+    $ sudo apt-get install autoconf
+    $ sudo apt-get install automake
+    $ sudo apt-get install libtool 
+
+#### ドキュメント系のライブラリ群
+
+    $ sudo apt-get install zlib1g-dev
+    $ sudo apt-get install curl
+    $ sudo apt-get install docbook-xsl
+
+#### 分散バージョン管理システム
+
+darcs を使うことが多い(git も最近使われつつある)。
+最新のdarcsをインストールする(Ubuntuのdarcsパッケージは**使わない**)
+
+darcs-2.1.0 をインストール(2008/10/12 13:44:45 JSTバージョンを変更)
+
+    $ wget http://darcs.net/darcs-2.1.0.tar.gz
+    $ cd darcs-2.1.0
+    $ autoconf
+    $ ./configure
+    $ make
+    $ sudo make install
+
+#### 字句解析器生成器 Alex
+
+最新のAlexをソースからビルドする(Ubuntu の alex パッケージは**使わない**)
+
+alex 2.2
+
+    $ wget http://www.haskell.org/alex/dist/2.2/alex-2.2.tar.gz
+    $ tar xvf alex-2.2.tar.gz
+    $ cd alex-2.2
+    $ runghc Setup configure
+    $ runghc Setup build
+    $ sudo runghc Setup install
+
+#### 構文解析器生成器 Happy
+
+最新のHappyをソースからビルドする(Ubuntu の happy パッケージは**使わない**)
+
+happy 1.17
+
+    $ wget http://haskell.org/happy/dist/1.17/happy-1.17.tar.gz
+    $ tar xvf happy-1.17.tar.gz 
+    $ cd happy-1.17
+    $ runghc Setup configure
+    $ runghc Setup build
+    $ sudo runghc Setup install
+
+### エディタ
+
+Emacs と haskell-mode を使う
+
+#### Emacs 23
+
+[nobsun]() の単なる好みにより Emacs 22 ではなく、Emacs 23 を使うことにする。
+
+    $ sudo apt-get install emacs-snapshot
+    $ sudo apt-get install emacs-snapshot-el
+
+#### haskell-mode
+
+Emacs を使ってプログラムを書くなら必須でしょう。
+
+    $ sudo apt-get install haskell-mode
+
+.emacs の設定例。
+
+    (append auto-mode-alist
+            '(("\\.hs$" . 'haskell-mode)
+              ("\\.hi$" . 'haskell-mode)
+              ("\\.lhs$" . 'literate-haskell-mode))))
+
+    (autoload 'haskell-mode "haskell-mode"
+      "Majour mode for editing Haskell scripts." t)
+    (autoload 'literate-haskell-mode "haskell-mode"
+      "Majour mode for editing literate Haskell scripts." t)
+
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
+
+    (setq haskell-literate-default 'latex)
+    (setq haskell-doc-idle-delay 0)
+
+* * * * *
+
+Last modified : 2009/08/05 22:44:31 JST

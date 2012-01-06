@@ -1,0 +1,371 @@
+# [Programming\_玉手箱\_その他]()
+
+[Programming]():[玉手箱]():その他
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+[関数型表]()
+
+[上向きにも辿れる木]()
+
+[平衡木]()
+
+-   [赤黒木]()
+-   [AVL 木]()
+
+[データタイプから再帰を分離]()
+
+[探索]()
+
+-   [深さ優先探索]()
+-   [幅優先探索]()
+
+[Graphical Sequence]()
+
+* * * * *
+
+## 関数型表
+
+関数型の表(Table)。結構、味があるとおもいません？
+
+    type Table k v = k -> Maybe v
+     
+    emptyTable :: Table k v
+    emptyTable = const Nothing
+
+    lookup :: Table k v -> k -> Maybe v
+    lookup = id
+     
+    insert :: Eq k => Table k v -> (k,v) -> Table k v
+    insert tbl (k,v) key = if k == key then Just v else tbl key
+     
+    remove :: Eq k => Table k v -> k -> Table k v
+    remove tbl k key = if k == key then Nothing else tbl key
+
+* * * * *
+
+## 上向きにも辿れる木
+
+zipper代わりに。-- yts
+
+    import Data.Maybe (isJust, fromJust)
+    data Tree a = Tree a [Tree a] deriving Show
+
+    data TreeP a =  TreeP { parent :: Maybe (TreeP a), value :: a, children :: [TreeP a] } 
+    mkTreeP pmb (Tree a cs)   = let x = TreeP pmb a (map (mkTreeP (Just x)) cs) in x
+    parents = map fromJust . takeWhile isJust . iterate (>>= parent) . return
+
+    instance Show a => Show (TreeP a) where
+      showsPrec d (TreeP p a cs) = showParen (d > 10) $ 
+          ("TreeP " ++) . (f p ++) . showsPrec 11 a . (" " ++) . showList cs
+          where f (Just _) = "(Just <parent>) "; f Nothing = "Nothing "
+
+    test00 = Tree 0 [Tree 1 [Tree 2 [Tree 3 []], Tree 4 []]]
+    test01 = mkTreeP Nothing test00
+    test02 = head . children . head . children $ test01
+    test03 = parent test02
+    test04 = parents test02
+
+-   [HaWiki:TheZipper](http://www.haskell.org/hawiki/TheZipper)
+
+* * * * *
+
+## 平衡木
+
+### 赤黒木
+
+[Haskell Red-Black
+Set](http://www.cse.ogi.edu/~hook/cse532f98/haskell1.htm)より。 [Red Black
+Trees](http://www.cs.kent.ac.uk/people/staff/smk/redblack/) に deletion
+付きのものがある。
+
+    data Color = R | B
+    data RedBlackSet a = E | T Color (RedBlackSet a) a (RedBlackSet a)
+
+    balance B (T R (T R a x b) y c) z d = T R (T B a x b) y (T B c z d)
+    balance B (T R a x (T R b y c)) z d = T R (T B a x b) y (T B c z d)
+    balance B a x (T R (T R b y c) z d) = T R (T B a x b) y (T B c z d)
+    balance B a x (T R b y (T R c z d)) = T R (T B a x b) y (T B c z d)
+    balance color a x b = T color a x b
+
+    empty = E
+
+    member x E = False
+    member x (T _ a y b)
+       | x < y  = member x a
+       | x > y  = member x b
+       | True   = True
+       
+    insert x s = T B a y b
+      where 
+        T _ a y b = ins s
+        ins E = T R E x E
+        ins s@(T color a y b) 
+          | x < y  = balance color (ins a) y b
+          | x > y  = balance color a y (ins b)
+          | True   = s
+
+balance が美しい。
+
+### AVL 木
+
+    data AVLSet a = E | T H (AVLSet a) a (AVLSet a) deriving Show
+    data H = L | B | R deriving Show
+
+    balanceL R a x b = (False, T B a x b)
+    balanceL B a x b = (True,  T L a x b)
+    balanceL L (T L a x b) y c = (False, T B a x (T B b y c))
+    balanceL L (T B a x b) y c = (True,  T R a x (T L b y c))
+    balanceL L (T R a x (T h b y c)) z d = (False, T B (T h' a x b) y (T h'' c z d))
+      where (h', h'') = case h of L -> (B, R); B -> (B, B); R -> (L, B)
+
+    balanceR L a x b = (False, T B a x b)
+    balanceR B a x b = (True,  T R a x b)
+    balanceR R a x (T R b y c) = (False, T B (T B a x b) y c)
+    balanceR R a x (T B b y c) = (True,  T L (T R a x b) y c)
+    balanceR R a x (T L (T h b y c) z d) = (False, T B (T h' a x b) y (T h'' c z d))
+      where (h', h'') = case h of R -> (L, B); B -> (B, B); L -> (B, R)
+
+    member x E = False
+    member x (T _ a y b)
+        | x < y = member x a
+        | x > y = member x b
+        | True  = True
+
+    insert x E = T B E x E
+    insert x t = snd $ ins x t
+
+    ins x E = (True, T B E x E)
+    ins x t@(T h l v r)
+        | x < v = case ins x l of
+                    (True,  l) -> balanceL h l v r
+                    (False, l) -> (False, T h l v r)
+        | x > v = case ins x r of
+                    (True,  r) -> balanceR h l v r
+                    (False, r) -> (False, T h l v r)
+        | True  = (False, t)
+
+    delete x t = snd $ del x t
+
+    del x E = (True, E)
+    del x (T h l y r)
+        | x < y = case del x l of
+                    (False, l) -> balanceR h l y r
+                    (True,  l) -> (True, T h l y r)
+        | x > y = case del x r of
+                    (False, r) -> balanceL h l y r
+                    (True,  r) -> (True, T h l y r)
+        | True  = case l of
+                    E -> (False,r)
+                    l -> case rightElem l of
+                           (z, (False, l)) -> balanceR h l z r
+                           (z, (True,  l)) -> (True, T h l z r)
+
+    rightElem (T h l x E) = (x, (False,l))
+    rightElem (T h l x r) = case rightElem r of
+                              (z, (False, r)) -> (z, balanceL h l x r)
+                              (z, (True,  r)) -> (z, (True, T h l x r))
+
+    height E = 0
+    height (T _ l _ r) = 1 + max (height l) (height r)
+
+    toList E = []
+    toList (T _ a x b) = toList a ++ [x] ++ toList b
+
+    check = snd . check'
+
+    check' E = (0, True)
+    check' (T h l _ r) =
+        ( 1 + max a c
+        , b && d && (case h of
+                     L -> a == c + 1
+                     R -> a + 1 == c
+                     B -> a == c
+                    )
+        )
+      where ((a, b), (c, d)) = (check' l, check' r)
+
+    permutation [] = [[]]
+    permutation xs = concat [map (x:) $ permutation (List.delete x xs) | x <- xs]
+
+    test = and $ map (check . foldl (flip insert) E) $ permutation [1..8]
+    test' = and [check $ delete x t | t <- map (foldl (flip insert) E) $ permutation [1..7], x <-[1..7]]
+
+Red-Black Tree をまねしてみたけど、場合分けが多くなってしまった。 -- y.hanatani
+
+    height E = 0
+    height (T L l _ _) = 1 + height l
+    height (T _ _ _ r) = 1 + height r
+
+これを使ってGADTで遊ばせてもらいました。その際に気付いたのですが、「balanceL L (T B a x b) y c = (True,
+T L (T B a x b) y c)」は「balanceL L (T B a x b) y c = (True, (T R a x (T L
+b y c)」ではないでしょうか。-- sakai
+
+あ、insert だけだとこの規則は使われないですね。delete のときにはsakai氏のおっしゃるとおりです。 -- y.hanatani
+
+    data Z = Z
+    data S n = S n
+
+    data (Ord a) => T a n where
+        E :: T a Z
+        T :: H l r n -> T a l -> a -> T a r -> T a n
+
+    data H l r n where
+        B :: H a a (S a)
+        L :: H (S a) a (S (S a))
+        R :: H a (S a) (S (S a))
+
+    balanceL :: H l r n -> T a (S l) -> a -> T a r -> Either (T a n) (T a (S n))
+    balanceL R a x b = Left  (T B a x b)
+    balanceL B a x b = Right (T L a x b)
+    balanceL L (T B a x b) y c = Right (T R a x (T L b y c))
+    balanceL L (T L a x b) y c = Left  (T B a x (T B b y c))
+    balanceL L (T R a x (T h b y c)) z d =
+        case h of
+        L -> Left (T B (T B a x b) y (T R c z d))
+        B -> Left (T B (T B a x b) y (T B c z d))
+        R -> Left (T B (T L a x b) y (T B c z d))
+
+    balanceR :: H l r n -> T a l -> a -> T a (S r) -> Either (T a n) (T a (S n))
+    balanceR L a x b = Left  (T B a x b)
+    balanceR B a x b = Right (T R a x b)
+    balanceR R a x (T B b y c) = Right (T L (T R a x b) y c)
+    balanceR R a x (T R b y c) = Left  (T B (T B a x b) y c)
+
+    balanceR R a x (T L (T h b y c) z d) =
+        case h of
+        R -> Left (T B (T L a x b) y (T B c z d))
+        B -> Left (T B (T B a x b) y (T B c z d))
+        L -> Left (T B (T B a x b) y (T R c z d))
+
+    ins :: (Ord a) => a -> T a n -> Either (T a n) (T a (S n))
+    ins x E = Right (T B E x E)
+    ins x t@(T h l v r) =
+        case x `compare` v of
+        EQ -> Left t
+        LT -> case ins x l of
+              Left l'  -> Left (T h l' v r)
+              Right l' -> balanceL h l' v r
+        GT -> case ins x r of
+              Left r'  -> Left (T h l v r')
+              Right r' -> balanceR h l v r'
+
+    data (Ord a) => AVLSet a = forall n. AVLSet (T a n)
+
+    emptySet :: (Ord a) => AVLSet a
+    emptySet = AVLSet E
+
+    insert :: (Ord a) => a -> AVLSet a -> AVLSet a
+    insert x (AVLSet t) =
+        case ins x t of
+        Left u  -> AVLSet u
+        Right u -> AVLSet u
+
+    toList :: (Ord a) => AVLSet a -> [a]
+    toList (AVLSet t) = f t
+        where f :: forall a n. T a n -> [a]
+              f E = []
+              f (T _ l x r) = f l ++ [x] ++ f r
+
+    height :: (Ord a) => AVLSet a -> Int
+    height (AVLSet t) = f t
+        where f :: forall a n. T a n -> Int
+              f E = 0
+              f (T L l _ r) = 1 + f l
+              f (T _ _ _ r) = 1 + f r
+
+    test = height $ foldl (flip insert) emptySet [1..100]
+
+foldによって書いてみる -- yts
+
+    fold :: (forall l n r. H l n r -> b -> a -> b -> b) -> b -> T a d -> b
+    fold f z x@(T h l a r) = f h (g l) a (g r) where g = fold f z
+    fold f z E = z
+
+    member :: (Ord a) => a -> AVLSet a -> Bool
+    member (x :: a) (AVLSet t) = fold f False t
+      where f :: H l r n -> Bool -> a -> Bool -> Bool
+            f _ l a r = case compare x a of
+            EQ -> True; LT -> l; GT -> r
+
+    -- toList (AVLSet t) = fold (\h l a r -> l ++ [a] ++ r) [] t
+    -- height (AVLSet t) = <snip>
+
+* * * * *
+
+## データタイプから再帰を分離
+
+    newtype Fix f = Fix (f (Fix f)) 
+    type Rec r = r (Fix r)
+    type Stream a = Rec ((,) a)
+
+    stream (x:xs) = (x, Fix (stream xs))
+    tolist (a, (Fix b)) = a:tolist b
+
+    test = take 10 $ tolist $ stream [1..]
+
+もっといい項目名をつけたかったのだけど… -- yts
+
+* * * * *
+
+## 探索
+
+### 深さ優先探索
+
+    dfs :: (a -> [a]) -> a -> [a]
+    dfs f x = x:(f x >>= dfs f)
+
+### 幅優先探索
+
+    bfs :: (a -> [a]) -> a -> [a]
+    bfs f = bfs' . (:[])
+      where bfs' [] = []
+            bfs' xs = xs ++ bfs' (xs >>= f)
+
+    -- 一行で書くと
+    bfs f = concat . takeWhile (not.null) . iterate (>> f) . (:[])
+
+* * * * *
+
+## Graphical Sequence
+
+[mputの日記](http://mput.dip.jp/mput/?date=20051007#p01)より
+
+    isGraphic []     = True
+    isGraphic (x:xs) = or [isGraphic $ map (subtract 1) xs ++ ys | (xs,ys) <- choice x xs]
+
+choice の定義は[Programming\_玉手箱\_組合せ]()にある．
+
+--nobsun
+
+    splitAt' :: Int -> [a] -> Maybe ([a], [a])
+    splitAt' 0 xs = Just ([], xs)
+    splitAt' _ [] = Nothing
+    splitAt' n (x:xs) = splitAt' (n-1) xs >>= \(ys, zs) -> Just (x:ys, zs)
+     
+    isGraphical :: [Int] -> Bool
+    isGraphical = isGraphical' . reverse . sort
+      where
+        isGraphical' []     = True
+        isGraphical' (x:xs) = case splitAt' x xs of
+                              Just (ys, zs) -> isGraphical $ map (subtract 1) ys ++ zs
+                              Nothing       -> False
+
+グラフ的な列を列挙。
+
+    genGraphical :: Int -> [[Int]]
+    genGraphical 0 = [[]]
+    genGraphical n = nub $ concat [[ins m $ map (+1) ys ++ zs | (m, (ys, zs)) <- zip [0..] (splits xs)] | xs <- genGraphical (n-1)]
+      where splits xs = zip (inits xs) (tails xs)
+            ins a [] = [a]
+            ins a xxs@(x:xs) | x <= a = a:xxs
+                             | True   = x:ins a xs
+
+    graphicals :: [[Int]]
+    graphicals = concatMap genGraphical [0..]
+
+* * * * *
+
+Last modified : 2008/05/22 14:05:57 JST

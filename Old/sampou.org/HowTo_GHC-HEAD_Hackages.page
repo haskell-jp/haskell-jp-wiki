@@ -1,0 +1,58 @@
+# [HowTo\_GHC-HEAD\_Hackages]()
+
+[HowTo]():[GHC-HEAD]():Hackages
+
+* * * * *
+
+[HowTo\_GHC-HEAD]()で構築したghcの環境が前提。($HOME/ghc-HEADにインストールしている状況)
+
+インストールしておきたいHackage群。
+
+-   HEADのghcを使ってビルドするのでパス設定
+
+<!-- -->
+
+    $ export PATH=$HOME/ghc-HEAD/bin:$PATH
+
+* * * * *
+
+### hscolourをインストールする
+
+-   以後のHackageをインストールする時にはhaddockもインストールしたい。
+
+<!-- -->
+
+    % tar xvf hscolour-1.10.1.tar.gz
+    % cd hscolour-1.10.1/
+    % runghc Setup.hs configure --prefix=$HOME/ghc-HEAD
+    % runghc Setup.hs build
+    % runghc Setup.hs install
+
+最初のインストールでhscolourを入れることでhaddock --hyperlink-sourceが可能になる。
+
+    % runghc Setup.hs haddock --hyperlink-source
+    % runghc Setup.hs install
+
+再度インストールする必要あり。\
+
+**なお、このhscolourがインストールされたghc-HEADを使って[HowTo:GHC-HEAD](haskell.cgi?HowTo:GHC-HEAD)の通りghcを再ビルドすると、**
+**作成されるhaddockにはソースへのリンクが作成されるので何かと便利。**
+
+* * * * *
+
+#### utf8-stringをインストールする
+
+-   UTF-8を使えるようにする。
+
+<!-- -->
+
+    % tar xvf ~/archives/utf8-string-0.3.1.1.tar.gz
+    % cd utf8-string-0.3.1.1/
+    % runghc Setup.lhs configure --prefix=$HOME/ghc-HEAD
+    % runghc Setup.lhs build
+    % runghc Setup.lhs haddock --hyperlink-source
+    % runghc Setup.lhs install
+
+* * * * *
+
+Last modified : 2008/09/24 17:47:43 JST

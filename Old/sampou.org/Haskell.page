@@ -1,0 +1,133 @@
+# [Haskell]()
+
+* * * * *
+
+### Programming in Haskell ページへようこそ
+
+#### このサイトについて
+
+このサイトは、Haskell でプログラミングを楽しむためのサイトです。
+
+現在のところ、[WiLiKi](http://practical-scheme.net/wiliki/wiliki.cgi)
+という**WiKiシステム**で運用されています。WiLiKiの使い方は、
+[WiLiKi:WiLiKi:リファレンスマニュアル](http://practical-scheme.net/wiliki/wiliki.cgi?WiLiKi:��ե���󥹥ޥ˥奢��)を参照してください。
+
+##### メイリングリスト
+
+「Haskellプログラミングを楽しむための」メーリングリストがあります． [MailingList]()のページをご覧ください．
+
+##### チャット
+
+「Haskellプログラミングを楽しむための」チャット・ルームがいくつか存在します． [ChatRoom]()のページをご覧ください．
+
+##### イベント情報
+
+-   [HaskellEvent]() Haskell関連イベント
+-   [Haskell2009AutumnJP]() Haskell 秋の年会 2009 (2009-09-19 〜 23)
+-   [2009年忘年会]()
+
+##### サイトマップ
+
+-   [Introduction]() Haskell とは
+-   [Definition]() 仕様と標準ライブラリ
+-   [Tutorial]() チュートリアル
+    -   [やさしいHaskell入門](http://www.sampou.org/haskell/tutorial-j/)
+    -   [モナドのすべて](http://www.sampou.org/haskell/a-a-monads/index.html)
+    -   [なぜ関数プログラミングは重要か](http://www.sampou.org/haskell/article/whyfp.html)
+    -   GHCHacking GHCソースコードハッキング
+
+-   [Books]() 書籍
+    -   [『Real World
+        Haskell—実戦で学ぶ関数型言語プログラミング』](http://www.amazon.co.jp/exec/obidos/ASIN/4873114233/philoprogramm-22)
+        -   [『Real World
+            Haskell—実戦で学ぶ関数型言語プログラミング』の正誤表](http://hop.timedia.co.jp/show/book/Real%20World%20Haskell)
+        -   [Books\_RWH\_BugReport]() RWHの誤りなどを報告するページ
+        -   [Books\_RWH\_読書会]()
+
+-   [『関数プログラミングの楽しみ』](http://www.amazon.co.jp/exec/obidos/ASIN/4274068056/philoprogramm-22/)
+    -   [正誤表](http://fop.sampou.org/static/errata.html)
+    -   [サポートページ](http://fop.sampou.org/)
+    -   [Books\_FOP\_BugReport]() FOPの誤りなどを報告するページ
+
+-   [情報処理学会誌の連載:「Haskellプログラミング」のプログラム](http://www.sampou.org/haskell/ipsj/)
+-   ITproの連載：[本物のプログラマはHaskellを使う]()
+-   @ITの連載：[のんびり
+    Haskell](http://www.atmarkit.co.jp/fcoding/index/haskell.html)
+-   [SD\_200904]()技術評論社Software
+    Design誌2009年04月号「〜Haskellで学ぶ〜関数プログラミングことはじめ」
+
+-   Lightweight Language イベントでの発表資料
+    -   [LL Weekend 2004: Language
+        Update](http://www.sampou.org/haskell/ll2004/)
+    -   [LL Day & Night 2005: Language
+        Update](http://www.sampou.org/haskell/ll2005/)
+    -   [LL Ring2006: Language
+        Update](http://www.slideshare.net/sakai/haskell-llring2006-language-update)
+
+-   Everyday[?]() Everyday Haskell
+-   [Type]() 型
+    -   型や型推論に関する話題
+
+-   [Lazy]() 遅延評価
+    -   怠け者評価:)に関する話題
+
+-   [Memoise]() メモ化
+    -   Memoi[sz]e、Memoi[sz]ation、メモ化に関する話題
+
+-   [Trace]() トレース
+    -   printfデバッグのTips
+
+-   [ICFP]() ICFP プログラミングコンテスト
+    -   [ICFP2007]() 2007年の参加記録
+        -   プログラムのリファクタリング例
+
+-   [HowTo]() ハウツー
+    -   言語処理系のインストール法や使い方
+        -   [HowTo\_ProgrammingEnvironment]() プログラミング環境の作り方
+        -   [HowTo\_GHC]() GHC
+
+    -   HowTo:IDE[?]() 統合開発環境 (IDE)
+    -   ライブラリの用例
+        -   HowTo:List[?]() List
+        -   HowTo:Maybe[?]() Maybe
+        -   [HowTo\_Array]() Array
+
+    -   ツールの使い方
+        -   [HowTo\_QuickCheck]() QuickCheck
+
+-   [Programming] プログラミング
+    -   [Programming\_玉手箱]() 玉手箱
+    -   [Programming\_Marathon]() Haskell マラソン
+    -   [Programming\_Network]() Haskell でネットワークプログラミング
+    -   [Programming\_WayToHaskeller]() Haskeller への道
+
+-   CategoryTheory[?]() 圏論
+    -   [CategoryTheory\_圏論勉強会]()
+    -   [CategoryTheory\_CLTTr]() CLTT読書会
+
+-   [ShelarcySeminar]() 『本物のプログラマはHaskellを使う』読者の集い
+-   [HaskellClub]() Haskell同好会
+-   [HaskellCamp]() Haskell合宿
+-   [HaskellIdea]() Haskellアイデア
+-   [HaskellHackathon]() Haskell Hackathon
+
+-   [GHCHacks]() GHCのHack
+
+-   [GHCLibraries]() LibraryのTipsなど．．．
+
+-   [逆引き]()
+
+-   個人のページ
+    -   [nobsun]()
+    -   [shelarcy]()
+    -   [cut-sea]()
+    -   [sakai]()
+    -   [ikegami]()
+    -   [hyuki]()
+    -   [oskimura]()
+    -   [dekudekuplex]()
+    -   [takeo]()
+
+* * * * *
+
+Last modified : 2011/06/30 04:43:20 JST

@@ -1,0 +1,64 @@
+# [Yesod\_Programming\_Tips]()
+
+[Yesod]():[Programming]():Tips
+
+* * * * *
+
+-   [アクセスログの取得]()
+
+* * * * *
+
+### アクセスログの取得
+
+アクセスログを仕込んでみる。 YesodのインスタンスでonRequestを書いてやれば良い。
+
+    instance Yesod YesodExample where
+     approot _ = ""
+     onRequest = do
+       req' <- getRequest
+       let req = reqWaiRequest req'
+       (pp, files) <- liftIO $ reqRequestBody req'
+       ses <- getSession
+       -- Network.Wai.Request
+       liftIO $ do
+         putStrLn "----"
+         putStrLn $ "Method: " ++ (show . requestMethod) req
+         putStrLn $ "httpVer.: " ++ (show . httpVersion) req
+         putStrLn $ "Path: " ++ (show . pathInfo) req
+         putStrLn $ "query string: " ++ (show . queryString) req
+         putStrLn $ "Server Name: " ++ (show . serverName) req
+         putStrLn $ "Server Port: " ++ (show . serverPort) req
+         putStrLn $ "Request Headers: " ++ (show . requestHeaders) req
+         putStrLn $ "Secure: " ++ if isSecure req then "YES" else "NO"
+         putStrLn $ "Client Host Information: " ++ (show . remoteHost) req
+         -- Yesod.Request
+         putStrLn $ "Cookies: " ++ (show . reqCookies) req'
+         putStrLn $ "Lang: " ++ (show . reqLangs) req'
+         putStrLn $ "Nonce: " ++ reqNonce req'
+         putStrLn $ "GET: " ++ (show . reqGetParams) req'
+         putStrLn $ "POST: " ++ show pp ++ show files
+         -- Session
+         putStrLn $ "Session: " ++ show ses
+
+こんな感じで書いてみると、以下のようなログがアプリの起動端末にずらずらと表示される。
+
+    ----
+    Method: "GET"
+    httpVer.: "1.1"
+    Path: "/page/"
+    query string: "?a=1&b=cut-sea&c=%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%82%8F"
+    Server Name: "localhost"
+    Server Port: 3000
+    Request Headers: [("Host","localhost:3000"),("User-Agent","Mozilla/5.0 (X11; U; Linux i686; ja; rv:1.9.2.12) Gecko/20101027 Ubuntu/10.04 (lucid) Firefox/3.6.12"),("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),("Accept-Language","ja,en-us;q=0.7,en;q=0.3"),("Accept-Encoding","gzip,deflate"),("Accept-Charset","Shift_JIS,utf-8;q=0.7,*;q=0.7"),("Keep-Alive","115"),("Connection","keep-alive"),("Cookie","_SESSION=1VrDKpCW1HXIza2XIuE/HTNf4sFrSSP07XeuNFlfpgK05v7iqkL3VqPJKusxMEKEocafLEiaQsq7AaaZfTWmoH9nx/9SHKcksCH2224u+RwA")]
+    Secure: NO
+    Client Host Information: "localhost"
+    Cookies: [("_SESSION","1VrDKpCW1HXIza2XIuE/HTNf4sFrSSP07XeuNFlfpgK05v7iqkL3VqPJKusxMEKEocafLEiaQsq7AaaZfTWmoH9nx/9SHKcksCH2224u+RwA")]
+    Lang: ["ja","en-us","en"]
+    Nonce: yFNz5HXfBz
+    GET: [("a","1"),("b","cut-sea"),("c","\12371\12435\12395\12385\12431")]
+    POST: [][]
+    Session: fromList []
+
+* * * * *
+
+Last modified : 2010/11/21 09:59:50 JST

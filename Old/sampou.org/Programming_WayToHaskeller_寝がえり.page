@@ -1,0 +1,484 @@
+# [Programming\_WayToHaskeller\_寝がえり]()
+
+[Programming]():[WayToHaskeller]():寝がえり
+
+* * * * *
+
+## 寝がえり
+
+([「ねがえり」を編集する](http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:��������&c=e&l=jp))|([Haskellerへの道](http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&l=jp))
+
+### 勉強よりまず処理系のインストール
+
+まずはHaskellをインストールしてみる訳だけど、面倒なのはいきなりくじけ る。私のモットーはまずは動かしてみる。だ。(今決めた)
+もう何年も前から PC-UNIXの世界ではサードパーティー製のソフトをワンタッチでインストール できる仕組みがあったりする。 Linux だと
+rpm か? FreeBSD なら ports collection、 NetBSD だと package
+など。まぁ、NetBSDなんかだとバージョ ンが古かったりする可能性もあるが、気にしない。（そりゃ単に私がちゃんと 最新化管理してないからか?）
+
+私の生活環境は NetBSD1.6.2 なので package から make してインストールしてみる。
+
+インストール作業そのものが好きな人には何の刺激もないが、まずバカチョン でインストールできるHaskell処理系にはどんなんがあるんかいな?
+
+    cut-sea@jini> pwd
+    /usr/pkgsrc
+    cut-sea@jini> ./pkglocate Haskell
+    (snip)
+    lang/ghc/DESCR:GHC: The Glasgow Haskell Compiler.
+    lang/ghc/DESCR:The Glasgow Haskell Compiler is a robust, fully-featured, optimising
+    lang/ghc/DESCR:compiler for the functional programming language Haskell 98
+
+    (snip)
+
+    lang/hugs/DESCR:The Nottingham and Yale Haskell interpreter and programming environment.
+    lang/hugs/DESCR:   a Haskell interpreter and programming environment for developing
+    lang/hugs/DESCR:   cool Haskell programs.  Sources and binaries are freely available
+
+    (snip)
+
+    lang/nhc98/DESCR:nhc98 is a fully-fledged compiler for Haskell 98, the standard lazy
+    lang/nhc98/DESCR:compiler for an earlier version of the language. Written in Haskell,
+    lang/nhc98/DESCR:With hmake, a replacement for the other makes used in Haskell
+
+どうやら [Hugs](http://www.haskell.org/hugs)、
+[GHC](http://www.haskell.org/ghc/)、[nhc98](http://www.haskell.org/nhc98/)
+ってのがそうらしいので、全部入れちゃう。ここはHaskellの話題じゃないの
+でインストールの詳細は書かない。とにかくすでにインストールしてくれた先 人のおかげで失敗することなんてないでしょ。
+
+    cut-sea@jini> which nhc98
+    /usr/pkg/bin/nhc98
+    cut-sea@jini> which ghc
+    /usr/pkg/bin/ghc
+    cut-sea@jini> which ghci
+    /usr/pkg/bin/ghci
+    cut-sea@jini> which hugs
+    /usr/pkg/bin/hugs
+
+はい。処理系が手に入りましたね。
+
+### ど・れ・に・し・よ・う・か・な
+
+とりあえず、石橋を叩かず渡る派の私はこれらのコマンドをまんま呼び出して みる。まぁいざとなれば外から kill すりゃいいじゃないの。
+
+    cut-sea@jini> ghc
+    ghc-5.04.3: no input files
+    Usage: For basic information, try the `--help' option.
+
+ありゃ、だめだ。
+
+    cut-sea@jini> nhc98
+    nhc98: error: no source, object or archive file specified
+
+お前もかブルータス。
+
+    cut-sea@jini> ghci
+       ___         ___ _
+      / _ ? /?  /?/ __(_)
+     / /_?// /_/ / /  | |      GHC Interactive, version 5.04.3, for Haskell 98.
+    / /_??/ __  / /___| |      http://www.haskell.org/ghc/
+    ?____/?/ /_/?____/|_|      Type :? for help.
+
+    Loading package base ... linking ... done.
+    Loading package haskell98 ... linking ... done.
+    Prelude> ^D Leaving GHCi.
+
+お、いけそう。
+
+    cut-sea@jini> hugs
+    __   __ __  __  ____   ___      _________________________________________
+    ||   || ||  || ||  || ||__      Hugs 98: Based on the Haskell 98 standard
+    ||___|| ||__|| ||__||  __||     Copyright (c) 1994-2001
+    ||---||         ___||           World Wide Web: http://haskell.org/hugs
+    ||   ||                         Report bugs to: hugs-bugs@haskell.org
+    ||   || Version: December 2001  _________________________________________
+
+    Haskell 98 mode: Restart with command line option -98 to enable extensions
+
+    Reading file "/usr/pkg/share/hugs/lib/Prelude.hs":
+                       
+    Hugs session for:
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    Type :? for help
+    Prelude> ^D [Leaving Hugs]
+
+ほほー、こいつが hugs ね。
+
+実は ghc と nhc98 てのはコンパイラらしい。オンラインマニュアルの最初に
+compilerって出てたりもするんで多分そうだろう。今のところ、あまり細かい ことは気にしない。 一方 ghci と hugs
+ってのが何やらプロンプトが現れたので interactive に遊べそう。
+
+最初はプロンプトからちまちま入力してみるのがいい。すぐに反応も見れて楽 しめた方が勉強する気にもなるってもんだ。とりあえずプロンプトが出て来た
+奴で進めることにしましょう。
+
+hugs ってのが軽くてよさそうってのをどっかで読んだような気がするんで hugs で GO!
+
+### Preludeってなんぞや?
+
+インタプリタのプロンプトって
+
+    cut-sea@jini> gosh
+    gosh> ^D
+    cut-sea@jini> stk
+    Welcome to the STk interpreter version 4.0.1 [NetBSD-1.6.2-i386]
+    Copyright 1993-1999 Erick Gallesio - I3S - CNRS / ESSI <eg@unice.fr>
+    STk> ^D Bye.
+
+みたいに「俺は gosh だぜ！」とか「我輩は STk なり！」って主張するか、
+もしくは全く主張なく"\>"みたいに印字するものと思ってた。なぜか Haskell は "ghci\>" とか "hugs\>"
+とかってんじゃなく、"Prelude\>" ってのがプロン プトになってる。Prelude とは何ぞや? と気になるもの。辞書引くと前奏曲と
+か序幕とかなんだけど、芝居がかった名前ですぞ。
+
+### ヘルプ
+
+この WiKi の HowTo:List[?]() とか HowTo:Maybe[?]() とか見ると入力事例が
+あるんで、真似してみましょう。ただ、ところどころプロンプトがなぜか List\> とかって変わってるのが気になる。
+
+どうも事例の雰囲気をじーーーーっっと見ているとプロンプトのところに出て いるのはモジュールの様なものかな〜そんな感触である。 (念のため断ってお
+くが現時点で本当に私は入門者なので正しいかどうか不明だから信用しないよ うに)
+
+まずは起動メッセージのところに :? ってしたらヘルプが見れる様なことが書 いてあったので、メッセージを確認して、色々試してみよう。
+
+    Prelude> :?
+    LIST OF COMMANDS:  Any command may be abbreviated to :c where
+    c is the first character in the full name.
+
+    :load <filenames>   load modules from specified files
+    :load               clear all files except prelude
+    :also <filenames>   read additional modules
+    :reload             repeat last load command
+    :project <filename> use project file
+    :edit <filename>    edit file
+    :edit               edit last module
+    :module <module>    set module for evaluating expressions
+    <expr>              evaluate expression
+    :type <expr>        print type of expression
+
+    :?                  display this list of commands
+    :set <options>      set command line options
+    :set                help on command line options
+    :names [pat]        list names currently in scope
+    :info <names>       describe named objects
+    :browse <modules>   browse names defined in <modules>
+    :find <name>        edit module containing definition of name
+    :!command           shell escape
+
+    :cd dir             change directory
+    :gc                 force garbage collection
+    :version            print Hugs version
+    :quit               exit Hugs interpreter
+    Prelude> [Leaving Hugs]
+
+おお？なんか scheme48 を思い出してしまった。えっと、勘が正しければこう かな？えいっ！
+
+    Prelude> :module List
+    ERROR - Cannot find module "List"
+
+あらハズレだ。エラーが出るところを見ると Prelude ってのがモジュール名かと思ってたのはハズレかもしれん。ならば！！と言うことで
+
+    Prelude> :load List
+    Reading file "/usr/pkg/share/hugs/lib/List.hs":
+    Reading file "/usr/pkg/share/hugs/lib/Maybe.hs":
+    Reading file "/usr/pkg/share/hugs/lib/List.hs":
+                       
+    Hugs session for:
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    /usr/pkg/share/hugs/lib/Maybe.hs
+    /usr/pkg/share/hugs/lib/List.hs
+    List>          <= コレ！！
+
+おおっ、なんかイけたみたいだよ。じゃあ、調子に乗って Maybe にも。
+
+    List> :load Maybe
+    Reading file "/usr/pkg/share/hugs/lib/Maybe.hs":
+                       
+    Hugs session for:
+
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    /usr/pkg/share/hugs/lib/Maybe.hs
+    Maybe> [Leaving Hugs]
+
+ぱちぱちぱち。って、まだ何の式も打ち込んでないぞ。いいのか?
+
+で、これって分かると思うけどファイルの path ですよね。じゃぁ現物見ましょ
+う。なんせインストールをバカチョンでやったんで、どこに何のファイルが入っ たかなんて押えてないしね。
+
+    -----------------------------------------------------------------------------
+    -- Standard Library: List operations
+    --
+    -- Suitable for use with Hugs 98
+    -----------------------------------------------------------------------------
+
+    module List (
+        elemIndex, elemIndices,
+        find, findIndex, findIndices,
+        nub, nubBy, delete, deleteBy, (??), deleteFirstsBy,
+        union, unionBy, intersect, intersectBy,
+        intersperse, transpose, partition, group, groupBy,
+        inits, tails, isPrefixOf, isSuffixOf,
+
+List.hs の中身です。しっかと module List の文字が光って見えますね。光っ
+て見えませんか？てなわけで、やーっぱモジュールじゃん。しかもいっぱい haskell のコードがあるんで、いずれ勉強に役立つやもしれず。
+
+それで、もう一度ようく、 :load の結果を見てみると、 :load List の結果 として、どうやら
+Prelude.hs/Maybe.hs/List.hs の三つが出現している。
+
+そこでロードした後に、もしかしたらモジュールを飛び回れるかも？とか思い 試してみる。
+
+    Prelude> :load List
+    Reading file "/usr/pkg/share/hugs/lib/List.hs":
+    Reading file "/usr/pkg/share/hugs/lib/Maybe.hs":
+    Reading file "/usr/pkg/share/hugs/lib/List.hs":
+                       
+    Hugs session for:
+    /usr/pkg/share/hugs/lib/Prelude.hs
+
+    /usr/pkg/share/hugs/lib/Maybe.hs
+    /usr/pkg/share/hugs/lib/List.hs
+    List> :module List
+    List> :module Maybe
+    Maybe> :module Prelude
+    Prelude> :module List
+    List> :module Maybe
+    Maybe> :module Prelude
+    Prelude> [Leaving Hugs]
+
+ぱちぱちぱちぱち。でも原理はよく分からないね。ただ、List ってモジュー ルが Maybe
+ってモジュールを必要とするらしく、芋づる的にロードされるら しいってのは分かる。 :module ってのは Gauche とかで言うところの
+select-module みたいなもんかなぁ。
+
+ちなみに ghci だと、
+
+Prelude\> :module List Prelude List\> :module Maybe Prelude Maybe\>
+:module List Maybe Prelude Maybe List\> Leaving GHCi.
+
+こんな風にプロンプトに複数の module をロードしてやることでプロンプトに
+も複数のものが表示されますね。意味は知らんが、直観的にはなんとなく分か るような気がしますよね？この辺もその内分かるようになるでしょう。多分。
+
+### Emacs を使いたい
+
+さらに調子に乗って関数なんぞを定義してみよう。 まずはなんてったって、クイックソートでしょう。 Haskell の入門だと大抵
+出ているので、試してみましょう。
+
+    quicksort  []           =  []
+    quicksort (x:xs)        =  quicksort [y | y <- xs, y<x ]
+                            ++ [x]
+                            ++ quicksort [y | y <- xs, y>=x]
+
+こんなコードだね。んじゃレッツトライ！
+
+    Prelude> quicksort [] = []
+    ERROR - Syntax error in input (unexpected `=')
+
+ありゃりゃ？もしかしてデータ型の定義が先にいるのかしらん。
+
+    Prelude> quicksort :: [a]->[a]
+    ERROR - Undefined variable "quicksort"
+    Prelude> 
+
+むむむ、だめだぞコレ。なんだろう？？？
+
+というちょっとわざとらしいフリをしてしまったけど、実際最初は結構迷った りします。私の場合にも結局教えてもらったんですよね。
+実はプロンプトから直接定義したりできないんだってさ。これってちょっと、 いや、かなり不便かも。対話的にイロイロできないってのはコーディングから
+デバッグまでのサイクルがひょいひょい回らないんで、個人的にはひどく嫌な わけだ。
+
+実は hugs から :e を使うと環境変数 EDITOR で設定されたエディタが立ち上
+がる。こいつを使ってみよう。使えればまぁなんとかなるかも知れない。
+
+その前に、 lhs っていう拡張子のファイルについて簡単に説明しちゃいます。 hugs のオンラインマニュアルを見ると literate
+scripts と紹介してある。 これは基本的に haskell 処理系に対しては、全部コメント扱いになるファイ ルなのだが、行頭から \>
+という風に
+
+リダイレクト記号と空白から始まる行だけはコードと認識されるんだって。 例えば、こんな感じに書くんだとさ。
+
+    begin tag ...
+
+    > quicksort  []           =  []
+    > quicksort (x:xs)        =  quicksort [y | y <- xs, y<x ]
+    >                         ++ [x]
+    >                         ++ quicksort [y | y <- xs, y>=x]
+
+    end tag ...
+
+使い道としては コメント扱いにするエリアに HTML のタグや WiKi のタグ、 TeX のタグなんぞを書いておけば、そのまま
+test.lhs を文書などに貼り付け ることが出来ちゃうのだ。(わー便利ー) もちろん普通に test.hs
+なプログラムを書いておいてもいいんだけどさ。
+
+じゃぁ早速、少しプログラムにバグを仕込んでおいて、試してみましょう。
+
+    Prelude> :load test.lhs
+    Reading file "test.lhs":
+    Parsing
+    ERROR "test.lhs":3 - Program line next to comment
+
+うむ、では正しいコードに修正してみる。
+
+    Prelude> :e test.lhs
+    Reading file "test.lhs":
+                       
+    Hugs session for:
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    test.lhs
+
+エディタで修正後、保存して抜けるとこんな感じになるので、ちょいと quicksort を実行してみましょう。
+
+    Main> quicksort [2,9,1,0,3,6,2,7,6,4,8,9]
+    [0,1,2,2,3,4,6,6,7,8,9,9]
+    Main> 
+
+わーい。ぱちぱちぱち。素晴らしい！
+
+ちなみによーく見るとプロンプトが Main になっておりますね。これがどうも user
+のためのモジュールっつうか評価環境なんだろうか。そんな雰囲気。
+
+さてと。。。
+
+それでも scheme + emacs でコードを書いていた私としては、どうもイマイチ 感は拭えない。
+なんせエディタとプロンプトを行ったり来たりしないといけないしさ。
+
+もちろん、NetBSD の package から make した hugs だと readline が生きて いるらしく、hugs
+のプロンプトからちゃんと行編集も可能だったりするんだ けど、やっぱりねぇ。。。 というわけで emacs
+で画面を分割して使えないんかな？というと、実は使え ます。ハイ。
+
+まずは準備としてここに emacs のための haskell modeってのがあるんで、 emacs
+使いの方は引っ張って来るよろし。でもってインストールしましょう。 これも別に難しくないので installation-guide
+を見て使えるようにしてくだ さい。
+
+そしたら配布物に入っている .emacs を自分の .emacs にコピぺしましょう。 もしあなたが、hugs じゃなくて ghci
+を使っているなら
+
+    ;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+    ;(add-hook 'haskell-mode-hook 'turn-on-haskell-hugs)
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
+
+こんな風に最後の方を修正してください。 hugs を ghci に変えた行を追加し て haskell-mode-hook ってのに
+add-hook します。 hugs の方はコメントア ウトしちゃっていいです。 もち、 hugs を使っている人はそのまま使えちゃいます。
+
+    cut-sea@jini> emacs test.lhs &
+
+って emacs を立ち上げたらコードを開いているバッファ上で C-c C-l って打 ち込んでみればいいんだって、ワクワク。
+(コントロールキーを押しながら c(シー)とl(エル)です)
+
+    Hugs session for:
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    Type :? for help
+    Prelude> :load /home/cut-sea/script/haskell/test.lhs
+
+    Reading file "/home/cut-sea/script/haskell/test.lhs":
+    Parsing........................................................................
+    Dependency analysis............................................................
+    Type checking..................................................................
+    Compiling......................................................................
+
+    Hugs session for:
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    /home/cut-sea/script/haskell/test.lhs
+    Main> 
+
+どうでしょうか？画面分割されて、こんな風に Main プロンプトが出なかった でしょうか？ここまでくればかなり便利になりますね？ emacs
+の編集機能を 駆使しつつ、適当に C-c C-l ってやれば良いんです。だいぶ便利じゃぁあり ませんか？
+
+ちなみにghciの方を有効にして同様に試すと、
+
+    Prelude> :load /home/cut-sea/script/haskell/test.lhs
+    Compiling Main             ( /home/cut-sea/script/haskell/test.lhs, interpreted )
+
+
+    /home/cut-sea/script/haskell/test.lhs:2:
+        Warning: No 'main' defined in module Main
+    Ok, modules loaded: Main.
+    *Main>
+
+あり？ main が無いって叱られます。 でも、 quicksort を実行するとちゃんと評価可能ですんで、あまり気にしな
+いで良いのかも知れません。まぁ warning だしね。メッセージからする とHaskellってCみたく main がいるのやも知れんな。
+ともあれ便利な開発環境が手に入ったところで、そろそろ腰を据えて取り掛か ろうかしらん。
+
+### 【ちょっとひとやすみ】「非正格」って？
+
+> Haskell は非正格純粋関数型言語っていう冠がついてたりする。いーじゃない
+> ですか。なんかこう難しそうで。会社で「非正格純粋関数型言語Haskellって
+> のがあってさ〜」なんて話そうもんならなんか恰好よさげじゃないですか。え え。もしかしたら女の子の瞳がハートマークになるかも知れませんよ。
+>
+> ところが、「非正格」って何さ？って聞かれて「いや、まあそのなんだ」とか なんとかしどろもどろになると途端に株が下がるかもしれない。
+>
+> どうも正格関数ってのは
+>
+>     f _|_  = _|_
+>
+> ってなる様なfって関数で、そうじゃないものを非正格って言うんだとさ。ちなみに \_|\_ は本当は一文字の記号でボトムとか読むらしい。
+>
+> 上司：「おいおい、良くわかんねぇよ。 いきなり\_|\_とかワケわかんない記号出して誤魔化そうとするな。 おまえは大体そういう・・・」
+>
+> はい、そうですね。ごもっともでございます。
+>
+>     _|_ は未定義値
+>
+> です。つまりこんな感じですね。
+>
+>     妻：「ねぇ、あなた！いつもいつも仕事仕事って、私と仕事とどっちが大切なの！？」
+>     夫：「そんなん決められっかよ！比較できるもんじゃねーだろ！！」
+>
+> コレですコレ！ドラマにありがちなシチュエーションだけどさ。妻は " 私 \> 仕事 "
+> っていう式を夫に評価させようとするわけだけど、夫はそんな式は評価できねぇよ！って評価できません値を返すよね？
+> あと、水割りならぬトリカブト割り "1/0" なんてのを飲ませると 死んじゃったり。これも無限大の値を返せないんで \_|\_
+> になる。いや、無限大を意味するものを返してもいいけどさ。話が続かないから返せないことにしてよ。
+>
+>     上司：「おい、田中君いつもの仕事、あれやっといてよ。
+>     　　　　必要な資料はコレとコイツでいいんだよな。」
+>     田中：「はい、分かりました」
+>
+> ってな会話の後、田中君はいつもの仕事って関数に渡されたデータを適用する んですね。
+>
+>     itumono_sigoto kore koitu
+>            => kekka
+>
+> 翌日も同じ様なやり取りが繰り返されます。
+>
+>     上司：「おい、田中君いつもの仕事、あれやっといてよ。
+>     　　　　必要な書類はコレとコイツでいいんだよな。
+>     　　　　あっ、あとん〜とコレコレ！
+>     　　　　必要になるかどうかわかんねぇけど一応渡しとくわ、
+>     　　　　あとよろしく。」
+>     田中：「はい、分かりました（おいおい必要かどうかわかんねぇものってなんだよ）」
+>
+> そう、実は今田中君が渡されたコレコレってのは「会社と家庭どっち取るんだ
+> よ！？」とか、"トリカブト割り"みたいに田中君がもし扱ってしまったら大変 なことになっちゃうアレです。
+>
+> まさに
+>
+>     itumono_sigoto kore koitu korekore
+>
+> ってのは
+>
+>     itumono_sigoto kore koitu _|_
+>
+> な訳ですね。
+>
+> これに対して正格な田中くんは仕事するまえに、渡されたデータを必要かどう
+> か判断するべく最初に評価するんだけど、コレコレを見た瞬間に「そんなん決 められっかよ！」とか死んじゃったりとかしちゃいます。
+>
+>     itumono_sigoto kore koitu _|_
+>            => _|_　（これがそういう状態なわけです）
+>
+> それに対して非正格な田中君であれば、必ずしもそうなるとは限りません。も
+> ちろん「必要になるかどうか分からないけど」って渡されたコレコレってやつ
+> が本当に必要になってしまって、田中君が見てしまうと結果は同じなんだけど、
+> もし結果的に必要なければ、田中君はちゃんと\_|\_以外の値を返せるんですよ ね。
+>
+> それがつまり、
+>
+>     正格関数ってのは
+>     f _|_  = _|_
+>     ってなる様なfって関数で、そうじゃないものを非正格関数という。
+>
+> これなんですね。ちなみに正格ってのは strict つまり厳格なとかって意味だ
+> けど、まぁ真面目なやつが変に不必要な情報に頭悩ませてしまって、それが元
+> で仕事を放り出す結果になってしまい、そうじゃないnon-strict（非正格）な
+> やつはなぜか問題なく仕事をしちゃうことがままあるのは因果なもんですね。
+>
+> さらには文脈によっては"非正格な"評価ってのを "怠惰な"評価とかって言わ
+> れることがあるんですが、怠惰なヤツの方が仕事をしちゃう可能性があるって のも・・・。（冗談ですってば）
+>
+> ([「ねがえり」を編集する](http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:��������&c=e&l=jp))|([Haskellerへの道](http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&l=jp))
+
+* * * * *
+
+Last modified : 2007/05/25 00:05:58 JST

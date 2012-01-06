@@ -1,0 +1,219 @@
+# [Programming\_玉手箱\_リスト]()
+
+[Programming]():[玉手箱]():リスト
+
+* * * * *
+
+[Programming\_玉手箱]()
+
+[リストの長さの比較]()
+
+[pos+]()
+
+[連続した n 要素のリストのリスト]()
+
+[Graph の統合]()
+
+-   [木の統合]()
+
+[集合の統合]()
+
+[xzip]()
+
+[リストをグループ化する]()
+
+-   [n 番飛ばし毎にグループに分ける]()
+-   [n 個ずつグループ化する]()
+
+* * * * *
+
+## リストの長さの比較
+
+リスト同士の長さを比較するというより、むしろ指定した値と指定したリスト の長さを比較するという方がよくありそう。これならリストに無限リストを渡
+されても大丈夫。
+
+    shorterThan, longerThan :: Int -> [a] -> Bool 
+    shorterThan n = null . drop (n-1)
+    longerThan  n = not . null . drop n
+
+あれっ。これ名前は逆の方がいいかな？ Curry 化されてなきゃ。逆だろうな。 逆にするなら、
+
+    cmpLen :: Int -> [a] -> Ordering
+    cmpLen 0 [] = EQ 
+    cmpLen n ls = case splitAt (n-1) ls of
+                    (_,[])  -> GT
+                    (_,[_]) -> EQ
+                    _       -> LT
+
+というのを定義しておけばいいかな。
+
+* * * * *
+
+## pos+
+
+整数のリストをもらって、おのおのの要素にその位置を示す数を加えてかえす -- Ansi Common Lisp Ex 3.5
+
+    posAdd :: [Int] -> [Int]
+    posAdd = zipWith (+) [0..]
+
+* * * * *
+
+## 連続した n 要素のリストのリスト
+
+    contElems 3 [1,2,3,4,5] → [ [1,2,3],[2,3,4],[3,4,5] ]
+
+2ch よりの話題 80さんと同じもの
+
+    contElems :: Int -> [a] -> [[a]]
+    contElems n = (!! n) . transpose . map inits . tails
+
+* * * * *
+
+## Graph の統合
+
+[WiLiKi:Scheme:リスト処理](http://practical-scheme.net/wiliki/wiliki.cgi?Scheme:�ꥹ�Ƚ���)「木の統合」での話題から。
+
+> ノード(シンボル)の親子関係の集合が与えられているとき、それらを全て満たす木の集合を求める。
+>
+> 親子関係はこんなリストで与えられている:
+>
+> (親 子1 子2 …)
+>
+> 子の親は常にユニーク。循環は無いものとする。兄弟関係(親を共有する子の順序)は保存する。入力には同じシンボルが「親」に二度以上出現しないものとする。
+>
+> 例えば、最初のセットが ((A B C) (B D E) (F G) (H F I) (J A))の場合、出力は：
+>
+> ((J (A (B (D) (E)) (C))) (H (F (G)) (I)))
+
+### 木の統合
+
+先ずは簡単な木の場合
+
+    import List
+    type Vertex = Char
+    type Relation = (Vertex, [Vertex])
+
+    data Tree a =  Tree a [Tree a] deriving (Show, Read)
+
+    roots :: [Relation] -> [Vertex]
+    roots rels = filter (not . flip elem children) parents
+                 where children = nub $ concat $ map snd rels
+                       parents  = map fst rels
+
+    makeTree :: [Relation] -> Vertex -> Tree Char
+    makeTree rels v = Tree v $ map (makeTree rels) $ lookupTos v rels
+
+    lookupTos :: Vertex -> [Relation] -> [Vertex]
+    lookupTos v []                  = []
+    lookupTos v (r:rs) | v == fst r = snd r
+                       | otherwise  = lookupTos v rs
+
+    makeForest :: [Relation] -> [Tree Char]
+    makeForest rels = map (makeTree rels) $ roots rels
+
+* * * * *
+
+## 集合の統合
+
+[はずかしいだいありー](http://www.namikilab.tuat.ac.jp/~sasada/diary/200308.html#d20)、[ヒビルテ](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20030821#p02)、[WiLiKi:Scheme:リスト処理](http://practical-scheme.net/wiliki/wiliki.cgi?Scheme:�ꥹ�Ƚ���)より、
+
+> (子)リストのリストがあって、子リストにはシンボルが2個以上入ってたとする。たとえば、((A B) (C D) (E F) (A G) (H
+> F I)) のような感じ。
+>
+> これを、同じシンボルを含む子リストはまとめたいとする。たとえば、例で言えば ((A B G) (C D) (E F H I))
+> のようなリストを返す。
+
+nobsun の解
+
+    import List
+
+    solve :: Eq a => [[a]] -> [[a]]
+    solve = foldr foo [] 
+
+    foo :: Eq a => [a] -> [[a]] -> [[a]]
+    foo x [] = [x]
+    foo x ccs@(c:cs)
+     = case bar x c of
+         [] -> c:foo x cs
+         xc -> foo xc cs
+
+    bar :: Eq a => [a] -> [a] -> [a]
+    bar ps qs = case intersect ps qs of
+                  [] -> []
+                  is -> union ps qs
+
+[Y. Hanatani
+さんによるスマートな解](http://www.lab2.kuis.kyoto-u.ac.jp/~hanatani/tdiary/?date=20030822)
+
+    import List
+     
+    solve xs = foldr solve' xs (concat xs)
+     
+    solve' x xs = case partition (elem x) xs of
+                  (p, q) -> foldl union [] p : q
+
+-   (concat xs) の代わりに (nub (concat xs)) あるいは (foldl union [] xs)
+    でもいいっかもしれない。-- nobsun
+
+* * * * *
+
+## xzip
+
+[ヒビルテ](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20030617)より
+
+> 長さの等しい二つのリスト[a1; a2...; an]と [b1; b2...; bn]を受け取って, [(a1, bn); (a2, bn
+> - 1); ...; (an, b1)] を返す関数を書きなさい。ただし、
+>
+> -   nをあらかじめ知ることはできない
+> -   与えられた二つのリスト以外のリストを使ってはならない
+> -   再帰呼び出しは高々(n + 1)回しか行ってはならない
+> -   全体の計算量はO(n)でなければならない
+
+nobsun の最初の解
+
+    xzip xs ys = zip xs (reverse ys)
+
+(reverse ys) で中間リストをつくっているので駄目？再帰呼び出しも2n回になるのかなぁ
+
+あおきさんの解
+
+    xzip xs ys = f where (f,s) = xzip' xs ys
+
+    xzip' [] ys = ([], ys)
+    xzip' (x:xs) ys = ((x,y):list, ys')
+                      where (list, (y:ys')) = xzip' xs ys 
+
+なるほどですね。
+
+で、nobsun の改良解？
+
+    import List (mapAccumR)
+    xzip xs ys = snd $ xzip' xs ys
+                 where xzip' = flip $ mapAccumR f 
+                       f (y:ys) x = (ys,(x,y))
+
+* * * * *
+
+## リストをグループ化する
+
+### n 番飛ばし毎にグループに分ける
+
+blog:Everyday:2005-01-11
+
+    f n = foldr (\x y -> (x:last y):init y) (replicate n [])
+
+    f5 n = transpose . unfoldr phi
+        where phi [] = Nothing
+              phi xs = Just $ splitAt n xs
+
+### n 個ずつグループ化する
+
+blog:Everyday:2005-01-13
+
+    f1 n = unfoldr phi
+        where phi [] = Nothing
+              phi xs = Just $ splitAt n xs
+
+* * * * *
+
+Last modified : 2008/07/03 21:36:01 JST

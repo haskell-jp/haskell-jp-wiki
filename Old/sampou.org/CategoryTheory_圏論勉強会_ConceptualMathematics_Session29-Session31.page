@@ -1,0 +1,363 @@
+# [CategoryTheory\_圏論勉強会\_ConceptualMathematics\_Session29-Session31]()
+
+[CategoryTheory]():[圏論勉強会]():[ConceptualMathematics]():Session29-Session31
+
+* * * * *
+
+## 第十八回圏論勉強会
+
+2006-7-9(日) [男女共同参画センター4F
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html) 8:45〜17:00
+
+写真 :
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200607/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200607/ct/)
+
+出席者
+
+          小林 日下部 久井     　　 |ス
+      　+--------------------+ 　　 |ク
+      酒|                    | 　　 |リ
+      井|                    | 　　 |｜
+      　+--------------------+  　　|ン
+        　shelarcy 今井         　　|
+
+### Session29 から
+
+## 第十九回圏論勉強会
+
+2006-7-23(日) [男女共同参画センター4F
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html) 8:45〜17:00
+
+出席者
+
+        　　　　 　shelarcy　　　　 |ス
+      日+--------------------+ 　　 |ク
+      下|                    | 　　 |リ
+      部|                    | 　　 |｜
+      　+--------------------+  　　|ン
+        　　　　　酒井/今井    　 　|
+
+### Article V, Exsercise 6. から
+
+-   Exercise 6
+    -   [解答](http://ic30.mixi.jp/photo/bbs_comm/86/61/92888661_202.jpg)??
+        （自信なし）
+        -   X → B\^A × C\^B と X × X → C\^A は1対1に対応
+        -   X → X × X は任意のXで一つだけ定まるので、図式から、X → B\^A × C\^B と X → C\^A
+            は1対1に対応
+        -   よって、B\^A × C\^B に、対応する C\^A を割り当てる射を γ とすればよい。
+            -   「f : X → B\^A, 「g : X → C\^B として、γ o <「f, 「g \> ＝ 「gf
+
+-   それ以降
+    -   一人しかいなくなってしまったため、Exercise は次回に回す事にして淡々と読む
+
+### Session 30
+
+-   Exercise がないため、とりあえず読み進めておく
+
+## 第二十回圏論勉強会
+
+2006-8-13(日) [男女共同参画センター4F
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html) 8:45〜17:00
+
+写真 :
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200608/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200608/ct/)
+
+### 雑談
+
+-   ソフトウェア技術の輸出規制
+    -   色々と厳しくなっている
+        -   今まで規制対象だった国々に対してはより制限が厳しいという形で、基本的に規制されるようになっている。
+
+    -   アメリカのルールと中国のルールが違う
+        -   アメリカのルールがどうと言うと、中国は違うルールを採用していると怒られる
+        -   中国経済は完全に外国資本に寄りかかっているので、内戦とか北朝鮮(との軍事同盟)に巻き込まれるなどの理由により戦争が起きて、外資がみんな引き揚げてしまったら終わり。だから、一刻も早く国内に技術を定着させようと、違うルールを採用しているんじゃないかな？
+
+### Article V の Exercise 7. 以降の Exercise
+
+## 第二十一回圏論勉強会
+
+2006-9-17(日) [男女共同参画センター4F
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html) 9：00〜17:00
+
+写真 :
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200609/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/)
+
+出席者
+
+          日下部　shelarcy     　　 |ス
+      　+--------------------+ 　　 |ク
+      　|                    | 　　 |リ
+      　|                    | 　　 |｜
+      　+--------------------+  　　|ン
+        　 酒井　　　今井       　　|
+
+### 今後の予定などについての雑談
+
+-   次読む本をどうするか
+    -   型理論を勉強しないと論文を読んでいけないけど、Types and programming Language (TAPL)
+        を読もうとすると型理論勉強会になってしまうよね
+        -   TAPL を、圏論に落とせばどうなるかを考えながら読むとか
+        -   それは結構しんどそう
+
+    -   最初に論文にあたって分からないことをどんどん調べていく感じでも良いかもしれないけど、ここでそれをやろうとすると資料が足りなくて不便
+    -   [PPL Summer School
+        2006](http://www.tom.sfc.keio.ac.jp/~sakai/hiki/?PPLSummerSchool2006)
+        での講演に従うと
+        -   自分で題材を探して、圏論を使ってどう定義できるか調べてみるのが良いんじゃないだろうか？
+        -   でも、どうやって題材を見つけるかが問題。宿題にすると、誰も見つけてこなそうだし……
+        -   圏論と型理論の繋ぎ目のようなものが見えてくると、題材は発見しやすいかも
+        -   じゃあ、やっぱり "Categories for Types" か "Categories, Types and
+            Structures" をやるのが良いかな？
+            -   "Categories, Types and
+                Structures"なら、「圏論学習の道しるべ」に示されているうちの初期のいくつか（普遍射、極限・余極限、随伴、米田の補題）をカバーできそう。
+            -   "Categories for
+                Types"は、www.kurims.kyoto-u.ac.jp/\~hassei/reading\_list.html\#category
+                に少し紹介があります。
+
+-   昨日の RHG 読書会はどんな感じだった？
+    -   [RHG読書会::東京
+        Revolution::ふつうのHaskellプログラミング](http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=RHG�ɽ��::���+Revolution::�դĤ���Haskell�ץ���ߥ�)
+    -   SFの話とかになった。冥王星とか。
+        -   なんで冥王星がなくなると星占いの人達が困るんだろう？そんなので運命が変わるのかね。
+            -   人類の無意識下に何かしらの影響はあるかもしれないけど。
+            -   未来に起こった出来事で過去が修正されたりするんじゃあるまいか。
+                -   漫画の辻褄が合わないところが修正されたり。
+                -   論文の間違いが別論文で指摘されると元論文も修正されたり。
+                -   冤罪でも裁判で判決が出たら事実になったり。
+
+-   「冥王星は蠍座の守護星」らしいので、星占いの人達が困るらしいです[当日参加しなかった者です]
+
+### Article V の Exercise 10 から
+
+-   Exercise 10
+    -   [解答1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/DSCN0271.html)、[2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/DSCN0272.html)、[3](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/DSCN0273.html)
+        -   Hom(A×A, A) 〜 Hom(A, A\^A) および Hom(A×D, A) 〜 Hom(D, A\^A)
+            から、まず A×A→AとA×D→Aについて考えてみる。
+            -   A×D→A が4つあるから、D→A\^Aも4つある、すなわちA\^Aのグラフに点は4つ。
+            -   A×A→A が4つあるから、A→A\^Aも4つある、すなわちA\^Aのグラフに矢印は4本。
+
+        -   A×A→A の4つの射とは、具体的には？
+            -   (s,s) → s, (t,t) → tは固定、(s,t)、(t,s)がそれぞれ s か t に行く（4通り)
+
+        -   ここからカリー化（っぽいこと）をして、A→A\^Aの4つの射を考えてみると
+            -   (s,s) → s, (t,s) → s or t から
+                -   s → (s → s) ∧ (t → s) もしくは
+                -   s → (s → s) ∧ (t → t)
+
+            -   同じく、(t,t) → t, (s,t) → s or t から
+                -   t → (t → t) ∧ (s → s) もしくは
+                -   t → (t → t) ∧ (s → t)
+
+        -   A → A\^A の
+            sをグラフ上の矢印のお尻、tを先頭とみなせば、[こんな感じ](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/DSCN0273.html)のグラフに。
+
+-   Exercise 11
+    -   [(a)の解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/DSCN0267.html)
+        -   T×1とTの間のisomorphism（＝ρ）をuniqueだとみなした場合に成立
+        -   ρを消せない場合は…？
+
+    -   [(b)の解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/DSCN0266.html)
+        -   easy。
+
+    -   [(c)の解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/DSCN0269.html)
+        -   …答えが出ない。
+            -   X×Tを使うと、どうしてもT×X→X×Tが残る。
+
+        -   T×XをX×Tと勘違いしての出題ミス？
+            -   参考：[X×TをT×Xと置き換えての(c)の解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200609/ct/DSCN0270.html)
+
+### 二次会
+
+-   トンデモ本
+    -   『ソ連は存在しなかった』（？）に吹いた
+    -   昔矢追純一のファンでした
+        -   [『カラスの死骸はなぜ見あたらないのか』](http://www.amazon.co.jp/exec/obidos/ASIN/4277880118)とか最高に面白いよ。表題のカラスの死骸に関する考察とか、展開の斜め上っぷりがすごい。
+
+    -   量子ファイナンス
+        -   量子力学についての説明は正しいけど、それを金融工学に応用しようとするのはちょっと……
+        -   気持ちは分からなくもないけど、重力定数とか何の関係もないし
+        -   経済物理学も借用ばかりだね
+            -   統計屋とか物理屋から言わせると、全然物理学してない
+
+-   次回は何やる？
+    -   Conceptual Mathematics の続き
+    -   とりあえず最後まで読もう。そして読みきったという充実感を持つことが重要
+
+-   [History of
+    Haskell](http://haskell.org/haskellwiki/History_of_Haskell)
+    の提出先は、History of Programming Language Conference (HOPL'07)だって
+    -   それって何だろ？
+    -   帰った後で調べました
+        -   [1978年の第一回 HOPL の内容](http://tennessee.cc.vt.edu/~hopl/)
+        -   [1993年の第二回 HOPL
+            の内容](http://www.informatik.uni-trier.de/~ley/db/conf/hopl/hopl93p.html)
+        -   [今度開催される第三回 HOPL のページ](http://research.ihost.com/hopl/)
+
+-   生物はなぜ子孫を残すように行動するのか？
+    -   子供を作らずに自己をどんどん書き換えていくことによって生き残っていく種もいたかもしれないけど、そういう種は既に滅んでしまった
+        -   いや、既に滅んでしまったことにする必要はないんじゃないの？
+        -   そういう種は何度も現われては消えていくんだけど、子孫を残して増えていく種とは違って絶対数が少ないためにそういう特徴を持つ種がいることを観察できていない、っていう可能性もないとは言い切れないよね
+
+    -   イソギンチャクは子供を作るのではなく、自分の中身を全て入れ替える
+    -   人間でも日々体の細胞入れ替わっているけど
+        -   でも脳細胞は入れ替わらないので
+            -   いや、[大人になってからも脳細胞は入れ替わるし、どんどん発達させれるよ](http://www.yukan-fuji.com/archives/2005/01/post_1212.html)
+                -   これ、新細胞が発達するとは言ってるけど、入れ替わるとは言ってなくない？
+                    -   記憶を残しつつ（新細胞に移しつつ）脳細胞が入れ替えられるならいいけど、そうでないなら、新しい記憶を獲得しながら古い記憶をどんどん捨てていく（＝時間経過に合わせて別人格が形成される）ことになりそうな。
+
+        -   問題なのは老化だよね
+            -   なぜ老化して死ななければならないのか、っていうのも重要な問いだと思う
+
+    -   子孫を残すように進化するように、方向づけられている
+        -   とは言っても、そう指示する絶対存在（ID論: Intelligent design理論）のようなものを仮定する必要はない
+        -   子孫を残すという性質は（別に子孫を残すことを全然要求してはいない）外部要因によって発生したものであっても、全くの偶然発生したものであってもどちらでも良くて、あとはその性質がより有利な結果フィードバックループが働いていけば良いだけだし
+        -   昔流行った「利己的な遺伝子」みたいなものがあるならまだ納得できる
+            -   ガイア理論とか、あったね。
+
+-   脳の働きを圏論を使って表現しているらしいけど、どうなの？
+    -   郡司ぺギオ幸夫の本は読んでないので知らない
+    -   書店で見かける本の帯に、脳学者から彼の意見は難しいけど一読しておく必要はある、というような推薦の辞が書かれていた
+        -   難しく語ろうとすることが良いことではない
+            -   ポストモダンとソーカル事件
+
+-   ポストモダンって何なの？
+    -   こういう風に簡単に説明すると怒る人がいるかもしれないけど、結局構造主義とかポストモダンというのは、これまで西洋では物事をどういうやって考えていたかということを知ることによって、そうでない考え方というものを知ろうとした試み
+        -   マルクスの進化的世界観？
+        -   いや、もっと前のカントの時代からそういう考え方はあった。時間と共に文明が進歩し、そうしていくことで人々がどんどん幸せになっていくはず、という近代の考えを否定したかった
+            -   で、そのための方法論だけが一人歩きして行き過ぎてしまったために、批判する人たちがでると
+            -   結局、難しく語ろうとすることが良いことではない、よね
+
+## 第二十二回圏論勉強会
+
+2006-10-15(日) [男女共同参画センター4F
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html) 9：00〜17:00
+
+写真 :
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200610/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/)
+
+出席者
+
+          　　酒井　田中　中村　久井   　　 |ス
+      　+----------------------------+ 　　 |ク
+      　|            　　       　　 | 　　 |リ
+      　|                　　    　　| 　　 |｜
+      　+----------------------------+  　　|ン
+         shelarcy　日下部　rpf　今井    　　|
+
+### 始まる前
+
+-   定理証明器の話
+    -   AgdaはMartin-Lofな型理論をそのまま使っているので、そっちから入ると理解が早い
+    -   [板書](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100243.html)
+        -   Tarski流でない、直観主義的な考え方
+
+### Session 31
+
+-   閑話休題：[カリー化 と universal mapping property
+    （UMP）の関係](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100244.html)
+    -   ほとんど同じもの。
+
+-   Exercise 1
+    -   解答：[A\^Aのグラフ](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100245.html)と[e:A×A\^A
+        →
+        A](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100246.html)の絵
+        -   A\^A は前回の議事録（Article V、Exercise 10）を参照
+        -   eは、実際にA×A\^A内の点を"eval"してやる→その様子をinternal diagram で記載。
+
+-   Exercise 2
+    -   [解1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100247.html)、[解2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100248.html)、[解3](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100249.html)
+    -   [前提](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100247.html)：X→1
+        がmonomorphism なら、任意のAに対してA→X は存在すれば一意
+    -   [(a)⇒(b)の解](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100248.html)：
+        -   任意のAに対して、Cartesian closed category なので、X×Aは常に存在
+        -   上記前提より、X×A→X は常に一意に存在
+        -   以上とUMPから、任意のAに対して A→X\^X は常に一意に存在 ⇒ X\^X ＝ 1
+
+    -   [(b)⇒(a)の解](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100249.html)：（注：後から見ると一部抜けてるので補足つき）
+        -   X → X\^X ＝ 1 より、X × X → X は常に一意に存在
+            -   てことは、それを2つ直積にした X × X → X × X も常に一意に存在
+
+        -   1 → X\^X ＝ 1 、X×1 〜 X より、X → X は常に一意に存在 （〜：isomorphic）
+            -   てことは、それを2つ直積にした X → X × X も常に一意に存在
+
+        -   以上から、X 〜 X × X
+            -   従って、projection である X × X → X は 1\_X: X → X に等しい
+
+        -   すると、[画像](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100249.html)右下の図が可換になるので、X
+            → 1 は monomorphism 。
+
+-   後注：上のようにしなくても、UMP で 1 → X\^X ＝ 1 から 「X → X
+    が常に一意に存在」することさえ言えば終了、という気が。
+    -   と思ったけどやっぱりダメかも。上記のでおｋ
+
+-   別解
+    -   f1,f2: A → X から定まる g = <f1,f2\>: A → X × X、projection p1,p2: X ×
+        X → X とする。
+    -   X → X\^X ＝ 1 より、X × X → X は一意に存在。よって上の p1 = p2。
+    -   f1 = p1・g = p2・g = f2。
+
+-   Exercise 3
+    -   [解（途中まで）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100250.html)
+        -   対応する dynamical system (r : N × Y\^A → N × Y\^A）を式で書き下しただけ。
+
+-   題意とは外れるが、[paramorphism
+    を利用した解](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20061015#p01)
+
+### Session 32
+
+-   Exercise 1 (a)
+    -   [解](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200610/ct/JT100251.html)
+        -   任意のobject T と、monomorphism の定義の対偶の仮定（∃ t1, t2 : T → X 、t1 ≠
+            t2）に対して、x : 1 → T をおいたのがミソ
+            -   ただし、t1 o x ≠ t2 o x
+
+### 二次会
+
+-   Clean の ABC マシンって何の略？
+    -   抽象機械の三つの stack
+        -   A(rgument)-stack
+        -   B(asic Value)-stack
+        -   C(ontrol)-stack
+            -   Actor-Based ほにゃらら ではないのですね
+
+-   次の本
+    -   "Categorical Logic and Type Theory" に興味津々
+        -   Conceptual Mathematics の知識で読める？ → 読めない
+        -   関手すらまだちゃんとやっていないので
+            -   随伴とか
+                -   その辺の概念は Haskell をやっていれば平気かも
+                -   Haskell やってない人もいるので、前提にはできない
+
+        -   "Categories, Types and Structures" で基礎を押さえてからそっちに移るのはどうだろう？
+            -   それだと別の本でやれるので、"Categories, Types and Structures"
+                である必要がないような
+
+        -   もう買っておいた方がいい？
+            -   "Categories, Types and Structures" なら PDF
+                で取ってこれるので、そっちをやっていくのであれば無理して早く買う必要はないと思う
+
+    -   TTTって？
+        -   Barr and Wells の ["Toposes, Triples and
+            Theories"](http://www.case.edu/artsci/math/wells/pub/ttt.html)
+            -   triple はモナドの事
+
+        -   なんとか type theory かと思った
+
+-   萩谷先生のエッセイはおもしろい
+    -   [「コンピュータ・サイエンスにおける才能とは何か」](http://nicosia.is.s.u-tokyo.ac.jp/pub/essay/hagiya/h/tensai)はよかった。
+        -   褒められた Guy Steel Jr. にλの会で会えた人達は幸せ者
+
+    -   萩谷先生は偉大
+        -   海外で、関数型言語をやっている日本人だとわかると萩谷を知っているかとよく言われた
+        -   AKCL は有名
+
+-   Peter Aczel の non-well foundated set
+    -   分散コンピューティングのモデル化に使えると思った。
+
+-   Domain Theory
+    -   [このサーベイ](http://www.cs.bham.ac.uk/~axj/pub/papers/handy1.pdf)がよくまとまってる
+
+* * * * *
+
+Last modified : 2007/02/26 02:05:27 JST

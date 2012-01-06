@@ -1,0 +1,97 @@
+# [Programming\_Network]()
+
+[Programming]():Network
+
+* * * * *
+
+### とりあえずの Echo サーバ
+
+    \begin{code}
+    module Main where
+
+    import Control.Concurrent
+    import Network
+    import System.IO
+
+    type Service = String -> String
+
+    port :: PortNumber
+    port = 8888
+
+    echo :: Service
+    echo = id
+
+    main :: IO ()
+    main = server port echo
+
+    server :: PortNumber -> Service -> IO ()
+    server p sc = withSocketsDo $ listenOn (PortNumber p) >>=  serve sc
+
+    serve :: Service -> Socket -> IO ()
+    serve sc sock =  accept sock >>= forkIO . service sc >> serve sc sock
+
+    service :: Service -> (Handle, HostName, PortNumber) -> IO ()
+    service sc (h,_,_) = hSetBuffering h LineBuffering >> loop h sc
+
+    loop :: Handle -> Service -> IO ()
+    loop h sc =  hIfEOF h (return ()) $ hGetLine h >>= hPutStrLn h . sc >> loop h sc
+
+    hIfEOF :: Handle -> IO a -> IO a -> IO a
+    hIfEOF h t e = hIsEOF h >>= \ eof -> if eof then t else e
+
+    \end{code}
+
+### とりあえずのEchoサーバ(低レベルAPI, 非関数プログラミング志向, 最低仕様)
+
+私の環境では上記のHigh Level API利用だとservname no supportedになる。 アドレス解決ができない模様なのでLow
+Level APIを叩いてみた。[cut-sea]():2008/06/05 05:24:09 JST
+
+-   クライアント側でのアドレス指定をFQDNじゃなくて、IPアドレス(127.0.0.1)でやってもアクセスできませんか？
+    MacOSでもはこれで上手くいった。Ubuntu 8.04 では問題なし。
+-   あークライアント以前に上記サーバが起動に失敗するのでつ。[cut-sea]():2008/06/05 11:47:28 JST
+-   これかも [GHC
+    ticket\#2103](http://hackage.haskell.org/trac/ghc/ticket/2103)
+    iquiw:2008/06/11 14:10:52 JST
+
+-   低レベルAPI : 低レイヤのNetworkライブラリ(Network.Socket)を利用した。
+-   非関数プログラミング志向 : 関数プログラミング志向で書けなかっただけ。
+-   最低仕様 : 複数接続やら切断など一切処理してない最低限のecho。終了にはserverをCtrl-Cなどで殺す。
+
+<!-- -->
+
+    import Network.Socket
+
+    server sv = do s0 <- sock0
+                   bindSocket s0 addr0
+                   listen s0 5
+                   (s1,a1) <- accept s0
+                   sv s1
+        where
+        sock0 = socket AF_INET Stream 0
+        addr0 = SockAddrInet 8888 0x0100007f -- 127.0.0.1:8888
+
+    echo s =  do (rcv, len, addr) <- recvFrom s 2048
+                 send s rcv
+                 echo s
+
+    main :: IO a
+    main = server echo
+
+なぜかIP Addressの指定が1.0.0.127的にしないと127.0.0.1にならない。\
+ もしかしてBig/Little Endianがおかしい？(pkgsrcからbuildしたghcなんだけど)\
+
+正直流れが見えるまで、何故こんなAPIになってるのかムカついてたんだけど…
+
+ステップバイステップでないと書けない子なので、
+
+    sock0 = socket AF_INET Stream 0
+    addr0 = SockAddrInet 8888 0x0100007f -- 127.0.0.1:8888
+                    :
+                    :
+
+みたいな調子でロードしてはsock0やらaddr0やら確認してた。 するとbindとlistenのところでハマって、
+ようやくsocketの返すのがIO Socketという風にIOモナドに包まれている理由が分った。 なーる。
+
+* * * * *
+
+Last modified : 2008/06/11 14:10:52 JST

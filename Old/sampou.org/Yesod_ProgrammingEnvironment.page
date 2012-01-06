@@ -1,0 +1,427 @@
+# [Yesod\_ProgrammingEnvironment]()
+
+[Yesod]():ProgrammingEnvironment
+
+* * * * *
+
+## 開発環境構築
+
+[開発環境構築]()
+
+[事前準備]()
+
+[インストール]()
+
+[Yesod]()
+
+[sqlite3を使えるようにする]()
+
+[postgresqlを使えるようにする]()
+
+[yesod-auth]()
+
+[devel-serverを使えるようにする]()
+
+[動作確認]()
+
+-   [yesod scaffolding]()
+-   [起動]()
+-   [自動リロード]()
+
+[サンプルコードの起動]()
+
+-   [yesoddocs]()
+-   [haskellers]()
+
+* * * * *
+
+### 事前準備
+
+[HowTo\_ProgrammingEnvironment]()に従ってまずはhaskell-platformのインストールまで済んでいるものとする。
+
+この時点で以下がインストール済。
+
+-   alex
+-   cabal-install
+-   darcs
+-   ghc-mod
+-   haskell-platform
+-   happy
+
+### インストール
+
+#### Yesod
+
+Yesodをインストールします。
+
+    $ cabal install yesod
+
+#### sqlite3を使えるようにする
+
+まずsqlite3が入ってなければインストールする。
+
+    $ sudo apt-get install sqlite3
+
+つぎにHackageからpersistent-sqliteをインストール。
+
+    $ cabal install persistent-sqlite
+
+#### postgresqlを使えるようにする
+
+sqlite3ですませるならスキップでいい。
+
+    $ sudo apt-get install postgresql
+    $ sudo apt-get install libpq-dev
+
+これでpostgresqlとpg\_configが使えるようになる。 そしたらcabal
+installでPostgreSQL用のpersistentパッケージをインストール。
+
+    $ cabal install persistent-postgresql
+
+まずPostgreSQLでデータベースを作成したりする設定。
+
+    $ sudo passwd postgres
+
+でpostgresのパスワード設定しておく。 次にpostgresになってからまずは自分をユーザ登録する。
+
+    $ sudo su - postgres
+    postgres$ createuser -a -d -U postgres -P cut-sea
+    パスワード：hogehoge
+
+[cut-sea]()の部分は今後開発するユーザ名。 以後はcut-seaでデータベースを作成できるようになる。
+もちろんこのユーザでデータベースに接続する。 -Uはpostgresユーザで接続して作成するって意味らしいのでそのままpostgresを使う。
+パスワードが聞かれるので入力します。
+
+もしバックエンドにpostgresqlを選んでscaffoldした場合は、データベースを作成して接続文字列を修正する必要がある。
+例えばpgtestというProject名でscaffoldするとSetting.hsには以下の行が生成される。
+
+    connStr = "user=pgtest password=pgtest host=localhost port=5432 dbname=pgtest"
+
+これを以下のように修正
+
+    connStr = "user=cut-sea password=hogehoge host=localhost port=5432 dbname=pgtest"
+
+あとはデータベースを作成しておく。
+
+    $ createdb -E UTF-8 -O cut-sea -U cut-sea pgtest
+
+などとすると接続ユーザ(-U)cut-seaで接続して、オーナー(-O)cut-seaでデータベースpgtestが作成される。\
+
+    $ runhaskell simple-server.hs
+    Loaded
+    Migrating: CREATE TABLE "User"(id SERIAL PRIMARY KEY UNIQUE,"ident" VARCHAR NOT NULL,"password" VARCHAR NULL)
+    NOTICE:  CREATE TABLEはシリアル列"User.id"用に暗黙的なシーケンス"User_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"User"に暗黙的なインデックス"User_pkey"を作成します
+    Migrating: ALTER TABLE "User" ADD CONSTRAINT "UniqueUser" UNIQUE("ident")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"User"に暗黙的なインデックス"UniqueUser"を作成します
+    Migrating: CREATE TABLE "Email"(id SERIAL PRIMARY KEY UNIQUE,"email" VARCHAR NOT NULL,"user" INT8 NULL REFERENCES "User","verkey" VARCHAR NULL)
+    NOTICE:  CREATE TABLEはシリアル列"Email.id"用に暗黙的なシーケンス"Email_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Email"に暗黙的なインデックス"Email_pkey"を作成します
+    Migrating: ALTER TABLE "Email" ADD CONSTRAINT "UniqueEmail" UNIQUE("email")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"Email"に暗黙的なインデックス"UniqueEmail"を作成します
+
+と起動してUserやらEmailなどModel.hsにあるテーブルが生成されればオッケー。
+なお、scaffoldコードはデバッグ用とデプロイ用でふたつデータベースを使いわけることになっている。
+sqliteの場合には気にしなくてもいいが、postgresqlの場合にはやはり個別にデータベースを作成しておくとよい。
+
+#### yesod-auth
+
+なぜか認証部分が0.6.0から別になったらしい。 しかも依存関係解決ではインストールされない。
+本当に認証とか関係ねーよって使い方もあるんだろうけど、 そもそもscaffoldで生成したアプリが簡単には起動しないのは
+最初からつまずくのでyesod-authを入れる。
+
+    $ cabal install yesod-auth
+
+あ、ここでmime-mailとかもインストールされると思うけど、
+リマインダとかでユーザのアカウントを取得する仕組みが最初から用意されているので、 SMTPサーバを使えるようにしておいてください。
+私はpostfixを入れました。
+
+    $ sudo apt-get install postfix
+
+#### devel-serverを使えるようにする
+
+こいつはなくても良いのだけど、あった方が圧倒的に便利なので入れます。 これを入れるとrunhaskell
+devel-server.hsでのサーバ起動が出来て、 Emacsでソースを変えると都度reloadしてくれるので、
+C-xC-sしてブラウザでF5すれば開発をサクサク進められる。
+逆にビデオみたくsimple-server.hsを使う場合には毎回サーバを再起動する必要がある。
+
+    $ cabal install wai-handler-devel
+
+#### 動作確認
+
+以上をインストールし終えたら、早速Helloなアプリを作成して起動してみる。
+
+##### yesod scaffolding
+
+まずは開発用のディレクトリを切って、その中で作業する。 私の場合は、\~/devel/yesodというのを準備。
+
+そこでyesodコマンドを叩くと、作るプロジェクトについていくつか質問してくるので、 聞かれた事に答えていけばよい。
+
+    cut-sea@birds:~/devel/yesod$ yesod
+
+まず自分の名前を入力。私は[cut-sea]()とした。
+
+    Welcome to the Yesod scaffolder.
+    I'm going to be creating a skeleton Yesod project for you.
+
+    What is your name? We're going to put this in the cabal and LICENSE files.
+
+    Your name: cut-sea
+    Welcome cut-sea.
+
+次はプロジェクト名。ビデオにならってyammerといれました。
+
+    What do you want to call your project? We'll use this for the cabal name.
+
+    Project name: yammer
+
+ディレクトリ名を聞かれるけど、ここに入力しても良いしビデオみたくエンターしてもいい。 エンターしたら、プロジェクト名なディレクトリが切られます。
+
+    Now where would you like me to place your generated files? I'm smart enough
+    to create the directories, don't worry about that. If you leave this answer
+    blank, we'll place the files in yammer.
+
+    Directory name: 
+
+次にFoundationってのを聞かれるのでYammerって入れる。
+これはそのまま.hsが付いてアプリ自体のモジュール名になるので大文字で始めること。
+
+    Great, we'll be creating yammer today, and placing it in yammer.
+    What's going to be the name of your foundation datatype? This name must
+    start with a capital letter.
+
+    Foundation: Yammer
+
+バックエンドデータベースとしてsqlite3とpostgresqlのどっちかを使えるんだけど、 sqlite3を使うのでsと入力。
+
+    Yesod uses Persistent for its (you guessed it) persistence layer.
+    This tool will build in either SQLite or PostgreSQL support for you. If you
+    want to use a different backend, you'll have to make changes manually.
+    If you're not sure, stick with SQLite: it has no dependencies.
+
+    So, what'll it be? s for sqlite, p for postgresql: s
+
+そうするとざっとファイルが生成されます。
+
+    That's it! I'm creating your files now...
+    Generating simple-server.hs
+    Generating fastcgi.hs
+    Generating devel-server.hs
+    Generating yammer.cabal
+    Generating LICENSE
+    Generating Yammer.hs
+    Generating Controller.hs
+    Generating Handler/Root.hs
+    Generating Model.hs
+    Generating Settings.hs
+    Generating cassius/default-layout.cassius
+    Generating hamlet/default-layout.hamlet
+    Generating hamlet/homepage.hamlet
+    Generating cassius/homepage.cassius
+    Generating julius/homepage.julius
+
+yammerってディレクトリが出来ているはずなので中身を確認しておく。
+
+    cut-sea@birds:~/devel/yesod$ cd yammer
+    cut-sea@birds:~/devel/yesod/yammer$ ls
+    Controller.hs  Model.hs     cassius          favicon.ico  simple-server.hs
+    Handler        Settings.hs  devel-server.hs  hamlet       yammer.cabal
+    LICENSE        Yammer.hs    fastcgi.hs       julius
+
+Controller.hs,Model.hsとHanlder/\*.hsあたりが頻繁に触ることになるプログラムかな。\
+ Yammer.hsはそこそこ大きなファイルだけど、 mkYesodDataでリソースの割り当てをやる以外はあまり触ってないと思う。\
+ あとEDSL化されたテンプレートファイルを以下に置くことになる。
+
+hamlet
+  ~ HTMLのテンプレート
+
+cassius
+  ~ cssのテンプレート
+
+julius
+  ~ javascriptのテンプレート
+
+それぞれ頭文字だけ見れば覚えやすい。 simple-server.hsやdevel-server.hsは触らない。
+走らせられりゃOK。もちろん触ってもいいだろうけど。 あとSettings.hsも触らなくていいと思う。
+
+##### 起動
+
+devel-server.hsで起動してみる。
+
+    cut-sea@birds:~/devel/yesod/yammer$ runhaskell devel-server.hs 
+    Starting your server process. Code changes will be automatically
+    loaded as you save your files. Type "quit" to exit.
+    You can view your app at http://localhost:3000/
+
+    Attempting to interpret your app...
+    Interpreting success, new app loaded
+    Migrating: CREATE TABLE "User"(id INTEGER PRIMARY KEY,"ident" VARCHAR NOT NULL,"password" VARCHAR NULL,CONSTRAINT "UniqueUser" UNIQUE ("ident"))
+    Migrating: CREATE TABLE "Email"(id INTEGER PRIMARY KEY,"email" VARCHAR NOT NULL,"user" INTEGER NULL REFERENCES "User","verkey" VARCHAR NULL,CONSTRAINT "UniqueEmail" UNIQUE ("email"))
+
+初回起動でいきなりSQLが動いてUserとEmailテーブルが作成される。 こいつはModel.hsあたりを見れば分かると思うけど、
+Yesodの認証の仕組みと絡んでいるだろうから、当面は触らないのが吉だと思う。
+
+この段階でブラウザから[http://localhost:3000にアクセスすると、](http://localhost:3000にアクセスすると、)
+Helloなシンプルなページが表示されてます。\
+ シンプルとは言えど、ちゃんとリマインダを使用したアカウントの作成とログインまではできるはず。
+
+##### 自動リロード
+
+EmacsでModel.hsを開いてちょろっとモデルを追加しようとするが、
+間違った状態で保存すると、devel-server.hsを起動しているターミナルに ずらずらとエラーログが吐かれる。\
+ 問題を修正し終えるまでひたすらエラーを吐き続けます。
+
+    Migrating: CREATE TABLE "Message"(id INTEGER PRIMARY KEY)
+    Attempting to interpret your app...
+    Interpreting success, new app loaded
+    Attempting to interpret your app...
+    Interpreting success, new app loaded
+    Attempting to interpret your app...
+    Compile failed: WontCompile [GhcError {errMsg = "Model.hs:11:0:\n    Multiple declarations of `Model.MessageId'\n    Declared at: Model.hs:11:0\n                 Model.hs:11:0"},GhcError {errMsg = "Model.hs:11:0:\n    Multiple declarations of `Model.Message'\n    Declared at: Model.hs:11:0\n                 Model.hs:11:0"},GhcError {errMsg = "Model.hs:11:0:\n    Multiple declarations of `Model.Message'\n    Declared at: Model.hs:11:0\n                 Model.hs:11:0"},GhcError {errMsg = "Model.hs:11:0:\n    Multiple declarations of `Model.MessageId'\n    Declared at: Model.hs:11:0\n                 Model.hs:11:0"},GhcError {errMsg = "Model.hs:11:0:\n    Multiple declarations of `Model.MessageId'\n    Declared at: Model.hs:11:0\n                 Model.hs:11:0"},GhcError {errMsg = "Model.hs:11:0:\n    Multiple declarations of `Model.Message'\n    Declared at: Model.hs:11:0\n                 Model.hs:11:0"},GhcError {errMsg = "Model.hs:11:0:\n    Multiple declarations of `Model.Message'\n    Declared at: Model.hs:11:0\n                 Model.hs:11:0"},GhcError {errMsg = "Model.hs:11:0:\n    Multiple declarations of `Model.MessageId'\n    Declared at: Model.hs:11:0\n                 Model.hs:11:0"}]
+    Attempting to interpret your app...
+    Compile failed: WontCompile [GhcError {errMsg = "Model.hs:11:0: Not in scope: type constructor or class `UTCTime'"},GhcError {errMsg = "Model.hs:11:0: Not in scope: type constructor or class `UTCTime'"}]
+    Attempting to interpret your app...
+    Compile failed: WontCompile [GhcError {errMsg = "Model.hs:11:0: Not in scope: type constructor or class `UTCTime'"},GhcError {errMsg = "Model.hs:11:0: Not in scope: type constructor or class `UTCTime'"}]
+    Attempting to interpret your app...
+    Compile failed: WontCompile [GhcError {errMsg = "Model.hs:11:0: Not in scope: type constructor or class `UTCTime'"},GhcError {errMsg = "Model.hs:11:0: Not in scope: type constructor or class `UTCTime'"}]
+                       :
+                       :
+
+ghc-modの助けですぐに問題が判ったので修正して、 再度保存すると今度はうまくコンパイルされて動的にテーブルが作り直される。
+
+    Interpreting success, new app loaded
+    Migrating: CREATE TEMP TABLE "Message_backup"(id INTEGER PRIMARY KEY,"user" INTEGER NOT NULL REFERENCES "User","content" VARCHAR NOT NULL,"timestamp" TIMESTAMP NOT NULL)
+    Migrating: INSERT INTO "Message_backup"("id") SELECT "id" FROM "Message"
+    Migrating: DROP TABLE "Message"
+    Migrating: CREATE TABLE "Message"(id INTEGER PRIMARY KEY,"user" INTEGER NOT NULL REFERENCES "User","content" VARCHAR NOT NULL,"timestamp" TIMESTAMP NOT NULL)
+    Migrating: INSERT INTO "Message" SELECT "id","user","content","timestamp" FROM "Message_backup"
+    Migrating: DROP TABLE "Message_backup"
+    Migrating: CREATE TABLE "Follow"(id INTEGER PRIMARY KEY,"follower" INTEGER NOT NULL REFERENCES "User","followee" INTEGER NOT NULL REFERENCES "User")
+
+ビデオのチュートリアルでも出てくるように、 カラムの追加なんかもソースの編集により自動的に行われる。
+ここでは最初に作ったMessageでは間違ってたのでMessageテーブルがMessage\_backupに一旦移されてから再度作り直されて、データを移すSQLが勝手に走ってやがります。
+
+### サンプルコードの起動
+
+勉強になりそうなサンプルコードを動かしてみるための準備。 上記の設定ができているものとする。
+
+#### yesoddocs
+
+yesoddocsは [http://docs.yesodweb.com/](http://docs.yesodweb.com/)
+のサイトそのものです。 自分のところで動作させることができる。
+ただし、blogのコメント欄とかは別サービスを活用しているのですべて静的ファイルで運用している。\
+ つまりホームページビルダー的にローカルでコンテンツを作成してサーバにアップしているらしい。 それでもシンプルな分だけ初歩の勉強にはなりそう。
+
+こちらはバックエンドデータベースなしなので**sqlite3もpostgresqlも不要**。
+ただし、Text.PandocとLanguage.Haskell.HsColourとかを使用しているのでpandocとhscolourをインストール。
+
+    $ cabal install pandoc
+    $ cabal install hscolour
+    $ cabal install highlighting-kate
+    $ cabal install xml-types
+    $ cabal install c2hs
+    $ sudo apt-get install libxml2 libxml2-dev
+    $ cabal install libxml-enumerator
+    $ cabal install cautious-file
+    $ cabal install stm-io-hooks
+
+git cloneコマンドでリポジトリから取得。
+
+    $ git clone https://github.com/snoyberg/yesoddocs.git
+
+起動できればあとは実際に動くものとコードでお勉強。
+
+    $ cd yesoddocs
+    $ runhaskell simple-server.hs
+
+#### haskellers
+
+haskellersは [http://www.haskellers.com/](http://www.haskellers.com/)
+のサイトそのものです。 Haskellerの集いの場?
+
+こっちは**postgresqlの設定が必要**。 いくつかライブラリが必要なのでインストールしておく。
+
+    $ sudo apt-get install libicu42 libicu-dev
+    $ cabal install text-icu
+    $ cabal install random-shuffle
+    $ cabal install HsOpenSSL
+    $ cabal install hjsmin
+
+git cloneコマンドでリポジトリから取得。
+
+    $ git clone https://github.com/snoyberg/haskellers.git
+
+起動できればあとは実際に動くものとコードでお勉強。
+
+    $ cd haskellers
+    $ runhaskell simple-servert.hs
+
+結構本格的なサービスなのでテーブル数も多い。
+
+    Loaded
+    Migrating: CREATE TABLE "User"(id SERIAL PRIMARY KEY UNIQUE,"fullName" VARCHAR NOT NULL,"website" VARCHAR NULL,"email" VARCHAR NULL,"verifiedEmail" BOOLEAN NOT NULL DEFAULT false,"verkey" VARCHAR NULL,"haskellSince" INT4 NULL,"desc" VARCHAR NULL,"visible" BOOLEAN NOT NULL DEFAULT true,"real" BOOLEAN NOT NULL DEFAULT false,"realPic" BOOLEAN NOT NULL DEFAULT false,"admin" BOOLEAN NOT NULL DEFAULT false,"employment" VARCHAR NULL,"blocked" BOOLEAN NOT NULL DEFAULT false,"emailPublic" BOOLEAN NOT NULL DEFAULT false,"location" VARCHAR NULL,"longitude" DOUBLE PRECISION NULL,"latitude" DOUBLE PRECISION NULL)
+    NOTICE:  CREATE TABLEはシリアル列"User.id"用に暗黙的なシーケンス"User_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"User"に暗黙的なインデックス"User_pkey"を作成します
+    Migrating: CREATE TABLE "Username"(id SERIAL PRIMARY KEY UNIQUE,"user" INT8 NOT NULL REFERENCES "User","username" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"Username.id"用に暗黙的なシーケンス"Username_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Username"に暗黙的なインデックス"Username_pkey"を作成します
+    Migrating: ALTER TABLE "Username" ADD CONSTRAINT "UniqueUsernameUser" UNIQUE("user")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"Username"に暗黙的なインデックス"UniqueUsernameUser"を作成します
+    Migrating: ALTER TABLE "Username" ADD CONSTRAINT "UniqueUsername" UNIQUE("username")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"Username"に暗黙的なインデックス"UniqueUsername"を作成します
+    Migrating: CREATE TABLE "Ident"(id SERIAL PRIMARY KEY UNIQUE,"ident" VARCHAR NOT NULL,"user" INT8 NOT NULL REFERENCES "User")
+    NOTICE:  CREATE TABLEはシリアル列"Ident.id"用に暗黙的なシーケンス"Ident_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Ident"に暗黙的なインデックス"Ident_pkey"を作成します
+    Migrating: ALTER TABLE "Ident" ADD CONSTRAINT "UniqueIdent" UNIQUE("ident")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"Ident"に暗黙的なインデックス"UniqueIdent"を作成します
+    Migrating: CREATE TABLE "Skill"(id SERIAL PRIMARY KEY UNIQUE,"name" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"Skill.id"用に暗黙的なシーケンス"Skill_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Skill"に暗黙的なインデックス"Skill_pkey"を作成します
+    Migrating: CREATE TABLE "UserSkill"(id SERIAL PRIMARY KEY UNIQUE,"user" INT8 NOT NULL REFERENCES "User","skill" INT8 NOT NULL REFERENCES "Skill")
+    NOTICE:  CREATE TABLEはシリアル列"UserSkill.id"用に暗黙的なシーケンス"UserSkill_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"UserSkill"に暗黙的なインデックス"UserSkill_pkey"を作成します
+    Migrating: ALTER TABLE "UserSkill" ADD CONSTRAINT "UniqueUserSkill" UNIQUE("user","skill")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"UserSkill"に暗黙的なインデックス"UniqueUserSkill"を作成します
+    Migrating: CREATE TABLE "Package"(id SERIAL PRIMARY KEY UNIQUE,"user" INT8 NOT NULL REFERENCES "User","name" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"Package.id"用に暗黙的なシーケンス"Package_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Package"に暗黙的なインデックス"Package_pkey"を作成します
+    Migrating: ALTER TABLE "Package" ADD CONSTRAINT "UniquePackage" UNIQUE("user","name")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"Package"に暗黙的なインデックス"UniquePackage"を作成します
+    Migrating: CREATE TABLE "Message"(id SERIAL PRIMARY KEY UNIQUE,"closed" BOOLEAN NOT NULL,"when" TIMESTAMP NOT NULL,"from" INT8 NULL REFERENCES "User","regarding" INT8 NULL REFERENCES "User","text" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"Message.id"用に暗黙的なシーケンス"Message_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Message"に暗黙的なインデックス"Message_pkey"を作成します
+    Migrating: CREATE TABLE "News"(id SERIAL PRIMARY KEY UNIQUE,"when" TIMESTAMP NOT NULL,"title" VARCHAR NOT NULL,"content" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"News.id"用に暗黙的なシーケンス"News_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"News"に暗黙的なインデックス"News_pkey"を作成します
+    Migrating: CREATE TABLE "Job"(id SERIAL PRIMARY KEY UNIQUE,"postedBy" INT8 NOT NULL REFERENCES "User","postedAt" TIMESTAMP NOT NULL,"title" VARCHAR NOT NULL,"location" VARCHAR NOT NULL,"fillingBy" DATE NOT NULL,"fullTime" BOOLEAN NOT NULL,"partTime" BOOLEAN NOT NULL,"desc" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"Job.id"用に暗黙的なシーケンス"Job_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Job"に暗黙的なインデックス"Job_pkey"を作成します
+    Migrating: CREATE TABLE "ScreenName"(id SERIAL PRIMARY KEY UNIQUE,"user" INT8 NOT NULL REFERENCES "User","service" VARCHAR NOT NULL,"name" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"ScreenName.id"用に暗黙的なシーケンス"ScreenName_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"ScreenName"に暗黙的なインデックス"ScreenName_pkey"を作成します
+    Migrating: CREATE TABLE "Team"(id SERIAL PRIMARY KEY UNIQUE,"name" VARCHAR NOT NULL,"desc" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"Team.id"用に暗黙的なシーケンス"Team_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Team"に暗黙的なインデックス"Team_pkey"を作成します
+    Migrating: ALTER TABLE "Team" ADD CONSTRAINT "UniqueTeam" UNIQUE("name")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"Team"に暗黙的なインデックス"UniqueTeam"を作成します
+    Migrating: CREATE TABLE "TeamUser"(id SERIAL PRIMARY KEY UNIQUE,"team" INT8 NOT NULL REFERENCES "Team","user" INT8 NOT NULL REFERENCES "User","status" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"TeamUser.id"用に暗黙的なシーケンス"TeamUser_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"TeamUser"に暗黙的なインデックス"TeamUser_pkey"を作成します
+    Migrating: ALTER TABLE "TeamUser" ADD CONSTRAINT "UniqueTeamUser" UNIQUE("team","user")
+    NOTICE:  ALTER TABLE / ADD UNIQUEはテーブル"TeamUser"に暗黙的なインデックス"UniqueTeamUser"を作成します
+    Migrating: CREATE TABLE "TeamNews"(id SERIAL PRIMARY KEY UNIQUE,"team" INT8 NOT NULL REFERENCES "Team","when" TIMESTAMP NOT NULL,"title" VARCHAR NOT NULL,"content" VARCHAR NOT NULL,"url" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"TeamNews.id"用に暗黙的なシーケンス"TeamNews_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"TeamNews"に暗黙的なインデックス"TeamNews_pkey"を作成します
+    Migrating: CREATE TABLE "TeamPackage"(id SERIAL PRIMARY KEY UNIQUE,"team" INT8 NOT NULL REFERENCES "Team","name" VARCHAR NOT NULL,"hackage" BOOLEAN NOT NULL,"desc" VARCHAR NULL,"homepage" VARCHAR NULL)
+    NOTICE:  CREATE TABLEはシリアル列"TeamPackage.id"用に暗黙的なシーケンス"TeamPackage_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"TeamPackage"に暗黙的なインデックス"TeamPackage_pkey"を作成します
+    Migrating: CREATE TABLE "Topic"(id SERIAL PRIMARY KEY UNIQUE,"team" INT8 NOT NULL REFERENCES "Team","created" TIMESTAMP NOT NULL,"type" VARCHAR NOT NULL,"status" VARCHAR NOT NULL,"creator" INT8 NULL REFERENCES "User","title" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"Topic.id"用に暗黙的なシーケンス"Topic_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"Topic"に暗黙的なインデックス"Topic_pkey"を作成します
+    Migrating: CREATE TABLE "TopicMessage"(id SERIAL PRIMARY KEY UNIQUE,"topic" INT8 NOT NULL REFERENCES "Topic","created" TIMESTAMP NOT NULL,"creator" INT8 NULL REFERENCES "User","content" VARCHAR NOT NULL)
+    NOTICE:  CREATE TABLEはシリアル列"TopicMessage.id"用に暗黙的なシーケンス"TopicMessage_id_seq"を作成します。
+    NOTICE:  CREATE TABLE / PRIMARY KEYはテーブル"TopicMessage"に暗黙的なインデックス"TopicMessage_pkey"を作成します
+
+* * * * *
+
+Last modified : 2010/12/03 04:39:10 JST

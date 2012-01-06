@@ -1,0 +1,296 @@
+# [CategoryTheory\_圏論勉強会\_CategoriesTypesAndStructures\_Chapter1]()
+
+[CategoryTheory]():[圏論勉強会]():[CategoriesTypesAndStructures]():Chapter1
+
+* * * * *
+
+## 第二十六回圏論勉強会
+
+2007-2-25(日) [川崎市教育文化会館4F
+第2学習室](http://www.city.kawasaki.jp/88/88kyobun/home/annnai/tizu/map.htm)
+10：00〜17:00
+
+出席者
+
+          梅沢 田中            |ス
+     酒井 +--------+ 中村      |ク
+     rpf  |        | 人名      |リ
+     今井 +--------+ shelarcy  |｜
+          佐藤 久井            |ン
+
+写真：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200702/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/)
+
+### 始まる前
+
+-   [Haskellのモナド](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0338.html)
+    -   Haskellのモナドは圏論のモナドですよ
+        -   Kleisli triple って書いてありましたよ
+            -   triple は モナドの事
+
+    -   モノイドでない、はそうかもしれないけど
+        -   関手圏を関手の合成を演算とするモノイダル圏にすると、モナドはこの圏のモノイドにはなるけどね。
+
+    -   レトラクション と レトラクト は違う
+        -   レトラクション r: A → B が定義できるとき、AはBのレトラクト
+
+-   論理学の新書
+    -   「知の教科書 論理の哲学」 飯田隆 編 講談社選書メチエ
+    -   「カリー・ハワード同型対応」が縦書きに書かれたのは史上初？
+    -   読者層はどのあたりなのかなあ
+        -   選書なので誰でもよいのでは…
+
+-   勉強会の場所をとるのは大変…
+
+-   [The n-Category
+    Cafe'](http://a.hatena.ne.jp/go?http://golem.ph.utexas.edu/category/20070226193940)
+    -   圏論ベースに、数学と物理学と哲学の話題を扱ってるブログ
+
+### テキスト選考
+
+-   選考のようす[１](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0340.html)、[２](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0342.html)
+    -   方向性としては、型理論・プログラム意味論・ソフトウェア工学（形式仕様記述）への応用 がある
+        -   純粋数学として進めるのは、モチベーションが維持しづらいかも
+        -   圏論一般の入門本もあるが、良い解説と面白い例が両方載っている良い本がない
+
+    -   参加者の興味の共通項を取ると、ラムダ計算や意味論あたりに持っていきたい
+    -   Jacobs の "Categorical logic and type theory"
+        は「次の次」には非常に良い選択だが、次やるテキストとしては早すぎる
+    -   まだ関手も自然変換もやってないので、そのへんはちゃんと押さえたい
+    -   後は、テキストの値段…
+
+-   **Asperti and Long の "Categories, Types and Structures" に決定**
+    -   やや出来レースな匂いもするが
+
+-   余談
+    -   タイプ計算・トークン計算のタイプって、type theory の type と同じ？
+        -   一見、そうは思えないけど
+        -   TAPLにそう書いてあった
+            -   TAPLにそんなこと書いてあるの？？
+
+        -   自然言語経由で共通点があるとかないとか
+
+    -   UMLと圏論の関係
+        -   [http://www.cs.sunysb.edu/\~grosu/bsbs99.pdf](http://www.cs.sunysb.edu/~grosu/bsbs99.pdf)
+
+### "Categories, Types and Structures" Chapter 1
+
+-   Section 1.1 Definition and Examples
+    -   Exercise1, 2
+        [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0345.html)
+        -   Exercise 1, 各 category における id と composition
+        -   Exercise 2, 「2対象間に射があるか」で定義される2項関係は preorder になる
+            -   preorder category ＝ やせた圏
+
+-   Section 1.2 Diagrams
+-   Section 1.3 Categories Out of Categories
+    -   subcategory
+    -   dual category
+    -   Exercise3
+        [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0347.html)
+        -   1点集合 1 から空集合 0 への射 は Set\^op にはあるが、Setにはない ⇒ Set\^op[1,0] ⊆
+            Set[1,0] は成り立たない
+        -   Set\^op が Rel の full subcategory か？ ⇒ NO
+            -   2点集合 a と 1点集合 b の図のような関係は、Set[b,a] に含まれない
+
+    -   product category
+    -   slice category
+        -   generalized object
+
+    -   Exercise4
+        [解答（左半分）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0349.html)
+        -   C↑a の定義
+
+    -   Slice categoryのイメージが沸かない →
+        [具体例（右半分）](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0349.html)
+        -   ある集合Xの冪集合からなる圏P(X)は、C/Xのsubcategory
+        -   Set に対して、Set↓A は A-indexed family of disjoint set を与える
+
+-   Section 1.4 Monic, Epic and Principal Morphism
+    -   epic, monic, iso
+    -   split monic
+    -   Exercises 5 (1.4.1 最後の Exercises) で突然詰まる
+        -   位相空間の圏 Top で、epic だが全射でない例とは？？
+        -   ⇒ **次回持ち越し**
+            -   追記：[問題文が間違っているかも](http://d.hatena.ne.jp/bonotake/20070225/1172406137)
+
+    -   principal morphism
+    -   retraction pair, retract
+    -   Exercises 6 (1.4.3 最後)
+        -   ⇒ **次回持ち越し**
+
+    -   category of idempotents on ...
+        -   ここのExercise も**次回持ち越し**
+
+### 2次会
+
+-   温暖化はないのか？
+    -   映画『不都合な真実』の海面上昇のデータは古い？
+        -   映画では６ｍになっているが、現在の研究ではせいぜい40cmとされている
+            -   40cmでも大きいんじゃないの
+
+    -   今起こっている変化の度合いではなく、その度合いが加速度的に変化しているのが問題
+        -   長期的に見て、加速度的に変化している、と主張する人と、実は普遍的な変化しかおこしていない、と主張する人がいる
+
+    -   ["The Skeptical
+        Environmentalist"](http://www.amazon.co.jp/exec/obidos/ASIN/0521010683/hirooyamagata-22/)（邦訳：[『環境危機をあおってはいけない』](http://www.amazon.co.jp/exec/obidos/ASIN/4163650806/)）
+        -   著者は統計学者で、元グリーンピースのメンバーだったが、ある環境保守主義者の主張に反論すべく統計的にデータを検証してみたら、逆に彼の主張を裏付ける結果になってしまった。
+
+    -   いずれにせよ、環境を考慮するのは良い事
+
+-   乱数
+    -   [HotBits:
+        放射性崩壊から生み出される本物の乱数](http://www.radiumsoftware.com/0701.html#070130)
+        -   このリンク先の続く記事が、当日話に挙がったその乱数を使って超心理学の手法を用いて超心理学を批判するという話
+
+-   利上げの話
+    -   日銀での政策のリーク問題
+        -   [日銀の福井俊彦総裁が追加利上げを提案したという情報が、会合開催中にリークされ、報道されてしまった](http://news.goo.ne.jp/article/ft/business/ft-20070225-01.html)とか。
+
+-   \*\*ワロスとか、前に単位などをつける表現
+    -   昔読んだ漫画で、[マキシマムださくない？](http://wiki.livedoor.jp/paniponi765/d/�ޥ����ޥ������ʤ���)とかあった
+    -   その漫画のアニメがやってから、[オメガ\*\*](http://wiki.livedoor.jp/paniponi765/d/�Ҷ�ɱ��)とかも良く使われるようになったような
+
+-   ゴルフ面白そう
+    -   今年は暖冬でスキー場は大変だったが、ゴルフ場は儲かったらしい
+        -   スキーゴルフとか？
+            -   スキー場でゴルフ
+            -   ホールインするまでの時間を競う
+            -   オーバーして坂を上りなおすことになるとタイムロス
+
+    -   将軍様などいない！
+
+-   Anarchy golf
+    -   Code golf 以前に流行っていた PKU OnlineJudge での試み
+        -   [コードを短くするのって楽しいですよね？](http://d.hatena.ne.jp/yaneurao/searchdiary?word=�����ɤ�û������ΤäƳڤ����Ǥ���͡�)
+            -   相手の入力を見てそれに沿った答えを出す方法とか、（OS の生成する）乱数を使う方法とか……。やり過ぎ。
+
+## 第二十八回圏論勉強会
+
+2007-4-28(土) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+10：00〜17:00
+
+出席者
+
+           豊福/酒井 今井 |ス
+     久井    +----------+ |ク
+     吉田    |          | |リ
+     日下部  +----------+ |｜
+            檜山 shelarcy |ン
+
+-   rpfさんは[Skype](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0607.html)で参加
+
+写真：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200704/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/)
+
+### 始まる前の雑談
+
+-   『量子ファイナンス工学入門』
+    -   [3冊そろい踏み](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0610.html)
+
+-   [バイオエタノールは本当にエコなのか](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0576.html)を考えてみた
+    -   「トウモロコシの吸収したCO2がそのままCO2として燃焼されるだけ、だからエコになる」というTVの説明があまりにおかしかったので
+    -   エコになる条件: t\_eco \> (yk/yk+nx)L
+        -   t\_eco: バイオエタノールを消費する時間
+        -   n: バイオエタノールを使用する自動車の台数
+        -   x: ガソリンからのCO2排出量
+        -   y: トウモロコシ1本あたりが吸収するCO2の量
+        -   k: バイオエタノール1L作るのに必要なトウモロコシの本数
+        -   L: トウモロコシの寿命
+
+    -   ここからわかること
+        -   最低限、バイオエタノールを消費する時間が、その生成に必要なトウモロコシの寿命を上回らないとエコにならない
+
+    -   まだ色々と考えるべきパラメータがありそう
+        -   トウモロコシが収穫された分だけ単調に減少するモデルになってるけど、実際には新たに植えて生長する分がある
+            -   でも、それは予め差し引きして考えればいいのか
+
+        -   ある土地で生産している作物をトウモロコシに変更した場合、現在作っている作物とトウモロコシのCO2吸収量の差も考慮すべき
+        -   発酵をおこなうとき菌が排出するCO2は？
+
+    -   TVの説明よりは遥かにマシ
+
+-   物理と計算と幾何の関係
+    -   ファインマン・ダイアグラムとか？
+    -   2つの演算の結合則が4角形の3角形分割に対応する（[図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0578.html)）
+        -   3つの演算なら5角形の3角形分割（[図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0580.html)と[解説のようす](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0579.html)）
+
+    -   物理との関連...[図1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0582.html)、[図2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0584.html)
+        -   チューブが3角形でポリゴン分割
+
+    -   可換則が結び目のヤンキングで表せる（[図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0586.html)）
+    -   等号の右辺と左辺の間に、実は特異点が存在するという話([図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0588.html))
+    -   で、結局圏論とはどのような関係が？
+        -   monoidal category
+            での演算([図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0592.html))
+            -   symmetric は、交差がinvolutionになっているもの
+            -   交差のよれ方に差がある（時計回りと反時計回り）ものは、braided
+            -   Network Algebra は traceつきのsymmetric monoidal category
+
+### "Categories, Types and Structures" Section 1.4.1 最後の Exersices (p.6)
+より
+
+-   Section 1.4.1 最後のExersice
+    -   1. Give an epi which is not surjective in Top
+        -   Topとしてはそんな例はない
+            -   ハウスドルフ空間の圏なら、QからRへの埋め込み
+            -   T0空間なら、（[解答となる例](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0596.html)）
+
+    -   2. Find a counterexample for the following assertion: let C be a
+        category; if f∈C[a,b] and g∈C[b,a] are mono, then a is
+        isomorphic to b. (Note that the assertion is true in Set.)
+        -   （[解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0598.html)）
+            -   順序集合の圏で、a = N, b = 2つのN
+
+    -   3. Prove that a split monic is an iso.
+        -   幾らなんでもそんな訳はないだろう（[反例](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0600.html))
+            -   このテキスト怪しくない？
+
+    -   retraction pair (i, h) を考えたとき、i は mono になり、h は epi かつ principal
+        になる（[図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0602.html)）
+        -   principal ... 任意の A → B を h: A → B で A → A → B にfactorize
+            できるとき、h は principal
+            -   イマイチ直感的じゃない
+            -   retraction は常に principal ということか
+
+        -   Excersice: Show that, given a category C, one can define a
+            category CRet whose objects are the same of C and whose
+            morphisms are retraction pairs in C, that is F∈CRet[a,b] iff
+            F=(f,g) and a<b via (f,g) in C.
+            -   解答：[図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0604.html)
+
+    -   Category of idempotents
+        -   直感的な解釈：外界の圏を1つの対象に埋め込むときに、こういうidempotentの圏のようなものを作ったりする（[板書](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0609.html)）
+            -   任意のデータ型X, Yとその間の関数を、そのまま自然数Nにエンコードすることを考える
+            -   関数 X → Y は ある f: N → N にエンコードされることになるが、このときのドメインNはXより広い
+            -   なので、f は
+                入力がXのときのみ受け付けるようにし、それ以外のときは0（例外）にフィルタリングすることを考えると、そのフィルタはidempotentになる
+            -   idempotentの圏で射が3つ組になっているが、以上のように考えれば、１番目がドメインのフィルタ、3番目がコドメインのフィルタと解釈できる
+
+-   Section 1.5 Subobjects
+    -   いきなりsubobject？
+        -   後でtoposが出てくるからでは
+        -   これを考え始めると数限りなくあるから、introductionに含めるのはふさわしくないような
+        -   でも、subsetに相当する概念が他にないから仕方ないのか…
+
+    -   Exercise: Prove that the preorder ≦ is the full subcategory of
+        C↓a determined by monomorphisms only.
+        -   板書なし（写真撮るの忘れました）
+
+### 2次会
+
+-   Haskell'
+    -   Arrows は入りそう？
+        -   [Arrows
+            は多分入らない](http://hackage.haskell.org/trac/haskell-prime/ticket/13)
+
+    -   [70以上あるライブラリのうち7つしか入らない](http://hackage.haskell.org/trac/haskell-prime/wiki/Status')ようだし、入るのはそういう概念的なものではなくて
+        Concurrent のような直ぐ使える実用的なものだけなんじゃないかな？
+    -   Haskell'の策定作業進んでいるの？
+        -   LL Ring で今年中にって言ったけど、結局去年はでなかった
+        -   最近、あんまり動いているように見えない
+        -   最近では（数ヶ月前だけど）[昔提案されていた Views
+            を改定して入れよう](http://www.mail-archive.com/haskell-prime@haskell.org/msg01985.html)という話があった
+
+* * * * *
+
+Last modified : 2007/12/11 22:56:18 JST

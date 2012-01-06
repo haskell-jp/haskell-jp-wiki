@@ -1,0 +1,77 @@
+# [ShelarcySeminar]()
+
+* * * * *
+
+## 『本物のプログラマはHaskellを使う』読者の集い
+
+### 開催概要
+
+-   日時 2009年5月4日 12:00-18:30
+-   場所 ミラクル・リナックス
+    セミナールーム（[http://www.miraclelinux.com/corp/about/maps\_google.html](http://www.miraclelinux.com/corp/about/maps_google.html)
+    ）
+-   発表資料：[http://page.freett.com/shelarcy/log/2009/diary\_05.html\#seminar\_of\_haskell\_articles](http://page.freett.com/shelarcy/log/2009/diary_05.html#seminar_of_haskell_articles)
+
+### アジェンダ
+
+-   12:00-12:10
+    -   開催の辞、案内
+
+-   12:10-12:15
+    -   **A** Lightening Talk
+        -   発表資料：[http://d.hatena.ne.jp/mokehehe/20090504/ShiraishiSeminar](http://d.hatena.ne.jp/mokehehe/20090504/ShiraishiSeminar)
+
+-   12:15-
+    -   連載記事のこれまでとこれから
+        -   今までの概要と、今後の予定をshelarcyさんが語る
+
+-   13:30-
+    -   連載記事解説（１）「状態」を扱うモナド 基本編
+        -   [第6回
+            局所的な「状態」を利用するためのStateモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20070109/258229/)
+        -   [第15回
+            Haskellでのデバッグのコツをつかむ](http://itpro.nikkeibp.co.jp/article/COLUMN/20071204/288630/)
+        -   [第29回
+            グローバル変数の代わりに使えるReaderモナドとWriterモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20090303/325807/)
+
+-   14:45-
+    -   連載記事解説（２）「状態」を扱うモナド 応用編
+        -   [第30回
+            状態を扱う複数のモナドを合成したRWSモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20090407/327904/)
+        -   [第20回
+            更新を高速化するためのSTモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20080603/305833/)
+        -   [第21回
+            更新操作を一般化するためのSTモナド](http://itpro.nikkeibp.co.jp/article/COLUMN/20080630/309793/)
+
+-   16:00-
+    -   連載記事解説（３）並列・並行処理と例外
+        -   [第12回 Haskellで学ぶ並列プログラミング（その3）
+            並行プログラミングと並列処理](http://itpro.nikkeibp.co.jp/article/COLUMN/20070703/276517/)
+        -   [第26回
+            例外の「中断・終了処理」としての側面](http://itpro.nikkeibp.co.jp/article/COLUMN/20081201/320478/)
+
+-   17:15-
+    -   質問タイム、自由討論
+        -   参考：shelarcyさんに聞いてみたい事
+            -   Haskellの未来
+                -   並列処理
+                -   依存型
+
+            -   余は如何にしてHaskellerとなりし乎
+            -   Haskellで飯を食うには
+
+-   18:15-18:30
+    -   まとめ、閉会の辞 （一旦解散、移動）
+
+-   19:00-21:00
+    -   懇親会
+
+### その他
+
+元の企画ページは[ShiraishiSeminar]()を参考のこと。
+
+[http://atnd.org/events/580](http://atnd.org/events/580)
+
+* * * * *
+
+Last modified : 2009/05/05 00:43:12 JST

@@ -1,0 +1,12 @@
+# [Programming\_玉手 箱\_その他]()
+
+[Programming]():[玉手 箱]():その他
+
+* * * * *
+
+     all_code = foldr1 (++) (iterate f (map (: []) "^'\""))
+     f xs = [y:x | x <- xs, y <- "^'\""]
+
+* * * * *
+
+Last modified : 2009/11/26 16:15:21 JST

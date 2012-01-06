@@ -1,0 +1,87 @@
+# [nobsun\_cerf]()
+
+[nobsun]():cerf
+
+* * * * *
+
+**無保証**
+
+XHTML文字実体
+
+[Data.XHTMLEntities]()
+
+-   [概略]()
+-   [インストールの概略]()
+-   [使い方の概略]()
+-   [注意]()
+-   [コメント]()
+
+* * * * *
+
+## Data.XHTMLEntities
+
+### 概略
+
+XHTMLの文字実体参照データ
+
+-   entities : (参照名(String), 文字(Char), 説明(String))のリスト
+
+参照名 → 文字
+
+-   nameToChar
+
+文字 → 参照名
+
+-   charToName
+
+文字 → 説明
+
+-   charToDesc
+
+### インストールの概略
+
+    % darcs get http://darcs.sampou.org/cerf
+    % cd cerf
+    % emacs cerf.cabal
+    % runhaskell Setup.lhs configure
+    % runhaskell Setup.lhs build
+    % runhaskell Setup.lhs install
+
+### 使い方の概略
+
+    import qualified Data.UTF8 as U
+    import Data.XHTMLEntities
+
+    main :: IO ()
+    main =  U.putStr $ unlines $ map showEntity $ entities
+
+    showEntity :: (String, Char, String) -> String
+    showEntity (n,c,d) = "("++n++","++[c]++","++d++")"
+
+実行結果
+
+    *Main> :main
+    (nbsp, ,no-break space = non-breaking space, U+00A0 ISOnum)
+    (iexcl,　,inverted exclamation mark, U+00A1 ISOnum)
+    (cent,¢,cent sign, U+00A2 ISOnum)
+    (pound,£,pound sign, U+00A3 ISOnum)
+    (curren,　,currency sign, U+00A4 ISOnum)
+    (yen,\,yen sign = yuan sign, U+00A5 ISOnum)
+    (brvbar,¦,broken bar = broken vertical bar, U+00A6 ISOnum)
+    (sect,§,section sign, U+00A7 ISOnum)
+    (uml,¨,diaeresis = spacing diaeresis, U+00A8 ISOdia)
+    (copy,　,copyright sign, U+00A9 ISOnum)
+    (ordf,　,feminine ordinal indicator, U+00AA ISOnum)
+    (laquo,&#171;,left-pointing double angle quotation mark = left pointing guillemet, U+00AB ISOnum)
+    (not,¬,not sign = angled dash, U+00AC ISOnum)
+    …
+
+### 注意
+
+-   無保証
+
+### コメント
+
+* * * * *
+
+Last modified : 2007/06/20 10:33:13 JST

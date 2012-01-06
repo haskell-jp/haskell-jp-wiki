@@ -1,0 +1,1536 @@
+# [Programming\_WayToHaskeller\_よちよち歩き]()
+
+[Programming]():[WayToHaskeller]():よちよち歩き
+
+* * * * *
+
+## よちよち歩き
+
+([「よちよち歩き」を編集する](http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:������⤭&c=e&l=jp))|([Haskellerへの道](http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&l=jp))
+
+他の方々がさくさくHaskellのコードを紡いでいるのを見ていると、まだまだ 道のりは長いらしい。
+実は入門の目次見てても型関係とモナド関係でおしまい？って気がしないでも なかったんだが、かなり勘違い？なのが見て取れる。
+とにかく二足歩行にちゃれんじだぜ！べいべっ！！
+
+### 自分で型を
+
+かの[やさしいHaskell入門](http://www.sampou.org/haskell/tutorial-j/index.html)が実は入門者に難しいという定説があるんだけど、
+思うに[ココ](http://www.sampou.org/haskell/tutorial-j/goodies.html)が
+
+しっしっ！けーれ！こちとら一見さんはお断りでいっ！っておっしゃってる様 に思える。
+でもさ、自分の問題に合わせて型とかを作るのって、言語によらず基本中の基 本じゃないすか？
+なんもかもリストとかなんもかも配列とか、そういう言語上でだって、見掛け 上だけでもそれっぽい型に見えるようなナニモノかをでっち上げるもんね？
+
+っちゅーわけで、以前から Tree とか気になってたりするわけさ。
+
+    data Tree a             = Leaf a | Branch (Tree a) (Tree a) 
+
+この直前に
+
+・・・ような型構築子とPtのようなデータ構築子は別の名前空間にあります。つまり、つぎのように、型構築子とデータ構築子に同じ名前を使うことが
+できるということです。
+
+    data Point a = Point a a
+
+こんな説明があるのだが、なんか足りない気がする。 うーん。Point ってデータ構築子はいつどこでだれが作るんだろう?
+
+というワケで例によってHugsの反応をうかがいつつ考えてみましょー。
+
+    #! /usr/pkg/bin/runhugs
+
+    \begin{code}
+
+    data Tree a = Leaf a | Branch (Tree a) (Tree a)
+
+    \end{code}
+
+まずは、これだけのコードを C-c C-l でロードしてみる。
+
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    /home/cut-sea/script/haskell/tree.lhs
+    Main> 
+
+お？予想外に通りました。何を予想してたかってーと、左辺のやつは型構築子 てやつで、右辺にあるのがデータ構築子だってことらしいけど、どっこにも定
+義してないんだよね？このデータ構築子ってのがさー。にも関わらずエラーも 何も出ないと考える方が異常かなぁっと。 もしかしてたまたま Branch
+とか含まれてるのか？と思って :find Branch っ てすると、なんと自分で書いた上のコードがそのまま表示されやがった。 :find
+Tree しても同じ。
+
+・・・ってーことはデータ構築子ってのは勝手に作られるんだね。そういや、
+以前[ここ](http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:�Ĥ��ޤ�Ω��&l=jp#9)
+で Color をいじった時にも、何もしなくたって良かったな。 Red とか Blue
+とかどうやって作るか？なんて考えもしてないわ。どうやら具体的 にどのように実装するものかってのを定義しなくてもいいわけか。以前は列挙
+型ってことだったんで、 Red や Blue ってまるでリテラルの定義の様に錯覚
+してたけど、改めて説明を読むと、これって（無引数）データ構築子だから Red とか Blue
+のインスタンスを生成する関数（？）のようなもんなわけか。
+
+しかもユーザ定義のデータ型とかって、例えば C ならどんな構造体だとか、 この要素は int だとか char \*
+だとか指定しないといけないけど、 Haskell の場合には不必要と？んーっむ、すんげー不思議(--;
+ってゆーかペテンにかけられてる気がする。どんな構造（気持ち的には実装） か指定してもいないのになんとなく作れちゃうのか？単に型同士の関係さえ掴
+めればいいのだろうか？ でもさぁ、そうだとしても、さらなる疑問が出て来るぞ。型同士の関係って意
+味でいうと次のところとか気になるんだよなぁ。個人的に。
+
+型構築子とデータ構築子は別の名前空間にあるんなら、
+
+    data Tree a = Leaf a | Branch (Tree a) (Tree a)
+
+この型宣言の左辺にある Tree ってやつと 右辺の Tree ってやつの関係は？ 右辺の Tree ってのは Tree
+って型のデータを作るためのデータ構築子だと思っ てたけど違うのか？ emacs 上でカーソルを合わせるけど案の定なんも表示されないね。ミニバッ
+ファ。 んじゃ、 Main\> プロンプトに Leaf 1 とか入れてみようか？
+
+    Main> Leaf 2
+    ERROR - Cannot find "show" function for:
+    *** Expression : Leaf 2
+    *** Of type    : Tree Integer
+
+ありゃ、ダメだ。そっか show クラス継承せんといかんな。
+
+    data Tree a = Leaf a | Branch (Tree a) (Tree a) deriving Show
+
+改めてロード！
+
+    Main> Leaf 1
+    Leaf 1
+    Main> Leaf 2
+    Leaf 2
+    Main> Tree 1
+    ERROR - Undefined constructor function "Tree"
+
+ふむ、Tree はデータ構築子じゃねーよ！って叱られちった。やっぱそうなんか。 んだらば、コレは？
+
+    Main> Branch 1 2
+    ERROR - Unresolved overloading
+    *** Type       : Num (Tree a) => Tree a
+    *** Expression : Branch 1 2
+
+あ、違った。(\^\^;
+
+    Main> Branch (Leaf 1) (Leaf 2)
+    Branch (Leaf 1) (Leaf 2)
+    Main> 
+
+うむ。ってーことは、右辺に現れる大文字英字から始まるシンボル名の内、ど れがデータ構築子で、どれが型構築子なんじゃろ(?\_?)
+
+    data Point a = Point a a deriving Show
+
+これはアリなんだよねぇ？うーん。 こういう時は、大っ嫌いなんだけど仕様書みるっきゃねーか。
+[ユーザ定義のデータ型](http://www.sampou.org/haskell/report-j/decls.html#datatype-decls)を見てみよう。
+
+    topdecl         ->      data [context =>] simpletype =  constrs [deriving]      
+    simpletype      ->      tycon tyvar1 ... tyvark         (k>=0)
+    constrs         ->      constr1 | ... | constrn         (n>=1)
+    constr  ->      con [!] atype1 ... [!] atypek   (arity con = k, k>=0)
+            |       (btype | ! atype) conop (btype | ! atype)       (infix conop)
+            |       con { fielddecl1 , ... , fielddecln }   (n>=0)
+    fielddecl       ->      vars :: (type | ! atype)        
+    deriving        ->      deriving (dclass | (dclass1, ... , dclassn))    (n>=0)
+    dclass  ->      qtycls
+
+・・・うわっ。(\^o\^; 基本的には topdecl は data simpletype = constrs だよってーとこから下っ
+ていって、 constr1 | constr2 ... | constrn って感じの列挙になるよと。 でもって constr
+ってのがどうも難し過ぎて閉口しちゃいました。ただ、なん となくなんだけど con ほげほげ ってな感じになってそうなんで、 con って のが
+constructor の略だとすれば、最初の一個目のシンボルだけがデータ構 築子ってことの様に思える。残りの atype
+ってのは多分、なんかの型だと思 うんだけど自信ねぇや。 [!]って感じで角括弧で囲まれたやつは省略可ってこ
+とだと思うんだけど、これも自信無し。まぁ、あまり突っ込んでも、まだ分か らないと思うんで潔くあきらめる。 とりあえず、|
+で区切って、各部分の最初のシンボルがデータ構築子の名前に なるんでしょーって思っておこう。 (ただし、途中に infix 云々があるんで、
+こいつはちょい別っぽいけど)
+
+    data Tree a = Leaf a | Branch (Tree a) (Tree a) deriving Show
+
+つまり、ここで Branch ほげ ふがってのは、この時点で Branch がデータ構 築子、ほげとふがが型を表してんだね。ってーことは、
+
+    data Tree a = Leaf a | Tree (Tree a) (Tree a) deriving Show
+                          ~~~~~~
+
+こんな風に書いた場合、ここに出てくる Tree のうち、最初の波下線つけた Tree だけがデータ構築子で、続く (Tree a) (Tree
+a) が型であり、データ構 築子 Tree の引数(って言い方が妥当かどうか知らんが)にもなるシロモノだね。
+
+    Main> Tree (Leaf 1) (Leaf 2)
+    Tree (Leaf 1) (Leaf 2)
+    Main> Tree (Tree (Leaf 1) (Leaf 2)) (Tree (Leaf 3) (Leaf 4))
+    Tree (Tree (Leaf 1) (Leaf 2)) (Tree (Leaf 3) (Leaf 4))
+    Main> Tree (Tree (Leaf 'a') (Leaf 'b')) (Tree (Leaf 'c') (Leaf 'd'))
+    Tree (Tree (Leaf 'a') (Leaf 'b')) (Tree (Leaf 'c') (Leaf 'd'))
+    Main> 
+
+うん。なんとなく正解くさくないっすか？
+
+さて、ここで重要なんじゃないかと思うのは、まさに Tree がどんな構造（こ
+こも気持ち的には実装ね）か？なんて一切指定というか記述されてないこと！ ではなかろーか。 上の Tree
+型の定義をみたら、規格外の偏屈者でもない限り、
+
+            Tree (Leaf 1) (Leaf 2)
+                   +---+---+
+                   | + | + |
+                   +/--+--\+
+                   /       \
+               +--/+       +\--+
+               | + |       | + |
+               +---+       +---+
+              Leaf 1       Leaf 2
+
+こーんな感じの木構造を思い浮かべるハズ。（だよね？だよね？DAYONE？オレ が規格外の偏屈者ってこたないと・・・） でも、多分 Haskell
+は 「想像すんのは勝手だけど、どんな風に実現してるか はオレの勝手じゃ！」とおっしゃるかもしれんワケだ。
+
+例えば、Scheme? とかの Lisp? 系言語ではフツーはリストって言えば、おそ らく上の Tree
+みたいになっているハズだけど、全く違う実装も考えられる。
+
+    (define (cons x y)
+      (lambda (z) (z x y)))
+    (define (car z)
+      (z (lambda (x y) x)))
+    (define (cdr z)
+      (z (lambda (x y) y)))
+
+なんて感じで実装されてたって良いわけやね。要は cons/car/cdr が互いに、
+インターフェースがピシッと合わせてあって、ソトヅラさえ、正しく動けば、 どんなんでもそんなん自由なわけか。
+
+ただ、上記で定義した cons/car/cdr は、こいつらの中だけで仲間意識があって、
+
+native に実装されている cons/car/cdr とは協定組んでないんで、いっしょ
+くたにして書いても動かないのは当ったり前。つまり、こいつらはこいつらの 世界だけで構成される計算ロジックの中でだけうまく動くので、ちゃんと閉じ
+込めてやらないといけないんだよね。 （実はモナドってやつの世界観もコレっぽい気がせんでもないんだが）
+
+    data Tree a = Leaf a | Tree (Tree a) (Tree a) deriving (Show,Eq)
+
+こんな風に Eq も継承させてみる。そうすっと、
+
+    Main> Tree (Leaf 1) (Leaf 2) == Tree (Leaf 1) (Leaf 2)
+    True
+    Main> Tree (Leaf 1) (Leaf 2) == Tree (Leaf 1) (Leaf 3)
+    False
+
+比較判定もできるようになるんですな。さて、ここでこんなん試してみましょう。
+
+> ちょっと割り込み。Quiz です(まず、脳内で考えましょう。それから、処理系に訊きましょう)。
+>
+>     data Tree a = Leaf a | Branch (Tree a) (Tree a)
+>
+> -   Leaf の型は？
+> -   Branch の型は？
+>
+> --nobsun(2004/12/08 10:23:37 JST)
+
+おっと、割り込み要求を受信してしまった。しかも、処理系に聞かないように とクギさされました。なんか行動見抜かれてます。ぎく。(-\_-;
+
+でも忘年会帰りでアルデヒドが脳内で暴れ狂ってるんで何か分かりそうな気がする。
+
+えーと、 Leaf とか Branch ってのはデータ構築子ですねぇ。データ構築子に
+型なんてあんの？と一瞬固まったんだけど、こいつは確かに一引数とか二引数 の関数とみなせそうですな。 Leaf は 任意の型 a を引数にとり、
+Tree a な 型のデータを生成する関数なんじゃない？ 生成するなんて言い方が妥当かどうか怪しいんだけど。同様に、 Branch は Tree
+a を二つ引数に取って、 Tree a な型のデータを返す関数ですよね？ これって妙に身構えちゃってたけど、良く考えたら構築子が関数ってのは別に
+驚くようなこっちゃねぇな。(\^\^; ま、ともあれ口頭で話すよか書いた方が綺麗かなぁ。
+
+    Leaf :: a -> Tree a
+    Branch :: Tree a -> Tree a -> Tree a
+
+こんな感じじゃなかろかしらん。しかも今回は結構自信マンマン。(\^\^)v なんかすげぇつじつま合ってそうだし。同様に推測すると Red や
+Blue なんかも。
+
+    Red :: Color
+    Blue :: Color
+
+ですね。無引数の関数って実質 thunk で、それは Haskell では値だ。これも 自分的には納得できる。
+
+んじゃ、自信もあるんでファイナルアンサー！
+
+    Main> Leaf
+    ERROR - Cannot find "show" function for:
+    *** Expression : Leaf
+    *** Of type    : a -> Tree a
+
+    Main> Branch
+    ERROR - Cannot find "show" function for:
+    *** Expression : Branch
+    *** Of type    : Tree a -> Tree a -> Tree a
+
+    Main> 
+
+ビンゴ！！やったね！！(\^\^)v しかしアルコール入るといー感じなのは喜ぶべきなんか・・・？ってな自己ツッ
+コミはおいといて、素晴らしい！！ダテに二足歩行しちゃいねぇ！ ・・・あれ？ってことはデータ構築子って関数？オイラそんな関数なんて定義
+してねぇぞ？(@\_@;えぇっ？？ 関数って定義してないのに関数が出来てるくさいんですけど、コレ・・・。酔っ
+払いすぎてマボロシでも見てますか？ワタシ？？
+
+気になるので逆にこんなんしてみる。これで逆に Tree a 型ってのができちゃっ たりして。ゴクリ。
+
+    #! /usr/pkg/bin/runhugs
+
+    \begin{code}
+
+    {-
+    data Tree a = Leaf a | Branch (Tree a) (Tree a) deriving (Show,Eq)
+    data Tree a = Leaf a 
+                | Tree (Tree a) (Tree a) deriving (Show,Eq)
+
+    data Point a = Point a a deriving Show
+    -}
+
+    Leaf :: a -> Tree a
+    Branch :: Tree a -> Tree a -> Tree a
+
+    \end{code}
+
+つまり、今度は data Tree a を宣言するんじゃなくて、 Leaf や Branch 関 数の型宣言をすることで、あたかも Tree a
+型が宣言できちゃうんじゃないか なぁ？って企てだ。いけーっ！！
+
+    Prelude> :load /home/cut-sea/script/haskell/tree.lhs
+    Reading file "/home/cut-sea/script/haskell/tree.lhs":
+    Parsing
+    ERROR "/home/cut-sea/script/haskell/tree.lhs":13 - Syntax error in declaration (unexpected `::')
+    Prelude> 
+
+あーぁ、これはハズレだ。
+
+> 「えっ？ 型？ あ、そうか。そんなものもあったな。いやあ、すっかり忘れておったわ」
+
+ガーーーッン (‾□‾;)
+
+> タイプ量は増えるけど、処理系に礼儀正しく型を聞く方法。
+>
+>     Hugs.Base> :t id
+>     id :: a -> a
+
+よくよく考えたら分かったかも。
+
+あ、いや、上で Leaf や Branch を定義することで Tree a が出来るか？って ムボーなチャレンジがダメな理由がね。
+
+やっぱ引用は[こっから](http://www.sampou.org/haskell/tutorial-j/goodies.html)だ。
+
+すべての値は型 (type)をもちます。 (直観的には型は値の集合と考えることができます。)
+
+そうよ、型は値の集合なんよね。（あくまで直観的にってお断りあるけど） 例えば、上の例で言えば Leaf か Branch で構築されるものだけが
+Tree なん だ。 Leaf だけでもないし、Branch だけでもない。また、それ以外のものも
+含まれちゃいない。だけど、ムボーなチャレンジの方で、もし私が Leaf だけ 定義してたとしたら、 Tree
+を完全に表現できてないんだね。（でも完全なの か不完全なのかすら分からん） 同じく Leaf と Branch だけで Tree
+の全てかどうかは Tree が明かされてな い以上は保証できん。
+
+逆に型 Tree を記述すれば、要素は全部明確になっているから、どの要素だっ
+て生成するための関数の存在を仮定する（？）ことは可能なような気がする。 なんとなくだけどさ。私の信用ゼロのゴーストがそうささやいている。
+
+> nobsun (2004/12/12 23:35:47 JST):
+> データ構築子は関数のような型をもっていますし、関数のように使えますが、関数ではありません。
+>
+>     data Tree a = Leaf a | Branch (Tree a) (Tree a)
+>
+>     tree,tree' :: Tree a -> Tree a -> Tree a
+>     tree  = Branch
+>     tree' = Branch
+>
+> この tree および tree' は関数です。では、tree、tree' と Branch ではなにが違いますか？
+>
+> 「ただの」関数ではないけれど、関数であるべき用件は満たしているのでは。 -- yts
+>
+> Paul Hudak:
+>
+>      > the Haskell designers might have used the following syntax:
+>      >
+>      > data Shape where
+>      >      Circle :: Float -> Shape
+>      >      Square :: Float -> Shape
+>      >
+>      > which conveys exactly the same information, and makes it quite clear 
+>      > that Circle and Square are functions. 
+>
+> [http://www.haskell.org//pipermail/haskell-cafe/2004-November/007357.html](http://www.haskell.org//pipermail/haskell-cafe/2004-November/007357.html)
+
+データ構築子は関数では無いのか？
+
+うーん。分かりません。(+\_+; とりあえず、関数は関数の本体が無いとダメだけど、データ構築子は無くても おっけー！ってか無い。
+
+> nobsun(2004/12/15 15:31:31 JST)
+>
+> データ構築子はタグのようなもので、強いて関数として書くなら、
+>
+> (define (Leaf x) (list 'Leaf x)) (define (Branch t1 t2) (list 'Branch
+> t1 t2))
+>
+> と同じようなものです。これなら、どれも同じパターンなので、強いて本体を書く必要はないでしょう(Haskell
+> では書きたくても書けませんが。。。)。
+>
+> 前に上げた、tree、tree' と Branch の重要な違いは、たとえば、
+>
+> Branch (Leaf 5) (Leaf 1)
+>
+> というデータがあったとき、このデータは、tree によって作られたものなの か tree'
+> によって作られたものかは解らないですよね。でも、Branch で作ら れたものだということは、解ります。
+
+他になんかあるかなぁって思っていくつか式入力してみたけど、特に差らしき とこが分かんないです。違いの分からない男です。えぇ・・・。
+
+・・・ってワケで、googleさん使ってカンニングしちゃいます。
+[関数型言語の比較／型の定義](http://wiki.ocaml.jp/index.php?�ؿ�������/�������)なんぞをみると、関数とデータ構築子は名前空
+間は別って書いてあるな。名前の先頭文字が大文字・小文字の差はある。他に なんか美味そうなネタないかしらん。
+
+あとは、（今神が導こうとしているとこと違うかも知れないけど）
+この[フィールドラベル](http://www.sampou.org/haskell/tutorial-j/moretypes.html)か。
+
+    data T = C1 {f :: Int, g :: Float}
+           | C2 {f :: Int, h :: Bool}
+
+    フィールド名 f は型 T の両方の構築子に適用されています。
+    つまり、もし、x の型が T ならば、x {f=5} は T 内の
+    どちらの構築子が生成した値に対しても機能します。
+
+ふむ。これはちょっと、いやかなり面白いかも。 ここで C1 とか C2 とかってのが、 Leaf や Branch にあたるわけだけど、こ
+の例で x ってやつは葉っぱか枝かはっきりしてない状態でデータが作れちゃ うんだって。
+
+とかなんとか言ってるうちにお告げがありました。ほー。ってことは、こうい うのはダメなのかな。
+
+    \begin{code}
+
+    data Tree a = Leaf a | Branch (Tree a) (Tree a) deriving (Show,Eq)
+
+    data Three a = Leaf a | Branch a deriving Show
+
+    \end{code}
+
+つまり、 Leaf で作られたり Branch で作られたりしたデータが、自分でなん の型か分からないとか唯一に決まんないのはNG食らいそう。
+例によって C-c C-l してやると。
+
+    Prelude> :load /home/cut-sea/script/haskell/tree.lhs
+    Reading file "/home/cut-sea/script/haskell/tree.lhs":
+    ERROR "/home/cut-sea/script/haskell/tree.lhs":5 - Repeated definition for constructor function "Leaf"
+    Prelude> 
+
+って感じで、 Repeated definition ってのが Leaf に対して出される。 ちなみに Branch
+で出ないのはなんでか？今の時点で考えられるのは、
+
+1.  Leaf でエラー出るから、そっから先はまだ目が行ってない。
+2.  Branch の引数の取り方が違うんでちゃんと見分けてくれてる。
+3.  それ以外の何か。(思い付かん)
+
+さぁどれかな。
+
+    data Three a = Branch a deriving Show
+
+こうしてみる。 Three から Leaf を除くの。
+
+    Prelude> :load /home/cut-sea/script/haskell/tree.lhs
+    Reading file "/home/cut-sea/script/haskell/tree.lhs":
+    ERROR "/home/cut-sea/script/haskell/tree.lhs":5 - Repeated definition for constructor function "Branch"
+    Prelude> 
+
+って訳でいっちゃん上のやつでした。 んー、やっぱS式で表現されると実にスンナリ受け入れられマス。
+
+さて、じゃあ Tree みたいなありがちな構造だけじゃなく、もちっと複雑な型
+を見てみよう。でも自分じゃ考えらんない。そもそもどういった構造を考えて も所詮既成概念からくるようなべったべたの工夫のカケラもないものになるの
+が目に見えておる。
+
+というわけでネタ探しだ。っつーか、心当たりはあるのだが。えーっと。あ、
+[これこれ](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/8)ここにある型構築子の不動点だのバランス木だの、これでんがな。
+
+    型構築子の不動点を表す、
+      newtype Fix f = In (f (Fix f))
+    くらいは私も見たことがあったのですが、
+    完全バランス木を表す
+      data Fork a = Fork a a
+      data Perfect a = ZeroP a | SuccP (Perfect (Fork a))
+
+しかし、 newtype ってまた。(\^\^;ガン○ム世代をくすぐるねぇ ちなみに Newtype 宣言とかいうやつで、やさしい
+Haskell 入門にはこうあります。
+
+プログラミングの練習に共通していることは、表現が既存の型と同一であるが、 型システムのなかでは別ものであるような型を定義することです。
+Haskell では newtype 宣言が既存の型から新しい型をつくりだします。
+
+うーん。C の typedef みたいなもんかと思ったんだけど、ちょっと違う気も
+する。型システムの中では別物って書いてあるけど、それの意味するところが 理解できてないのが致命的なんだろうね。
+
+まぁ、こいつを肴にひさかたぶりにHaskellをいぢいぢしてみるかい。のんび りね。のんびり。
+
+まず、型構築子の不動点を表すとかいうやつです。
+
+    newtype Fix f = In (f (Fix f))
+
+・・・(-"-) えーっと、久々なんでかなり忘れてる。やべぇ。復習、復習。あ、 そうだ。In がデータ構築子だね。 f
+がなんだかよう分からんが、 Fix は型 構築子になるんじゃないかな。あれ? もしかして Fix f っていう型かな。 IO () とか IO
+String みたいに f は a とか b なんかと同じ型変数だろうか。 だとすると、IO a みたいなもんだな。 Fix f ってのが型変数
+f を内部に持 つ Fix 型と。んー、とりあえずそう考えてみるか。あんまり抽象的だとつい てけないから、具体的な型にしてみるか。
+
+    newtype Fix Int = In (Int (Fix Int))
+
+これならどーよ。念のためにロードしてみよう。うりゃ！久々の一発！
+
+    Hugs session for:
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    Type :? for help
+    Prelude> Reading file "/home/cut-sea/script/haskell/fix.lhs":
+    ERROR "/home/cut-sea/script/haskell/fix.lhs":12 - Illegal left hand side in datatype definition
+    Prelude> 
+
+うがぁっ！えーと、datetype 定義の左辺がだめだってか? やっぱ Int とかに したらいけないのか。
+
+> 例えば、Scheme で
+>
+>     (define (g x) x)
+>
+> を具体的な値にしたくて
+>
+>     (define (g 0) 0)
+>
+> としたら、エラーになりますよね。要するに、Fix の仮引数 f まで Int にし てしまったのがエラーの原因です。
+>
+> やるのであれば、
+>
+>     newtype Fix = In (Int Fix)
+>
+> でしょうか。(ほかのエラーが出ると思いますが)
+
+    newtype Fix f = In (f (Fix f))
+
+んじゃ、元に戻してみよう。C-cC-lだっ。
+
+    /usr/pkg/share/hugs/lib/Prelude.hs
+    /home/cut-sea/script/haskell/fix.lhs
+    Main> 
+
+うむ。しかし、どうやって使えばいいのかが分からん。(-\_-; いやいや、落ち着け、オレ。例えば、
+
+    data Tree a = Leaf a | Branch (Tree a) (Tree a) deriving (Show,Eq)
+
+この Tree の例で言えば、Tree って型はデータ構築子の Leaf か Branch で
+作られるんだったよね。これってLeafやBranchってタグが付けられるようなも んだとかって話があったな。それからすると、例えば Leaf
+10 とかってして Tree 型のデータを作るみたく In (10 (Fix 10)) とかって感じか? でも (10 (Fix 10))
+は何か変。型変数の名前の付け方が f ってところからして俺のこ と関数だと思ってよ〜 って電波をビシビシ感じます。ええ。そうすっと、例
+えば・・・
+
+    Main> In ...
+
+ん？んんんん〜？あれれ？なんか書けないぞ、コレ。なんでだ？(@\_@;; えーっと。Tree なんかだとこうだよな。
+
+    Main> Leaf 10
+    Leaf 10
+    Main> :t (Leaf 10)
+    Leaf 10 :: Num a => Tree a
+    Main> Branch (Leaf 1) (Leaf 2)
+    Branch (Leaf 1) (Leaf 2)
+    Main> :t Branch (Leaf 1) (Leaf 2)
+    Branch (Leaf 1) (Leaf 2) :: Num a => Tree a
+
+あー、そうか再帰的な型なのはいいんだけど、基底っていって良いのかなぁ、 Leaf みたいな、そういうデータ構築子がFixに無いからだ。こりゃ。
+
+> まあ、
+>
+>     Main> :t In Nothing
+>     In Nothing :: Fix Maybe
+>
+> とか書けない事も無いですが、素直に[ここ](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/14)から例を引っ張ってきた方がいい
+> と思います。
+
+それでも不動点についてなんか無いかしらんと google に頼ってみると結構説 明してるのが多いな、うん。個人的には
+[この説明](http://d.hatena.ne.jp/tanakh/20040813) が結構一歩一歩説明してあっ て分かりやすいかも。
+…いや、分かったような気にしてもらえるかも、って んで推奨。
+
+Haskell に限らないみたいだが Schemeなんかでもふとしたキッカケでぶわーっ て不動点の話題が燃え上がることがあるようで。
+
+なんだか fix って操作というか簡約の方向を、自分を呼び出すような仕掛け
+を作りこむのに使ってる感じがするわいな。不動点て聞くとどうも勘違いしや すいのよね。(私だけかい?)
+検索中にもどっかで見かけたが、関数を与えたら 勝手に不動点を計算してくれる〜みたいなさ。 (\^\^;いやまさに私もそう思っ
+てましたって感じで、ははは。
+
+さて、神の助言にしたがって入力してみる。 (実はその前に見てて fold/unfold の定義を見落としてた。はずい〜)
+
+    \begin{code}
+
+    newtype Fix f = In (f (Fix f))
+
+    out (In x) = x
+    fold f     = f . fmap (fold f) . out
+    unfold f   = In . fmap (unfold f) . f
+
+    data ListF a x = Nil | Cons a x
+
+    instance Functor (ListF a) where
+      fmap f Nil        = Nil
+      fmap f (Cons a x) = Cons a (f x)
+
+    type List a = Fix (ListF a)
+
+    nil       = In Nil
+    cons x xs = In (Cons x xs)
+
+    lengthFix = fold f where
+                    f Nil = 0
+                    f (Cons _ n) = n + 1
+
+    \end{code}
+
+length はそのまま使うとmultiple define だって叱られるんで、とりあえず、 lengthFix としてみる。
+
+…うぅ、あまりにも初めて見る方々が多いので、ちょっとキビシイ。(--; instanceだのFunctorだのぞくぞく新キャラ登場。
+
+まぁ、いろいろ考えた末に一番最後の式から見ていくことにするわけさ。
+
+    lengthFix = fold f where
+                    f Nil = 0
+                    f (Cons _ n) = n + 1
+
+これはいいねぇ。すっごい抽象的にだけど、イメージは分かる。「lengthFix リストっぽいもの」が「fold f
+リストっぽいもの」って感じで使われるんじゃ ないかしらん。で、whereってのは、まぁこの文脈でfはこれこれこういうモノ
+だよってことだね。つまり、fはNilなら0を返して、(Cons \_ n)ならnに1を足 すという関数だと。
+あっしゃ大域的に名乗るほどの者じゃございやせんとかっ てfを局所的に定義しているようなもんだ。
+
+んん？「リストっぽいもの」を普通のリストだと考えると、ちょっと引っかか るぞ。 Consってデータ構築子だよね。
+
+    data ListF a x = Nil | Cons a x
+
+うん、そうだよね。 ListF って型はNilか、もしくは型変数 a x に Cons タ グ付けたものだとするんだけど、もしかしたら a と
+x は別の型なのかもしれ ない。んー、ってかそうだって書いてあるじゃん。これは変数じゃなくて型変 数なんだから Cons a a じゃなくて
+Cons a x って書いてあるってことはやっ ぱり別の型なんだよっ。(\^\^;
+いや、まぁScheme?のリストでも確かに違うっちゃ違うけどさ。なんか驚いちゃった。
+
+こういう使われ方をするってことは、(Cons \_ n)の n には整数が来て、 \_ な
+ワイルドカードにはリストを構成する要素みたいなもんが来るということです な。 Scheme?っぽいリスト表現で書くと、
+
+    '(a b c d e f g)   => (a b c d e f g ())
+                       => (a b c d e f g 0)
+                       => (a b c d e f 1)
+                       => (a b c d e 2)
+                       => (a b c d 3)
+                       => (a b c 4)
+                       => (a b 5)
+                       => (a 6)
+                       => (7)
+
+みたいな感じの計算になるんじゃないか？多分。あくまでだいたいね。そうす るとなんか fold って感じしません？ 次にぽーーんっと飛ぶけど、
+
+    out (In x) = x
+    fold f     = f . fmap (fold f) . out
+
+これと、lengthFixの例を見ると、
+
+    lengthFix == fold f
+    lengthFix リストっぽいもの == fold f リストっぽいもの
+                               == f . fmap (fold f) . out   リストっぽいもの
+                                                     ~~~~~~~~~~~~~~~~~~~~~~~~
+
+ってなるから、なんとなーくだけど リストっぽいもの == In x で表現される
+ものって感じじゃないかな。なんて軽く言っちゃったけどfoldの定義が再帰構 造になってるわ、
+fmapもあるわで、ちとツライかも。(TヮT)アハハ こーゆー自分の頭を越えたかな〜って時は素直に参りましたm(\_\_)m
+ってワビ入れてから、具体的な値で計算を追ってみる作戦を採用する。一番簡
+単なのはNilとかだよね。こいつはListF型だな。こいつとInていうデータ構築 子とがどう絡んでくるのがはっきりしないんだけど、
+
+    instance Functor (ListF a) where
+      fmap f Nil        = Nil
+      fmap f (Cons a x) = Cons a (f x)
+
+このfmap f Nilって使い方が取っ掛かりになるかな〜？ lengthFix は fold f で、 fold f は f. fmap
+(fold f) . out だよね。ってことは、In xって感じ で作られた「リストっぽいもの」にoutを適用して得られた xがfmap
+(fold f) x って感じに適用される訳だな。ってことはxがListF型らしい気がする。そー 思いません？
+
+じゃ、そうだと仮定してNilをInなデータ構築子に渡してみよう。タグ付けさ れるイメージで考えると、In Nil なデータになるね。
+そーすっとー、こうだっ！
+
+    lengthFix (In Nil) => fold f (In Nil)                     -- lengthFix の定義
+                       => (f . fmap (fold f) . out) (In Nil)  -- fold の定義
+                       => (f . fmap (fold f)) Nil             -- 適用
+                       => f (fmap (fold f) Nil)               -- 式変形
+                       => f Nil                               -- ListF a　に対するFunctorのメソッド？fmap の定義から
+                       => 0                                   -- lengthFixのwhere部から
+
+おぉおぉぉぉっ！正解くせぇぞ。 (ちなみに上のfが"大域的に名乗るほどのものじゃございやせん"なfなんで一 応確認ね)
+んじゃ調子に乗って、も少しリストっぽいものを作って動作を追っ てみようか。
+
+………………………………………………………………あ。(‾□‾;)
+
+とんでもないことに気付いちゃった。 Fixにちっとも触れてないよ。(--;
+さらにこの後でCons使った例をやっても、なんだか触ること無しに終わりそう な予感がするんだけど気のせいか？
+
+えーと、気づかなかったことにして、とりあえず追うよ。
+
+    Cons "Hello" Nil
+
+とかしてもいいのかな？えーっと、
+
+    instance Functor (ListF a) where
+      fmap f Nil        = Nil
+      fmap f (Cons a x) = Cons a (f x)
+
+これからすると、Cons a x の x は f x って感じで f に適用されるんだから、 そういう型じゃなきゃダメだね。
+
+    lengthFix (In Nil) => fold f (In (Cons ? ??))
+                       => (f . fmap (fold f) . out) (In (Cons ? ??))
+                       => (f . fmap (fold f)) (Cons ? ??)
+                       => f . fmap (fold f) (Cons ? ??)
+                       => f . Cons ? (fold f ??)
+
+なんだから ?? つまり Cons a x の x は、fold f に適用可能なものじゃなきゃ ダメだ。
+
+    fold f     = f . fmap (fold f) . out
+
+だから、 ?? は In x のように In データ構築子で生成されるものなんだ。
+
+    Cons ? (In Nil)
+
+とかが Nil の次に簡単な「リストっぽいもの」候補かな。ちなみに ? は結局 値を必要とされないので、多分なんだっていけそうな気がする。
+Cons データ 構築子で作られたものはListF型なので、こいつを In で包めば、また別の Cons の cdr
+(か?)にすることができるね。
+
+    In (Cons [1..] (In (Cons [0..] (In Nil))))
+
+こんなんでどうでしょ。なんかとりあえずリストっぽい感じがせんでもないん
+じゃない？こいつをlengthFixに適用させてやるとどうなるかシミュレートし てみる。
+
+    lengthFix (In (Cons [1..] (In (Cons [0..] (In Nil)))))
+           => fold f (In (Cons [1..] (In (Cons [0..] (In Nil)))))
+           => (f . fmap (fold f) . out) (In (Cons [1..] (In (Cons [0..] (In Nil)))))
+           => (f . fmap (fold f)) (Cons [1..] (In (Cons [0..] (In Nil))))
+           => f . fmap (fold f) (Cons [1..] (In (Cons [0..] (In Nil))))
+           => f . (Cons [1..] (fold f (In (Cons [0..] (In Nil)))))
+           => f . (Cons [1..] ((f . fmap (fold f) . out) (In (Cons [0..] (In Nil)))))
+           => f . (Cons [1..] ((f . fmap (fold f)) (Cons [0..] (In Nil))))
+           => f . (Cons [1..] (f . fmap (fold f) (Cons [0..] (In Nil))))
+           => f . (Cons [1..] (f . (Cons [0..] (fold f (In Nil)))))
+
+ふぅ。 あ、くどいけど、このfは例の大域的に名乗るほどの者じゃありやせんのfです よん。 (最初にミスってるなぁ。fold f の f を g
+とかにしとけばよかった んじゃん) だから、(fold f (In Nil))はさっきやったばっかりのやつね。結 果は 0。
+
+           => f . (Cons [1..] (f . (Cons [0..] 0)))
+
+ようやくlengthFixのfの一般条件が使える。
+
+    lengthFix = fold f where
+                    f Nil = 0
+                    f (Cons _ n) = n + 1  -- こいつね。
+
+っちゅーわけで、ゴールまで一直線。
+
+           => f . (Cons [1..] (f . (Cons [0..] 0)))
+           => f . (Cons [1..] (0 + 1))
+           => ((0 + 1) + 1)
+           => 2
+
+ほっ。なんかよさそうだけど釈然としねぇ。なんで In out を使ったのか、な んで Fix
+が必要だったのか。再帰の原動力はもともと不動点型にあると予想 してたんだけど、今は fold f の定義がそうじゃん、とか思い始めてるし。
+
+再掲。
+
+    \begin{code}
+
+    newtype Fix f = In (f (Fix f))
+
+    out (In x) = x
+    fold f     = f . fmap (fold f) . out
+    unfold f   = In . fmap (unfold f) . f
+
+    data ListF a x = Nil | Cons a x
+
+    instance Functor (ListF a) where
+      fmap f Nil        = Nil
+      fmap f (Cons a x) = Cons a (f x)
+
+    type List a = Fix (ListF a)
+
+    nil       = In Nil
+    cons x xs = In (Cons x xs)
+
+    lengthFix = fold f where
+                    f Nil = 0
+                    f (Cons _ n) = n + 1
+
+    \end{code}
+
+見返すと、他にも使ってないものがある。 nilとconsだ。もしかしたら、直接 NilやConsやInを使うのが間違ってんのか？
+
+今ごろ気付くとは、不覚！
+
+    In (Cons [1..] (In (Cons [0..] (In Nil)))) == (cons [1..] (cons [0..] nil))
+
+おわっ！すげぇ！たったこんだけの事だけど、全然違って見えるわ。こりゃ。 ふーん。なるほどなるほど。
+
+いや、こんなん感心しててもしょうがない。本丸はこっちなんだよな。
+
+    newtype Fix f = In (f (Fix f))
+
+うーっ、なんか分かるような分からんような手が届かない感じでキモチ悪い。 fold
+fの定義の再帰性はlengthを求めるアルゴリズムの再帰性の元で、 Fix f
+の再帰性は、なんだか「リストに何かをconsしたものもまたリストになる」っ
+ていうそういう再帰構造の源なんだろうか。再びゴーストがささやいてるんだ けど。（なにせ信用ないからなぁ(--;;）
+
+すっきりしないのは多分 newtype Foo = ...
+な説明は[入門](http://www.sampou.org/haskell/tutorial-j/moretypes.html)にもあるんだけど、
+newtype Fix f = となった時のことが分かってないからか。ふむ。
+
+えーっと、どっか別の場所にないかいな。やっぱり、[構文リファレンス](http://www.sampou.org/haskell/report-revised-j/syntax-iso.html)かなぁ。
+
+    topdecls -> topdecl1 ; ... ; topdecln (n>=0) 
+    topdecl -> type simpletype = type 
+     | data [context =>] simpletype = constrs [deriving] 
+     | newtype [context =>] simpletype = newconstr [deriving]    -- これね
+     | class [scontext =>] tycls tyvar [where cdecls] 
+     | instance [scontext =>] qtycls inst [where idecls] 
+     | default (type1 , ... , typen) (n>=0) 
+     | decl 
+
+このnewtype宣言から始まって、今のケースではcontextは無いから、 simpletypeがFix fだ。
+
+    simpletype -> tycon tyvar1 ... tyvark (k>=0) 
+
+というわけでFixが型構築子でfが型変数。うーん。合ってるなぁ。
+
+    tyvar -> varid (type variables) 
+    tycon -> conid (type constructors) 
+
+ほれ、この通り。 (f (Fix f))みたく使われているんだからやっぱり型変数f
+は関数型のデータなんだよね。なんも新しい発見が無かった。orz
+
+    newtype Fix f = In (f (Fix f))
+
+以前確認した通り、左辺のFixは型構築子で右辺のInはデータ構築子で、右辺 のFixは型構築子だ。ここで、ちょっと視点を変えてっていうか戻して、
+
+    (cons [1..] (cons [0..] nil))
+
+こいつと見比べてみよう。 fって型変数によって代表されるのはnilとか(cons [1..])のような関数になる
+のかな。実際nilは無引数の関数で(cons [1..])は一引数の関数だ。 nilを (nil (Fix
+f))って感じで適用されることはないけど、 (Fix nil)ってのはア リアリなんだよね。（あ、もちろん意味的にってことであって実際の式じゃな
+いです、キモチの話ね） つまり、Fix fは nil とか Fix f にcons ??な関数を適用した結果できるもの だと。（なお、cons
+とか nil とかの場合にはInは含まれているのに注意） おおぉ、全てがかみ合ってきたぞい！？もしかしてようやくたどり着いたか？ （どこに！？）
+
+そうすると、なんか新しい視点が開けた感じだな。
+
+    (cons 1 (cons 2 (cons 3 ())))
+                            ~~
+                            ↑
+                            ()は値→値はthunk→thunkは無引数の関数→()は関数の仲間だよね
+
+とみなすことから始まって、
+
+    (cons 1 (cons 2 (cons 3 ())))
+                    ~~~~~~~
+                      ↑
+                      cons 3 をcurry化して関数とみなす
+                      Scheme なら (cut cons 3 <>) なキモチ
+
+てな風にする。()がfでcons ??もfの仲間。生成されるリストってやつがFix f
+で表現されるもの。つまり、リストにfを適用したものがリストになる。くど いけど、()またはリストにcons
+??を適用した結果できるのはリスト。そう見 るとリストって不動点型ってわけだね。
+
+ではでは、実機確認！！
+
+    Main> lengthFix nil
+    0
+    Main> lengthFix (cons 1 (cons 2 (cons 3 nil)))
+    3
+    Main> lengthFix (cons [1..] (cons [0..] nil))
+    2
+
+へっへっへー！やったネ！！(\^\^)v
+
+そうすると配列も同じように不動点型として定義できそうな気がするぞ。配列 に (++) すると配列になる、とかね。この場合は f は ((++)
+[1..]) みたい な感じでさ。 nilに相当するのは当然[]だろう。おおっ、全体を書く根性も能 力もまだまだないけどなんかできそうじゃん。
+
+ありゃ？そうすっと整数も整数に足し算（や引き算）をすることで整数になる わけだから、これも不動点型か？おいおい(\^\^;)
+
+えーっと、ちょびっとだけチャレンジ。
+
+    lengthFix = fold f where
+                    f Nil = 0
+                    f (Cons _ n) = n + 1
+
+    consFix = fold f where
+                     f Nil = []
+                     f (Cons x xs) = x:xs
+
+    strAppendFix = fold f where
+                          f Nil = ""
+                          f (Cons x xs) = x ++ xs
+
+    intFix = fold f where
+                    f Nil = 0
+                    f (Cons x y) = x + y
+
+なんだかconsFixってのは変な名前だけど、
+
+    Main> consFix (cons 1 (cons 2 (cons 3 nil)))
+    [1,2,3]
+
+    Main> strAppendFix (cons "Hello" (cons "," (cons "World" (cons "!" nil))))
+    "Hello,World!"
+
+    Main> intFix (cons 10 (cons 20 nil))
+    30
+
+残念ながらconsFixの場合には[]がshow出来ないのでエラーでちゃうけどね。(\^\^;
+ま、あとは全く同じConsの定義をplusとかstring-appendみたく、いい名前に 付け直してやれば、それっぽくなるんじゃない？
+
+> 「fって型変数によって代表されるのはnilとか(cons [1..])のような関数」で はありません。
+>
+>     type List a = Fix (ListF a)
+>
+> この定義を見れば分かりますが、f はこの場合 (ListF a) です。また、以前出した例
+>
+>     Main> :t In Nothing
+>     In Nothing :: Fix Maybe
+>
+> では、f は Maybe です。
+>
+> つまり、f には、(ListF a) や Maybe のような「型を受け取って新たな型を
+> 返す関数(のようなもの)」が入ります。正確に言うと、f には、類 '\*→\*' を 持つ型が入る事になります。
+> ([入門](http://www.sampou.org/haskell/tutorial-j/classes.html)の「類」の説明を参照)
+>
+> あと、lengthFix, strAppendFix, intFix は、length, concat, sum の [a]を List
+> aに置き換えたものですし、consFix は List a-\>[a] のコンバータなの で、不動点型を定義しているわけではありません。
+>
+> そもそも、型の不動点のキモは、
+>
+>     data List a = Nil | Cons a (List a)
+>
+> のような再帰的な型を、再帰を使わずに
+>
+>     data ListF a x = Nil | Cons a x
+>     type List a = Fix (ListF a)
+>
+> のように定義できる、という所にあります。
+
+### る、るる、類(kind)って？
+
+えっと、まず神の示された類っちゅー単語に意識集中して 入門を読みませう。
+
+読みましたか？私は以前も読んでたハズなんだけど、こんな内容だったっけ？っ て位初めて読んだ感じ。(--;;
+いや、以前は読めてなかったんでしょう。実は先日来CLOS系のお勉強なんぞも
+やってて、その副作用かもしれないけど、類が出てくるまでの前半部分は結構 すんなり頭に入ってきました。はい。総称関数とメソッドの関係みたいなのが
+ここにもあるなーとか思っちゃいましたよ。 少なくとも類が出てくるところまではね。
+
+んじゃ、どこで躓いたかっていうと…
+
+    ここまで、「第一級の」型を使ってきました。
+    つまり、型構築子 Tree はこれまで常にひとつの引数と組になっていました。
+    たとえば、 Tree Integer ( Integer 型の値を含む木)、
+    あるいは、 Tree a ( a 型の値を含む木の族をあらわす)です。
+    しかし、Tree それ自身は型構築子であり、ひとつの型を引数としてとり、
+    ひとつの型を返します。Haskell にはこの種の値はありませんが、
+    このような「高階の」型はクラス宣言のなかで使用することができます。
+
+[型クラスと多重定義](http://www.sampou.org/haskell/tutorial-j/classes.html)からの引用ですが、この中の最初の文ね。
+
+あれぇ？確か型は第一級じゃないよって言ってなかったか？と思ったわけです。
+
+    Haskell の値はすべて「第一級の対象」です。
+    すなわち、関数の引数、関数の返り値、になり得ます。
+    また、データ構造などのなかに入れることもできます。
+    一方、Haskell の型は「第一級の対象」ではありません。
+
+あ、コレコレ。 値、型その他の有用な概念 にきっちりうたっとりまんがな。 (-"-)うーっむ。
+
+> 「値、型その他の有用な概念」に出てくる「第一級の対象」と「型クラスと多重定義」に出てくる「第一級の」とは別物です。
+>
+> 「値、型その他の有用な概念」に出てくる「第一級の対象」は 'first-class' の訳で、「型クラスと多重定義」に出てくる「第一級の」は
+> 'first-order' の訳です。
+>
+> 個人的には、'first-order' は「一階の」と訳すべきだと思います。
+>
+> -   御指摘の通りこれは明らかな誤訳です．修正しました．-- nobsun (2005/03/25 09:05:47 JST)
+
+なるほど、確かにfirst-orderになってました。という訳で、訳文訂正のフィー ドバックをかけておいて先へ進みましょう。
+
+そうすると、型構築子のうち、「型を引数に取って型を返す」という「高階の 型」なんちゅうもんが出てきちゃいました。 高階って聞くと
+なんだかまたすごいことが記述できちゃうのか？ ってワクワ クしませんか？そー思うワタシはビョーキですかね。。。(\^\^;;;
+高階関数なんてもんが使えるようになった時、ちょっとの違いが大違い、そ りゃーもーキノコ食ったヒゲおじさんくらいパワーアップしたの覚えてますよ。
+
+ここでもどうやら
+
+    こうした能力は大変便利なものです。
+    これは総称的「コンテナ」型を記述する能力のあることを示し、
+    fmap のような、任意の木、リストあるいは他の型の上で
+    統一的に動作する関数を可能にします。
+
+と、なにやら魅惑的な誘い文句が書かれとります。魅惑的ってのは○○を記述 する能力のあるって文言のことです。もうLLプログラマにとっては垂涎ものの
+殺し文句じゃないかい？
+
+しかも驚いたことに、すでにこういう型構築子を扱ってたんだとさ。
+
+    [型適用は関数適用とおなじやりかたで書きます。
+    型 T a b は (T a) b のように構文解析されます。
+    タプルのような特別な構文を使う型はカリー化可能な別のスタイルで書きます。
+    関数については、 (->) が型構築子です。
+    f -> g と (->) f g とは同じです。同様に、[a] と [] a とは同じです。
+    タプルについては、型構築子(同時にデータ構築子でもありますが)
+    は (,)、(,,) などとなります。]
+
+ということで -\> とか [] がまさにそうなんですって。確かに f -\> g を (-\>) f g とか書くと分かるような気もする。
+
+んで、類ってなんじゃ？というと、
+
+    型式は別々の類に分類されます。これは次の 2 つの形式をとります。
+
+     +  記号 * は具体的なデータ対象に結びついた型の類をあらわす。
+       すなわち、 もし、値 v の型が t であるなら、v の類は * で なければならない。
+
+     +  もし、k1 と k2 とが類ならば、k1->k2 は k1 という類の型をとり、
+       k2 という類の型を返す型の類である。
+
+    型構築子 Tree の類は、 *->* であり、Tree Int の類は * です。
+    Functor クラスのメンバーはすべて、類 *->* でなければならず、
+    類付けのエラーは、次のような宣言により引き起こされます。
+
+…む、ムツカシイ(-"-; わざとやってねぇか？Haskell！？ えっと、なんかの型があるとして、そいつが具体的なデータの型をあらわして
+るなら、類\*で、型を引数に取って型を返すような型の場合には\*-\>\*って感じ で高階の型って扱いになると。
+Treeの例を見ると分かるような気にさせられ るんだけど。。。通常の(曖昧な言葉だなぁ)型の類は\*で高階の型の場合には
+\*-\>\*とか\*-\>\*-\>\*とかって思っていいのかな。
+
+もっかい神の助言を読み返すか。
+
+    つまり、f には、(ListF a) や Maybe のような
+    「型を受け取って新たな型を返す関数(のようなもの)」が入ります。
+    正確に言うと、f には、類 '*→*' を持つ型が入る事になります。
+
+んー、ってことはfはなんらかの関数型が来るってことじゃねーかい？いや、
+形からしてさ、\*-\>\*ってのがいかにもそんな感じ。つまりfのとこにはただの 型じゃなくてなんか関数型に分類されるものが来ると。
+
+    data List a = Nil | Cons a (List a)
+
+のような再帰的な型を、再帰を使わずに
+
+    data ListF a x = Nil | Cons a x
+    type List a = Fix (ListF a)
+
+のように定義できる
+
+ってのが型の不動点のキモだってことなんだけど、この関係だけ確認しておこ う。
+
+### MyEqクラスってヤツ
+
+えー、確認しておこう。なーんつってナレーション風に書いておいて放置プレ イすること７ヵ月。 長き沈黙をやぶり、今再びはじめちゃおうかな。
+
+気づけば\*.lhsなファイルをEmacsに読み込んでもhaskell-modeにならないわ、 C-cC-lしてもマトモに評価できないわ。
+完全に忘れてしまってて足腰がなまってしまってたんで、よちよち歩きがます ますぐずぐずに。そりゃもう狂牛病になった牛みてーな状態。
+
+世の中には1ヵ月でHaskellを学んで、次の1ヵ月でPerl6を実装してしまうっつー 変態もいるっちゅーのにね。(-,-;;
+
+まぁ雑談はほどほどにして早速書いてみる。
+
+    \begin{code}
+
+    class MyEq a where
+        (===) :: a->a->Bool
+
+    instance MyEq Integer where
+        a === b = a == b
+
+    data Foo = Foo Integer String
+
+    instance MyEq Foo where
+        Foo x _ === Foo y _ = x === y
+
+    \end{code}
+
+実はね、クラスとか型とかが難しいYo!って愚痴ったら示してくれたのが上の
+様なコード。実際に自分で書き下ろしてちゃんとHugsにロードできる様になる までに四苦八苦したよ。
+
+でもデバッグする際にあらためて ここを読んでたら、まんま書いてあんじゃん。
+
+毎度のことながら読んで分からない文言てのはまるで記憶に残らないもんだねぇ としみじみ。
+
+まぁ、７ヵ月の休養の結果、なぜかちょびっとだけ分かるようになった、こい つを餌に再スタートを切ってみよう。いっくぽーーーーっん！！
+
+### 同じとは？
+
+例えば仮に彼女がキュートな笑顔で
+
+「りんごとバナナは同じだよね」
+
+なーんて目頭がアツクなるほどイタイことをのたまったとしよう。
+
+いや、イタイと思わずに「そうそう！俺もそー思うYo!」とかって逝ってしまう人もいるかもしれん。でもさ、イタイかどうかは同じって言葉の意味というか定義によるわけよね。
+
+でも物凄く不思議ではあるんだが、それ以前に同じって言葉の定義ではなく、
+同じという言葉の出現する文脈ってのは共通したものとして存在している。それは
+
+「○○と××は同じか否か？」 「同じだ」もしくは「違うよ」
+
+という、なんつーの？二つの対象をならべて、真偽を問うという体系のようなもの。
+
+別の例を挙げてみる。
+
+「▲▲君ってジャイアント馬場よりデッカイよね」
+
+という、これまたビミョーな発言があったとしよう。これは身長を比較してい るのか、心の広さを比較しているのか、はたまたナニを比較しているのか分か
+らんが、それでもデカイか？という言葉が出現する文脈において共通するもの があるわけやね。
+
+「○○と××ではどちらがデカイか」 「そりゃ○○よ」とか「××なんじゃん？」とか「一緒だよ」
+
+などですな。 あるいは、もちっと高度な応用をきかして
+
+「○○と××と△△と□□ではどれが一番でっかい？」 「△△かな」とか「☆☆はでかいぞ」とか「しらね」とか。
+
+まぁ、とりあえず「同じ」の例でコードを組んだので、そっちで考えてみるこ とにしよう。
+
+    class MyEq a where
+        (===) :: a->a->Bool
+
+これはまさに「同じ」の定義ではなく「同じ」という言葉が使われる文脈を決 めているんじゃないかと思うわけよ。実際、
+
+    a(○○)とa(××)は同じ？->Bool(同じだ/違うよ)
+
+って感じに見えるよね？ 少なくとも
+
+「りんごと同じがバナナ？」
+
+なーんて世界が真っ白になるほどブッ飛んだ発言は同じという概念の枠には無 いんだよね。先程の彼女のイタイ発言もここまではイタクないわけだが、それ
+はa-\>a-\>Boolには当てはまっているからでしょうね。 だから辛抱強い人だったら「その同じってどういう意味でいってんの？」と定
+義をもとめるワケですな。 でもって、
+
+    instance MyEq Integer where
+        a === b = a == b
+
+これがIntegerについてMyEqという同じの概念を規定した時の定義だと思う。
+多分ね。ここでIntegerについて語る時には同じってのはこういうことだ！っ てー感じの判断基準を与えておるようだ。
+
+つまり「フルーツだから同じ？→YES」なのか「果物の種類として同じ→NO」
+なのか、あるいは「このりんごとあのりんごは同じ？」の場合でも「色が違う」
+「品種が違う」「産地が違う」「糖度が違う」「存在している位置座標が違う」
+などなど、そういう定義がInteger上でされたりNumber上でされたり、まぁそ んな感じなんでしょう。
+
+だから
+
+    data Foo = Foo Integer String
+
+    instance MyEq Foo where
+        Foo x _ === Foo y _ = x === y
+
+ってすれば、Fooってタグのついたデータ構造に対しても同じかどうかを議論 することが出来るんですな。
+ここではFooには２つのスロット値というかメンバデータとでもいうものがあっ
+て、例えばこれが年齢と名前だとすると、年齢が同じなら同じとしようよって ことでしょう。 Foo 34 "cut-sea"もFoo 34
+"羽生善治"も「同じ」なんですよ、誰がなんとい おうとさ。いや、同じなのです！ソコ！妙なツッコミいれないよーに。
+
+Hugsで評価してみると、こんな感じ。
+
+    Main> Foo 1 "hoge" === Foo 1 "foo"
+    True
+
+うむ。似たようなのをも一個。
+
+    data Fluit = Fluit String
+
+    instance MyEq Fluit where
+        Fluit x === Fluit y = True
+
+これはFluitなタグさえついてりゃ同じは同じですね。
+
+    Main> Fluit "Apple" === Fluit "Banana"
+    True
+
+よし、少しずつ調子が出て来た。 どうせxとかyの部分を無視させるんだったら、これはどうよ？
+
+    data Fluit = Fluit a   <= ここをStringからaにしてみた
+
+    instance MyEq Fluit where
+        Fluit x === Fluit y = True
+
+うりゃ！(C-cC-l)
+
+    Main> :load /home/cut-sea/script/haskell/class.lhs
+    Reading file "/home/cut-sea/script/haskell/class.lhs":
+    ERROR "/home/cut-sea/script/haskell/class.lhs":21 - Undefined type variable "a"
+    Prelude> 
+
+あうっ！！(久々に食らってちょっとカンドー)
+
+> 値は無視できても型は無視できないよ．
+>
+> instance Eq Fruit where
+>
+>       (==) = const . const True
+>
+> でどう？
+
+って浸っててもショーガネーってことで、Treeとかの定義を再度見てみる。ははぁ。
+
+    data Fluit a = Fluit a
+
+    instance MyEq Fluit where
+        Fluit x === Fluit y = True
+
+えいや！
+
+    Main> :load /home/cut-sea/script/haskell/class.lhs
+    Reading file "/home/cut-sea/script/haskell/class.lhs":
+    ERROR "/home/cut-sea/script/haskell/class.lhs":23 - Illegal type in class constraint
+
+むむ？えーっとあてずっぽだけど、23行目ってのは手元では
+
+    instance MyEq Fluit where
+
+この行だ。っちゅーワケだから、
+
+    data Fluit a = Fluit a
+
+    instance MyEq (Fluit a) where
+        Fluit x === Fluit y = True
+
+こうしてみる。いや全然根拠無いし分かっちゃいないが、これでMainプロンプ トがオメミエ。うーん。なんでじゃろ?(\^\^;
+まぁとりあえず使ってみるなり。
+
+    Main> Fluit "APPLE" === Fluit "BANANA"
+    True
+    Main> Fluit 1 === Fluit 3
+    True
+
+当然次なる疑問は、
+
+    data Foo = Foo Integer
+
+と
+
+    data Foo Integer = Foo Integer
+
+とはどう違うんぞなもし？という点なんだが、そもそも下の定義は可能なんだ ろうか？型変数aで出来るのはわかってるんだが。 Hugsにきいてみよう。
+
+    data Bar Integer = Bar Integer
+
+んでエバってみると…
+
+    Main> :load /home/cut-sea/script/haskell/class.lhs
+    Reading file "/home/cut-sea/script/haskell/class.lhs":
+    ERROR "/home/cut-sea/script/haskell/class.lhs":29 - Illegal left hand side in datatype definition
+    Prelude> 
+
+うーむ。なんか予感は当たったんだが、単にIllegal left hand side in datatype
+definitionだって。もちっと噛み砕いた説明くれーーー！！ まぁSyntax上正しくないってことだろうが、なぜ書けない？
+
+んじゃaを出しておきながら使わないとどうなる？
+
+    data Bar a = Bar Integer
+
+…いけますなぁ。んじゃあ全く違ったらどうよ。
+
+    data Bar a = Bar b
+
+    Main> :load /home/cut-sea/script/haskell/class.lhs
+    Reading file "/home/cut-sea/script/haskell/class.lhs":
+    ERROR "/home/cut-sea/script/haskell/class.lhs":26 - Undefined type variable "b"
+
+ふむ。 規則は分かる。左辺は今から多分定義しようとしている何者かなので、 (型)
+変数がくるべき。右辺は定義済み、もしくは今定義しようとしている部分に無 いとダメ。 ありゃ？当り前なのか？
+
+じゃあ単に
+
+    data Foo = Foo Integer
+
+と
+
+    data Foo a = Foo Integer
+
+の違いはFooを(Foo a)としただけのこと？後者の何が嬉しいかっていわれたら 多分これだと嬉しくない。
+
+    data Foo a = Foo a
+
+ってするとさっき試した時みたいにa部分に色々取り得てウレシイってことかな。
+
+左辺の型変数ってやつがどうも何者なのか分かりにくいのでも少しいじってみる。
+
+    data Hoge a a = Hoge a a 
+
+これはどうさ?
+
+    Main> :load /home/cut-sea/script/haskell/class.lhs
+    Reading file "/home/cut-sea/script/haskell/class.lhs":
+    ERROR "/home/cut-sea/script/haskell/class.lhs":26 - Repeated type variable "a" on left hand side
+
+うーんくりかえし出ちゃダメってか。当然これはイけるんだよね？
+
+data Hoge a b = Hoge a a
+
+うん。ちとマニュアルを読んでみるか。
+
+> 左辺の型変数については、関数定義の仮引数と同じように考えればいいのではないでしょうか。
+>
+> たとえば、型 x -\> y -\> x の関数 hoge の定義
+>
+> hoge a b = a
+>
+> と、類 \* -\> \* -\> \* の型 Hoge の定義
+>
+> data Hoge a b = Hoge a a
+>
+> を比較すれば、左辺の変数の意味がわかりやすいと思います。
+>
+> 同様に、型定義を関数定義と置き換えて考えれば、なぜエラーが起こるかもはっ きりすると思います。
+
+なんと！？そうかー
+
+    data Hoge a b ...
+
+とあったときに、a/bってのは位置が問題なのではなく、Hogeという型では２
+種類の型変数を使うよってことだけが重要なのかな？つまり第一引数(?)の型 変数とか第二引数の型変数とかっていう位置を表すシンボル(の型)
+じゃなく て、単にHogeってのは二種類の型をつかうって定義されるものだよ、と。
+
+そういや、データを構築するのは右辺の定義なんだから、引数の位置ってか何 番目の引数ってのは重要だろうけど、左辺はそもそも関係なさげだわなぁ。
+
+ってことは、
+
+    data Hoge = ...
+
+なHogeって型は他の型には一切依存しない、言い方を変えると、他の型の存在 を一切仮定せず定義される型なんだね。
+
+んだらば一応確認しておこう。
+
+    data Fuga = Fuga [String]
+
+    instance MyEq Fuga where
+        Fuga s1 === Fuga s2 = length s1 == length s2
+
+あう。訂正…「他の型には一切依存しない」じゃなくて「他の変数な型には一
+切依存しない」か。でもそもそも左辺には型変数しかないわけで、Integerみ
+たいな型が書けるわけじゃないもんねぇ。なんかもって回った書き方になるけ ど、うーん、拘るのはヤメっか。
+
+    data FugaS a = FugaS [a]
+
+    instance MyEq (FugaS a) where
+        FugaS s1 === FugaS s2 = length s1 == length s2
+
+でもって評価すると、もうバッチリ。いや、めちゃめちゃ簡単な例なんだけど さ、分かって書いてる感があるってのが進歩なわけよ。はい。
+
+    Main> Fuga [] === Fuga []
+    True
+    Main> Fuga ["", "", ""] === Fuga ["abc", "xyz", "123"]
+    True
+    Main> Fuga ["", "", ""] === Fuga ["abc", "xyz"]
+    False
+    Main> FugaS [] === FugaS []
+    True
+    Main> FugaS ["", "", ""] === FugaS ["abc", "xyz"]
+    False
+    Main> FugaS [1, 2, 3] === FugaS [12, 23, 34]
+    True
+    Main> FugaS ['a','b','c'] === FugaS "ABCDEF"
+    False
+
+やったね！！ ちょっとだけ開眼(した気になってる)。
+
+じゃあ引続き、今度はtypeだかnewtypeだかを学びませう。
+
+> 既に理解されているとは思いますが、念のため追加で説明します。
+>
+> まず、型定義の左辺に変数が許されない場合にどうなるかを考えます。そうす ると、Integer の木が必要な場合、String
+> の木が必要な場合で、別々の定義 を書かなければなりません。
+>
+>     data IntegerTree = IntegerLeaf Integer | IntegerBranch IntegerTree IntegerTree
+>     data StringTree = StringLeaf String | StringBranch StringTree StringTree
+>
+> 別の型の木を作るたびに定義し直すのは面倒なので、好きな型を渡せば、その 型の木を作ってくれるような関数を考えます。
+>
+>     data Tree a = Leaf a | Branch (Tree a) (Tree a)
+>
+> そうすれば、いちいち使う型ごとに定義し直さなくても、Integer の木が欲し ければ (Tree Integer) を、 String
+> の木が欲しければ (Tree String) を使 えば良くなります。
+>
+> 型定義の左辺の変数は、後々ユーザが好きな型を渡すための受け口の役割を果 たします。これは関数の仮引数の役割と同じですよね。
+
+まずtype！
+
+    type String             = [Char]
+    type Person             = (Name,Address)
+    type Name               = String
+
+うははっ、もらい。これは簡単じゃね。単に別名として使えるようにしてんだ ろう。つまり、[Char]って書く代わりにStringって使えるだけだ。
+Cでいうと ころのtypedefだろう。
+
+ではそそくさとnewtypeへいっちゃおう。例の初心者に[やさしくない入門](http://www.sampou.org/haskell/tutorial-j/moretypes.html)によれば、
+
+表現が既存の型と同一だが，型システムの中では別の型として識別されるよう な型を定義
+
+だそうだから、さっきのtypeとは別の型として識別される点で違うんだろう。
+
+さっきから「だろう」ばっかしでちゃんと確認してないので、少しHugsに聞い
+て確認してみよう。直観的にはCLOSのclass-ofみたいなのがあればいいんだけ ど、なんかHaskellには無いような気が…。
+
+    type Name = String
+    data Foo = Foo Name deriving Show
+
+んで動作確認はこれ。
+
+    Main> Foo "My Name"
+    Foo "My Name"
+
+おっけー。じゃあ間違ってみよう。(なんだこの表現は)
+
+    Main> Foo 123
+    ERROR - Unresolved overloading
+    *** Type       : Num [Char] => Foo
+    *** Expression : Foo 123
+
+どーよ？ん？ちゃんと[Char]だと言ってる。つまりあくまで推測だけど、Nameっ
+て読み込んだ時点で[Char]に置き換わってんじゃないかな。内部的にはもう区 別つかないんだろう。多分。
+Stringってのも結局置き換わって[Char]になっ ちゃうわけだしさ。
+
+そいでは次newtypeでやってみる。
+
+    newtype Namex = MakeNamex String
+    data Bar = Bar Namex deriving Show
+
+んでエバって…
+
+    Main> :load /home/cut-sea/script/haskell/class.lhs
+    Reading file "/home/cut-sea/script/haskell/class.lhs":
+    ERROR "/home/cut-sea/script/haskell/class.lhs":42 - An instance of Show Namex is required to derive Show Bar
+
+あらら。だめじゃん。 deriveがダメとか言ってやがんのかな？
+
+    newtype Namex = MakeNamex String
+    data Bar = Bar Namex
+
+これなら確かにMainプロンプトがでてくれる。ん？んん？…もしかしてこれ自 体が証拠か？？？？
+つまりさっきのtypeの時にはNameがShowなStringそのものだから文句も言われ なかったと。
+
+で、Namexは全く新しい型だから、まずBarをShowするには NamexをShowを deriveしてやらんとだめだよと。
+
+    newtype Namex = MakeNamex String deriving Show
+    data Bar = Bar Namex deriving Show
+
+おおっ！！Main出現！！やたっ！！すばらしい。 では動作確認。
+
+    Main> Bar "My New Name"
+    ERROR - Type error in application
+    *** Expression     : Bar "My New Name"
+    *** Term           : "My New Name"
+    *** Type           : String
+    *** Does not match : Namex
+
+はうっ。。。 えーっとマニュアルマニュアル…。あ、そういうこと。。。
+
+    Main> MakeNamex "My New Name"
+    MakeNamex "My New Name"
+
+よし。
+
+    Main> Bar MakeNamex "My New Name"
+    ERROR - Type error in application
+    *** Expression     : Bar MakeNamex "My New Name"
+    *** Term           : Bar
+    *** Type           : Namex -> Bar
+    *** Does not match : a -> b -> c
+
+あうっ。もしかしてこう？
+
+    Main> Bar (MakeNamex "My New Name")
+    Bar (MakeNamex "My New Name")
+
+おおーっ。なんだかnewtype使う意味がワカンネー。 ま、いーや。とりあえず、MakeNamexってのがNamexな新しい型のコンストラク
+タっぽいもんなわけね。いいです。そういうことで、今日のところは。ハイ。
+
+あ、ゴメンゴメン。忘れるとこだった。さっきのエラーの、Typeを見てみると [Char] -\> Bar じゃないとこがnewtypeですな。
+
+    *** Type           : Namex -> Bar
+
+おそらくね〜。
+
+### まだ不動点はムリ
+
+えーっと後ろを振り返るとやっぱ型の不動点は心残りなんだが、どうも今見て も理解できん。
+
+んで、何が自分で分かんないのか突き詰めるとこれだ。
+
+    newtype Namex = MakeNamex String deriving Show
+    type Name = String
+    data Foo = Foo Name deriving Show
+    instance MyEq Fuga where
+        Fuga s1 === Fuga s2 = length s1 == length s2
+
+みたいにNamexやNameやFooやMyEqとかってシンボルが出てくると、これらのシ
+ンボルについて定義してるっつーか宣言してるっつーか、そういうのが分かる んだが、
+
+    newtype Fix f = In (f (Fix f))
+            ~~~~~~
+    type List a = Fix (ListF a)
+         ~~~~~~
+    data ListF a x = Nil | Cons a x
+         ~~~~~~~~~~
+    instance Functor (ListF a) where
+             ~~~~~~~~~~~~~~~~~
+      fmap f Nil        = Nil
+      fmap f (Cons a x) = Cons a (f x)
+
+とかって出てくると、これらは何について定義してるのか良く分かんないんす。
+はい。ちょっと探したとこだとclassではそういうの見当たんなかったけどさ。
+
+たとえばSchemeだと
+
+    (define (f x y) (* x y))
+
+ってのが出て来ても、
+
+    (define f (lambda (x y) (* x y)))
+
+と同じことだって言われると、なーんだーって分かる気がする。 (んじゃない かと思う。今となってはScheme?知らない人の気持ちがわからんけど)
+ま、まま、それと同じように、
+
+    data ListF a x = Nil | Cons a x
+
+これは
+
+    data ListF a = ???
+
+と同じだよーとか、
+
+    instance Functor (ListF a) where
+
+これは
+
+    instance Functor ListF where  ????
+
+と同じなんだよってのがあると分かるかもしれんとかナンクセをつけてみたりね。
+
+> ListFを直接そのように定義する事は(多分)できないのですが、このような説 明はどうでしょうか。
+> (ただ、私の場合、「やさしいHaskell入門」をすべて読み終えた後でも、型の
+> 不動点の話を理解するのに苦労したので、どうしても分からないようなら無視 して別の内容を学ぶ事をお勧めします。)
+>
+> 型を値の集合(リスト)と考えます。そうすると、整数型と文字型は以下のよう に表せます。 (要素を全部書くと煩雑なので一部だけにしてあります)
+>
+>     int = [1, 2]
+>     char = ['x', 'y']
+>
+> ここで、この型を扱う関数として、以下の2つのものを考えます。まず、それ
+> ぞれの要素を一つずつとって、組み合わせた新しい型を生成するdprod。
+>
+>     dprod a b = [(x, y) | x <- a, y <- b]
+>
+> intとcharに適用すると以下のようになります。
+>
+>     *Main> dprod int char
+>     [(1,'x'),(1,'y'),(2,'x'),(2,'y')]
+>
+> もう一つは、それぞれの要素をすべて含んだ新しい型を生成するdsum。ただし、
+> もともとどちらの要素であったかをはっきりさせるために、片方の要素の前に Left、もう片方の要素の前にRightをつけます。
+>
+>     dsum a b = [Left x | x <- a] ++ [Right y | y <- b]
+>
+> intとcharに適用すると以下のようになります。
+>
+>     *Main> dsum int char
+>     [Left 1,Left 2,Right 'x',Right 'y']
+>
+> さて、この枠組みでListFがどうなるのかを考えてみましょう。
+>
+>     data ListF a x = Nil | Cons a x
+>
+> これは、型ListF a xの要素はNilかCons a xのどちらかである、という宣言で
+> す。どちらか、ということは、dsumが使えます。また、Nilは要素が1個の型と みなせるので[()]で表し、Cons a
+> xは型aと型xの要素を一つずつとるので dprodで表せます。
+>
+>     listF a x = [()] `dsum` dprod a x
+>
+> lambda式の方が理解しやすいのであれば以下をどうぞ。
+>
+>     listF = \a x->[()] `dsum` dprod a x
+>
+> intとcharに適用すると以下のようになります。
+>
+>     *Main> listF int char
+>     [Left (),Right (1,'x'),Right (1,'y'),Right (2,'x'),Right (2,'y')]
+
+### あやしい集会
+
+先日あやしい集会に行ってきました。 その怪しさといったら筆舌に尽くし難いわけで、一体どこに隠れていたのか、
+明らかにまっとうな社会生活を送れてるとは思えない生命体が20人近く一同に 会するわけです。
+以前キャッチーなお姉さんに捕まった時もヤバイとは思いましたが、そんなの 比じゃないです。お姉さんの場合は心は腐ってましたが見た目はキレイだった
+ので、結婚してくれるなら買ってもいいと言い張り、今すぐ役所に行こう、今 すぐ入籍してくれたら君を連帯保証人にして買いましょうと迫ったわけです。
+残念ながら性格の不一致とでも申しましょうか、婚姻にはいたらなかったわけ
+ですが、これはこれでHaskellに比べれば案外ちょろいもんでした。(意味不明)
+
+えーっと何の話だっけ、あ、そうそうその怪しい集会のおかげでちょっとだけ モナドが怖くなくなりました。まぁ、それもあるし、ここも長くなってきたし、
+潜入ルポも兼ねて(兼ねてないです。念のため) [Programming\_WayToHaskeller\_てくてく]()へ Go!
+(うーむ、さらにイー加減さに拍車がかかってきた。。。)
+
+([「よちよち歩き」を編集する](http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:������⤭&c=e&l=jp))|([Haskellerへの道](http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&l=jp))
+
+* * * * *
+
+Last modified : 2007/01/21 00:13:17 JST

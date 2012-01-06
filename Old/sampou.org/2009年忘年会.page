@@ -1,0 +1,88 @@
+# [2009年忘年会]()
+
+* * * * *
+
+## Haskell 2009年末の集い(忘年会前哨戦)
+
+-   日時：2009年12月22(火) 18:30〜20:00
+-   場所：[IIJ](http://www.jinbochomitsui.com/) 大会議室2 (17F)
+    -   張り紙に従って大会議室2まで来て下さい。
+    -   エレベータは2カ所にあります。張り紙のある方を使って下さい。
+
+## 忘年会
+
+-   日時：2009年12月22(火) 20:00〜22:00
+-   場所：[シャヒダワット](http://dining.rakuten.co.jp/restaurant/?rid=2849)
+-   金額：4,500円ぐらい
+
+## 割り当て
+
+自分でテーマを1つ選んで、右に名前を書いて下さい。早い者勝ちです。
+
+-   ["Haskell
+    2010"](http://hackage.haskell.org/trac/haskell-prime/query?status=new&status=assigned&status=reopened&state=accepted&milestone=Haskell+2010&order=priority)
+    -   [DoAndIfThenElse](http://www.mew.org/~kazu/material/2009-ifthenelse.pdf)
+        (kazu)
+    -   [HierarchicalModules](http://page.freett.com/shelarcy/log/2009/diary_12.html#haskell_bounenkai_2009)
+        ([shelarcy]())
+    -   EmptyDataDeclarations (nobsun)
+    -   FixityResolution
+    -   ForeignFunctionInterface
+    -   [LineCommentSyntax](http://bit.ly/LineCommentSyntax)
+        (nakanowatari)
+    -   [PatternGuards](http://blog.livedoor.jp/heitatta/archives/65207463.html)
+        (heita)
+    -   [RelaxedDependencyAnalysis](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20091222#p01)
+        ([sakai]())
+    -   [LanguagePragma](http://d.hatena.ne.jp/propella/20091220/p2)
+        (yamamiya.takashi/[propella](http://metatoys.org/propella/))
+    -   NoNPlusKPatterns
+
+-   ["GHC
+    6.12.x"](http://www.haskell.org/ghc/docs/6.12.1/html/users_guide/release-6-12-1.html)
+    -   [parallel
+        execution](http://d.hatena.ne.jp/maoe/20091225/1261716304)
+        (maoe)
+    -   ThreadScope
+    -   Dynamic linking
+        -   きちんと動くのは Linux 環境なので、できれば Linux を常用している方に選んでもらいたいです。
+
+    -   [Unicode](http://gist.github.com/262978) (nwn)
+        -   [元ネタ](http://www.scribd.com/doc/19537350/A-Wander-Through-GHCs-New-IO-Library)
+
+    -   ABI
+    -   [Tuple
+        Sections](http://www.haskell.org/ghc/docs/6.12.1/html/users_guide/syntax-extns.html#tuple-sections)
+        (oneda)
+        -   Python を使ったことがある人に、どう便利なのか教えてもらいたいです。
+
+    -   [Record
+        puns](http://www.haskell.org/ghc/docs/6.12.1/html/users_guide/syntax-extns.html#record-puns)（、Record
+        wildcards、Record field disambiguation）
+        -   正確には GHC 6.12.1 で入ったというわけではなくて、これらの機能に対する拡張・修正が行われただけですが、GHC
+            6.10.x の頃にはあまり（日本で）話している人はいなかったと思うので
+
+自己紹介も含めて、5分の発表にまとめてきて下さい。VGA プロジェクターを用意します。
+
+調べたいテーマ、聞きたい話を追加するも OK です。
+
+## 参加者
+
+    nwn
+    shelarcy
+    nobsun
+    shikano
+    [1..100]>>=pen
+    nakano
+    oneda
+    kazu
+    maoe
+    okimura
+    heita
+    sakai
+    yamamiya.takashi
+    ytomino
+
+* * * * *
+
+Last modified : 2009/12/30 15:33:59 JST

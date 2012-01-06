@@ -1,0 +1,792 @@
+# [Books\_FOP\_MAG]()
+
+[Books]():[FOP]():MAG
+
+* * * * *
+
+第5章で使用されている MAG の使用方法に関するページ（書きかけ）
+
+* * * * *
+
+## MAG のマニュアル
+
+FOP のサイトにある mag-2.10 に、MAG のユーザーマニュアルの元になる tex ファイルが同梱されています。
+
+* * * * *
+
+## MAG をビルドするための patch (2011/10/15 01:49:48 JST)
+
+FOP のサイトにある mag-2.10 のプログラムを GHC 6.12.x や GHC 7.2.1 でビルドするための patch です。
+
+Makefileを使って magcalc をビルドできるようにしただけで、第5章の例がきちんと試せるかどうかは確かめていません。（cabal
+化も試みてみましたが、まだファイルを自動生成する部分に対応できていません。特に ag の代わりに
+[uuagc](http://hackage.haskell.org/package/uuagc) を使って Infer.ag から
+Infer.hs を生成する部分が未解決です。）また、CGI.lhs の文字コードは Windows-1252(ISO-8859-15)、GHC
+が現在対応している文字コードは UTF-8 のためこのファイルの diff の表示が化けてしまっています。
+
+    diff -ruN mag-2.10.orig/Setup.hs mag-2.10/Setup.hs
+    --- mag-2.10.orig/Setup.hs      Thu Jan  1 09:00:00 1970
+    +++ mag-2.10/Setup.hs   Tue Oct 18 15:24:42 2011
+    @@ -0,0 +1,8 @@
+    +{-
+    +import Distribution.Simple (defaultMainWithHooks)
+    +import Distribution.Simple.UUAGC (uuagcUserHook)
+    +
+    +main = defaultMainWithHooks uuagcUserHook
+    +-}
+    +import Distribution.Simple
+    +main = defaultMain
+    diff -ruN mag-2.10.orig/mag.cabal mag-2.10/mag.cabal
+    --- mag-2.10.orig/mag.cabal     Thu Jan  1 09:00:00 1970
+    +++ mag-2.10/mag.cabal  Tue Oct 18 15:29:32 2011
+    @@ -0,0 +1,182 @@
+    +name: mag
+    +version: 2.10.0.0
+    +license: GPL
+    +license-file: LICENSE
+    +author: Ganesh Sittampalam, Oege de Moor
+    +-- maintainer: 
+    +-- bug-reports: 
+    +homepage: http://web.comlab.ox.ac.uk/oucl/research/areas/progtools/mag/
+    +category: Program Transformation
+    +synopsis: A small transformation system for a subset of Haskell
+    +description:
+    +   MAG is a transformation tool for a small Haskell-like language which tries to
+    +   make it easy to mechanise some complex program transformations with the help
+    +   of user-supplied rewrite rules. Examples this has been tried with include
+    +   cat-elimination and alpha-beta pruning.
+    +
+    +   This version is not latest version. MAG's website is gone. But we can download
+    +   MAG from "the fun of programming" book's support site at
+    +   <http://web2.comlab.ox.ac.uk/oucl/publications/books/fop/>. So, I just modified
+    +   "the fun of programming" version to build with GHC 6.12.x.
+    +
+    +-- build-type: Custom
+    +build-type: Simple
+    +cabal-version: >=1.2
+    +extra-source-files:
+    +   README
+    +   Makefile
+    +   getarch.sh
+    +   bin/mag
+    +   bin/test
+    +   bin/runtest
+    +   bin/updatetest
+    +   doc/mag.bib
+    +   doc/manual.tex
+    +   doc/Makefile
+    +   doc/version.tex
+    +   examples/abstracts.output
+    +   examples/abstracts.p
+    +   examples/alphabeta.output
+    +   examples/alphabeta.p
+    +   examples/atiguous.output
+    +   examples/atiguous.p
+    +   examples/decorate.output
+    +   examples/decorate.p
+    +   examples/errors.p
+    +   examples/fib.output
+    +   examples/fib.p
+    +   examples/horner.output
+    +   examples/horner.p
+    +   examples/levels.p
+    +   examples/llp.output
+    +   examples/llp.p
+    +   examples/mindepth.output
+    +   examples/mindepth.p
+    +   examples/mss.output
+    +   examples/mss.p
+    +   examples/partition.p
+    +   examples/postorder.output
+    +   examples/postorder.p
+    +   examples/reverse.p
+    +   examples/steep.output
+    +   examples/steep.p
+    +   examples/sumsq.output
+    +   examples/sumsq.p
+    +   examples/reverse.output
+    +
+    +   -- for Generating file by using make
+    +   src/buildfast.sh
+    +   src/accummatches.patch
+    +   src/fastise.patch
+    +   src/onestepflex.patch
+    +   src/accumulate.patch
+    +   src/quickerapps.patch
+    +   src/fastabstracts.patch
+    +   src/viable.patch
+    +   src/Infer.ag
+    +   src/Makefile
+    +   src/agdepend
+    +   src/AG1.hs
+    +   src/AG1_Parser.hs
+    +   src/AG1_Print.hs
+    +   src/AG1_Sem.hs
+    +   src/AGMain.hs
+    +   src/UU_Maps.hs
+    +flag split-base
+    +
+    +library
+    +   exposed-modules:
+    +      UU_Parsing
+    +      UU_Parsing_ext
+    +      UU_Scanner
+    +      UU_Pretty
+    +      UU_Pretty_ext
+    +      OldPretty
+    +
+    +      Types
+    +      State
+    +      Names
+    +      Utils
+    +      Constants
+    +      Syntax
+    +      PPrint
+    +      HParse
+    +      Expressions
+    +      SCC
+    +      SCC_Base
+    +      SCC_nonST_Prune
+    +      Sets
+    +      Laws
+    +      Substitutions
+    +      SubExpressions
+    +      FiniteMaps
+    +      Matching
+    +      ReferenceMatching
+    +      HtmlBlockTable
+    +      Html
+    +      GList
+    +      FailList
+    +      Calculations
+    +      Rewrite
+    +      CabaledVersion
+    +
+    +   other-modules:
+    +      -- Generated file by Makefile
+    +      FastMatching
+    +
+    +      -- Generated file by Makefile using agc
+    +      -- (Attribute Grammer Compiler)
+    +      Infer
+    +
+    +   if flag(split-base)
+    +      build-depends: base >= 3 && <5, array
+    +--                   , uuagc >=  0.9.12
+    +   else
+    +      build-depends: base < 3
+    +--                   , uuagc >=  0.9.12
+    +   hs-source-dirs  : src
+    +
+    +executable magdcalc
+    +   main-is:
+    +      Main.hs
+    +   other-modules:
+    +      -- Generated file by Makefile
+    +      -- FastMatching
+    +
+    +      -- Generated file by Makefile using agc
+    +      -- (Attribute Grammer Compiler)
+    +      -- Infer
+    +
+    +   if flag(split-base)
+    +      build-depends: base >= 3 && <5, array
+    +--                   , uuagc >=  0.9.12
+    +   else
+    +      build-depends: base < 3
+    +--                   , uuagc >=  0.9.12
+    +   hs-source-dirs  : src
+    +--   ghc-options     : -rtsopts
+    +--   ghc-options     : -with-rtsopts="-H20m -K2m"
+    +
+    +
+    +executable cgi
+    +   main-is:
+    +      CGIMain.lhs
+    +   other-modules:
+    +      Pretty
+    +      CGI
+    +      Exception
+    +
+    +      -- Generated file by Makefile
+    +      -- FastMatching
+    +
+    +      -- Generated file by Makefile using agc
+    +      -- (Attribute Grammer Compiler)
+    +      -- Infer
+    +
+    +   if flag(split-base)
+    +      build-depends: base >= 3 && <5, array, random
+    +--                   , uuagc >=  0.9.12
+    +   else
+    +      build-depends: base < 3
+    +--                   , uuagc >=  0.9.12
+    +   hs-source-dirs  : src
+    diff -ruN mag-2.10.orig/src/AG1_Print.hs mag-2.10/src/AG1_Print.hs
+    --- mag-2.10.orig/src/AG1_Print.hs      Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/AG1_Print.hs   Fri Oct 14 23:31:36 2011
+    @@ -1,5 +1,5 @@
+     module AG1_Print where
+    -import List
+    +import Data.List
+     import UU_Pretty
+     import UU_Pretty_ext
+     import OldPretty
+    diff -ruN mag-2.10.orig/src/CGI.lhs mag-2.10/src/CGI.lhs
+    --- mag-2.10.orig/src/CGI.lhs   Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/CGI.lhs        Sat Oct 15 00:05:13 2011
+    @@ -5,7 +5,8 @@
+     \section[CGI]{Haskell binding for CGI/HTTP/HTML}
+     
+     
+    -\begin{code}       
+    +\begin{code}
+    +{-# LANGUAGE ScopedTypeVariables #-}
+     module CGI (
+     
+             -- Interface HTML --------------------------------------------------
+    @@ -57,10 +58,12 @@
+             getScriptName         -- :: IO String
+            ) where
+     
+    -import Char ( ord, chr, toUpper, isDigit, isAlphaNum, isHexDigit )
+    -import System ( getEnv )
+    +import Prelude hiding (catch)
+    +import Control.Exception (catch, IOException)
+    +import Data.Char ( ord, chr, toUpper, isDigit, isAlphaNum, isHexDigit )
+    +import System.Environment ( getEnv )
+     import qualified Pretty ( (<+>), (<>), nest, sep, text, Doc )
+    -import Monad(MonadPlus(..), guard)
+    +import Control.Monad(MonadPlus(..), guard)
+     
+     infixr 5 +++
+     \end{code}       
+    @@ -612,13 +615,13 @@
+              htmlifyChar '>' = "&gt;"
+              htmlifyChar '&' = "&amp;"
+              htmlifyChar '"' = "&quot;"
+    -         htmlifyChar '・ = "&auml;"
+    -         htmlifyChar '・ = "&ouml;"
+    -         htmlifyChar '・ = "&uuml;"
+    -         htmlifyChar 'ト' = "&Auml;"
+    -         htmlifyChar 'ヨ' = "&Ouml;"
+    -         htmlifyChar 'ワ' = "&Uuml;"
+    -         htmlifyChar '゜' = "&szlig;"
+    +         htmlifyChar 'テ、' = "&auml;"
+    +         htmlifyChar 'テカ' = "&ouml;"
+    +         htmlifyChar 'テシ' = "&uuml;"
+    +         htmlifyChar 'テ・ = "&Auml;"
+    +         htmlifyChar 'テ・ = "&Ouml;"
+    +         htmlifyChar 'テ・ = "&Uuml;"
+    +         htmlifyChar 'テ・ = "&szlig;"
+     --         htmlifyChar ' ' = "&nbsp;"
+              htmlifyChar c   = [c]
+     
+    @@ -684,7 +687,7 @@
+     type StatusCode = Int
+     type Reason = String
+     
+    -data Mime a => CgiOut a =
+    +data CgiOut a =
+          Content{mime :: a}
+        | Location{url :: URL}
+        | Status{status :: StatusCode, reason :: Reason}
+    @@ -818,7 +821,7 @@
+                    putStr (show a)
+     
+     myGetEnv :: String -> IO String
+    -myGetEnv v = catch (getEnv v) (const (return ""))
+    +myGetEnv v = catch (getEnv v) (\ (e :: IOException) -> return "")
+     
+     getScriptName :: IO String
+     getScriptName = myGetEnv "SCRIPT_NAME"
+    diff -ruN mag-2.10.orig/src/CGIMain.lhs mag-2.10/src/CGIMain.lhs
+    --- mag-2.10.orig/src/CGIMain.lhs       Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/CGIMain.lhs    Fri Oct 14 23:32:52 2011
+    @@ -4,9 +4,9 @@
+     
+     > import CGI
+     
+    -> import Maybe
+    -> import Random
+    -> import IO
+    +> import Data.Maybe
+    +> import System.Random
+    +> import System.IO
+     
+     > import Syntax
+     > import HParse
+    diff -ruN mag-2.10.orig/src/CabaledVersion.hs mag-2.10/src/CabaledVersion.hs
+    --- mag-2.10.orig/src/CabaledVersion.hs Thu Jan  1 09:00:00 1970
+    +++ mag-2.10/src/CabaledVersion.hs      Thu Dec  2 00:01:35 2010
+    @@ -0,0 +1,18 @@
+    +{-# LANGUAGE CPP #-}
+    +module CabaledVersion(versionstr,archstr,datestr) where
+    +#ifdef MAKE
+    +import Version
+    +#else
+    +import Paths_mag ( version )
+    +import Data.Version  ( showVersion )
+    +import System.Info   ( arch )
+    +
+    +versionstr :: String
+    +versionstr = showVersion version
+    +
+    +archstr :: String
+    +archstr = arch
+    +
+    +datestr :: String
+    +datestr = "Wed Dec  1 23:23:35     2010"
+    +#endif
+    diff -ruN mag-2.10.orig/src/Calculations.hs mag-2.10/src/Calculations.hs
+    --- mag-2.10.orig/src/Calculations.hs   Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Calculations.hs        Mon Aug  2 15:07:01 2010
+    @@ -2,7 +2,7 @@
+                         prettyCalc,shortprettyCalc,htmlCalc
+                        ) where
+     
+    -import List
+    +import Data.List
+     import Utils
+     import UU_Pretty (indent)
+     import UU_Pretty_ext
+    diff -ruN mag-2.10.orig/src/Constants.hs mag-2.10/src/Constants.hs
+    --- mag-2.10.orig/src/Constants.hs      Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Constants.hs   Mon Aug  2 15:00:17 2010
+    @@ -4,10 +4,10 @@
+     import UU_Scanner
+     import UU_Parsing
+     import UU_Parsing_ext
+    -import Char
+    +import Data.Char
+    +import Data.List
+     import Numeric
+     import Types
+    -import List
+     import Utils
+     
+     data Constant = If | Number Int | FNumber Float | Binop Op | Boolean Bool | Nul | 
+    diff -ruN mag-2.10.orig/src/Exception.hs mag-2.10/src/Exception.hs
+    --- mag-2.10.orig/src/Exception.hs      Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Exception.hs   Tue Oct 18 15:36:52 2011
+    @@ -1,7 +1,9 @@
+     module Exception(ExT(..),liftEx,raiseEx,catchEx,trapIOEx,
+                      transformExUnit,Ex)
+     where
+    -import Monad
+    +import Prelude hiding (catch)
+    +import Control.Exception (catch, IOException)
+    +import Control.Monad
+     
+     data Exception a b = Raise a | Return b
+     newtype ExT a m b = ExT (m (Exception a b))
+    @@ -14,7 +16,7 @@
+                                  Return w -> do let ExT ret = f w
+                                                 ret
+     
+    -trapIOEx :: ExT a IO b -> (IOError -> IO a) -> ExT a IO b
+    +trapIOEx :: ExT a IO b -> (IOException -> IO a) -> ExT a IO b
+     trapIOEx (ExT x) f = ExT $ catch (do v <- x
+                                          return v)
+                                      (\ioerr -> do err <- f ioerr
+    diff -ruN mag-2.10.orig/src/Expressions.hs mag-2.10/src/Expressions.hs
+    --- mag-2.10.orig/src/Expressions.hs    Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Expressions.hs Mon Aug  2 15:00:31 2010
+    @@ -12,10 +12,10 @@
+     import Syntax
+     import Types
+     import Names
+    -import List
+     import Utils
+     import Constants
+    -import Maybe
+    +import Data.List
+    +import Data.Maybe
+     
+     instance Eq Exp where
+        e1 == e2 
+    diff -ruN mag-2.10.orig/src/FiniteMaps.hs mag-2.10/src/FiniteMaps.hs
+    --- mag-2.10.orig/src/FiniteMaps.hs     Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/FiniteMaps.hs  Fri Oct 14 23:34:34 2011
+    @@ -56,8 +56,7 @@
+     -- greater keys respectively (this requires an ordering relation on the keys);
+     -- all keys in a tree are distinct
+     --
+    -data (Ord key) =>
+    -     FiniteMap key elem = Leaf
+    +data FiniteMap key elem = Leaf
+                            | Node key                      -- this key
+                                   elem                     -- assoc with key
+                                   Int                      -- size >= 1
+    diff -ruN mag-2.10.orig/src/GList.hs mag-2.10/src/GList.hs
+    --- mag-2.10.orig/src/GList.hs  Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/GList.hs       Mon Aug  2 15:02:49 2010
+    @@ -1,6 +1,6 @@
+     module GList (GList(gmap,gzero,gcat,gfilter,gsequence),MonadPlus(mzero,mplus),
+                   Functor(fmap),gconcat,gconcat',gmapM) where
+    -import Monad
+    +import Control.Monad
+     
+     class (Functor l, MonadPlus l) => GList l where
+        gmap :: (a -> b) -> (l a -> l b)
+    diff -ruN mag-2.10.orig/src/HParse.hs mag-2.10/src/HParse.hs
+    --- mag-2.10.orig/src/HParse.hs Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/HParse.hs      Mon Aug  2 15:10:01 2010
+    @@ -2,12 +2,12 @@
+                   parse,ptheory,parseExp,parse',typecheck',SourceFileInfo (..))
+     where
+     
+    +import Data.Char
+    +import Data.List
+     import UU_Scanner
+     import UU_Parsing
+     import UU_Parsing_ext
+    -import Char
+     import Types
+    -import List
+     import Utils
+     import Syntax
+     import Infer
+    diff -ruN mag-2.10.orig/src/Infer.ag mag-2.10/src/Infer.ag
+    --- mag-2.10.orig/src/Infer.ag  Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Infer.ag       Sat Oct 15 18:43:15 2011
+    @@ -1,6 +1,6 @@
+    --->import Maybe
+    --->import List
+    --->import Char
+    +-->import Data.Maybe
+    +-->import Data.List
+    +-->import Data.Char
+     
+     -->import Types
+     -->import Constants
+    diff -ruN mag-2.10.orig/src/Laws.hs mag-2.10/src/Laws.hs
+    --- mag-2.10.orig/src/Laws.hs   Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Laws.hs        Mon Aug  2 15:02:32 2010
+    @@ -2,7 +2,7 @@
+                 TheorMap) 
+     where
+     
+    -import List
+    +import Data.List
+     import Names
+     import Expressions
+     
+    diff -ruN mag-2.10.orig/src/Main.hs mag-2.10/src/Main.hs
+    --- mag-2.10.orig/src/Main.hs   Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Main.hs        Thu Dec  2 00:00:15 2010
+    @@ -1,5 +1,5 @@
+     module Main( main ) where
+    -import Version
+    +import CabaledVersion
+     import PPrint
+     import HParse 
+     import Syntax
+    @@ -12,18 +12,19 @@
+     import SubExpressions
+     import Matching
+     import Names
+    -import List
+     import Calculations
+     import Rewrite
+     import Laws
+    -import System
+     import Html (renderHtml,prettyHtml)
+     import State
+     import UU_Scanner
+     import UU_Parsing
+     import UU_Parsing_ext
+    -import GetOpt
+    -import IO
+    +import Data.List
+    +import System.Console.GetOpt
+    +import System.Environment
+    +import System.IO
+    +import System.IO.Error
+     
+     type Path = String
+     
+    diff -ruN mag-2.10.orig/src/Makefile mag-2.10/src/Makefile
+    --- mag-2.10.orig/src/Makefile  Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Makefile       Thu Dec  2 00:03:06 2010
+    @@ -1,6 +1,6 @@
+     HCFLAGS = -c -O2
+     LINKFLAGS = -O2
+    -GHC = ghc -syslib util -syslib lang
+    +GHC = ghc -DMAKE
+     HC = $(GHC)
+     
+     GHCP = $(GHC) -prof -auto-all -osuf p_o -hisuf p_hi
+    @@ -42,7 +42,7 @@
+               Laws.hs Substitutions.hs SubExpressions.hs FiniteMaps.hs \
+               Matching.hs ReferenceMatching.lhs \
+               HtmlBlockTable.lhs Html.lhs GList.hs FailList.hs \
+    -          Calculations.hs Rewrite.hs
+    +          Calculations.hs Rewrite.hs CabaledVersion.hs
+     
+     EXESRC = Main.hs
+     
+    @@ -116,11 +116,11 @@
+     # Infer.hs with hugs
+     
+     agdepend: $(UUSRC) $(AGSRC)
+    -       $(GHC) -M -optdep-f -optdepagdepend -optdep-s -optdepp $(UUSRC) $(AGSRC)
+    +       $(GHC) -M -dep-makefile -optdepagdepend -dep-suffix -optdepp $(UUSRC) $(AGSRC)
+     
+     include agdepend
+     
+     depend: $(COMSRC) $(EXESRC) $(CGISRC) $(GENHS)
+    -       $(GHC) -M -optdep-f -optdepdepend -optdep-s -optdepp $(COMSRC) $(EXESRC) $(CGISRC) $(GENHS)
+    +       $(GHC) -M -dep-makefile -optdepdepend -dep-suffix -optdepp $(COMSRC) $(EXESRC) $(CGISRC) $(GENHS)
+     
+     include depend
+    diff -ruN mag-2.10.orig/src/Matching.hs mag-2.10/src/Matching.hs
+    --- mag-2.10.orig/src/Matching.hs       Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Matching.hs    Mon Aug  2 15:03:33 2010
+    @@ -5,14 +5,14 @@
+     where
+     import qualified ReferenceMatching as R
+     import qualified FastMatching as F
+    -import List
+     import PPrint
+     import Substitutions
+     import Expressions
+     import Names
+    -import IO
+    -import IOExts
+    -import Monad
+    +import Control.Monad
+    +import Data.List
+    +import System.IO
+    +import System.IO.Unsafe
+     
+     
+     data Matcher = 
+    diff -ruN mag-2.10.orig/src/Names.hs mag-2.10/src/Names.hs
+    --- mag-2.10.orig/src/Names.hs  Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Names.hs       Mon Aug  2 15:02:11 2010
+    @@ -6,8 +6,8 @@
+                  NameT,freshVarT,forkName)
+     where
+     
+    -import Maybe
+    -import List
+    +import Data.Maybe
+    +import Data.List
+     import Utils
+     import State
+     
+    diff -ruN mag-2.10.orig/src/ReferenceMatching.lhs mag-2.10/src/ReferenceMatching.lhs
+    --- mag-2.10.orig/src/ReferenceMatching.lhs     Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/ReferenceMatching.lhs  Fri Oct 14 23:37:35 2011
+    @@ -7,9 +7,9 @@
+     >
+     > where
+     
+    -> import Monad
+    -> import List
+    -> import Maybe
+    +> import Control.Monad
+    +> import Data.List
+    +> import Data.Maybe
+     
+     > import Utils (collect,subsplus,subseteq)
+     > import State
+    @@ -570,8 +570,8 @@
+     > abstractssub :: Int -> VarId -> Exp -> Exp -> [Exp]
+     
+     > abstractssub 0 x e t = [t]
+    -> abstractssub (n+1) x e t = nub [c | b <- abstractssub n x e t, 
+    ->                                     c <- abstract x e b]
+    +> abstractssub n x e t = nub [c | b <- abstractssub (n-1) x e t, 
+    +>                                 c <- abstract x e b]
+     
+     > abstract :: VarId -> Exp -> Exp -> [Exp]
+     
+    diff -ruN mag-2.10.orig/src/Rewrite.hs mag-2.10/src/Rewrite.hs
+    --- mag-2.10.orig/src/Rewrite.hs        Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Rewrite.hs     Mon Aug  2 15:07:30 2010
+    @@ -1,5 +1,5 @@
+     module Rewrite(calculate) where
+    -import List
+    +import Data.List
+     import Utils
+     import Expressions
+     import Calculations
+    diff -ruN mag-2.10.orig/src/SCC.lhs mag-2.10/src/SCC.lhs
+    --- mag-2.10.orig/src/SCC.lhs   Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/SCC.lhs        Mon Aug  2 15:08:28 2010
+    @@ -10,9 +10,9 @@
+     > import SCC_Base
+     > import SCC_nonST_Prune
+     
+    -> import Array
+    -> import List
+    -> import Maybe
+    +> import Data.Array
+    +> import Data.List
+    +> import Data.Maybe
+     > import FiniteMaps
+     
+     The concept of the  interface following is to some extent lifted/adapted 
+    diff -ruN mag-2.10.orig/src/Sets.hs mag-2.10/src/Sets.hs
+    --- mag-2.10.orig/src/Sets.hs   Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Sets.hs        Fri Oct 14 23:34:12 2011
+    @@ -42,8 +42,7 @@
+     
+     -- a set is a finite map with a trivial image (EXPORTED ABSTRACT)
+     --
+    -newtype (Ord a) => 
+    -       Set a = Set (FiniteMap a ())
+    +newtype Set a = Set (FiniteMap a ())
+                    deriving (Eq, Ord)
+     
+     -- ATTENION: the ordering is _not_ the subset relation
+    diff -ruN mag-2.10.orig/src/State.hs mag-2.10/src/State.hs
+    --- mag-2.10.orig/src/State.hs  Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/State.hs       Tue Oct 18 15:36:01 2011
+    @@ -1,7 +1,9 @@
+     module State(StT(..),liftSt,evalSt,readSt,writeSt,applSt,
+                    transformStT,catchSt,St(..),appl,eval,readS,writeS)
+     where
+    -import Monad
+    +import Prelude hiding (catch)
+    +import Control.Exception (catch, IOException)
+    +import Control.Monad
+     
+     -- State Transformer
+     
+    @@ -30,7 +32,7 @@
+                                            -> StT a m b -> StT a n b
+     transformStT tr (StT f) = StT (tr.f)
+     
+    -catchSt :: StT a IO b -> (IOError -> StT a IO b) -> StT a IO b
+    +catchSt :: StT a IO b -> (IOException -> StT a IO b) -> StT a IO b
+     catchSt (StT f) fn = StT g
+                where g s = catch (f s) fn'
+                         where   fn' error = do let StT h = fn error
+    diff -ruN mag-2.10.orig/src/SubExpressions.hs mag-2.10/src/SubExpressions.hs
+    --- mag-2.10.orig/src/SubExpressions.hs Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/SubExpressions.hs      Mon Aug  2 15:06:43 2010
+    @@ -4,7 +4,6 @@
+                           abstractallthree)
+     where
+     
+    -import List
+     import Utils
+     import Names
+     import Types
+    @@ -14,9 +13,10 @@
+     import Constants
+     import Syntax
+     import Infer
+    -import Monad (foldM)
+    --- import Trace
+    -import Maybe
+    +import Control.Monad (foldM)
+    +import Data.List
+    +import Data.Maybe
+    +-- import Data.Trace
+     
+     notrace _ = id
+     
+    diff -ruN mag-2.10.orig/src/Substitutions.hs mag-2.10/src/Substitutions.hs
+    --- mag-2.10.orig/src/Substitutions.hs  Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Substitutions.hs       Mon Aug  2 15:04:07 2010
+    @@ -4,11 +4,11 @@
+     import Names
+     import Expressions
+     import Constants
+    -import List
+     import Utils
+     import PPrint
+     import Html
+    --- import Trace
+    +import Data.List
+    +-- import Data.Trace
+     
+     type Subst = (FMap VarId Exp,Sub)
+     
+    diff -ruN mag-2.10.orig/src/Types.hs mag-2.10/src/Types.hs
+    --- mag-2.10.orig/src/Types.hs  Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Types.hs       Mon Aug  2 15:01:46 2010
+    @@ -6,7 +6,7 @@
+                  appid,assign,unknowns,fcomp,fcom,
+                  namesupply,generalize,inst,nbound,tbs) where
+     
+    -import List
+    +import Data.List
+     
+     type TypeList = [Type]
+     
+    diff -ruN mag-2.10.orig/src/UU_Parsing.hs mag-2.10/src/UU_Parsing.hs
+    --- mag-2.10.orig/src/UU_Parsing.hs     Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/UU_Parsing.hs  Mon Aug  2 14:56:57 2010
+    @@ -11,7 +11,7 @@
+     
+     module UU_Parsing where
+     
+    -import List
+    +import Data.List
+     
+     infixl 2 <?> ; infixl 3 <|> ; infixl 4 <*>
+     
+    diff -ruN mag-2.10.orig/src/UU_Scanner.hs mag-2.10/src/UU_Scanner.hs
+    --- mag-2.10.orig/src/UU_Scanner.hs     Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/UU_Scanner.hs  Mon Aug  2 14:57:13 2010
+    @@ -5,7 +5,7 @@
+      - Author(s): Doaitse Swierstra
+      - Version 1.0, May 25, 1998: first appearance on the software web site.
+      -}
+    -import Char
+    +import Data.Char
+     import UU_Parsing
+     import UU_Parsing_ext
+     
+    diff -ruN mag-2.10.orig/src/Utils.hs mag-2.10/src/Utils.hs
+    --- mag-2.10.orig/src/Utils.hs  Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/Utils.hs       Mon Aug  2 14:59:35 2010
+    @@ -1,7 +1,7 @@
+     module Utils where
+    -import Char
+    -import List
+    -import Maybe
+    +import Data.Char
+    +import Data.List
+    +import Data.Maybe
+     
+     type FMap a b = [(a,b)]
+     idf = []
+    diff -ruN mag-2.10.orig/src/Version.hs mag-2.10/src/Version.hs
+    --- mag-2.10.orig/src/Version.hs        Thu Jan  1 09:00:00 1970
+    +++ mag-2.10/src/Version.hs     Tue Oct 18 15:39:16 2011
+    @@ -0,0 +1,4 @@
+    +module Version(versionstr,archstr,datestr) where
+    +versionstr = "2.10"
+    +archstr = "i686-msys"
+    +datestr = "Tue Oct 18 15:39:16     2011"
+    diff -ruN mag-2.10.orig/src/fastabstracts.patch mag-2.10/src/fastabstracts.patch
+    --- mag-2.10.orig/src/fastabstracts.patch       Tue Mar 25 04:13:00 2003
+    +++ mag-2.10/src/fastabstracts.patch    Sat Oct 15 01:14:37 2011
+    @@ -11,8 +11,8 @@
+     +> abstracts x e t = abstracts' x e [t]
+      
+     -> abstractssub 0 x e t = [t]
+    --> abstractssub (n+1) x e t = nub [c | b <- abstractssub n x e t, 
+    -->                                     c <- abstract x e b]
+    +-> abstractssub n x e t = nub [c | b <- abstractssub (n-1) x e t, 
+    +->                                 c <- abstract x e b]
+     +> abstracts' :: VarId -> Exp -> [Exp] -> [Exp]
+     +  
+     +> abstracts' x e ts 
+    diff -ruN mag-2.10.orig/uuagc_options mag-2.10/uuagc_options
+    --- mag-2.10.orig/uuagc_options Thu Jan  1 09:00:00 1970
+    +++ mag-2.10/uuagc_options      Thu Dec  2 00:49:25 2010
+    @@ -0,0 +1 @@
+    +
+
+* * * * *
+
+* * * * *
+
+Last modified : 2011/10/18 15:51:33 JST

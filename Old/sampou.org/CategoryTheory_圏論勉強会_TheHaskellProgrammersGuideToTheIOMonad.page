@@ -1,0 +1,218 @@
+# [CategoryTheory\_圏論勉強会\_TheHaskellProgrammersGuideToTheIOMonad]()
+
+[CategoryTheory]():[圏論勉強会]():TheHaskellProgrammersGuideToTheIOMonad
+
+* * * * *
+
+## 第三十七回圏論勉強会
+
+2008-2-10(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00 の予定
+
+           モニタ
+          ---------
+      shelarcy  日下部
+     +-----------------+
+     |                 |  |ホワイトボード
+     +-----------------+
+      酒井 穗苅 今井 
+
+-   久井さんはSkypeで参加
+
+写真（仮） :
+[http://picasaweb.google.co.jp/takeo.bono/Kenron080210](http://picasaweb.google.co.jp/takeo.bono/Kenron080210)
+
+写真（ミラー）：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200802/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200802/ct/)
+
+### "Categories, Types and Structures" Section 2.4.1.3
+
+はやめました。
+
+### "The Haskell Programmer's Guide to the IO Monad — Don't Panic"
+
+-   [http://stefan-klinger.de/](http://stefan-klinger.de/)
+
+#### Preface, Chapter 1, Chapter 2
+
+は前置き。
+
+#### Chapter 3 Categories
+
+## 第三十八回圏論勉強会
+
+2008-3-9(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00 の予定
+
+           モニタ
+          ---------
+      日下部 shelarcy
+     +-----------------+
+     |                 |  |ホワイトボード
+     +-----------------+
+      青谷 酒井 今井 
+
+-   久井さんはSkypeで参加
+
+写真（仮） :
+[http://picasaweb.google.co.jp/takeo.bono/Kenron080309](http://picasaweb.google.co.jp/takeo.bono/Kenron080309)
+
+写真（ミラー）：
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200803/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200803/ct/)
+
+### "The Haskell Programmer's Guide to the IO Monad — Don't Panic"
+
+#### Chapter 4 "Functor"
+
+-   4.1.6
+    -   identity が Functor になる証明
+        [解答](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475667457042802)
+        -   記法に混乱が見られますが気にしないでください
+
+    -   GFがFunctorになる証明
+        [解答](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475684636912002)
+
+-   4.2 Functorの例
+    -   [pair](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475714701683090)
+    -   [power
+        set](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475757651356082)
+
+-   4.3
+    -   HaskellでのList Char、Maybe Charの例
+        -   写真なし。
+
+-   4.3.1 Maybe、ListがFunctorになっている事の証明
+    -   [Maybe](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475792011094466)
+    -   [List](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475822075865554)
+
+#### Chapter 5 "Natural Transformation"
+
+-   5.2 Natural transformation in Haskell
+    -   Just は natural transformation
+        ([板書](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475847845669346)上)
+    -   maybeToList, ListToMaybeの自然性の証明
+        -   maybeToList
+            ([板書](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475847845669346)下、[解答](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475882205407730))
+        -   listToMaybe
+            ([解答](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475912270178818)、[解答続き](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475938039982610))
+
+-   5.3 Composing transformations and functors
+    -   5.3.3 Proof
+        -   図式で書いてみた
+            -   [PartI](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475955219851810)
+            -   [PartII](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475980989655602)
+
+    -   "vertical" composition
+        -   vertical vs horizontal
+            ([板書](http://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176476015349393986))
+
+### 2次会
+
+-   はてなの「Haskell」を含む日記をいろいろと読んでいる
+    -   あのへんで色々とつっこみたいことはあるんだけれど……
+        -   [MaybeT
+            が処理系についてきていない](http://d.hatena.ne.jp/Otter_O/20080308)のはなぜ？
+            -   mtl は [Mark P. Jones
+                の論文](http://web.cecs.pdx.edu/~mpj/pubs.html)
+                に書かれているモナド変換子を提供するためのライブラリだからじゃないかな？
+                -   (2008/03/12 00:07:52 JST: MaybeT の例も出ていました……。mtl
+                    で提供するモナドのモナド変換子しか提供していない感じでしょうか？)
+                -   加えれば良いじゃん。
+                -   昔と違って[新しくライブラリに加えるには Proposal
+                    が必要になった](http://haskell.org/haskellwiki/Library_submissions)ので、ちょっと面倒
+                    -   純粋関数の場合には QuickCheck、そうでない場合には HUnit によるテストが必要
+
+            -   [実は GHC の実装には MaybeT が使われている（ただし Current
+                のみ）](http://darcs.haskell.org/ghc/compiler/utils/Maybes.lhs)
+
+    -   つっこめば良いじゃん
+    -   そのうち連載（[本物のプログラマはHaskellを使う]()）で書けば、それで良いかなとも思って。
+
+## 第三十九回圏論勉強会
+
+2008-4-12(土) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:30?
+
+           モニタ
+          ---------
+      shelarcy 今井
+     +-----------------+
+     |                 |  |ホワイトボード
+     +-----------------+
+      酒井     檜山 
+
+### 雑談
+
+-   [coarbitrary の
+    co-について](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20080411#p01)作者に聞きました
+    -   variant と co-variant の関係と同じものとして名づけた
+    -   ただし、co-variant は variant の双対でもあるので、co-arbitrary の co-
+        が双対を意味するというのも正しい、とのこと。
+        -   その意味における（co-variant と双対な意味を持つ）variant って何よ？
+
+### "The Haskell Programmer's Guide to the IO Monad — Don't Panic"
+Chapter 6 "Monad"より
+
+### 二次会
+
+-   色々とマンガの話
+    -   カイジ
+
+-   ゲシュタルト崩壊
+    -   発端：
+        漫画に出てくる女刺客「あざみ」「あずみ？」「そういえばあずみだったような気が？」「あれ、本当にあずみだったっけ？」「わだち？（次の『わだちべにおふめん』に続く）」喧々諤々。（これはゲシュタルト崩壊とは違うが繰り返せば繰り返すほど混乱する過程は似ている）
+
+-   たほいや
+    -   わだちべにおふめん
+
+-   鳥居みゆき
+-   エクストリーム聖火リレー
+    -   「大東亜戦争への道」中村 粲 (著)
+
+-   継続
+-   org をなんて読むか
+
+## 第四十回圏論勉強会
+
+2008-5-11(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜17:50
+
+           モニタ
+          ---------
+      shelarcy    DekuDekuplex
+     +-----------------+
+     |                 |  |ホワイトボード
+     +-----------------+
+      酒井 穗苅 日下部
+
+-   久井さんはSkypeで参加
+
+### 雑談
+
+-   [将来の GHC では impredicative polymorphism
+    の実装が変わるかも](http://hackage.haskell.org/trac/ghc/wiki/Status/May08)
+
+### "The Haskell Programmer's Guide to the IO Monad — Don't Panic"
+Section 6.3 "An alternative definition of the monad"より
+
+-   今回で終了
+    -   次は何を読む？
+
+### 二次会
+
+-   GC の話
+    -   Python
+        -   Reference Count。論外らしい
+
+    -   GHC
+        -   incremental GC はまだ入ってない
+            -   [比較的安価に実装できる](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20040821#p01)はず
+            -   [Parallel GC が GHC 6.10
+                に入る予定](http://hackage.haskell.org/trac/ghc/wiki/Status/Releases)なので、単に優先順位の問題？
+
+* * * * *
+
+Last modified : 2011/06/30 04:42:33 JST

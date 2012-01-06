@@ -1,0 +1,314 @@
+# [CategoryTheory\_圏論勉強会\_TemperleyLiebAlgebra]()
+
+[CategoryTheory]():[圏論勉強会]():TemperleyLiebAlgebra
+
+* * * * *
+
+## 第四十一回圏論勉強会
+
+2008-6-15(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00
+
+                     モニタ    ホワイトボード
+                    ---------
+                     +-----+
+           shelarcy  |     | DekuDekuplex
+      豊福     酒井  |     | 檜山
+     +-----+   hiro  |     | 田中
+     |     |         |     | 今井
+     +-----+         +-----+
+
+-   久井さんはSkypeで参加
+
+写真（後半） :
+[http://picasaweb.google.co.jp/takeo.bono/Kenron080616](http://picasaweb.google.co.jp/takeo.bono/Kenron080616)
+
+写真（ミラー）：[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200806/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200806/ct/)
+
+### S. Abramsky "Temperley-Lieb algebra: From knot theory to logic and
+computation via quantum mechanics"
+
+-   [http://www.comlab.ox.ac.uk/people/samson.abramsky/tambook.pdf](http://www.comlab.ox.ac.uk/people/samson.abramsky/tambook.pdf)
+
+#### 2 The Temperly-Lieb Algebra
+
+-   すんごくよくまとまってるまとめ →
+    [こちら](http://d.hatena.ne.jp/hiroki_f/20080615/1213541356)
+
+##### 2.1 Temperly-Lieb algebra: generators and relations
+
+##### 2.2 Diagram Monoids
+
+##### 2.3 Expressiveness of the Generators
+
+-   ○ は "scalar"
+    -   平面を飛び越えて、どこにでも移動できる特殊な存在
+    -   ○でない図形は、平面上で他の線をまたいだり、切れたりすることはできない
+
+-   1 は恒等写像
+
+##### 2.4 The Trace
+
+-   trace がないと全体が閉じない
+    -   trace をかけると、0点 → 0点 で全体が閉じる
+    -   単なるgeneratorの合成ではない
+    -   内積はtraceの一種
+
+-   行列で表せないか？
+    -   cap と cup があるので無理
+        -   バラバラにできる？
+            -   Temperly-Lieb algebra は正方行列でひたすら計算しましょう、という枠組み。なので、cap と
+                cup を別々にはできない。
+
+        -   これはいったい（物理の）何に対応するの？
+            -   ブラとケットの背中合わせとか、＋と-とか。
+                -   [ブラケットで計算してみた（後半）](http://d.hatena.ne.jp/hiroki_f/20080615/1213541356)
+
+-   trace を計算するプログラム
+    -   [CategoryTheory\_圏論勉強会ノート]()に書いたのを参照。
+
+##### 2.5 The Connection to Knots
+
+-   ２段落で説明するのは無理がありすぎ、説明はしょりすぎ
+    -   [板書](http://picasaweb.google.co.jp/takeo.bono/Kenron080616/photo#5212274321971832322)
+
+-   bracket polynomial?
+    -   [参考書](http://d.hatena.ne.jp/asin/4431708596)からもう少し具体的な定義を見る
+        -   [板書](http://picasaweb.google.co.jp/takeo.bono/Kenron080616/photo#5212274334041241538)
+
+    -   実際に式を作ってみるとどんな風になるか？
+        -   [やってみた](http://d.hatena.ne.jp/bonotake/20080616/1213578037)
+
+### 2次会
+
+## 第四十二回圏論勉強会
+
+2008-7-6(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00
+
+     モニタ    ホワイトボード
+    ---------
+              +-----+
+    shelarcy  |     | 酒井
+              |     | 
+        hiro  |     | 檜山
+              |     | 
+              +-----+
+
+-   久井さんはSkypeで参加
+
+（でしたっけ？）
+
+写真：[http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080706](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080706)
+
+### S. Abramsky "Temperley-Lieb algebra: From knot theory to logic and
+computation via quantum mechanics" 3節より
+
+## 第四十三回圏論勉強会
+
+2008-8-10(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00
+
+     モニタ    ホワイトボード
+    ---------
+              +-----+
+        今井  |     | 檜山
+              |     | 
+    shelarcy  |     | 酒井
+              |     | 
+              +-----+
+               hiro
+
+              +-----+
+              |     | 
+              +-----+
+            DekuDekuplex
+
+写真：[http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080810](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080810)
+
+### S. Abramsky "Temperley-Lieb algebra: From knot theory to logic and
+computation via quantum mechanics" 4節より
+
+## 第四十四回圏論勉強会
+
+2008-9-14(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00
+
+写真：[http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080914](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080914)
+
+### S. Abramsky "Temperley-Lieb algebra: From knot theory to logic and
+computation via quantum mechanics" 5.2より
+
+## 第四十五回圏論勉強会
+
+2008-10-12(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00
+
+写真：[http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081012](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081012)
+
+### S. Abramsky "Temperley-Lieb algebra: From knot theory to logic and
+computation via quantum mechanics" 6節より
+
+## 第四十六回圏論勉強会
+
+2008-11-09(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00
+
+写真：[http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081109](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081109)
+
+### S. Abramsky "Temperley-Lieb algebra: From knot theory to logic and
+computation via quantum mechanics" 6.4より
+
+## 第四十七回圏論勉強会
+
+2008-12-14(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00
+
+写真：[http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081214](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081214)
+
+### S. Abramsky "Temperley-Lieb algebra: From knot theory to logic and
+computation via quantum mechanics" 6.4.3より
+
+## 第四十八回圏論勉強会
+
+2009-01-11(日) [びぎねっと
+トレーニングルーム](http://begi.net/modules/xfsection/article.php?articleid=1)
+13:00〜18:00
+
+     モニタ    ホワイトボード
+    ---------
+           白石=木戸=shelarcy hiro
+          +-----------------------+
+    酒井  |                       |
+          +-----------------------+
+            檜山       今井
+
+写真：[http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090111](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090111)
+
+### S. Abramsky "Temperley-Lieb algebra: From knot theory to logic and
+computation via quantum mechanics" 7.3
+
+### 始まる前
+
+-   GHC 6.10.1 でErrorクラスとExceptionクラスが混在して嫌な雰囲気になっている
+    -   mtl の Error モナドを使って処理を行うには Error クラスのインスタンスが必要
+    -   新しい例外型を定義するには Exception クラスのインスタンスが必要
+
+-   会場を変更するかもしれない？
+    -   びぎねっとさんは場所は至便だけど、金曜に鍵を確保するのが大変
+    -   慶応大学 日吉キャンパス or 矢上キャンパスになるかも
+
+-   webからテキストをコピー＆ペーストしたら、川の字がなぜか ||| に変換された？？
+    -   firefoxの仕業？
+
+### 7.3-last
+
+-   二重カッコ（[[ ]]）でくくられているのは何？
+    -   表示（denotation）のこと（[板書](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090111#5290248439654085970)）
+        -   等式の左側に記号（の並び）、右側に、その解釈の仕方を書く
+        -   例えば、古典論理でα|-βとなった場合、典型的な解釈ではfalseとtrueの間に順序を割り当て、［[α]］≦［[β]］となるようにする
+
+    -   【】なんかで書かれることもある
+        -   「隅付き括弧」というそうです
+        -   ちなみに、[「二重亀甲括弧」](http://ja.wikipedia.org/wiki/括弧#.E4.BA.8C.E9.87.8D.E4.BA.80.E7.94.B2.E6.8B.AC.E5.BC.A7.E3.80.98.E3.80.99)なるものもありました
+
+-   "|-" = turnstile
+    -   自然演繹だと推論規則の前後（分数の上下）を表す記号だけど、このテキストではゲンツェン流の方式を採用しているので、上記の古典論理の例とは意味が違う
+        -   圏論でのdenotationを考えると、［[|-]]= → （射）に対応
+            -   一方、推論規則は射から射への変換（transformation）に対応
+
+    -   turnstile
+        のオリジナルの意味は[これ](http://en.wikipedia.org/wiki/File:Turnstile.alewife.agr.jpg)らしい
+
+-   7.4の例：コンビネータB ＝λx.λy.λz.x(yz) と、それを使った Babc の計算
+    -   上のほうの図 ... x:C, y: B, z:A |- x(yz):C から、o ＝ x(yz) （の出力）を描いている
+        -   x,y,zについてる+とか-は、それぞれの入力と出力を分けて書いてみたものらしい
+
+    -   下のほうの図 ... 上の図の上側を時計回りにぐるっと曲げてみた図 ＝ λ abstraction
+
+-   7.3の意味論のほうに図をつけてくれればわかりやすいのに
+    -   描いてみました（[板書](http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090111#5290248445846167234)）
+        -   abstraction も application も常に右側？
+            -   左側は別にあるってこと
+                -   planarな（平面上の）操作だから、右と左の操作が一緒にはならない
+                -   7.5によれば、ここでの計算体系は Lambek calculus (a non-commutative
+                    logic and λ-calculus)の一部になっている
+
+### テキストが終わって・余談
+
+-   BaezがAbramsky流のお絵かき算に手を染め始めた（[発表資料](http://math.ucr.edu/home/baez/atmcs2008/atmcs2008.pdf)）
+    -   f, g を四角でなく丸で書くのがトレンドらしい
+    -   参考文献に"Homotopy lambda calculus"!?
+        -   25枚目に怪しい絵が
+            -   未来のλ計算はこうなってるのかもしれない
+
+-   次回のテキストは？
+    -   復刊した[『層・圏・トポス』](http://d.hatena.ne.jp/m-hiyama/20081218/1229577890)？
+        -   わかりやすそう
+        -   読みきるのは時間がかかると思う。
+            -   著者がかなり飛ばして書いてるので、行間を埋めるのが大変
+            -   全部を読もうとせずに、章を区切って読むのがいいかも
+                -   圏の基本的な定義については既に知っているので、とばしてしまっても良いし
+
+    -   量子系が心残りなので、またそちらを…
+
+### 2次会
+
+-   次回のテキストは？（続き）
+    -   Arrowの論文とかいいんじゃ？
+        -   お絵描きだし
+
+    -   初学者が入ってこれるようなのをやりたい
+
+-   [2chのHaskellスレ](http://pc11.2ch.net/test/read.cgi/tech/1211010089/961-971)によると、haskell-jpで圏論の話題が不興を買っているらしい
+    -   「みんな引いてる」？
+        -   まぁ場違いな感じはするが
+        -   それ以前に、最近メールまともに流れてなくね？
+            -   殆ど白石さんの独白ログになってる気が
+
+    -   [Lingrのhaskell-ja部屋](http://www.lingr.com/room/haskell-ja)ならikegamiさんが答えてくれるって（[archive参照](http://www.lingr.com/room/haskell-ja/archives/2008/12/27#msg-55876292)）
+
+-   [shelarcy]() の名前の読みについて
+    -   白石さんネタまだ引き摺りますか！
+        -   shelarcy を白石と聞き間違えられることがある
+            -   某氏はハンドルで呼ぶのが気恥ずかしいので白石さんと呼びたい
+
+        -   shelarcy は呼びにくい、書きにくい
+            -   どうせ公表しているし、本名でもよいですけれど。あるいは「しぇら」さんとか
+
+        -   本名のローマ字表記だと同姓同名のアーティストが引っかかる
+            -   継続祭の後、アーティストと間違って検索してくる人がちらほら
+
+        -   区別のためミドルネームをつけた方が良い？
+            -   いや、日本の伝統に沿って（e.g. 源九郎義経）寧ろ名前の後ろに付けるべきでは？
+
+-   集合知
+    -   画像認証をクラックするために、エロサイトを利用する方法があるらしい （エロ・グリッド・コンピューティング）
+        -   別のエロサイトに画像を表示して人間に解かせ、その答えを再利用する
+        -   この手法を何かに応用できないか？
+
+    -   『集合知プログラミング』（[http://www.amazon.co.jp/dp/4873113644/](http://www.amazon.co.jp/dp/4873113644/)
+        ）が、世間での好評に反して使えない件
+        -   3箇所参照して、3箇所とも間違いがあった
+            -   結局、どれも別の文献をあたる羽目に
+
+        -   c.f.
+            [http://d.hatena.ne.jp/naoe/20081130](http://d.hatena.ne.jp/naoe/20081130)
+
+    -   もっと新しくて恥ずかしい方法を考えよう
+        -   「集合恥」とか
+        -   あるいは「集合痴」
+
+-   やっぱりモナドは難しい
+    -   初心者に「モナドって何？」と聞かれたらどう解説したらいいの？
+
+* * * * *
+
+Last modified : 2009/04/27 20:17:09 JST

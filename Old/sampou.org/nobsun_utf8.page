@@ -1,0 +1,87 @@
+# [nobsun\_utf8]()
+
+[nobsun]():utf8
+
+* * * * *
+
+**無保証**
+
+いま(2008/06/30 17:00:49
+JST)は、[utf8-string](http://hackage.haskell.org/cgi-bin/hackage-scripts/package/utf8-string)があるのでそちらをどうぞ。
+
+UTF8 <-\> UCS
+
+[Data.UTF8]()
+
+-   [概略]()
+-   [インストールの概略]()
+-   [使い方の概略]()
+-   [注意]()
+-   [コメント]()
+
+* * * * *
+
+## Data.UTF8
+
+### 概略
+
+「UCS4 文字列」と「UTF-8 バイト列」との変換関数
+
+-   toUTF8
+-   fromUTF8
+
+toUTF8 でラップした System.IO系の出力関数
+
+-   putStr,putStrLn,writefile,hPutStr,hPutStrLn
+
+fromUTF8 でラップした System.IO系の入力関数
+
+-   getContents, getLine readFile,hGetContents,hGetLine
+
+### インストールの概略
+
+    % darcs get http://darcs.sampou.org/utf8
+    % cd utf8
+    % emacs utf8.cabal
+    % runhaskell Setup.lhs configure
+    % runhaskell Setup.lhs build
+    % runhaskell Setup.lhs install
+
+### 使い方の概略
+
+    import Data.UTF8
+    import Prelude hiding (getContents,getLine,readFile
+                          ,putStr,putStrLn,writeFile)
+    import System.IO hiding (getContents,getLine,readFile
+                            ,putStr,putStrLn,writeFile
+                            ,hGetContents,hGetLine
+                            ,hPutStr,hPutStrLn)
+
+    main :: IO ()
+    main =  putStrLn "お名前をどうぞ．" >>
+            getLine                     >>= \ name ->
+            putStr   "ようこそ，"       >>
+            putStr   name               >>
+            putStrLn "さん．"          
+
+実行結果
+
+    % ghci -v0 utf8.hs
+    *Main> main
+    お名前をどうぞ．
+    花子
+    ようこそ，花子さん．
+    *Main> 
+
+### 注意
+
+-   無保証
+-   ナイーブな文字列変換なので遅い
+-   不正な文字列あるいはバイト列入力に対してエラーで例外が発生することはない
+-   変換が正しく行われたかどうかを判定するAPIはサポートしていない
+
+### コメント
+
+* * * * *
+
+Last modified : 2008/06/30 17:00:49 JST

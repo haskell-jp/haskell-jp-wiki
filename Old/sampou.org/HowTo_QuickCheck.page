@@ -1,0 +1,78 @@
+# [HowTo\_QuickCheck]()
+
+[HowTo]():QuickCheck
+
+* * * * *
+
+QuickCheck の使い方を覚えたいなぁ。というわけで、まだこれから。
+
+* * * * *
+
+と、誰かが書いてから一向に文章が増えないので、僕も挑戦しよう。
+
+## QuickCheck とは何か。
+
+プログラムの満たすべき「性質」を定義すると、その性質を本当に満たしているかどうかを 確認する「テスト」を“自動的に”生成して検査するライブラリ。
+
+-   [QuickCheckのページ](http://www.cs.chalmers.se/~rjmh/QuickCheck/)
+-   [QuickCheckのマニュアル](http://www.cs.chalmers.se/~rjmh/QuickCheck/manual.html)
+    -   [マニュアルの日本語訳その1](http://haskell.g.hatena.ne.jp/taninsw/20060619/p4)、[その2](http://haskell.g.hatena.ne.jp/taninsw/20060620/p1)
+
+## はじめてのQuickCheck
+
+英語が平気な人は、QuickCheck のマニュアルを読んだ方が良い。
+
+      import Debug.QuickCheck
+      
+      prop_true x = True
+        where types = x::Int
+      prop_false x = False
+        where types = x::Int
+      
+      prop_head x = x == head [x]
+        where types = x::Int
+      prop_head' x xs = x == head (x:xs)
+        where types = (x::Int, xs::[Int])
+
+接頭辞 prop\_ には何の意味もない。適当な名前 (i\_want\_to\_check x = ... ) でもよい。
+ただし、引数が最低一つは必要で、かつ、引数の型を "types"
+という関数で教える必要がある(テストできる型に型推論できる場合はその必要はないが、しかしテストできる型が何かなんて最初は知らないので...)。
+というのは、自動生成されるテストは引数の型を利用して作られるからである。
+(型を持たない言語(Erlang)にもトリックを利用してQuickCheckが移植されているらしい)
+
+      *Main> quickCheck prop_true
+      OK, passed 100 tests.
+      *Main> quickCheck prop_false
+      Falsifiable, after 0 tests:
+      0
+      *Main> quickCheck prop_head
+      OK, passed 100 tests.
+      *Main> quickCheck prop_head'
+      OK, passed 100 tests.
+
+-   [shelarcy]()(2008/04/09 13:45:06 JST):確かに GHCi や Hugs
+    などの対話環境上で使う場合には何も意味はありませんが、かといって接頭辞 prop\_
+    を使うということに何の意味もないということはありませんよ。連載の方にも書きましたが、[接頭辞 prop\_ は「quickCheck
+    という自動テスト用のスクリプトで QuickCheck
+    を使用するテストであるかどうかを判断する」のに使われています](http://itpro.nikkeibp.co.jp/article/COLUMN/20080408/298292/?P=2&ST=develop)。また、こうした慣習が今後他の自動化ツールを作る上で参考になっていくと思うので。
+-   まあ、確かに[マニュアルの quickCheck
+    スクリプトの説明](http://www.cs.chalmers.se/~rjmh/QuickCheck/manual_body.html#4)では全然言及されておらず、スクリプトをきちんとダウンロードして確認した人しか気づかないことではあるのですが。
+
+[如何にして全ての奇数は素数たることを証明せしや?](http://www.gdargaud.net/Humor/OddPrime.html)
+
+小泉総理: 1 は素数。3 は素数。5 は素数。7 は素数。全てに明確に答弁している。
+
+      primes = map head $ iterate sieve [2..]
+      sieve (p:xs) = [ x | x <- xs, x `mod` p /= 0]
+      
+      prop_odd_prime x = (mod x 2) == 1 && (x > 2) ==> elem x (take 1000 primes)
+
+      *Main> quickCheck prop_odd_prime
+      Falsifiable, after 26 tests:
+      9  
+
+## つづく?
+
+* * * * *
+
+Last modified : 2008/04/09 19:54:19 JST
