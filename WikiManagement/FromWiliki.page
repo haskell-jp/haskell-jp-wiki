@@ -1,0 +1,22 @@
+# WiLiKiからの移行
+
+## ページ先頭の目次を消したい
+
+Wikiページ編集時に先頭に
+
+~~~ { .text }
+---
+toc: no
+...
+~~~
+
+と入れれば、Wikiページの頭のtocを削れる。
+詳細は
+[/Help#page-metadata]()
+を参照。
+
+## 編集日時を入力したい
+
+[Signature.hs](https://github.com/jgm/gitit/blob/master/plugins/Signature.hs)
+
+が有効になっているので、
