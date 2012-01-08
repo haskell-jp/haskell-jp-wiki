@@ -25,10 +25,5 @@
 
 # このWikiで使っているgititプラグイン
 
-## TwitterUrl.hs
-
-    * まさか @master_q が変態だったなんて！
-
-と書くと以下のようにtwitterへのリンクになります。
-
-* まさか @master_q が変態だったなんて！
+[gitit-pluginsのREADME.md](https://gitorious.org/wiki-haskell-jp/gitit-plugins/blobs/master/README.md)
+を見てください。
