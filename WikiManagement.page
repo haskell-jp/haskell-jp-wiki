@@ -16,6 +16,13 @@
 [gitit-wikidata](https://gitorious.org/wiki-haskell-jp/gitit-wikidata)
 へのpullリクエストは禁止しています。
 
+# Wikiの使い方
+
+
+## 移行マニュアル
+
+* [WiLiKiからの移行](WikiManagement/FromWiliki)
+
 # このWikiで使っているgititプラグイン
 
 ## TwitterUrl.hs
