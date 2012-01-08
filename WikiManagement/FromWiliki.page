@@ -33,5 +33,4 @@ pluginが有効になっているので、
 
 ## Wikiページの最終更新日時を表示したい
 
-xxxxxxxxxxx plugin作成中。。。
-ひょっとするとpluginじゃなくて、全ページに強制表示した方が良い？
+LastModified.hs pluginが有効になっているので、ページ下部に最終更新日時が自動的に入ります。
