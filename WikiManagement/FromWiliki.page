@@ -17,6 +17,14 @@ toc: no
 
 ## 編集日時を入力したい
 
+このWikiでは
 [Signature.hs](https://github.com/jgm/gitit/blob/master/plugins/Signature.hs)
+pluginが有効になっているので、
 
-が有効になっているので、
+![](http://farm8.staticflickr.com/7159/6658022067_235b58bb90_o.png)
+
+のようにWikiページに入力すると以下のように変換されて登録される。
+
+~~~ { .text }
+-- masterq (Sun Jan  8 08:07:53 UTC 2012)
+~~~
