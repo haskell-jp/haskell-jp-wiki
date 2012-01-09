@@ -1,0 +1,79 @@
+## 第十三回圏論勉強会
+
+2006-1-22(日) [男女共同参画センター
+学習室B](http://www.kissport.or.jp/sisetu/libra/index.html)
+8:45〜16:30
+
+写真
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200601/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/)
+
+出席者
+
+           shelarcy 久井  　　 |ス
+          +-------------+ 　　 |ク
+          |             | 　　 |リ
+          |             | 　　 |｜
+          +-------------+  　　|ン
+               酒井 今井   　　|
+
+### 雑談
+
+-   Haskell の標準数値 Class の再デザイン
+    -   [Haskell の Num が備える + や \* は環 (ring)
+        が備えるべきという議論](http://www.nerimadors.or.jp/~kando/TITECH/TypeSystem/OverLoading.doc)
+        -   (だけど、Haskell では user の手で Class をより小さな Class
+            にすることのできる仕組みがないので問題を悪化させる、ってもとの [A Second Look at
+            Overloading](http://lampwww.epfl.ch/~odersky/papers/fpca95.ps.gz)
+            には書いてあるね)
+
+    -   [Numeric
+        prelude](http://www.haskell.org/communities/11-2005/html/report.html#sect4.2.10)
+        -   物理計算などをやるときに便利なように線形代数などを導入したり、QuickCheck に対応させたりしている (やはり
+            Num を Ring という名前に変更したいらしい)
+        -   代数的な構造をきっちりやりたい、っいうと、どこまでやるかが問題になるけど……
+            -   [DoCon](http://haskell.org/docon/)
+
+### Session 23
+
+-   category CからC\_{B1,B2}を作る
+    -   [C\_{B1,B2｝がcategoryになっているかのチェック](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0532.JPG)
+        -   ([同じ図](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0533.JPG))
+
+    -   このC\_{B1,B2}における terminal object が、Cにおける B1, B2の product
+        と同じものになる。
+
+-   Exercise 1
+    -   B1×B2の uniqueness を、２通りの方法で証明
+        -   [Cの中で直接証明](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0534.html)
+        -   [C\_{B1,B2} の terminal object の uniqueness と、これが C における
+            B1×B2
+            と同じになることから証明](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0535.JPG)
+
+-   Exercise 2
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0536.JPG)
+
+### Session 24
+
+-   Exercise 1
+    -   Session 23 の Ex.1 とほぼ同様につき略
+
+-   Exercise 2
+    -   [解答1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0537.html)、[解答2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0538.html)
+
+-   Exercise 3
+    -   難しい…
+    -   [板書1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0539.html),
+        [板書1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0542.html)
+
+-   人手で確かめるのはほとんど無理に近いので、Haskellでソルバを書いてみる…？
+    -   書いてはみたけど、グラフに出してみるのはまたあとで。
+    -   [グラフ](http://www.tom.sfc.keio.ac.jp/~sakai/d/images/20060122_4.png)
+        -   おお、すごい！
+
+### 二次会
+
+-   Haskell の Integral という Class は integral domain (整域) を指しているんじゃないだろうか？
+
+* * * * *
+
+最終更新 : 2006/02/21 15:52:45 JST

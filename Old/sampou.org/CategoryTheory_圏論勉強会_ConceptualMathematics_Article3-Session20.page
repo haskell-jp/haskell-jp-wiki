@@ -1,8 +1,440 @@
-# [CategoryTheory\_圏論勉強会\_ConceptualMathematics\_Article3-Session20]()
+## 第十一回圏論勉強会
 
-[CategoryTheory]():[圏論勉強会]():[ConceptualMathematics]():Article3-Session20
+2005-11-18(日)
+[コールドブレス](http://www.coldbreath.jp/access.php)
+10:00-18:00
 
-* * * * *
+写真
+[http://mixi.jp/view\_album.pl?id=197407](http://mixi.jp/view_album.pl?id=197407)
+
+(このWikiに張るのに便利なように
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200511/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/)
+にも一応コピーしておきました)
+
+出席者
+
+           久井 酒井 堀江      　　 |ス
+          +------------------+ 　　 |ク
+          |                  | 　　 |リ
+          |                  | 　　 |｜
+          +------------------+  　　|ン
+           今井 Shelarcy 豊福   　　|
+
+### 雑談
+
+-   Mac で gtk を使うのはインストールが大変
+    -   pango が cairo を要求するようになっている
+        -   gtk2hs がどうやって cairo をバインディングしているのか気になってソースを見たら
+            pango\_cairo\_\*\*\* という関数を呼び出しによる実現だったので、これはすぐには wxHaskell
+            に移植できないなとがっかり
+
+    -   darwin ports の gauche-gtk は？
+        -   gauche のバージョンが 0.8.3 と、古い
+        -   向井さんの [ports
+            を書こう](http://www.city5.org/letsports.html)を参考にやってみて、darwin
+            ports 版を書くべし
+
+    -   Mac で gauche-gl を使っていると、bus error が出てくるのが困る。何か解決法はないか？
+        -   Haskell の OpenGL パッケージでも、バージョンとか見ようとすると bus error が出てくる
+
+-   [Mac も早く OpenAL 1.1
+    に対応してくれないかな？](http://page.freett.com/shelarcy/diary_2005-11.html#novembre122005)
+
+-   圏論でなにかを考察するためには、考察するものに対する圏を構築する際にきちんと考察の対象物を全てのせてやらないといけないという話
+
+-   universal とは
+    -   [universal property
+        のWikipedia（英語版）にある記事](http://en.wikipedia.org/wiki/Universal_property)
+        -   一意に定まる射を用いて、何か特殊な特徴を持つ対象が特定できるような性質、ということかな？
+
+-   [アスキーアートで図式を描く](http://hpcgi2.nifty.com/1to100pen/wiki/wiki.cgi?p=AjointFunctor)のは大変だね。
+    -   便利なツールはないか?
+        -   XyPic?
+
+    -   [XMLの檜山さん](http://www.chimaira.org/docs/indexCategoryTheory.htm)はフリーハンドでゴリゴリ描いてますね。
+
+-   (今回で)一周年だし、次回は忘年会という形にしない？
+
+### Article � p222、Exercise 17 の途中から
+
+-   Exercise 17 endomap のsum
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1383276722.html)
+
+-   Exercise 17 の、sumへのpointがinjectionから構成できることの証明
+    -   解答：
+        [集合の場合](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1577113984.html)、[endomapの場合](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_2155009521.html)
+    -   irreflexive graphははしょっちゃった
+
+-   Exercise 18
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_792235049.html)
+    -   一番下の図が反例。fはB1から来た要素とB2からきた要素の両方にまたがってマップされている
+
+-   Exercise 19
+    -   [解答1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1470641740.html)、[解答2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_3832168550.html)
+        ２つで１つの解答
+        -   計算が大変 (\*´Д｀)
+        -   [f, g]oj1 = f, [f, g]oj2 = g がポイント
+
+-   standard map : (A×B)+(A×C) → A×(B+C) が任意のカテゴリで構成できるか？
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1184946415.html)
+        -   この逆は一般には成り立つとは限らない。つまり分配法則は任意のカテゴリで成り立つとは限らない。
+
+-   Exercise 20
+    -   解答：[解答1（sliced category
+        のsumの構成)](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1258546772.html)、[解答２(板書左が反例)](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1917871645.html)
+    -   つまり、initial object と terminal object が一致するようなカテゴリでは分配法則が成り立たない。
+    -   [http://www.tom.sfc.keio.ac.jp/\~sakai/d/?date=20050215\#p02](http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20050215#p02)
+
+-   Exercise 21
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_3784340896.html)
+        -   A×A のinternal mapを書くと、板書の左
+            -   確かに A+D+Dになっている。
+
+### SESSION 19 - Terminal Objects
+
+### SESSION 20 - Points of an object
+
+### 二次会
+
+-   今回は二次会参加者の人数が少ない
+-   Kahua とか WASH とか継続ベースなので、Ajax との相性が良いんじゃないか？
+
+## 第十回圏論勉強会
+
+2005-10-8(土)
+[コールドブレス](http://www.coldbreath.jp/access.php)
+10:00-17:30
+
+写真
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200510/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/)
+
+出席者
+
+           久井 今井 豊福 堀江 　　 |ス
+          +------------------+ 　　 |ク
+          |                  | 　　 |リ
+          |                  | 　　 |｜
+          +------------------+  　　|ン
+           酒井 Shelarcy        　　|
+
+### Article �、p217、Exercise 13 より
+
+#### 4. Products
+
+-   Exersize 13
+    -   [前半解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240183.html)
+        -   B1、B2のpointの組でB1xB2のpointが一意に定まることの証明
+
+    -   [後半解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240184.html)
+        -   任意の B1, B2のpointの組 がB1xB2のあるpointの射影になってることの証明
+
+-   219ページ上から２つめのダイアグラム、右下はXでなくY（誤植）
+-   Exercize 14
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240186.html)
+    -   identity の証明がポイント（解答の下図）
+
+-   補題: <f,g\> o h = <f o h, g o h\> ??
+    -   [解答1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240187.html)
+        -   ・・・ hを <\> の中に組み入れてる時点で与題を既に使用してるっぽい
+
+    -   ということでやりなおし →
+        [解答2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240188.html)
+        -   universal property を使って書き換え
+        -   「一意に定まる」がポイント（？）
+
+-   練習問題: <p1, p2\> = 1\_(AxB) を証明せよ。
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240190.html)
+        -   ヒント（右図）： e = u
+
+-   Exersize 15
+    -   [解答](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240191.html)
+        -   上図：ξ(α(a,b),x) = ξ(a, ξ(b,x)) for all a,b,x
+        -   下図：ξ(a0,x) = x for all x
+        -   1\_A x ξ と α x 1\_A がポイント。domainをどうあわせるか？
+
+    -   直観的な理解。Aの要素は関数X-\>Xをエンコードしたもの。αは関数の結合。a0は恒等関数。ξはapply。
+    -   A, α、a0はmonoidを形成 →
+        [板書](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240192.html)の左側
+
+-   閑話休題：文脈ってなんですか？
+    -   [板書](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240192.html)の右側
+        -   環境 とだいたい似たようなもの
+        -   dependent type とかこういう感じ
+
+#### 5. Commutative, associative, and identity laws for multiplication
+of objects
+
+-   Exercize 16
+    -   [解答1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240193.html),
+        [解答2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240194.html)
+        (同じもの）
+        -   美しい！(･∀･)
+
+    -   ここで最終的に導かれる X → P x Cc は <<fa,fb\>,fc\>なわけだけど、<fa, fb,
+        fc\>にならなくていいの？
+        -   そもそも、<fa, fb, fc\> をまだ定義していない。<fa, fb, fc\> を <<fa,fb\>,fc\>
+            と定義する。
+
+#### 6. Sums
+
+-   Exercise 17
+    -   [集合のsum](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240195.html)
+    -   [有向グラフのsum,
+        その1](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240196.html)
+        -   sumの構成
+        -   A(arrow)とD(dot)は集合であるから、先の集合のsumの結果を前提
+
+    -   [有向グラフのsum,
+        その2](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240197.html),
+        [その3](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240198.html)
+        -   injectionの構成
+        -   (s1 + s2) o j\_1a = j\_1d o s1 を s1 + s2 の定義を用いて示す
+        -   あとはt1 + t2 についても同じことを述べて j1完成、j2についても同様に示せる
+
+### 昼休み
+
+-   バージョン管理システム
+    -   subversion は使いやすいの？
+        -   (･∀･)イイ！
+        -   CVS でいうタグとかブランチの概念を全部ディレクトリのコピーで代用している
+
+    -   CVS はダメダメ
+        -   Visual Source Safe はもっとダメダメ
+            -   それでも何にもなくて、手元で色々とやっているときよりは価値があった。
+
+        -   CVS と subversion は確か同じ作者
+
+    -   手元のソースにはきちんと管理してあるものだけではなく、適当に作って転がしてあるだけのものがあるけど、これもきちんとバージョン管理した方がいいのかな？
+        -   なんでもバージョン管理に突っ込もう
+        -   そういうものには RCS を使っている
+        -   そういうものには darcs を使いはじめた
+
+    -   darcs 使わないの？
+        -   Haskell の本家のコミュニティでは、結構人が作りかけのものを勝手に cabalise して darcs
+            リポジトリを作っているものを良く見かけるけど (そして、そこにパッチを送ってる)
+
+-   cabal って依存するライブラリとかを検出できる？
+    -   autoconf とかを使って configure
+        でやれっていうのがスタンスだった気がする。最新版は試してないので、今どうなっているか分からないけど。
+        -   [HSQL-1.6 や HaskellDB の CVS HEAD などは、autoconf
+            をやめたせいでいちいちライブラリごとに入れなければいけないという面倒なものになってしまった](http://page.freett.com/shelarcy/diary_2005-09.html#between_ghc6_4_1_and_ghc_6_4)
+
+    -   Setup.(l)hs でそうするように書けば、できる
+
+-   カオスと複雑系と生物
+    -   カオスの数学的定義は?
+    -   リー・ヨークの定理「F: R-\>R
+        が連続であるとする。さらに、Fが基本周期3の周期点を持つとする。そのとき、Fは任意の周期の周期点を持つ」
+    -   シャルコフスキー順序:
+        3,5,7,9,...,2\*3,2\*5,2\*7,...,2\^2\*3,2\^2\*5,2\^2\*7,...,2\^3\*3,2\^3\*5,2\^3\*7,...2\^n,...,2\^3,2\^2,2\^1,1
+    -   シャルコフスキーの定理「F: R-\>R
+        が連続であるとする。また、Fは基本周期nの周期点を持ち、nはシャルコフスキーの順序において、kよりも前にあるとする。そのとき、Fは基本周期kの周期の周期点を持つ」
+    -   無限後退
+    -   タルスキの真理階層
+    -   不動点定理
+    -   複雑系の問題
+        [http://www.math.tohoku.ac.jp/\~kuroki/keijiban/e0000.html\#e20000224194821](http://www.math.tohoku.ac.jp/~kuroki/keijiban/e0000.html#e20000224194821)
+    -   脳の認識を圏論を使って表現？
+    -   [複雑系と高次元圏論](http://www.ritsumei.ac.jp/se/~tjst/doc/n-cat/cs-ncat.html)
+    -   放送大学でカオスを教えていたのは大木凡人に似た先生だった
+        -   [合原先生](http://www.k.u-tokyo.ac.jp/j/info/pros/kyoujyu/kiban/fukuzatu/fukuzatu/kazuyuki_aihara.html)
+
+### 二次会
+
+-   自習してないと、間があくとやっぱり忘れる……
+    -   予習してくればいいじゃん -\> そのように言われていれば予習してくるけど
+    -   じゃあ、予習してきて、次回はあらかじめ解いてもらった答えをみんなでみるというのはどうだろう
+
+-   圏論の質問するには
+    -   haskell-jp とは住み分けをしたいと思う
+    -   mixi の圏論勉強会のコミュニティが一番よいんじゃないだろうか？
+    -   [圏論メーリングリスト](http://categorical.org/)は？
+        -   流量が全然ない
+        -   それなりのレベルの質問をしなければいけないような雰囲気があって、敷居が高い
+        -   自己紹介しなければいけないのも……
+            -   あれはどういう背景を持っている人が参加するのか、知りたいってことでしょ
+
+        -   そもそも流量が全然ないからレベルが測れなくて、それでみんな遠慮しているような感じがあるから、質問をぶつけてこういうことなら質問できるという雰囲気をつくっていくことが重要なんじゃないだろうか？
+
+    -   2ch の圏論スレで聞く
+        -   2ch 使ったことない
+        -   2ch はピンキリ(ピンからキリまで)だけど、自然科学とかプログラミングとかには有用なスレッドがある
+            -   キリには黒い噂も聞く
+            -   ピンとキリって、どっちが良い方で、どっちが悪い方だっけ？ -\>
+                [ピンが良い方でキリが悪い方](http://www.narupara.com/~netwalker/archives2004/000720.html)
+
+-   [MEPHISTO](http://sourceforge.jp/projects/mephisto)
+    - 久井
+    ([WiLiKi:とおる。](http://www.shiro.dreamhost.com/scheme/wiliki/wiliki.cgi?�Ȥ��롣))
+    さんの制約システムによる 3D アニメーション記述言語 (DSL) 実装を行う、未踏ユースのプロジェクト
+    -   [The Essence of Dataflow Programming が公開されて、Comonad や Codata
+        に興味を持った人が Hawiki
+        にリンクを集めている](http://haskell.org/hawiki/CoMonadArticles)(この論文のプログラムのソースコード自体は
+        [Central-European Functional Programming School
+        2005](http://plc.inf.elte.hu/cefp/)
+        のダウンロードページの
+        [Interp.tgz](http://plc.inf.elte.hu/cefp/download/Interp.tgz)
+        にある)けど、これらが参考になるんじゃないかな？
+
+-   最近 haskell-jp に tanakh さんや Monadius の村主 (nushio) さんなど関西方面の Haskell
+    で有名な人が続々と参加したり、Ruby を実装した
+    [RType](http://mono.kmc.gr.jp/~oxy/hiki.cgi?rtype)
+    のアナウンスが出されたりしているものの、反応が薄いことについて
+    -   実際に利用してないし、ソースも見ていないし、特に何か言うことは……
+        -   Monadius は遊んだことはあるけど、ソースを見たことはない
+
+    -   Haskell でこういうことができる、こういう能力があるというアピールをしてくれるのは嬉しいけど、Haskell
+        での実装があって嬉しいかというと微妙
+        -   Haskell で書かれていることによって、アーキテクチャが明確になることに意味がある
+        -   Haskell のソースだと弄れない人がいるから、Python とかで darcs のクローンを作ろうという話がある
+
+-   gonzui の Haskell サポートの作りかけはどうなったの？ 公開しないの？
+    -   今の作りかけのコードを見るより、一から作り直した方が楽だと思う。
+
+-   Ruby Haskell binding は？
+    -   Haskell から Ruby の eval を呼び出すぐらいしかできない
+    -   ちょっと弄ってあって、今のコードだとコンパイルできない
+        -   それ以前に、Haskell から Ruby のコードを呼び出して、何か嬉しいことはあるのか？
+
+-   奥さんが人狼で結構勝っているという話
+    -   天然狂人なところもあるんだけど、人狼側から「このキャラ殺したくない」って思わせる魅力がある
+
+-   嫌韓流と韓国
+    -   韓国は存在自体がネタなんじゃないかと思うことが
+        -   米軍を追い出そうとしていたり…
+
+    -   北朝鮮に潰れられると損をすることが眼に見えているので、どの国も今北朝鮮に潰れて欲しくない。生かさず殺さず
+
+-   自衛隊
+    -   軍隊ではないという建前上、法律的に矛盾するところがあってどうにかして欲しい
+        -   有事を前提に話し合う事自体をタブー視する人たちがいて、議論が全然かみ合わないのはなんとかならないか
+            -   有事法制ができるまでは、上陸されたときに、戦時でも戦車に道交法を適用しなければならなかった。こんなことを是正するのにもすごく揉めた
+                -   上陸される前に手をうちたい -\> 日本の国土が広いので全てをカバーするのは無理
+                -   いや、言いたかったのはそういうことじゃなくて、専守防衛で上陸されるまで手を出せないっていうのだと国土に被害がでるから、加えて領海侵犯の時点で手をだしたいな、って
+
+        -   すぐそこに海自がいるのに、管轄上手がだせないとか。海自が出て行くべき場面で、海上保安庁(警察)任せになるところとか
+
+    -   憲法を改正して軍隊にすると徴兵制を始めるということを言う人がいるけど、常時訓練されていないような人は欲しくないので、世界的にも徴兵制は廃れてきている
+        -   ドイツで徴兵制が残っているのは、軍にいくかわりにボランティアにいくというオプションでのボランティア活動の規模が大きくなっていて、今更廃止できないため
+        -   韓国はどうして未だに徴兵制を採用してるんだろう？
+        -   スイスの国民皆兵って、どうやってやってるんだろ？
+
+    -   そういう部分での憲法改正自体は文句ないけど、自民党案にしろ民主党案にしろ、憲法を変えるとなると一部ではなく一気に改正してしまおうというところがどうにも賛成できない
+    -   憲法の改正方法って決まってたっけ？ -\> いや、決まってないから国民投票の仕方を審議しているところ
+
+-   朝日の偏向報道とかどうにかならないかな？
+    -   日本はスパイ防止法がないから、その手が朝日のみならず各メディアの上層部に結構くいこんでいるので、まずきちんと報道されることがない
+    -   団塊の世代が安保とかの時代の影響で、左巻きだし
+
+-   随伴の例
+    -   直積は diagonal functor （Δ:C → C×C） の右随伴
+    -   直和は diagonal functor の左随伴
+    -   自由代数と忘却関手
+        -   自由代数への関手が左随伴、忘却関手がその右随伴になることが多い
+
+    -   興味を持ったので演習としてやってみました。[随伴関手](http://hpcgi2.nifty.com/1to100pen/wiki/wiki.cgi?p=AjointFunctor)
+
+-   随伴の右と左はなぜそう呼ぶ?
+    -   hom(F(A),B) 〜 hom(A,G(B))
+        と書いたときにdomainの側(左)と、codomainの側(右)にくるから?
+
+-   映画キルビルは突込みどころ満載で面白いらしい
+    -   飛行機の椅子に日本刀ホルダーがついている
+    -   栗山千明がいい味出してる
+        -   今やってる「シン・シティ」の殺人兵器ミホ（デヴォン青木）も結構ポジション的に近い。手裏剣＋二刀流
+
+    -   まだ地上波でTV放送してない。たぶんグロすぎて流せない。
+
+## 第九回圏論勉強会
+
+2005-8-13(土)
+[コールドブレス](http://www.coldbreath.jp/access.php)
+10:00-18:00
+
+### Session 15、p179 より
+
+……のつもりが、内容忘却により Session 15 冒頭より
+
+-   Excercise 7
+    -   14個あると書いてるけど、12個しかみつからない？？
+
+### Article �
+
+### 二次会
+
+-   隣の席から GHC とか、プログラミング関係の話題が聞こえるような……
+    -   違う違う、あれはプロレスの話題。GHCは[ノアって団体のタイトル](http://www.noah.co.jp/ghc1.html)
+
+-   小泉首相は15日にちゃんと参拝しにいくだろうか？
+    -   本当に行ったら尊敬するね。選挙で負けてしまうだろうけど。
+    -   行ったからといって負けるとは思わないけど、行って負けたらヤバイってのはあるだろうなぁ。個人的にはちゃんと参拝して欲しいけど。
+
+-   圏論勉強会は論文を読むために型付きλ計算などの型理論の方に進むべきか？
+    圏論の基礎をきちんと読めるよう、代数とかやって数学方面に進むべきか？
+    -   まあ今のテキスト読み終わるまでに考えればいいし、間に合わなければ当分論文を読み進めていくんでいいんじゃない？
+
+-   [Haskell Standard
+    を改定しないかって話](http://www.haskell.org//pipermail/haskell/2005-August/016208.html)
+-   LLDN
+    -   言語のダメ自慢で Haskell の場合に GHC に対する不満とかあげればたくさんあるけど、Haskell
+        を知らない一般人に分かるようなダメ自慢は難しいよね。
+    -   キミならどう書の電卓って自由課題何がいい？ -\> λ計算機とかどうだろう？ -\>
+        それでもいいけど、割り算できないのはどうしようか
+    -   Squeak(Smalltalk) はまたデモがすごいんだろうな。 -\> そのための機能が最初からたくさんあるし
+
+-   HD/DVD レコーダーでとってあるはずのビデオが見れないというトラブルについて
+    -   HD/DVD レコーダーでのそういうトラブルってよく聞くよねー
+        -   もともとハードディスクなんで脆いんじゃ
+
+    -   NEC のは Linux を採用しているので、自分で入れ替えたりして自力救済できる
+        -   NEC のってあまり聞かないね。< 宣伝してないから
+
+    -   録画が成功していれば、修理に持っていけば見れる可能性はかなり高いと思う。
+    -   [(こっちは転送時だけど)コピーワンスでもそういうトラブルが問題になっていた](http://www.watch.impress.co.jp/av/docs/20050729/soumu1.htm)
+
+## 第八回圏論勉強会
+
+2005-7-2(土)
+[コールドブレス](http://www.coldbreath.jp/access.php)
+10:00-18:00
+
+出席者
+
+           フク 酒井 久井 　　 |ス
+          +-------------+ 　　 |ク
+     豊福 |             | 　　 |リ
+          |             | 　　 |｜
+          +-------------+  　　|ン
+           今井 Shelarcy   　　|
+
+写真
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200507/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200507/ct/)
+
+### Article �、p148 より
+
+### Session 13
+
+### Session 14
+
+### Session 15
+
+### 二次会
+
+-   今後の予定として圏論の基礎を読んでいくのはどうだろうか？
+    -   院生向けにかかれているので、数学の知識がさらりとでてくるので読みこなすのは難しい。
+    -   豊福さんがそういった部分について解説してくれるなら、やってもいいかも。
+
+-   圏論の基礎知識について初心者にわかりやすく書いたページはあるの？
+    -   なければつくりたい。
+    -   Category の図とかを書くには？
+        -   Visio なんてどうだろうか？
+        -   SVG を使って書くという手も。でも対応しているブラウザが Opera と Amaya くらいで…… Firefox
+            へのサポートってもう入ったっけ？
+
+-   こないだの SICP
+    の飲み会でも話題になったし、[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/684](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/684)
+    にも書いたけど、Haskell Hacks が欲しいな。
+    -   そういう実用的な本も一冊あっても良いかも。
 
 ## 第七回圏論勉強会
 
@@ -22,7 +454,7 @@
 写真
 [http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200506/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200506/ct/)
 
-### ArticleⅢ
+### Article�
 
 -   英単語とか定義とか
     -   cohesive ... ???
@@ -67,7 +499,7 @@
 
 ### 余談
 
--   下記漸化式を解く良い方法は？ f(n) = \^(n-1)\_{i=1} f(i)f(n-i)
+-   下記漸化式を解く良い方法は？ f(n) = �\^(n-1)\_{i=1} f(i)f(n-i)
     -   [「木で遊ぶ」](http://www.ruby-talk.org/cgi-bin/scat.rb/haskell/haskell-jp/662)の証明のための計算
 
 -   [Clean 2.1.1 に入った Editor 開発のためのライブラリで
@@ -115,48 +547,6 @@
     -   失恋のメッセージが貼り付けてあって、知らぬ間に自分が失恋したことにされてる
     -   番号再利用のアルゴリズムは？
 
-## 第八回圏論勉強会
-
-2005-7-2(土) [コールドブレス](http://www.coldbreath.jp/access.php) 10:00-18:00
-
-出席者
-
-           フク 酒井 久井 　　 |ス
-          +-------------+ 　　 |ク
-     豊福 |             | 　　 |リ
-          |             | 　　 |｜
-          +-------------+  　　|ン
-           今井 Shelarcy   　　|
-
-写真
-[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200507/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200507/ct/)
-
-### Article Ⅲ、p148 より
-
-### Session 13
-
-### Session 14
-
-### Session 15
-
-### 二次会
-
--   今後の予定として圏論の基礎を読んでいくのはどうだろうか？
-    -   院生向けにかかれているので、数学の知識がさらりとでてくるので読みこなすのは難しい。
-    -   豊福さんがそういった部分について解説してくれるなら、やってもいいかも。
-
--   圏論の基礎知識について初心者にわかりやすく書いたページはあるの？
-    -   なければつくりたい。
-    -   Category の図とかを書くには？
-        -   Visio なんてどうだろうか？
-        -   SVG を使って書くという手も。でも対応しているブラウザが Opera と Amaya くらいで…… Firefox
-            へのサポートってもう入ったっけ？
-
--   こないだの SICP
-    の飲み会でも話題になったし、[http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/684](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/684)
-    にも書いたけど、Haskell Hacks が欲しいな。
-    -   そういう実用的な本も一冊あっても良いかも。
-
 * * * * *
 
-Last modified : 2006/06/15 02:12:01 JST
+最終更新 : 2006/02/21 15:52:45 JST

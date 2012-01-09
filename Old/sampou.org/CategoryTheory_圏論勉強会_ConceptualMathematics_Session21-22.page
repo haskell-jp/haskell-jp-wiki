@@ -1,0 +1,110 @@
+## 第十二回圏論勉強会
+
+2005-12-18(日)
+[コールドブレス](http://www.coldbreath.jp/access.php)
+10:00-18:00
+
+写真
+[http://mixi.jp/view\_album.pl?id=236771](http://mixi.jp/view_album.pl?id=236771)
+
+(いつものように
+[http://www.tom.sfc.keio.ac.jp/\~sakai/d/data/200512/ct/](http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200512/ct/)
+にもコピーしておきました)
+
+出席者
+
+           久井 酒井      　　 |ス
+          +-------------+ 　　 |ク
+          |             | 　　 |リ
+          |             | 　　 |｜
+          +-------------+  　　|ン
+           今井 Shelarcy   　　|
+
+### 雑談
+
+-   気分は忘年会もーど
+    -   でも、(忘年会に)参加できる人が少なくて、いつも通りという感じで全然忘年会っぽくない
+
+-   玄関にロックが掛かっていることを直前の mixi と
+    [HaskellJP:765](http://blade.nagaokaut.ac.jp/haskell/haskell-jp/765)
+    でしか連絡していないけど、堀江さんは大丈夫か？
+    -   堀江さんがどこを情報源にしているか分からない
+    -   堀江さんが来てたら、やっぱり[圏論メーリングリストに投稿がないことを嘆く声があるみたいだし](http://d.hatena.ne.jp/m-hiyama/20051214/1134523500)、敷居の高さなんか気にしないで投稿しようよ、と三度目になる呼びかけをしてみるつもりだったんだけど……
+
+-   [WiLiKi:Seminar:Kahua:2005](http://www.shiro.dreamhost.com/scheme/wiliki/wiliki.cgi?Seminar:Kahua:2005)
+    及び、そこでした話の話
+
+-   世の中の言語が関数型化している件について
+    -   C\# 3.0にはλが入るらしい
+        -   2.0で入った匿名関数の書き方がλになる
+        -   Cωのフィードバック
+        -   MS Resarch にあんだけ関数型言語屋がいれば当然か…
+
+    -   こういう風潮が続くと、リテラシーとしてCベースの言語だけ学習したプログラマーがついてこれなくなるかも。関数型を学校で教えないと。
+        -   実際のところ、Lispを知るとCではわからないことが沢山見えてくる。Cだけ知ってると結構カツカツ。
+
+-   Haskellの合宿があるらしいけど？
+    -   関西の Haskell同好会
+        ([HaskellClub](http://www.sampou.org/cgi-bin/haskell.cgi?HaskellClub))
+        の人達が主に企画している。合宿自体は関西でやるのか関東でやるのか知らない。
+    -   Haskell同好会みたいに、関東でもHaskellerの定期的な集まりをやればいいのに。
+        -   そもそも、Haskell同好会はこの圏論勉強会を意識してたみたいだけど。
+            -   ええっ？Σ(゜д゜;
+
+        -   LLの前とか、不定期な集まりはある。
+
+### Session 21
+
+-   pp.238 任意のobject T から A, Bへのmap q1, q2が、product A×Bへの唯一のmap qを与えること
+    -   [板書](http://www.osk.3web.ne.jp/~usitukai/images/kenron051218/236771_1565308758.jpg)
+        -   一例として、集合のcategoryでTを一点集合とした場合
+
+    -   直感的には、直交座標のようなものを考えてみる。
+
+-   Exercise 1
+    -   [解答](http://www.osk.3web.ne.jp/~usitukai/images/kenron051218/236771_2766014459.jpg)…?
+        -   候補になりそうなのは、たぶんシフトとシフト中の経過時間のproduct。
+        -   しかし、これはproductにならない。これはendomapのcategoryで考えているが、この場合はmapがendomapのそれとして構造を保存しない。
+
+-   Exercise 2
+    -   [解答](http://www.osk.3web.ne.jp/~usitukai/images/kenron051218/236771_1142966774.jpg)
+        -   周期同士の最小公倍数がproductの周期になる。
+        -   実際、C4 × C6 で確かめると、12の周期が2つできる。
+        -   したがって、C8 × C12 だと、24 の周期が4つできる。
+
+-   Exercise 3
+    -   [解答](http://www.osk.3web.ne.jp/~usitukai/images/kenron051218/236771_1338783574.jpg)
+        -   後注：(m, f) と (f, m) は要らないかも。
+            -   product G×C がこのcategory の object としての要件を満たさなくなる。
+
+### Session 22
+
+-   incident って何？
+    -   事件、事故、付随する、依存する、とか
+    -   mapが衝突してる or 重なってるような状況
+
+-   Exercise 1
+    -   …結構手ごわい。
+        -   存在したら一意であることは言えそうだけど、存在の証明はどうするのだ？？
+
+先にすすむ。
+
+-   Exercise 2
+    -   [解答](http://www.osk.3web.ne.jp/~usitukai/images/kenron051218/236771_407490543.jpg)
+        -   AからA2への2つのmapは、それぞれのsourceとtargetがincidentの状態
+
+-   Exercise 1, 再び
+    -   [板書](http://www.osk.3web.ne.jp/~usitukai/images/kenron051218/236771_785387644.jpg)
+    -   存在証明はできた気がする…が**この先は面倒なので(ry**
+        -   一意性を示すのがこの問題の趣旨では？？
+        -   続きは豊福さんの宿題にしよう（ぉ
+
+今年はこれでお開き。
+
+### 忘年会
+
+-   [ぐつぐつ。](http://www.osk.3web.ne.jp/~usitukai/images/kenron051218/236771_3678094069.jpg)
+
+* * * * *
+
+最終更新 : 2006/02/21 15:52:45 JST
