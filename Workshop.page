@@ -4,3 +4,4 @@ Haskell関連の勉強会のまとめページです。
 * [スタートHaskell](Workshop/StartHaskell/)
 * [PurelyFunctionalDataStructures読書会](Workshop/ReadPFDS/)
 * [初心者Haskell勉強会](Workshop/HaskellR/)
+* [GHCソースコードリーディング勉強会](Workshop/ReadGHC/)
