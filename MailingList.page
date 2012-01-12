@@ -1,0 +1,37 @@
+# Haskell関連メーリングリスト
+本家にもいくつかのメイリングリストがありますが、 日本語でやりとりするメイリングリストを作りました。
+(2011/02/07 12:44:37 JST)：Googleグループに移行しました．
+
+## 主旨
+Haskell プログラミングを楽しもう
+
+## おことわり
+このメーリングリストへの投稿は公開しますので、公開できない内容は投稿しないでください。
+
+## 参加登録方法
+haskell-jpグループに参加登録するには以下の2つの方法があります．
+
+### Webインターフェイスからの登録
+* Googleアカウントにログイン(予めGoogleアカウントの取得が必要)．
+* [http://groups.google.com/group/haskell-jp](http://groups.google.com/group/haskell-jp) にアクセス
+* ページ右側の [このグループについて] の下にある [このグループに参加] リンクをクリック
+
+### メールからの登録
+* 登録するメールアドレスから以下のアドレスに空メールを送信．( at -\>@， dot -\>.)
+
+> haskell-jp+subscribe at googlegroups dot com
+
+## 投稿方法
+### Webインターフェイスからの投稿
+[http://groups.google.com/group/haskell-jp/](http://groups.google.com/group/haskell-jp/)
+
+### メールでの投稿 (at -\>@， dot -\>.)
+
+> haskell-jp at googlegroups dot com
+
+## アーカイブ
+### 2011-02-07以前
+[http://www.sampou.org/cgi-bin/w3ml.cgi/haskell-jp/](http://www.sampou.org/cgi-bin/w3ml.cgi/haskell-jp/)
+
+### 2006-06-07以前
+[haskell-jp ML](http://blade.nagaokaut.ac.jp/haskell/haskell-jp/index.shtml)
