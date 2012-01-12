@@ -1,12 +1,13 @@
 # ようこそHaskellJP wikiへ!
 
-まだベータ試験中です。
+## おしらせ
+ベータ運用中です。
 
 [sampou.org](http://www.sampou.org/cgi-bin/haskell.cgi)
 から
 [Old/sampou.org/]()
-カテゴリへデータを移管中です。
-移管中データの不備などありましたら @master_q まで連絡をください。
+カテゴリへデータを移管完了しました。
+一部WikiNameのリンク切れが見つかっており、対策検討中です。
 
 ## このサイトについて
 このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。
@@ -23,6 +24,8 @@ gititの使い方は左サイドバーの
 にあります。
 
 ## コンテンツ
+* [メーリングリスト](MailingList)
+* [チャット](ChatRoom)
 * [イベントカレンダー](EventCalendar)
 * [勉強会まとめ](Workshop)
 * [Wikiの練習](Sandbox)
