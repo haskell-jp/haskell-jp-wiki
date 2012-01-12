@@ -3,6 +3,18 @@
 [HaskellWikiのライセンス](http://www.haskell.org/haskellwiki/HaskellWiki:Copyrights)
 を適用するものとします。
 
+~~~ { .text }
+Permission is hereby granted, free of charge, to any person obtaining this work (the "Work"),
+to deal in the Work without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the Work, and to permit
+persons to whom the Work is furnished to do so.
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+THE WORK OR THE USE OR OTHER DEALINGS IN THE WORK.
+~~~
+
 # このWikiのロゴのライセンス
 「Haskell書道ロゴ」の著作権は[柚子テクノロジー](http://www.yuzutechnology.com/)が所有いたします。
 [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/deed.ja)のライセンスでリリースされています。
