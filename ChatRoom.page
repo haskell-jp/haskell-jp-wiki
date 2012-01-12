@@ -1,0 +1,25 @@
+# Haskell関連チャット
+本家にもいくつかのチャットルームがありますが、 現在のところ IRC
+の以下のチャットルームが日本語でやり取りできる比較的活発な場所になっています。
+
+## IRCNet
+[\#haskell:\*.jp](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/711)
+
+また、Freenode や Lingr にもチャットルームは存在するようです。
+
+## FreeNode
+[\#haskell.jp](http://www.haskell.org/haskellwiki/IRC_channel#Related_channels)
+
+## Lingr
+[haskell-ja <http://www.lingr.com/room/haskell-ja)>](http://www.lingr.com/room/haskell-ja)
+
+## Chaton
+
+[haskell-ja <http://practical-scheme.net/chaton/haskell-ja/>](http://practical-scheme.net/chaton/haskell-ja/)
+
+Lingr ( [http://www.lingr.com](http://www.lingr.com) ) のサービス終了を受け，
+LingrにあったGauche部屋を引き継ぐために開発されたものです．
+shiroさんの厚意によりhaskell-jaという部屋もserveしていただいきました．
+Chatonについては
+[http://practical-scheme.net/chaton/](http://practical-scheme.net/chaton/)
+をご覧ください．
