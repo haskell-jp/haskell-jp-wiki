@@ -6,6 +6,16 @@
 # 資料
 
 # 議事録
+## 本勉強会に期待すること
+* GHC の構成概要の理解、GHCで使われているテクニックが理解できること @utotch
+* GHC と関係なくてもよいですが、皆さんが Haskell 界隈で興味を持っていること(Web とか コンパイラとか Graphics とか,,,)の情報共有 @utotch
+* Haskell を仕事で活用している人の情報共有 などなどができるとうれしいな。 @utotch
+
+## GHCのどの部分に興味がありますか？
+* 高速化のための工夫 @utotch
+* LLVM との融合 @utotch
+* [House](http://web.cecs.pdx.edu/~kennyg/house/) など組込み向けGHC拡張パッチの理解 @master_q
+
 ## 録画と写真
 
 ## ネタ案出し
