@@ -5,7 +5,8 @@
 
 # 資料
 
-# 議事録
+# 事前アンケート
+
 ## 本勉強会に期待すること
 * GHC の構成概要の理解、GHCで使われているテクニックが理解できること @utotch
 * GHC と関係なくてもよいですが、皆さんが Haskell 界隈で興味を持っていること(Web とか コンパイラとか Graphics とか,,,)の情報共有 @utotch
@@ -15,6 +16,13 @@
 * 高速化のための工夫 @utotch
 * LLVM との融合 @utotch
 * [House](http://web.cecs.pdx.edu/~kennyg/house/) など組込み向けGHC拡張パッチの理解 @master_q
+
+## LTネタありますか？
+
+* 第0回じゃない気がしますが，[HaskellImplementorsWorkshop/2011/Takano - HaskellWiki](http://www.haskell.org/haskellwiki/HaskellImplementorsWorkshop/2011/Takano) や [情報処理学会 第86回プログラミング研究会 (2010年11月) - プログラム](http://www.shudo.net/sigpro/2011-3/program.html) で発表したGHCの改造のことなら話せると思います．主にCore〜C--とRTS周辺です．みなさん興味ないかもしれませんが @tyasunao
+* [House](http://programatica.cs.pdx.edu/House/) のGHC patchについて説明できるかも。。 @master_q
+
+# 議事録
 
 ## 録画と写真
 
