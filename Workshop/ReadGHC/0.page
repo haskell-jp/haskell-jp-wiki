@@ -11,11 +11,17 @@
 * GHC の構成概要の理解、GHCで使われているテクニックが理解できること @utotch
 * GHC と関係なくてもよいですが、皆さんが Haskell 界隈で興味を持っていること(Web とか コンパイラとか Graphics とか,,,)の情報共有 @utotch
 * Haskell を仕事で活用している人の情報共有 などなどができるとうれしいな。 @utotch
+* cabalの概要、現状の仕組み、問題点 @ruicc
+* GHC由来で発生したバグを取る方法 @ruicc
+* HaskellをJVM上で動かすために障害となるもの、制約:) @ruicc
+* [House](http://web.cecs.pdx.edu/~kennyg/house/) など組込み向けGHC拡張パッチの理解 @master_q
 
 ## GHCのどの部分に興味がありますか？
 * 高速化のための工夫 @utotch
 * LLVM との融合 @utotch
-* [House](http://web.cecs.pdx.edu/~kennyg/house/) など組込み向けGHC拡張パッチの理解 @master_q
+* GHC pluginの仕組み、概要、作りかた @ruicc
+* 途中で作成される中間データ別概要 @ruicc
+* 各中間データ上で実行される最適化手法 @ruicc
 
 ## LTネタありますか？
 
