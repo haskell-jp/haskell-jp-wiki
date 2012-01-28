@@ -27,6 +27,7 @@
 
 * 第0回じゃない気がしますが，[HaskellImplementorsWorkshop/2011/Takano - HaskellWiki](http://www.haskell.org/haskellwiki/HaskellImplementorsWorkshop/2011/Takano) や [情報処理学会 第86回プログラミング研究会 (2010年11月) - プログラム](http://www.shudo.net/sigpro/2011-3/program.html) で発表したGHCの改造のことなら話せると思います．主にCore〜C--とRTS周辺です．みなさん興味ないかもしれませんが @tyasunao
 * [House](http://programatica.cs.pdx.edu/House/) のGHC patchについて説明できるかも。。 @master_q
+* [AboutVideos – GHC](http://hackage.haskell.org/trac/ghc/wiki/AboutVideos) これ全員で見る？ @shelarcy
 
 # 議事録
 
