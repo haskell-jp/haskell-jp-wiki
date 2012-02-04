@@ -8,6 +8,26 @@
 * 16:20-17:20 今後のすすめ方と作業分担
 
 # 資料
+* dph向け設定
+
+~~~ {.text}
+どの部分を読むかにもよりますが、GHC の機能の一部は base パッケージや
+DPH ライブラリ（並列配列）、haddock など外部のライブラリやツールと関
+わっているので、ちゃんと読もうとするなら、その辺も取得しておく必要が
+ありますね。
+
+git clone 後、以下のコマンドを実行して下さい。
+
+./sync-all --dph get
+
+テストやベンチマーク、その他のライブラリも必要なら、こちらのコマンド
+になります。
+
+./sync-all --testsuite --nofib --extra --dph get
+
+ http://hackage.haskell.org/trac/ghc/wiki/Building/GettingTheSources
+ http://hackage.haskell.org/trac/ghc/wiki/Repositories
+~~~
 
 # 事前アンケート
 
@@ -40,4 +60,4 @@
 ## ネタ案出し
 
 # 次回
-[2]()
+[1]()
