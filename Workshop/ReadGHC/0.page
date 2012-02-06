@@ -29,6 +29,40 @@ git clone 後、以下のコマンドを実行して下さい。
  http://hackage.haskell.org/trac/ghc/wiki/Repositories
 ~~~
 
+* ghc --make実行時のコールグラフ
+
+~~~ {.text}
+  → doMake -- ghc/Main.hs
+    targets <- mapM (uncurry GHC.guessTarget) hs_srcs
+    GHC.setTargets targets -- セッション情報のhsc_targetsを設定
+    ok_flag <- GHC.load LoadAllTargets
+    → load -- compiler/main/GhcMake.hs
+      → load2
+        → upsweep
+          → upsweep_mod 
+            → compile_it
+              → compile -- compiler/main/DriverPipeline.hs
+                → compile'
+                  → runCompiler batchCompiler handleBatch
+                    → hscCompileBatch -- compiler/main/HscMain.hs
+                      → genericHscCompile hscBatchCompiler batchMsg
+                         compile RecompRequired
+                         → runHsc hsc_env $ hscRecompile compiler mod_summary mb_old_hash
+                           → genericHscRecompile hscBatchCompiler
+                             tc_result <- hscFileFrontEnd mod_summary
+                             hscBackend compiler tc_result mod_summary mb_old_hash
+                             → genericHscBackend hscBatchCompiler
+                               guts <- hscDesugar' (ms_location mod_summary) tc_result
+                               → deSugar -- compiler/deSugar/Desugar.lhs
+                               hscGenOutput compiler guts mod_summary mb_old_hash
+                               → hscGenOutput = \guts0 mod_summary mb_old_iface -> do
+                                 guts <- hscSimplify' guts0
+                                 (iface, changed, details, cgguts) <- hscNormalIface guts mb_old_iface
+                                 hscWriteIface iface changed mod_summary
+                                 hasStub <- hscGenHardCode cgguts mod_summary
+                    linkable <- handleBatch result
+~~~
+
 # 事前アンケート
 
 ## 本勉強会に期待すること
