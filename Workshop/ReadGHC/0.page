@@ -68,6 +68,7 @@ HEAD などで DPH ライブラリが不要な場合には --no-dph が必要で
 * GHC と関係なくてもよいですが、皆さんが Haskell 界隈で興味を持っていること(Web とか コンパイラとか Graphics とか,,,)の情報共有 @utotch
 * Haskell を仕事で活用している人の情報共有 などなどができるとうれしいな。 @utotch
 * cabalの概要、現状の仕組み、問題点 @ruicc
+* [ghc --make に -j オプションを加える](http://hackage.haskell.org/trac/ghc/ticket/910)（[ghc-parmake](http://hackage.haskell.org/package/ghc-parmake)の機能を取り込む）ための課題の理解 @shelarcy
 * GHC由来で発生したバグを取る方法 @ruicc
 * HaskellをJVM上で動かすために障害となるもの、制約:) @ruicc
 * [House](http://web.cecs.pdx.edu/~kennyg/house/) など組込み向けGHC拡張パッチの理解 @master_q
@@ -78,6 +79,7 @@ HEAD などで DPH ライブラリが不要な場合には --no-dph が必要で
 * GHC pluginの仕組み、概要、作りかた @ruicc
 * 途中で作成される中間データ別概要 @ruicc
 * 各中間データ上で実行される最適化手法 @ruicc
+* クロスコンパイル/クロスビルド機能（の現状） @shelarcy
 
 ## LTネタありますか？
 
