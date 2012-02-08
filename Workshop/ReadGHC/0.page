@@ -2,25 +2,29 @@
 [GHCソースコードリーディング勉強会 第0回(準備編) - [PARTAKE]](http://partake.in/events/57179633-b2ad-4e7d-b56e-c4ac8e6b178e)
 
 # 資料
-* dph向け設定
+* GHC の機能と関わりの深いライブラリやツールなどの取得
 
 ~~~ {.text}
 どの部分を読むかにもよりますが、GHC の機能の一部は base パッケージや
 DPH ライブラリ（並列配列）、haddock など外部のライブラリやツールと関
 わっているので、ちゃんと読もうとするなら、その辺も取得しておく必要が
-ありますね。
+ありますね。（またビルド時にはこれらのライブラリやツールが必要です。）
 
 git clone 後、以下のコマンドを実行して下さい。
 
-./sync-all --dph get
+./sync-all get
 
 テストやベンチマーク、その他のライブラリも必要なら、こちらのコマンド
 になります。
 
-./sync-all --testsuite --nofib --extra --dph get
+./sync-all --testsuite --nofib --extra get
 
  http://hackage.haskell.org/trac/ghc/wiki/Building/GettingTheSources
  http://hackage.haskell.org/trac/ghc/wiki/Repositories
+
+（GHC に DPH ライブラリの同梱されていない）ghc-7.4 branch などをビル
+ドする場合、DPH ライブラリの取得には --dph オプションが必要です。逆に
+HEAD などで DPH ライブラリが不要な場合には --no-dph が必要です。
 ~~~
 
 * ghc --make実行時のコールグラフ
