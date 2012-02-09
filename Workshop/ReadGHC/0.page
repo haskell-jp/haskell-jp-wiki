@@ -29,6 +29,8 @@ HEAD などで DPH ライブラリが不要な場合には --no-dph が必要で
 
 * ghc --make実行時のコールグラフ
 
+その1
+
 ~~~ {.text}
   → doMake -- ghc/Main.hs
     targets <- mapM (uncurry GHC.guessTarget) hs_srcs
@@ -40,26 +42,50 @@ HEAD などで DPH ライブラリが不要な場合には --no-dph が必要で
           → upsweep_mod 
             → compile_it
               → compile -- compiler/main/DriverPipeline.hs
-                → compile'
+                → compile' (hscCompileNothing, hscCompileInteractive, hscCompileBatch)
                   → runCompiler batchCompiler handleBatch
-                    → hscCompileBatch -- compiler/main/HscMain.hs
-                      → genericHscCompile hscBatchCompiler batchMsg
-                         compile RecompRequired
-                         → runHsc hsc_env $ hscRecompile compiler mod_summary mb_old_hash
-                           → genericHscRecompile hscBatchCompiler
-                             tc_result <- hscFileFrontEnd mod_summary
-                             hscBackend compiler tc_result mod_summary mb_old_hash
-                             → genericHscBackend hscBatchCompiler
-                               guts <- hscDesugar' (ms_location mod_summary) tc_result
-                               → deSugar -- compiler/deSugar/Desugar.lhs
-                               hscGenOutput compiler guts mod_summary mb_old_hash
-                               → hscGenOutput = \guts0 mod_summary mb_old_iface -> do
-                                 guts <- hscSimplify' guts0
-                                 (iface, changed, details, cgguts) <- hscNormalIface guts mb_old_iface
-                                 hscWriteIface iface changed mod_summary
-                                 hasStub <- hscGenHardCode cgguts mod_summary
-                    linkable <- handleBatch result
 ~~~
+
+その2
+
+~~~ {.text}
+  → runCompiler batchCompiler handleBatch -- compiler/main/DriverPipeline.hs
+    → hscCompileBatch -- compiler/main/HscMain.hs
+      → genericHscCompile hscBatchCompiler batchMsg
+         compile RecompRequired
+         → runHsc hsc_env $ hscRecompile compiler mod_summary mb_old_hash
+           → genericHscRecompile hscBatchCompiler
+             → hscFileFrontEnd mod_summary
+               → hscParse' mod_summary
+                 -- xxx Parser --
+               → tcRnModule -- compiler/typecheck/TcRnDriver.lhs
+                 -- xxx Typecheck-Rename --
+             hscBackend compiler tc_result mod_summary mb_old_hash
+             → genericHscBackend hscBatchCompiler
+               guts <- hscDesugar' (ms_location mod_summary) tc_result
+               → deSugar -- compiler/deSugar/Desugar.lhs
+                 -- xxx Desugar --
+               hscGenOutput compiler guts mod_summary mb_old_hash
+               → hscGenOutput hscBatchCompiler
+                 → hscSimplify' guts0
+                   -- xxx Simplify? (Core2Core) --
+                 → hscNormalIface guts mb_old_iface
+                   -- xxx CoreTidy --
+                 hscWriteIface iface changed mod_summary
+                 → hscGenHardCode cgguts mod_summary
+                   -- xxx CorePrep --
+                   -- xxx CoreToStg --
+                   -- xxx CodeGen --
+                   -- xxx CodeOutput
+    linkable <- handleBatch result
+    → runPipeline StopLn hsc_env' (output_fn,Nothing) (Just basename)
+                                   Persistent (Just location) maybe_stub_o
+       -- ghc --makeだと何もせず終わるらしい
+~~~
+
+↑の個々のxxxの部分は
+[Compiling one module: HscMain](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/HscMain)
+の図に相当すると思われる。
 
 # 事前アンケート
 
