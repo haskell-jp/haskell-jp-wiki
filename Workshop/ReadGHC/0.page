@@ -158,8 +158,26 @@ GHC 7.4.1 のコア言語は System $F_{C}^{↑}$
 * [AboutVideos – GHC](http://hackage.haskell.org/trac/ghc/wiki/AboutVideos) これ全員で見る？ @shelarcy
 
 # 議事録
+## GHCのソースコード全体について @master_q
+
+[プレゼン資料:GHCソースコード読みのススメ](http://www.slideshare.net/master_q/readghc0)
+
+## GHCの改造について @tyasunao
+
+[プレゼン資料:GHCの改造について](http://public.iwork.com/document/ja/?a=p50720299&d=GHC%E5%8B%89%E5%BC%B7%E4%BC%9A%E7%AC%AC0%E5%9B%9E.key)
+
+## togetter
+
+* [GHCソースコードリーディング勉強会 第0回 - Togetter](http://togetter.com/li/256046)
+* [#readghc 第0回まとめ - Togetter](http://togetter.com/li/256160)
 
 ## 録画と写真
+
+[録画1](http://www.justin.tv/kiwamu/b/308228681)
+[録画2](http://www.justin.tv/kiwamu/b/308228717)
+[録画3](http://www.justin.tv/kiwamu/b/308228759)
+
+[写真](http://www.flickr.com/photos/masterq/sets/72157629272851139/)
 
 ## ネタ案出し
 
