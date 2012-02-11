@@ -123,6 +123,14 @@ lexer cont = do
   cont (L (RealSrcSpan span) tok)
 ~~~
 
+## コア言語
+
+GHC 7.4.1 のコア言語は System $F_{c}^{↑}$
+
+* [System F](http://en.wikipedia.org/wiki/System_F) に GADTs や型族（TypeFamilies）を扱うための拡張を加えたのが System F~c~ で、DataKinds や PolyKinds などを扱うためにさらに拡張を加えたのが System $F_{c}^{↑}$。
+* [System F~c~: equality constraints and coercions](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/FC)
+* [GHC の System F に拡張を加える提案を行う論文を集めたページ](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/)
+
 # 事前アンケート
 
 ## 本勉強会に期待すること
