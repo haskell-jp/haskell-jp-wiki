@@ -87,6 +87,42 @@ HEAD などで DPH ライブラリが不要な場合には --no-dph が必要で
 [Compiling one module: HscMain](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/HscMain)
 の図に相当すると思われる。
 
+## LexerとParserが協調動作
+
+~~~ {.haskell}
+-- Parser.hs
+parseModule = happySomeParser where
+  happySomeParser = happyThen (happyParse action_0)
+                    (\x -> case x of {HappyAbsSyn9 z -> happyReturn z; _other -> notHappyAtAll })
+
+happyThen :: () => P a -> (a -> P b) -> P b
+happyThen = (>>=)
+happyReturn :: () => a -> P a
+happyReturn = (return)
+
+happyParse start_state = happyNewToken start_state notHappyAtAll notHappyAtAll
+
+happyNewToken action sts stk
+	= lexer(\tk -> 
+	let cont i = action i i tk (HappyState action) sts stk in
+	case tk of {
+	L _ ITeof -> action 367 367 tk (HappyState action) sts stk;
+	L _ ITunderscore -> cont 233;
+        --snip--
+	L _ (ITquasiQuote _) -> cont 366;
+	_ -> happyError' tk
+	})
+
+-- Lexer.hs
+lexer :: (Located Token -> P a) -> P a
+lexer cont = do
+  alr <- extension alternativeLayoutRule
+  let lexTokenFun = if alr then lexTokenAlr else lexToken
+  (L span tok) <- lexTokenFun
+  --trace ("token: " ++ show tok) $ do
+  cont (L (RealSrcSpan span) tok)
+~~~
+
 # 事前アンケート
 
 ## 本勉強会に期待すること
