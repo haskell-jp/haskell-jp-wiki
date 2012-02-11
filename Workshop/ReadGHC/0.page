@@ -166,6 +166,28 @@ GHC 7.4.1 のコア言語は System $F_{C}^{↑}$
 
 [プレゼン資料:GHCの改造について](http://public.iwork.com/document/ja/?a=p50720299&d=GHC%E5%8B%89%E5%BC%B7%E4%BC%9A%E7%AC%AC0%E5%9B%9E.key)
 
+## GHCのソースコード読み環境について
+
+@master_q は
+[hasktags](http://hackage.haskell.org/package/hasktags)
+を使ってタグジャンプしてたらしい。
+GHCのソースコードに添付されているutils/ghctagsを使うともっとましなTAGSができるかもしれない。
+タグジャンプでもよくわからない場合には
+[ghc-7.4.1: The GHC API](http://www.haskell.org/ghc/docs/7.4.1/html/libraries/ghc-7.4.1/)
+で調べれば型の情報などは横断で調べられる。
+
+GHC内部情報についてのドキュメントは
+[Commentary – GHC](http://hackage.haskell.org/trac/ghc/wiki/Commentary)
+から辿ると良い。
+
+gitブランチを使ってGHCをビルドする手順は
+[Building/GettingTheSources – GHC](http://hackage.haskell.org/trac/ghc/wiki/Building/GettingTheSources)
+に記載あり。
+
+その他GHCの変更に関する記事は
+[Blog – GHC](http://hackage.haskell.org/trac/ghc/blog)
+に投稿されることがある。
+
 ## togetter
 
 * [GHCソースコードリーディング勉強会 第0回 - Togetter](http://togetter.com/li/256046)
