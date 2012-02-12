@@ -128,8 +128,12 @@ lexer cont = do
 GHC 7.4.1 のコア言語は System $F_{C}^{↑}$
 
 * [System F](http://en.wikipedia.org/wiki/System_F) に GADTs や型族（TypeFamilies）を扱うための拡張を加えたのが System F~C~ で、DataKinds や PolyKinds などを扱うためにさらに拡張を加えたのが System $F_{C}^{↑}$。
+* System F~C~ と System F~ω~ の違い
+
+    > "Our system allows types of higher kind; hence the type application form τ~1~ τ~2~. However, like Haskell but unlike F~ω~, our system has no type-level lambda, and type equality is syntactic identity (modulo alpha-conversion)." System F with Type Equality Coercions - 3.1 Conventional features
+
 * [System F~C~: equality constraints and coercions](http://hackage.haskell.org/trac/ghc/wiki/Commentary/Compiler/FC)
-* [GHC の System F に拡張を加える提案を行う論文を集めたページ](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/)
+* [（GHC の）System F に拡張を加える提案を行う論文を集めたページ](http://research.microsoft.com/en-us/um/people/simonpj/papers/ext-f/)
 
 # 事前アンケート
 
