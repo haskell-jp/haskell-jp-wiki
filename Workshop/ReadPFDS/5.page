@@ -11,13 +11,24 @@
 * 5.5 @yuga
 
 # 資料
-
+* [kinug.com/wiki - Study/PFDS/5.1-Techniques of Amortized Analysis](http://kinug.com/wiki/Study/PFDS/5.1-Techniques%20of%20Amortized%20Analysis)
+* [(3) purely functional data structures chapter5_2](http://www.slideshare.net/ShigekazuTakei/purely-functional-data-structures-chapter52)
+* [永続スプレー木と永続スプレーヒープ](http://mew.org/~kazu/material/2012-splay.pdf)
+* [(3) Pairing heap](http://www.slideshare.net/yuganda/pairing-heap)
 
 # 議事録
 ## 録画と写真
+[写真](http://www.flickr.com/photos/masterq/sets/72157629144574778/with/6951876015/)
+
 録画できなかった。。。
 
-## ネタ案出し
+## Togetter
+
+[PFDS読書会 第5回 (Purely Functional Data Structures) - Togetter](http://togetter.com/li/267628)
+
+## 次回分担
+
+![](http://farm8.staticflickr.com/7065/6951876015_404929bd50.jpg)
 
 # 次回
 [6]()
