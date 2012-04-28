@@ -16,7 +16,7 @@ www.sampou.orgから引越してきました。-- nobsun (Sun Jan  8 23:21:20 UT
 * * * * *
 「第５章 融合変換を自動化する」で使われている mag を Haskell Platform 2011.x.x.x に付属の GHC 7.0.x などでもビルドできるようにしたバージョンの（作者自身の手による） darcs repository が以下にあります。
 
-- [http://urchin.earth.li/darcs/ganesh/mag/_darcs/](http://urchin.earth.li/darcs/ganesh/mag/_darcs/)
+- [http://urchin.earth.li/darcs/ganesh/mag/](http://urchin.earth.li/darcs/ganesh/mag/)
 
 HackageDB にアップロードするにはもう少し時間がかかると思うので、サポートページに darcs repository へのリンクを加えてもらえないでしょうか？
 
