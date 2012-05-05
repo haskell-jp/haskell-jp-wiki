@@ -1,0 +1,102 @@
+# 調整/当日スケジュール
+6月やる？日程決まったらpartake立てる。
+
+# 資料
+## GHC RTS起動時のコールグラフ
+
+~~~ {.text}
+hs_init(int *argc, char **argv[])
+-> hs_init_ghc(int *argc, char **argv[], RtsConfig rts_config)
+   -> initScheduler()
+      -> initCapabilities()
+         -> moreCapabilities(0, RtsFlags.ParFlags.nNodes)
+            for i in 0..RtsFlags.ParFlags.nNodes
+            -> initCapability(&capabilities[i], i)
+               initMutex(capabilities[i].lock)
+               # その他capabilities[i]のメンバーを初期値でうめる
+         n_capabilities = RtsFlags.ParFlags.nNodes
+         enabled_capabilities = n_capabilities
+         last_free_capability = &capabilities[0] # 後でIOスレッド用に使う
+      -> initTaskManager()
+      -> startWorkerTasks(1, n_capabilities)
+         for i in 1..n_capabilities
+         -> startWorkerTask(&capabilities[i])
+            task = newTask(rtsTrue)
+            task->cap = &capabilities[i]
+            capabilities[i].running_task = task
+            createOSThread(&tid, (OSThreadProc*)workerStart, task)
+            -> workerStart(Task *task) # 新しいスレッド
+               -> setMyTask(task)
+                  setThreadLocalVar(&currentTaskKey,task)
+               -> newInCall(task)
+                  incall = stgMallocBytes((sizeof(InCall)), "newBoundTask")
+                  incall->task = task
+                  incall->prev_stack = task->incall
+                  task->incall = incall
+               -> scheduleWorker(task->cap,task)
+                  cap = schedule(task->cap,task) # スケジュールループ
+                  releaseCapability_(cap,rtsFalse)
+                  workerTaskStop(task)
+            task->id = tid
+            # これでCapabilityの数だけWorkerスレッド(Task)を作れた
+            # この時点ではCapability<=>Task<=>InCallは1対1対1写像
+   -> initStorage()
+      xxxxxxxxxxxxxxxxxxxxxxxx この中はもっと読む必要有り
+   -> getStablePtr((StgPtr)xxxx_closure) # xxxxxxxxx GCルートの設定？
+   -> initTimer()
+   -> startTimer()
+   -> ioManagerStart()
+      -> cap = rts_lock()
+         -> task = newBoundTask()
+            -> task = allocTask()
+               -> task = myTask()
+                  task = newTask(rtsFalse)
+                  ask->id = osThreadId()
+                  setMyTask(task)
+                  return task
+            newInCall(task)
+         -> waitForReturnCapability(&cap, task)
+            cap = last_free_capability
+            task->cap = cap
+            cap->running_task = task
+         return cap
+      -> ioManagerStartCap(&cap)
+         -> rts_evalIO(cap,&base_GHCziConcziIO_ensureIOManagerIsRunning_closure,NULL)
+            -> tso = createStrictIOThread(*cap, RtsFlags.GcFlags.initialStkSize, p)
+               -> StgTSO *t = createThread(cap, stack_size)
+                  stack = (StgStack *)allocate(cap, stack_size)
+                  tso = (StgTSO *)allocate(cap, sizeofW(StgTSO))
+                  tso->what_next = ThreadRunGHC
+                  tso->stackobj = stack
+                  tso->id = next_thread_id++
+                  tso->global_link = g0->threads
+                  g0->threads = tso
+               pushClosure(t, (W_)&stg_forceIO_info)
+               pushClosure(t, (W_)&stg_ap_v_info)
+               pushClosure(t, (W_)closure) # base_GHCziConcziIO_ensureIOManagerIsRunning_closure
+               pushClosure(t, (W_)&stg_enter_info)
+               # xxxxx このクロージャの設定がHaskell worldとの橋？
+               #     pushClosureを読むかぎりだとStgTSOのスタックに積むだけ
+               return t
+            -> scheduleWaitThread(tso,ret,cap)
+               task = cap->running_task
+               tso->bound = task->incall
+               tso->cap = cap
+               task->incall->tso = tso
+               -> appendToRunQueue(cap,tso)
+                  cap->run_queue_hd = tso
+                  tso->block_info.prev = END_TSO_QUEUE
+                  cap->run_queue_tl = tso
+               cap = schedule(cap,task) # スケジュールループ
+~~~
+
+# 事前アンケート
+## LTネタありますか？
+
+# 議事録
+## togetter
+## 録画と写真
+## ネタ案出し
+
+# 次回
+[2]()
