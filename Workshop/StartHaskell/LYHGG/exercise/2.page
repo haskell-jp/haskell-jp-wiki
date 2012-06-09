@@ -12,7 +12,7 @@ succ :: Enum a => a -> a
 2. レンジを使って、以下のような文字列(リスト)を作ってみましょう。
 
 ~~~ { .haskell }
-"adgjmpsvy"
+"zvrnjfb"
 ~~~
 
 * * * * *
