@@ -17,4 +17,8 @@ pred :: Enum a => a -> a
 
 * * * * *
 
-3. ここに追加
+3. リストを切り出してみましょう。
+
+~~~ { .haskell }
+tail (take 3 aList) ++ [last (init aList)]
+~~~
