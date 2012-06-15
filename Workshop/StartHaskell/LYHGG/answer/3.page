@@ -1,8 +1,12 @@
 # すごいHaskell楽しく学ぼうの練習問題を作ってみた解答 (3. Types and Typeclasses)
 
 
-1. ここに追加
+1. (答の例) [(1,last),(2,head)]
 
+~~~ {.haskell}
+Prelude> :t [(1,last),(2,head)]
+[(1,last),(2,head)] :: Num t => [(t, [a] -> a)]
+~~~
 
 * * * * *
 
