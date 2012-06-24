@@ -13,18 +13,31 @@ null :: [a] -> Bool
 
 * * * * *
 
-2. 以下の式の型を調べましょう。
-
+2. 型を考えましょう。
+2-1. 次の値の型は何ですか？
 ~~~ { .haskell }
 'a'
+['a', 'b', 'c']
+('a', 'b', 'c')
 'a' == 'a'
 ("Hello", "world!")
 100
 show
 take 3 [1..]
+[(False, 'o'), (True, '1')]
+([False, True], ['0', '1'])
 [init , tail , reverse]
-
 ~~~
+2-2. 次の関数の型は何ですか？
+~~~ { .haskell }
+second xs = head (tail xs)
+swap (x, y) = (y, x)
+pair x y = (x, y)
+double x = x * 2
+palindrome xs = reverse xw == xs
+twice f x = f (f x)
+~~~
+2-3. 上の答えを、ghci を使って確かめましょう。
 
 * * * * *
 
