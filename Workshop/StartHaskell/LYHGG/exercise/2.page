@@ -140,3 +140,12 @@ fromIntegral :: (Num b, Integral a) => a -> b
 ~~~
 
 この関数を使って, 1 + 1.0 をInt型として足してみましょう。
+
+13. (プログラミングHaskell演習2-3)以下のプログラムにはエラーが三つある。エラーを修正し、正しく動くか確かめよ。
+
+~~~ {.haskell}
+N = a 'div' length xs
+  where
+    a = 10
+   xs = [1, 2, 3, 4, 5]
+~~~
