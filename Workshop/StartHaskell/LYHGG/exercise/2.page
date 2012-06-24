@@ -14,7 +14,9 @@ null :: [a] -> Bool
 * * * * *
 
 2. 型を考えましょう。
+
 2-1. 次の値の型は何ですか？
+
 ~~~ { .haskell }
 'a'
 ['a', 'b', 'c']
@@ -28,7 +30,9 @@ take 3 [1..]
 ([False, True], ['0', '1'])
 [init , tail , reverse]
 ~~~
+
 2-2. 次の関数の型は何ですか？
+
 ~~~ { .haskell }
 second xs = head (tail xs)
 swap (x, y) = (y, x)
@@ -37,6 +41,7 @@ double x = x * 2
 palindrome xs = reverse xw == xs
 twice f x = f (f x)
 ~~~
+
 2-3. 上の答えを、ghci を使って確かめましょう。
 
 * * * * *
