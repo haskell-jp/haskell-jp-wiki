@@ -1,0 +1,23 @@
+# すごいHaskell楽しく学ぼうの練習問題を作ってみた解答 (4. Syntax in Functions)
+
+
+1. caseとifを使わないで関数を作りましょう
+
+~~~ {.haskell}
+analysisLine' :: String -> String
+analysisLine' []   = "empty"
+analysisLine' [_]  = "a character"
+analysisLine' s'
+  | last s' == '.' = "a sentence"
+  | ' ' `elem` s'  = "some words"
+  | otherwise      = "a word"
+~~~
+
+* * * * *
+
+2. ここに追加
+
+
+* * * * *
+
+3. ここに追加
