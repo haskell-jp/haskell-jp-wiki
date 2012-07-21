@@ -1,21 +1,26 @@
-# すごいHaskell楽しく学ぼうの練習問題を作ってみた (3. Types and Typeclasses)
+# 3. 関数の構文
 
+1. caseとifを使わないで関数を作りましょう
 
-1. 与えらえた型から値を想像してみましょう
-
-ある日、ghciを使って遊んでいて以下のような結果が得られました。
+次の関数からcaseとifを取り除いてみましょう。
 
 ~~~ {.haskell}
-Prelude> :t XXX
-XXX :: Num t => [(t, [a] -> a)]
+analysisLine :: String -> String
+analysisLine s = 
+  case s of [] -> "empty"
+            [_] -> "a character"
+            s' -> if last s' == '.' 
+                  then "a sentence"
+                  else if ' ' `elem` s' 
+                       then "some words"
+                       else "a word"
 ~~~
 
-ところがXXXの部分を覚えていません。
-XXXはどのような式になるでしょうか。
-(答は一つではありません)
+ヒント: パターンマッチとガードを使います。
 
 * * * * *
-2. (プログラミングHaskell 5-1)リスト内包表記を使って、1から100までの二乗の和 1^2 + 2^2 + ... + 100^2 を計算する式を考えよ。
+
+2.
 
 * * * * *
 
