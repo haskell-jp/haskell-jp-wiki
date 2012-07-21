@@ -1,6 +1,28 @@
 # 3. 関数の構文
 
-1. caseとifを使わないで関数を作りましょう
+1. FizzBuzz関数を実装してみよう。
+
+~~~ {.haskell}
+fizzBuzz :: Int -> String
+~~~
+
+実行例
+
+~~~ {.haskell}
+ghci> fizzBuzz 2
+"2"
+ghci> fizzBuzz 3
+"Fizz"
+ghci> fizzBuzz 4
+"4"
+ghci> fizzBuzz 5
+"Buzz"
+~~~
+
+ヒント： IntをStringに変換するには show関数を使います。
+
+
+2. caseとifを使わないで関数を作りましょう
 
 次の関数からcaseとifを取り除いてみましょう。
 
@@ -20,8 +42,18 @@ analysisLine s =
 
 * * * * *
 
-2.
+3. 以下のソースコードをGHCiに読み込んでみて、警告がでるかどうか試してみましょう。 (p.37)
+
+~~~{.haskell}
+{-# OPTIONS -Wall -Werror #-}
+
+charName :: Char -> String
+charName 'a' = "Albert"
+charName 'b' = "Broseph"
+charName 'c' = "Cecil"
+~~~
+警告がなくなるようにcharName関数を修正しましょう。
 
 * * * * *
 
-3. ここに追加
+4. ここに追加
