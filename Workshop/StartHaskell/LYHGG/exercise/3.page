@@ -1,5 +1,6 @@
 # 3. 関数の構文
 
+
 1. 論理演算関数をパターンマッチを使って実装してみよう。
 
 ~~~ {.haskell}
@@ -103,3 +104,9 @@ charName 'c' = "Cecil"
 * * * * *
 
 6. ここに問題を追加
+
+* * * * *
+
+# 練習問題リンク集
+
+- [スタートHaskell 2011 関数定義 練習問題](https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter04/Chapter04-ja.md)
