@@ -1,26 +1,41 @@
-# すごいHaskell楽しく学ぼうの練習問題を作ってみた (4. Syntax in Functions)
+# Hello 再帰！
 
-1. caseとifを使わないで関数を作りましょう
-
-次の関数からcaseとifを取り除いてみましょう。
+1. リストの長さを返す関数を、再帰を使って自分で書いてみよう。
 
 ~~~ {.haskell}
-analysisLine :: String -> String
-analysisLine s = 
-  case s of [] -> "empty"
-            [_] -> "a character"
-            s' -> if last s' == '.' 
-                  then "a sentence"
-                  else if ' ' `elem` s' 
-                       then "some words"
-                       else "a word"
+myLength   :: [a] -> Int
 ~~~
 
-ヒント: パターンマッチとガードを使います。
+2. リストの要素を全部足す関数と、全部かける関数を、再帰を使って書いてみよう。
+
+~~~ {.haskell}
+mySum      :: [Int] -> Int
+myProduct  :: [Int] -> Int
+~~~
+
+実行例
+
+~~~ {.haskell}
+ghci> mySum [1,2,3,4]
+10
+ghci> myProduct [1,2,3,4]
+24
+~~~
 
 * * * * *
-2. ここに追加
+3. 整数のリストを受け取って、奇数だけのリストと偶数だけのリストに分ける関数を、再帰を使って書いてみよう。
+
+~~~ {.haskell}
+oddEven :: [Int] -> ([Int],[Int])
+~~~
+
+実行例
+
+~~~ {.haskell}
+ghci> oddEven [1,4,5,6,7,10,11]
+([1,5,7,11], [4,6,10])
+~~~
 
 * * * * *
 
-3. ここに追加
+4. ここに追加
