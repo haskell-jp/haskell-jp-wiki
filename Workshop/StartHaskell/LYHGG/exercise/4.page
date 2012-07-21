@@ -1,14 +1,17 @@
-# Hello 再帰！
+# 『Hello 再帰！』　練習問題
 
-1. リストの長さを返す関数を、再帰を使って自分で書いてみよう。
+## リストの長さ
+
+リストの長さを返す関数を、再帰を使って自分で書いてみよう。
 
 ~~~ {.haskell}
 myLength   :: [a] -> Int
 ~~~
 
 * * * * *
+## 総和と総積
 
-2. リストの要素を全部足す関数と、全部かける関数を、再帰を使って書いてみよう。
+リストの要素を全部足す関数と、全部かける関数を、再帰を使って書いてみよう。
 
 ~~~ {.haskell}
 mySum      :: [Int] -> Int
@@ -25,7 +28,9 @@ ghci> myProduct [1,2,3,4]
 ~~~
 
 * * * * *
-3. 整数のリストを受け取って、奇数だけのリストと偶数だけのリストに分ける関数を、再帰を使って書いてみよう。
+## 偶数と奇数にわける
+
+整数のリストを受け取って、奇数だけのリストと偶数だけのリストに分ける関数を、再帰を使って書いてみよう。
 
 ~~~ {.haskell}
 oddEven :: [Int] -> ([Int],[Int])
@@ -39,8 +44,9 @@ ghci> oddEven [1,4,5,6,7,10,11]
 ~~~
 
 * * * * *
+## コラッツ数列
 
-4. コラッツ数列を返す関数を実装してみよう。
+コラッツ数列を返す関数を実装してみよう。
 
 与えられた数nに、以下の操作を繰り返し適用して、数列を生成する。
 
@@ -68,4 +74,9 @@ collatz :: Int -> [Int]
 ghci> collatz 13
 [13,40,20,10,5,16,8,4,2,1]
 ~~~
+
+# 練習問題リンク集
+
+- [スタートHaskell 2011 関数定義 練習問題](https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter04/Chapter04-ja.md)
+- [スタートHaskell 2011 再帰関数 練習問題](https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter06/Chapter06-ja.md)
 
