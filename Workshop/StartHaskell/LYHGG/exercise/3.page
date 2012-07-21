@@ -1,6 +1,26 @@
 # 3. 関数の構文
 
-1. FizzBuzz関数を実装してみよう。
+1. 論理演算関数をパターンマッチを使って実装してみよう。
+
+~~~ {.haskell}
+myNot :: Bool -> Bool
+myAnd :: Bool -> Bool -> Bool
+myOr  :: Bool -> Bool -> Bool
+myXor :: Bool -> Bool -> Bool
+~~~
+
+実行例
+
+~~~ {.haskell}
+ghci> myNot True
+False
+ghci> myOr False True
+True
+~~~
+
+* * * * *
+
+2. FizzBuzz関数を実装してみよう。
 
 ~~~ {.haskell}
 fizzBuzz :: Int -> String
@@ -21,8 +41,9 @@ ghci> fizzBuzz 5
 
 ヒント： IntをStringに変換するには show関数を使います。
 
+* * * * *
 
-2. caseとifを使わないで関数を作りましょう
+3. caseとifを使わないで関数を作りましょう
 
 次の関数からcaseとifを取り除いてみましょう。
 
@@ -42,9 +63,9 @@ analysisLine s =
 
 * * * * *
 
-3. 以下のソースコードをGHCiに読み込んでみて、警告がでるかどうか試してみましょう。 (p.37)
+4. 以下のソースコードをGHCiに読み込んでみて、警告がでるかどうか試してみましょう。 (p.37)
 
-~~~{.haskell}
+~~~ {.haskell}
 {-# OPTIONS -Wall -Werror #-}
 
 charName :: Char -> String
@@ -52,8 +73,9 @@ charName 'a' = "Albert"
 charName 'b' = "Broseph"
 charName 'c' = "Cecil"
 ~~~
+
 警告がなくなるようにcharName関数を修正しましょう。
 
 * * * * *
 
-4. ここに追加
+5. ここに問題を追加
