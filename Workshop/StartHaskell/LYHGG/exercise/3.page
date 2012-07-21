@@ -27,17 +27,21 @@ True
 - ただし、西暦年が100で割り切れる年はうるう年でない
 - ただし、西暦年が400で割り切れる年はうるう年
 
+
 ~~~ {.haskell}
 isLeap :: Int -> Bool
 ~~~
 
 実行例
 
+
 ~~~ {.haskell}
 ghci> isLeap 1999
 False
 ghci> isLeap 2000
 True
+~~~
+
 * * * * *
 
 3. FizzBuzz関数を実装してみよう。
