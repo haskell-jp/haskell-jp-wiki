@@ -1,0 +1,27 @@
+# 『高階関数』　練習問題
+
+
+## 部分適用された関数の型
+
+以下の式の型はなんですか。
+
+~~~ {.haskell}
+max 5
+~~~
+
+* * * * *
+## 関数適用と関数合成
+
+以下の関数の括弧を、関数適用($)で書き換えてみよう。(p.83, p.84)
+
+~~~ {.haskell}
+f xs = take 10 (map (*3) (filter even xs))
+g xs = tail (tail (tail (tail xs)))
+~~~
+
+同じものを関数合成(.)を使って書き直してみよう。
+
+
+# 練習問題リンク集
+
+- [スタートHaskell 2011 高階関数 練習問題](https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter07/Chapter07-ja.md)
