@@ -131,6 +131,24 @@ applyTwice applyTwice applyTwice applyTwice applyTwice (+1) 0
 ~~~
 
 
+* * * * *
+## fold
+
+foldl と foldr を用いて、以下の2つの関数を作成しました。
+
+~~~ {.haskell}
+hoge f y xs = foldl (\g x a -> g $ f x a) id xs y
+
+piyo f y xs = foldr (\x g a -> g $ f a x) id xs y
+~~~
+
+これらの関数の型はどうなりますか？
+foldl や foldr はどうでしたか？
+
+これらの関数は、どのように動きますか？
+
+これらの関数は、無限リストに対しても使えますか？
+
 
 # 練習問題リンク集
 
