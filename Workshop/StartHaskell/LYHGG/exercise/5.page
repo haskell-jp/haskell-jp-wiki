@@ -13,7 +13,8 @@ takeWhile (<100)
 zipWith (+)
 ~~~
 
-ヒント: 
+ヒント: それぞれの関数の型は以下のとおり
+
 - [takeWhile](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html#v:takeWhile)
 - [zipWith](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html#v:zipWith)
 
@@ -76,8 +77,14 @@ sqrtSum = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
 
 
 ~~~ {.haskell}
+f :: Int -> Int
 f n = 2*n + 1
+
+g :: Int -> Int -> Int
 g n m = 2*n + m
+
+h :: Int -> [a] -> [a]
+h n xs = fst (splitAt n xs)
 ~~~
 
 
