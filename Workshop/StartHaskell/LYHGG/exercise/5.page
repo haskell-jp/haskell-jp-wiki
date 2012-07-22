@@ -93,6 +93,43 @@ j :: (a,a,a) -> [a]
 j (x,y,z) = [x,y,z]
 ~~~
 
+* * * * *
+## applyTwice
+
+applyTwice は、以下のような関数でした。(p65)
+
+~~~ {.haskell}
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
+~~~
+
+例えば、以下のように使えます。
+
+~~~ {.haskell}
+> applyTwice (+1) 0
+2
+~~~
+
+さて、以下の式は、なにを返しますか？
+それはなぜですか？
+
+~~~ {.haskell}
+applyTwice applyTwice (+1) 0
+
+applyTwice applyTwice applyTwice (+1) 0
+
+applyTwice applyTwice applyTwice applyTwice (+1) 0
+~~~
+
+また、以下の式を計算しようとすると、おそらく返ってきません。(Ctrl + c で中断)
+
+それはなぜですか？
+この式が計算できたとしたら、その値はいくつだと考えられますか？
+
+~~~ {.haskell}
+applyTwice applyTwice applyTwice applyTwice applyTwice (+1) 0
+~~~
+
 
 
 # 練習問題リンク集
