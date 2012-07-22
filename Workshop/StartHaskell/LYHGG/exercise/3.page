@@ -91,6 +91,43 @@ analysisLine s =
 
 ヒント: パターンマッチとガードを使います。
 
+
+* * * * *
+## シーザー暗号
+
+与えられた文字列をシーザー暗号で暗号化する関数を作成しよう。
+
+~~~ {.haskell}
+caesar :: Int        -- 何文字右へずらすか
+       -> String     -- 暗号化する文字列
+       -> String     -- 暗号化された文字列
+~~~
+
+- a～z の文字は、指定された数だけ右へずらす
+- A～Z の文字は、指定された数だけ右へずらす
+- それ以外の文字や記号や空白は、ずらさない
+
+実行例
+
+
+~~~ {.haskell}
+ghci> caesar 1 "Hello, world!"
+"Ifnmp, xpsme"
+ghci> caesar 10 "(^o^) <`v`> ['-'] {~<~} |T_T|"
+"(^y^) <`f`> ['-'] {~<~} |D_D|"
+~~~
+
+上の関数を使って、以下のシーザー暗号を解読できますか。
+
+~~~
+Par Yngvmbhgte Ikhzktffbgz Ftmmxkl
+~~~
+
+短い文字数でかけたら、あなごるに投稿しよう。
+
+[Caesar cipher - anarchy golf](http://golf.shinh.org/p.rb?Caesar+cipher)
+
+
 * * * * *
 
 ## パターンマッチの網羅
