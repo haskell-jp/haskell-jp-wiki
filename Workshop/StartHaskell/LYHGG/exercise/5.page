@@ -7,7 +7,16 @@
 
 ~~~ {.haskell}
 max 5
+
+takeWhile (<100)
+
+zipWith (+)
 ~~~
+
+ヒント: 
+- [takeWhile](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html#v:takeWhile)
+- [zipWith](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html#v:zipWith)
+
 * * * * *
 ## コラッツ数列
 
