@@ -150,6 +150,19 @@ foldl や foldr はどうでしたか？
 これらの関数は、無限リストに対しても使えますか？
 
 
+* * * * *
+## zipWith, scanl と、あの数列
+
+次の2つの無限リストは、どのような数列を表しますか？
+なぜそのようになりますか？
+
+~~~ {.haskell}
+alist = 0 : 1 : zipWith (+) alist (tail alist)
+
+blist = 0 : scanl (+) 1 blist
+~~~
+
+
 # 練習問題リンク集
 
 - [スタートHaskell 2011 高階関数 練習問題](https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter07/Chapter07-ja.md)
