@@ -22,7 +22,7 @@ Haskell の正規表現ライブラリはいろいろあるようですがお勧
 
 [Haskellのパッケージ管理システムCabalでinstallしたものをデリート(in Ubuntu)](http://cosmo0920.wordpress.com/2011/02/17/haskell%E3%81%AEcabal-install%E3%81%97%E3%81%9F%E3%82%82%E3%81%AE%E3%82%92%E3%83%87%E3%83%AA%E3%83%BC%E3%83%88/)
 
-- 現在はcabalの振る舞いが変わってその危険性は減ったそうです。ちなみに[cabalとghc-pkgをラップしたcabというkazu-yamamotoさんのツール](http://www.mew.org/~kazu/proj/cab/en/)を使えばもっと楽にcabを使えるそうです！
+- 現在はcabalの振る舞いが変わってその危険性は減ったそうです。ちなみに[cabalとghc-pkgをラップしたcabというkazu-yamamotoさんのツール](http://www.mew.org/~kazu/proj/cab/en/)を使えばもっと楽にパッケージを使えるそうです！
 
 ## ドキュメントをサクッと読むツール
 標準ライブラリや、cabal installしたライブラリのドキュメントをコマンド一つで読むツール（Rubyのriみたいなもの）はありますか？
