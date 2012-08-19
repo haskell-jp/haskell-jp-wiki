@@ -1,7 +1,7 @@
 #Haskell 学習者の FAQ
 
 ## 正規表現ライブラリ
-Haskell の正規表現http://wiki.haskell.jp/Workshop/StartHaskell2/FAQライブラリはいろいろあるようですがお勧めはありますか？
+Haskell の正規表現ライブラリはいろいろあるようですがお勧めはありますか？
 
 - POSIX互換であればHaskell Platform添付のregex-posixを、Perl互換であればregex-pcreを。ただしHaskellにはパーサを書くモジュールが他に充実しているのであまり正規表現のお世話にはならないそうです。
 
