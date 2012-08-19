@@ -1,3 +1,34 @@
-Haskell 学習者の FAQ
+#Haskell 学習者の FAQ
 
-[今はここ](http://wiki.livedoor.jp/igrep/d/Haskeller%a4%cb%ca%b9%a4%a4%a4%c6%a4%df%a4%e8%a4%a6)
+## 正規表現ライブラリ
+Haskell の正規表現http://wiki.haskell.jp/Workshop/StartHaskell2/FAQライブラリはいろいろあるようですがお勧めはありますか？
+- POSIX互換であればHaskell Platform添付のregex-posixを、Perl互換であればregex-pcreを。ただしHaskellにはパーサを書くモジュールが他に充実しているのであまり正規表現のお世話にはならないそうです。
+
+## 関数の名前
+
+    hoge :: Hoge -> Foo
+    hoge x = ...
+
+のように関数の名前を何回も書かなきゃいけないのは面倒だなぁと感じます。
+なんとか1回で済む方法はありませんか？
+
+- ghc-mod を使っていれば、型シグネチャを書いてから M-t とか。
+
+
+
+## cabal install したパッケージ
+以下のページに、「余談ですが、cabal installでインストールするとパッケージが壊れることがあるので、できるだけUbuntuの場合はdebパッケージがある場合それを使うと良いようです。」という、余談にしては随分深刻な記述がありますが、現在でもそうなのでしょうか？
+  http://cosmo0920.wordpress.com/2011/02/17/haskell%E3%81%AEcabal-install%E3%81%97%E3%81%9F%E3%82%82%E3%81%AE%E3%82%92%E3%83%87%E3%83%AA%E3%83%BC%E3%83%88/
+
+## ドキュメントをサクッと読むツール
+標準ライブラリや、cabal installしたライブラリのドキュメントをコマンド一つで読むツール（Rubyのriみたいなもの）はありますか？
+
+## foldrと無限リスト
+手前味噌で恐縮ですが、foldrがケースによっては無限リストにも使える理由について次のページに解説を書いてみました。
+これで正解なのかどうか教えていただけないでしょうか？
+また、何か補足があればお願いします。
+  [[なんでHaskellのfoldrは無限リストにも使えるのか、自分なりに考えて分かったこと>http://blog.livedoor.jp/igrep/archives/1563992.html]]
+
+- 「実行順」を意識するより演算の「正格性」を意識するべきかも
+
+[昔はここだった](http://wiki.livedoor.jp/igrep/d/Haskeller%a4%cb%ca%b9%a4%a4%a4%c6%a4%df%a4%e8%a4%a6)
