@@ -37,6 +37,8 @@ Haskell の正規表現ライブラリはいろいろあるようですがお勧
   [なんでHaskellのfoldrは無限リストにも使えるのか、自分なりに考えて分かったこと](http://blog.livedoor.jp/igrep/archives/1563992.html)
 
 - 「実行順」を意識するより演算の「正格性」を意識するべきかも
+- ここまで考えられるのであれば、小さなfoldrを使ったコードを手で最外簡約してみると良いと思います。
+- [foldrの実装](http://hackage.haskell.org/packages/archive/base/latest/doc/html/src/GHC-Base.html#foldr) も見てみてください。
 
 
 ---------------------------
