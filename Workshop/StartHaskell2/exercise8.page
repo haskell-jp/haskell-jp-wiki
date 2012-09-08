@@ -1,0 +1,117 @@
+# 『入出力』　練習問題
+
+## I/Oアクションを実行する
+
+下の３つのI/Oアクションを使って、これらを上から順番に実行する関数を、do構文を使ったものと、sequence関数を使ったものと２通りで書いてみよう。
+
+~~~ {.haskell}
+hello :: IO ()
+hello = putStrLn "Hello!"
+
+myName :: IO ()
+myName = putStrLn "My name is Haskell."
+
+bye :: IO ()
+bye = putStrLn "Bye!"
+~~~
+
+## プログラムの終了
+
+"q"と入力されたら終了するプログラムを書こうと思ったが、バグっていてうまく終了しない。このプログラムを直して、ちゃんと動くようにしよう。
+
+~~~ {.haskell}
+main = do
+  x <- getLine
+  if x == "q"
+    then return ()
+    else putStrLn x
+  main
+~~~
+
+## 数の合計を表示する
+
+ユーザーから空白区切りの数の入力をもらって、合計を表示するコードを書いてみよう。
+
+実行例
+
+~~~ {.haskell}
+> 0 10 10
+20
+> 1 2 3 4 5 6 7 8 9 10
+55
+~~~
+
+## エコー
+
+ユーザーの入力をそのまま表示するプログラムを作ろう。
+
+ただし "quit" と入力されたときは "本当に終了しますか？(yes/no)" と表示して、次の入力が "yes" だったらプログラムを終了する。
+
+実行例
+~~~ {.haskell}
+aaaaa
+aaaaa
+a b ccc d
+a b ccc d
+quit
+本当に終了しますか？(yes/no)
+yes
+~~~
+
+文字出力の際、バッファリングの関係ですぐに表示されないことがある。そのときは [hFlush](http://hackage.haskell.org/packages/archive/base/latest/doc/html/System-IO.html#v:hFlush)を使うとよい。
+
+~~~ {.haskell}
+import System.IO (hFlush, stdout)
+
+main = do
+  putStr "input text: "
+  hFlush stdout
+  txt <- getLine
+  putStrLn txt
+~~~
+
+## 九九の表
+
+こんな感じの九九の表を表示してみよう。
+
+~~~ {.haskell}
+ 1  2  3  4  5  6  7  8  9
+ 2  4  6  8 10 12 14 16 18
+ 3  6  9 12 15 18 21 24 27
+ 4  8 12 16 20 24 28 32 36
+ 5 10 15 20 25 30 35 40 45
+ 6 12 18 24 30 36 42 48 54
+ 7 14 21 28 35 42 49 56 63
+ 8 16 24 32 40 48 56 64 72
+ 9 18 27 36 45 54 63 72 81 
+~~~
+
+Haskellには、いわゆるprintf関数もある。printfを使うときは Text.Printf モジュールをインポートする。
+
+~~~ {.haskell}
+Prelude> import Text.Printf
+Prelude Text.Printf> mapM_ (printf "%3d\n") [1..10]
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+~~~
+
+## フィボナッチ数列を表示する
+
+ユーザーから数字の入力を受け取り、その長さだけフィボナッチ数列を表示するプログラムを作ろう。
+
+実行例
+
+~~~ {.haskell}
+input number> 1
+0
+input number> 10
+0 1 1 2 3 5 8 13 21 34
+~~~
