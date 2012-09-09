@@ -90,3 +90,7 @@ ls
 getDirectoryContents :: FilePath -> IO [FilePath]
 ~~~
 
+
+* * * * *
+## Project Euler problem 8
+[Problem](http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%208)
