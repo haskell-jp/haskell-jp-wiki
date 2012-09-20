@@ -19,9 +19,9 @@ toc: no
 このWikiは
 [gitit](http://gitit.net/)
 というWikiエンジンで運用されています。
-gititの使い方は左サイドバーの
-"Help"
-リンクを見てください。
+gititの使い方は
+[Help]()
+を見てください。
 もっと詳細な解説が
 [Gitit User's Guide]()
 にあります。
