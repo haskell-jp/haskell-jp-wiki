@@ -98,6 +98,11 @@ hs_init(int *argc, char **argv[])
 ~~~
 
 # 議事録
+## 発表資料
+
+* [GCをみればRTSが見えてくる、かも。。。](http://www.slideshare.net/dec9ue/rts-gc)
+* [Dive into RTS - another side](http://www.slideshare.net/master_q/dive-into-rts-another-side)
+
 ## togetter
 
 T.B.D.
