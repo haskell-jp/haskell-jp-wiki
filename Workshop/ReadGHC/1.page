@@ -6,6 +6,7 @@
 
 * @kazu_yamamoto : @master_q GHC ソースコードリーディングですが、6月9日以降の土日なら、IIJ の会議室 を貸し出せると思います。
 * 田町のミラクルリナックス会議室を貸してもらえそう 最大15人が限界
+* 結局ミラクルリナックスで開催となった。
 
 # 資料
 ## GHC RTS起動時のコールグラフ
@@ -98,8 +99,16 @@ hs_init(int *argc, char **argv[])
 
 # 議事録
 ## togetter
+
+T.B.D.
+
 ## 録画と写真
+
+[写真](http://www.flickr.com/photos/masterq/sets/72157631649911818/)
+
 ## ネタ案出し
+
+![](http://farm9.staticflickr.com/8459/8035488859_567ce685f1.jpg)
 
 # 懇親会
 
@@ -128,6 +137,9 @@ hs_init(int *argc, char **argv[])
 　合計金額　8,626円（うち消費税410円）
 ~~~
 
+他会計。ビアバッシュ安いですね。
+
+![](http://farm9.staticflickr.com/8173/8035466175_557db848a6_n.jpg)
 
 # 次回
 [2]()
