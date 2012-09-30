@@ -101,6 +101,7 @@ hs_init(int *argc, char **argv[])
 ## 発表資料
 
 * [GCをみればRTSが見えてくる、かも。。。](http://www.slideshare.net/dec9ue/rts-gc)
+* [GHC へのプログラム変換パスの追加(pdf)](https://github.com/khibino/ghc-src-read/raw/master/01/GhcSimplGVN.pdf)
 * [Dive into RTS - another side](http://www.slideshare.net/master_q/dive-into-rts-another-side)
 
 ## togetter
