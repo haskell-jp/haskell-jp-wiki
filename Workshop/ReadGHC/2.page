@@ -1,0 +1,16 @@
+# 事前準備
+
+## ネタどうする？
+
+@master_q としては、以下に興味があります。
+
+* gdb + dwarf
+* RTSから外部ライブラリ依存を削減する
+* IOスケジューラ
+
+## 目処が立ったら
+
+[[PARTAKE]](http://partake.in/)
+にイベント立てて、
+[haskell-jp - Google グループ](https://groups.google.com/forum/?fromgroups#!forum/haskell-jp)
+にメールすること。
