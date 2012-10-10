@@ -1,0 +1,1601 @@
+* * * * *
+
+文字列を複製する
+----------------
+
+    dup s = s ++ s
+
+pure functional だと実態が複製されたかどうかは関係ない。
+
+文字列を反復する
+----------------
+
+    Prelude> foldr1 (++) $ replicate 3 "abc"
+    "abcabcabc"
+
+replicate に 0 をわたすとこける。
+
+    Prelude> concat $ replicate 3 "abc"
+    "abcabcabc"
+
+でどうよ。
+
+    strReplicate :: Int -> String -> String
+    strReplicate n s = iterate (s++) "" !! n
+
+なんてのはどうよ。
+
+    strReplicate :: Int -> String -> String
+    strReplicate n s = iterate (showString s) "" !! n
+
+もあるよ。scanl でいいんじゃない？ --t15u
+
+    Prelude> scanl (++) [] (repeat "abc") !! 3
+    "abcabcabc"
+
+強引にunfoldrで書いてみた。--さかい
+
+    strReplicate :: Int -> String -> String
+    strReplicate _ [] = []
+    strReplicate n s@(x:xs) = unfoldr phi (n,s)
+        where phi (m,y:ys) = Just (y,(m,ys))
+              phi (0,[])   = Nothing
+              phi (m,[])   = Just (x,(m-1,xs))
+
+    unfoldr phi x = case phi x of
+                      Nothing -> []
+                      Just (a,y) -> a : unfoldr phi y
+
+うっ。。。--nobsun
+
+さかいさんのを参考に別版を書いてみました。
+
+    strReplicate :: Int -> String -> String
+    strReplicate n s = unfoldr f (n,s,s)
+        where f (_,_,[])   = Nothing
+              f (0,_,_)    = Nothing
+              f (n,[x],s)  = Just (x,(n-1,s,s))
+              f (n,x:xs,s) = Just (x,(n,xs,s))
+
+文字列の長さを得る
+------------------
+
+    Prelude> length "abc"
+    3
+
+文字列を検索する
+----------------
+
+### パターンが含まれるかどうか調べる
+
+    import Text.Regex
+    import Data.Maybe
+
+    isMatch pat str = isJust $ matchRegex (mkRegex pat) str
+
+### パターンが出現する最初のバイト位置を調べる
+
+### パターンが出現する最後のバイト位置を調べる
+
+### マッチの詳しい情報を得る
+
+### 文字列中に複数マッチする
+
+    import Text.Regex
+
+    rxScan pat str
+        = case matchRegexAll (mkRegex pat) str of
+            Just (before, "", "", _)         -> []
+            Just (before, "", after, _)      -> rxScan pat (tail after)
+            Just (before, matched, after, _) -> matched : rxScan pat after
+            Nothing                          -> []
+
+### パターンを含む行のみを処理する
+
+パターンを含む行に f を適用し、残りはそのまま。
+
+    grep :: String -> (String -> String) -> [String] -> [String]
+    grep pat f ss = [ case matchRegex (mkRegex pat) line of
+                        Just _ -> f line
+                        Nothing -> line
+                    | line <- ss
+                    ]
+
+    grep pat f ss = [ (case matchRegex (mkRegex pat) line of {Just _ -> f; _-> id}) line | line <- ss ]
+
+ううむ。
+
+    grep pat f = map (\ l -> case matchRegex (mkRegex pat) l of {Nothing->id;_->f} $ l)
+
+特定の文字・文字列の出現回数を調べる
+------------------------------------
+
+    count x = length . filter (x==)
+
+    count xs [] = 0
+    count xs ys = (if isPrefixOf xs ys then (1+) else id) (count $ tail ys)
+
+文字列の出現頻度を調べる
+------------------------
+
+    count xs [] = 0
+    count xs ys = (if isPrefixOf xs ys then (1+) else id) (count xs $ tail ys)
+
+こういう入力例だと効率がすごく悪い。KMPでやれば少しはましか。
+
+    count "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaab" (take 9999 $ repeat 'a')
+    0
+
+Excelのデータで特定の文字列の出現頻度を調べる。カット＆ペーストでa.txtファイルを作る。
+
+    $KCODE='EUC'
+
+    f=open("a.txt")
+    txt=f.read
+    ar=%w(田中 和田)
+    ar.each {|n|
+     print n,"::"
+     puts txt.scan(n).length
+    }
+    f.close
+
+出力結果
+
+    $ ruby scan.rb
+    田中::5
+    和田::2
+
+文字列を比較する
+----------------
+
+    Main> "foo" == "bar"
+    False
+    Main> "foo" == "foo"
+    True
+    Main> "foo" < "bar"
+    False
+
+文字列が空行か調べる
+--------------------
+
+本当の空行
+
+    main = getContents >>= print . filter (""==) . lines
+
+空白のみの行も空行とみなす
+
+    main = getContents >>= print . filter (all isSpace) . lines
+
+数値を表す文字列か調べる
+------------------------
+
+    isNumStr :: String -> Bool
+    isNumStr "" = False
+    isNumStr xxs@(x:xs)
+        | x `elem` "+-" = all isDigit xs
+        | otherwise     = all isDigit xxs
+
+8進とか？16進とかは？
+
+    isNumStr "" = False
+    isNumStr xxs@(x:xs)
+        | x `elem` "+-" = isNumStr' xs
+        | otherwise     = isNumStr' xxs
+      where isNumStr' "0" = True
+            isNumStr' ('0':x:xs)
+                | toLower x == 'x' = all isHexDigit xs
+                | toLower x == 'o' = all isOctDigit xs
+                | toLower x == 'b' = all (flip elem "01") xs
+                | otherwise        = all isOctDigit (x:xs)
+            isNumStr' xs = all isDigit xs
+
+こんなもんでしょうか。 -- y.hanatani
+
+文字列を数値に変換する
+----------------------
+
+    read "123" :: Int
+
+文字が大文字か小文字かを調べる
+------------------------------
+
+    Prelude> :module +Char
+    Prelude Char> isLower 'a'
+    True
+    Prelude Char> isLower 'A'
+    False
+    Prelude Char> isUpper 'a'
+    False
+    Prelude Char> isUpper 'A'
+    True
+
+文字を大文字・小文字に変換する
+------------------------------
+
+    Prelude> :module +Char
+    Prelude Char> toUpper 'a'
+    'A'
+    Prelude Char> toLower 'A'
+    'a'
+    Prelude Char> map toUpper "aBcDeFg"
+    "ABCDEFG"
+    Prelude Char> map toLower "aBcDeFg"
+    "abcdefg"
+
+文字列の一部を取り出す
+----------------------
+
+    Prelude> take 3 . drop 3 $ "abcdefghi"
+    "def"
+
+最初にマッチした部分を取り出す
+------------------------------
+
+正規表現と同じことをリスト処理関数でやってみる。
+
+    > take 3 $ head $ filter (isPrefixOf "a") $ tails "xxxabcfffpat"
+    "abc"
+
+head が失敗した時がちょっといや。
+
+    > (case filter (isPrefixOf "a") $ tails "xxxabcfffpat" of (x:_) -> Just x; _ -> Nothing) >>= Just . take 3
+    Just "abc"
+
+無理矢理回避してみる。失敗した時は Nothing
+
+マッチした部分すべてを取り出す
+------------------------------
+
+    import Text.Regex
+    import Data.List
+
+    matchRegexList rx xs
+        = unfoldr f xs
+          where f x = matchRegexAll rx x >>= (\ (_, m, rest, _) -> Just (m, rest))
+
+正規表現の「()」にマッチした部分を取り出す
+------------------------------------------
+
+    import Text.Regex
+    import Data.List
+
+    matchRegexList' rx xs
+        = concat $ unfoldr f xs
+          where f x = matchRegexAll rx x >>= (\ (_, _, rest, m) -> Just (m, rest))
+
+正規表現にマッチした部分の前後の文字列を取り出す
+------------------------------------------------
+
+    import Text.Regex
+
+    > matchRegexAll (mkRegex "ab*c") "xabbcz" >>= \ (b, _, a, _) -> Just (b, a)
+    Just ("x","z")
+
+特定の文字を含む部分の長さを調べる
+----------------------------------
+
+    matchingLength xs ys = length [y | y <- ys, elem y xs]
+
+これは
+
+    matchingLength xs = length . filter (flip elem xs)
+
+と同じ。 xs も消せないの？ -- t15u
+
+-   matchingLength :: Eq a => [a] -> [a] -> Int
+        matchingLength = (length .) . filter . (flip elem)
+
+    この場合型宣言は必要。[**haskell**-jp:467](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/467)
+
+文字列を段落に分ける
+--------------------
+
+    parags :: [String] -> [[String]]
+    parags [] = []
+    parags xs = p:parags xs'
+      where
+        (p, xs') = (applySnd (dropWhile (""==)) . break (""==)) xs
+        applySnd f (x,y) = (x,f y)
+
+これだと、複数の空白だけでなりたつパラグラフできちゃうよ。
+こんなのではどうでしょう。
+
+    paragraphs :: String -> [[String]]
+    paragraphs = parags . map trimSpace . lines
+
+    trimSpace :: String -> String
+    trimSpace = reverse . dropWhile isSpace . reverse . dropWhile isSpace
+
+    parags :: [String] -> [[String]]
+    parags [] = []
+    parags xs = p : parags (dropWhile ("" ==) ps)
+                where
+                  (p,ps) = break ("" ==) xs
+
+これじゃ、インデントが消えちゃうじゃん。ダメポ。
+
+これで動くかな。=\> 動くみたい。
+
+    parags = filter (not . null) . map (dropWhile (all isSpace)) . groupBy (\_ x -> not $ all isSpace x)
+
+-   [Listライブラリの使い方](http://www.sampou.org/cgi-bin/haskell.cgi?HowTo:List&l=jp)
+
+<!-- -->
+
+    List> parags $ lines testdata
+    [["  A  "," AA  "],["B","BB"],["C"]]
+
+テストデータ
+
+    testdata = "  \n\n  A  \n AA  \n   \n\nB\nBB\n\n\n\n  \n\nC\n\n"
+
+文字列を行に分ける
+------------------
+
+    Prelude> lines "foo\nbar\nbaz"
+    ["foo","bar","baz"]
+
+lines は Prelude で定義されている
+
+    lines     :: String -> [String]
+    lines ""   = []
+    lines s    = let (l,s') = break ('\n'==) s
+                 in l : case s' of []      -> []
+                                   (_:s'') -> lines s''
+
+文字列を単語に分ける
+--------------------
+
+    Prelude> words "foo bar baz"
+    ["foo","bar","baz"]
+
+words は Prelude で定義されている
+
+    words     :: String -> [String]
+    words s    = case dropWhile isSpace s of
+                      "" -> []
+                      s' -> w : words s''
+                            where (w,s'') = break isSpace s'
+
+正規表現で文字列を分割する
+--------------------------
+
+    import Text.Regex
+    import Data.List
+
+    splitWithRx rstr str = splitWithRx' str
+      where
+        rx = mkRegex rstr
+        splitWithRx' str = case matchRegexAll rx str of
+                           Just (b, _, a, _) -> b : splitWithRx' a
+                           Nothing           -> [str]
+
+    splitWithRx'' rs str = unfoldr f str
+      where
+        rx = mkRegex rs
+        f s = matchRegexAll rx s >>= (\(b, _, a, _) -> Just (b, a))
+
+空文字列にマッチする正規表現を与えるのは危険。
+
+ふたつめの方法だと最後の要素が消えてしまう。最後にマッチするスプリッタ
+があればうまくいくんだけど。
+
+文字列を文字ごとに処理する
+--------------------------
+
+    Prelude> sequence_ [print x | x <- "abc"]
+    'a'
+    'b'
+    'c'
+
+文字列を連結する
+----------------
+
+リストですから，リストの連結の演算子 ++ で連結できます．
+
+    Prelude> "hello " ++ "wor" ++ "ld"
+    "hello world"
+
+正規表現にマッチした部分を置換する
+----------------------------------
+
+    import Text.Regex
+
+    sub re s str = case matchRegexAll re str of
+                      Just (b, _, a, _) -> b ++ s ++ a
+                      _ -> str
+
+    gsub re s str = case matchRegexAll re str of
+                      Just (b, _, a, _) -> b ++ s ++ gsub re s a
+                      _ -> str
+
+特定の文字(列)を置換する
+------------------------
+
+ruby 版とは挙動が違います。str の中から xs を見つけて ys に置換します。
+
+    tr str [] _ = str
+    tr str xs ys = tr' str xs []
+        where tr' str [] _ = ys ++ tr' str xs []
+              tr' (s:str) (z:zs) rs
+                 | s == z    = tr' str zs (s:rs)
+                 | otherwise = (reverse rs) ++ s:tr' str xs []
+              tr' [] _ rs = reverse rs
+
+    > tr "ruby 1.8.1" "." "_"
+    "ruby 1_8_1"
+    > tr "ruby 1ten6ten8" "ten" "."
+    "ruby 1.6.8"
+
+特定の文字をエスケープする
+--------------------------
+
+    escape xs y = flip (>>=) f
+        where f x | x `elem` xs = y:x:[]
+                  | otherwise   = x:[]
+
+    unescape x (y:yy:ys)
+        | x == y = yy:unescape x ys
+        | True   = y:unescape x (yy:ys)
+    unescape x ys = ys
+
+    > escape "!?_" '_' "Hi! How_are_you?"
+    "Hi_! How__are__you_?"
+
+文字を二重にしてエスケープする
+------------------------------
+
+不可視文字を表示する
+--------------------
+
+特定のエスケープ方式にする
+--------------------------
+
+文字列の一部を取り除く
+----------------------
+
+### 正規表現にマッチした部分を取り除く
+
+    import Text.Regex
+
+    sub rx x = matchRegexAll (mkRegex rx) x
+          >>= (\(before, _, after, _) -> Just (before ++ after))
+
+    *Main> sub "a+" "aabbcaa"
+    Just "bbcaa"
+    *Main> sub "b+" "aabbcc"
+    Just "aacc"
+    *Main> sub "b*" "aabbcc"
+    Just "aabbcc"
+    *Main> sub "b+" "aacc"
+    Nothing
+
++は最長マッチ、\*は最短マッチのようだ。 =\> これは間違い。
+単に先頭でマッチしてしまうだけ。
+
+### 特定の文字を取り除く
+
+    import List
+
+    delete' :: Eq a => a -> [a] -> [a]
+    delete' _ [] = []
+    delete' e (x:xs)
+        | e == x = delete' e xs
+        | True   = x : delete' e xs
+
+↑これはあほ
+
+    delete' e xs = filter (e/=) xs
+
+    List> delete' 'o' "gooooooooogle"
+    "ggle"
+
+    squeeze :: Eq a => a -> [a] -> [a]
+    squeeze _ []            = []
+    squeeze e [x]           = [x]
+    squeeze e (x:xxs@(xx:_))
+        | e == x && e == xx = squeeze e xxs
+        | otherwise         = x : squeeze e xxs
+
+    Prelude> squeeze 'g' "gggooogle"
+    "gooogle"
+
+### 文字列先頭・末尾の文字を取り除く
+
+    List> init "bar"
+    "ba"
+    List> tail "bar"
+    "ar"
+
+### インデックスを指定して取り除く
+
+    applyFst f (x, y) = (f x, y)
+
+    main = print $ applyFst init $ splitAt 3 "abcde"
+
+    ("ab","de")
+
+文字列の先頭・末尾から空白を取り除く
+------------------------------------
+
+### ナイーブな方法
+
+    Char> (dropWhile isSpace . reverse . dropWhile isSpace . reverse) " foo bar "
+    "foo bar"
+
+せっかくだから、関数にしよう。
+
+    trimSpace :: String -> String
+    trimSpace = dropWhile is Space . reverse . dropWhile isSpace . reverse
+
+タブと半角空白文字を変換する
+----------------------------
+
+    untabify :: Int -> String -> String
+    untabify tabstop str = concat (unfoldr phi (0,str))
+        where phi (n, '\t':s)
+                  = Just (replicate (tabstop - (n `mod` tabstop)) ' ', (0,s))
+              phi (n, c:s) = Just ([c], (n+1,s))
+              phi (_, [])  = Nothing
+
+    tabify :: Int -> String -> String
+    tabify tabstop str = f 0 str
+        where f n ('\t':str) = f (n+tabstop) str
+              f n (' ':str)  = f (n+1) str
+              f n str        = case n `divMod` tabstop of
+                               (t,s) ->
+                                   replicate t '\t' ++ replicate s ' ' ++
+                                   case str of
+                                   []   -> []
+                                   x:xs -> x : f 0 xs
+
+Ruby版も同じだと思うけど、逆変換になってないな。
+
+[レシピ1.7](marathon.cgi?%a5%ec%a5%b7%a5%d41.7) も参照。
+
+インデントを変更する
+--------------------
+
+### インデントする関数
+
+    -- 文字列の各行を半角空白文字n個分インデントする
+    indent0 :: Int -> String -> String
+    indent0 n = unlines . map (replicate n ' ' ++) . lines
+
+    -- タブ対応版
+    indent :: Maybe Int -> Int -> String -> String
+    indent (Just tabstop) n = unlines . map f . lines
+        where f line = tabify tabstop (replicate n ' ' ++ untabify tabstop line)
+    indent Nothing n = indent0 n
+
+### インデントを下げる関数
+
+    -- 文字列の各行を半角空白文字n個分アンインデントする
+    unindent0 n = unlines . map (f n) . lines
+        where f 0 s       = s
+              f n (' ':s) = f (n-1) s
+              f n s       = s
+
+    -- タブ対応版
+    unindent :: Maybe Int -> Int -> String -> String
+    unindent (Just tabstop) n = tabify tabstop . unindent0 n . untabify tabstop
+    unindent Nothing n = unindent0 n
+
+文字列の末尾に文字列を追加する
+------------------------------
+
+    > "abc" ++ "def"
+    "abcdef"
+
+文字列をn文字ずつに分割する
+---------------------------
+
+    import Data.List
+
+    divide n xs = case splitAt n xs of
+                    (a, []) -> [a]
+                    (a, b)  -> a : foo n b
+
+    Main> foo 3 ['a'..'z']
+    ["abc","def","ghi","jkl","mno","pqr","stu","vwx","yz"]
+
+文字列を最大n文字に切り詰める
+-----------------------------
+
+    *Main> take 5 "abcdefgh"
+    "abcde"
+    *Main> take 5 "\x3042\x3044\x3046\x3048\x304a\x304b\x304d"
+    "\12354\12356\12358\12360\12362"
+    *Main> take 5 "abc"
+    "abc"
+    *Main> take 5 "ab\n\ncde"
+    "ab\n\nc"
+    *Main> take 5 ""
+    ""
+
+メッセージダイジェストを作成する
+--------------------------------
+
+-   [http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/md5/](http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/md5/)
+-   [http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/sha1/](http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/sha1/)
+
+正規表現のメタ文字をエスケープする
+----------------------------------
+
+    escape :: [Char] -> Char -> String -> String
+    escape meta esc str = concat [ if c == esc || c `elem` meta
+                                     then [esc, c]
+                                     else [c]
+                                 | c <- str
+                                 ]
+
+foldr版
+
+    escape :: [Char] -> Char -> String -> String
+    escape meta esc = foldr phi []
+        where phi c s = if c == esc || c `elem` meta
+                        then esc:c:s
+                        else c:s
+
+いろいろなテキストフォーマットを解析する
+----------------------------------------
+
+### URI
+
+Network.URI の parseURI :: String -\> Maybe URI でパースできる
+
+    Prelude> :module +Network.URI
+    Prelude Network.URI> parseURI "http://user.pass@www.example.com:80/path/to/file?q=query#part"
+    Preludeng package network ... linking ... done.
+    Preludehttp://user.pass@www.example.com:80/path/to/file?q=query#part
+    Prelude Network.URI> parseURI "http://user.pass@www.example.com:80/path/to/file?q=query#part" >>= scheme
+    Prelude Network.URI> parseURI "http://user.pass@www.example.com:80/path/to/file?q=query#part" >>= return . scheme
+    Prelude"http"
+    Prelude Network.URI> parseURI "http://user.pass@www.example.com:80/path/to/file?q=query#part" >>= return . authority
+    Prelude"user.pass@www.example.com:80"
+    Prelude Network.URI> parseURI "urn:isbn:4797324295"
+    Just urn:isbn:4797324295
+
+### メール
+
+### RD
+
+### RDoc
+
+### Rubyのソースコード
+
+### その他、プログラム言語のソースコード
+
+「,」で区切られたデータ（CSV）を処理する
+--------------------------------------
+
+区切り記号での分割
+
+    divide x = unfoldr (\xs -> case break (x==) xs of
+                                 (_, []) -> Nothing
+                                 (p, q)  -> Just (p, tail q)
+                       )
+
+実行例:
+
+    Main> divide ',' "ab,cd,ef,g,,hi,,,"
+    ["ab","cd","ef","g","","hi","",""]
+
+特に区切り記号のエスケープなどは考えていない。
+あ、これじゃ最後の要素がやっぱり消えてしまう。 こういうとき、unfold
+ってどう使えばいいんだろ。 -- Y. Hanatani 2004/08/02 12:41:04 JST
+
+XML を解析する
+--------------
+
+[HaXml](http://projects.haskell.org/HaXml/) を使ってみる。
+
+[あおきにっきの RDF](http://i.loveruby.net/d/index.rdf) から title
+要素を抜き出す。
+
+    import Text.XML.HaXml
+    import Text.XML.HaXml.Pretty
+    import System.IO
+    import System.Environment
+
+    main = do ~[arg] <- getArgs
+              h <- openFile arg ReadMode
+              str <- hGetContents h
+              case xmlParse "err.txt" str of
+                (Document _ _ (Elem _ _ contents))
+                  -> mapM_ print $ map getTitle contents
+              hClose h
+
+    getTitle = map content . (keep /> tag "title" /> txt)
+
+適当に aoki.rdf というのを用意して、
+
+    $ runhugs rdf.hs aoki.rdf | nkf -e
+    [あおきにっき つっこみつき]
+    [2004-11-14のツッコミ[3] (青木)]
+    [るびま 3 号]
+    [2004-11-14のツッコミ[2] (たむら)]
+    [2004-11-14のツッコミ[1] (arton)]
+    [Linux本 (2)]
+    [Linuxプログラミング本]
+    [daily build]
+    [反省]
+    [ほしみ]
+    [2004-11-12のツッコミ[4] (青木)]
+    [2004-11-12のツッコミ[3] (yuco)]
+    [2004-11-12のツッコミ[2] (青木)]
+    [tDiary / コメント SPAM 避けチェックボックスパッチ]
+    [2004-11-12のツッコミ[1] (halchan)]
+    [2004-11-08のツッコミ[2] (青木)]
+
+値がいくつかあり、それを格納した配列を作る
+------------------------------------------
+
+    book :: Array Int String
+    book = array (0,2) (zip [0..] ["title", "author", "publisher"])
+
+listArray を使うと zip がいらない。
+
+    book :: Array Int String
+    book = listArray (0,2) ["title" , "author" , "publisher"]
+
+汎用オヤジ版 -- t15u
+
+    mkArray :: Int -> [a] -> Array Int a
+    mkArray i0 ls = listArray (i0, i0+length ls-1) ls
+
+多次元配列を作成する
+--------------------
+
+    array ((1, 1), (9, 9)) [((x, y), z) | x <- [1..9], y <- [1..9], let z = x == y]
+
+リスト内包表記の中にletが書けるって初めて知ったよ。
+
+リストのリストから二次元配列を作ろうと思ったら 添字の順序に注意が必要。
+transpose を使うと縦横を反転できる。
+
+    xs = [[1,2,3]
+         ,[4,5,6]
+         ,[7,8,9]
+         ]
+    array ((1, 1), (3, 3)) $ zip [(x, y) | y <- [1..3], x <- [1..3]] $ concat xs
+
+配列やハッシュの全要素を順に処理する
+------------------------------------
+
+リストに直してからあとはお好きなように。
+
+Data.Array
+
+    elems :: Ix i => Array i e -> [e]
+    assocs :: Ix i => Array i e -> [(i, e)]
+
+Data.HashTable
+
+    toList :: HashTable key val -> IO [(key, val)]
+
+Data.FiniteMap
+
+    fmToList :: FiniteMap key elt -> [(key, elt)]
+    keysFM :: FiniteMap key elt -> [key]
+    eltsFM :: FiniteMap key elt -> [elt]
+
+配列の要素を変更する
+--------------------
+
+    Array> listArray (1,26) ['a'..'z'] // [(4, '?'), (6, '#')]
+    array (1,26) [(1,'a'),(2,'b'),(3,'c'),(4,'?'),(5,'e'),(6,'#'),(7,'g'),(8,'h'),(9
+    ,'i'),(10,'j'),(11,'k'),(12,'l'),(13,'m'),(14,'n'),(15,'o'),(16,'p'),(17,'q'),(1
+    8,'r'),(19,'s'),(20,'t'),(21,'u'),(22,'v'),(23,'w'),(24,'x'),(25,'y'),(26,'z')]
+
+配列の要素をシャッフルする
+--------------------------
+
+リストのシャッフル
+
+    import Random
+
+    shuffle :: (RandomGen g) => g -> [a] -> ([a], g)
+    shuffle g l = f (g, l, length l)
+        where f (g,l,0) = ([],g)
+              f (g,l,n) =
+                  case randomR (0,n-1) g of
+                  (pos,g') ->
+                      case pickup pos l of
+                      (x,l') ->
+                          let (dest,g'') = f (g',l',n-1)
+                          in (x:dest, g'')
+
+    pickup :: Int -> [a] -> (a,[a])
+    pickup 0 (a:ax) = (a,ax)
+    pickup n (a:ax) = case pickup (n-1) ax of
+                      (x,ax') -> (x,a:ax')
+    pickup _ _ = error "shouldn't happen"
+
+    import Array
+    import System.Random
+
+    shuffle :: [a] -> IO [a]
+    shuffle ls
+     = do { arr' <- mksff n (listArray (0,n) ls)
+          ; return (elems arr')
+          }
+       where 
+         n = length ls - 1
+         mksff i a = if i == 0
+                       then return a
+                       else do { j <- randomRIO (0,i-1)
+                               ; mksff (i-1) (a//[(j,a!i),(i,a!j)])
+                               }
+
+配列の要素数を調べる
+--------------------
+
+bounds か length . indices
+
+配列の要素の出現回数を調べる
+----------------------------
+
+    import Data.FiniteMap
+
+    test = "haskeller"
+
+    count xs = foldl f emptyFM xs
+        where f fm x = addToFM fm x (1 + lookupWithDefaultFM fm 0 x)
+
+    main = print $ fmToList $ count test
+
+    [('a',1),('e',2),('h',1),('k',1),('l',2),('r',1),('s',1)]
+
+配列ならば elems でリストに直してから適用すればいい。
+
+配列から複数の要素を一度に取得する
+----------------------------------
+
+-fglasgow-exts
+
+    indexes arr xs = array (1,length xs) [(n, arr ! x) | x <- xs | n <- [1..]]
+
+配列のインデックスと要素のペアを取得する
+----------------------------------------
+
+    assocs
+
+配列から重複する要素を取り除く
+------------------------------
+
+リストから重複する要素を取り除く
+
+    uniq :: Eq a => [a] -> [a]
+    uniq []       = []
+    uniq (x : xs) = x : uniq [y | y <- xs, y /= x]
+
+    *Main> uniq "abccb"
+    "abc"
+
+nub (名前の由来：謎) 使え
+
+    Prelude> :module List
+    Prelude List> nub "abccb"
+    "abc"
+
+隣接している要素のみを比較
+
+    uniq :: Eq a => [a] -> [a]
+    uniq  (x:xx:xs)
+        | x == xx = uniq (x:xs)
+        | otherwise = x:uniq (xx:xs)
+    uniq xs = xs
+
+
+    *Main> uniq "abccb"
+    "abcb"
+
+配列から条件を満たす要素を取得する
+----------------------------------
+
+    filter
+
+配列なら elems してから filter
+
+配列の要素を検索する
+--------------------
+
+www.sampou.org
+[HowTo:List](http://www.sampou.org/cgi-bin/haskell.cgi?HowTo%3aList&l=jp)
+より
+
+    List> elem 'a' "baca"
+    True
+    List> elemIndex 'a' "baca"
+    Just 1
+    List> elemIndices 'a' "baca"
+    [1,3]
+    List> find even [1,2,3,4]
+    Just 2
+    List> findIndex even [1,1,2,3]
+    Just 3
+    List findIndices even [1,2,3,4]
+    [1,3]
+
+2つの配列に共通する要素を調べる
+-------------------------------
+
+    List> union [1,2,3] [2,3,4]
+    [1,2,3,4]
+    List> intersect [1,2,3] [2,3,4]
+    [2,3]
+
+2 つの配列の差を取る
+--------------------
+
+    [x | x <- "Hello, World", not $ elem x "abcde"]
+    "Hllo, Worl"
+
+配列を連結する
+--------------
+
+一次元の Int な配列なら
+
+    append :: Array Int a -> Array Int a -> Array Int a
+    append a a' = array (x, y + (w - z) + 1)
+                        (assocs a ++ [((i + y - z + 1), e) | (i, e) <- assocs a'])
+      where
+        (x, y) = bounds a
+        (z, w) = bounds a'
+
+リストなら
+
+    (++)
+
+配列の要素の順序を逆転する
+--------------------------
+
+### 一次元配列の場合
+
+    import Array
+
+    reverseArray a = ixmap (x, y) (\z -> y + x - z) a
+      where
+        (x, y) = bounds a
+
+    Main> reverseArray (array (2, 10) [(i, i) | i <- [2..10]])
+    array (2,10) [(2,10),(3,9),(4,8),(5,7),(6,6),(7,5),(8,4),(9,3),(10,2)]
+
+### リストの場合
+
+    Main> reverse [1..9]
+    [9,8,7,6,5,4,3,2,1]
+
+一定範囲の整数を要素とする配列を作成する
+----------------------------------------
+
+import IX
+
+    > range (1,10)
+    [1,2,3,4,5,6,7,8,9,10]
+
+配列を(「,」つきで)連結して文字列にする
+---------------------------------------
+
+    List> intersperse ',' "baca"
+    "b,a,c,a"
+    List> foldr1 (++) $ intersperse ", " ["Haskell", "Scheme", "OCaml"]
+    "Haskell, Scheme, OCaml"
+
+ハッシュに要素を追加する
+------------------------
+
+Data.HashTable
+
+    insert hash key elt
+
+Data.FiniteMap
+
+    addToFM fm key elt
+
+ハッシュ内にキーが存在するか調べる
+----------------------------------
+
+    lookup :: HashTable key val -> key -> IO (Maybe val)
+
+    lookupFM :: Ord key => FiniteMap key elt -> key -> Maybe elt
+
+ハッシュの要素を削除する
+------------------------
+
+    delete :: HashTable key val -> key -> IO ()
+
+    delFromFM :: Ord key => FiniteMap key elt -> key -> FiniteMap key elt
+    delListFromFM :: Ord key => FiniteMap key elt -> [key] -> FiniteMap key elt
+
+ハッシュの要素を挿入した順に取り出す
+------------------------------------
+
+リストを併用する
+
+配列やハッシュをソートする
+--------------------------
+
+Data.FiniteMap の fmToList の出力結果は sorted.
+
+ハッシュをマージする
+--------------------
+
+    plusFM :: Ord key => FiniteMap key elt -> FiniteMap key elt -> FiniteMap key elt
+
+    *Main Data.FiniteMap> fmToList $ plusFM (listToFM [(1,1)]) (listToFM [(1,2)])
+    [(1,2)]
+
+第二引数の要素が優先されるようです。
+
+巨大で疎な配列を使う
+--------------------
+
+Data.FiniteMap\
+ か\
+ Data.HashTable\
+ を使う
+
+スタックやキューを使う
+----------------------
+
+リスト2つを使った実装
+
+    nullQ :: Queue a
+    nullQ = Q [] []
+
+    addQ :: Queue a -> a -> Queue a
+    addQ (Q xs ys) y = Q xs (y:ys)
+
+    removeQ :: Queue a -> (a, Queue a)
+    removeQ (Q [] [])     = error "Queue is null"
+    removeQ (Q (x:xs) ys) = (x, Q xs ys)
+    removeQ (Q [] ys) = (head r, Q (tail r) []) where r = reverse ys
+
+リスト2つを使った実装 その2
+
+    -- invariant: forall (Q xs ys). null xs => null ys
+    data Queue a = Q ![a] ![a]
+
+    nullQ :: Queue a
+    nullQ = Q [] []
+
+    addQ :: Queue a -> a -> Queue a
+    addQ (Q [] ys) y = Q [y] ys
+    addQ (Q xs ys) y = Q xs (y:ys)
+
+    removeQ :: Queue a -> Maybe (a, Queue a)
+    removeQ (Q [] _)      = Nothing
+    removeQ (Q (x:xs) ys) = Just (x, q xs ys)
+        where q [] ys = Q (reverse ys) []
+              q xs ys = Q xs ys
+
+リスト1つと関数1つを使った実装
+
+    -- invariant: forall Q xs f. null xs => f==id
+    data Queue a = Q ![a] !([a] -> [a])
+
+    nullQ :: Queue a
+    nullQ = Q [] id
+
+    addQ :: Queue a -> a -> Queue a
+    addQ (Q [] f) x = Q [x] f
+    addQ (Q xs f) x = Q xs (f . (x:))
+
+    removeQ :: Queue a -> Maybe (a, Queue a)
+    removeQ (Q [] _)     = Nothing
+    removeQ (Q (x:xs) f) = Just (x, q xs f)
+        where q [] f = Q (f []) id
+              q xs f = Q xs f
+
+Data.Queue みたいなのはない
+[DData.Queue](http://legacy.cs.uu.nl/daan/download/ddata/doc/Queue.html)
+
+パス名がパターンにマッチするか調べる。
+--------------------------------------
+
+    data Fmatch = C Char
+                | R [(Char, Char)]
+                | NR [(Char, Char)]
+                | OC
+                | AC deriving Show
+
+    fmatch :: [Fmatch] -> String -> Bool
+    fmatch (C x:xs) (y:ys) = x == y && fmatch xs ys
+    fmatch (R (x:xx):xs) (y:ys) = fst x <= y && y <= snd x && fmatch (R xx:xs) ys
+    fmatch (NR (x:xx):xs) (y:ys) = (y < fst x || snd x < y) && fmatch (NR xx:xs) ys
+    fmatch (OC:xs) (y:ys) = fmatch xs ys
+    fmatch (AC:xs) (y:ys) = fmatch (AC:xs) ys || fmatch xs (y:ys)
+    fmatch [] [] = True
+    fmatch _ _ = False
+
+    mkFmatch :: String -> [Fmatch]
+    mkFmatch ('?':xs) = OC:mkFmatch xs
+    mkFmatch ('*':xs) = AC:mkFmatch xs
+    mkFmatch ('[':'^':xs) = cons $ applyFst NR $ mkFmatch' xs
+    mkFmatch ('[':xs) = cons $ applyFst R $ mkFmatch' xs
+    mkFmatch (x:xs) = C x:mkFmatch xs
+    mkFmatch "" = []
+
+    mkFmatch' :: String -> ([(Char, Char)], [Fmatch])
+    mkFmatch' (x:'-':xx:xs) = applyFst ((x, xx):) $ mkFmatch' xs
+    mkFmatch' (']':xs) = ([], mkFmatch xs)
+    mkFmatch' (x:xs) = applyFst ((x, x):) $ mkFmatch' xs
+
+
+    cons (x, xs) = x:xs
+
+    applyFst f (x, y) = (f x, y)
+
+現在のディレクトリ名を取得する
+------------------------------
+
+System.Directory の getCurrentDirectory :: IO FilePath を使う
+
+    Prelude> :module +System.Directory
+    Prelude System.Directory> getCurrentDirectory >>= putStrLn
+    /home/sakai/
+
+現在のディレクトリを変更する
+----------------------------
+
+System.Directory の setCurrentDirectory :: FilePath -\> IO () を使う。
+
+    Prelude> :module +System.Directory
+    Prelude System.Directory> setCurrentDirectory "/usr"
+    Prelude System.Directory> getCurrentDirectory >>= putStrLn
+    /usr
+
+ビット演算を行える型のクラスは Data.Bits のBitsクラスです。
+
+    Prelude> :module +Data.Bits
+    Prelude Data.Bits> :info Bits
+    -- Bits is a class
+    class (Num a) => Bits a where {
+        (.&.) :: a -> a -> a;
+        (.|.) :: a -> a -> a;
+        xor :: a -> a -> a;
+        complement :: a -> a;
+        shift :: a -> Int -> a {- has default method -};
+        rotate :: a -> Int -> a {- has default method -};
+        bit :: Int -> a {- has default method -};
+        setBit :: a -> Int -> a {- has default method -};
+        clearBit :: a -> Int -> a {- has default method -};
+        complementBit :: a -> Int -> a {- has default method -};
+        testBit :: a -> Int -> Bool {- has default method -};
+        bitSize :: a -> Int;
+        isSigned :: a -> Bool;
+        shiftL :: a -> Int -> a {- has default method -};
+        shiftR :: a -> Int -> a {- has default method -};
+        rotateL :: a -> Int -> a {- has default method -};
+        rotateR :: a -> Int -> a {- has default method -};
+        }
+
+例:
+
+回数を指定して処理を繰り返す
+----------------------------
+
+    times n f = foldl (.) id $ replicate n f
+
+    Prelude> (foldl (.) id $ replicate 3 (2*)) 1
+    8
+
+Monad だと mapM\_ (replicate n f) でいいのかな。
+
+最大値・最小値を求める
+----------------------
+
+    Prelude> max 1 2
+    2
+    Prelude> min 1 2
+    1
+    Prelude> maximum [1..3]
+    3
+    Prelude> minimum [1..3]
+    1
+
+数値の総和を求める
+------------------
+
+sum :: (Num a) =\> [a] -\> a が便利
+
+    Prelude> sum [1,2,3,4,5]
+    15
+
+絶対値を求める
+--------------
+
+abs :: (Num a) =\> a -\> a を使います。
+
+    Prelude> abs 2
+    2
+    Prelude> abs 0
+    0
+    Prelude> abs (-2)
+    2
+    Prelude> abs 2.3
+    2.3
+    Prelude> abs (-2.3)
+    2.3
+    Prelude> :module +Complex
+    Prelude Complex> abs (3 :+ 4)
+    5.0 :+ 0.0
+
+割り算の余りを求める
+--------------------
+
+Interal クラスの rem, div, mod, quot, divMod, quotRem
+といったメソッドを使います。
+
+    Prelude> :info Integral
+    -- Integral is a class
+    class (Real a, Enum a) => Integral a where {
+        rem :: a -> a -> a {- has default method -};
+        div :: a -> a -> a {- has default method -};
+        mod :: a -> a -> a {- has default method -};
+        quot :: a -> a -> a {- has default method -};
+        divMod :: a -> a -> (a, a) {- has default method -};
+        quotRem :: a -> a -> (a, a);
+        toInteger :: a -> Integer;
+        }
+    Prelude> 5 `div` 2
+    2
+    Prelude> 5 `mod` 2
+    1
+    Prelude> (5 `div` 2) * 2 + (5 `mod` 2)
+    5
+    Prelude> 5 `divMod` 2
+    (2,1)
+    Prelude> 10 `divMod` (-3)
+    (-4,-2)
+    Prelude> 10 `quotRem` (-3)
+    (-3,1)
+
+べき乗を求める
+--------------
+
+-   (\*\*) :: (Floating a) =\> a -\> a -\> a
+-   (\^) :: (Num a, Integral b) =\> a -\> b -\> a
+-   (\^\^) :: (Fractional a, Integral b) =\> a -\> b -\> a
+
+の三つの関数があるので、型によって使い分ける。
+
+    Prelude> 3 ^ 4
+    81
+    Prelude> 4 ^^ (-2)
+    6.25e-2
+    Prelude> 10 ^ 0
+    1
+    Prelude> 2 ** 3.5 
+    11.313708498984761
+    Prelude> 2 ^ 128
+    340282366920938463463374607431768211456
+
+複素数のべき乗も計算できる
+
+    Prelude> :module +Data.Complex
+    Prelude Data.Complex> (0 :+ 3) ** (4 :+ 1)
+    7.658580080790688 :+ 14.995755028498099
+
+最大公約数と最小公倍数を求める
+------------------------------
+
+最大公約数
+
+    Prelude> 1105 `gcd` 3570
+    85
+
+最小公倍数
+
+    Prelude> 123 `lcm` 33
+    1353
+
+平方根を求める
+--------------
+
+Floating クラスの sqrt :: a -\> a を使います。
+
+    *Main> sqrt 10
+    3.1622776601683795
+    *Main> sqrt 2.0
+    1.4142135623730951
+    *Main> :module +Data.Complex
+    *Main Data.Complex> 2 ** 0.5
+    1.4142135623730951
+    *Main Data.Complex> sqrt (-1 :: Complex Double)
+    -0.0 :+ 1.0
+    *Main Data.Complex> sqrt (-10 :: Complex Double)
+    -0.0 :+ 3.1622776601683795
+
+三角関数を計算する
+------------------
+
+Floatingクラスのメソッドを使います。
+
+    Prelude> :info Floating
+    -- Floating is a class
+    class (Fractional a) => Floating a where {
+        pi :: a;
+        log :: a -> a;
+        sqrt :: a -> a {- has default method -};
+        exp :: a -> a;
+        logBase :: a -> a -> a {- has default method -};
+        (**) :: a -> a -> a {- has default method -};
+        cos :: a -> a;
+        tan :: a -> a {- has default method -};
+        sin :: a -> a;
+        acos :: a -> a;
+        atan :: a -> a;
+        asin :: a -> a;
+        cosh :: a -> a;
+        tanh :: a -> a {- has default method -};
+        sinh :: a -> a;
+        acosh :: a -> a;
+        atanh :: a -> a;
+        asinh :: a -> a;
+        }
+
+    deg2rad :: (Floating a) => a -> a
+    deg2rad deg = deg / (360 / (pi * 2))
+
+    *Main> sin (deg2rad 30)
+    0.49999999999999994
+
+直交座標を局座標に変換する
+--------------------------
+
+Data.Complex の polor :: (RealFloat a) =\> Complex a -\> (a, a)
+を使うと便利です。
+
+    *Main> :module +Data.Complex
+    *Main Data.Complex> polar (3 :+ 4)
+    (5.0,0.9272952180016122)
+
+対数計算を行う
+--------------
+
+Floating のメソッドである以下のような関数を使います。
+
+-   log :: (Floating a) =\> a -\> a
+-   sqrt :: (Floating a) =\> a -\> a
+-   exp :: (Floating a) =\> a -\> a
+-   logBase :: (Floating a) =\> a -\> a -\> a
+
+<!-- -->
+
+    *Main> logBase 10 1000
+    2.9999999999999996
+    *Main> log 10
+    2.302585092994046
+    *Main> exp (log 10)
+    10.000000000000002
+    *Main> logBase 2 8
+    3.0
+    *Main> logBase 2 10
+    3.3219280948873626
+
+浮動小数点を丸める
+------------------
+
+RealFrac のround, truncate, floor, ceiling といったメソッドを使います。
+
+    *Main> :info RealFrac
+    -- RealFrac is a class
+    class (Real a, Fractional a) => RealFrac a where {
+        properFraction :: forall b. (Integral b) => a -> (b, a);
+        round :: forall b. (Integral b) => a -> b {- has default method -};
+        truncate ::
+            forall b. (Integral b) => a -> b
+            {- has default method -};
+        floor :: forall b. (Integral b) => a -> b {- has default method -};
+        ceiling ::
+            forall b. (Integral b) => a -> b
+            {- has default method -};
+        }
+
+    *Main> round 1001.2
+    1001
+    *Main> truncate 1001.2
+    1001
+    *Main> ceiling 1001.2
+    1002
+    *Main> floor 1001.2
+    1001
+
+    *Main> round (-1001.2)
+    -1001
+    *Main> truncate (-1001.2)
+    -1001
+    *Main> ceiling (-1001.2)
+    -1001
+    *Main> floor (-1001.2)
+    -1002
+
+    *Main> round 1001.5
+    1002
+    *Main> truncate 1001.5
+    1001
+    *Main> ceiling 1001.5
+    1002
+    *Main> floor 1001.5
+    1001
+
+    *Main> round (-1001.5)
+    -1002
+    *Main> truncate (-1001.5)
+    -1001
+    *Main> ceiling (-1001.5)
+    -1001
+    *Main> floor (-1001.5)
+    -1002
+
+複素数を使う
+------------
+
+Complex
+[http://www.**haskell**.org/onlinereport/complex.html](http://www.haskell.org/onlinereport/complex.html)
+
+中置データコンストラクタ :+ で，実部と虚部から作成．極座標表現からは
+mkPolar ．逆に複素数から絶対値と偏角のタプルを得るには polar ．
+
+    Prelude> :module Complex
+    Prelude Complex> 3 :+ 5
+    3.0 :+ 5.0
+    Prelude Complex> mkPolar 3 (pi / 4)
+    2.121320343559643 :+ 2.1213203435596424
+    Prelude Complex> polar $ mkPolar 3 (pi / 4)
+    (3.0,0.7853981633974482)
+
+演算については，Complex は Eq, Read, Show, Num, Fractional, RealFloat
+の各クラスのインスタンスなので，ふつうの算術演算子が使える．
+
+（※：虚部が負の場合，負号のすぐ外側の括弧は必須）
+
+    Prelude> :module Complex
+    Prelude Complex> (3 :+ 5) + (2 :+ (-2))
+    5.0 :+ 3.0
+    Prelude Complex> (3 :+ 5) - (2 :+ (-2))
+    1.0 :+ 7.0
+    Prelude Complex> (3 :+ 5) * (2 :+ (-2))
+    16.0 :+ 4.0
+    Prelude Complex> (3 :+ 5) / (2 :+ (-2))
+    (-0.5) :+ 2.0
+
+射影関数は realPart と imagPart ．
+
+    Prelude> :module Complex
+    Prelude Complex> realPart (3 :+ 5)
+    3.0
+    Prelude Complex> imagPart (3 :+ 5)
+    5.0
+
+そのほか，共軛・cis (与えられた偏角で絶対値が 1 の複素数を返す：名前は θ
+に対して **C**os θ + **i** **S**in θ を返す，から，だろう（by nobsun）)
+・極座標への射影．
+
+    Prelude> :module Complex
+    Prelude Complex> conjugate (16 :+ 4)
+    16.0 :+ (-4.0)
+    Prelude Complex> cis 10
+    (-0.8390715290764524) :+ (-0.5440211108893698)
+    Prelude Complex> magnitude (1 :+ 1)
+    1.4142135623730951
+    Prelude Complex> phase (1 :+ 1)
+    0.7853981633974483
+
+有理数を使う
+------------
+
+Ratio モジュールの一部
+
+Ratio モジュール
+[http://www.**haskell**.org/onlinereport/ratio.html](http://www.haskell.org/onlinereport/ratio.html)
+
+中置の抽象データコンストラクタ % で作れる．export
+されてないので，直接データコンストラクタを使うことはできない．
+
+演算は，Eq, Ord, Num, Real, Fractional, RealFrac, Enum, Read, Show
+のインスタンスであるので，
+
+コマンドライン引数を解析する
+----------------------------
+
+    data Option = All
+                | Usr_
+                | Usr String
+                | Fmt String
+                | Help deriving Show
+
+    cmdOpt :: String -> [Option]
+    cmdOpt = cmdOpt' . words
+      where
+        cmdOpt' ("-a":xs) = All : cmdOpt' xs
+        cmdOpt' ("--all":xs) = All : cmdOpt' xs
+        cmdOpt' ("-u":x:xs)
+          | head x == '-' = Usr_ : cmdOpt' (x:xs)
+          | otherwise     = Usr x : cmdOpt' xs
+        cmdOpt' ("--user":x:xs)
+          | head x == '-' = Usr_ : cmdOpt' (x:xs)
+          | otherwise     = Usr x : cmdOpt' xs
+        cmdOpt' ("-f":x:xs) = Fmt x : cmdOpt' xs
+        cmdOpt' ("--format":x:xs) = Fmt x : cmdOpt' xs
+        cmdOpt' ("--help":_) = [Help]
+
+同じことを二回書く(-aと--allなど)は嫌だなあ。
+
+こういうときは System.Console.GetOpt を使う。
+
+TCP クライアントを作る
+----------------------
+
+    import Network
+    import IO
+
+    crlf = "\r\n"
+
+    main = withSocketsDo sockMain
+
+    sockMain = do h <- connectTo "www.sampou.org" (PortNumber 80)
+                   hPutStrLn h "GET / HTTP/1.1"
+                   hPutStrLn h "HOST: www.sampou.org"
+                   hPutStrLn h crlf
+                   str <- hGetContents h
+                   putStrLn str
+
+TCP サーバを作る
+----------------
+
+送った文字列の長さを返してくれるサーバ
+
+    import Network
+    import IO
+
+    main = withSocketsDo sockMain
+
+    sockMain = do sock <- listenOn (PortNumber 7001)
+                  loop sock
+
+    loop sock = do (h, _, _) <- accept sock
+                   eof <- hIsEOF h
+                   if eof then return ()
+                          else do str <- hGetLine h
+                                  hPutStrLn h (show (length str))
+                                  hClose h
+                                  loop sock
+
+横長
+
+    import Network
+    import IO
+
+    main = withSocketsDo sockMain
+
+    sockMain =listenOn (PortNumber 7001) >>= loop
+
+    loop sock = do (h, _, _) <- accept sock
+                   eof <- hIsEOF h
+                   if eof then return ()
+                          else do hGetLine h　>>= hPutStrLn h . show . length >> hClose h >> loop sock
+
+明示的な再帰を消してみる。……と思ったけど、これじゃ振る舞いが変わっちゃう。
+
+    import Network
+    import IO
+    import Monad
+
+    main = withSocketsDo $ sequence_ (repeat f)
+
+    f = do sock <- listenOn (PortNumber 7001)
+           (h, _, _) <- accept sock
+           eof <- hIsEOF h
+           if eof
+              then return ()
+              else do str <- hGetLine h
+                      hPutStrLn h (show (length str))
+                      hClose h
+
+* * * * *
+
+最終更新 : 2004/11/20 18:17:33 JST
