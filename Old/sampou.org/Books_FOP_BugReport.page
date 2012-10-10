@@ -14,6 +14,449 @@ toc: no
 www.sampou.orgから引越してきました。-- nobsun (Sun Jan  8 23:21:20 UTC 2012)
 
 * * * * *
+
+2012/07/05 18:16:42 JST -- gotoki\_no\_joe
+
+#### p.142, p.151, p.154
+
+fromInt → fromIntegral
+
+#### p.143 図 7.3
+
+altRing → altRings
+
+#### p.148 図7.9, 7.10
+
+いずれも width = 3 だけにするのが正しい
+
+#### p.149 swirlP の定義
+
+rotate → rotateP 原著も同じ誤り
+
+#### p.150 l.-4 以降 3 行
+
+and → (&&), or → (||), lift1→ lift2 \
+ 原著も同じ誤り
+
+#### p.153 l.-2
+
+ρを反転する → ρを逆数にする
+
+#### p.156 練習問題7.11
+
+例に使っている wipe2 が未定義
+
+#### p.156 l.-4
+
+     ファイル表現(...1)からの変換は、実際の色の配列(...2)を生成してソートするのではなく、「添字指定」中にオンザフライで行う。
+
+Rather than creating and storing an actual array of colours, each
+represented as a quadruple of floating point numbers, conversion from
+the file representation (typically 1, 8, 16, or 24 bits per pixel) is
+done on-the-fly during ‘subscripting’. \
+ sorting ではなく storing
+
+     ファイル表現(...1)からの変換は、色の配列(...2)を実際に作成して格納する代わりに、「添字指定」中にオンザフライで行う。
+
+#### p.157 l.3
+
+     領域内の点がピクセル位置の離散集合へと写像されることはあまりない。
+
+Inner points generally do not map to one of the discrete set of pixel
+locations,
+
+     領域内の点を写像した先がピクセル位置の離散集合のある要素にぴったり来ることはまずない。
+
+#### p.157 l.6
+
+画像のresamplingにおけるbilinearは「線形補間」でよいのでは。
+
+#### p.158 inBoundsの定義
+
+reconstructの定義中で、(x,y)が(w-1,h-1)に入っていればcropされずにbilerpArray2が呼び出される。
+しかし、x=w-1,y=h-1というギリギリの位置にいるとき、sub (i+1,j)
+などの呼び出しは out of range になる。
+結局Array2に与える関数の定義にも依るが、簡単に解決するには inBoundsの
+\<= fromInt (\*-1) を \<fromIntegral (\*-1) に変えるのが楽。
+
+#### p.159 l.6
+
+形式化手法 → 定式化 \
+ formulation であって formalizationではない。
+
+#### p.159 l.8
+
+Paul Hudakは...を使ってもいる → Paul Hudakも...を使っている
+
+* * * * *
+
+2012/06/18 17:51:20 JST -- gotoki\_no\_joe
+
+6章
+
+#### p.117
+
+Franと同様に、ここでも観測可能項のレベルへの持ち上げ関数に対応するコンビネータlift,lift2などを提供する。\
+ Like Fran, we provide combinators for lifting functions to the
+observable level, lift, lift2, and so on.\
+ Franと同様に、関数を観測可能項のレベルに持ち上げるコンビネータlift,
+lift2などを提供する。\
+ (liftの型を見れば明らか。)
+
+#### p.120 l.-3 c10の式
+
+× rainInCyrus %\> 10\
+ ○ rainInCyprus %\> konst 10\
+ 'p'の抜けと持ち上げの抜けの2点\
+ (%\>) は Num クラスのメソッドではないので明示的な型変換が必要。
+
+#### p.121 l.-9
+
+× 2004年 ○ 2003年
+
+#### p.122 betweenの定義
+
+t1とt2にkonstを付ける
+
+#### p.129 (A4) TeX typo
+
+× eschk1 ○ exch\_{k1}
+
+#### p.130 snell\_kの式
+
+× \\forall o' ・(o ... \
+ ○ \\forall o' . (o ... \
+ なお、最新版ではdisc\_kでなくsnell\_kを使った式で説明していますが、
+それでは循環定義になるので、disc\_kを使ったFOPの定義の方が正解に近いのではないかと思います。
+
+#### p.133 l.-3
+
+E\_BGP -\> E\_GBP
+
+#### p.134 l.-2
+
+価値評価過程 x仮定
+
+#### p.135 l.2
+
+次節 (next subsection)\
+ §6.6には見あたらないし、subsectionは存在しないし、どこのことでしょう。
+
+8章
+
+#### p.161
+
+コアとは、個別の関数を実装するために\
+ A core is a predesigned block to implement a particular function\
+ コアとは、何らかの機能を実現するために\
+
+ここの function は純関数ではなくてレジスタを含む「機能」のこと。
+
+#### p.161続き
+
+顧客が自社の FPGA
+を使う環境を整備することで、さらなるコアの購入を促している。\
+ to make it easier for their customers to use their FPGAs, thus
+encouraging the customers to buy more of them.\
+
+(全ての機能を各自で開発するのではなく、再利用可能かつ高性能な機能ブロックであるコアのラインアップを充実させることで）
+自社の FPGA を顧客にとってより使いやすくすることで、FPGA
+の購入を促している。\
+ 最終的に販売したいのはコアでなく FPGA そのものという文章だと思う。
+
+#### p.169 中ほど
+
+「検証可能」(Checkable) は初出なので太字にする。
+
+#### p.170 中ほど
+
+性質は Bit よりも複雑で多くの情報を含む。\
+ 「性質」は英語でも小文字で property と書いてあるが、ここは「Property
+型」としないと意味が通じない。
+
+#### 問題8.8
+
+n でパラメータ化した性質、すなわち 1 から指定した n
+までのサイズすべてで性質が成り立つかどうかを検証する関数を定義せよ。\
+ Define a function that verifies a parameterised property for all sizes
+from 1 up to a specific n.\
+ サイズによりパラメータ化した性質に対して、サイズ 1 から n
+までの全てで性質が成り立つかを検証する関数を定義せよ。
+
+#### 問題 8.10
+
+「3 番目、6 番目、9 番目、」の後ろに “and so on” を表す「…」が必要。
+
+#### p.178 l.3
+
+ここで実装する回路はコンピュータのビット上でしか動作しない。…精緻化\
+ the circuits that we implement works only on bits. …refine\
+ (Lava で) 実装できる回路はビットしか扱えない。
+…整数をビットでどう表現するかを決めて、その定義に基づいて比較器を具体化する必要がある。
+
+#### p.179 中程 typo
+
+バイトニックマージャの定義に bfly *を*使ってもよい。
+
+#### p.179 l.-2
+
+また、evens f は 2n-リストから 2n-リストへの写像でなければならない。\
+ The f parameter must have two-lists (that is, lists of length two) as
+both input and output, and evens f maps 2n-lists to 2n-lists.\
+ evens f は 2n-リストから 2n-リストへの写像である。 (must は,and
+の前までしか効いてない。map には３単元の s が付いているので must
+はかかっていない。)
+
+#### p.181 sec8.9 l.3
+
+Virtex-II という特別なアーキテクチャの\
+ specific\
+ Virtex-II という (特定の) アーキテクチャの\
+ (Virtex は普通の市販品 FPGA です。)
+
+#### p.181 l.-2
+
+LUT
+の出力にレジスタをバイパスさせることによって、組み合わせ論理関数を実装したセルを構成できる。\
+ A cell can be configured to implement a combinational logic function by
+making the output of the look-up table bypass register.\
+ レジスタをバイパスして LUT
+の出力を取り出すことで、組み合わせ論理関数を実現するようにセルを設定(構成)できる。\
+ (意訳)
+
+#### p.182 l.-5
+
+リップル加算器\
+ ripple-carry adder\
+ リップルキャリー加算器\
+
+(スタッドレスタイヤを「スタッドレス」でなく「スタッド」と略すくらい変。)
+
+#### p.183 l.5
+
+特別な→特定の
+
+#### p.183 l.6
+
+6入力ゲートは3つの4入力LUTにマッピングされる\
+ a six-input and gate ...\
+ 6入力*AND*ゲート...
+
+#### p.183 l.-4
+
+Lava にはライブラリを使って直接マッピングを行う技術がある。\
+ it provides technology mapping directly through libraries.\
+ Lava ではテクノロジマッピングはライブラリを直接用いて行う。\
+ c.f.
+[http://mix.kumikomi.net/index.php/%E3%83%86%E3%82%AF%E3%83%8E%E3%83%AD%E3%82%B8%E3%83%BB%E3%83%9E%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0](http://mix.kumikomi.net/index.php/%E3%83%86%E3%82%AF%E3%83%8E%E3%83%AD%E3%82%B8%E3%83%BB%E3%83%9E%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0)
+
+    テクノロジ・マッピング【Technology Mapping】 ゲート・レベルのネットリスト（論理ゲート，基本
+    セルなど）を，特定の半導体製造技術のライブラリ（マクロセルなど）に割り当てていくこと．
+
+#### p.186 l.4?
+
+  ------------------------ --------------------------- ---------------------------------- --------------------
+  記述                     原文                        正しい訳語                         注
+  設計の実体部             entity part of the design   設計のエンティティ (entity) 部     VHDL 用語
+  設計のアーキテクチャ部   achitecture part            アーキテクチャ (architecture) 部   同上
+  部品                     components                  コンポーネント (component)         同上
+  1出力バッファ            one output buffer           1つの出力バッファ                  ※
+  2入力バッファ            two input buffers           2つの入力バッファ                  ※ (buffers:複数形)
+  ------------------------ --------------------------- ---------------------------------- --------------------
+
+※
+FPGA内部の信号レベルに比べて大きい、LSIの外とやり取りするための信号レベルを合わせるためのバッファ
+
+#### p.187 l.4
+
+and ゲートの出力は、同じ名前の信号 lava(4)
+を使って、インバータの入力に接続する。\
+ The output of the and gate is connected to the input of the inverter by
+giving both signals the same name, lava(4).\
+ and ゲートの出力とインバータの入力に同じ信号名 lava(4)
+を指定することで、両者が結線されていることを表す。\
+ (この give
+は名前を付ける意味ではなく、コンポーネントインスタンス文の実引数に渡しているという意味と解釈する。)
+
+#### p.187 l.8
+
+部品は...位置する\
+ The comments show where each cell is positioned.\
+ コメントは...配置される\
+ (componentとcommentを見間違えないでください…)
+
+#### p.187 l.9
+
+直列合成の使い方と矛盾しない\
+ which is consistent with the use of the left to right serial
+composition.\
+ 直列合成を用いて指示したとおりになっている。
+
+#### p.187 l.-11
+
+設計結果の平面図は長方形に詰め込まれる\
+ the resulting floorplan for the design is packed rectangle in which
+every cell is used.\
+ 設計に対する実装結果のフロアプラン (floorplan) は packed rectangle
+になり、その中の全てのセルが使用された。\
+ (フロアプランは業界用語。再利用できる部品としてIPを作るとき、
+配置するときに他の部品との干渉を避けるために長方形に固める。
+これをpacked rectangleという(ような気がする)。
+この中に未使用セルがあるともったいないが、そうなっていない、と自慢している。)
+
+#### p.187 l.-9
+
+集合 set セット/組\
+ 数学の集合ではなく、集まりという程度の意味。
+
+#### p.187 l.-2
+
+結果として生成されるネットリストを置き換える必要がある。\
+ which means that the resulting netlists have to be automatically
+placed.\
+ (VHDLでは設計者が配置を明示して設計する標準的な方法がないため)
+ネットリストの配置は(高度に賢くはない)自動配置に行わせるしかない。\
+ (replaced じゃなくて placed)
+
+* * * * *
+
+2012/04/16 07:45:08 JST -- gotoki\_no\_joe
+
+#### p.226 問題10.10
+
+firstの分配公理が成り立つことを証明せよ。\
+ Prove the functor axiom for first in the arrow defined in the previous
+exercise. This requires the distributivity axiom.\
+ firstの関手公理(p.220 l.2)が成り立つことを証明せよ。
+証明には分配公理(p.225 l.10)が必要である。
+
+問題10.9で作るのはArrowであってArrowChoiceではない。
+
+#### p.227 l.-7
+
+オートマトンについては、出力の一部を入力にフィードバックするというより巧妙なところがある。\
+ The instance for automata is more subtle. At each stage, part of the
+output is fed back to the input:\
+ オートマトンのインスタンスはかなり奇妙だ。
+毎回の状態遷移において、出力の一部が入力にフィードバックされる。
+
+#### p.228 l.-5
+
+アローを定義するλ式を変化させたものである。\
+ a variation on a lambda expression that defines an arrow.\
+ アローを定義する、λ式の変種である。\
+ つまり：\
+
+普通のλ式は関数というアローを定義する。「λ、パターン、→、式(パターン内の変数を参照できる)」
+と書く。\
+ パターンの型をb、式の型をcとしたとき、b→c という型の関数式になる。\
+
+これの強化版で、あらゆるアローを定義する記法を定義する。「proc、パターン、→、コマンド」と書く。\
+ 型は、アローがaのとき a b c となる。
+
+#### p.228 l.-4
+
+この場合、入力の形式は()である。\
+ In this case the input has the form ().\
+ genSymの例では入力(引数のパターン)は()という形をしている。
+
+#### p.232 中段
+
+図10.3の表現を直接表現\
+ This corresponds rather directly to the graphical presentation of
+Figure 3.\
+ 図10.3の図式/図表現とほぼ直接対応している
+
+#### p.234 上段
+
+関数pureは、木の葉の上の関数を写像する。\
+ The function pure maps a function over the leaves of the tree.\
+ pureは木の葉の上の関数を木全体の葉にmapする。
+
+#### p.234 2段落目
+
+基底(1要素の木)の場合では純粋な関数を提供し、ペアの木の場合では式を提供する。このとき通常はより小さい木に対しても同じアルゴリズムを呼び出す。\
+ one often provides a pure function for the base case (trees of one
+element) and an expression for trees of pairs, usually invoking the same
+algorithm on smaller trees.\
+ Hom型の値としてこのアローの上でアルゴリズムを記述するには、
+基底(:&:の左)には純粋な関数を置き、ペアの木の場合(:&:の右)には式
+―通常は、より小さい木に対して同じアルゴリズムを適用するような記述―
+を置く。
+
+以降のscanとかがその具体例になっている。
+
+* * * * *
+
+2012/03/29 14:40:22 JST -- gotoki\_no\_joe
+
+#### p.218 恒等性の公理
+
+idA \>\>\> f と f \>\>\> idA と f は対等なので、=の位置を3等分するべき
+
+#### p.219 l.10
+
+× 関数\
+ ○ 関手
+
+#### p.231 §10.4
+
+tick はこのコンテキストでは(先頭以外)「刻み」ではなく「時刻」
+
+#### p.232 l.6
+
+× 2つを合成して1つにしてしまえば確実だが、\
+ ○
+loopとdelayを合成した一つの構成要素を作ってこれを強制することもできるが、
+
+#### p.237 l.-3
+
+× ここで使ったプリミティブで\
+ ○ ここで使ったものよりプリミティブで
+
+#### p.68 ex4.1
+
+×同音異名\
+ ○異名同音
+
+#### p.71 durM
+
+× durM (Prim (Note d))\
+ ○ durM (Prim (Note \_ d))
+
+#### p.72 l.-2
+
+× d秒\
+ ○ d小節\
+ 原文でもsecondだが、Durationの1は絶対時間の1秒ではなく1小節なはず。
+
+#### p.73 l.-2 遅い版のdropM
+
+最初にpadMしているが、revMには不要だしtakeMは自前でやるので冗長。
+
+#### p.75 中程
+
+     演奏は音楽的イベントの「時系列」である。
+
+temporally ordered sequence of musical events\
+ 続けて
+
+     「時系列とは、時刻の順で整列されたリストである。」
+
+などと定義を入れないと、以降の補題4.1、補題4.2の意味が定まらない。
+
+#### p.83 l.6
+
+     より抽象的な概念で、伝統的なピアニッシモ、...などを表現している。
+
+これは前の文から続いている。機能は両立している。
+
+     HaskoreではNote構成子に音量を表す追加のフィールドが設けてある他に、
+     伝統的な表記であるピアニッシモ、ピアノ、メゾピアノ、メゾフォルテ、フォルテ、フォルテッシモ
+     (それぞれpp,p,mp,mf,f,ffと略記)を用いる、より抽象的な方法も使える。
+
+* * * * *
+
 「第５章 融合変換を自動化する」で使われている mag を Haskell Platform 2011.x.x.x に付属の GHC 7.0.x などでもビルドできるようにしたバージョンの（作者自身の手による） darcs repository が以下にあります。
 
 - [http://urchin.earth.li/darcs/ganesh/mag/](http://urchin.earth.li/darcs/ganesh/mag/)
