@@ -51,8 +51,6 @@ instance Functor Maybe where
 
 ## ファンクター則を破るとどうなるの？
 
-ファンクター側を破るとプログラムが崩壊する、というわけではないが、ファンクター側を満たすことでよい性質を得ることができる（そして余計な悲劇を避けることができる）。
-
 
 （なんか面白い例を載せる）
 
@@ -60,7 +58,7 @@ instance Functor Maybe where
 
 * * * * *
 
-## ZipListを使ってみる
+## アプリカティブスタイルその１
 
 ZipListを使って、Data.Listにある[transpose](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-List.html#v:transpose)関数を実装してみよう。
 
@@ -71,16 +69,9 @@ transpose :: [[a]] -> [[a]]
 transpose [[1,2,3],[4,5,6]] == [[1,4],[2,5],[3,6]]
 ~~~
 
+テキスト(p.253)にある sequenceA 関数と比較してみよう。
+
+
 参考：Conor McBride and Ross Paterson. [Applicative Programming with Effects.](http://www.soi.city.ac.uk/~ross/papers/Applicative.html) J. Funct. Program., 18(1):pages 1-13 (2008).
-
-* * * * *
-
-## traverse関数の実装
-
-Data.Traverseにある[traverse](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-Traversable.html#v:traverse)関数の、リスト版を作ってみよう。
-
-~~~ {.haskell}
-traverse :: Applicative f => (a -> f b) -> [a] -> f [b]
-~~~
 
 * * * * *
