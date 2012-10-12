@@ -1,0 +1,29 @@
+# 『ファンクターからアプリカティブファンクターへ』　練習問題
+
+
+
+## transposeの実装
+
+ZipListを使って、Data.Listにある[transpose](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-List.html#v:transpose)関数を実装してみよう。
+
+
+~~~ {.haskell}
+transpose :: [[a]] -> [[a]]
+
+transpose [[1,2,3],[4,5,6]] == [[1,4],[2,5],[3,6]]
+~~~
+
+参考：Conor McBride and Ross Paterson. (Applicative Programming with Effects.)[http://www.soi.city.ac.uk/~ross/papers/Applicative.html] J. Funct. Program., 18(1):pages 1-13 (2008).
+
+* * * * *
+
+## traverseの実装
+
+Data.Traverseにある[traverse](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-Traversable.html#v:traverse)関数の、リスト版を作ってみよう。
+
+~~~ {.haskell}
+traverse :: Applicative f => (a -> f b) -> [a] -> f [b]
+~~~
+
+* * * * *
+
