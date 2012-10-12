@@ -1,6 +1,54 @@
 # 『ファンクターからアプリカティブファンクターへ』　練習問題
 
 
+## Functerインスタンスのを考える
+
+次のもののFuncterインスタンスを考えてみよう。
+
+実装はファンクター則を満たしているだろうか。また、それ以外の実装はありえるだろうか。
+
+~~~ {.haskell}
+data Maybe a     = Nothing | Just a
+
+data [] a        -- リスト 
+
+data Tree a      = Leaf | Branch a (Tree a) (Tree a) 
+
+data Either a b  = Left a | Right b
+
+data (,) a b     -- タプル
+~~~
+
+たとえばリストだったら、以下のように書く。
+
+~~~ {.haskell}
+instance Functor [] where
+  fmap f xs = undefined
+~~~
+
+
+ヒント：
+
+次のMaybeのFuncter実装は、ファンクター則を満たしているだろうか。
+
+~~~ {.haskell}
+instance Functor Maybe where
+  fmap f Nothing  = Nothing
+  fmap f (Just a) = Nothing
+~~~
+
+または、次の実装ではどうだろうか。
+
+~~~ {.haskell}
+instance Functor Maybe where
+  fmap f Nothing  = Nothing
+  fmap f (Just a) = Just a
+~~~
+
+
+参考：[The Typeclassopedia](http://snak.tdiary.net/20091020.html)
+
+* * * * *
 
 ## transposeの実装
 
@@ -26,4 +74,3 @@ traverse :: Applicative f => (a -> f b) -> [a] -> f [b]
 ~~~
 
 * * * * *
-
