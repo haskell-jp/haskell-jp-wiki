@@ -13,7 +13,7 @@ transpose :: [[a]] -> [[a]]
 transpose [[1,2,3],[4,5,6]] == [[1,4],[2,5],[3,6]]
 ~~~
 
-参考：Conor McBride and Ross Paterson. (Applicative Programming with Effects.)[http://www.soi.city.ac.uk/~ross/papers/Applicative.html] J. Funct. Program., 18(1):pages 1-13 (2008).
+参考：Conor McBride and Ross Paterson. [Applicative Programming with Effects.](http://www.soi.city.ac.uk/~ross/papers/Applicative.html) J. Funct. Program., 18(1):pages 1-13 (2008).
 
 * * * * *
 
