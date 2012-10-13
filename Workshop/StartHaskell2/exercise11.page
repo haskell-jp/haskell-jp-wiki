@@ -160,7 +160,7 @@ main = do
 
 formula :: Parser Int
 formula = do
-  n <- choise [ number, minus, times, add ]
+  n <- choice [ number, minus, times, add ]
   return n
 
 number :: Parser Int
