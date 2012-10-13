@@ -58,7 +58,39 @@ instance Functor Maybe where
 
 * * * * *
 
-## アプリカティブスタイルその１
+## モナドを書き直す（アプリカティブスタイル）
+
+次のIOモナドを使ったコードを、アプリカティブスタイルに書き直してみよう。
+
+
+~~~ {.haskell}
+main :: IO ()
+main = do
+  z <- add
+  print z
+
+
+add :: IO Int
+add = do
+  x <- readLn
+  y <- readLn
+  return (x+y)
+~~~
+
+次のコードもアプリカティブスタイルに書き直してみよう。
+
+
+~~~ {.haskell}
+main :: IO ()
+main = do
+  putStrLn "What's your name?"
+  name <- getLine
+  putStrLn $ "Hello, " ++ name
+~~~
+
+* * * * *
+
+## ZipList（アプリカティブスタイル）
 
 ZipListを使って、Data.Listにある[transpose](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-List.html#v:transpose)関数を実装してみよう。
 
