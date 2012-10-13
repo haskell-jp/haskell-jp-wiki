@@ -92,14 +92,6 @@ main = do
   print n
 ~~~
 
-~~~ {.haskell}
--- 空白区切りの数字の列を1行読み込んで、その合計を表示する
-main = do
-  xs <- getLine
-  let n = sum $ map read $ words xs
-  print n
-~~~
-
 
 * * * * *
 
