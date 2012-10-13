@@ -68,7 +68,7 @@ fmap (g . f)  == fmap (c . b . a)
 
 
 
-参考：ファンクター則は、一般的には準同型と呼ばれる。 [ja.wikipedia.org/wiki/準同系](http://ja.wikipedia.org/wiki/準同系)
+参考：ファンクター則は、一般的には準同型と呼ばれる。 [ja.wikipedia.org/wiki/準同型](http://ja.wikipedia.org/wiki/準同型)
 
 * * * * *
 
