@@ -195,6 +195,8 @@ add = do
 
 ~~~
 
+実行例：echo "(2*3)" | runghc parser.hs
+
 ヒント：[Applicativeのススメ](http://d.hatena.ne.jp/kazu-yamamoto/20101211/1292021817)に、アプリカティブを使ったパーサーコンビネーターの書き方が載っています。
 
 [Control.Applicative](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Control-Applicative.html#t:Applicative)にある、次の関数を駆使する必要があります。
