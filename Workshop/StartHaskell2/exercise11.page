@@ -151,9 +151,7 @@ main = do
      Right n   -> print n
 
 formula :: Parser Int
-formula = do
-  n <- choice [ number, minus, times, add ]
-  return n
+formula = choice $ map try [ number, minus, times, add ]
 
 number :: Parser Int
 number = do
