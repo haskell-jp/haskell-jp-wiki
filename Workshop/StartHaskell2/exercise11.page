@@ -58,6 +58,38 @@ instance Functor Maybe where
 
 * * * * *
 
+## ファンクターを使って書き直す
+
+次のコードをファンクターを使って書き直してみよう。
+
+~~~ {.haskell}
+-- 1行読み込んで、空白区切りで分割して、1行ずつ表示する
+main = do
+  xs <- getLine
+  let ws = words xs
+  mapM_ putStrLn ws
+~~~
+
+~~~ {.haskell}
+-- 空白区切りの数字の列を1行読み込んで、その合計を表示する
+main = do
+  xs <- getLine
+  let n = sum $ map read $ words xs
+  print n
+~~~
+
+~~~ {.haskell}
+-- 空白区切りの数字の列を1行読み込んで、その合計を表示する
+main = do
+  xs <- getLine
+  let n = sum $ map read $ words xs
+  print n
+~~~
+
+
+* * * * *
+
+
 ## モナドをアプリカティブに書き直す
 
 次のIOモナドを使ったコードを、アプリカティブスタイルに書き直してみよう。
@@ -154,7 +186,7 @@ add = do
 [Control.Applicative](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Control-Applicative.html#t:Applicative)にある、次の関数を駆使する必要があります。
 
 ~~~ {.haskell}
--- 純粋な関数を文脈上へ持ち上げる
+-- 純粋な値を文脈へ持ち上げる（ただの a が 文脈f上に持ち上がって f a になった）
 pure :: a -> f a
 
 -- 文脈上で関数を適用する
