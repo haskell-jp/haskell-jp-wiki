@@ -35,13 +35,6 @@ instance Functor Maybe where
   fmap f (Just a) = Nothing
 ~~~
 
-または、次の実装ではどうだろうか。
-
-~~~ {.haskell}
-instance Functor Maybe where
-  fmap f Nothing  = Nothing
-  fmap f (Just a) = Just a
-~~~
 
 
 参考：[The Typeclassopedia](http://snak.tdiary.net/20091020.html)
