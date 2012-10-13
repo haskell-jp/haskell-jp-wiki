@@ -99,11 +99,18 @@ main = do
               -<formula> | (<formula>*<formula>) | (<formula>+<formula>)
 ~~~
 
-これを解析して計算するパーサーコンビネーターをモナドスタイルで書いたのが次のコードである。これをアプリカティブスタイルに書き直してみよう。
+これを解析して計算するパーサーコンビネーターをモナドスタイルで書いたのが次のコードである。これの number, minus, times, add 関数をアプリカティブスタイルに書き直してみよう。
 
 ~~~ {.haskell}
-import Text.ParserCombinators.ReadP
+import Text.ParserCombinators.Parsec
 import Control.Applicative
+
+main :: IO ()
+main = do
+  xs <- getLine
+  case parse formula "" xs of
+     Left err  -> print err
+     Right n   -> print n
 
 main :: IO ()
 main = do
@@ -143,6 +150,15 @@ add = do
 ~~~
 
 ヒント：[Applicativeのススメ](http://d.hatena.ne.jp/kazu-yamamoto/20101211/1292021817)に、アプリカティブを使ったパーサーコンビネーターの書き方が載っています。
+
+たとえば times 関数をアプリカティブに書き直すと、こんな感じです。
+
+~~~ {.haskell}
+times :: Parser Int
+times = (*) 
+   　　　  <$> ((char '(' *> formula) <* char '*') 
+   　　　  <*> (formula <* char ')')
+~~~
 
 
 
