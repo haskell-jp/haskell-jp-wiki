@@ -58,7 +58,7 @@ instance Functor Maybe where
 
 * * * * *
 
-## モナドを書き直す（アプリカティブスタイル）
+## モナドをアプリカティブに書き直す
 
 次のIOモナドを使ったコードを、アプリカティブスタイルに書き直してみよう。
 
@@ -90,7 +90,7 @@ main = do
 
 * * * * *
 
-## パーサーコンビネータ（アプリカティブスタイル）
+## パーサーコンビネータ
 
 次のBNFを考える。
 
@@ -166,7 +166,7 @@ times = (*)
 
 * * * * *
 
-## ZipList（アプリカティブスタイル）
+## ZipList
 
 ZipListを使って、Data.Listにある[transpose](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-List.html#v:transpose)関数を実装してみよう。
 
