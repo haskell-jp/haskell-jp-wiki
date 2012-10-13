@@ -150,6 +150,7 @@ main = do
      Left err  -> print err
      Right n   -> print n
 
+-- 簡単のため、全部に try を挟む
 formula :: Parser Int
 formula = choice $ map try [ number, minus, times, add ]
 
