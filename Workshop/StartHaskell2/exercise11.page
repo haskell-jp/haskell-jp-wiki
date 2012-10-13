@@ -151,13 +151,31 @@ add = do
 
 ヒント：[Applicativeのススメ](http://d.hatena.ne.jp/kazu-yamamoto/20101211/1292021817)に、アプリカティブを使ったパーサーコンビネーターの書き方が載っています。
 
+[Control.Applicative](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Control-Applicative.html#t:Applicative)にある、次の関数を駆使する必要があります。
+
+~~~ {.haskell}
+-- 純粋な関数を文脈上へ持ち上げる
+pure :: a -> f a
+
+-- 文脈上で関数を適用する
+(<*>) :: f (a -> b) -> f a -> f b
+
+-- 第一引数を捨てる
+(*>) :: f a -> f b -> f b
+
+-- 第二引数を捨てる
+(<*) :: f a -> f b -> f a
+~~~
+
+
+
 たとえば times 関数をアプリカティブに書き直すと、こんな感じです。
 
 ~~~ {.haskell}
 times :: Parser Int
-times = (*) 
-   　　　  <$> ((char '(' *> formula) <* char '*') 
-   　　　  <*> (formula <* char ')')
+times = (*)            -- 2引数関数を <$> で持ち上げて関数適用する
+   　　　  <$> ((char '(' *> formula) <* char '*')  -- 真ん中以外は捨てる
+   　　　  <*> (formula <* char ')') -- 第二引数は捨てる
 ~~~
 
 
