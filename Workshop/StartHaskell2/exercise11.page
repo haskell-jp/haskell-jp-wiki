@@ -90,6 +90,66 @@ main = do
 
 * * * * *
 
+## パーサーコンビネータ（アプリカティブスタイル）
+
+次のBNFを考える。
+
+~~~
+<formula> ::= 0 | 1 | 2 | 3 |
+              -<formula> | (<formula>*<formula>) | (<formula>+<formula>)
+~~~
+
+これを解析して計算するパーサーコンビネーターをモナドスタイルで書いたのが次のコードである。これをアプリカティブスタイルに書き直してみよう。
+
+~~~ {.haskell}
+import Text.ParserCombinators.ReadP
+import Control.Applicative
+
+main :: IO ()
+main = do
+  xs <- getLine
+  print $ readP_to_S formula xs
+
+formula = do
+  n <- choise [ number, minus, times, add ]
+  return n
+
+number = do
+  x <- choice [ char '0', char '1', char '2', char '3' ]
+  return (read[x])
+
+minus = do
+  char '-'
+  x <- formula
+  return (-x)
+
+times = do
+  char '('
+  x <- formula
+  char '*'
+  y <- formula
+  char ')'
+  return (x * y)
+
+add = do
+  char '('
+  x <- formula
+  char '+'
+  y <- formula
+  char ')'
+  return (x + y)
+
+
+~~~
+
+ヒント：[Applicativeのススメ](http://d.hatena.ne.jp/kazu-yamamoto/20101211/1292021817)に、アプリカティブを使ったパーサーコンビネーターの書き方が載っています。
+
+
+
+出典：[ACM国際大学対抗プログラミングコンテスト 2008 国内予選 問題C](http://www.acm-japan.org/past-icpc/domestic2008/problems/all_ja.html) の改変
+
+* * * * *
+
 ## ZipList（アプリカティブスタイル）
 
 ZipListを使って、Data.Listにある[transpose](http://hackage.haskell.org/packages/archive/base/latest/doc/html/Data-List.html#v:transpose)関数を実装してみよう。
