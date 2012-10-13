@@ -112,24 +112,23 @@ main = do
      Left err  -> print err
      Right n   -> print n
 
-main :: IO ()
-main = do
-  xs <- getLine
-  print $ readP_to_S formula xs
-
+formula :: Parser Int
 formula = do
   n <- choise [ number, minus, times, add ]
   return n
 
+number :: Parser Int
 number = do
   x <- choice [ char '0', char '1', char '2', char '3' ]
   return (read[x])
 
+minus :: Parser Int
 minus = do
   char '-'
   x <- formula
   return (-x)
 
+times :: Parser Int
 times = do
   char '('
   x <- formula
@@ -138,6 +137,7 @@ times = do
   char ')'
   return (x * y)
 
+add :: Parser Int
 add = do
   char '('
   x <- formula
