@@ -1,0 +1,17 @@
+## 日時
+
+2012/07/27
+
+## 内容
+
+http://learnyouahaskell.com/modules#data-list
+のinitsから再開します。
+
+## 宿題
+
+http://learnyouahaskell.com/modules
+で出てきたiterate関数を再帰を使って実装してみてください。
+
+### ヒント
+
+iterate関数は基底部を持たないかもしれません
