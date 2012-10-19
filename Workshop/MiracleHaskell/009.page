@@ -1,0 +1,29 @@
+## 日時
+
+2012/08/10
+
+## 内容
+
+http://learnyouahaskell.com/making-our-own-types-and-typeclasses#derived-instances
+Readの自動導出から再開します。
+
+## 宿題
+
+http://learnyouahaskell.com/making-our-own-types-and-typeclasses
+で出てきた
+
+~~~ {.haskell}
+nudge :: Shape -> Float -> Float -> Shape
+~~~
+
+という関数を改造して、左右に動かす関数nudgeWと型Wayを作成してください。
+以下は使用例です。
+
+~~~ {.haskell}
+*Main> :t nudgeW
+nudgeW :: Shape -> Way -> Shape
+*Main> nudgeW (Circle (Point 10 20) 5) (WLeft 5)
+Circle (Point 5.0 20.0) 5.0
+*Main> nudgeW (Rectangle (Point 10 10) (Point 80 100)) (WRight 3)
+Rectangle (Point 13.0 10.0) (Point 83.0 100.0)
+~~~
