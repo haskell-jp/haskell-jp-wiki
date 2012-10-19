@@ -1,0 +1,47 @@
+## 日時
+
+2012/09/21
+
+## 内容
+
+http://learnyouahaskell.com/input-and-output#hello-world
+の途中から再開します。
+
+## 宿題
+
+以下のように
+
+* 演算子
+* 左辺値
+* 右辺値
+
+の3つの値を入力すると、計算結果が得られるCalcというプログラムを作ってください。
+
+~~~
+$ echo "+\n10\n20\n" | ./Calc
+Answer: 30
+$ echo "-\n1\n9\n" | ./Calc
+Answer: -8
+$ echo "*\n4\n5\n" | ./Calc
+Answer: 20
+$ echo "/\n100\n5\n" | ./Calc
+Answer: 20
+$ echo "hoge\n1\n1\n" | ./Calc
+Calc: *** Error: not operator
+~~~
+
+### ヒント
+
+* getLine関数を使います
+* read関数を使います
+* エラーメッセージはerror関数を使うと作りやすいです
+* 以下のような変換を使うと楽かもしれません
+
+~~~ {.haskell}
+func :: Integral a => String -> a -> a -> a
+func "+" = (+)
+func "-" = (-)
+func "*" = (*)
+func "/" = div
+func _ = error "*** Error: not operator"
+~~~
