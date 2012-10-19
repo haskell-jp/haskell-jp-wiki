@@ -1,0 +1,26 @@
+## 日時
+
+2012/10/19
+
+## 内容
+
+http://learnyouahaskell.com/input-and-output#bytestrings
+から再開します。
+
+## 宿題
+
+"cat"という文字列が得られるまで、アルファベット小文字からなる3文字のランダムな文字列を表示するプログラムを作りましょう。
+
+~~~
+$ ghc RandCat.hs
+$ ./RandCat
+hog
+pwd
+cat
+> I got it! <
+$
+~~~
+
+### ヒント
+
+* splitAt関数を使うと楽ができるかもしれませんよ！
