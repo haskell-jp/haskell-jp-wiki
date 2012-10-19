@@ -1,0 +1,20 @@
+## 日時
+
+2012/06/21
+
+## 内容
+
+今回は http://learnyouahaskell.com/syntax-in-functions の頭からです。
+
+## 宿題
+
+ある日、ghciを使って遊んでいて以下のような結果が得られました。
+
+~~~ {.haskell}
+Prelude> :t XXX
+XXX :: Num t => [(t, [a] -> a)]
+~~~
+
+ところがXXXの部分を覚えていません。
+ XXXはどのような式になるでしょうか。
+ (答は一つではありません)
