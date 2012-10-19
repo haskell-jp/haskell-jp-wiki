@@ -1,0 +1,28 @@
+## 日時
+
+2012/06/29
+
+## 内容
+
+今回は http://learnyouahaskell.com/recursion の頭からです。
+
+## 宿題
+
+次の関数からcaseとifを取り除いてみましょう。
+
+~~~ {.haskell}
+analysisLine :: String -> String
+analysisLine s = 
+  case s of [] -> "empty"
+            [_] -> "a character"
+            s' -> if last s' == '.' 
+                  then "a sentence"
+                  else if ' ' `elem` s' 
+                       then "some words"
+                       else "a word"
+~~~
+
+### ヒント
+
+パターンマッチとガードを使います。
+インデントはエディタに貼り付けてから確認した方が良いかもです。
