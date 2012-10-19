@@ -1,0 +1,34 @@
+## 日時
+
+2012/07/20
+
+## 内容
+
+今回は7章から読もうと思います。
+http://learnyouahaskell.com/modules
+場合によっては6章をもう一度軽く復習するかもしれないです。
+
+## 宿題
+
+filter関数と同じ動きをする
+
+~~~ {.haskell}
+filter' :: (a -> Bool) -> [a] -> [a]
+~~~
+
+という関数をfoldlかfoldrを使って実装してください。
+
+リスト内包表記の場合のfilter'の実装は↓になると思います。
+
+~~~ {.haskell}
+filter' p xs = [ x | x <- xs, p x]
+~~~
+
+再帰を使った場合、fiter'の実装は↓になると思います。
+
+~~~ {.haskell}
+filter' _ [] = []
+filter' pred (x:xs)
+  | pred x = x : filter pred xs
+  | otherwise = filter pred xs
+~~~
