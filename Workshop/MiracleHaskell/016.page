@@ -1,0 +1,40 @@
+## 日時
+
+2012/10/05
+
+## 内容
+
+http://learnyouahaskell.com/input-and-output#files-and-streams
+から再開します。
+
+## 宿題
+
+前々回、以下のような
+
+* 演算子
+* 左辺値
+* 右辺値
+
+の3つの値を入力すると、計算結果が得られるCalcというプログラムを作りました。
+
+~~~ {.haskell}
+func :: String -> Int -> Int -> Int
+func "+" = (+)
+func "-" = (-)
+func "*" = (*)
+func "/" = div
+func _ = error "*** Error: not operator"
+
+main :: IO ()
+main = do
+  f <- getLine
+  a <- getLine
+  b <- getLine
+  putStrLn $ "Answer: " ++ show (func f (read a) (read b))
+~~~
+
+このプログラムをsequenceを使って書いてみましょう。
+
+### ヒント
+
+* getLine関数をリストの中に入れましょう
