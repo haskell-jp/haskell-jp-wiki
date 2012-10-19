@@ -1,0 +1,127 @@
+## 日時
+
+2012/09/28
+
+## 内容
+
+
+http://learnyouahaskell.com/input-and-output
+のreturnについての説明あたりから再開します。
+
+## 宿題
+
+前回、以下のような
+
+* 演算子
+* 左辺値
+* 右辺値
+
+の3つの値を入力すると、計算結果が得られるCalcというプログラムを作りました。
+
+~~~ {.haskell}
+func :: String -> Int -> Int -> Int
+func "+" = (+)
+func "-" = (-)
+func "*" = (*)
+func "/" = div
+func _ = error "*** Error: not operator"
+
+main :: IO ()
+main = do
+  f <- getLine
+  a <- getLine
+  b <- getLine
+  putStrLn $ "Answer: " ++ show (func f (read a) (read b))
+~~~
+
+このプログラムを改造して、空行が入力されるまで計算を繰り返すようにしてください。
+
+~~~
+$ ./Calc
++
+10
+20
+Answer: 30
+-
+1
+9
+Answer: -8
+*
+4
+5
+Answer: 20
+/
+100
+$
+~~~
+
+### ヒント
+
+* 再帰を使うかもしれません
+* foreverという関数を使うと楽かもしれません
+
+### ごめんなさい
+
+ちょっとむづかしかったですね。。。
+この本ではexit例外を習わないので、この宿題はIOモナドを大域脱出せずに解くことになってしまいます。
+exitさえ使えば以下のように簡単に解けるのですが。。。
+
+~~~ {.haskell}
+import System.Exit
+import Control.Monad
+
+func :: String -> Int -> Int -> Int
+func "+" = (+)
+func "-" = (-)
+func "*" = (*)
+func "/" = div
+func _ = error "*** Error: not operator"
+
+getLineEmptyExit :: IO String
+getLineEmptyExit = do
+  s <- getLine
+  when (s == "") exitSuccess
+  return s
+
+main :: IO ()
+main = forever $ do
+  f <- getLineEmptyExit
+  a <- getLineEmptyExit
+  b <- getLineEmptyExit
+  putStrLn $ "Answer: " ++ show (func f (read a) (read b))
+~~~
+
+例外による大域脱出を使わないと、以下のようにモナド変換子を使わければなりません。
+これはまたの機会に。。。
+
+~~~ {.haskell}
+import Control.Monad
+import Control.Monad.Trans.Maybe
+import Control.Monad.IO.Class
+
+func :: String -> Int -> Int -> Int
+func "+" = (+)
+func "-" = (-)
+func "*" = (*)
+func "/" = div
+func _ = error "*** Error: not operator"
+
+getLineEmptyExit :: MaybeT IO String
+getLineEmptyExit = do
+  s <- liftIO getLine
+  if s == "" 
+    then MaybeT $ return Nothing
+    else return s
+
+calc :: MaybeT IO ()
+calc = do
+    f <- getLineEmptyExit
+    a <- getLineEmptyExit
+    b <- getLineEmptyExit
+    liftIO $ putStrLn $ "Answer: " ++ show (func f (read a) (read b))
+
+main :: IO ()
+main = do
+  runMaybeT $ forever calc
+  return ()
+~~~
