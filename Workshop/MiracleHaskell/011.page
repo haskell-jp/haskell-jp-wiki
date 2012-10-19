@@ -1,0 +1,69 @@
+## 日時
+
+2012/08/31
+
+## 内容
+
+http://learnyouahaskell.com/making-our-own-types-and-typeclasses#the-functor-typeclass
+から再開します。
+↓の宿題どっちかを解いてきてくれると嬉しいな！
+宿題が解けたり、宿題にわからないところがあったりしたら岡部までメールをください。答えますよーーー
+
+## 宿題1
+
+Making Our Own Types and Typeclassesで作ったList a型を取るreverseを作ってください。
+
+標準のリストにはreverseという関数がありました。
+
+~~~ {.haskell}
+$ ghci
+*Main> :t reverse
+reverse :: [a] -> [a]
+*Main> reverse [1,2,3]
+[3,2,1]
+~~~
+
+同じように以下のような型を持つ関数reverse'を作成してください。
+
+~~~ {.haskell}
+reverse' :: List a -> List a
+~~~
+
+実行例は以下になります。
+
+~~~ {.haskell}
+$ ghci MyList.hs
+*Main> reverse' $ 1 :-: 2 :-: 3 :-: Empty
+3 :-: (2 :-: (1 :-: Empty))
+~~~
+
+### ヒント
+
+http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html
+のSourceというリンクの先にHaskell標準の実装があります。
+
+## 宿題2
+
+Making Our Own Types and Typeclassesで作ったList a型をリストっぽく表示するようにしてください。
+
+標準のリストはこんな感じに表示されてました。
+
+~~~ {.haskell}
+$ ghci
+*Main> [1, 2, 3]
+[1,2,3]
+*Main> []
+[]
+~~~
+
+ところがList a型の表示かかっこわるいので、標準のリストっぽく表示されるようにしてください。
+deriving Showしないで、instanceを使ってList a型のshow関数を自分で作りまショウ！
+実行例は以下になります。
+
+~~~ {.haskell}
+$ ghci MyList.hs
+*Main> 1 :-: 2 :-: 3 :-: Empty
+[1,2,3]
+*Main> Empty
+[]
+~~~
