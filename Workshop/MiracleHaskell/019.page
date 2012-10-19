@@ -1,0 +1,38 @@
+## 日時
+
+2012/10/26
+
+## 内容
+
+次回は
+http://learnyouahaskell.com/functionally-solving-problems
+から再開します。
+
+## 宿題(みんな)
+
+ファイルの内容を逆順してファイルに書くプログラムを作ってください。
+この時、ファイルの読み込みと書き込みにStringを使った物と、ByteStringを使った物を別々に作成してください。
+実行例は以下になります。
+
+~~~
+$ ghc ReverseFile.hs
+$ cat hoge.txt
+
+12
+345
+6789
+$ ./ReverseFile hoge.txt out.txt
+$ cat out.txt
+
+9876
+543
+21
+$ ./ReverseFile
+ReverseFile: user error (Pattern match failure in do expression at ReverseFile.hs:6:5-27)
+~~~
+
+実行時に例外が起きないともっと良いですね！
+
+## 宿題(岡部)
+
+ListとByteStringのメモリ使用効率を定量的に調べる。
