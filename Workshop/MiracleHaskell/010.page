@@ -1,0 +1,46 @@
+## 日時
+
+2012/08/17
+
+## 内容
+
+http://learnyouahaskell.com/making-our-own-types-and-typeclasses#recursive-data-structures
+のbinary search treeから再開します。
+
+## 宿題
+
+Making Our Own Types and Typeclassesで作ったList a型を取るheadとreverseを作ってください
+
+標準のリストにはheadとreverseという関数がありました。
+
+~~~ {.haskell}
+*Main> :t head
+head :: [a] -> a
+*Main> head [1,2,3]
+1
+*Main> :t reverse
+reverse :: [a] -> [a]
+*Main> reverse [1,2,3]
+[3,2,1]
+~~~
+
+同じように以下のような型を持つ関数head'とreverse'を作成してください。
+
+~~~ {.haskell}
+head' :: List a -> a
+reverse' :: List a -> List a
+~~~
+
+実行例は以下になります。
+
+~~~ {.haskell}
+*Main> head' $ 1 :-: 2 :-: 3 :-: Empty
+1
+*Main> reverse' $ 1 :-: 2 :-: 3 :-: Empty
+3 :-: (2 :-: (1 :-: Empty))
+~~~
+
+### ヒント
+
+http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html
+のSourceというリンクの先にHaskell標準の実装があります。
