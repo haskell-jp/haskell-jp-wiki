@@ -1,0 +1,20 @@
+## 回答
+
+~~~ {.haskell}
+import System.Random
+
+findCat :: String -> IO ()
+findCat ('c':'a':'t':_) = putStrLn "cat" >> putStrLn "> I got it! <"
+findCat a@(_:r) = do
+  putStrLn $ take 3 a
+  findCat r
+findCat [] = error "findCat: infinate string."
+
+main :: IO ()
+main = do
+  gen <- getStdGen
+  let rnds = randomRs ('a', 'z') gen
+  findCat rnds
+~~~
+
+再帰を使わない方法もあるかもしれませんね。
