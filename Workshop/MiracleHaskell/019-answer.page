@@ -6,3 +6,34 @@
 まず、リストのメモリ構造については
 [GHCのこと](http://www.kotha.net/hperf/ghc.html)
 の代数的データ型の項目を参照のこと。
+
+### ヒープの形を比較してみる
+
+[ghc-vis](http://felsin9.de/nnis/ghc-vis/)
+を使ってヒープの形を比較してみた。
+
+~~~{.haskell}
+{-# LANGUAGE OverloadedStrings #-}
+module MyString (bStr, sStr) where
+import qualified Data.ByteString.Lazy as BL
+import Data.ByteString.Char8 ()
+
+bStr :: BL.ByteString
+bStr = BL.fromChunks ["abcd", "efgh"]
+
+sStr :: String
+sStr = "abcdefgh"
+~~~
+
+#### Stringのヒープ
+
+![](http://farm9.staticflickr.com/8046/8138261767_be359fea74_z.jpg)
+
+単なるリスト構造。
+
+#### ByteString(Lazy)のヒープ
+
+![](http://farm9.staticflickr.com/8043/8138291208_5c55fe6a7b_z.jpg)
+
+2つのチャンクに分かれていて、チャンク同士の関係はリスト構造そのもの。
+ただし、チャンクの中身は生のポインタで表現されている。
