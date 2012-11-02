@@ -1,0 +1,32 @@
+## 日時
+
+2012/11/09
+
+## 内容
+
+次回は
+[Heathrow to London](http://learnyouahaskell.com/functionally-solving-problems#heathrow-to-london)
+から再開します。
+
+## 宿題
+
+[Reverse Polish notation calculator](http://learnyouahaskell.com/functionally-solving-problems#reverse-polish-notation-calculator)
+
+逆ポーランド記法電卓(Reverse Polish notation calculator)を上記のURLでは作りました。
+ところで
+[一般の電卓](http://ja.wikipedia.org/wiki/%E9%9B%BB%E5%8D%93#.E8.A8.98.E5.8F.B7)
+には"メモリ"という機能があります。
+そこで、逆ポーランド記法電卓に以下の演算子を追加してください。
+
+* "M+": メモリ上の値にスタックの最上位の値を足して、メモリに記憶させておく
+* "M-": メモリ上の値からスタックの最上位の値を引いて、メモリに記憶させておく
+* "MC": メモリに0を記憶させる
+* "MR": 現在のメモリの値をスタックの最上位に積む（M+とM-で入れた数の合計）
+
+"メモリ"は1つだけで、その初期値は0としてください。
+実行例は以下です。
+
+~~~
+ghci> solveRPN "1 2 M+ 3 M+ MR sum"
+11.0
+~~~
