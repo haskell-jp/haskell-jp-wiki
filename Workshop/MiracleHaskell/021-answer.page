@@ -1,0 +1,15 @@
+## みんなの宿題
+
+~~~ {.haskell}
+infixr 5 :-:  
+data List a = Empty | a :-: (List a) deriving (Show, Read, Eq, Ord)
+
+myMap :: (a -> b) -> List a -> List b
+myMap _ Empty = Empty
+myMap f (x :-: xs) = f x :-: myMap f xs
+
+instance Functor List where
+    fmap = myMap
+~~~
+
+[テスト含むソースコード全体](https://github.com/master-q/snippets_haskell/blob/master/MiracleHaskell/021/HomeWork/MyList.hs)
