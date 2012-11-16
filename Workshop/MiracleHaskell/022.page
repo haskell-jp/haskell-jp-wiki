@@ -1,0 +1,38 @@
+## 日時
+
+2012/11/23
+
+## 内容
+
+次回は
+[ZipListの説明あたり](http://learnyouahaskell.com/functors-applicative-functors-and-monoids#applicative-functors)
+から再開します。
+
+## みんなの宿題
+
+[Recursive data structures](http://learnyouahaskell.com/making-our-own-types-and-typeclasses#recursive-data-structures)
+ではList aという型でリスト型を作りました。
+
+~~~ {.haskell}
+infixr 5 :-:  
+data List a = Empty | a :-: (List a) deriving (Show, Read, Eq, Ord)  
+~~~
+
+FunctorとApplicativeを継承することで、このList a型でアプリカティブファンクターを使えるようにしてみてください。
+実行例は以下になります。
+
+~~~
+ghci> :m Control.Applicative
+ghci> (+) <$> [1,2] <*> [100,200]
+[101,201,102,202]
+ghci> (+) <$> (1 :-: 2 :-: Empty) <*> (100 :-: 200 :-: Empty)
+101 :-: (201 :-: (102 :-: (202 :-: Empty)))
+~~~
+
+### ヒント
+
+前回の宿題の答([021-answer]())にFunctorの実装があります。あとはApplicativeを継承してpureと(<*>)を実装してみてください。
+
+誰かが書いた
+[ヲレヲレPrelude](https://github.com/master-q/my_prelude/blob/master/MyPrelude.hs#L55)
+でのpureと(<*>)の定義が役に立つかもしれません！
