@@ -11,13 +11,10 @@
 * oprofileでサンクの時間コストを測定
 
 ~~~
-[15時48分44秒] Kiwamu Okabe: oprofileのコマンドインターフェイスをtprofに似せるわけですね。
-[15時49分00秒] Kiwamu Okabe: http://pic.dhe.ibm.com/infocenter/aix/v6r1/index.jsp?topic=%2Fcom.ibm.aix.cmds%2Fdoc%2Faixcmds5%2Ftprof.htm
 [15時49分31秒] Kiwamu Okabe: Java アプリケーションのプロファイル作成 ？？？？？？？
 [15時49分49秒] xxx: うん
 [15時49分54秒] Kiwamu Okabe: なんと。。。
 [15時50分01秒] xxx: あれ、oprofileでもできたはず?
-[15時50分04秒] Kiwamu Okabe: IBMのJVMのみ？
 [15時50分15秒] xxx: http://oprofile.sourceforge.net/doc/getting-jit-reports.html
 [15時50分29秒] Kiwamu Okabe: MJD!
 [15時50分47秒] Kiwamu Okabe: これは、GHC RTSも対応しなければならない流れ。。。
