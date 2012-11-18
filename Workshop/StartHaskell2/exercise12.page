@@ -1,0 +1,27 @@
+# 『モノイド』　練習問題
+
+
+## newtypeを使ってみよう
+
+第3章に、体重と身長を受け取って肥満度指数(BMI)を計算する関数があった。
+
+~~~ {.haskell}
+bmi :: Double -> Double -> Double
+bmi weight height = weight / height^2
+~~~
+
+上のbmi関数は、ありえない体重や身長が引数として渡されても動いてしまう。そこで、ただのDoubleではなく、それが体重を表すDoubleであることを明示するためにnewtypeを使うことを考える。
+
+~~~ {.haskell}
+newtype Weight = Weight Double
+newtype Height = Height Double
+~~~
+
+上の型を使って、bmi関数を書き直した新しいbmi2関数を実装しよう。
+
+~~~ {.haskell}
+bmi2 :: Weight -> Height -> Double
+~~~
+
+
+* * * * *
