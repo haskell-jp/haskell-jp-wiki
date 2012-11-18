@@ -1,0 +1,32 @@
+# GHC内部の地図を作ろう！
+
+# コンパイルパイプライン
+
+![](http://farm9.staticflickr.com/8202/8195711060_de8437e563.jpg)
+[図を拡大](http://hackage.haskell.org/trac/ghc/attachment/wiki/Commentary/Compiler/HscPipe/HscPipe2.png)
+
+## パーサ
+
+## 言語: Core
+
+## 言語: STG
+
+## 言語: Cmm
+
+## LLVMバックエンド
+
+# RTS
+
+## GC
+
+# ビルドシステム
+
+## GNU make
+
+# 基盤ライブラリ
+
+## base
+
+## integer-gmp
+
+## ghc-prim
