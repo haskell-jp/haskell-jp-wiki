@@ -8,6 +8,14 @@
 [ZipListの説明あたり](http://learnyouahaskell.com/functors-applicative-functors-and-monoids#applicative-functors)
 から再開します。
 
+以下のスライドを皆で見てもいいかもしれない。
+
+* [Applicative functor](http://www.slideshare.net/UsrNameu1/applicative-functor)
+* [すごいH 第12章モノイド](http://www.slideshare.net/ShintaHatatani/h-12-15228437)
+* [モナドがいっぱい！](http://www.slideshare.net/KentaSato/ss-15225450)
+* [mew.org/~kazu/material/2012-monoid.pdf](http://mew.org/~kazu/material/2012-monoid.pdf)
+* [mew.org/~kazu/material/2012-monad.pdf](http://mew.org/~kazu/material/2012-monad.pdf)
+
 ## みんなの宿題
 
 [Recursive data structures](http://learnyouahaskell.com/making-our-own-types-and-typeclasses#recursive-data-structures)
