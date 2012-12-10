@@ -6,6 +6,7 @@ Haskell関連の勉強会のまとめページです。
 * [PurelyFunctionalDataStructures読書会](Workshop/ReadPFDS/)
 * [初心者Haskell勉強会](Workshop/HaskellR/)
 * [GHCソースコードリーディング勉強会](Workshop/ReadGHC/)
+* [jhcソースコードリーディング勉強会](Workshop/ReadJhc/)
 * [Yesod勉強会](Workshop/yesod/)
 * [Haskell Day](Workshop/HaskellDay/)
 * [TaPL読書会](Workshop/tapl/)
