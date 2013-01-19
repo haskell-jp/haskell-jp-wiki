@@ -1,6 +1,44 @@
 # 『もうちょっとだけモナド』　練習問題
 
-## テンプレート
+## Writerモナド
+
+## 差分リスト
+
+## Readerモナド
+
+## Stateモナド
+
+## Eitherモナド
+
+(p.342 NOTE) ピエールのバランス棒に鳥がとまる様子をシミュレートしました。ピエールが滑って落ちた瞬間に棒の左右に何羽の鳥が止まってるか分かるように、Eitherモナドを使って書き直してみよう。
+
+~~~{ .haskell }
+import Control.Monad.Error
+
+type Birds = Int
+type Pole  = (Birds, Birds)
+
+landLeft :: Birds -> Pole -> Maybe Pole
+landLeft n (left, right)
+  | abs ((left + n) - right) < 4 = Just (left + n, right)
+  | otherwise                    = Nothing
+
+landRight :: Birds -> Pole -> Maybe Pole
+landRight n (left, right)
+  | abs (left - (right + n)) < 4 = Just (left, right + n)
+  | otherwise                    = Nothing
+
+banana :: Pole -> Maybe Pole
+banana _ = Nothing
+
+routine :: Maybe Pole
+routine = do
+  start  <- return (0,0)
+  first  <- landLeft 2 start
+  second <- landRight 2 first
+  landLeft 1 second
+~~~
+ 
 
 
 
