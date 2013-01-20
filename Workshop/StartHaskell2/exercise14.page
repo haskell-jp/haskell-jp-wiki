@@ -135,6 +135,7 @@ clear :: Stack -> State Stack ()
 ~~~
 
 実行例
+
 ~~~{ .haskell }
 ghci> runState (push 1 >> clear) [0]
 ((), [])
