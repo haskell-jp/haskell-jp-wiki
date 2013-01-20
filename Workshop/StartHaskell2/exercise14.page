@@ -25,6 +25,7 @@ solveRPN = head . foldl foldingFunction [] . words
 ~~~ { .haskell }
 type Env = [(String, String)]
 
+environment :: Env
 environment = 
   [ ("HOME", "/home/haskell")
   , ("PATH", "/bin:/usr/bin")
@@ -45,7 +46,6 @@ lookupEnv key = do
   env <- ask
   ...
 
-
 test = runReader (lookupEnv "LANG") environment
 ~~~
 
@@ -59,6 +59,28 @@ getConfPath :: Reader Env String
 
 
 ## Stateモナド
+
+2次元平面上を移動する処理を書いてみよう。（上下左右の座標実装はお任せ）
+
+
+~~~ { .haskell }
+import Control.Monad.State
+
+type Point = (Int, Int)
+
+move :: Char -> State Point ()
+move 'u' (x,y) =  -- 上へ移動
+move 'd' (x,y) =  -- 下へ移動
+move 'l' (x,y) =  -- 左へ移動
+move 'r' (x,y) =  -- 右へ移動
+
+moveGame :: String -> State Point ()
+moveGame []     =
+moveGame (c:cs) =
+
+main :: IO ()
+main = print $ evalState (moveGame "ulrdddlr") (0,0)
+~~~
 
 ## Eitherモナド
 
@@ -90,7 +112,8 @@ routine = do
   second <- landRight 2 first
   landLeft 1 second
 ~~~
- 
+
+
 ## Prob(確率)モナド
 
 (p.361) 結果が一致する事象の確率をまとめる関数 joinSameOutcomes を書いてみよう。
@@ -115,6 +138,5 @@ flatten (Prob xs) = Prob $ concat $ map multAll xs
 
 joinSameOutcomes :: Prob a -> Prob a
 ~~~
-
 
 
