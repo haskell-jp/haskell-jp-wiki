@@ -18,7 +18,30 @@ solveRPN = head . foldl foldingFunction [] . words
 
 ## 差分リスト
 
-## Readerモナド
+誰かよろしくお願いします
+
+
+## モナドとしての関数
+
+関数のモナドの定義を見ながら、無理やり使える例を探してみよう。
+
+~~~ { .haskell }
+instance Monad ((-> r) where
+  return x = \_ -> x
+  h >>= f = \w -> f (h w) w
+~~~
+
+たとえば、リストの前半分だけ取る関数 takeHalf は、こんな風に書ける（あまり書こうとは思わないけど）。
+
+~~~ { .haskell }
+import Control.Monad.Instances
+
+takeHalf :: [a] -> [a]
+takeHalf = (`div`2).length >>= take
+~~~
+
+
+## Readerモナドを使ってみる
 
 いまUnixの環境変数を、変数名と値の連想リストで表すことにする。
 
@@ -139,5 +162,4 @@ flatten (Prob xs) = Prob $ concat $ map multAll xs
 joinSameOutcomes :: Eq a => Prob a -> Prob a
 joinSameOutcomes = ....
 ~~~
-
 
