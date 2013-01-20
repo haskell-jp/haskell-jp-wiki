@@ -2,6 +2,20 @@
 
 ## Writerモナド
 
+逆ポーランド記法で書かれた式を計算する関数 solveRPN (p.214) に、Writerモナドを使って計算経過ログをとる機能を追加してみよう。
+
+~~~ { .haskell }
+import Control.Monad.Writer
+
+solveRPN :: String -> Double
+solveRPN = head . foldl foldingFunction [] . words
+  where
+    foldingFunction (x:y:ys) "*" = (y * x) : ys
+    foldingFunction (x:y:ys) "+" = (y + x) : ys
+    foldingFunction (x:y:ys) "-" = (y - x) : ys
+    foldingFunction xs       str = read str : xs
+~~~
+
 ## 差分リスト
 
 ## Readerモナド
@@ -44,7 +58,7 @@ routine = do
 (p.361) 結果が一致する事象の確率をまとめる関数 joinSameOutcomes を書いてみよう。
 
 
-~~~ { .haksell }
+~~~ { .haskell }
 import Data.Ratio
 
 newtype Prob a = Prob { getProb :: [(a, Rational)] } deriving Show
@@ -63,7 +77,6 @@ flatten (Prob xs) = Prob $ concat $ map multAll xs
 
 joinSameOutcomes :: Prob a -> Prob a
 ~~~
-
 
 
 
