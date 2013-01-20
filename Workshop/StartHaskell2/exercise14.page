@@ -136,7 +136,8 @@ flatten :: Prob (Prob a) -> Prob a
 flatten (Prob xs) = Prob $ concat $ map multAll xs
   where multAll (Prob innerxs, p) = map (\(x, r) -> (x, p*r)) innerxs
 
-joinSameOutcomes :: Prob a -> Prob a
+joinSameOutcomes :: Eq a => Prob a -> Prob a
+joinSameOutcomes = ....
 ~~~
 
 
