@@ -1,5 +1,8 @@
 # 『もうちょっとだけモナド』　練習問題
 
+
+* * * * *
+
 ## Writerモナド
 
 逆ポーランド記法で書かれた式を計算する関数 solveRPN (p.214) に、Writerモナドを使って計算経過ログをとる機能を追加してみよう。
@@ -16,10 +19,14 @@ solveRPN = head . foldl foldingFunction [] . words
     foldingFunction xs       str = read str : xs
 ~~~
 
+* * * * *
+
 ## 差分リスト
 
 誰かよろしくお願いします
 
+
+* * * * *
 
 ## モナドとしての関数
 
@@ -40,6 +47,7 @@ takeHalf :: [a] -> [a]
 takeHalf = (`div`2).length >>= take
 ~~~
 
+* * * * *
 
 ## Readerモナドを使ってみる
 
@@ -80,6 +88,7 @@ import Control.Monad.Reader
 getConfPath :: Reader Env String
 ~~~
 
+* * * * *
 
 ## Stateモナド
 
@@ -104,6 +113,8 @@ moveGame (c:cs) =
 main :: IO ()
 main = print $ evalState (moveGame "ulrdddlr") (0,0)
 ~~~
+
+* * * * *
 
 ## Eitherモナド
 
@@ -136,6 +147,7 @@ routine = do
   landLeft 1 second
 ~~~
 
+* * * * *
 
 ## Prob(確率)モナド
 
@@ -162,4 +174,3 @@ flatten (Prob xs) = Prob $ concat $ map multAll xs
 joinSameOutcomes :: Eq a => Prob a -> Prob a
 joinSameOutcomes = ....
 ~~~
-
