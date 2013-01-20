@@ -99,10 +99,10 @@ import Control.Monad.State
 type Point = (Int, Int)
 
 move :: Char -> State Point ()
-move 'u' (x,y) =  -- 上へ移動
-move 'd' (x,y) =  -- 下へ移動
-move 'l' (x,y) =  -- 左へ移動
-move 'r' (x,y) =  -- 右へ移動
+move 'u' =  -- 上へ移動
+move 'd' =  -- 下へ移動
+move 'l' =  -- 左へ移動
+move 'r' =  -- 右へ移動
 
 moveGame :: String -> State Point ()
 moveGame []     =
