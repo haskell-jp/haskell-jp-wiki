@@ -1,9 +1,7 @@
 # 『もうちょっとだけモナド』　練習問題
 
 
-* * * * *
-
-## Writerモナド
+## Writerモナドを使ってみよう
 
 逆ポーランド記法で書かれた式を計算する関数 solveRPN (p.214) に、Writerモナドを使って計算経過ログをとる機能を追加してみよう。
 
@@ -38,7 +36,7 @@ instance Monad ((-> r) where
   h >>= f = \w -> f (h w) w
 ~~~
 
-たとえば、リストの前半分だけ取る関数 takeHalf は、こんな風に書ける（あまり書こうとは思わないけど）。
+たとえば、リストの前半分だけ取る関数 takeHalf は、こんな風に書ける。（あまり書こうとは思わないけど）
 
 ~~~ { .haskell }
 import Control.Monad.Instances
@@ -49,7 +47,7 @@ takeHalf = (`div`2).length >>= take
 
 * * * * *
 
-## Readerモナドを使ってみる
+## Readerモナドを使ってみよう
 
 いまUnixの環境変数を、変数名と値の連想リストで表すことにする。
 
@@ -90,7 +88,7 @@ getConfPath :: Reader Env String
 
 * * * * *
 
-## Stateモナド
+## Stateモナドを使ってみよう
 
 2次元平面上を移動する処理を書いてみよう。（上下左右の座標実装はお任せ）
 
@@ -112,6 +110,38 @@ moveGame (c:cs) =
 
 main :: IO ()
 main = print $ evalState (moveGame "ulrdddlr") (0,0)
+~~~
+
+
+* * * * *
+
+## スタックを拡張しよう
+
+(p.333) で出てきたスタックに、以下の操作を追加しよう。
+
+- undo : 直前の操作を取り消し、状態を元に戻す
+- clear : スタックを空にする。ただし操作履歴の情報は残る（undoできるようにしておく）
+
+~~~{ .haskell }
+type Stack =  -- 新しいスタックの定義
+
+pop :: Stack -> State Stack Int
+
+push :: Int -> Stack -> State Stack ()
+
+undo :: Stack -> State Stack ()
+
+clear :: Stack -> State Stack ()
+~~~
+
+実行例
+~~~{ .haskell }
+ghci> runState (push 1 >> clear) [0]
+((), [])
+ghci> runState (push 1 >> clear >> undo) [0]
+((), [1, 0])
+ghci> runState (pop >> undo) [0]
+((), [0])
 ~~~
 
 * * * * *
