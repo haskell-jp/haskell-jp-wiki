@@ -39,6 +39,32 @@ routine = do
   landLeft 1 second
 ~~~
  
+## Prob(確率)モナド
+
+(p.361) 結果が一致する事象の確率をまとめる関数 joinSameOutcomes を書いてみよう。
+
+
+~~~ { .haksell }
+import Data.Ratio
+
+newtype Prob a = Prob { getProb :: [(a, Rational)] } deriving Show
+
+instance Functor Prob where
+  fmap f (Prob xs) Prob $ map (\(x, p) -> (f x, p)) xs
+
+instance Monad Prob where
+  return x = Prob [(x, 1%1)]
+  m >>= f = flatten (fmap f m)
+  fail _ = Prob []
+
+flatten :: Prob (Prob a) -> Prob a
+flatten (Prob xs) = Prob $ concat $ map multAll xs
+  where multAll (Prob innerxs, p) = map (\(x, r) -> (x, p*r)) innerxs
+
+joinSameOutcomes :: Prob a -> Prob a
+~~~
+
+
 
 
 
