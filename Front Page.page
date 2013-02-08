@@ -26,6 +26,12 @@ gititの使い方は
 [Gitit User's Guide]()
 にあります。
 
+ディレクトリを作る時は、直接WebブラウザのURL欄に以下のような文字列を入力してください。
+
+~~~
+http://wiki.haskell.jp/ディレクトリ名/ファイル名
+~~~
+
 ## コンテンツ
 * [メーリングリスト](MailingList)
 * [チャット](ChatRoom)
