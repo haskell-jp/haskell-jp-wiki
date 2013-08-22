@@ -18,9 +18,13 @@
 
 パッケージ管理システムで提供されていたらそれを使う。
 
-Mac OS X での ThreadScope のインストール方法
+Mac OS X / Windows での ThreadScope のインストール方法
 
-- [Mac に ThreadScope をインストールする方法](http://d.hatena.ne.jp/kazu-yamamoto/20130731/1375254210)
+- [Binary Installer for Windows / OSX](http://www.haskell.org/haskellwiki/ThreadScope#Binary_releases)
+
+- Cabalでインストールする場合
+    - [(MacPorts)Mac に ThreadScope をインストールする方法](http://d.hatena.ne.jp/kazu-yamamoto/20130731/1375254210)
+    - [HomebrewベースでThreadScopeをインストール - ✚POPSTACK✚](http://popstack.hatenablog.com/entry/2013/08/06/215110)
 
 その他の環境では、以下の説明に従って Gtk2Hs と ThreadScope をインストール
 
@@ -37,4 +41,3 @@ Mac OS X での ThreadScope のインストール方法
 
 # 次回
 [2]()
-
