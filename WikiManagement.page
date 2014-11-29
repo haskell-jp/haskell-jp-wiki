@@ -22,8 +22,3 @@
 ## 移行マニュアル
 
 * [WiLiKiからの移行](WikiManagement/FromWiliki)
-
-# このWikiで使っているgititプラグイン
-
-[gitit-pluginsのREADME.md](https://gitorious.org/wiki-haskell-jp/gitit-plugins/blobs/master/README.md)
-を見てください。
