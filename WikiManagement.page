@@ -1,19 +1,19 @@
 # このWikiの運用について
-いまのところ @master_q が管理していまいます。
-もっとサーバサイドに詳しい人一緒にメンテしましょう！
+いまのところ @igrep が管理していまいます。
+といってもHerokuに上げただけですけどね！
 
 本Wiki関連データは
 [gitorious.org](https://gitorious.org/wiki-haskell-jp/)
 にまとめて置いてあります。
-一日一度gititのgitリポジトリが
-[gitit-wikidata](https://gitorious.org/wiki-haskell-jp/gitit-wikidata)
-に自動pushされます。
+ページを更新する都度gititのgitリポジトリが
+[haskell-jp-wiki](https://github.com/igrep/haskell-jp-wiki)
+に自動的にpushされます。
 
 今のところWikiの更新はWebブラウザ経由のみです。
 技術的にはgit経由で更新することもできるかもしれません。
 サーバ側でコンフリクトが発生した場合にどうすればいいのかわからないので、
 今のところ
-[gitit-wikidata](https://gitorious.org/wiki-haskell-jp/gitit-wikidata)
+[haskell-jp-wiki](https://github.com/igrep/haskell-jp-wiki)
 へのpullリクエストは禁止しています。
 
 # Wikiの使い方
