@@ -2,4 +2,7 @@
 
 [http://haskellmokumoku.connpass.com/event/9829/](http://haskellmokumoku.connpass.com/event/9829/)
 
-Haskell JP WikiをHeroku上にデプロイしました。
+- Haskell JP WikiをHeroku上にデプロイしました。(@igrep)
+
+- PureScript入門ために環境作ってました。(@minamijoyo)  
+[[PureScript]HaskellっぽいAltJSなPureScriptの環境作る](http://d.hatena.ne.jp/minamijoyo/20141129/p1)
