@@ -3,4 +3,5 @@
 [http://haskellmokumoku.connpass.com/event/10434/](http://haskellmokumoku.connpass.com/event/10434/)
 
 - 前回HaskellJP Wikiをデプロイした際に使用した方法を整理してブログ記事にしました。 [http://the.igreque.info/posts/2014-12-20-haskelljp-wiki-on-heroku.html](http://the.igreque.info/posts/2014-12-20-haskelljp-wiki-on-heroku.html)(@igrep)
+- scottyのチュートリアルをやっててバージョンの非互換で若干ハマったところ補足記事書いておきました。[[Haskell]scotty使ってみた](http://d.hatena.ne.jp/minamijoyo/20141220/p1)(@minamijoyo)
 - 成果発表では、@khibinoさんが「[haskell-relational-record](https://github.com/khibino/haskell-relational-record)」という自前のライブラリをくださいました。
