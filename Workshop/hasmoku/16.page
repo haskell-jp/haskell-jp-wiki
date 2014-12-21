@@ -1,0 +1,6 @@
+# 第16回 Haskellもくもく会 @ Sansan, Inc.
+
+[http://haskellmokumoku.connpass.com/event/10434/](http://haskellmokumoku.connpass.com/event/10434/)
+
+- 前回HaskellJP Wikiをデプロイした際に使用した方法を整理してぶろぐきじにしました。 [http://the.igreque.info/posts/2014-12-20-haskelljp-wiki-on-heroku.html](http://the.igreque.info/posts/2014-12-20-haskelljp-wiki-on-heroku.html)(@igrep)
+- 成果発表では、@khibinoさんが「[haskell-relational-record](https://github.com/khibino/haskell-relational-record)」という自前のライブラリをくださいました。
