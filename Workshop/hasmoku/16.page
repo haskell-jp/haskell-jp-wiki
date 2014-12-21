@@ -4,7 +4,7 @@
 
 - 前回HaskellJP Wikiをデプロイした際に使用した方法を整理してブログ記事にしました。 [http://the.igreque.info/posts/2014-12-20-haskelljp-wiki-on-heroku.html](http://the.igreque.info/posts/2014-12-20-haskelljp-wiki-on-heroku.html)(@igrep)
 - scottyのチュートリアルをやっててバージョンの非互換で若干ハマったところ補足記事書いておきました。[[Haskell]scotty使ってみた](http://d.hatena.ne.jp/minamijoyo/20141220/p1)(@minamijoyo)
-- 成果発表では、@khibinoさんが「[haskell-relational-record](https://github.com/khibino/haskell-relational-record)」という自前のライブラリをくださいました。
+- 成果発表では、@khibinoさんに「[haskell-relational-record](https://github.com/khibino/haskell-relational-record)」という自前のライブラリを紹介していただきました。
 - [Free vs Operational](https://gist.github.com/minpou/c47e9283d69fb70dfdb7)(@minpou_氏による)のような話がTwitterちょろっとだけ上がっていたので記録しときます(@its_out_of_tune)
     - [もくもく会中に書いてみたコード](https://gist.github.com/tokiwoousaka/744595f076137b1402e3/)
     - [ReifiedProgramを使ったコード](https://gist.github.com/minpou/036c674622d77026f489)(@minpou_氏による)
