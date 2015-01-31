@@ -26,17 +26,11 @@ toc: no
 このWikiは
 [gitit](http://gitit.net/)
 というWikiエンジンで運用されています。
-gititの使い方は
-[Help]()
-を見てください。
-もっと詳細な解説が
-[Gitit User's Guide]()
-にあります。
 
-ディレクトリを作る時は、直接WebブラウザのURL欄に以下のような文字列を入力してください。
+新しいページやディレクトリを作る時は、直接WebブラウザのURL欄に以下のような文字列を入力してください。
 
 ~~~
-http://wiki.haskell.jp/ディレクトリ名/ファイル名
+http://wiki.haskell.jp/ディレクトリ名/ページ名
 ~~~
 
 ## コンテンツ
