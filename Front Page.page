@@ -19,9 +19,11 @@ http://wiki.haskell.jp/ディレクトリ名/ページ名
 ~~~
 
 ## コンテンツ
-* [メーリングリスト](MailingList)
-* [チャット](ChatRoom)
-* [勉強会まとめ](Workshop) <= 充実
+
+* HaskellJPコミュニティへの入り口
+    * [メーリングリスト](MailingList)
+    * [チャット](ChatRoom)
+    * [勉強会まとめ](Workshop): 今のところ一番充実してます！
 * [Wikiの練習](Sandbox)
 * [このWikiの運用について](WikiManagement)
 * [www.sampou.org/cgi-bin/haskell.cgiから引っ越してきたページ達](Old/sampou.org/)
