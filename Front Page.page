@@ -14,7 +14,8 @@ toc: no
 
 ### Herokuに移行しました
 
-2014年11月29日以降、[@mietek](https://github.com/mietek)さんが作成された[Haskell on Heroku](https://haskellonheroku.com/)というbuildpackを利用して、Herokuに移行しました。
+2014年11月29日以降、[\@mietek](https://github.com/mietek) さんが作成された[Haskell on Heroku](https://haskellonheroku.com/) というbuildpackを利用して、Herokuに移行しました。
+
 その副作用として、**これまでに保存していたwikiアカウントは利用できなくなり、GitHubのOAuthを利用した登録のみ**となりました。
 ご了承ください。
 
