@@ -20,8 +20,8 @@ toc: no
 ご了承ください。
 
 ## このサイトについて
-このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。
-ユーザアカウントさえ取っていただければ、どなたでも自由に書き込めます。
+このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。 \
+[GitHub](https://github.com/)のアカウントを取得した上で、右上の「Login / Get an account」をクリックし、「Authorize application」ボタンを押せば、どなたでも自由に書き込めるようになります。
 
 このWikiは
 [gitit](http://gitit.net/)
