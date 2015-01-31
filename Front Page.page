@@ -20,12 +20,13 @@ toc: no
 ご了承ください。
 
 ## このサイトについて
-このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。 \
-[GitHub](https://github.com/)のアカウントを取得した上で、右上の「Login / Get an account」をクリックし、「Authorize application」ボタンを押せば、どなたでも自由に書き込めるようになります。
 
-このWikiは
-[gitit](http://gitit.net/)
-というWikiエンジンで運用されています。
+このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。 \
+[gitit](http://gitit.net/)というWikiエンジン（**もちろんHaskell製**）で運用されています。
+
+## 使い方
+
+[GitHub](https://github.com/)のアカウントを取得した上で、右上の「Login / Get an account」をクリックし、「Authorize application」ボタンを押せば、どなたでも自由に書き込めるようになります。
 
 新しいページやディレクトリを作る時は、直接WebブラウザのURL欄に以下のような文字列を入力してください。
 
