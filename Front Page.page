@@ -3,22 +3,6 @@ toc: no
 ...
 # ようこそHaskellJP wikiへ!
 
-## おしらせ
-ベータ運用中です。
-
-[sampou.org](http://www.sampou.org/cgi-bin/haskell.cgi)
-から
-[Old/sampou.org/]()
-カテゴリへデータを移管完了しました。
-一部WikiNameのリンク切れが見つかっており、対策検討中です。
-
-### Herokuに移行しました
-
-2014年11月29日以降、[\@mietek](https://github.com/mietek) さんが作成された[Haskell on Heroku](https://haskellonheroku.com/) というbuildpackを利用して、Herokuに移行しました。
-
-その副作用として、**これまでに保存していたwikiアカウントは利用できなくなり、GitHubのOAuthを利用した登録のみ**となりました。
-ご了承ください。
-
 ## このサイトについて
 
 このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。 \
@@ -41,6 +25,23 @@ http://wiki.haskell.jp/ディレクトリ名/ページ名
 * [Wikiの練習](Sandbox)
 * [このWikiの運用について](WikiManagement)
 * [www.sampou.org/cgi-bin/haskell.cgiから引っ越してきたページ達](Old/sampou.org/)
+
+
+## おしらせ
+ベータ運用中です。
+
+[sampou.org](http://www.sampou.org/cgi-bin/haskell.cgi)
+から
+[Old/sampou.org/]()
+カテゴリへデータを移管完了しました。
+一部WikiNameのリンク切れが見つかっており、対策検討中です。
+
+### Herokuに移行しました
+
+2014年11月29日以降、[\@mietek](https://github.com/mietek) さんが作成された[Haskell on Heroku](https://haskellonheroku.com/) というbuildpackを利用して、Herokuに移行しました。
+
+その副作用として、**これまでに保存していたwikiアカウントは利用できなくなり、GitHubのOAuthを利用した登録のみ**となりました。
+ご了承ください。
 
 ## ライセンスについて
 本サイトに適用されるライセンスについては
