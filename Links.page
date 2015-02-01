@@ -1,0 +1,40 @@
+# Haskellに関する日本語のリンク集
+
+建設中です！どんどん追加・削除しましょう！
+
+## 各種ウェブサービスでのHaskellタグ
+
+暇な時に覗いてみましょう！
+
+- [Qiita](http://qiita.com/tags/haskell)
+- [スタック・オーバーフロー](http://ja.stackoverflow.com/questions/tagged/haskell)
+- [はてなブックマーク](http://b.hatena.ne.jp/search/tag?q=haskell)
+- [SlideShare](http://www.slideshare.net/search/slideshow?searchfrom=header&q=haskell)
+- [Speaker Deck](https://speakerdeck.com/search?utf8=%E2%9C%93&q=haskell)
+
+## おすすめブログ
+
+とりあえず追いかけてみましょう！自薦・他薦問いません！
+（下記のブログはもちろんすべてHaskellについて書いてあるわけではありませんが...。あしからず。）
+
+- [あどけない話](http://d.hatena.ne.jp/kazu-yamamoto/)
+- [モナドとわたしとコモナド](http://fumieval.hatenablog.com/)
+- [maoeのブログ](http://maoe.hatenadiary.jp/)
+- [Creatable a => a -> IO b](http://tune.hateblo.jp/)
+- [みゆっきのにっき](http://solorab.net/)
+- [ぼくのぬまち 出張版](http://notogawa.hatenablog.com/)
+
+## 書籍
+
+- [すごいHaskellたのしく学ぼう！](http://estore.ohmsha.co.jp/titles/978427406885P)
+- [プログラミングHaskell](http://estore.ohmsha.co.jp/titles/978427406781P)
+- [Haskellによる並列・並行プログラミング](http://www.oreilly.co.jp/books/9784873116891/)
+- [関数プログラミング実践入門 ──簡潔で，正しいコードを書くために](http://gihyo.jp/book/2014/978-4-7741-6926-2)
+- [Amazon.co.jp： 関数プログラミング入門 ―Haskellで学ぶ原理と技法―: Richard Bird, 山下伸夫: 本](http://www.amazon.co.jp/%E9%96%A2%E6%95%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%85%A5%E9%96%80-%E2%80%95Haskell%E3%81%A7%E5%AD%A6%E3%81%B6%E5%8E%9F%E7%90%86%E3%81%A8%E6%8A%80%E6%B3%95%E2%80%95-Richard-Bird/dp/427406896X)
+- [Real World Haskell](http://www.oreilly.co.jp/books/9784873114231/)
+- [関数プログラミング 珠玉のアルゴリズムデザイン](http://shop.ohmsha.co.jp/shopdetail/000000004066/)
+
+## 各社での採用事例
+
+- [古くて新しいプログラミングパラダイム～関数型プログラミング | NTTデータ](http://www.nttdata.com/jp/ja/insights/trend_keyword/2013032101.html)
+- [Haskell使ってみた | GREE Engineers' Blog](http://labs.gree.jp/blog/2013/12/9882/)
