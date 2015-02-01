@@ -3,9 +3,9 @@
 といってもHerokuに上げただけですけどね！
 
 本Wiki関連データは
-[gitorious.org](https://gitorious.org/wiki-haskell-jp/)
+[GitHubのリポジトリ](https://github.com/igrep/haskell-jp-wiki)
 にまとめて置いてあります。
-ページを更新する都度gititのgitリポジトリが
+ページを更新する都度、gititのgitリポジトリが
 [haskell-jp-wiki](https://github.com/igrep/haskell-jp-wiki)
 に自動的にpushされます。
 
