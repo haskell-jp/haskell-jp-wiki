@@ -29,6 +29,12 @@
 - [みゆっきのにっき](http://solorab.net/)
 - [ぼくのぬまち 出張版](http://notogawa.hatenablog.com/)
 
+## ライブラリなどの解説
+
+- [Monad - モナモナ言わない モナド入門 第二版](http://www.mew.org/~kazu/material/2012-monad.pdf)
+- [lens - Lens で Haskell をもっと格好良く！ ](http://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
+- [haskell-relational-record - チュートリアル](https://github.com/khibino/haskell-relational-record/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
+
 ## 書籍
 
 - [すごいHaskellたのしく学ぼう！](http://estore.ohmsha.co.jp/titles/978427406885P)
