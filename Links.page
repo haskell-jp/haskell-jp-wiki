@@ -36,6 +36,8 @@
 - [lens - Lens で Haskell をもっと格好良く！ ](http://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
 - [haskell-relational-record - チュートリアル](https://github.com/khibino/haskell-relational-record/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
 - [Haskellのビルドツール"stack"の紹介 - Qiita](http://qiita.com/tanakh/items/6866d0f570d0547df026)
+- [Haskell - 関数に多相的なリストを適用する - Qiita](http://qiita.com/philopon/items/1f4d74fdf72333fa0927)
+- [シンプルでかつ最高のJavaScriptプロファイラ sjsp を作りました！ ― Webアプリケーションが複雑化する中でプロファイラに求められるものとは何か - プログラムモグモグ](http://itchyny.hatenablog.com/entry/2015/07/01/120000)
 
 ## 書籍
 
@@ -47,9 +49,6 @@
 - [Real World Haskell](http://www.oreilly.co.jp/books/9784873114231/)
 - [関数プログラミング 珠玉のアルゴリズムデザイン](http://shop.ohmsha.co.jp/shopdetail/000000004066/)
 
-## Haskell製のツール
-
-- [シンプルでかつ最高のJavaScriptプロファイラ sjsp を作りました！ ― Webアプリケーションが複雑化する中でプロファイラに求められるものとは何か - プログラムモグモグ](http://itchyny.hatenablog.com/entry/2015/07/01/120000)
 
 ## 各社での採用事例
 
