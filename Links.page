@@ -31,13 +31,18 @@
 
 ## ライブラリなどの解説
 
-- [GHC 7.4.1 の型レベル新機能を使い倒す 〜GADTs、型族 と DataKinds、ConstraintKinds の円環〜 - konn-san.com](http://konn-san.com/articles/2012-06-06-promoted-types-and-list-arguments.html)
+- [Haskellのビルドツール"stack"の紹介 - Qiita](http://qiita.com/tanakh/items/6866d0f570d0547df026)
+- [Stackでやる最速Haskell Hello world! (GHCのインストール付き！) - Qiita](http://qiita.com/igrep/items/da1d8df6d40eb001a561)
+
 - [Monad - モナモナ言わない モナド入門 第二版](http://www.mew.org/~kazu/material/2012-monad.pdf)
+
 - [lens - Lens で Haskell をもっと格好良く！ ](http://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
 - [haskell-relational-record - チュートリアル](https://github.com/khibino/haskell-relational-record/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
-- [Haskellのビルドツール"stack"の紹介 - Qiita](http://qiita.com/tanakh/items/6866d0f570d0547df026)
-- [Haskell - 関数に多相的なリストを適用する - Qiita](http://qiita.com/philopon/items/1f4d74fdf72333fa0927)
 - [シンプルでかつ最高のJavaScriptプロファイラ sjsp を作りました！ ― Webアプリケーションが複雑化する中でプロファイラに求められるものとは何か - プログラムモグモグ](http://itchyny.hatenablog.com/entry/2015/07/01/120000)
+
+- [Haskell - 関数に多相的なリストを適用する - Qiita](http://qiita.com/philopon/items/1f4d74fdf72333fa0927)
+- [GHC 7.4.1 の型レベル新機能を使い倒す 〜GADTs、型族 と DataKinds、ConstraintKinds の円環〜 - konn-san.com](http://konn-san.com/articles/2012-06-06-promoted-types-and-list-arguments.html)
+
 
 ## 書籍
 
