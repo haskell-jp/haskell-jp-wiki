@@ -32,7 +32,7 @@
 ## ライブラリなどの解説
 
 - [Twitterを巡回していてわかったHaskell初心者が躓きやすいポイント8つ - Qiita](http://qiita.com/lotz/items/5cbaca19d90cd168ab43)
-- [](https://github.com/lotz84/haskell/blob/master/docs/haskell-made-tools.md)
+- [Haskell製ツール集追加](https://github.com/lotz84/haskell/blob/master/docs/haskell-made-tools.md)
 
 - [Haskellのビルドツール"stack"の紹介 - Qiita](http://qiita.com/tanakh/items/6866d0f570d0547df026)
 - [Stackでやる最速Haskell Hello world! (GHCのインストール付き！) - Qiita](http://qiita.com/igrep/items/da1d8df6d40eb001a561)
