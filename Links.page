@@ -11,6 +11,7 @@
 ## ドキュメントの翻訳
 
 - [GHC ver. 7.8.2](http://www.kotha.net/ghcguide_ja/latest/)
+- [GHC](http://ghcguide.haskell.jp): こちらはGHC 8.0.2に対応してますが、2017/2/19現在まだ工事中。
 - [The Typeclassopedia](http://snak.tdiary.net/20091020.html)
 - [Monad Transformers Step By Step](http://bicycle1885.hatenablog.com/entry/2012/12/08/165236)
 
