@@ -1,4 +1,4 @@
-# HaskellJP Wiki
+# Haskell-jp Wiki
 
 Haskell関連情報を日本語でまとめるためのWikiのソースコードです。  
 原則として、このリポジトリへのPull Requestは受け付けておりません。  
