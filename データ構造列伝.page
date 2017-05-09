@@ -1,6 +1,6 @@
 Haskellの世界にはたくさんのデータ構造があり、魅力の一つであるとも言える。とは言え、どれを使えばいいのかは悩みの種。Haskellで実装されている様々なデータ構造の特徴と使い方を紹介する。
 
-## リスト
+# リスト
 
 難易度: ☆
 
@@ -19,7 +19,7 @@ data [] a = a : [a] | []
 
 逐次的な処理のための表現だけでなく、他の構造への橋渡しとしてもリストは重要な役割を担っている。
 
-### 例
+## セルオートマトン
 
 以下はルール110のセルオートマトンの実装である。多くの関数がPreludeにあるのもリストの利点だ。
 
@@ -39,7 +39,7 @@ main = putStr $ unlines
   $ iterate (automata rule110) [True]
 ```
 
-## Set
+# Set
 
 難易度: ☆☆
 
@@ -61,7 +61,7 @@ intersection :: Ord a => Set a -> Set a -> Set a
 
 必要な場面はそこまで多くはないが、要素の有無を確かめたり、集合の演算を使いたい時に気軽に持ち出せる。
 
-### 例
+## 速いnub
 
 Setを利用するとリストの重複を[Data.List.nub](http://hackage.haskell.org/package/base-4.9.1.0/docs/Data-List.html#v:nub)よりも効率よく取り除ける。
 
@@ -75,7 +75,7 @@ ordNub xs = foldr (\x k s -> if Set.member x s
   (const []) xs Set.empty
 ```
 
-## Heap
+# Heap
 
 難易度: ☆
 
@@ -94,7 +94,7 @@ viewMin :: Ord a => Heap a -> Maybe (a, Heap a)
 data Entry p a = Entry { priority :: p, payload :: a }
 ```
 
-### 例
+## トップ3
 
 標準入力から受け取った整数のうち、トップ3を表示する。
 
@@ -109,7 +109,7 @@ main = interact $ unlines . map show . toList
   . map (read :: String -> Int) . lines
 ```
 
-## Seq
+# Seq
 
 難易度: ☆☆☆
 
@@ -149,16 +149,14 @@ splitAt :: Int -> Seq a -> (Seq a, Seq a) -- O(log(min(i, n - i)))
 両端のアクセスが定数時間であるという性質を生かし、手軽なキューとしてしばしば使われる。
 永続性を生かしつつ様々な操作をバランスよく組み合わせたいという状況に刺さることもある。
 
-### 例
+## 例 TBD
 
-TBD
-
-### fingertree
+## fingertree
 
 テキストエディタyiやパーサーコンビネータtrifectaでは、亜種の[fingertree](http://hackage.haskell.org/package/fingertree/docs/Data-FingerTree.html)
 を文字列の表現に活用している。新たな型変数`v`に位置を、要素としてバイト列を当てはめることで、柔軟かつ高速な文字列の操作を実現できる。
 
-## 配列(Boxed Vector)
+# 配列(Boxed Vector)
 
 難易度: ☆☆
 
@@ -175,6 +173,4 @@ accum :: (a -> b -> a)
 
 個々の要素の更新は得意ではなく、それが必要な場合はMVectorというミュータブルな表現に一度変換する必要がある。基本は簡単だが、性能を活かそうとなるとややテクニカルな側面がある。
 
-### 例
-
-TBD
+## 例 TBD
