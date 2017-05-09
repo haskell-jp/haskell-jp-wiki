@@ -220,4 +220,18 @@ __欠点__
 *　consのような構造が変わる操作は、線形時間を使って丸々作り直さないといけない
 * チューニングが難しい
 
-## 例 TBD
+## 例
+
+任意の範囲について、平均を定数時間で得られる表現を作る。
+
+```haskell
+import qualified Data.Vector.Unboxed as U
+
+newtype Integrated a = Integrated (U.Vector a) deriving Show
+
+integrate :: (Num a, U.Unbox a) => [a] -> Integrated a
+integrate = Integrated . U.postscanl' (+) 0 . U.fromList
+
+average :: (Fractional a, U.Unbox a) => Integrated a -> Int -> Int -> a
+average (Integrated v) i j = (v U.! j - v U.! i) / fromIntegral (j - i + 1)
+```
