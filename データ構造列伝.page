@@ -1,0 +1,180 @@
+Haskellの世界にはたくさんのデータ構造があり、魅力の一つであるとも言える。とは言え、どれを使えばいいのかは悩みの種。Haskellで実装されている様々なデータ構造の特徴と使い方を紹介する。
+
+## リスト
+
+難易度: ☆
+
+```haskell
+data [] a = a : [a] | []
+```
+
+誰もが真っ先に触れるであろうデータ構造、リスト。順番に処理したいデータをまとめる構造としては王道中の王道だ。また、多くのデータ構造はリストとの相互変換をする関数を提供している。
+
+リストを構築する手段は多数ある。
+
+* コンストラクタ`(:)`と`[]`で直接構築する
+* リテラル `[0,1,2,3]`
+* FromThenTo記法 `[0,2..12]`
+* 構築関数 `unfoldr`, `iterate`, `replicate`, `repeat`など
+
+逐次的な処理のための表現だけでなく、他の構造への橋渡しとしてもリストは重要な役割を担っている。
+
+### 例
+
+以下はルール110のセルオートマトンの実装である。多くの関数がPreludeにあるのもリストの利点だ。
+
+```haskell
+rule110 :: Bool -> Bool -> Bool -> Bool
+rule110 False a b = a || b
+rule110 True a b = a /= b
+
+automata :: (Bool -> Bool -> Bool -> Bool) -> [Bool] -> [Bool]
+automata f xs = go ([False, False] ++ xs ++ [False, False]) where
+  go (x : ys@(y : z : _)) = f x y z : go ys
+  go _ = []
+
+main = putStr $ unlines
+  $ map (map (\b -> if b then '.' else ' '))
+  $ take 80
+  $ iterate (automata rule110) [True]
+```
+
+## Set
+
+難易度: ☆☆
+
+[Set](http://hackage.haskell.org/package/containers/docs/Data-Set.html)はその名の通り集合を表すデータ構造で、順序と重複の概念がない。要素を追加・削除する`insert`と`delete`、要素の存在を確かめる`member`が基本操作となる。
+
+```haskell
+insert :: Ord a => a -> Set a -> Set a
+delete :: Ord a => a -> Set a -> Set a
+member :: Ord a => a -> Set a -> Bool
+```
+
+もちろん集合演算もあり、小さい方をmとして計算量はO(m*log(n/m + 1))となかなか優秀だ。
+
+```haskell
+union :: Ord a => Set a -> Set a -> Set a
+difference :: Ord a => Set a -> Set a -> Set a
+intersection :: Ord a => Set a -> Set a -> Set a
+```
+
+必要な場面はそこまで多くはないが、要素の有無を確かめたり、集合の演算を使いたい時に気軽に持ち出せる。
+
+### 例
+
+Setを利用するとリストの重複を[Data.List.nub](http://hackage.haskell.org/package/base-4.9.1.0/docs/Data-List.html#v:nub)よりも効率よく取り除ける。
+
+```haskell
+import qualified Data.Set as Set
+
+ordNub :: Ord a => [a] -> [a]
+ordNub xs = foldr (\x k s -> if Set.member x s
+  then k s
+  else x : k (Set.insert x s))
+  (const []) xs Set.empty
+```
+
+## Heap
+
+難易度: ☆
+
+[heapsのData.Heap](http://hackage.haskell.org/package/heaps-0.3.4.1/docs/Data-Heap.html)は、Bootstrapped skew binomial heapの実装である。Setと違い、重複した要素を持つことができる。
+
+```haskell
+insert :: a -> Heap a -> Heap a
+viewMin :: Ord a => Heap a -> Maybe (a, Heap a)
+```
+
+挿入だけでなく、結合(mappend)も定数時間なのが面白い、クセの少ない構造である。
+
+タプルとよく似たEntry型も定義されており、大小比較がpriorityフィールドに基づいて行われる。優先度付きキューとして使うときに有用だ。
+
+```haskell
+data Entry p a = Entry { priority :: p, payload :: a }
+```
+
+### 例
+
+標準入力から受け取った整数のうち、トップ3を表示する。
+
+```haskell
+insertN :: Ord a => Int -> a -> H.Heap a -> H.Heap a
+insertN n a h = case H.insert a h of
+  h' | H.size h' <= n -> h'
+     | otherwise -> H.deleteMin h'
+
+main = interact $ unlines . map show . toList
+  . foldl' (flip $ insertN 3) H.empty
+  . map (read :: String -> Int) . lines
+```
+
+## Seq
+
+難易度: ☆☆☆
+
+[containersのData.Sequenceモジュール](http://hackage.haskell.org/package/containers/docs/Data-Sequence.html)は2-3 Finger treeというデータ構造を実装している。
+
+要素の追加・削除を含め、両端へのアクセスはO(1)、任意の要素でもO(log n)と、カタログスペックは優秀だ。しかし、リストと比べると、オーダーは同じでも定数倍の違いは大きく、実は使いこなすのが難しい上級者向けの構造だ。
+
+`<|`演算子で左に要素を追加する。
+
+```haskell
+(<|) :: a -> Seq a -> Seq a
+```
+
+`|>`演算子で右に要素を追加する。
+```haskell
+(|>) :: Seq a -> a -> Seq a
+```
+
+左端の要素はviewlで取り出す。
+```haskell
+viewl :: Seq a -> ViewL a
+data ViewL = EmptyL | a :< (Seq a)
+```
+
+右端の要素はviewrで取り出す。
+```haskell
+viewr :: Seq a -> ViewL a
+data ViewL = EmptyR | Seq a :> a
+```
+
+結合(mappend)もsplitAtも対数時間である。
+
+```haskell
+splitAt :: Int -> Seq a -> (Seq a, Seq a) -- O(log(min(i, n - i)))
+```
+
+両端のアクセスが定数時間であるという性質を生かし、手軽なキューとしてしばしば使われる。
+永続性を生かしつつ様々な操作をバランスよく組み合わせたいという状況に刺さることもある。
+
+### 例
+
+TBD
+
+### fingertree
+
+テキストエディタyiやパーサーコンビネータtrifectaでは、亜種の[fingertree](http://hackage.haskell.org/package/fingertree/docs/Data-FingerTree.html)
+を文字列の表現に活用している。新たな型変数`v`に位置を、要素としてバイト列を当てはめることで、柔軟かつ高速な文字列の操作を実現できる。
+
+## 配列(Boxed Vector)
+
+難易度: ☆☆
+
+[vector](https://hackage.haskell.org/package/vector)パッケージでは、一次元の配列`Vector`が定義されている。配列なので、要素へのアクセス(`index`)が定数時間である。要素数が変わらないような演算、例えば`map`や`zipWith`などを多用するときに適している。
+
+要素を更新したいときは`accum`でまとめて更新するとお得だ。
+
+```haskell
+accum :: (a -> b -> a)
+  -> Vector a
+  -> [(Int, b)]
+  -> Vector a
+```
+
+個々の要素の更新は得意ではなく、それが必要な場合はMVectorというミュータブルな表現に一度変換する必要がある。基本は簡単だが、性能を活かそうとなるとややテクニカルな側面がある。
+
+### 例
+
+TBD
