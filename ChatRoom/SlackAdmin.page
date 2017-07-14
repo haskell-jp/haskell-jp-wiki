@@ -1,0 +1,42 @@
+# Haskell-jp Slack Team管理者へ
+
+誰でも登録できるようにするために[slackin](https://github.com/rauchg/slackin)というツールを使っています。  
+たまにアップデートしろよ、とHerokuに怒られるのでアップデートのために今日（2017年7月14日）やったことをメモ。
+
+Herokuのメールで案内された手順ではうまくアップデートできない。
+なぜなら、そもそもslackinはHerokuの簡単デプロイ機能（そんな呼び方でいいのか？）でデプロイしたものなので、紐付けられたgit repositoryがなく、
+
+```
+heroku git:clone -a join-haskell-jp-slack
+```
+
+しても、空のgit repositoryがcloneされてしまう。
+
+これでは明らかに意味がないので、[元のリポジトリー](https://github.com/rauchg/slackin)をcloneして対象のアプリケーションに紐付けることにした。  
+手順はこう（もちろん、予め `heroku login` コマンドなどを実行して、認証の設定をしておこう。
+
+```
+git clone git@github.com:rauchg/slackin.git
+cd slackin
+heroku git:remote -a join-haskell-jp-slack
+git push heroku master
+```
+
+特に問題がなければこれで無事リビルドされ、自動で新しい環境になるはず。
+
+## トラブルシューティング
+
+が、2017年7月14日の今回はうまくいかなかった。  
+`heroku logs` で確認したところ、どうやらslackinの仕様が変わり、Google CAPTCHA APIの設定が必要になっていたらしい。
+
+Google CAPTCHA APIの登録方法は割愛するが、
+`GOOGLE_CAPTCHA_SECRET` と `GOOGLE_CAPTCHA_SITEKEY` を取得したら、[join-haskell-jp-slackの設定画面](https://dashboard.heroku.com/apps/join-haskell-jp-slack/settings)に移動して、Config Varsとして設定する。
+
+設定できたら、
+
+```
+git commit --allow-empty -m "Update"
+git push heroku master # もしかしたら heroku restartでよかったかも。
+```
+
+して、再デプロイしよう。
