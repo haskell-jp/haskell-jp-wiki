@@ -48,7 +48,7 @@
 - [Monad - モナモナ言わない モナド入門 第二版](http://www.mew.org/~kazu/material/2012-monad.pdf)
 
 - [lens - Lens で Haskell をもっと格好良く！ ](http://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
-- [haskell-relational-record - チュートリアル](https://github.com/khibino/haskell-relational-record/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
+- [haskell-relational-record - Project Page](http://khibino.github.io/haskell-relational-record/), [Quick Start](http://khibino.github.io/haskell-relational-record/quickstart.html), [Tutorial](http://khibino.github.io/haskell-relational-record/tutorial.html)
 - [【型レベルWeb DSL】 Servantの紹介](http://qiita.com/lotz/items/883b41fa79f060e59efa)
 - [Hakyllでブログを作る(実践編) - Wake up! Good night*](https://imokuri123.com/blog/2015/12/how-to-create-blog-with-hakyll-part1.html)
 - [シンプルでかつ最高のJavaScriptプロファイラ sjsp を作りました！ ― Webアプリケーションが複雑化する中でプロファイラに求められるものとは何か - プログラムモグモグ](http://itchyny.hatenablog.com/entry/2015/07/01/120000)
