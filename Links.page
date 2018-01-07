@@ -21,6 +21,7 @@
 - [Haskell 初心者へのアドバイス (和訳) - Qiita](https://qiita.com/rounddelta/items/8b7d2a200a932e761fa3)
 - [Haskell のアプリケーション向けに軽量の Dockerイメージ を作る (和訳) - Qiita](https://qiita.com/rounddelta/items/d767f36d544427a9c60d)
 - [Haskell で暗号学的ハッシュを扱う (和訳) - Qiita](https://qiita.com/rounddelta/items/ace180b1b78876f1c190)
+- [Haskell のパフォーマンスをデバッグする](https://haskell.e-bigmoon.com/posts/2017-12-27-haskell-performance-debugging)
 
 ## 各種ウェブサービスでのHaskellタグ
 
@@ -65,6 +66,7 @@
 
 - [Haskell - 関数に多相的なリストを適用する - Qiita](http://qiita.com/philopon/items/1f4d74fdf72333fa0927)
 - [GHC 7.4.1 の型レベル新機能を使い倒す 〜GADTs、型族 と DataKinds、ConstraintKinds の円環〜 - konn-san.com](http://konn-san.com/articles/2012-06-06-promoted-types-and-list-arguments.html)
+- [Haskell Backpack 覚え書き](https://matsubara0507.github.io/posts/2017-12-12-backpack-memo.html)
 
 
 ## 書籍
