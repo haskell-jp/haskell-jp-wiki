@@ -67,6 +67,8 @@
 - [Haskell - 関数に多相的なリストを適用する - Qiita](http://qiita.com/philopon/items/1f4d74fdf72333fa0927)
 - [GHC 7.4.1 の型レベル新機能を使い倒す 〜GADTs、型族 と DataKinds、ConstraintKinds の円環〜 - konn-san.com](http://konn-san.com/articles/2012-06-06-promoted-types-and-list-arguments.html)
 - [Haskell Backpack 覚え書き](https://matsubara0507.github.io/posts/2017-12-12-backpack-memo.html)
+- [Haskell・Servant+Persistent/Esqueletoで作る実用WebAPI (11) Esqueleto:selectの基本 - Qiita](https://qiita.com/cyclone_t/items/cb492e53ad71a56ae321)
+- [Haskell・Servant+Persistent/Esqueletoで作る実用WebAPI (12) Esqueleto:select（続き） - Qiita](https://qiita.com/cyclone_t/items/337f2d88e9a0a0f80c86)
 
 
 ## 書籍
