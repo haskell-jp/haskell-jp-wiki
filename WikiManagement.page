@@ -3,17 +3,17 @@
 といってもHerokuに上げただけですけどね！
 
 本Wiki関連データは
-[GitHubのリポジトリ](https://github.com/igrep/haskell-jp-wiki)
+[GitHubのリポジトリ](https://github.com/haskell-jp/haskell-jp-wiki)
 にまとめて置いてあります。
 ページを更新する都度、gititのgitリポジトリが
-[haskell-jp-wiki](https://github.com/igrep/haskell-jp-wiki)
+[haskell-jp-wiki](https://github.com/haskell-jp/haskell-jp-wiki)
 に自動的にpushされます。
 
 今のところWikiの更新はWebブラウザ経由のみです。
 技術的にはgit経由で更新することもできるかもしれません。
 サーバ側でコンフリクトが発生した場合にどうすればいいのかわからないので、
 今のところ
-[haskell-jp-wiki](https://github.com/igrep/haskell-jp-wiki)
+[haskell-jp-wiki](https://github.com/haskell-jp/haskell-jp-wiki)
 へのpullリクエストは禁止しています。
 
 # Wikiの使い方
