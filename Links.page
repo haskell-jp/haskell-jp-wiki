@@ -22,6 +22,7 @@
 - [Haskell のアプリケーション向けに軽量の Dockerイメージ を作る (和訳) - Qiita](https://qiita.com/rounddelta/items/d767f36d544427a9c60d)
 - [Haskell で暗号学的ハッシュを扱う (和訳) - Qiita](https://qiita.com/rounddelta/items/ace180b1b78876f1c190)
 - [Haskell のパフォーマンスをデバッグする](https://haskell.e-bigmoon.com/posts/2017-12-27-haskell-performance-debugging)
+- [wizard モノイド](https://haskell.e-bigmoon.com/posts/2018-03-07-the-wizard-monoid)
 
 ## 各種ウェブサービスでのHaskellタグ
 
