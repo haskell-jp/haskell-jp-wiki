@@ -57,19 +57,23 @@
 
 - [Monad - モナモナ言わない モナド入門 第二版](http://www.mew.org/~kazu/material/2012-monad.pdf)
 
+- [extensible 攻略Wiki](http://wiki.hask.moe/)
 - [lens - Lens で Haskell をもっと格好良く！ ](http://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
 - [haskell-relational-record - チュートリアル](https://github.com/khibino/haskell-relational-record/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
     - 残念ながら、↑のページは内容が古くなってしまっています。
     - 最新版は英語ですがこちら: [haskell-relational-record - Project site](http://khibino.github.io/haskell-relational-record/), [Quick Start](http://khibino.github.io/haskell-relational-record/quickstart.html), [Tutorial](http://khibino.github.io/haskell-relational-record/tutorial.html)
-- [【型レベルWeb DSL】 Servantの紹介](http://qiita.com/lotz/items/883b41fa79f060e59efa)
 - [Hakyllでブログを作る(実践編) - Wake up! Good night*](https://imokuri123.com/blog/2015/12/how-to-create-blog-with-hakyll-part1.html)
 - [シンプルでかつ最高のJavaScriptプロファイラ sjsp を作りました！ ― Webアプリケーションが複雑化する中でプロファイラに求められるものとは何か - プログラムモグモグ](http://itchyny.hatenablog.com/entry/2015/07/01/120000)
 
+- [【型レベルWeb DSL】 Servantの紹介](http://qiita.com/lotz/items/883b41fa79f060e59efa)
 - [Haskell - 関数に多相的なリストを適用する - Qiita](http://qiita.com/philopon/items/1f4d74fdf72333fa0927)
 - [GHC 7.4.1 の型レベル新機能を使い倒す 〜GADTs、型族 と DataKinds、ConstraintKinds の円環〜 - konn-san.com](http://konn-san.com/articles/2012-06-06-promoted-types-and-list-arguments.html)
+
 - [Haskell Backpack 覚え書き](https://matsubara0507.github.io/posts/2017-12-12-backpack-memo.html)
+
 - [Haskell・Servant+Persistent/Esqueletoで作る実用WebAPI (11) Esqueleto:selectの基本 - Qiita](https://qiita.com/cyclone_t/items/cb492e53ad71a56ae321)
 - [Haskell・Servant+Persistent/Esqueletoで作る実用WebAPI (12) Esqueleto:select（続き） - Qiita](https://qiita.com/cyclone_t/items/337f2d88e9a0a0f80c86)
+
 - [Haskell System.Random.MWCの使い方を随分と詳細にまとめた（初心者向け）](http://blog.livedoor.jp/rtabaladi_58/archives/65158189.html)
 
 
