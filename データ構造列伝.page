@@ -255,7 +255,7 @@ ls = M.delete 1 ms
 main = print $ ls ! 10
 ```
 
-[containers](http://hackage.haskell.org/package/containers)パッケージに遅延評価版の[Data.Map.Strict](http://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html)や[Data.Map.Lazy](http://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html)が定義されている。挿入と削除、検索が純粋なので配列の代わりに使ったりもできる。似たようなものとしてキーがIntの場合のみ利用できる[IntMap](hackage.haskell.org/package/containers/docs/Data-IntMap.html)がある。
+[containers](http://hackage.haskell.org/package/containers)パッケージに値を正格評価で保持するの[Data.Map.Strict](http://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html)や値を非正格に保持する[Data.Map.Lazy](http://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html)が定義されている。挿入と削除、検索が純粋なので配列の代わりに使ったりもできる。似たようなものとしてキーがIntの場合のみ利用できる[IntMap](hackage.haskell.org/package/containers/docs/Data-IntMap.html)がある。
 
 __利点__
 
