@@ -241,14 +241,18 @@ average (Integrated v) i j = (v U.! j - v U.! i) / fromIntegral (j - i + 1)
 難易度: ☆☆
 
 ```haskell
-import qualified Data.Map.Lazy as M
+import qualified Data.Map.Stric as M
+import Data.Map.Strict ((!))
 import qualified Data.List as L
 
-ns = M.fromList [zip [1..] fact]
+ns = M.fromList $ zip [1..100] fact
   where fact = tail $ L.scanl (*) 1 [1..]
+
 ms = M.insert 1 1 ns
 
 ls = M.delete 1 ms
+
+main = print $ ls ! 10
 ```
 
 [containers](http://hackage.haskell.org/package/containers)パッケージに遅延評価版の[Data.Map.Strict](http://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html)や[Data.Map.Lazy](http://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html)が定義されている。挿入と削除、検索が純粋なので配列の代わりに使ったりもできる。似たようなものとしてキーがIntの場合のみ利用できる[IntMap](hackage.haskell.org/package/containers/docs/Data-IntMap.html)がある。
