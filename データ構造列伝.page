@@ -241,7 +241,7 @@ average (Integrated v) i j = (v U.! j - v U.! i) / fromIntegral (j - i + 1)
 難易度: ☆☆
 
 ```haskell
-import qualified Data.Map.Strict as M
+import qualified Data.Map.Lazy as M
 import qualified Data.List as L
 
 ns = M.fromList [zip [1..] fact]
