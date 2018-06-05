@@ -235,3 +235,33 @@ integrate = Integrated . U.postscanl' (+) 0 . U.fromList
 average :: (Fractional a, U.Unbox a) => Integrated a -> Int -> Int -> a
 average (Integrated v) i j = (v U.! j - v U.! i) / fromIntegral (j - i + 1)
 ```
+
+# 連想配列
+
+難易度: ☆☆
+
+```haskell
+import qualified Data.Map.Strict as M
+
+ns = M.fromList [(i, fact i)|i<-[1..100]]
+  where 
+  fact n
+    | 0 == n = 1
+    | 0 <= n = n * fact (n-1)
+    | 0 >= n = -1 * fact (-n)
+
+ms = M.insert 1 1 ns
+
+ls = M.delete 1 ms
+```
+
+[containers](http://hackage.haskell.org/package/containers)パッケージに遅延評価版の[Data.Map.Strict](http://hackage.haskell.org/package/containers/docs/Data-Map-Strict.html)や[Data.Map.Lazy](http://hackage.haskell.org/package/containers/docs/Data-Map-Lazy.html)が定義されている。挿入と削除、検索が純粋なので配列の代わりに使ったりもできる。似たようなものとしてキーがIntの場合のみ利用できる[IntMap](hackage.haskell.org/package/containers/docs/Data-IntMap.html)がある。
+
+__利点__
+
+* 挿入、削除、検索がO(log N)で行える。
+* 操作が純粋である。
+
+__欠点__
+
+* 配列等と比べるとメモリ効率や操作のオーダが劣る。
