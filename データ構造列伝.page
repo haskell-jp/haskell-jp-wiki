@@ -236,7 +236,7 @@ average :: (Fractional a, U.Unbox a) => Integrated a -> Int -> Int -> a
 average (Integrated v) i j = (v U.! j - v U.! i) / fromIntegral (j - i + 1)
 ```
 
-# 連想配列
+# Map
 
 難易度: ☆☆
 
@@ -265,3 +265,69 @@ __利点__
 __欠点__
 
 * 配列等と比べるとメモリ効率や操作のオーダが劣る。
+
+# Skew binary random access list
+
+難易度: ☆☆
+
+数列系データ構造(@fumievalの勝手な命名)の一つ。2のべき乗のような特定の数列は、要素を組み合わせると任意の自然数を表現できるという性質を持つ。これを応用し、数列に対応する要素数のデータ構造を組み合わせ、任意の個数を格納できるようにしたのが数列系データ構造である。
+
+このデータ構造はSkew binaryと呼ばれる特殊な記数法に基づいている。位は1, 3, 7, 15, n, 2n + 1, ...という数列に対応しており、以下を見れば規則性がわかりやすい。
+
+```
+1
+1 + 1
+3
+1 + 3
+1 + 1 + 3
+3 + 3
+7
+1 + 7
+1 + 1 + 7
+3 + 7
+```
+
+数字が二つ並んでいると、次に繰り上がるのがわかる。この__繰り上がりが高々一回__であるという性質を、__定数時間のcons__に対応させるのがこのデータ構造のポイントである。
+
+```
+data Tree a = Leaf a | Bin a (Tree a) (Tree a)
+
+type List a = [(Int, Tree a)] -- 高速化のため、要素数をあらかじめ記録しておく
+
+cons :: a -> List a -> List a
+cons a ((m, l) : (n, r) : xs)
+  | m == n = (2 * m + 1, Bin a l r) -- 2n + 1個の木に繰り上がる
+cons a xs = (1, Leaf a) : xs
+
+uncons :: List a -> Maybe (a, List a)
+uncons [] = Nothing
+uncons ((_, Leaf a) : xs) = Just (a, xs)
+uncons ((n, Bin a l r) : xs) = let h = n `div` 2 in Just (a, (h, l) : (h, r) : xs)
+```
+
+`drop`はやや複雑だが、このデータ構造の利点を最もよく活かせる操作である。DPS(drop per second)が指数関数的に増加しながら木を削ぎ落とすので、対数時間で完了する。
+
+```haskell
+drop :: Int -> List a -> List a
+drop 0 xs = xs
+drop n ((m, t) : xs)
+  | n >= m = drop (n - m) xs
+  | otherwise = dropTree n m t xs
+  where
+    dropTree 0 m t xs = (m, t) : xs
+    dropTree _ _ (Leaf _) xs = xs
+    dropTree n m (Bin _ l r) xs
+      | n > h = dropTree (n - h - 1) h r xs
+      | otherwise = dropTree (n - 1) h l ((h, r) : xs)
+      where
+        h = m `div` 2
+drop _ [] = []
+```
+
+遅延評価によるストリームとしての表現力を失った代わりに、対数時間の操作を手に入れたデータ構造である。de Bruijn indexや、TVarへの格納など、永続性とランダムアクセスの両立が求められる場面に置いて、その実力を発揮できるだろう。
+
+## Leonardo random access list
+
+フィボナッチ数列の亜種であるレオナルド数列をベースに構築することもできる。木は平衡ではなく右寄りになるが、かえって分岐予測やキャッシュとのシナジーが生まれ、Skew binary版よりも速くなるらしい。
+
+https://www.schoolofhaskell.com/user/edwardk/fibonacci/leonardo 
