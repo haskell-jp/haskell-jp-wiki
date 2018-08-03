@@ -324,10 +324,10 @@ drop n ((m, t) : xs)
 drop _ [] = []
 ```
 
-遅延評価によるストリームとしての表現力を失った代わりに、対数時間の操作を手に入れたデータ構造である。de Bruijn indexや、TVarへの格納など、永続性とランダムアクセスの両立が求められる場面に置いて、その実力を発揮できるだろう。
+遅延評価によるストリームとしての表現力を失った代わりに、対数時間の操作を手に入れたデータ構造である。de Bruijn indexや、TVarへの格納など、永続性とランダムアクセスの両立が求められる場面において、その実力を発揮できるだろう。
 
 ## Leonardo random access list
 
 フィボナッチ数列の亜種であるレオナルド数列をベースに構築することもできる。木は平衡ではなく右寄りになるが、かえって分岐予測やキャッシュとのシナジーが生まれ、Skew binary版よりも速くなるらしい。
 
-https://www.schoolofhaskell.com/user/edwardk/fibonacci/leonardo 
+* [Part 1: Leonardo Random Access Lists](https://www.schoolofhaskell.com/user/edwardk/fibonacci/leonardo)
