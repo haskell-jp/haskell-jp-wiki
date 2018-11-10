@@ -127,14 +127,14 @@ Slack Workspaceについては、[こちらから登録してください](https
 
 ### ビルドツール
 
-[stack](https://haskellstack.org)、あるいはそれがラップしている[cabal](https://www.haskell.org/cabal/)というツールがよく使われています。  
+[stack](https://haskellstack.org)、あるいは[cabal-install](https://www.haskell.org/cabal/)というツールがよく使われています。どちらも、内部でCabalというライブラリを使用しています。  
 結論から言うと、とりあえず無難に使うならstack、なんですが、それぞれについてざっくり紹介しておきます。
 
-cabalは、ほかのプログラミング言語にもあるようなパッケージマネージャーの機能を備えています。  
+cabal-installは、ほかのプログラミング言語にもあるようなパッケージマネージャーの機能を備えています。  
 Javaで言うところのMaven, Rubyで言うところのRubyGems, などといったところです。  
 [Hackage](http://hackage.haskell.org/)というウェブサイトにアップロードされたHaskell製のパッケージ（ライブラリーやアプリケーション）を簡単にビルド・インストールできるようにしてくれます。
 
-stackは[Stackage](https://www.stackage.org/)というウェブサイトに書かれた、「resolver」と呼ばれる「この組み合わせなら必ずビルドできるバージョン」のパッケージ群を使用することで、パッケージの依存関係を確実に解決できるよう、cabalをラップしたツールです。  
+stackは[Stackage](https://www.stackage.org/)というウェブサイトに書かれた、「resolver」と呼ばれる「この組み合わせなら必ずビルドできるバージョン」のパッケージ群を使用することで、パッケージの依存関係を確実に解決できるような後発のツールです。
 stackができる前は、「cabal地獄」などと呼ばれる、「パッケージの依存関係を解決できず、まともにインストールできない」といった事態がしばしば発生していました。  
 ちなみに、実際にパッケージをダウンロードするのはHackageからです。
 
