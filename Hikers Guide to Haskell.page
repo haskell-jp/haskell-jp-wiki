@@ -1,0 +1,264 @@
+# Haskellの歩き方
+
+この文章は、[発展編！ Haskellで「型」のポテンシャルを最大限に引き出すには？【第二言語としてのHaskell】 - エンジニアHub｜若手Webエンジニアのキャリアを考える！の「【超発展編】もっと勉強したい人のために！」](https://employment.en-japan.com/engineerhub/entry/2017/10/03/110000#%E8%B6%85%E7%99%BA%E5%B1%95%E7%B7%A8%E3%82%82%E3%81%A3%E3%81%A8%E5%8B%89%E5%BC%B7%E3%81%97%E3%81%9F%E3%81%84%E4%BA%BA%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AB)を新しい情報に合わせて加筆・更新したものです。  
+Haskellの入門書などで学習した人が、知っておくと良いトピックについて網羅するよう努めています。
+
+なお、Haskellの学習コンテンツの一覧やその他日本語の情報については、[リンク集](/Links)もご覧ください。
+
+## 大原則
+
+**すべてを完全に理解しようとは思わないでください。**  
+Haskellはもともとプログラミング言語の研究者が作ったという背景があるためか、日夜新しい機能や概念が実験されています。  
+それらは追いかけるだけでも大変ですし、理解しようにも抽象度が高く、難しい概念がたくさんあります。  
+自分にとって有益なものを、詳しい人たちの解説を待ちながら使うのでもよいでしょう（その割には日本語の解説が少なくて恐縮ですが...）
+
+## ポイントフリースタイル、あるいは様々なスタイルとの付き合い方
+
+「Haskellは上級者のコードほどコードゴルフのようになって読みづらい」みたいな声をたまに聞きます。  
+これは一面の真実で、Haskellはポイントフリースタイルなどを駆使することで、同じコードをすごく短くも書ければ、長めに書くこともできるようになっている言語です。  
+「[失敗しながら学ぶHaskell入門](https://github.com/haskell-jp/makeMistakesToLearnHaskell)」でも追々触れる予定ですが、そうした、短く書くための機能がたくさんあります。  
+そうした機能を駆使したコードを指して「上級者のコードほど読みづらい」という認識が生まれるのではないかと推測しています。
+
+いずれにしてもここで大事なことは、「**短く書ける人を上級者と呼ぶな**」ということです。  
+当然Haskellに限った話ではありませんが、短**すぎる**コードは読みづらいコードになりがちです。  
+ポイントフリースタイルなどを勉強して、より簡潔に、より本質的な部分のみを書けるようになることはHaskellerとして重要なことです。  
+しかし同時に、コードの読み手のことを考えて、理解できるコードを書くことは、プログラマーとして極めて重要なことです。  
+「読み手」はプロジェクトや場面によって変わるわけですから、それぞれの習熟度や好みに合わせて書き分ける、という至極当たり前のことは、Haskellerの常識としても広めていきましょう。
+
+もちろん、そうして選択肢が多いために、「逐一書き方を考えなくてはならない」ところはHaskellを現場に導入する上での障害になり得ます。心得ておきたいものですね。
+
+ちなみに、[HLint](http://hackage.haskell.org/package/hlint)というツールは、そうしたHaskellの（主に構文以外の）スタイルを統一する上で、必要不可欠なツールです。  
+デフォルトでも冗長な書き方を改善するための指摘をたくさんしてくれますし、細かく設定すれば「この関数はこのモジュール以外では使わないでください」などというプロジェクト固有のルールも強制できます。  
+これはスタイルの問題以上に有益なもので、「危険な関数を避けて、それをラップしたバージョンのみを使う」といった、バグを防ぐための習慣も作り出せるのです。
+詳細は、[素晴らしき HLint を使いこなす](https://haskell.e-bigmoon.com/posts/2018-01-29-awesome-hlint.html)をご覧ください。
+
+## 言語拡張との付き合い方
+
+Haskell製のライブラリーのソースコードやサンプルコードを眺めていると、冒頭で次のような行をたくさん目にすると思います。
+
+```haskell
+{-# LANGUAGE FlexibileInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+...
+```
+
+これらは、言語拡張と呼ばれている機能を有効にする、特殊なコメントです。  
+言語拡張は、[Haskellの標準](https://www.haskell.org/onlinereport/haskell2010/)として定められた機能に対して、（主に）GHCが加えた新しい機能です。  
+言語拡張は、初見では何のために有効にされたのかわからず、面食らってしまうことも多いと思います。  
+しかし、ご安心ください。  
+一部を除いて、言語拡張を有効にして起こる悪影響はあまりありません。  
+GHCが提供するHaskellに対する言語拡張は、**ライブラリーが必要としているものであればとりあえずコピペ**して使いましょう。
+
+## ドキュメントやパッケージの調べ方
+
+### パッケージの名前や、概要から検索したい場合は
+
+※このセクションはもともと[最近のHaskell製パッケージのドキュメント事情について簡単に - Qiita](https://qiita.com/igrep/items/e7926ef2d015ca85c18e)からコピペして、若干修正しました。
+
+- [Hackage](http://hackage.haskell.org/)から検索するか、
+- [Stackage](https://www.stackage.org/)のトップから「browse packages」というリンクをクリックして、LTS-Haskellに載っているパッケージを**ページ内検索**してください。
+- 実は、次のセクションで紹介するHoogleなどの検索エンジンも、パッケージの名前による検索をサポートしています。
+
+2つめのStackageは、LTS-Haskellに載っているパッケージのみの一覧なので、Hackageに公開されているすべてのパッケージが載っているわけではありません。  
+詳しくは[tanakhさんの記事のこのへん](http://qiita.com/tanakh/items/6866d0f570d0547df026#stackage%E3%81%A8%E3%81%AF)が参考になるかと思います。
+
+### どこかのパッケージに入っている、関数の名前や関数のシグネチャ（型）から検索したい場合は
+
+実際にHaskellでプログラムを書いていくと、「こんな型の関数がほしい」「こんな名前の関数ないかな」などと感じるケースが頻繁に出てくるでしょう。  
+そのような場合に便利なのが下記のサイトです。
+
+- [Hoogle](https://www.haskell.org/hoogle/)
+- [Hayoo! Haskell API Search](https://hayoo.fh-wedel.de/)
+- [Stackage Server](https://www.stackage.org/)（右上の検索ボックス）
+
+いずれも、関数の名前や関数の型から調べることができる、ほかのプログラミング言語ではちょっと珍しいタイプのドキュメント検索エンジンです。
+
+たとえば`filter`関数の型は`(a -> Bool) -> [a] -> [a]`ですが、 これを上記の[Hoogleで検索してみる](https://www.haskell.org/hoogle/?hoogle=%28a+-%3E+Bool%29+-%3E+%5Ba%5D+-%3E+%5Ba%5D)と、`filter`関数以外にもたくさんの関数がヒットするのがわかります。
+
+ただ、3つとも収録されている内容が異なる場合があります。  
+新しいバージョンがでた場合に、ドキュメントの生成が追いついていないことがあるためです。  
+どれを使うべきか簡単に言うと、stackを主に使って開発する場合には、上記の[StackageのHoogle](https://www.stackage.org/)を使うのが個人的なおすすめです（筆者自身これを最もよく使います）。  
+どれかを使ってみて目的の関数が見つからなかった場合は、ほかのエンジンを試してみてください。
+
+## 情報収集に役立つサイト
+
+- [Haskell Antenna](https://haskell.jp/antenna/)  
+  QiitaのHaskellタグが着いた記事や、日本人のHaskellerによるブログのRSSを収集したサイトです。  
+  昔はHerokuの無料プランで運用していたため非常に反応が遅かったですが、今はGitHub Pages上の静的サイトを定期的に更新する、という運用に変えたため、非常に速くなりました。
+- [Haskell Weekly](https://haskellweekly.news/)
+  話題になったHaskellの記事や新しいHaskell製パッケージを、毎週紹介してくれるサービスです。 メールで購読もできます。
+- [日本HaskellユーザーグループのSlack Workspace](https://haskell-jp.slack.com/messages/C5666B6BB/convo/C4M4TT8JJ-1541321220.051500/)  
+  各種チャンネルで、日夜情報のやりとりをしています。  
+  [登録はこちらからどうぞ](https://join.slack.com/t/haskell-jp/shared_invite/enQtNDY4Njc1MTA5MDQxLTAzZGNkZDlkMWYxZDRlODI3NmNlNTQ1ZDc3MjQxNzg3OTg4YzUzNmUyNmU5YWVkMjFmMjFjYzk1OTE3Yzg4ZTM)。
+
+## デバッグの仕方
+
+**(要検証)**: 標準で付いている[Debug.Traceパッケージ](https://hackage.haskell.org/package/base-4.12.0.0/docs/Debug-Trace.html)のほか、[debug](http://hackage.haskell.org/package/debug-0.1.1/docs/Debug-Variables.html)というサードパーティーのパッケージが便利そうです。GHC標準のデバッガーは、正直あまり使いやすくないのでおすすめしません...。
+
+## パッケージとの付き合い方
+
+これはHaskellに限った話ではないですが、パッケージ（特に、そのまま実行できるプログラムではなく、プログラムが依存するライブラリー）を選ぶときの基準について簡単に説明します。
+
+同じテーマについて解説した記事が[Haskell for all: How I evaluate Haskell packages](http://www.haskellforall.com/2018/05/how-i-evaluate-haskell-packages.html)にもあります。  
+共通する部分もありますが、こちらの方がより詳細で、詳しい人向けです。
+
+一番に大事なことは、あなたがそのパッケージを使えることです。  
+Haskellには高度で便利なパッケージがたくさんありますが、抽象度が高すぎて使い方がわかりづらかったり、同じような目的のパッケージが複数見つかる、といったことがしばしばあります。  
+そうした状況で、対象のパッケージを使うか使わないか判断するためには、やはりドキュメントを読んでその使い方をあなたが理解できるか否か、という点にあります。  
+特に以下の点に注目してみてください。
+
+- 関数の型を見て、使い方がなんとなくわかるか
+    - Haskellでは、関数の型、つまりどんな型の値を受け取ってどんな型の値を返すか、といった情報が、重要なドキュメントになることがしばしばあります。  
+      十分に単純なパッケージでは、それだけで十分な場合も多いです。GHCiなどに頼りつつ、「とりあえず型を合わせたらどんな挙動になるか」確認してみるのも良いでしょう。
+- サンプルコードや使い方の説明を見てなんとなくわかるか
+    - 一方、特に抽象度の高いパッケージでは、型宣言がすごく複雑だったりして、型を見てもよくわからない、といったことがしばしばあります。  
+      そうした場合は、逆にサンプルコードなどを見て、使い方が推測できるか考えてみてください。  
+      ここで仕組みを完璧に理解する必要はないでしょう。よくできたパッケージは、雰囲気で使っても型さえあっていれば正しく動作して然るべきです。
+- （同じ目的のパッケージがほかに存在している場合に）競合との違いを明確にしているか。
+
+これらの情報を見てもわからない、あるいはそもそも載っていない場合は、無理にそのパッケージを使おうとしないでください。  
+どうしても必要なのであれば、[リンク集](https://wiki.haskell.jp/Links#%E5%90%84%E7%A8%AE%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A7%E3%81%AEhaskell%E3%82%BF%E3%82%B0)に上げたteratailやStack Overflowなどの質問サイト、[Haskell-jpのSlack Workspaceにある、#questionsチャンネル](https://haskell-jp.slack.com/messages/C5666B6BB/convo/C4M4TT8JJ-1541321220.051500/)で質問してみると良いでしょう。  
+Slack Workspaceについては、[こちらから登録してください](https://join.slack.com/t/haskell-jp/shared_invite/enQtNDY4Njc1MTA5MDQxLTAzZGNkZDlkMWYxZDRlODI3NmNlNTQ1ZDc3MjQxNzg3OTg4YzUzNmUyNmU5YWVkMjFmMjFjYzk1OTE3Yzg4ZTM)。
+
+## 要素技術
+
+### ビルドツール
+
+[stack](https://haskellstack.org)、あるいはそれがラップしている[cabal](https://www.haskell.org/cabal/)というツールがよく使われています。  
+結論から言うと、とりあえず無難に使うならstack、なんですが、それぞれについてざっくり紹介しておきます。
+
+cabalは、ほかのプログラミング言語にもあるようなパッケージマネージャーの機能を備えています。  
+Javaで言うところのMaven, Rubyで言うところのRubyGems, などといったところです。  
+[Hackage](http://hackage.haskell.org/)というウェブサイトにアップロードされたHaskell製のパッケージ（ライブラリーやアプリケーション）を簡単にビルド・インストールできるようにしてくれます。
+
+stackは[Stackage](https://www.stackage.org/)というウェブサイトに書かれた、「resolver」と呼ばれる「この組み合わせなら必ずビルドできるバージョン」のパッケージ群を使用することで、パッケージの依存関係を確実に解決できるよう、cabalをラップしたツールです。  
+stackができる前は、「cabal地獄」などと呼ばれる、「パッケージの依存関係を解決できず、まともにインストールできない」といった事態がしばしば発生していました。  
+ちなみに、実際にパッケージをダウンロードするのはHackageからです。
+
+これらのツールをより深く使いこなすには、下記の公式ドキュメントに加え、日本語での解説も読んでみてください。
+
+- [Home - The Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/)
+- [Welcome to the Cabal User Guide — Cabal \<release\> User's Guide](https://www.haskell.org/cabal/users-guide/)
+- [Haskell Development](https://haskell.e-bigmoon.com/stack/)
+- [Haskellのビルドツール"stack"の紹介 - Qiita](https://qiita.com/tanakh/items/6866d0f570d0547df026)
+- [Stackを使って楽しくHaskellスクリプティング - Qiita](https://qiita.com/tanakh/items/1ca4ba9e1f5006a30106)
+
+### Webアプリケーション
+
+HaskellでWebアプリケーションを作る上で、昨今よく使われるライブラリーは次の3つかと思います。
+
+- [Servant](https://haskell-servant.github.io/)
+- [Yesod](https://www.yesodweb.com/)
+- [Spock](https://www.spock.li/)
+
+[Servant](https://haskell-servant.github.io/)はいわゆるRESTfulなAPIに特化したフレームワークです。  
+[Yesod](https://www.yesodweb.com/)に比べて、サーバー側のコードについてフレームワークがやってくれることが少ないみたい[^servant]ですが、代わりに、専用の言語内DSLでAPIの仕様を記述するだけで、JavaScriptをはじめとした、クライアント側がそのAPIにアクセスするためのコードを自動生成してくれる、という珍しい機能があります。
+
+[^servant]: とはいえ、昔に比べてServantを補助するライブラリーは増えたみたいなので、それらを自分で組み合わせれば、それなりに楽ができそうではありますが。
+
+対する[Yesod](https://www.yesodweb.com/)は、いわゆるRailsをきっかけに広まったような、「フルスタックWebアプリケーションフレームワーク」を標榜しています。  
+その分、Servantよりも手早く開発するのを支援してくれるでしょう。
+
+ただしServant, Yesod, 共通した困った特徴があります。  
+それぞれがHaskellの高度な機能を利用した独特なDSLを提供しているため、仕組みがわかりづらい、という点です。  
+Servantは、「型レベルプログラミング」と呼ばれる、GHCの言語拡張を使った仕組みを駆使して、型宣言だけでREST APIの仕様を記述できるようにしています。  
+YesodもGHCの言語拡張をたくさん使っているのに加え、特に変わった特徴として、TemplateHaskellやQuasiQuoteという仕組みを利用して、独自のDSLを提供しています。  
+それぞれ、見慣れたHaskellと多かれ少なかれ異なる構文で書かなければいけない部分があるのです。  
+つまり、これらのうちどちらかを使う以上、どちらかの魔法を覚えなければならないのです。
+
+その点、Spockは幾分マシです。  
+一部の型宣言に`TypeFamilies`というこれまたGHCの言語拡張を使用してはいるものの、概ねRubyのSinatraをHaskellの`do`記法でそのまま再現したようなDSLで書くことができるので、まだとっつきやすいかと思います。  
+YesodやServantにあるような高度な機能はありませんが、とりあえずHaskellでWebアプリケーションを作ってみたい、という方のはじめの一歩としてはちょうどいいかもしれません。
+
+### Monad
+
+MonadはHaskellの学習における鬼門とも言われています。  
+これを読んでいる皆さんの中にも、Monadで消耗しちゃった人がいらっしゃるかも知れません。  
+MonadをHaskellの一機能として理解する上で最も大事なことは、**「Monad」というコンセプトがなんなのかを正確に理解することより、各種の具体的なMonadの使い方を理解する**ことに時間を割くことです。  
+そうしていけば、やがて「なんとなく」つかめるかと思います。  
+実用上は本当に「なんとなく」でよいのです。
+
+ポイントとして、下記の、一見すると何の共通点もないような処理を`do`という魔法の構文糖で実現してくれるもの、という点を抑えておきましょう。  
+それらが必要になったときに、その使い方を知れば良いのです。
+
+- 入出力処理 (`IO` Monad)
+- 処理が失敗した場合などにブロックから脱出すること (`Maybe` Monadや`Either` Monad)
+- 何重にもネストされたmap関数やconcatMap関数をフラットにすること (リスト Monad)
+- ブロックで暗黙に共有している変数の参照や更新（ダイナミックスコープのシミュレーション） (`State` Monad, `Reader` Monad, `Writer` Monad)
+- などなど
+
+なお、Monadは、「圏論」という数学の一分野における「モナド」という概念に由来してはいるものの、HaskellのMonadを使いこなすために圏論を理解する必要はまったくありません。「プログラミングのためのモナド」として、圏論のモナドとは分けて考えてもいいぐらいでしょう。
+
+### Monad Transformer
+
+Monadを使いこなせるようになると、複数のMonadの機能を同時に（同じ`do`ブロックで）使用したくなることがあります。  
+Monad Transformerは、既存のMonadを組み合わせることで、そうしたニーズを満たすための仕組みです。
+
+Monad Transformerの比較的わかりやすい解説としては、「Monad Transformers Step by Step」という記事が有名です。
+
+- [Monad Transformers Step by Step（原文PDF）](https://page.mi.fu-berlin.de/scravy/realworldhaskell/materialien/monad-transformers-step-by-step.pdf)
+- [上記記事の和訳](http://bicycle1885.hatenablog.com/entry/2012/12/08/165236)
+    - 残念ながら、すべてのセクションが翻訳されているわけではありません。
+
+ここでも軽くポイントに触れておきます。
+
+#### mtlについて
+
+最もよく使われているMonad Transformerのライブラリーは、[mtl](http://hackage.haskell.org/package/mtl)パッケージが提供しています。  
+各種Monad Transformerの機能を型クラスで抽象化することにより、複数のMonad Transformerを積み重ねた場合でも、積み重ねた各層のMonad Transformerの機能に簡単にアクセスさせてくれます。
+
+具体的には、以下のルールを大雑把に覚えておくと良いでしょう。
+
+- `ReaderT`や`StateT`などのように、`HogeT`という形式の名前の型が、実際に`Hoge`の機能を提供するMonad Transformer。
+- `MonadReader`や`MonadState`などのように、`MonadHoge`という形式の名前の型クラスが、`Hoge`の機能を提供するMonad Transformerを、抽象化した型クラス。
+- `ReaderT r (StateT s (HogeT m)) a`のように、`HogeT`を一段でも重ねているMonad Transformerは、すべて`MonadHoge`のインスタンスとなっているため、`HogeT`が提供する機能をそのまま使用できる。
+- こうした慣習は、mtlパッケージ以外でも広く採用されている。なので`MonadFooBar`という型クラスを見かけたら`FooBar`という機能を実装したMonad全般を抽象化した型クラスとなっていることが多い。
+
+この機能の詳細は、先ほどの[Monad Transformers Step by Stepの**原文**](https://page.mi.fu-berlin.de/scravy/realworldhaskell/materialien/monad-transformers-step-by-step.pdf)が後半で解説してくれています。  
+仕組みが気になった場合は是非読んでみてください！
+
+#### よく見る `HogeHogeT` や `FooBarM`について
+
+あなたは「Monad Transformer」という概念に出遭う前に、[Hspec](http://hackage.haskell.org/package/hspec)や[haskeline](http://hackage.haskell.org/package/haskeline)、[relational-record](http://hackage.haskell.org/package/relational-record)などの内部DSLを提供するパッケージを通じて、Monad Transformerをすでに使っているかも知れません。  
+これらのパッケージが提供する`SpecM`や`InputT`など見慣れないMonadっぽいものを見つけても、「何じゃこりゃ！？どんなMonadやねん？」などと戸惑わないでください。  
+先に挙げたパッケージのように、こうした型はパッケージごとに固有のものが存在していることがあります。  
+基本的にはこれらの型は、**何かの`Monad`を組み合わせたものに別名をつけた、あるいは`newtype`でラップしただけ**のものです。  
+`newtype`でラップすることで、内部構造を隠蔽しているんですね。  
+その点を知っておくと、こうしたライブラリーへの理解が深まり、何をしているのかイメージしやすくなるでしょう。
+
+ちなみに、「Webアプリケーション」の節で紹介した、spockの`SpockM`や、Servantの`Handler`もそうです。調べてませんがYesodにも同じようなものがあるのではないかと。
+
+### lensライブラリー
+
+lensは、「任意のデータ構造に対するjQuery」ともいわれる巨大なユーティリティーライブラリーです。
+さまざまなデータ構造、特に複雑に入れ子になった構造に対して自由自在にアクセスしたり、中身を一部だけ書き換えたバージョンを返したりといった処理を、非常に簡潔に書くことができます。
+
+日本語の入門資料としては、下記がおすすめです。
+lensを導入するモチベーション、基本的な使い方、さらにlensの仕組みまで踏み込んで説明されています。
+
+- [Ekmett勉強会発表資料 LensでHaskellをもっと格好良く！](https://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
+- [Lens&Prism勉強会 LensでHaskellをもっと格好良く！](http://tokiwoousaka.github.io/takahashi/contents/20150530LensPrism.html)
+
+lensについてもigrepの個人的な所感を一つ。  
+lensは確かに便利ですが、その分学習コストが高く、特に複雑な操作を行う`Traversal`などの機能に至っては、実際のアプリケーションで使われることはそんなに多くありません。  
+そもそも特定の入れ子構造に依存した処理というのは、対象のデータ構造の変更に弱く、ある程度の規模のアプリケーションでは、避けるべきものです。  
+なので、実際によく使われるのは比較的使い方がわかりやすい、`Lens`型のみであることが多いです。  
+そんなに深く知りたくもないな、という方は、そのあたりの機能のみを押さえておくといいでしょう。すべてを理解しようとは思わないことです。
+
+そうした需要を反映してか、よく使う機能に絞ることで、依存関係を軽くしたlensライブラリーが、いくつもあります。  
+その中では、[microlens](http://hackage.haskell.org/package/microlens)がおすすめです。  
+競合との比較も明確にしていますし、なによりドキュメントが充実しています。
+
+それでもlens沼にハマることで得られる知識の応用方法と言えば、HTMLのスクレイピングだったり、一部分だけ書き換えると言った、書き捨てのスクリプトでの、複雑な入れ子構造の書き換えでしょう。  
+実はそうした用途に特化したツールが（**まだ開発中で、Hackageにも公開されてません**が）あります。  
+[refactorio](https://github.com/SuperpowersCorp/refactorio)というツールです。  
+refactorioはlensライブラリーと、lensでJSONやHTML, HaskellやJavaScriptなどのソースコードを操作する各種のライブラリーを組み合わせることで、そうしたソースコードの一括置換を支援してくれます。  
+具体的には、引数で指定した、Haskellの`ByteString -> ByteString`な式を評価し、その結果を指定したディレクトリーにあるファイルすべてに適用することで、一括置換してくれます。  
+その引数で指定する式で、lensライブラリーをはじめとする、各種のライブラリーを自動で使えるようにしてくれる、というものです。
+
+### まだまだあるぞ！
+
+Wikiなので、適宜紹介したいトピックを追記してください。
