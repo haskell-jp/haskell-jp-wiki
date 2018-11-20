@@ -1,0 +1,30 @@
+# Haskell Day 2018 - Haskellちょっと興味あるからちょっとできるまで
+
+[Haskell Day 2018 - connpass](https://haskell-jp.connpass.com/event/92617/)
+
+## プレゼン資料
+
+* [オープニング「作りながら学ぶHaskell入門」を使ったハンズオン](https://github.com/haskell-jp/makeMistakesToLearnHaskell/)
+* [Haskell を導入した話と HRR の紹介](https://htmlpreview.github.io/?https://github.com/khibino/haskell-day-2018/blob/master/presentation.html)
+* [Servantで実現する高速かつ安全なAPI開発](https://speakerdeck.com/daishi/servantdexing-uan-quan-katugao-su-naapikai-fa)
+* [並列並行言語Haskell](https://speakerdeck.com/syocy/bing-lie-bing-xing-yan-yu-haskell)
+* [Dhall: Haskellの新たなキラーアプリ](https://speakerdeck.com/syocy/dhall-haskellfalsexin-tanakiraapuri)
+* [Semigroupとは？ Monoidとは？ 環とは？](https://aiya000.github.io/Maid/haskell-day-2018-algebra)
+* [Haskell で作る CLI](https://www.slideshare.net/noob00/haskell-cli)
+* [gloss: 動かして遊んで学ぶHaskell](https://qiita.com/lotz/items/bdb04c771efc8919b79c)
+* [Liszt あるいは永続データ構造を真に永続させる方法](https://shared-assets.adobe.com/link/353213c2-281a-4a53-6cff-a52bff1314c1)
+
+## Togetter
+
+* [HaskellDay 2018 まとめ - Togetter](https://togetter.com/li/1287729) 
+
+## 参加者によるレポート記事
+
+* [今日は Haskell Day 2018 の日です - 北海道苫小牧市出身の初老PGが書くブログ](http://hiratara.hatenadiary.jp/entry/2018/11/10/101541)
+* [Haskell Day 2018に参加しました - ncaq](https://www.ncaq.net/2018/11/10/10/52/33/)
+* [HaskellDay2018のまとめ – namiki – Medium](https://medium.com/@snamiki1212/haskellday2018のまとめ-3f66500c3113)
+* [Haskell Day 2018 - matonix - Qrunch](https://matonix.qrunch.io/logs/8vdQVJaqrTxlS2kl)
+* [karky7のブログ: Haskell Day 2018 に参加してきた](https://blog.karky7.com/2018/11/haskell-day-2018.html)
+* [大銀河宇宙No.1_Haskeller - HaskellDay 2018で登壇してきた（代数的構造について）](https://aiya000.github.io/posts/2018-11-12-haskell-day-2018.html)
+* [Haskell Day 2018 に参加してきた - ひげメモ](https://matsubara0507.github.io/posts/2018-11-17-join-haskell-day-2018.html)
+* [Haskell Day 2018 開催レポート - Haskell-jp](https://haskell.jp/blog/posts/2018/haskell-day-2018.html)
