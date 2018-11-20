@@ -4,4 +4,20 @@
 
 ## プレゼン資料
 
+* [Haskell チュートリアル](http://qiita.com/hiratara/items/169b5cb83b0adbfda764)
+* [Haskell Relational Record Composable, Typesafe SQL building](https://htmlpreview.github.io/?https://github.com/khibino/haskell-relational-record/blob/master/doc/slide/Haskell-Day-201609/HRR.html)
+* [Introduction to Web Development with Spock](http://qiita.com/lotz/items/e2c6765e65d7eb692ee2)
+* [Introduction to Stack's Docker integration](http://the.igreque.info/slides/2016-09-17-stack-docker-integration.html#(1))
+* [SAT/SMT solving in Haskell](https://www.slideshare.net/sakai/satsmt-solving-in-haskell)
+* [HTTP/2 and TLS in Warp](http://www.mew.org/~kazu/material/2016-http2-tls.pdf)
+* Into the Core: squeezing Haskell into nine constructors
+
 ## Togetter
+
+* [Haskell Day 2016 #hsd2016 まとめ - Togetter](https://togetter.com/li/1025781) 
+
+## 参加者によるレポート記事
+
+* [Tech Blog | ICFP及び関連イベント参加レポート – Haskell Day –](https://adtech.cyberagent.io/techblog/archives/1095)
+* [Haskell Day 2016 – Mitsutoshi Aoe – Medium](https://medium.com/@maoe/haskell-day-2016-a52cd41a06c0)
+* [igreque : Info -> Haskell Day 2016に参加・発表してきました！](http://the.igreque.info/posts/2016/05-haskell-day-2016.html)
