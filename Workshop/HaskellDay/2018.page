@@ -4,7 +4,7 @@
 
 ## プレゼン資料
 
-* [オープニング「作りながら学ぶHaskell入門」を使ったハンズオン](https://github.com/haskell-jp/makeMistakesToLearnHaskell/)
+* [オープニング「作りながら学ぶHaskell入門」を使ったハンズオン](http://the.igreque.info/slides/2018-11-10-haskellday.html)
 * [Haskell を導入した話と HRR の紹介](https://htmlpreview.github.io/?https://github.com/khibino/haskell-day-2018/blob/master/presentation.html)
 * [Servantで実現する高速かつ安全なAPI開発](https://speakerdeck.com/daishi/servantdexing-uan-quan-katugao-su-naapikai-fa)
 * [並列並行言語Haskell](https://speakerdeck.com/syocy/bing-lie-bing-xing-yan-yu-haskell)
