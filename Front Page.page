@@ -49,7 +49,7 @@ https://wiki.haskell.jp/ディレクトリ名/ページ名
 その副作用として、**これまでに保存していたwikiアカウントは利用できなくなり、GitHubのOAuthを利用した登録のみ**となりました。
 ご了承ください。
 
-2017年4月9日: 上記に関連して、編集したデータを保存するリポジトリーを https://github.com/haskell-jp/haskell-jp-wiki に移行しました。
+2017年4月9日: 上記に関連して、編集したデータを保存するリポジトリーを <https://github.com/haskell-jp/haskell-jp-wiki> に移行しました。
 
 ## ライセンスについて
 本サイトに適用されるライセンスについては
