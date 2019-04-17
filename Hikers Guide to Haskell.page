@@ -89,9 +89,9 @@ Haskellには記号だけの名前を持った関数（記号関数、あるい�
 前述したHoogleは、そうした記号関数も記号を入力すれば、名前から検索することが出来ます。便利！  
 そのうち、特によく使う記号関数は[Operator Glossary](https://haskell.fpcomplete.com/tutorial/operators)にまとまっているので、一度目を通すといいでしょう。
 
-加えて、記号関数ではない、構文の一部として使われている記号もたくさんあります。
+加えて、記号関数ではない、構文の一部として使われている記号もたくさんあります。  
 そうしたものをまとめた一覧が[ takenobu-hs/haskell-symbol-search-cheatsheet
-](https://github.com/takenobu-hs/haskell-symbol-search-cheatsheet)です。
+](https://github.com/takenobu-hs/haskell-symbol-search-cheatsheet)です。  
 Haskell標準外のものやたまにしか使わないであろうものもたくさんあるので、知らない記号が出てきたときに調べてみてください。
 
 ## 情報収集に役立つサイト
