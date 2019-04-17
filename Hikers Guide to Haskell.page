@@ -83,6 +83,17 @@ GHCが提供するHaskellに対する言語拡張は、**ライブラリーが�
 どれを使うべきか簡単に言うと、stackを主に使って開発する場合には、上記の[StackageのHoogle](https://www.stackage.org/)を使うのが個人的なおすすめです（筆者自身これを最もよく使います）。  
 どれかを使ってみて目的の関数が見つからなかった場合は、ほかのエンジンを試してみてください。
 
+### そのほか、記号の調べ方
+
+Haskellには記号だけの名前を持った関数（記号関数、あるいは演算子）ユーザーが定義できるという特徴があります。  
+前述したHoogleは、そうした記号関数も記号を入力すれば、名前から検索することが出来ます。便利！  
+そのうち、特によく使う記号関数は[Operator Glossary](https://haskell.fpcomplete.com/tutorial/operators)にまとまっているので、一度目を通すといいでしょう。
+
+加えて、記号関数ではない、構文の一部として使われている記号もたくさんあります。
+そうしたものをまとめた一覧が[ takenobu-hs/haskell-symbol-search-cheatsheet
+](https://github.com/takenobu-hs/haskell-symbol-search-cheatsheet)です。
+Haskell標準外のものやたまにしか使わないであろうものもたくさんあるので、知らない記号が出てきたときに調べてみてください。
+
 ## 情報収集に役立つサイト
 
 - [Haskell Antenna](https://haskell.jp/antenna/)  
