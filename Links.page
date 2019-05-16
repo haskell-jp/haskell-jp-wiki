@@ -56,6 +56,8 @@
 - [Stackでやる最速Haskell Hello world! (GHCのインストール付き！) - Qiita](http://qiita.com/igrep/items/da1d8df6d40eb001a561)
 
 - [Monad - モナモナ言わない モナド入門 第二版](http://www.mew.org/~kazu/material/2012-monad.pdf)
+- [モナドトランスフォーマー・ステップ・バイ・ステップ(Monad Transformers Step By Step)](http://bicycle1885.hatenablog.com/entry/2012/12/08/165236)
+- [Maybe と IO を一緒に使いたくなったら](https://ryota-ka.hatenablog.com/entry/2018/05/26/193220)
 
 - [素晴らしき HLint を使いこなす](https://haskell.e-bigmoon.com/posts/2018-01-29-awesome-hlint.html)
 
