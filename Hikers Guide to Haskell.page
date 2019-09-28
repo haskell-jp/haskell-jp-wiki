@@ -103,7 +103,7 @@ Haskell標準外のものやたまにしか使わないであろうものもた�
   話題になったHaskellの記事や新しいHaskell製パッケージを、毎週紹介してくれるサービスです。 メールで購読もできます。
 - [日本HaskellユーザーグループのSlack Workspace](https://haskell-jp.slack.com/messages/C5666B6BB/convo/C4M4TT8JJ-1541321220.051500/)  
   各種チャンネルで、日夜情報のやりとりをしています。  
-  [登録はこちらからどうぞ](https://join.slack.com/t/haskell-jp/shared_invite/enQtNDY4Njc1MTA5MDQxLTAzZGNkZDlkMWYxZDRlODI3NmNlNTQ1ZDc3MjQxNzg3OTg4YzUzNmUyNmU5YWVkMjFmMjFjYzk1OTE3Yzg4ZTM)。
+  [登録はこちらからどうぞ](https://join.slack.com/t/haskell-jp/shared_invite/enQtNDY4Njc1MTA5MDQxLWY1ZDVhZjIzMGE1MDMzZDAyNGZmYTU5M2VlODg5NTNmY2QwNGU1NjJjMjYzN2VjZmRjMDNiNGU0NjI5NDdlMTc)。
 
 ## デバッグの仕方
 
@@ -133,7 +133,7 @@ Haskellには高度で便利なパッケージがたくさんありますが、�
 
 これらの情報を見てもわからない、あるいはそもそも載っていない場合は、無理にそのパッケージを使おうとしないでください。  
 どうしても必要なのであれば、[リンク集](https://wiki.haskell.jp/Links#%E5%90%84%E7%A8%AE%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A7%E3%81%AEhaskell%E3%82%BF%E3%82%B0)に上げたteratailやStack Overflowなどの質問サイト、[Haskell-jpのSlack Workspaceにある、#questionsチャンネル](https://haskell-jp.slack.com/messages/C5666B6BB/convo/C4M4TT8JJ-1541321220.051500/)で質問してみると良いでしょう。  
-Slack Workspaceについては、[こちらから登録してください](https://join.slack.com/t/haskell-jp/shared_invite/enQtNDY4Njc1MTA5MDQxLTAzZGNkZDlkMWYxZDRlODI3NmNlNTQ1ZDc3MjQxNzg3OTg4YzUzNmUyNmU5YWVkMjFmMjFjYzk1OTE3Yzg4ZTM)。
+Slack Workspaceについては、[こちらから登録してください](https://join.slack.com/t/haskell-jp/shared_invite/enQtNDY4Njc1MTA5MDQxLWY1ZDVhZjIzMGE1MDMzZDAyNGZmYTU5M2VlODg5NTNmY2QwNGU1NjJjMjYzN2VjZmRjMDNiNGU0NjI5NDdlMTc)。
 
 ## 要素技術
 
