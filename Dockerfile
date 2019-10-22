@@ -7,7 +7,7 @@ RUN cabal v2-install gitit
 RUN mkdir /work
 
 COPY ./run-gitit.sh /work
-RUN chmod /work/run-gitit.sh
+RUN chmod +x /work/run-gitit.sh
 
 COPY ./gitit.conf /work
 
