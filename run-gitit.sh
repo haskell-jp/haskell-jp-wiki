@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -eux
 
 cat <<END >> ./gitit.conf
 oauthclientid: "$GITIT_OAUTH_CLIENT_ID"
