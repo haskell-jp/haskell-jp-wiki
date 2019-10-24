@@ -9,7 +9,11 @@ END
 
 mkdir -p ~/.ssh/
 chmod 0700 ~/.ssh/
+
+set +x
 echo "$DEPLOY_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+set -x
+
 chmod 0600 ~/.ssh/id_ed25519
 
 if [ ! -d ./wikidata ]; then
