@@ -3,8 +3,8 @@
 set -eux
 
 cat <<END >> ./gitit.conf
-oauthclientid: "$GITIT_OAUTH_CLIENT_ID"
-oauthclientsecret: "$GITIT_OAUTH_CLIENT_SECRET"
+oauthclientid: $GITIT_OAUTH_CLIENT_ID
+oauthclientsecret: $GITIT_OAUTH_CLIENT_SECRET
 END
 
 if [ ! -d ./wikidata ]; then
