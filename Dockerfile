@@ -1,16 +1,11 @@
-FROM haskell:8.6
+FROM debian:buster-slim
 
-RUN cabal v2-update
+RUN apt-get update && apt-get install gitit -y
 
-RUN cabal v2-install gitit
+COPY ./run-gitit.sh ./gitit.conf /work/
 
-RUN mkdir /work
-
-COPY ./run-gitit.sh /work
 RUN chmod +x /work/run-gitit.sh
 
-COPY ./gitit.conf /work
-
-WORKDIR /work
+WORKDIR /work/
 
 CMD ["./run-gitit.sh"]

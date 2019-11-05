@@ -3,14 +3,9 @@
 set -eu
 
 cat <<END >> ./gitit.conf
-oauthclientid: "$GITIT_OAUTH_CLIENT_ID"
-oauthclientsecret: "$GITIT_OAUTH_CLIENT_SECRET"
+oauthclientid: $GITIT_OAUTH_CLIENT_ID
+oauthclientsecret: $GITIT_OAUTH_CLIENT_SECRET
 END
-
-mkdir -p ~/.ssh/
-chmod 0700 ~/.ssh/
-echo "$DEPLOY_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-chmod 0600 ~/.ssh/id_ed25519
 
 if [ ! -d ./wikidata ]; then
   (
