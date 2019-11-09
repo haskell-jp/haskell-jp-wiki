@@ -87,18 +87,23 @@
 
 ## 書籍
 
-- [関数プログラミングの楽しみ](https://shop.ohmsha.co.jp/shopdetail/000000001859/)
-- [すごいHaskellたのしく学ぼう！](http://shop.ohmsha.co.jp/shopdetail/000000001926/)
+- [ふつうのHaskellプログラミング ふつうのプログラマのための関数型言語入門](http://www.loveruby.net/ja/stdhaskell/) (2006/06)
+- [Real World Haskell](https://www.oreilly.co.jp/books/9784873114231) (2009/10)
+- [プログラミングHaskell](https://www.ohmsha.co.jp/book/9784274067815/) (2009/11)
+- [関数プログラミングの楽しみ](https://shop.ohmsha.co.jp/shopdetail/000000001859/) (2010/06)
+- [関数プログラミング入門 ―Haskellで学ぶ原理と技法―](https://shop.ohmsha.co.jp/shopdetail/000000001936/) (2010/10)
+- [すごいHaskellたのしく学ぼう！](http://shop.ohmsha.co.jp/shopdetail/000000001926/) (2012/05)
     - あわせて読みたい: [2017年に「すごいHaskellたのしく学ぼう」を読む](https://qiita.com/Aruneko/items/e72f7c6ee49159751cba)
-- [プログラミングHaskell](https://www.ohmsha.co.jp/book/9784274067815/)
-- [Haskellによる並列・並行プログラミング](http://www.oreilly.co.jp/books/9784873116891/)
-- [関数プログラミング実践入門 ──簡潔で，正しいコードを書くために](http://gihyo.jp/book/2016/978-4-7741-8390-9)
-- [関数プログラミング入門 ―Haskellで学ぶ原理と技法―](http://www.amazon.co.jp/%E9%96%A2%E6%95%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%85%A5%E9%96%80-%E2%80%95Haskell%E3%81%A7%E5%AD%A6%E3%81%B6%E5%8E%9F%E7%90%86%E3%81%A8%E6%8A%80%E6%B3%95%E2%80%95-Richard-Bird/dp/427406896X)
-- [Real World Haskell](http://www.oreilly.co.jp/books/9784873114231/)
-- [関数プログラミング 珠玉のアルゴリズムデザイン](http://shop.ohmsha.co.jp/shopdetail/000000004066/)
-- [簡約! λカ娘](http://www.paraiso-lang.org/ikmsm/books/index.html) - [参照透明な海を守る会](http://www.paraiso-lang.org/ikmsm/)
-- [Haskell 教養としての関数型プログラミング](http://www.shuwasystem.co.jp/products/7980html/4806.html)
-- [Haskell入門 関数型プログラミング言語の基礎と実践](https://gihyo.jp/book/2017/978-4-7741-9237-6)
+- [Haskellによる並列・並行プログラミング](http://www.oreilly.co.jp/books/9784873116891/) (2014/08)
+- [関数プログラミング 珠玉のアルゴリズムデザイン](http://shop.ohmsha.co.jp/shopdetail/000000004066/) (2014/11)
+- [関数プログラミング実践入門 ──簡潔で，正しいコードを書くために](http://gihyo.jp/book/2016/978-4-7741-8390-9) (2014/12, 増補改訂版が 2016/09)
+- [Haskell による関数プログラミングの思考法](https://asciidwango.jp/post/157185312025/) (2017/02)
+- [Haskell 教養としての関数型プログラミング](https://www.shuwasystem.co.jp/book/9784798048062.html) (2017/04)
+- [Haskell入門 関数型プログラミング言語の基礎と実践](https://gihyo.jp/book/2017/978-4-7741-9237-6) (2017/09)
+- [Haskellで作るWebアプリケーション 遠回りして学ぶYesod入門](https://nextpublishing.jp/book/9979.html) (2018/08)
+- [入門Haskellプログラミング](https://www.shoeisha.co.jp/book/detail/9784798158662) (2019/07)
+- [プログラミング Haskell 第2版](https://www.lambdanote.com/products/haskell) (2019/08)
+- [簡約! λカ娘](https://ikmsm.pastillage-research.org/ikmsm/books/index.html) - [参照透明な海を守る会](https://ikmsm.pastillage-research.org/ikmsm/)
 
 ## 各社での採用事例
 
