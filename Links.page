@@ -25,6 +25,7 @@
 - [Haskell で暗号学的ハッシュを扱う (和訳) - Qiita](https://qiita.com/rounddelta/items/ace180b1b78876f1c190)
 - [Haskell のパフォーマンスをデバッグする](https://haskell.e-bigmoon.com/posts/2017-12-27-haskell-performance-debugging)
 - [wizard モノイド](https://haskell.e-bigmoon.com/posts/2018-03-07-the-wizard-monoid)
+- [Megaparsec 8](https://haskell.e-bigmoon.com/posts/2019/11-10-megaparsec8.html)
 
 ## 各種ウェブサービスでのHaskellタグ
 
