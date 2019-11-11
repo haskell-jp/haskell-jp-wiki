@@ -108,6 +108,8 @@
 
 ## 各社での採用事例
 
+- [業務でHaskellを導入した理由と、Haskell Relational Recordについて解説 - ログミーTech](https://logmi.jp/tech/articles/320396)
+- [Haskell × Servantで作る、安全かつ高速なAPI開発 - ログミーTech](https://logmi.jp/tech/articles/320369)
 - [Javaはもう古い！次の主流は「関数型」 - ［Haskell］関数型の特徴を満載した王道の言語：ITpro](http://itpro.nikkeibp.co.jp/article/COLUMN/20130112/449224/)
 - [古くて新しいプログラミングパラダイム～関数型プログラミング | NTTデータ](http://www.nttdata.com/jp/ja/insights/trend_keyword/2013032101.html)
 - [Haskell使ってみた | GREE Engineers' Blog](http://labs.gree.jp/blog/2013/12/9882/)
