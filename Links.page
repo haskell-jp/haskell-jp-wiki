@@ -108,6 +108,7 @@
 
 ## 各社での採用事例
 
+- [大規模数値計算を支える Haskell](https://speakerdeck.com/konn/da-gui-mo-shu-zhi-ji-suan-wozhi-eru-haskell-nil-nil-pragmatic-haskell-in-large-scale-numerical-computation-nil-nil)
 - [業務でHaskellを導入した理由と、Haskell Relational Recordについて解説 - ログミーTech](https://logmi.jp/tech/articles/320396)
 - [Haskell × Servantで作る、安全かつ高速なAPI開発 - ログミーTech](https://logmi.jp/tech/articles/320369)
 - [Javaはもう古い！次の主流は「関数型」 - ［Haskell］関数型の特徴を満載した王道の言語：ITpro](http://itpro.nikkeibp.co.jp/article/COLUMN/20130112/449224/)
