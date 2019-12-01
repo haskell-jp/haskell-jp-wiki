@@ -23,6 +23,8 @@ https://wiki.haskell.jp/ディレクトリ名/ページ名
 * [メーリングリスト](MailingList)
 * [チャット](ChatRoom)
 * [勉強会まとめ](Workshop)
+* [勉強会カレンダー](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)
+    * （Wikiのコンテンツではないですがあしからず。）Google Calendarに随時追加しています。追加するとHaskell-jpのSlack Workspaceに通知されます。
 * [Haskellに関する日本語のリンク集](Links): 今のところ一番充実してます！
 * [データ構造列伝](データ構造列伝): こちらも充実してます！
 * [Hasekllの歩き方](Hikers Guide to Haskell)
