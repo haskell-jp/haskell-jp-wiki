@@ -5,3 +5,11 @@ Wikiの内容そのものに対するPull Request, Issueは受け付けており
 http://wiki.haskell.jp/ を直接編集するか、「disscuss」タブで議論して下さい。
 
 このWikiに限らず、Haskellに関して日本語で情報を共有したい場合や質問がある場合は[Haskell-jpのSlackチーム](https://haskell.jp/signin-slack.html)に投稿してください！
+
+## 管理者メモ
+
+デプロイしてログの確認をするときは
+
+```
+heroku container:push web -a $HEROKU_APP_NAME && heroku container:release web -a $HEROKU_APP_NAME && heroku logs --tail -a $HEROKU_APP_NAME
+```
