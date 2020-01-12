@@ -26,6 +26,7 @@
 - [Haskell のパフォーマンスをデバッグする](https://haskell.e-bigmoon.com/posts/2017-12-27-haskell-performance-debugging)
 - [wizard モノイド](https://haskell.e-bigmoon.com/posts/2018-03-07-the-wizard-monoid)
 - [Megaparsec 8](https://haskell.e-bigmoon.com/posts/2019/11-10-megaparsec8.html)
+- [正格性のすべて (翻訳)](https://haskell.e-bigmoon.com/posts/2018/06-25-all-about-strictness)
 
 ## 各種ウェブサービスでのHaskellタグ
 
@@ -60,10 +61,10 @@
 
 - [Monad - モナモナ言わない モナド入門 第二版](http://www.mew.org/~kazu/material/2012-monad.pdf)
 - [Maybe と IO を一緒に使いたくなったら](https://ryota-ka.hatenablog.com/entry/2018/05/26/193220)
+- [実装して理解する遅延評価の仕組み 〜 thunkを絵に描いて理解しよう・JavaScriptでHaskellを実装！？ - プログラムモグモグ](https://itchyny.hatenablog.com/entry/20130209/1360417348)
 
 - [素晴らしき HLint を使いこなす](https://haskell.e-bigmoon.com/posts/2018-01-29-awesome-hlint.html)
 
-- [extensible 攻略Wiki](http://wiki.hask.moe/)
 - [lens - Lens で Haskell をもっと格好良く！ ](http://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
 - [haskell-relational-record - チュートリアル](https://github.com/khibino/haskell-relational-record/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
     - 残念ながら、↑のページは内容が古くなってしまっています。
