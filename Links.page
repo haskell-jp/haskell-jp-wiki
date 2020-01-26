@@ -65,6 +65,9 @@
 
 - [素晴らしき HLint を使いこなす](https://haskell.e-bigmoon.com/posts/2018-01-29-awesome-hlint.html)
 
+- [glossではじめるグラフィック描画 :: Haskell入門の次に読む記事 - Qiita](https://qiita.com/lotz/items/eb73e62a64bc208c2dd6)
+- [not-glossでお手軽3Dグラフィック描画 - Qiita](https://qiita.com/yakituka/items/9820c10f68e68846bc7d)
+
 - [lens - Lens で Haskell をもっと格好良く！ ](http://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
 - [haskell-relational-record - チュートリアル](https://github.com/khibino/haskell-relational-record/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
     - 残念ながら、↑のページは内容が古くなってしまっています。
