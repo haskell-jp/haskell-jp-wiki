@@ -61,6 +61,8 @@
 
 - [Monad - モナモナ言わない モナド入門 第二版](http://www.mew.org/~kazu/material/2012-monad.pdf)
 - [Maybe と IO を一緒に使いたくなったら](https://ryota-ka.hatenablog.com/entry/2018/05/26/193220)
+- [IO モナドと副作用 - Haskell-jp](https://haskell.jp/blog/posts/2020/io-monad-and-sideeffect.html)
+
 - [実装して理解する遅延評価の仕組み 〜 thunkを絵に描いて理解しよう・JavaScriptでHaskellを実装！？ - プログラムモグモグ](https://itchyny.hatenablog.com/entry/20130209/1360417348)
 
 - [haskell の Int と Integer の違いや Float や Double や Rational を理解する - Qiita](https://qiita.com/suzuki-hoge/items/17cf0cd3680ef10b2cc1)
