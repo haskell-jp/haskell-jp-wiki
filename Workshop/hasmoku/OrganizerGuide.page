@@ -16,6 +16,7 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 - [connpassのグループ](https://haskell-jp.connpass.com/)の管理者権限
 - コピーしたいconnpassのイベントにおける管理者権限
 - [TweetDeck](https://tweetdeck.twitter.com/)における[\@haskell_jp](https://twitter.com/haskell_jp)としての投稿権限
+- [Googleカレンダーの、「Haskell勉強会」カレンダーへの追加権限](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)
 - Optional: SlackのHaskell-jp WorkspaceにおけるAdmin権限
     - `@here`を使うのに必要。なければないでいいんじゃないかな！
 
@@ -55,6 +56,8 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
     - e.g. <https://haskell-jp.connpass.com/event/176659/>
     - 特に連絡事項がなければ日付とタイトルのみ変更してください
     - **次回の開催担当者は必ず参加登録**してください！
+1. イベントページが作成できたら、イベントページ右側の「Googleカレンダー」というリンクをクリックして、[「Haskell勉強会」カレンダー](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)に予定を追加します
+    - これによって、[Slackの #event-announcementチャンネル](https://app.slack.com/client/T4LFB6C4C/C4NDY2TF1)に、イベントが自動で告知されるようになります
 1. [TweetDeck](https://tweetdeck.twitter.com/)で@haskell_jpとしてイベントの告知をしましょう
     - e.g. [第32回Haskell-jpもくもく会 @ オンライン は5/16に行います。次回もお気軽にどうぞ！ haskell-jp.connpass.com/event/174028/ #hasmoku](https://twitter.com/haskell_jp/status/1251490432418078721)
 
