@@ -1,0 +1,58 @@
+# Haskell-jpもくもく会 運営ガイド
+
+Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行くために、開催の手順をまとめておきます。
+
+## 動機
+
+- かつてリアル会場のみで運営していた頃は、「オンラインもくもく会なんてあんま意味なくね？」と懐疑的であったが、やってみると意外とモチベーションや集中力を高めるのに効果的なことに気づいた
+- 運営に関わるメンバーと、運営に関わる機会を増やすことで、よりHaskell-jpの活動を活発なものにしたい
+    - 関連: [「『公式面して』発信する人」を増やしたい](https://the.igreque.info/slides/2019-11-29-stack-cabal.html#\(4\))
+    - COVID-19の流行が落ち着いてからは、慣れた人がリアル会場でも月一回程度開催する体制も目指す
+
+## 前提
+
+以下の権限が必要です。「自分も協力したい！」という方は、あらかじめ[igrep](https://twitter.com/igrep)はじめ、他のHaskell-jpもくもく会運営にご連絡ください。
+
+- [connpassのグループ](https://haskell-jp.connpass.com/)の管理者権限
+- コピーしたいconnpassのイベントにおける管理者権限
+- [TweetDeck](https://tweetdeck.twitter.com/)における[@haskell\_jp](https://twitter.com/haskell_jp)としての投稿権限
+- Optional: SlackのHaskell-jp WorkspaceにおけるAdmin権限
+    - `@here`を使うのに必要。なければないでいいんじゃないかな！
+
+## オンライン開催の場合
+
+前回の開催担当者から任命された方は、イベント当日に以下👇の手順を踏んでください。
+
+### イベント当日
+
+1. 開始時刻（通常は13:00）になったら、[Slackの#mokumoku-onlineチャンネル](https://app.slack.com/client/T4LFB6C4C/CUPBC8WCE)と、Twitterの@haskell\_jpアカウントに、開催を告知します
+    - Slackのメッセージ例:
+        - 「@here 第33回Haskell-jpもくもく会の時間です！好きなタイミングでいいので、自己紹介と今日やりたいことを書き込んでいただけると！ hask(\_ \_)eller」
+            - Slack WorkspaceにおけるAdmin権限を持っている場合、`@here`を付けるのをお忘れなく！
+                - Admin権限を持っていない場合は付けなくて結構です
+            - 毎週必ず開催できそうな状況になったら、これはリマインダーで自動化してもいいかも
+    - Tweet例:
+        - [「第33回Haskell-jpもくもく会 @ オンラインの時間です！https://haskell-jp.connpass.com/event/176659/ #hasmoku 興味のある方は https://haskell.jp/signin-slack.html からHaskell-jpのSlack Workspaceに登録した上で、# mokumoku-onlineというチャンネルにjoinしてください！ hask(\_ \_)eller」](https://twitter.com/haskell_jp/status/1264044431751012353)
+1. 終了時刻（通常は18:00）を過ぎたら、同じく[Slackの#mokumoku-onlineチャンネル](https://app.slack.com/client/T4LFB6C4C/CUPBC8WCE)と、Twitterの@haskell\_jpアカウントに、成果報告の時間を告知します
+    - Slackのメッセージ例:
+        - 「@here 成果報告の時間です！何か、やったことを軽くご共有いただけると幸いです hask(\_ \_)eller」
+            - こちらもSlackのAdmin権限が**あれば**`@here`を付けましょう
+    - Tweet例:
+        - 「成果発表の時間です。今週もお疲れ様でした！ #hasmoku」
+1. ある程度の人が報告が終わったところで切り上げるメッセージをSlackに送りましょう
+    - Slackのメッセージ例:
+        - 「まだ成果を共有していない方もいらっしゃるようですがそろそろお開きと言うことで！お疲れ様でした！」
+
+### イベント当日: 終了後
+
+1. 次回のイベント担当者と、開催日程を決めます
+    - なるべく毎週開催したいですが、イベント担当者の都合が付かない場合は無理をなさらず！
+1. 前回のイベントページのページから「コピーを作成」して、次回のイベントページを作成・公開します
+    - e.g. <https://haskell-jp.connpass.com/event/176659/>
+    - 特に連絡事項がなければ日付とタイトルのみ変更してください。
+1. [TweetDeck](https://tweetdeck.twitter.com/)で[@haskell\_jp](https://twitter.com/haskell_jp)としてイベントの告知をしましょう
+    - e.g. [第32回Haskell-jpもくもく会 @ オンライン は5/16に行います。次回もお気軽にどうぞ！ haskell-jp.connpass.com/event/174028/ #hasmoku](https://twitter.com/haskell_jp/status/1251490432418078721)
+
+## オフライン開催の場合
+
+※次回開催したときぐらいに書きます。
