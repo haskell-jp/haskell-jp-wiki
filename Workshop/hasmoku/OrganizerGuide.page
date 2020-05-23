@@ -15,7 +15,7 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 
 - [connpassのグループ](https://haskell-jp.connpass.com/)の管理者権限
 - コピーしたいconnpassのイベントにおける管理者権限
-- [TweetDeck](https://tweetdeck.twitter.com/)における[@haskell\_jp](https://twitter.com/haskell_jp)としての投稿権限
+- [TweetDeck](https://tweetdeck.twitter.com/)における[\@haskell_jp](https://twitter.com/haskell_jp)としての投稿権限
 - Optional: SlackのHaskell-jp WorkspaceにおけるAdmin権限
     - `@here`を使うのに必要。なければないでいいんじゃないかな！
 
@@ -50,7 +50,7 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 1. 前回のイベントページのページから「コピーを作成」して、次回のイベントページを作成・公開します
     - e.g. <https://haskell-jp.connpass.com/event/176659/>
     - 特に連絡事項がなければ日付とタイトルのみ変更してください。
-1. [TweetDeck](https://tweetdeck.twitter.com/)で[@haskell\_jp](https://twitter.com/haskell_jp)としてイベントの告知をしましょう
+1. [TweetDeck](https://tweetdeck.twitter.com/)で@haskell_jpとしてイベントの告知をしましょう
     - e.g. [第32回Haskell-jpもくもく会 @ オンライン は5/16に行います。次回もお気軽にどうぞ！ haskell-jp.connpass.com/event/174028/ #hasmoku](https://twitter.com/haskell_jp/status/1251490432418078721)
 
 ## オフライン開催の場合
