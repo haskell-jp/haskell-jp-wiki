@@ -94,13 +94,6 @@ Haskellには記号だけの名前を持った関数（記号関数、あるい�
 ](https://github.com/takenobu-hs/haskell-symbol-search-cheatsheet)です。  
 Haskell標準外のものやたまにしか使わないであろうものもたくさんあるので、知らない記号が出てきたときに調べてみてください。
 
-### base-4.13以降のドキュメント
-
-GHC 8.8に添付されているbaseパッケージver. 4.13以降について、hackageに上がってないよ！という声（多分、他のGHC添付のパッケージもそうなんでしょう）が度々MLなどで投稿されています。  
-曰く、GHCのドキュメントに添付されているものを直接読め、とのこと。  
-例えば[GHC 8.10はこちら](https://downloads.haskell.org/~ghc/8.10.1/docs/html/libraries/index.html)。  
-でもこれ、Hoogleでの検索に引っかからないのでは... という不安はあるものの、とりあえず使えそうですね。
-
 ## 情報収集に役立つサイト
 
 - [Haskell Antenna](https://haskell.jp/antenna/)  
