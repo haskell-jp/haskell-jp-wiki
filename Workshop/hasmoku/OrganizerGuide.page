@@ -24,6 +24,18 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 
 前回の開催担当者から任命された方は、以下👇の手順を踏んでください。
 
+### 前回のイベント担当者から任命された後 ～ 開催告知まで
+
+1. 次回のイベント開催日程を決めます
+1. 前回のイベントページのページから「コピーを作成」して、次回のイベントページを作成・公開します
+    - 最新のイベントページへは <https://haskell-jp.connpass.com/> からたどりましょう
+    - 特に連絡事項がなければ日付とタイトルのみ変更してください
+    - **次回の開催担当者は必ず参加登録**してください！
+1. イベントページが作成できたら、イベントページ右側の「Googleカレンダー」というリンクをクリックして、[「Haskell勉強会」カレンダー](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)に予定を追加します
+    - これによって、[Slackの #event-announcementチャンネル](https://app.slack.com/client/T4LFB6C4C/C4NDY2TF1)に、イベントが自動で告知されるようになります
+1. [TweetDeck](https://tweetdeck.twitter.com/)で@haskell_jpとしてイベントの告知をしましょう
+    - e.g. [第32回Haskell-jpもくもく会 @ オンライン は5/16に行います。次回もお気軽にどうぞ！ haskell-jp.connpass.com/event/174028/ #hasmoku](https://twitter.com/haskell_jp/status/1251490432418078721)
+
 ### イベント開催告知後 ～ 前日
 
 1. 前回の開催担当者が作成した**イベントページで参加登録**するのをお忘れなく！
@@ -54,16 +66,8 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 
 ### イベント当日: 終了後
 
-1. 次回のイベント担当者と、開催日程を決めます
-    - なるべく毎週開催したいですが、イベント担当者の都合が付かない場合は無理をなさらず！
-1. 前回のイベントページのページから「コピーを作成」して、次回のイベントページを作成・公開します
-    - 最新のイベントページへは <https://haskell-jp.connpass.com/> からたどりましょう
-    - 特に連絡事項がなければ日付とタイトルのみ変更してください
-    - **次回の開催担当者は必ず参加登録**してください！
-1. イベントページが作成できたら、イベントページ右側の「Googleカレンダー」というリンクをクリックして、[「Haskell勉強会」カレンダー](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)に予定を追加します
-    - これによって、[Slackの #event-announcementチャンネル](https://app.slack.com/client/T4LFB6C4C/C4NDY2TF1)に、イベントが自動で告知されるようになります
-1. [TweetDeck](https://tweetdeck.twitter.com/)で@haskell_jpとしてイベントの告知をしましょう
-    - e.g. [第32回Haskell-jpもくもく会 @ オンライン は5/16に行います。次回もお気軽にどうぞ！ haskell-jp.connpass.com/event/174028/ #hasmoku](https://twitter.com/haskell_jp/status/1251490432418078721)
+次回のイベント担当者と、開催日程を決めてください。  
+なるべく毎週開催したいですが、イベント担当者の都合が付かない場合は無理をなさらず！
 
 ## オフライン開催の場合
 
