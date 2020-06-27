@@ -46,7 +46,7 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
                 - Admin権限を持っていない場合は付けなくて結構です
             - 毎週必ず開催できそうな状況になったら、これは自動化してもいいかも
     - Tweet例:
-        - [「第33回Haskell-jpもくもく会 @ オンラインの時間です！https://haskell-jp.connpass.com/event/176659/ #hasmoku 興味のある方は https://haskell.jp/signin-slack.html からHaskell-jpのSlack Workspaceに登録した上で、# mokumoku-onlineというチャンネルにjoinしてください！ hask(\_ \_)eller」](https://twitter.com/haskell_jp/status/1264044431751012353)
+        - 「第33回Haskell-jpもくもく会 @ オンラインの時間です！https://haskell-jp.connpass.com/event/176659/ #hasmoku 興味のある方は https://haskell.jp/signin-slack.html からHaskell-jpのSlack Workspaceに登録した上で、# mokumoku-onlineというチャンネルにjoinしてください！ hask(\_ \_)eller」
         - 👆の内容を、TweetDeckで予約投稿します。
         - 予約投稿については[Twitterで予約投稿するなら「TweetDeck」が簡単！ | STUDIO SERO](https://studiosero.net/forlife/tips/21124/)をご覧ください。
 1. 終了時刻（通常は18:00）を過ぎたら成果報告の時間を告知するよう、同じく[Slackの#mokumoku-onlineチャンネル](https://app.slack.com/client/T4LFB6C4C/CUPBC8WCE)と、Twitterの@haskell\_jpアカウントに予約します。
