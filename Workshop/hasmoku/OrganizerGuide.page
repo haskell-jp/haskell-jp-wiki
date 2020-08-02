@@ -17,8 +17,6 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 - コピーしたいconnpassのイベントにおける管理者権限
 - [TweetDeck](https://tweetdeck.twitter.com/)における[\@haskell_jp](https://twitter.com/haskell_jp)としての投稿権限
 - [Googleカレンダーの、「Haskell勉強会」カレンダーへの追加権限](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)
-- Optional: SlackのHaskell-jp WorkspaceにおけるAdmin権限
-    - `@here`を使うのに必要。なければないでいいんじゃないかな！
 
 ## オンライン開催の場合
 
@@ -41,9 +39,7 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 1. 前回の開催担当者が作成した**イベントページで参加登録**するのをお忘れなく！
 1. 開始時刻（通常は13:00）になったら開催を告知するよう[Slackの#mokumoku-onlineチャンネル](https://app.slack.com/client/T4LFB6C4C/CUPBC8WCE)と、Twitterの@haskell\_jpアカウントに予約します。
     - Slackのメッセージ例 **（2020年7月4日に試したところ、なぜかリマインダーを設定してもうまく行きませんでした。なので当日の該当の時刻に手動でコピペする、という運用になるかも）**:
-        - 「/remind #mokumoku-online @here 第39回Haskell-jpもくもく会の時間です！好きなタイミングでいいので、自己紹介と今日やりたいことを書き込んでいただけると！ hask(\_ \_)eller at 13:00 next Saturday」
-            - Slack WorkspaceにおけるAdmin権限を持っている場合、`@here`を付けるのをお忘れなく！
-                - Admin権限を持っていない場合は付けなくて結構です
+        - 「/remind #mokumoku-online 第39回Haskell-jpもくもく会の時間です！好きなタイミングでいいので、自己紹介と今日やりたいことを書き込んでいただけると！ hask(\_ \_)eller at 13:00 next Saturday」
             - 毎週必ず開催できそうな状況になったら、これは自動化してもいいかも
     - Tweet例:
         - 「第33回Haskell-jpもくもく会 @ オンラインの時間です！https://haskell-jp.connpass.com/event/176659/ #hasmoku 興味のある方は https://haskell.jp/signin-slack.html からHaskell-jpのSlack Workspaceに登録した上で、# mokumoku-onlineというチャンネルにjoinしてください！ hask(\_ \_)eller」
@@ -51,8 +47,7 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
         - 予約投稿については[Twitterで予約投稿するなら「TweetDeck」が簡単！ | STUDIO SERO](https://studiosero.net/forlife/tips/21124/)をご覧ください。
 1. 終了時刻（通常は18:00）を過ぎたら成果報告の時間を告知するよう、同じく[Slackの#mokumoku-onlineチャンネル](https://app.slack.com/client/T4LFB6C4C/CUPBC8WCE)と、Twitterの@haskell\_jpアカウントに予約します。
     - Slackのメッセージ例 **（2020年7月4日に試したところ、こちらもなぜかリマインダーを設定してもうまく行きませんでした。なので当日の該当の時刻に手動でコピペする、という運用になるかも）**:
-        - 「/remind #mokumoku-online @here 成果報告の時間です！何か、やったことを軽くご共有いただけると幸いです hask(\_ \_)eller at 18:00 next Saturday」
-            - こちらもSlackのAdmin権限が**あれば**`@here`を付けましょう
+        - 「/remind #mokumoku-online 成果報告の時間です！何か、やったことを軽くご共有いただけると幸いです hask(\_ \_)eller at 18:00 next Saturday」
     - Tweet例:
         - 「成果発表の時間です。今週もお疲れ様でした！ #hasmoku」
         - 👆の内容を、同じくTweetDeckで予約投稿します。
