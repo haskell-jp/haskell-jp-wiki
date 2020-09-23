@@ -164,7 +164,7 @@ HaskellでWebアプリケーションを作る上で、昨今よく使われる�
 
 - [Servant](https://haskell-servant.github.io/)
 - [Yesod](https://www.yesodweb.com/)
-- [Spock](https://www.spock.li/)
+- [scotty](https://github.com/scotty-web/scotty)
 
 [Servant](https://haskell-servant.github.io/)はいわゆるRESTfulなAPIに特化したフレームワークです。  
 [Yesod](https://www.yesodweb.com/)に比べて、サーバー側のコードについてフレームワークがやってくれることが少ないみたい[^servant]ですが、代わりに、専用の言語内DSLでAPIの仕様を記述するだけで、JavaScriptをはじめとした、クライアント側がそのAPIにアクセスするためのコードを自動生成してくれる、という珍しい機能があります。
@@ -181,8 +181,8 @@ YesodもGHCの言語拡張をたくさん使っているのに加え、特に変
 それぞれ、見慣れたHaskellと多かれ少なかれ異なる構文で書かなければいけない部分があるのです。  
 つまり、これらのうちどちらかを使う以上、どちらかの魔法を覚えなければならないのです。
 
-その点、Spockは幾分マシです。  
-一部の型宣言に`TypeFamilies`というこれまたGHCの言語拡張を使用してはいるものの、概ねRubyのSinatraをHaskellの`do`記法でそのまま再現したようなDSLで書くことができるので、まだとっつきやすいかと思います。  
+その点、Scottyは遙かにシンプルです。  
+RubyのSinatra（その他、各言語に輸出された同種のフレームワーク）をHaskellの`do`記法でそのまま再現したようなDSLで書くことができるので、結構とっつきやすいでしょう。  
 YesodやServantにあるような高度な機能はありませんが、とりあえずHaskellでWebアプリケーションを作ってみたい、という方のはじめの一歩としてはちょうどいいかもしれません。
 
 ### Monad
@@ -241,7 +241,7 @@ Monad Transformerの比較的わかりやすい解説としては、「Monad Tra
 `newtype`でラップすることで、内部構造を隠蔽しているんですね。  
 その点を知っておくと、こうしたライブラリーへの理解が深まり、何をしているのかイメージしやすくなるでしょう。
 
-ちなみに、「Webアプリケーション」の節で紹介した、spockの`SpockM`や、Servantの`Handler`もそうです。調べてませんがYesodにも同じようなものがあるのではないかと。
+ちなみに、「Webアプリケーション」の節で紹介した、scottyの`ScottyM`や、Servantの`Handler`もそうです。調べてませんがYesodにも同じようなものがあるのではないかと。
 
 ### lensライブラリー
 
