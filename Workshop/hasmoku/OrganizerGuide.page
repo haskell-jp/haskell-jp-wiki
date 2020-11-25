@@ -32,14 +32,14 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 1. イベントページが作成できたら、イベントページ右側の「Googleカレンダー」というリンクをクリックして、[「Haskell勉強会」カレンダー](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)に予定を追加します
     - これによって、[Slackの #event-announcementチャンネル](https://app.slack.com/client/T4LFB6C4C/C4NDY2TF1)に、イベントが自動で告知されるようになります
 1. [TweetDeck](https://tweetdeck.twitter.com/)で@haskell_jpとしてイベントの告知をしましょう
-    - e.g. [第32回Haskell-jpもくもく会 @ オンライン は5/16に行います。次回もお気軽にどうぞ！ haskell-jp.connpass.com/event/174028/ #hasmoku #haskell](https://twitter.com/haskell_jp/status/1251490432418078721)
+    - e.g. 「第60回Haskell-jpもくもく会 @ オンライン は11/28に行います。次回もお気軽にどうぞ！ #hasmoku #haskell <connpassのURL>」
 
 ### イベント開催告知後 ～ 前日
 
 1. 上記で作成した**イベントページで参加登録**するのをお忘れなく！
 1. イベント前日のお昼12時30分（お昼休みを取ってる人が多そうな時間なので）に告知するよう、Twitterの@haskell\_jpアカウントに予約します。
     - Tweet例:
-        - 「第43回Haskell-jpもくもく会 @ オンラインは明日開催です。自分の作業をもくもくしたり疑問があれば一緒に考えたりする会です。まだ募集していますのでお気軽にご参加ください！ https://haskell-jp.connpass.com/event/184023/ #hasmoku #haskell」
+        - 「第43回Haskell-jpもくもく会 @ オンラインは明日開催です。自分の作業をもくもくしたり疑問があれば一緒に考えたりする会です。まだ募集していますのでお気軽にご参加ください！ #hasmoku #haskell <connpassのURL>」
         - 👆の内容を、TweetDeckで予約投稿します。
         - 予約投稿については[Twitterで予約投稿するなら「TweetDeck」が簡単！ | STUDIO SERO](https://studiosero.net/forlife/tips/21124/)をご覧ください。
 1. 開始時刻（通常は13:00）になったら開催を告知するよう[Slackの#mokumoku-onlineチャンネル](https://app.slack.com/client/T4LFB6C4C/CUPBC8WCE)と、Twitterの@haskell\_jpアカウントに予約します。
@@ -47,7 +47,7 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
         - 「/remind #mokumoku-online 第39回Haskell-jpもくもく会の時間です！好きなタイミングでいいので、自己紹介と今日やりたいことを書き込んでいただけると！ hask(\_ \_)eller at 13:00 Saturday」
             - 毎週必ず開催できそうな状況になったら、これは自動化してもいいかも
     - Tweet例:
-        - 「第33回Haskell-jpもくもく会 @ オンラインの時間です！https://haskell-jp.connpass.com/event/176659/ 興味のある方は https://haskell.jp/signin-slack.html からHaskell-jpのSlack Workspaceに登録した上で、# mokumoku-onlineというチャンネルにjoinしてください！ hask(\_ \_)eller #hasmoku #haskell」
+        - 「第33回Haskell-jpもくもく会 @ オンラインの時間です！興味のある方は https://haskell.jp/signin-slack.html からHaskell-jpのSlack Workspaceに登録した上で、# mokumoku-onlineというチャンネルにjoinしてください！ hask(\_ \_)eller #hasmoku #haskell <connpassのURL>」
         - 👆の内容を、同じくTweetDeckで予約投稿します。
 1. 終了時刻（通常は18:00）を過ぎたら成果報告の時間を告知するよう、同じく[Slackの#mokumoku-onlineチャンネル](https://app.slack.com/client/T4LFB6C4C/CUPBC8WCE)と、Twitterの@haskell\_jpアカウントに予約します。
     - Slackのメッセージ例:
