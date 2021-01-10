@@ -31,8 +31,9 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
     - **次回の開催担当者は必ず参加登録**してください！
 1. イベントページが作成できたら、イベントページ右側の「Googleカレンダー」というリンクをクリックして、[「Haskell勉強会」カレンダー](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)に予定を追加します
     - これによって、[Slackの #event-announcementチャンネル](https://app.slack.com/client/T4LFB6C4C/C4NDY2TF1)に、イベントが自動で告知されるようになります
-1. [TweetDeck](https://tweetdeck.twitter.com/)で@haskell_jpとしてイベントの告知をしましょう
-    - e.g. 「第60回Haskell-jpもくもく会 @ オンライン は11/28に行います。次回もお気軽にどうぞ！ #hasmoku #haskell \<connpassのURL\>」
+    - イベントの「説明」は書き換えないでください！IFTTTによって自動投稿される際にこの「説明」がそのままツイートされます
+1. IFTTTによって、自動で告知のツイートが \@haskell\_jp より投稿されます
+    - 例: <https://twitter.com/haskell_jp/status/1348203848175906816>
 
 ### イベント開催告知後 ～ 前日
 
