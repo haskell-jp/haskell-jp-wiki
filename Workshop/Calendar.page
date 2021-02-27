@@ -1,0 +1,18 @@
+# Haskell勉強会カレンダー
+
+下記のリンクからGoogleカレンダーに追加すれば閲覧できるでしょう:
+
+<https://calendar.google.com/calendar/u/0?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ>
+
+## Haskell関係のイベント主催者へ
+
+### イベントを追加・編集する権限を得るには
+
+[\@igrep](https://twitter.com/igrep) など、カレンダーの追加権限を持っている人にGoogleアカウントのメールアドレスを教えてください。イベント内容を確認の上、追加権限を与えます。
+
+### イベント追加時の注意事項
+
+「Haskell勉強会」カレンダーに新しくイベントを追加すると、igrepが設定したZapierやIFTTTによって、Twitterの[\@haskell\_jp](https://twitter.com/haskell_jp)アカウントや[Haskell-jp Slack Workspace](https://haskell.jp/signin-slack.html)の#event-announcementチャンネルにて**告知**されます。
+
+その際、イベントの説明に書いた内容が、そのまま**TwitterやSlackでの発言に転記**されます。
+通例、Connpassで作成したイベントなどをConnpassの機能を使ってGoogleカレンダーにそのまま登録した場合、URLが説明に書かれるので、URLを書いておく想定で転記しています。ハッシュタグなど、必要に応じて短いメッセージを加えるのもよいでしょう。ただし、**Twitterの文字数制限は特にチェックしていない**のでご注意ください！
