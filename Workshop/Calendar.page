@@ -16,3 +16,16 @@
 
 その際、イベントの説明に書いた内容が、そのまま**TwitterやSlackでの発言に転記**されます。
 通例、Connpassで作成したイベントなどをConnpassの機能を使ってGoogleカレンダーにそのまま登録した場合、URLが説明に書かれるので、URLを書いておく想定で転記しています。ハッシュタグなど、必要に応じて短いメッセージを加えるのもよいでしょう。ただし、**Twitterの文字数制限は特にチェックしていない**のでご注意ください！
+
+### 使用しているZapierのZap・IFTTTのAppletへのURL
+
+#### Zapier
+
+- [1週間後に始まるHaskell勉強会をHaskell-jpのSlackに](https://zapier.com/shared/b9d74dff723dbb5572e0d7d8b694d33286ba096d)
+- [新しいHaskell勉強会をHaskell-jpのSlackに](https://zapier.com/shared/19c3b672e4ce56cd26c30f40b8451b171ad5c55d)
+- [明日始まるHaskell勉強会をHaskell-jpのSlackに](https://zapier.com/shared/47d27773bf63d2a6f5aa4ad4c547c9a76d11642d)
+- [明日始まるHaskell勉強会をTwitterで告知](https://zapier.com/shared/e1f6f57665ad8df57087dbbc80435f237490a7d1)
+
+#### IFTTT
+
+※IFTTTについては残念ながら個人アカウントで作ったAppletのURLを共有する手段は現状ないみたいです。残念！
