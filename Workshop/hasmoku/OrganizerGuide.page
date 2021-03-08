@@ -30,14 +30,13 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
     - 特に連絡事項がなければ日付とタイトルのみ変更してください
 1. イベントページが作成できたら、イベントページ右側の「Googleカレンダー」というリンクをクリックして、[「Haskell勉強会」カレンダー](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)に予定を追加します
     - これによって、[Slackの #event-announcementチャンネル](https://app.slack.com/client/T4LFB6C4C/C4NDY2TF1)に、イベントが自動で告知されるようになります
+    - 同様に、IFTTTによって、自動で告知のツイートが \@haskell\_jp より投稿されます
+        - 例: <https://twitter.com/haskell_jp/status/1348203848175906816>
     - イベントの「説明」は書き換えないでください！IFTTTやZapierによって自動投稿される際にこの「説明」がそのままツイートされます
         - これを始めIFTTTやZapierによる自動投稿については、 <https://wiki.haskell.jp/Workshop/Calendar> をご覧ください。
-1. IFTTTによって、自動で告知のツイートが \@haskell\_jp より投稿されます
-    - 例: <https://twitter.com/haskell_jp/status/1348203848175906816>
 
 ### イベント開催告知後 ～ 前日
 
-1. 上記で作成した**イベントページで参加登録**するのをお忘れなく！
 1. これ以降の手順はIFTTT・Zapierで自動化しています。以下のメッセージがそれぞれの時刻に投稿されます。
     1. イベント24時間前にTwitterで告知
         - **まだZapierで作成したフローを試していないので、正しく動かないかも！**
@@ -49,13 +48,9 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
         - Tweetの例: <https://twitter.com/haskell_jp/status/1350367358196588544>
         - Slackの例: 「成果報告の時間です！何か、やったことを軽くご共有いただけると幸いです hask(\_ \_)eller」
 
-### イベント当日: 開催中
-
-参加者の質問に答えたり、万が一いざこざがあったときに仲裁する、といったことに優先的に取り組んでいただきたいです！🙏
-
 ### イベント当日: 終了後
 
-次回のイベント担当者と、開催日程を決めてください。  
+次回のイベント担当者と、開催日程を投票結果に基づいて決めてください。  
 なるべく毎週開催したいですが、イベント担当者の都合が付かない場合は無理をなさらず！
 
 ## オフライン開催の場合
