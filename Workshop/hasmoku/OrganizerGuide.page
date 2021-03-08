@@ -28,7 +28,6 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 1. 前回のイベントページのページから「コピーを作成」して、次回のイベントページを作成・公開します
     - 最新のイベントページへは <https://haskell-jp.connpass.com/> からたどりましょう
     - 特に連絡事項がなければ日付とタイトルのみ変更してください
-    - **次回の開催担当者は必ず参加登録**してください！
 1. イベントページが作成できたら、イベントページ右側の「Googleカレンダー」というリンクをクリックして、[「Haskell勉強会」カレンダー](https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ)に予定を追加します
     - これによって、[Slackの #event-announcementチャンネル](https://app.slack.com/client/T4LFB6C4C/C4NDY2TF1)に、イベントが自動で告知されるようになります
     - イベントの「説明」は書き換えないでください！IFTTTやZapierによって自動投稿される際にこの「説明」がそのままツイートされます
