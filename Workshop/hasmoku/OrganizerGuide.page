@@ -39,7 +39,6 @@ Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行�
 
 1. これ以降の手順はIFTTT・Zapierで自動化しています。以下のメッセージがそれぞれの時刻に投稿されます。
     1. イベント24時間前にTwitterで告知
-        - **まだZapierで作成したフローを試していないので、正しく動かないかも！**
         - Tweet例: <https://twitter.com/haskell_jp/status/1354813987729281026>
     1. イベント開始時刻にイベント開始を告げる発言がSlackの #mokumoku-online チャンネルと Twitterの \@haskell_jp アカウントに投稿されます。
         - Tweetの例: <https://twitter.com/haskell_jp/status/1350291895830896643>
