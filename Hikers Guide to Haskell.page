@@ -230,9 +230,6 @@ Monad Transformerの比較的わかりやすい解説としては、「Monad Tra
 - `ReaderT r (StateT s (HogeT m)) a`のように、`HogeT`を一段でも重ねているMonad Transformerは、すべて`MonadHoge`のインスタンスとなっているため、`HogeT`が提供する機能をそのまま使用できる。
 - こうした慣習は、mtlパッケージ以外でも広く採用されている。なので`MonadFooBar`という型クラスを見かけたら`FooBar`という機能を実装したMonad全般を抽象化した型クラスとなっていることが多い。
 
-この機能の詳細は、先ほどの[Monad Transformers Step by Stepの**原文**](https://page.mi.fu-berlin.de/scravy/realworldhaskell/materialien/monad-transformers-step-by-step.pdf)が後半で解説してくれています。  
-仕組みが気になった場合は是非読んでみてください！
-
 #### よく見る `HogeHogeT` や `FooBarM`について
 
 あなたは「Monad Transformer」という概念に出遭う前に、[Hspec](http://hackage.haskell.org/package/hspec)や[haskeline](http://hackage.haskell.org/package/haskeline)、[relational-record](http://hackage.haskell.org/package/relational-record)などの内部DSLを提供するパッケージを通じて、Monad Transformerをすでに使っているかも知れません。  
