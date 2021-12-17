@@ -72,6 +72,7 @@
 
 - [glossではじめるグラフィック描画 :: Haskell入門の次に読む記事 - Qiita](https://qiita.com/lotz/items/eb73e62a64bc208c2dd6)
 - [not-glossでお手軽3Dグラフィック描画 - Qiita](https://qiita.com/yakituka/items/9820c10f68e68846bc7d)
+- [brick + vty で TUI パネポンを作ってみる - Qiita](https://qiita.com/maton/items/2f2566eb44bdfed9a6e3)
 
 - [lens - Lens で Haskell をもっと格好良く！ ](http://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009)
 - [haskell-relational-record - チュートリアル](https://github.com/khibino/haskell-relational-record/wiki/%E3%83%81%E3%83%A5%E3%83%BC%E3%83%88%E3%83%AA%E3%82%A2%E3%83%AB)
