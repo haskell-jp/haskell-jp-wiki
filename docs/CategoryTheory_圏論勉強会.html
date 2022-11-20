@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#categorytheory_%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A"><span>CategoryTheory_圏論勉強会</span></a><ul>
+<li><a href="#%E9%96%8B%E5%82%AC%E6%A6%82%E8%A6%81">開催概要</a><ul>
+<li><a href="#%E9%81%8E%E5%8E%BB%E3%81%AE%E9%96%8B%E5%82%AC%E8%A8%98%E9%8C%B2">過去の開催記録</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E4%B8%83%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第五十七回圏論勉強会</a><ul>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-remark-5.8-%E3%82%88%E3%82%8A">P. Selinger, “A survey of graphical languages for monoidal categories” Remark 5.8 より</a></li>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-lemma5.7">P. Selinger, “A survey of graphical languages for monoidal categories” Lemma5.7</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E5%85%AD%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第五十六回圏論勉強会</a><ul>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-lemma-5-%E3%82%88%E3%82%8A">P. Selinger, “A survey of graphical languages for monoidal categories” Lemma 5 より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%94%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第五十五回圏論勉強会</a><ul>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-lemma-4.11-%E3%82%88%E3%82%8A">P. Selinger, “A survey of graphical languages for monoidal categories” Lemma 4.11 より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E5%9B%9B%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第五十四回圏論勉強会</a><ul>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-4.2-planer-pivotal-categories">P. Selinger, “A survey of graphical languages for monoidal categories” 4.2 (Planer) pivotal categories</a></li>
+<li><a href="#planer-pivotal-categories">4.2 (Planer) pivotal categories</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E4%BA%8C%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第五十二回圏論勉強会</a><ul>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-3.4-balanced-monoidal-categories-%E3%82%88%E3%82%8A">P. Selinger, “A survey of graphical languages for monoidal categories” 3.4 Balanced monoidal categories より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E4%B8%80%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第五十一回圏論勉強会</a><ul>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-theorem-3.1-%E3%82%88%E3%82%8A">P. Selinger, “A survey of graphical languages for monoidal categories” Theorem 3.1? より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E5%8D%81%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第五十回圏論勉強会</a><ul>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-theorem-3.1-%E3%82%88%E3%82%8A-1">P. Selinger, “A survey of graphical languages for monoidal categories” Theorem 3.1? より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B9%9D%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十九回圏論勉強会</a><ul>
+<li><a href="#p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories">P. Selinger, “A survey of graphical languages for monoidal categories”</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="categorytheory_圏論勉強会"><a href="" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory" class="uri" title="Go to wiki page">CategoryTheory</a>:圏論勉強会</p>
+<hr>
+<h2 id="開催概要">開催概要</h2>
+<ul>
+<li>毎月第２日曜 13:00 から開催予定</li>
+<li><p><a href="https://www.google.com/calendar/embed?src=61jgs049qr04qa9qf5hspavhl8@group.calendar.google.com&amp;ctz=Asia/Tokyo">予定＠Googleカレンダー</a></p></li>
+<li>圏論の関係する様々な論文や文書を読んでいく</li>
+<li>今のところ予習をするかどうかは各自に任せるが、予習をしておくと質問すべきことがまとめれていいと思う</li>
+<li>Skype による遠隔参加も可能だが、事前に連絡を取っておくこと
+<ul>
+<li>Skype による参加者がいたり論文などが PDF で提供されているため、現在ノートパソコンの持込が多くなっているものの、特にノートパソコンを持ち込む必要はない</li>
+</ul></li>
+<li><p>連絡などは、haskell-jp の<a href="MailingList-1.html" class="uri" title="Go to wiki page">MailingList</a>、または<a href="http://mixi.jp/view_community.pl?id=168625">mixiの圏論勉強会コミュ</a>にて</p></li>
+<li><a href="http://mixi.jp/view_community.pl?id=168625">mixi:圏論勉強会</a></li>
+<li><a href="CategoryTheory_圏論関係リンク集.html" class="uri" title="Go to wiki page">CategoryTheory_圏論関係リンク集</a></li>
+<li><a href="CategoryTheory_圏論勉強会ノート.html" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会ノート</a>
+<ul>
+<li>宿題の回答など説明が長くなるものをこのノートに書く</li>
+</ul></li>
+<li><p><a href="https://twitter.com/masahiro_sakai/category-seminar">twitter:masahiro_sakai/category-seminar</a></p></li>
+</ul>
+<h3 id="過去の開催記録">過去の開催記録</h3>
+<ul>
+<li><a href="CategoryTheory_圏論勉強会_ConceptualMathematics.html" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_ConceptualMathematics</a></li>
+<li><a href="CategoryTheory_圏論勉強会_CategoriesTypesAndStructures.html" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_CategoriesTypesAndStructures</a></li>
+<li><a href="CategoryTheory_圏論勉強会_量子ファイナンス工学入門.html" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_量子ファイナンス工学入門</a></li>
+<li><a href="CategoryTheory_圏論勉強会_TheHaskellProgrammersGuideToTheIOMonad.html" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_TheHaskellProgrammersGuideToTheIOMonad</a></li>
+<li><a href="CategoryTheory_圏論勉強会_TemperleyLiebAlgebra.html" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_TemperleyLiebAlgebra</a></li>
+</ul>
+<h2 id="第五十七回圏論勉強会">第五十七回圏論勉強会</h2>
+<p>2009-10-18(日) 秋葉原某所 14:00-18:00</p>
+<p>写真：<a href="https://picasaweb.google.com/takeo.bono/Kenron091018#" class="uri">http://picasaweb.google.com/takeo.bono/Kenron091018#</a></p>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-remark-5.8-より">P. Selinger, “A survey of graphical languages for monoidal categories” Remark 5.8 より</h3>
+<ul>
+<li><a href="http://www.mscs.dal.ca/~selinger/papers/graphical.pdf" class="uri">http://www.mscs.dal.ca/~selinger/papers/graphical.pdf</a></li>
+</ul>
+<!-- -->
+<pre><code>                   日下部
+     m-a-o  今井   豊福
+　  +-----------+
+白  |           |
+板  |           |白石
+    +-----------+
+     酒井 小田 </code></pre>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-lemma5.7">P. Selinger, “A survey of graphical languages for monoidal categories” Lemma5.7</h3>
+<ul>
+<li><a href="http://www.mscs.dal.ca/~selinger/papers/graphical.pdf" class="uri">http://www.mscs.dal.ca/~selinger/papers/graphical.pdf</a></li>
+</ul>
+<h2 id="第五十六回圏論勉強会">第五十六回圏論勉強会</h2>
+<p>2009-09-13(日) 秋葉原某所 14:00-18:00</p>
+<p>写真：<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron090913" class="uri">http://picasaweb.google.co.jp/takeo.bono/Kenron090913</a></p>
+<pre><code>     m-a-o  酒井   豊福
+　  +-----------+
+白  |           |今井
+板  |           |白石
+    +-----------+
+     hiro 日下部 </code></pre>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-lemma-5-より">P. Selinger, “A survey of graphical languages for monoidal categories” Lemma 5 より</h3>
+<ul>
+<li><a href="http://www.mscs.dal.ca/~selinger/papers/graphical.pdf" class="uri">http://www.mscs.dal.ca/~selinger/papers/graphical.pdf</a></li>
+</ul>
+<h2 id="第五十五回圏論勉強会">第五十五回圏論勉強会</h2>
+<p>2009-08-09(日) 秋葉原某所 14:00-18:00</p>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-lemma-4.11-より">P. Selinger, “A survey of graphical languages for monoidal categories” Lemma 4.11 より</h3>
+<ul>
+<li><a href="http://www.mscs.dal.ca/~selinger/papers/graphical.pdf" class="uri">http://www.mscs.dal.ca/~selinger/papers/graphical.pdf</a></li>
+</ul>
+<h2 id="第五十四回圏論勉強会">第五十四回圏論勉強会</h2>
+<p>2009-07-12(日) 秋葉原某所 14:00-18:00</p>
+<p>写真：<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron090712" class="uri">http://picasaweb.google.co.jp/takeo.bono/Kenron090712</a></p>
+<pre><code>     酒井  nuc   豊福
+　  +-------------------+
+白  |                   |m-a-o
+板  |                   |白石
+    +-------------------+
+     日下部 今井 hiro 瞳 </code></pre>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-4.2-planer-pivotal-categories">P. Selinger, “A survey of graphical languages for monoidal categories” 4.2 (Planer) pivotal categories</h3>
+<ul>
+<li><a href="http://www.mscs.dal.ca/~selinger/papers/graphical.pdf" class="uri">http://www.mscs.dal.ca/~selinger/papers/graphical.pdf</a></li>
+</ul>
+<h3 id="planer-pivotal-categories">4.2 (Planer) pivotal categories</h3>
+<ul>
+<li>参考：<a href="http://practical-scheme.net/chaton/haskell-ja/a/2009/07/12" class="uri">http://practical-scheme.net/chaton/haskell-ja/a/2009/07/12</a></li>
+</ul>
+<h2 id="第五十二回圏論勉強会">第五十二回圏論勉強会</h2>
+<p>2009-05-10(日) <a href="http://www.miraclelinux.com/corp/about/maps_google.html">ミラクル・リナックス セミナールーム</a> 13:00〜18:00</p>
+<p>写真：<a href="https://picasaweb.google.com/Masahiro.Sakai/Kenron090510" class="uri">http://picasaweb.google.com/Masahiro.Sakai/Kenron090510</a></p>
+<pre><code>           酒井 檜山 hiro
+           +-------------+
+スクリーン |             |
+           +-------------+
+           m-a-o 日下部 瞳 </code></pre>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-3.4-balanced-monoidal-categories-より">P. Selinger, “A survey of graphical languages for monoidal categories” 3.4 Balanced monoidal categories より</h3>
+<ul>
+<li><a href="http://www.mscs.dal.ca/~selinger/papers/graphical.pdf" class="uri">http://www.mscs.dal.ca/~selinger/papers/graphical.pdf</a></li>
+</ul>
+<h2 id="第五十一回圏論勉強会">第五十一回圏論勉強会</h2>
+<p>2009-04-12(日) <a href="http://begi.net/overview/map.html">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-theorem-3.1-より">P. Selinger, “A survey of graphical languages for monoidal categories” Theorem 3.1? より</h3>
+<h2 id="第五十回圏論勉強会">第五十回圏論勉強会</h2>
+<p>2009-03-08(日) <a href="http://www.nii.ac.jp/introduce/access1-j.shtml">国立情報学研究所 12F カンファレンスルーム</a> 13:00〜18:00</p>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories-theorem-3.1-より-1">P. Selinger, “A survey of graphical languages for monoidal categories” Theorem 3.1? より</h3>
+<h2 id="第四十九回圏論勉強会">第四十九回圏論勉強会</h2>
+<p>2009-02-08(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<pre><code>  モニタ    ホワイトボード
+---------
+酒井     木村    hiro      nuc
++------------+  +-------------+
+|            |  |             |
++------------+  +-------------+
+檜山     木戸   かがみ モミヤマ</code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<p>写真：<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090208" class="uri">http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090208</a></p>
+<h3 id="p.-selinger-a-survey-of-graphical-languages-for-monoidal-categories">P. Selinger, “A survey of graphical languages for monoidal categories”</h3>
+<hr>
+<p>Last modified : 2012/01/09 17:35:08 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_玉手箱_整数論</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_玉手箱_整数論</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_%E7%8E%89%E6%89%8B%E7%AE%B1_%E6%95%B4%E6%95%B0%E8%AB%96"><span>Programming_玉手箱_整数論</span></a><ul>
+<li><a href="#%E7%B4%A0%E5%9B%A0%E6%95%B0%E5%88%86%E8%A7%A3">素因数分解</a></li>
+<li><a href="#%E6%97%A2%E7%B4%84%E5%88%86%E6%95%B0">既約分数</a></li>
+<li><a href="#%E6%8B%A1%E5%BC%B5%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E3%81%AE%E4%BA%92%E9%99%A4%E6%B3%95">拡張ユークリッドの互除法</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_玉手箱_整数論"><a href="" class="uri" title="Go to wiki page">Programming_玉手箱_整数論</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e7%8e%89%e6%89%8b%e7%ae%b1" class="uri" title="Go to wiki page">玉手箱</a>:整数論</p>
+<hr>
+<p><a href="Programming_玉手箱.html" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b4%a0%e5%9b%a0%e6%95%b0%e5%88%86%e8%a7%a3" class="uri" title="Go to wiki page">素因数分解</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%97%a2%e7%b4%84%e5%88%86%e6%95%b0" class="uri" title="Go to wiki page">既約分数</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%8b%a1%e5%bc%b5%e3%83%a6%e3%83%bc%e3%82%af%e3%83%aa%e3%83%83%e3%83%89%e3%81%ae%e4%ba%92%e9%99%a4%e6%b3%95" class="uri" title="Go to wiki page">拡張ユークリッドの互除法</a></li>
+</ul>
+<hr>
+<h2 id="素因数分解">素因数分解</h2>
+<p>ついでに、素因数分解</p>
+<pre><code>primes = map head $ iterate sieve [2..]
+sieve (p:xs) = [ x | x &lt;- xs, x `mod` p /= 0]
+
+factors n = fc [] (prms n primes) n
+            where
+             prms n ps = takeWhile (ceiling (sqrt (fromInteger (n+1))) &gt; ) ps
+             fc rs [] n         = reverse (n:rs)
+             fc rs <a href="email-protection.html" class="__cf_email__" data-cfemail="3747474477">[email&nbsp;protected]</a>(p:ps) n = case n `divMod` p of
+                                    (1,0) -&gt; reverse (n:rs)
+                                    (m,0) -&gt; fc (p:rs) (prms m pps) m
+                                    _     -&gt; fc rs ps n </code></pre>
+<ul>
+<li><p>篩で無駄な割り算を減らしてみる。</p>
+<pre><code>primes' :: [Integer]
+primes' = 2:sieve' [3] [5,7..]
+
+sieve' :: [Integer] -&gt; [Integer] -&gt; [Integer]
+sieve' (p:ps) xs = p:sieve' (ps++ps') [x | x &lt;- qs, mod x p /= 0]
+  where (ps', qs) = span (&lt;(p*p)) xs</code></pre></li>
+<li><p>primesが全然primesになっていないのと、素数の2乗の素因数分解ができないのが気になる</p></li>
+<li>修正しますた</li>
+<li><p>primes をまじめに計算すると遅いので、これで十分かも</p>
+<pre><code>primes' = 2 : zipWith (+) primes' (1 : 2 : cycle [2, 4])</code></pre>
+<ul>
+<li>primes’ = 2:3:(3の倍数を除く奇数)ですか。オーダとしては、primes’’ = 2:[3,5..] としてもいいのか、なるほど。</li>
+</ul></li>
+<li><p>primes’’’ = 2:3:5:scanl (+) 7 (cycle [4,2,4,2,4,6,2,6]) – やりすぎですか、そうですか。</p></li>
+</ul>
+<p>prms っていらないんじゃないの？</p>
+<pre><code>factors n = fc [] primes n
+            where
+               fc rs <a href="email-protection.html" class="__cf_email__" data-cfemail="6717171427">[email&nbsp;protected]</a>(p:ps) n = case n `divMod` p of
+                                      (1,0) -&gt; reverse (n:rs)
+                                      (q,0) -&gt; fc (p:rs) pps q
+                                      _     -&gt; fc rs ps n </code></pre>
+<p>でいいような。</p>
+<ul>
+<li><p>prms なくてもいいけど、ないと遅くなるでしょう。 n の平方根より大きい値で割っても意味ないし</p></li>
+<li><p>reverseはいらないし(lazyにfactoring)、(1, 0)とのマッチはおこりません。 – yts</p>
+<pre><code>primes = sieve [2..] 
+  where sieve (p:xs) = p:sieve [x | x &lt;- xs,  x `mod` p /= 0]
+factors n = f n (g n primes)
+  where f x [] = [x]
+        f x <a href="email-protection.html" class="__cf_email__" data-cfemail="6e1e1e1d2e">[email&nbsp;protected]</a>(p:ps) = case x `divMod` p of
+            (m, 0) -&gt; p:f m (g m pps)
+            _      -&gt; f x ps
+        g n = takeWhile ((&lt;= n).(^2))</code></pre></li>
+<li>f x pps の定義で、x が変化しない場合も takeWhile を実行するのは無駄ではないでしょうか
+<ul>
+<li>確かに。スタートアップで削っておけば十分ですね。修正しました。 –yts</li>
+</ul></li>
+<li><p>sieve の中と factors で 2 回割り算するのはもったいない。</p>
+<pre><code>factors n = f n (2:[3,5..])
+  where
+    f n (m:ms) | n &lt;= 1         = []
+               | n &lt; m * m      = [n]
+               | n `mod` m == 0 = m:f (n `div` m) (m:ms)
+               | otherwise      = f n ms</code></pre></li>
+</ul>
+<hr>
+<h2 id="既約分数">既約分数</h2>
+<p><a href="http://www.hyuki.com/diary/dia0312.html#i30">結城浩の日記</a>より</p>
+<blockquote>
+<p>問題：正の整数Nが与えられているとき、以下の条件を満たす既約分数p/qを「すべて」求めるアルゴリズムを示してください。条件は：</p>
+<ul>
+<li>p, qは整数(pは0以上で、qは1以上N以下).</li>
+<li>gcd(p, q) = 1 (pとqの最大公約数は1).</li>
+<li>0 &lt;= p/q &lt;= 1.</li>
+</ul>
+</blockquote>
+<pre><code>ss = map s [0..]
+
+s 0 = False : True : cycle [False]
+s n = cycle $ map (!! n) $ take n ss
+
+irr 0 = []
+irr n = irr (n-1) ++ [(n,i) | (p,i) &lt;- zip (ss !! n) [0..n], p]</code></pre>
+<p>『算譜の記』のコメントにかかれたssを利用しない版 s を利用したもの</p>
+<pre><code>s 0 = False : True : cycle [False]
+s 1 = cycle [True]
+s n = map (!! n) $ map s $ cycle [0..n-1]
+
+irr 0 = []
+irr 1 = [(1,0),(1,1)]
+irr n = irr (n-1) ++ [(n,i) |  (p,i) &lt;- zip (s n) [0..n-1], p]</code></pre>
+<p>強引に一行化</p>
+<pre><code>irr n = concat $ foldl (\x n -&gt; [(n,i) | i &lt;- [1..n-1], (\y -&gt; elem y $ map snd $ x !! (y-1)) $ min i (n-i)] : x) [[(1,0),(1,1)]] [2..n]
+
+irr n = foldl (\x n -&gt; [(n,i) | i &lt;- [1..n-1], (\y -&gt; elem (n-y,y) x) $ min i (n-i)] ++ x) [(1,0),(1,1)] [2..n]</code></pre>
+<hr>
+<h2 id="拡張ユークリッドの互除法">拡張ユークリッドの互除法</h2>
+<pre><code>euclid x y = euclid' x y 1 0 0 1
+  where
+    euclid' x 0 a b _ _ = ((a, b), x)
+    euclid' x y a b c d = euclid' y r c d (a-c*q) (b-d*q)
+      where (q, r) = quotRem x y
+
+Main&gt; euclid 5 7
+((3,-2),1)    -- 5 * 3 - 7 * 2 == 1</code></pre>
+<hr>
+<p>Last modified : 2006/06/13 07:36:19 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

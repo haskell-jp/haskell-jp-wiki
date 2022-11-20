@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Memoise"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Memoise</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Memoise">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Memoise">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Memoise">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Memoise</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#memoise"><span>Memoise</span></a><ul>
+<li><a href="#%E3%83%A1%E3%83%A2%E5%8C%96%E3%81%A3%E3%81%A6%E3%81%AA%E3%81%81%E3%81%AB">メモ化ってなぁに？</a></li>
+<li><a href="#%E9%96%A2%E6%95%B0%E3%81%AE%E3%83%A1%E3%83%A2%E5%8C%96">関数のメモ化</a></li>
+<li><a href="#memoise-%E3%81%AF%E7%89%B9%E6%AE%8A%E3%81%AA-%E3%81%8B%E3%82%82">memoise は特殊な ($) かも？</a></li>
+<li><a href="#memo-%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB">Memo モジュール</a></li>
+<li><a href="#%E5%AE%9F%E8%A3%85%E3%82%92%E5%85%B1%E6%9C%89%E3%81%99%E3%82%8B%E9%AD%94%E6%B3%95">実装を共有する魔法</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="memoise"><a href="" class="uri" title="Go to wiki page">Memoise</a></h1>
+<hr>
+<p>Memoi[sz]e、Memoi[sz]ation、メモ化の話題</p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%a1%e3%83%a2%e5%8c%96%e3%81%a3%e3%81%a6%e3%81%aa%e3%81%81%e3%81%ab%ef%bc%9f" class="uri" title="Go to wiki page">メモ化ってなぁに？</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%96%a2%e6%95%b0%e3%81%ae%e3%83%a1%e3%83%a2%e5%8c%96" class="uri" title="Go to wiki page">関数のメモ化</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/memoise%20%e3%81%af%e7%89%b9%e6%ae%8a%e3%81%aa%20($)%20%e3%81%8b%e3%82%82%ef%bc%9f" title="Go to wiki page">memoise は特殊な ($) かも？</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/Memo%20%e3%83%a2%e3%82%b8%e3%83%a5%e3%83%bc%e3%83%ab" title="Go to wiki page">Memo モジュール</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%ae%9f%e8%a3%85%e3%82%92%e5%85%b1%e6%9c%89%e3%81%99%e3%82%8b%e9%ad%94%e6%b3%95" class="uri" title="Go to wiki page">実装を共有する魔法</a></li>
+</ul>
+<h3 id="メモ化ってなぁに">メモ化ってなぁに？</h3>
+<p>フィボナッチ関数を考えてみよう、定義は</p>
+<pre><code>fib 0 = 0
+fib 1 = 1
+fib n = fib (n-1) + fib (n-2)</code></pre>
+<p>これを使って、fib 7 を計算すると</p>
+<pre><code>fib 7 -- fib 6 -- fib 5 -- fib 4 -- fib 3 -- fib 2 -- fib 1 -- 1 
+  |        |        |        |        |        |                 
+  |        |        |        |        |      fib 0 -- 0          
+  |        |        |        |        |                          
+  |        |        |        |      fib 1 -- 1                   
+  |        |        |        |                                   
+  |        |        |      fib 2 -- fib 1 -- 1                   
+  |        |        |        |                                   
+  |        |        |      fib 0 -- 0                            
+  |        |        |                                            
+  |        |      fib 3 -- fib 2 -- fib 1 -- 1                   
+  |        |        |        |                                   
+  |        |        |      fib 0 -- 0                            
+  |        |        |                                            
+  |        |      fib 1 -- 1                                     
+  |        |
+  |      fib 4 -- fib 3 -- fib 2 -- fib 1 -- 1
+  |        |        |        |
+  |        |        |      fib 0 -- 0
+  |        |        |
+  |        |      fib 1 -- 1
+  |        |
+  |      fib 2 -- fib 1 -- 1
+  |        |
+  |      fib 0 -- 0
+  |
+fib 5 -- fib 4 -- fib 3 -- fib 2 -- fib 1 -- 1 
+  |        |        |        |                 
+  |        |        |      fib 0 -- 0          
+  |        |        |                          
+  |        |      fib 1 -- 1                   
+  |        |                                   
+  |      fib 2 -- fib 1 -- 1                   
+  |        |                                   
+  |      fib 0 -- 0                            
+  |                                            
+fib 3 -- fib 2 -- fib 1 -- 1                   
+  |        |                                   
+  |      fib 0 -- 0                            
+  |                                            
+fib 1 -- 1                                     </code></pre>
+<p>のような計算の樹系図になるでしょう。これを見ると fib 5 は 2 度計算して いるし、fib 4 は 3 度計算していますね。これはなんだか、とっても無駄な 気がします。</p>
+<p>この無駄を省くには、</p>
+<blockquote>
+<p>一度計算した結果を覚えておいて、二度目以降は律義に再計算しないで、覚え ていたものを再利用する</p>
+</blockquote>
+<p>という手法がありそうですね。このような計算の最適化の技法を「メモ化 (memoisation)」といいます。結果を覚えたり、再利用の際に検索したりする のに、表(table) を使うような場合には、「テーブル化(tabulation)」という 用語を使うこともあります。</p>
+<p>もちろん、メモ化が最適化技法として意味があるためには、</p>
+<blockquote>
+<p>律義に再計算するよりも、一度計算したものを覚えておいて、それを再利用す る方が安価</p>
+</blockquote>
+<p>という前提があります。</p>
+<h3 id="関数のメモ化">関数のメモ化</h3>
+<p>関数にこの性質を持たせることを、関数を「メモ化する」 (memoise あるいは memoize)といいます。そして、この性質を持たされた関数を「メモ化された」 関数といいます。</p>
+<p>さて、上の fib がメモ化されていれば、</p>
+<pre><code>fib 7 -- fib 6 -- fib 5 -- fib 4 -- fib 3 -- fib 2 -- fib 1 -- 1 
+  |        |        |        |        |        |                 
+  |        |        |        |        |      fib 0 -- 0          
+  |        |        |        |        |                          
+  |        |        |        |      fib 1 -- 1                   
+  |        |        |        |                                   
+  |        |        |      fib 2 -- 1
+  |        |        |
+  |        |      fib 3 -- 2
+  |        |
+  |      fib 4 -- 3
+  |  
+fib 5 -- 5</code></pre>
+<p>となることを期待するわけです。これならば、結果を覚えるのと、検索するコ ストが、定数オーダなら、fib 全体としては、n の線型オーダで計算ができる ことになります。</p>
+<p>Haskell では変更可能な関数の内部状態というのを持てませんので、関数の引 数をひとつ増して、</p>
+<pre><code>fib :: Integer -&gt; Integer
+fib = fst . flip memofib []
+
+type Table = [(Integer,Integer)]
+
+memofib :: Integer -&gt; Table -&gt; (Integer,Table)
+memofib 0 mt = (0, (0,0):mt)
+memofib 1 mt = (1, (1,1):mt)
+memofib n mt = case prev of 
+                   Just r    -&gt; (r , mt)
+                   Nothing   -&gt; (r1+r2, (n,r1+r2):tb2)
+                 where
+                   prev = lookup n mt
+                   (r1,tb1) = memofib (n-1) mt
+                   (r2,tb2) = memofib (n-2) tb1</code></pre>
+<p>として、表を明示的にもちまわす方法にするか、 State モナドを使って、 SICPの Exercise 3.27 にある、memoize に相当する memoise を</p>
+<pre><code>import Control.Monad.State
+
+memoise f x = find x                  &gt;&gt;= \ prev -&gt;
+              case prev of
+                Just r  -&gt; return r
+                Nothing -&gt; f x        &gt;&gt;= \ r -&gt;
+                           ins (x, r) &gt;&gt;  return r
+ins item = get &gt;&gt;=  put . (item:)
+find n = get &gt;&gt;= return . lookup n
+
+infixl 6 |+|
+(|+|) = liftM2 (+)</code></pre>
+<p>のように定義して、</p>
+<pre><code>type Table = [(Integer,Integer)]
+
+(|+|) :: State Table Integer -&gt; State Table Integer -&gt; State Table Integer
+
+memofib :: Integer -&gt; State Table Integer
+memofib 0 = return 0
+memofib 1 = return 1
+memofib n = memoise (\ x -&gt; memofib (x-1) |+| memofib (x-2)) n
+
+fib :: Integer -&gt; Integer                           
+fib = flip evalState [] . memofib</code></pre>
+<p>のように定義することが可能です。</p>
+<blockquote>
+<p>ところで、fib に関しては、メモ化は最適化手法に一つにしかすぎません。たとえば、末尾再帰で書いた fib</p>
+<p>fib n = iter 0 1 n</p>
+<pre><code>  where iter a _ 0 = a
+        iter _ b 1 = b
+        iter a b c = iter b (a+b) (c-1)</code></pre>
+<p>これは、O(n) で計算できる例です。</p>
+<p>さらに、</p>
+<p>fib n = iter 1 0 0 1 n</p>
+<pre><code>  where iter a b p q c
+          | c == 0    = b
+          | even c    = iter a b (p*p+q*q) (2*p*q+q*q) (c`div`2)
+          | otherwise = iter (b*q+a*q+a*p) (b*p+a*q) p q (c-1)</code></pre>
+<p>とすると O(log n) で計算ができます。これらは、元のナイーブな fib の定 義とは構造の違う定義になっており、 memoisation とは別の最適化手法と考 えてよいと思います。</p>
+</blockquote>
+<h3 id="memoise-は特殊な-かも">memoise は特殊な ($) かも？</h3>
+<p>上のコードをもうすこし整理して</p>
+<pre><code>import Control.Monad.State
+
+memoise f x = find x                  &gt;&gt;= \ prev -&gt;
+              case prev of
+                Just r  -&gt; return r
+                Nothing -&gt; f x        &gt;&gt;= \ r -&gt;
+                           ins (x, r) &gt;&gt;  return r
+
+ins item = get &gt;&gt;=  put . (item:)
+find n = get &gt;&gt;= return . lookup n
+
+type Table = [(Integer,Integer)]
+
+memofib :: Integer -&gt; State Table Integer
+memofib 0 = fromInteger 0
+memofib 1 = fromInteger 1
+memofib n = memoise (\ x -&gt; memofib (x-1) +  memofib (x-2)) n
+
+fib :: Integer -&gt; Integer                           
+fib = flip evalState [] . memofib</code></pre>
+<p>とします。ほとんど変っていませんが、|+| がなくなって、+ になってますね。 これをちゃんと動かすには、(State Table Integer) が Num クラスのインス タンスであることを宣言すればよいのです。</p>
+<pre><code>instance Show (State Table Integer) where
+  show = const "&lt;State Table Integer&gt;"
+
+instance Eq (State Table Integer) where
+  s == t = evalState s [] == evalState t []
+
+instance Num (State Table Integer) where
+  (+) = liftM2 (+)
+  (-) = liftM2 (-)
+  (*) = liftM2 (*)
+  negate = liftM negate
+  abs = liftM abs
+  signum = liftM signum
+  fromInteger = return</code></pre>
+<p>さて、さて、</p>
+<pre><code>memofib n = memoise (\ x -&gt; memofib (x-1) +  memofib (x-2)) n</code></pre>
+<p>この部分を見ると、memoise が特殊な ($) に見えてきませんか。</p>
+<hr>
+<h3 id="memo-モジュール">Memo モジュール</h3>
+<p>Memo というモジュールを作ってみました．</p>
+<pre><code>module Memo where
+
+import Control.Monad.State
+
+class Table t where
+  emptyTable  :: Ord a =&gt; t a b
+  lookupTable :: Ord a =&gt; a -&gt; t a b -&gt; Maybe b
+  insertTable :: Ord a =&gt; a -&gt; b -&gt; t a b -&gt; t a b
+
+
+instance (Table t, Ord a, Num b) =&gt; Eq (State (t a b) b) where
+  sx == sy = evalState sx emptyTable == evalState sy emptyTable
+
+instance (Table t, Ord a, Num b) =&gt; Show (State (t a b) b) where
+  show sx = show (evalState sx emptyTable)
+
+instance (Table t, Ord a, Num b) =&gt; Num (State (t a b) b) where
+  (+)    = liftM2 (+)
+  (-)    = liftM2 (-)
+  (*)    = liftM2 (*)
+  negate = liftM negate
+  abs    = liftM abs
+  signum = liftM signum
+  fromInteger = return . fromInteger
+
+type Memo t a b = a -&gt; State (t a b) b
+
+memoise :: (Table t, Ord a) =&gt; Memo t a b -&gt; Memo t a b
+memoise mf x = do prev &lt;- find x
+                  case prev of
+                    Just y  -&gt; return y
+                    Nothing -&gt; do y    &lt;- mf x
+                                  ins x y
+                                  return y
+               where find x  = get &gt;&gt;= return . lookupTable x
+                     ins x y = get &gt;&gt;= put . insertTable x y
+
+evalMemo :: (Table t, Ord a) =&gt; (Memo t) a b -&gt; (-&gt;) a b
+evalMemo m v = evalState (m v) emptyTable</code></pre>
+<p>これで，メモに使う Table も少し抽象化できますね．</p>
+<h3 id="実装を共有する魔法">実装を共有する魔法</h3>
+<p>さて，memofib はもともとの fib と形は似ています．しかし，memofib は fib の定義を使って定義されているわけではありません．すんごく惜しい，は がゆい感じがしませんか？</p>
+<p>再帰形式で定義を書く以上しかたがないですか？</p>
+<p>ではこんなのはどうでしょう．</p>
+<pre><code>fix f = let x = f x in x</code></pre>
+<p>という最小不動点オペレータ(？) fix があれば，明示的な再帰を使わず(fix 自身は再帰定義ですが)に関数が定義できます．</p>
+<pre><code>fibF f 0 = 0
+fibF f 1 = 1
+fibF f n = f (n-2) + f (n-1)</code></pre>
+<p>という定義は再帰ではありませんよね．</p>
+<pre><code>fib = fix fibF</code></pre>
+<p>ちょっと面白いでしょ．これで通常定義する Fibonacci 関数ができます．さ て，ここからさらにマジックです．</p>
+<pre><code>gfun = (fix .) . (.)</code></pre>
+<p>というのを考えます．そうすると通常の Fibonacci 関数は，</p>
+<pre><code>ifib :: (-&gt;) Integer Integer
+ifib = gfun ($) fibF</code></pre>
+<p>そして，memo化した Fibonacci 関数は，</p>
+<pre><code>mfib :: Table t =&gt; (Memo t) Integer Integer
+mfib = gfun memoise fibF</code></pre>
+<p>と定義できます．これを見ると，($) と memoise とが対応し，型の上でも， (-&gt;) と Memo t とがそれぞれ対応しているのが解りますよね．</p>
+<p>実際に計算させるには，</p>
+<pre><code>memofib :: Integer -&gt; Integer
+memofib = evalMemo (mfib :: (Memo M.Map) Integer Integer)</code></pre>
+<p>としてテーブルの型を確定してから使います．</p>
+<pre><code>*Main&gt; memofib 100
+354224848179261915075</code></pre>
+<p>マジックですねぇ．．．</p>
+<ul>
+<li>M.Map の定義はどのようになっているのでしょう？(定義がないので動かせません)
+<ul>
+<li><p>Data.Mapモジュールを使っているのではないでしょうか。</p>
+<pre><code>  import qualified Data.Map as M
+
+  instance Table M.Map where
+    emptyTable  = M.empty
+    lookupTable = M.lookup
+    insertTable = M.insert</code></pre></li>
+</ul></li>
+</ul>
+<hr>
+<p>Last modified : 2006/06/11 23:08:39 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Memoise">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Memoise?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Memoise">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Memoise" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

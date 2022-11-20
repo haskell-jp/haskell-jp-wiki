@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/HaskellIdea"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/HaskellIdea</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/HaskellIdea">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/HaskellIdea">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/HaskellIdea">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/HaskellIdea</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#haskellidea"><span>HaskellIdea</span></a><ul>
+<li><a href="#haskell%E3%82%A2%E3%82%A4%E3%83%87%E3%82%A2">Haskellアイデア</a><ul>
+<li><a href="#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%83%84%E3%83%BC%E3%83%AB-by-oxy">ドキュメントツール by oxy</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="haskellidea"><a href="" class="uri" title="Go to wiki page">HaskellIdea</a></h1>
+<hr>
+<h2 id="haskellアイデア">Haskellアイデア</h2>
+<p>このページはこんなの作りたい＆作ってほしいという要望を書き連ねるページ です。少しでもHaskellに係わるならば何でも自由に書いてもらって構いませ ん。もちろん開発言語がHaskellならば、みんなウェルカムです。きっちりし た仕様書なんてものはここには必要ありません。むしろそんな仕様書があるよ うなアイデアならば他人には見せたくないかもしれませんし、もっと言えばも うあなた自身が作り始めていることでしょう。</p>
+<p>このページではそんなものではなく、もっと気楽な、そう、言わばチラシの裏 に書かれるようなアイデアを募集しています。本当にちょっとした思い付きで 構いません。休憩時間にレモンティーを飲んでいたらふと思い付いたもの、お 風呂に入ろうとしてタオルを探していたらふと思い付いたもの。何でも構いま せん。最初は大したことが無いように見える小さなアイデアでも、色々な人に 見てもらいコメントをコメントをもらうことで、素晴らしいアイデアに生まれ 変わっているかもしれませんよ。</p>
+<p>普段こんなことを考えているんだけど、こんなの作っても仕方がないよなぁだ とか、もうちょっと案を練りたいけれども、近くに相談できる人がいないんだ よなぁという場合にも、ここに書いておけば何らかのレスポンスがもらえる可 能性もあります！</p>
+<p>実際のところHaskell製のアプリケーションというのは非常に少ないです。し かもその中で完成度の高いものと言えばみんな排他的なものばかり。。。 ghc やdarcsやcabalなどなど。つまりHaskellの世界の中で閉じているんですね。 もちろんParsecなどといった一般的に見ても有用なものもありますが、ごくご く少数です。なんだかんだで言語がどんなに優秀でも、キラーアプリや優秀な ライブラリが揃わなければ見向きもされないというのが現実です。手慣れてい る今の言語に替えて、他の言語に手を出すというだけでも相当なコストがかか りますから。なのでHaskellを広めようと思ったら、他には今まで無かったキ ラリと光るものが必要です。その為にも、遍く存在する(笑)Haskellerの知恵 を借りれたらというのがこのページの願いです。</p>
+<hr>
+<p>どなたでもどこにでも好きなようにコメントしてください。本当はwikiにコメ ントを書くプラグインが有れば良いのですけど、今のところ無いようですので wikiを直に編集してしまってOKです。</p>
+<hr>
+<h3 id="ドキュメントツール-by-oxy">ドキュメントツール by oxy</h3>
+<p>どうも案がまとまらないので、ここに書いておきます。最初の動機は haskell-doc-modeの拡張です。 haskell-doc-modeとはemacsでカーソル上にあ る関数の型をミニバッファに表示してくれるモードです。これが関数の引数の 順番をよく忘れる僕にとってはかなり有用なのですが、残念ながらPreludeの 関数にしか対応してくれていません。折角なら各種ライブラリの関数の型も表 示してくれると嬉しいし、どうせそこまでするならHaddock形式で書かれたド キュメントにも対応してくれていると嬉しいと思ったわけです。</p>
+<ul>
+<li>必要な機能
+<ul>
+<li>emacs上で各種ライブラリの関数の型をミニバッファに表示する。</li>
+<li>manやriなどのようにクラス名、関数名で検索することでhaddock形式で書かれたドキュメントを見ることができる。</li>
+</ul></li>
+<li>野望
+<ul>
+<li>cabalとの連携。runhaskell Setup.hs haddockのような感覚でドキュメントを追加したい。</li>
+<li>関数定義のある場所（ファイル、行番号）の表示</li>
+</ul></li>
+<li>未定事項
+<ul>
+<li>検索にどのような仕組み使うか。少なくとも関数名から型は一瞬で求まる必要があるので、ここは*dbmのようなライブラリを使うべきか。ドキュメントから検索したい場合はaproposのように馬鹿サーチでも良いような。</li>
+<li>今自分が書いているソースの関数の型や場所も調べられると嬉しいけど、これはこのツールでやることではない？</li>
+<li>C系言語やスクリプト言語でも型や引数名を表示してくれるのはそれなりに有用だと思うけど、そこまで手を広げると破綻するかなぁ。</li>
+</ul></li>
+<li>コメント
+<ul>
+<li>Hoogle <a href="https://haskell.org/hoogle/" class="uri">http://haskell.org/hoogle/</a> は関連あるかも。これはwebのインタフェースですが、コアの部分は流用できるのではないでしょうか。キモは型から検索できること。</li>
+<li>うわ、こんなまんまな物があるとは。これは参考にさせてもらいます。型から検索できるのは便利そうですね。これをこう変換する関数があるかどうか調べたい！って時に非常に助かります。webインターフェイスはまぁ宣伝にしかならないかな。エディタと直結してないと旨味半減なので。 (oxy)</li>
+</ul></li>
+</ul>
+<hr>
+<p>Ajax記述言語 by oxy</p>
+<p>Ajaxは自分の作ったアプリケーションを宣伝するのにとても良い技術だけども、 実装するのが非常に手間なので、Ajax用のDSLが有れば便利じゃないかなぁと 言う提案です。具体的にどうするかといったことは全然考えてないですが、や るとすればWashに付け足すのが自然かな？</p>
+<p>どういうレイヤーまでサポートするかが難しいです。単に定型文を書き足すだ けなのか、それとも<a href="https://dojotoolkit.org/" class="uri">http://dojotoolkit.org/</a> のように各種Widget(GUIでサポー トされてるWidgetは殆んど)まで対応してしまうのか。まぁ、そこまでするな らX飛ばす技術を考えた方が楽だという説もありますが。</p>
+<ul>
+<li>コメント</li>
+</ul>
+<hr>
+<p>Last modified : 2007/02/20 11:51:05 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/HaskellIdea">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/HaskellIdea?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/HaskellIdea">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/HaskellIdea" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

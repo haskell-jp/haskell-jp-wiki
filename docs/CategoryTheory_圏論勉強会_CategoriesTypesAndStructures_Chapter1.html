@@ -1,0 +1,483 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会_CategoriesTypesAndStructures_Chapter1</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会_CategoriesTypesAndStructures_Chapter1</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#categorytheory_%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A_categoriestypesandstructures_chapter1"><span>CategoryTheory_圏論勉強会_CategoriesTypesAndStructures_Chapter1</span></a><ul>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AD%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第二十六回圏論勉強会</a><ul>
+<li><a href="#%E5%A7%8B%E3%81%BE%E3%82%8B%E5%89%8D">始まる前</a></li>
+<li><a href="#%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E9%81%B8%E8%80%83">テキスト選考</a></li>
+<li><a href="#categories-types-and-structures-chapter-1">“Categories, Types and Structures” Chapter 1</a></li>
+<li><a href="#%E6%AC%A1%E4%BC%9A">2次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第二十八回圏論勉強会</a><ul>
+<li><a href="#%E5%A7%8B%E3%81%BE%E3%82%8B%E5%89%8D%E3%81%AE%E9%9B%91%E8%AB%87">始まる前の雑談</a></li>
+<li><a href="#categories-types-and-structures-section-1.4.1-%E6%9C%80%E5%BE%8C%E3%81%AE-exersices-p.6">“Categories, Types and Structures” Section 1.4.1 最後の Exersices (p.6)</a></li>
+<li><a href="#%E6%AC%A1%E4%BC%9A-1">2次会</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="categorytheory_圏論勉強会_categoriestypesandstructures_chapter1"><a href="" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_CategoriesTypesAndStructures_Chapter1</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory" class="uri" title="Go to wiki page">CategoryTheory</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a" class="uri" title="Go to wiki page">圏論勉強会</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/CategoriesTypesAndStructures" class="uri" title="Go to wiki page">CategoriesTypesAndStructures</a>:Chapter1</p>
+<hr>
+<h2 id="第二十六回圏論勉強会">第二十六回圏論勉強会</h2>
+<p>2007-2-25(日) <a href="http://www.city.kawasaki.jp/88/88kyobun/home/annnai/tizu/map.htm">川崎市教育文化会館4F 第2学習室</a> 10：00〜17:00</p>
+<p>出席者</p>
+<pre><code>      梅沢 田中            |ス
+ 酒井 +--------+ 中村      |ク
+ rpf  |        | 人名      |リ
+ 今井 +--------+ shelarcy  |｜
+      佐藤 久井            |ン</code></pre>
+<p>写真：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/</a></p>
+<h3 id="始まる前">始まる前</h3>
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0338.html">Haskellのモナド</a>
+<ul>
+<li>Haskellのモナドは圏論のモナドですよ
+<ul>
+<li>Kleisli triple って書いてありましたよ
+<ul>
+<li>triple は モナドの事</li>
+</ul></li>
+</ul></li>
+<li>モノイドでない、はそうかもしれないけど
+<ul>
+<li>関手圏を関手の合成を演算とするモノイダル圏にすると、モナドはこの圏のモノイドにはなるけどね。</li>
+</ul></li>
+<li>レトラクション と レトラクト は違う
+<ul>
+<li>レトラクション r: A → B が定義できるとき、AはBのレトラクト</li>
+</ul></li>
+</ul></li>
+<li>論理学の新書
+<ul>
+<li>「知の教科書 論理の哲学」 飯田隆 編 講談社選書メチエ</li>
+<li>「カリー・ハワード同型対応」が縦書きに書かれたのは史上初？</li>
+<li>読者層はどのあたりなのかなあ
+<ul>
+<li>選書なので誰でもよいのでは…</li>
+</ul></li>
+</ul></li>
+<li><p>勉強会の場所をとるのは大変…</p></li>
+<li><a href="http://a.hatena.ne.jp/go?http://golem.ph.utexas.edu/category/20070226193940">The n-Category Cafe’</a>
+<ul>
+<li>圏論ベースに、数学と物理学と哲学の話題を扱ってるブログ</li>
+</ul></li>
+</ul>
+<h3 id="テキスト選考">テキスト選考</h3>
+<ul>
+<li>選考のようす<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0340.html">１</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0342.html">２</a>
+<ul>
+<li>方向性としては、型理論・プログラム意味論・ソフトウェア工学（形式仕様記述）への応用 がある
+<ul>
+<li>純粋数学として進めるのは、モチベーションが維持しづらいかも</li>
+<li>圏論一般の入門本もあるが、良い解説と面白い例が両方載っている良い本がない</li>
+</ul></li>
+<li>参加者の興味の共通項を取ると、ラムダ計算や意味論あたりに持っていきたい</li>
+<li>Jacobs の “Categorical logic and type theory” は「次の次」には非常に良い選択だが、次やるテキストとしては早すぎる</li>
+<li>まだ関手も自然変換もやってないので、そのへんはちゃんと押さえたい</li>
+<li>後は、テキストの値段…</li>
+</ul></li>
+<li><strong>Asperti and Long の “Categories, Types and Structures” に決定</strong>
+<ul>
+<li>やや出来レースな匂いもするが</li>
+</ul></li>
+<li>余談
+<ul>
+<li>タイプ計算・トークン計算のタイプって、type theory の type と同じ？
+<ul>
+<li>一見、そうは思えないけど</li>
+<li>TAPLにそう書いてあった
+<ul>
+<li>TAPLにそんなこと書いてあるの？？</li>
+</ul></li>
+<li>自然言語経由で共通点があるとかないとか</li>
+</ul></li>
+<li>UMLと圏論の関係
+<ul>
+<li><a href="http://www.cs.sunysb.edu/~grosu/bsbs99.pdf" class="uri">http://www.cs.sunysb.edu/~grosu/bsbs99.pdf</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="categories-types-and-structures-chapter-1">“Categories, Types and Structures” Chapter 1</h3>
+<ul>
+<li>Section 1.1 Definition and Examples
+<ul>
+<li>Exercise1, 2 <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0345.html">解答</a>
+<ul>
+<li>Exercise 1, 各 category における id と composition</li>
+<li>Exercise 2, 「2対象間に射があるか」で定義される2項関係は preorder になる
+<ul>
+<li>preorder category ＝ やせた圏</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Section 1.2 Diagrams</li>
+<li>Section 1.3 Categories Out of Categories
+<ul>
+<li>subcategory</li>
+<li>dual category</li>
+<li>Exercise3 <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0347.html">解答</a>
+<ul>
+<li>1点集合 1 から空集合 0 への射 は Set^op にはあるが、Setにはない ⇒ Set^op[1,0] ⊆ Set[1,0] は成り立たない</li>
+<li>Set^op が Rel の full subcategory か？ ⇒ NO
+<ul>
+<li>2点集合 a と 1点集合 b の図のような関係は、Set[b,a] に含まれない</li>
+</ul></li>
+</ul></li>
+<li>product category</li>
+<li>slice category
+<ul>
+<li>generalized object</li>
+</ul></li>
+<li>Exercise4 <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0349.html">解答（左半分）</a>
+<ul>
+<li>C↑a の定義</li>
+</ul></li>
+<li>Slice categoryのイメージが沸かない → <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200702/ct/RIMG0349.html">具体例（右半分）</a>
+<ul>
+<li>ある集合Xの冪集合からなる圏P(X)は、C/Xのsubcategory</li>
+<li>Set に対して、Set↓A は A-indexed family of disjoint set を与える</li>
+</ul></li>
+</ul></li>
+<li>Section 1.4 Monic, Epic and Principal Morphism
+<ul>
+<li>epic, monic, iso</li>
+<li>split monic</li>
+<li>Exercises 5 (1.4.1 最後の Exercises) で突然詰まる
+<ul>
+<li>位相空間の圏 Top で、epic だが全射でない例とは？？</li>
+<li>⇒ <strong>次回持ち越し</strong>
+<ul>
+<li>追記：<a href="http://d.hatena.ne.jp/bonotake/20070225/1172406137">問題文が間違っているかも</a></li>
+</ul></li>
+</ul></li>
+<li>principal morphism</li>
+<li>retraction pair, retract</li>
+<li>Exercises 6 (1.4.3 最後)
+<ul>
+<li>⇒ <strong>次回持ち越し</strong></li>
+</ul></li>
+<li>category of idempotents on …
+<ul>
+<li>ここのExercise も<strong>次回持ち越し</strong></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="次会">2次会</h3>
+<ul>
+<li>温暖化はないのか？
+<ul>
+<li>映画『不都合な真実』の海面上昇のデータは古い？
+<ul>
+<li>映画では６ｍになっているが、現在の研究ではせいぜい40cmとされている
+<ul>
+<li>40cmでも大きいんじゃないの</li>
+</ul></li>
+</ul></li>
+<li>今起こっている変化の度合いではなく、その度合いが加速度的に変化しているのが問題
+<ul>
+<li>長期的に見て、加速度的に変化している、と主張する人と、実は普遍的な変化しかおこしていない、と主張する人がいる</li>
+</ul></li>
+<li><a href="https://www.amazon.co.jp/exec/obidos/ASIN/0521010683/hirooyamagata-22/">“The Skeptical Environmentalist”</a>（邦訳：<a href="https://www.amazon.co.jp/exec/obidos/ASIN/4163650806/">『環境危機をあおってはいけない』</a>）
+<ul>
+<li>著者は統計学者で、元グリーンピースのメンバーだったが、ある環境保守主義者の主張に反論すべく統計的にデータを検証してみたら、逆に彼の主張を裏付ける結果になってしまった。</li>
+</ul></li>
+<li>いずれにせよ、環境を考慮するのは良い事</li>
+</ul></li>
+<li>乱数
+<ul>
+<li><a href="http://www.radiumsoftware.com/0701.html#070130">HotBits: 放射性崩壊から生み出される本物の乱数</a>
+<ul>
+<li>このリンク先の続く記事が、当日話に挙がったその乱数を使って超心理学の手法を用いて超心理学を批判するという話</li>
+</ul></li>
+</ul></li>
+<li>利上げの話
+<ul>
+<li>日銀での政策のリーク問題
+<ul>
+<li><a href="http://news.goo.ne.jp/article/ft/business/ft-20070225-01.html">日銀の福井俊彦総裁が追加利上げを提案したという情報が、会合開催中にリークされ、報道されてしまった</a>とか。</li>
+</ul></li>
+</ul></li>
+<li>**ワロスとか、前に単位などをつける表現
+<ul>
+<li>昔読んだ漫画で、<a href="http://wiki.livedoor.jp/paniponi765/d/%EF%BF%BD%DE%A5%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%DE%A5%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CA%A4%EF%BF%BD%EF%BF%BD%EF%BF%BD">マキシマムださくない？</a>とかあった</li>
+<li>その漫画のアニメがやってから、<a href="http://wiki.livedoor.jp/paniponi765/d/%EF%BF%BD%D2%B6%EF%BF%BD%C9%B1%EF%BF%BD%EF%BF%BD">オメガ**</a>とかも良く使われるようになったような</li>
+</ul></li>
+<li>ゴルフ面白そう
+<ul>
+<li>今年は暖冬でスキー場は大変だったが、ゴルフ場は儲かったらしい
+<ul>
+<li>スキーゴルフとか？
+<ul>
+<li>スキー場でゴルフ</li>
+<li>ホールインするまでの時間を競う</li>
+<li>オーバーして坂を上りなおすことになるとタイムロス</li>
+</ul></li>
+</ul></li>
+<li>将軍様などいない！</li>
+</ul></li>
+<li>Anarchy golf
+<ul>
+<li>Code golf 以前に流行っていた PKU OnlineJudge での試み
+<ul>
+<li><a href="http://d.hatena.ne.jp/yaneurao/searchdiary?word=%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C9%A4%EF%BF%BD%C3%BB%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CE%A4%C3%A4%C6%B3%DA%A4%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C7%A4%EF%BF%BD%EF%BF%BD%EF%BF%BD%CD%A1%EF%BF%BD">コードを短くするのって楽しいですよね？</a>
+<ul>
+<li>相手の入力を見てそれに沿った答えを出す方法とか、（OS の生成する）乱数を使う方法とか……。やり過ぎ。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="第二十八回圏論勉強会">第二十八回圏論勉強会</h2>
+<p>2007-4-28(土) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 10：00〜17:00</p>
+<p>出席者</p>
+<pre><code>       豊福/酒井 今井 |ス
+ 久井    +----------+ |ク
+ 吉田    |          | |リ
+ 日下部  +----------+ |｜
+        檜山 shelarcy |ン</code></pre>
+<ul>
+<li>rpfさんは<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0607.html">Skype</a>で参加</li>
+</ul>
+<p>写真：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/</a></p>
+<h3 id="始まる前の雑談">始まる前の雑談</h3>
+<ul>
+<li>『量子ファイナンス工学入門』
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0610.html">3冊そろい踏み</a></li>
+</ul></li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0576.html">バイオエタノールは本当にエコなのか</a>を考えてみた
+<ul>
+<li>「トウモロコシの吸収したCO2がそのままCO2として燃焼されるだけ、だからエコになる」というTVの説明があまりにおかしかったので</li>
+<li>エコになる条件: t_eco &gt; (yk/yk+nx)L
+<ul>
+<li>t_eco: バイオエタノールを消費する時間</li>
+<li>n: バイオエタノールを使用する自動車の台数</li>
+<li>x: ガソリンからのCO2排出量</li>
+<li>y: トウモロコシ1本あたりが吸収するCO2の量</li>
+<li>k: バイオエタノール1L作るのに必要なトウモロコシの本数</li>
+<li>L: トウモロコシの寿命</li>
+</ul></li>
+<li>ここからわかること
+<ul>
+<li>最低限、バイオエタノールを消費する時間が、その生成に必要なトウモロコシの寿命を上回らないとエコにならない</li>
+</ul></li>
+<li>まだ色々と考えるべきパラメータがありそう
+<ul>
+<li>トウモロコシが収穫された分だけ単調に減少するモデルになってるけど、実際には新たに植えて生長する分がある
+<ul>
+<li>でも、それは予め差し引きして考えればいいのか</li>
+</ul></li>
+<li>ある土地で生産している作物をトウモロコシに変更した場合、現在作っている作物とトウモロコシのCO2吸収量の差も考慮すべき</li>
+<li>発酵をおこなうとき菌が排出するCO2は？</li>
+</ul></li>
+<li>TVの説明よりは遥かにマシ</li>
+</ul></li>
+<li>物理と計算と幾何の関係
+<ul>
+<li>ファインマン・ダイアグラムとか？</li>
+<li>2つの演算の結合則が4角形の3角形分割に対応する（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0578.html">図</a>）
+<ul>
+<li>3つの演算なら5角形の3角形分割（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0580.html">図</a>と<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0579.html">解説のようす</a>）</li>
+</ul></li>
+<li>物理との関連…<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0582.html">図1</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0584.html">図2</a>
+<ul>
+<li>チューブが3角形でポリゴン分割</li>
+</ul></li>
+<li>可換則が結び目のヤンキングで表せる（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0586.html">図</a>）</li>
+<li>等号の右辺と左辺の間に、実は特異点が存在するという話(<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0588.html">図</a>)</li>
+<li>で、結局圏論とはどのような関係が？
+<ul>
+<li>monoidal category での演算(<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0592.html">図</a>)
+<ul>
+<li>symmetric は、交差がinvolutionになっているもの</li>
+<li>交差のよれ方に差がある（時計回りと反時計回り）ものは、braided</li>
+<li>Network Algebra は traceつきのsymmetric monoidal category</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="categories-types-and-structures-section-1.4.1-最後の-exersices-p.6">“Categories, Types and Structures” Section 1.4.1 最後の Exersices (p.6)</h3>
+<p>より</p>
+<ul>
+<li>Section 1.4.1 最後のExersice
+<ul>
+<li><ol type="1">
+<li>Give an epi which is not surjective in Top</li>
+</ol>
+<ul>
+<li>Topとしてはそんな例はない
+<ul>
+<li>ハウスドルフ空間の圏なら、QからRへの埋め込み</li>
+<li>T0空間なら、（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0596.html">解答となる例</a>）</li>
+</ul></li>
+</ul></li>
+<li><ol type="1" start="2">
+<li>Find a counterexample for the following assertion: let C be a category; if f∈C[a,b] and g∈C[b,a] are mono, then a is isomorphic to b. (Note that the assertion is true in Set.)</li>
+</ol>
+<ul>
+<li>（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0598.html">解答</a>）
+<ul>
+<li>順序集合の圏で、a = N, b = 2つのN</li>
+</ul></li>
+</ul></li>
+<li><ol type="1" start="3">
+<li>Prove that a split monic is an iso.</li>
+</ol>
+<ul>
+<li>幾らなんでもそんな訳はないだろう（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0600.html">反例</a>)
+<ul>
+<li>このテキスト怪しくない？</li>
+</ul></li>
+</ul></li>
+<li>retraction pair (i, h) を考えたとき、i は mono になり、h は epi かつ principal になる（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0602.html">図</a>）
+<ul>
+<li>principal … 任意の A → B を h: A → B で A → A → B にfactorize できるとき、h は principal
+<ul>
+<li>イマイチ直感的じゃない</li>
+<li>retraction は常に principal ということか</li>
+</ul></li>
+<li>Excersice: Show that, given a category C, one can define a category CRet whose objects are the same of C and whose morphisms are retraction pairs in C, that is F∈CRet[a,b] iff F=(f,g) and a&lt;b via (f,g) in C.
+<ul>
+<li>解答：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0604.html">図</a></li>
+</ul></li>
+</ul></li>
+<li>Category of idempotents
+<ul>
+<li>直感的な解釈：外界の圏を1つの対象に埋め込むときに、こういうidempotentの圏のようなものを作ったりする（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200704/ct/RIMG0609.html">板書</a>）
+<ul>
+<li>任意のデータ型X, Yとその間の関数を、そのまま自然数Nにエンコードすることを考える</li>
+<li>関数 X → Y は ある f: N → N にエンコードされることになるが、このときのドメインNはXより広い</li>
+<li>なので、f は 入力がXのときのみ受け付けるようにし、それ以外のときは0（例外）にフィルタリングすることを考えると、そのフィルタはidempotentになる</li>
+<li>idempotentの圏で射が3つ組になっているが、以上のように考えれば、１番目がドメインのフィルタ、3番目がコドメインのフィルタと解釈できる</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Section 1.5 Subobjects
+<ul>
+<li>いきなりsubobject？
+<ul>
+<li>後でtoposが出てくるからでは</li>
+<li>これを考え始めると数限りなくあるから、introductionに含めるのはふさわしくないような</li>
+<li>でも、subsetに相当する概念が他にないから仕方ないのか…</li>
+</ul></li>
+<li>Exercise: Prove that the preorder ≦ is the full subcategory of C↓a determined by monomorphisms only.
+<ul>
+<li>板書なし（写真撮るの忘れました）</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="次会-1">2次会</h3>
+<ul>
+<li>Haskell’
+<ul>
+<li>Arrows は入りそう？
+<ul>
+<li><a href="https://hackage.haskell.org/trac/haskell-prime/ticket/13">Arrows は多分入らない</a></li>
+</ul></li>
+<li><a href="https://hackage.haskell.org/trac/haskell-prime/wiki/Status'">70以上あるライブラリのうち7つしか入らない</a>ようだし、入るのはそういう概念的なものではなくて Concurrent のような直ぐ使える実用的なものだけなんじゃないかな？</li>
+<li>Haskell’の策定作業進んでいるの？
+<ul>
+<li>LL Ring で今年中にって言ったけど、結局去年はでなかった</li>
+<li>最近、あんまり動いているように見えない</li>
+<li>最近では（数ヶ月前だけど）<a href="https://www.mail-archive.com/haskell-prime@haskell.org/msg01985.html">昔提案されていた Views を改定して入れよう</a>という話があった</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr>
+<p>Last modified : 2007/12/11 22:56:18 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

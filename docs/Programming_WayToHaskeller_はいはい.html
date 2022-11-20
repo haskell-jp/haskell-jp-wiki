@@ -1,0 +1,1047 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_WayToHaskeller_はいはい</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_WayToHaskeller_はいはい</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_waytohaskeller_%E3%81%AF%E3%81%84%E3%81%AF%E3%81%84"><span>Programming_WayToHaskeller_はいはい</span></a><ul>
+<li><a href="#%E3%81%AF%E3%81%84%E3%81%AF%E3%81%84">はいはい</a><ul>
+<li><a href="#hello-world-%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0">Hello, World! プログラム</a></li>
+<li><a href="#%E5%AE%9F%E8%A1%8C%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E3%81%97%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86">実行ファイルにしてみよう</a></li>
+<li><a href="#runhugs">runhugs</a></li>
+<li><a href="#%E3%82%84%E3%81%AF%E3%82%8A%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%E3%81%AA%E3%81%AE%E3%81%8B">やはりブラックボックスなのか？</a></li>
+<li><a href="#%E3%81%95%E3%82%89%E3%81%AB-echo.lhs-%E3%81%A8%E3%81%8B%E3%81%AD">さらに echo.lhs とかね</a></li>
+<li><a href="#do-%E3%81%97%E3%81%BE%E3%81%97%E3%82%87">do しましょ</a></li>
+<li><a href="#%E3%81%82%E3%81%A3%E3%81%A1%E3%82%83%E3%81%AE%E4%B8%96%E7%95%8C%E3%81%AE%E5%BC%95%E6%95%B0%E3%81%A8%E3%81%93%E3%81%A3%E3%81%A1%E3%82%83%E3%81%AE%E4%B8%96%E7%95%8C%E3%81%AE%E5%BC%95%E6%95%B0">あっちゃの世界の引数とこっちゃの世界の引数</a></li>
+<li><a href="#%E3%83%A2%E3%83%8A%E3%83%89%E3%82%92%E9%81%A0%E7%9B%AE%E3%81%AB%E8%A6%8B%E3%82%8B">モナドを遠目に見る</a></li>
+<li><a href="#cat.lhs-%E3%81%A8%E3%81%8B%E3%82%82%E3%81%BF%E3%81%A8%E3%81%8F">cat.lhs とかもみとく</a></li>
+<li><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%B2%E3%81%A8%E3%82%84%E3%81%99%E3%81%BF%E3%83%94%E3%83%A5%E3%82%A2%E3%81%AA%E6%80%A0%E3%81%91%E8%80%85">【ちょっとひとやすみ】ピュアな怠け者</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_waytohaskeller_はいはい"><a href="" class="uri" title="Go to wiki page">Programming_WayToHaskeller_はいはい</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/WayToHaskeller" class="uri" title="Go to wiki page">WayToHaskeller</a>:はいはい</p>
+<hr>
+<h2 id="はいはい">はいはい</h2>
+<p>(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:%EF%BF%BD%CF%A4%EF%BF%BD%EF%BF%BD%CF%A4%EF%BF%BD&amp;c=e&amp;l=jp">「はいはい」を編集する</a>)|(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&amp;l=jp">Haskellerへの道</a>)</p>
+<h3 id="hello-world-プログラム">Hello, World! プログラム</h3>
+<p>さぁ寝返りもうてるようになった（どういう基準だよ？）ところで、地べたは いずっちゃいましょう！ やっぱりプログラミングを始める場合には、どんな言語でも Hello, World で しょう。 LL Weekend 2004 では<a href="http://www014.upp.so-net.ne.jp/tetryl/llw2004/ll-samurai.txt">LL侍にブラックボックスと称された</a> Haskell の Hello, World です。ちょっと緊張しますね。あんな人達の集まる場でブラッ クボックスって言われる様なシロモノを私なんかが書けるわけねーんじゃねー かって？！でも今の世の中便利なもので、google で検索するとありました。 <a href="http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=Haskell">このサイト</a> 面白そうなんで、しばらくは参照させてもらってお勉強を進めましょう。</p>
+<pre><code>&gt; main = putStrLn "Hello, World!"</code></pre>
+<p>これ結構簡単じゃねぇすか？これを emacs 上で評価してやると、</p>
+<pre><code>Main&gt; main
+Hello, World!</code></pre>
+<p>こんな感じで挨拶してくれましたよ。どもこんちわ。m(__)m</p>
+<pre><code>&gt; main = putStrLn "Hello, ほげさん!"</code></pre>
+<p>と書き換えて評価してやると、日本語も大丈夫！ すごいすごい。</p>
+<p>ふと、これに型を記述しておいてやろうと思ったんだが、よう分からん。こう いう時はわざとエラーを発生させてやるのが正しいやり方です。嘘ですよ、も ちろん。(^^;</p>
+<pre><code>Main&gt; main 123
+ERROR - Type error in application
+*** Expression     : main 123
+*** Term           : main
+*** Type           : IO ()
+*** Does not match : a -&gt; b</code></pre>
+<p>あえて不必要な引数 123 を渡してやると Type error ってエラーが出ました。 その下に Type ってとこに IO () って出てますね。 フツーは逆で型の指定っ てチェックのためにするんだろうけど、初心者の内はこういうナサケナイ使い 方もアリでしょ。じゃぁ Haskell の教えてくれた型を書いてみましょう。</p>
+<pre><code>&gt; main :: IO ()
+&gt; main = putStrLn "Hello, ほげさん!"</code></pre>
+<p>んで、C-c C-l してから評価してやると、</p>
+<pre><code>Main&gt; main
+Hello, ほげさん!</code></pre>
+<p>わーい、ぱちぱちぱち！</p>
+<h3 id="実行ファイルにしてみよう">実行ファイルにしてみよう</h3>
+<p>・・・で？(^^;; ここでさぁ、やっぱり emacs 上だけじゃなくて実行ファイルにしたいじゃん？ やってみましょう。・・・さて、どうやるんだろ？</p>
+<pre><code>#! /usr/pkg/bin/hugs
+
+&gt; main :: IO ()
+&gt; main = putStrLn "Hello, ほげさん!"</code></pre>
+<p>こんな感じに hello.lhs で保存してみて、パーミッションを実行可能にしてみた。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="6b081e1f46180e0a2b01020502">[email&nbsp;protected]</a>&gt; ./hello.lhs 
+__   __ __  __  ____   ___      _________________________________________
+||   || ||  || ||  || ||__      Hugs 98: Based on the Haskell 98 standard
+||___|| ||__|| ||__||  __||     Copyright (c) 1994-2001
+||---||         ___||           World Wide Web: http://haskell.org/hugs
+||   ||                         Report bugs to: <a href="email-protection.html" class="__cf_email__" data-cfemail="69011c0e1a440b1c0e1a2901081a020c050547061b0e">[email&nbsp;protected]</a>
+||   || Version: December 2001  _________________________________________
+
+Haskell 98 mode: Restart with command line option -98 to enable extensions
+
+Reading file "/usr/pkg/share/hugs/lib/Prelude.hs":
+Reading file "./hello.lhs":
+                   
+Hugs session for:
+/usr/pkg/share/hugs/lib/Prelude.hs
+./hello.lhs
+Type :? for help
+Main&gt;</code></pre>
+<p>あらら・・・。一応 Main&gt; にプロンプトが変わってはいるんだけど、だめか。っつーか、hugs ん中に入っちゃってるじゃん。(T^T) もしかしたら hello.hs ファイルにせにゃならんかな？</p>
+<pre><code>#! /usr/pkg/bin/hugs
+
+main :: IO ()
+main = putStrLn "Hello, ほげさん!"</code></pre>
+<p>今度は lhs じゃないので、各行頭の &gt; を外してます。・・・が、無駄な努力 でした。結果は同じ。</p>
+<p>すごすごと man hugs ってしてみたけど、何かそれっぽ いのもないぞ。困ったな。とりあえず、先頭の #! 行を取り除いて ghc でコ ンパイルしてみることにしようか。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="accfd9d881dfc9cdecc6c5c2c5">[email&nbsp;protected]</a>&gt; ghc hello.hs
+<a href="email-protection.html" class="__cf_email__" data-cfemail="4427313069372125042e2d2a2d">[email&nbsp;protected]</a>&gt; ll
+total 370
+drwxr-xr-x  2 cut-sea  users     512 Sep 18 22:36 .
+drwxr-xr-x  4 cut-sea  users     512 Aug  5 21:05 ..
+-rw-r--r--  1 cut-sea  users     287 Sep 18 22:36 Main.hi       &lt;= コレ
+-rwxr-xr-x  1 cut-sea  users  353908 Sep 18 22:36 a.out         &lt;= コレ
+-rwxr-xr-x  1 cut-sea  users      50 Sep 18 22:36 hello.hs
+-rwxr-xr-x  1 cut-sea  users      79 Sep 18 22:16 hello.lhs
+-rw-r--r--  1 cut-sea  users      31 Sep 18 21:43 hello.lhs~
+-rw-r--r--  1 cut-sea  users    1956 Sep 18 22:36 hello.o       &lt;= コレ
+-rw-r--r--  1 cut-sea  users     364 Aug 31 21:42 test.lhs
+-rw-r--r--  1 cut-sea  users     203 Aug 31 21:08 test.lhs~
+<a href="email-protection.html" class="__cf_email__" data-cfemail="076472732a746266476d6e696e">[email&nbsp;protected]</a>&gt; file *
+Main.hi:    raw G3 data, byte-padded
+a.out:      ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), for NetBSD, dynamically linked (uses shared libs), not stripped
+hello.hs:   ISO-8859 text
+hello.lhs:  a /usr/pkg/bin/hugs script text executable
+hello.lhs~: ASCII text, with no line terminators
+hello.o:    ELF 32-bit LSB relocatable, Intel 80386, version 1 (SYSV), not stripped
+test.lhs:   ASCII text
+test.lhs~:  ASCII text</code></pre>
+<p>おおっ！出来てる出来てる。 file でチェックすると executable な ELF バイナリが！</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="7e1d0b0a530d1b1f3e14171017">[email&nbsp;protected]</a>&gt; ./a.out 
+Hello, ほげさん!</code></pre>
+<p>わーい！ちゃんと走りましたよ〜(T^T)感無量。</p>
+<p>でもさぁ、やっぱりスクリプトで動かしてみたくないっすか？あと、Main.hi ってのもよー分からんファイルだし。なんだこりゃ？謎がいっぱいあるけど、 あんまり細かいこたぁ気にしなぁい気にしなぁい。</p>
+<p>しばらくコンパイルするんじゃなくて、ソースのまんま実行する方法ないか探 してみましょう。 google よ！教えておくれっ！！</p>
+<h3 id="runhugs">runhugs</h3>
+<p>さんざん色々試して探しまくった挙げ句にようやく出会ったのが、これでした。 この中にちゃんと書いてありまんがな。もう感涙！何十年も会ってなかった肉 親に会ったかのような感動モノの出会いです。</p>
+<p>説明するよかコードを書く方がめんどくさくないので書いちゃいます。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="412234356c322420012b282f28">[email&nbsp;protected]</a>&gt; cat hello.lhs
+#! /usr/pkg/bin/runhugs
+
+&gt; main :: IO ()
+&gt; main = putStrLn "Hello, ほげさん!"</code></pre>
+<p>literate 形式のプログラムにしておいて、hugs じゃなくて runhugsを呼び出 してやるんだってさ。っつーわけで、えいやっ！</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="8deef8f9a0fee8eccde7e4e3e4">[email&nbsp;protected]</a>&gt; ./hello.lhs 
+Hello, ほげさん!</code></pre>
+<p>動いてくれましたよ〜。あぁむせび泣き。</p>
+<h3 id="やはりブラックボックスなのか">やはりブラックボックスなのか？</h3>
+<p>ではじっくり hello.lhs を読んでみましょうか？たった２行で何がじっくり じゃぁっっ！！ってツッコまれそうですけど、いいんです。何事も最初が肝心 です。でもヤバそうになったら無理せずに裸足で逃げ出します。コレ肝心！挫 折するより、経験値積み上げてから出直しってやつです。（伏線だったり）</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; main :: IO ()
+&gt; main = putStrLn "Hello, ほげさん!"</code></pre>
+<p>lhs 形式になっていることで、#!行がHaskellには無視されるわけですね。 hs 形式じゃないのは、まさにこのためですね。</p>
+<ol type="1">
+<li>さぁshellから実行されたぞ〜</li>
+<li>最初に#!があるじゃん！</li>
+<li>何々？/usr/pkg/bin/runhugsを呼べってか？</li>
+<li>/usr/pkg/bin/runhugs召喚！</li>
+<li>へいへ〜い！呼ばれて飛び出てじゃじゃじゃじゃーん！（by runhugs）</li>
+<li>何々？コメントコメント・・・（最初の２行を読み飛ばし）</li>
+<li>おっと、“&gt;”があった！！この行は本体だねぇ</li>
+<li>んじゃまぁ、評価すっか</li>
+</ol>
+<p>とりあえず、こんな具合でしょうか。でもさ、これって不思議じゃないですか？ Schemeで言えば(define main …)があるだけですよ？ (main)とかって関数呼 び出ししないで走りはったがな、このシト(^^;ナシテ？</p>
+<p>（注）Schemeでもmain関数を定義してあるだけで、最初にmainがcallされる仕 組みがある。でもこれってやっぱ特例だよね？</p>
+<blockquote>
+<p>nobsun(2004/09/22 10:38:27 JST): う〜ん。そんなことないと思うけど。コ ンパイラを持つ言語なら普通、エントリポイントになる関数の名前は仕様で決 まっているよね。main とは限らないかもしれないけど。</p>
+<p>Haskell では、プログラム(算譜)は、定義が書いてあるだけだよね。で、 Haskell のプログラムの実行は、式を評価することだったよね。インタープリ タ内部に居るときには、評価する式を指定することが普通だけど、インタープ リタ外部に居るときには、評価する式を決めておいた方が便利でしょ。それが main というわけ。</p>
+</blockquote>
+<p>実は上のコード書いてたときにも</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; main :: IO ()
+&gt; main = putStrLn "Hello, ほげさん!"
+&gt; main              &lt;= コレは間違いっす</code></pre>
+<p>なんて書いてて、きっちりエラーを喰らってたんで、気づいちゃいたんだけど 知らんプリして、ここまで延ばしてました。 LL Weekend でも Haskeller な 方が「Haskellの場合はmainから始まります」って何度かコード解説してた様 に思います。しかも先程神の声が main がエントリポイントになるんだよ っ て囁いてたんで間違いありません。</p>
+<p>じゃぁ次にHaskellに教えてもらって追加した行です。</p>
+<pre><code>&gt; main :: IO ()</code></pre>
+<p>・・・すんません。早速わかりません。降参デス。なんで main 関数のデータ 型が IO なの？しかも IO のバックに変なシトが取り憑いてます。ナニこれ？ nil(?.?)</p>
+<p>IO () ってどんなデータ型？</p>
+<blockquote>
+<p>nobsun(2004/09/22 10:24:21 JST): ものすごく、はしょって言うと、main は プログラム外部へ出力するアクションだからです。外部へ出力するアクション は IO () 型です。</p>
+</blockquote>
+<p>お？神の声が聞こえてきました。そういうことらしいです。 この部分はなんとなくボスキャラが潜んでそうなので、そういうものって事で 素通りすることにして、次いきましょう次。</p>
+<pre><code>&gt; main = putStrLn "Hello, ほげさん!"</code></pre>
+<p>これはなんとなくわかる気がする。 put string line の略でしょうね。この 部分は調べてる最中に他で出会ったパターンでは</p>
+<pre><code>&gt; main = putStr "Hello, ほげさん!\n"</code></pre>
+<p>こんなんもアリらしいです。 put string の略と思われます。これも分かりま すよね。動作的には明示的に改行を入れるかどうかの違いでしょうか。最初の 印象としては関数名としては PutStrLn とか PutStr の方が良くないか？と思っ たりしますが、 <a href="http://www.sampou.org/haskell/tutorial-j/goodies.html">やさしいHaskell入門</a> とかを見ると以下の様な文面に出会います。</p>
+<blockquote>
+<p>[読者のみなさんは気づいたでしょうか、特定の型を表わす識別子は大文字で はじまっています。たとえば、Integer や Char です。また、 inc のような 値を表わす識別子は小文字ではじまっています。これは単なる習慣ではありま せん。Haskell の構文規則でそうすることになっているのです。また、先頭の 文字だけではなく、そのほかの文字も、大文字か小文字かということは重要で、 foo と fOo と fOO はすべて違う識別子として区別されます。]</p>
+</blockquote>
+<p>だそうです。まぁ関数もファーストクラスデータオブジェクトなわけで、それ を束縛しただけの識別子である putStrLnやputStrも小文字スタートって訳な んでしょうね。</p>
+<p>では、ほんのちょびっとだけ遊んでみましょう。</p>
+<pre><code>&gt; main = putStr ("Hello," ++ " ほげさん!\n")</code></pre>
+<p>結果としてはまるで変わりませんけどね。 ++ ってのはとりあえずは文字列を 連結してくれる中置演算子と思っておきます。はい。そんなことより重要なの はカッコです。これが無いと型が違うって叱られます。</p>
+<blockquote>
+<p>nobsun(2004/09/23 00:54:22 JST): 括弧なしで、</p>
+<p>&gt; main = putStr “Hello,” ++ " ほげさん!\n"</p>
+<p>と書くと何故、叱られるかというと。関数適用の結合力は、二項演算子 ++ の 結合力より強いので、上は</p>
+<p>&gt; main = (putStr “Hello,”) ++ " ほげさん!\n"</p>
+<p>と解釈されてしまいます。(putStr “Hello,”) の型は IO () で、" ほげさん! \n" の型は String です。これは、++ の型 [a] -&gt; [a] -&gt; [a] というのに矛 盾します。で、エラー。</p>
+<p>Haskellの型推論のシステムが、上のように型を推論してくれて、プログラマ の意図と実際に書かれたプログラムとの齟齬を教えてくれます。こんなのが実 行時エラーだったらやだよねぇ。型推論マンセー！</p>
+<p>WiLiKi:Shiro (2004/09/23 11:24:53 JST): でもでも、最初の関数の型が [Char] -&gt; [Char] だったら、エラーは出ないよね。プログラマの意図を完全 に表現しきるのは無理なんだから、結局程度問題ってことにならない? (いや、 型推論があるのはうらやましいんだけどさ。) 議論になりそうなら別ページに 行きましょう。</p>
+<ul>
+<li>続きは <a href="Type.html" class="uri" title="Go to wiki page">Type</a> にてやりましょう (2004/09/24 15:53:18 JST)</li>
+</ul>
+</blockquote>
+<pre><code>&gt; main = putStr ((("Hello," ++ " ほげさん!\n")))</code></pre>
+<p>無いとまずいんだけど、余分にある分には一向に構わないみたいで、こんな風 にカッコ連発しても大丈夫です。なんかＣの式みたい。</p>
+<p>ちょっと興味が出てきたので ++ に寄り道してみましょう。 ++ は中置演算子 なんだけど、敢えて前置演算ぽく使うことも出来ちゃいます。</p>
+<pre><code>&gt; main = putStr ((++) "Hello," " ほげさん!")</code></pre>
+<p>こんな風に(++)ってカッコで囲ってやるだけですが、やっぱりputStrに対して は引数全体をカッコでくるんでやる必要がある。カッコを外す方法は無いんか いなと思うのだが、こんな風にすると出来るらしい。</p>
+<pre><code>&gt; main = putStr $ (++) "Hello," " ほげさん!"</code></pre>
+<p>この $ってやつを使うとカッコを省略できるみたいだ。正直に白状すると、コ レも LL Weekend 行った時に仕入れたネタだったりする。いや、セッションじゃ ないんだけどね。(^^)v さらに調子に乗ってこうやってみる。</p>
+<pre><code>&gt; main = putStr $ (++) "ども〜, " $ (++) "どもども," " ほげさん!"</code></pre>
+<p>これは</p>
+<pre><code>&gt; main = putStr ((++) "ども〜, " ((++) "どもども," " ほげさん!"))</code></pre>
+<p>これと同じことのようだ。</p>
+<blockquote>
+<p>nobsun(2004/09/23 01:09:27 JST): $ は ++ より結合力が弱いから</p>
+<pre><code>&gt; main = putStr $ "ども〜, " ++ "どもども," ++ " ほげさん!"</code></pre>
+<p>でも、おっけぇよん。</p>
+</blockquote>
+<p>これ見てようやくGauche の部分適用の関数名の末尾に $ がついている意味が 分かったりとかね。</p>
+<blockquote>
+<p>ソウダッタンダァー</p>
+</blockquote>
+<h3 id="さらに-echo.lhs-とかね">さらに echo.lhs とかね</h3>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; --
+&gt; -- simple echo command in Haskell
+&gt; --
+&gt;
+&gt; module Main where
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args</code></pre>
+<p>続いて echo.lhs も読んでみましょう。これも このサイト から拝借しちゃい ます。</p>
+<p>まず実行してみましょーかね。レッツエバル！ emacs 上で走らせると、いや、 走ってないんだけど・・・</p>
+<pre><code>Main&gt; main
+
+Main&gt; main 1 2 3
+ERROR - Type error in application
+*** Expression     : main 1 2 3
+*** Term           : main
+*** Type           : IO ()
+*** Does not match : a -&gt; b -&gt; c -&gt; d
+
+Main&gt; main "1 2 3"
+ERROR - Type error in application
+*** Expression     : main "1 2 3"
+*** Term           : main
+*** Type           : IO ()
+*** Does not match : a -&gt; b
+
+Main&gt; </code></pre>
+<p>あでででで。ダメですね。最初なんも引数与えてないのですが、そうするとな んも言わないんですよね。 引数を 1 2 3 って与えてやると、エラーが出ましたね。 Does not match : a -&gt; b -&gt; c -&gt; d ってあるのは引数 1 2 3 って適用する形で呼び出したから型 がちゃうよって叱ってるんだよね。 これは 1適用 -&gt; 2適用 -&gt; 3適用 -&gt; mainの返値である何か てな間違った呼 び出しになってるよ〜って主張されておられる。ふむ。</p>
+<p>で、浅知恵なんだけど、 main “1 2 3” って引数を一個のものにしてみたんだ けど、 Does not match : a -&gt; b ってやっぱり間違ってるよって叱られます ね。多分やっぱり IO () ってのが分からないとダメなような気がします。い ずれにせよ、mainの引数は無いような気がします。だって -&gt; が型に無いもん ねぇ。</p>
+<p>考えててもしょうがないからコマンドラインから実行してみましょう。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="82e1f7f6aff1e7e3c2e8ebeceb">[email&nbsp;protected]</a>&gt; ./echo.lhs
+<a href="email-protection.html" class="__cf_email__" data-cfemail="e3809697ce908682a3898a8d8a">[email&nbsp;protected]</a>&gt; ./echo.lhs 1 2 3
+1
+2
+3
+<a href="email-protection.html" class="__cf_email__" data-cfemail="b0d3c5c49dc3d5d1f0dad9ded9">[email&nbsp;protected]</a>&gt; ./echo.lhs はろ〜 もーにんぐ 娘。
+はろ〜
+もーにんぐ
+娘。
+<a href="email-protection.html" class="__cf_email__" data-cfemail="99faecedb4eafcf8d9f3f0f7f0">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>こんな風に引数で与えたモノ(文字列臭い気がするけど、まだ不明)が一行ずつ 印字されますね。ふーん。じゃあ、これをふまえて！コードの方を読んでみま しょうか。</p>
+<p>まず最初の “&gt;” で始まる行の内先頭三行はコメントだそうです。 Haskellの コメントは – で始まる所から行末尾までがコメントになります。あと、ブロッ ク的にコメントを入れる手段もあるそうです。今まであんまり言語仕様書って 見たくなかったんだけど、この辺りから参照させてもらった方がよさげかな〜。 と。いや、Lisp?を初めて勉強する時に、いきなりCLtL2ってマクラみたいな本 を手に取ったことがあって心的外傷にね、ちょっとね。うん。 <a href="http://www.sampou.org/haskell/report-j/lexemes.html#sect2.3">この辺</a>を参照するとネストしたコメントは {- から -} までよんって書いて ます。「おいおい、literate 形式だったら “&gt;” で始まってない行はどうせ コメント扱いだろうが〜」ってツッコミありそうですが、丁重に無視。</p>
+<pre><code>&gt; module Main where</code></pre>
+<p>あ、なんかモジュールだ。・・・ぢぐぢょうぅぅ！！(T^T) <a href="http://www.sampou.org/haskell/report-revised-j/modules.html">またこれ</a> かよ。しかも案の定理解できねぇ。なんとなく名前空間を分ける、正確には制 御するか？そういうモンらしいのは分かったけどさ。とりあえず、Gaucheに もあるモジュールと同じようなもんと思ってみるか。・・・ってオレGauche のモジュールシステム使いこなしてねーじゃんっ！切腹！！</p>
+<p>しかもこの辺で道草食ってたら</p>
+<pre><code>(^^)             :: (Fractional a, Integral b) =&gt; a -&gt; b -&gt; a           negative exponent allowed</code></pre>
+<p>なんてのを見つけて「やるじゃんHaskell（なにがやねん）」とかボソッとつ ぶやいてみたり。こんなんが、 $ や ++ や !! なんかに混じってコードに入っ てたら、なぜスマイルマーク？？って幻惑されることうけあい！なかなかイカ ス（死語）じゃん。</p>
+<p>おっと、いかんいかん。モジュールだった。こういう時は必殺技</p>
+<p>コードにエラー仕込んで処理系を怒らせてヒントをもらおう作戦です。</p>
+<p>先の一行を削ってHaskellの怒りっぷリを静かに拝見させていただきましょう。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; --
+&gt; -- simple echo command in Haskell
+&gt; --
+&gt;
+ module Main where
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args</code></pre>
+<p>コメントアウトして（うわ、簡単だわこりゃ）、んで、まずはロード！！</p>
+<pre><code>Main&gt; :load /home/cut-sea/script/haskell/echo.lhs
+Reading file "/home/cut-sea/script/haskell/echo.lhs":
+Parsing.................
+ERROR "/home/cut-sea/script/haskell/echo.lhs":7 - Program line next to comment
+Prelude&gt;</code></pre>
+<p>ありゃ？なんで？ Program line next to comment ってどういう意味だ？コメントの次にプログラム行が来てる？確かにそうなってますよ。 あれ、もしかして7行目ってコメントアウトした行自身か。ってことはもしかして “&gt;” 行って途切れたらダメなの？</p>
+<p>じゃあ今度はこうしてみよう。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; --
+&gt; -- simple echo command in Haskell
+&gt; --
+&gt;
+
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args</code></pre>
+<p>・・・うーん。予想が外れました。ちゃんとロードできるねぇ。なんでだろ。 で、色々試したんだけどようやく分かりました！はい。さっきの誤訳してま した。すまねぇだ。 Program line next to comment はコメントの隣、つま り隣接する行にプログラム行があるって仰っているんですね。 module Main where の前後に空行を入れたり入れなかったりしてようやく判明しました。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; --
+&gt; -- simple echo command in Haskell
+&gt; --
+&gt;
+
+ module Main where
+
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args</code></pre>
+<p>これでおっけーです！ドン！</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="4d2e3839603e282c0d27242324">[email&nbsp;protected]</a>&gt; ./echo.lhs 1 2 3
+1
+2
+3</code></pre>
+<p>わーい！！ぱちぱちぱち・・・・って違うっ。そうじゃなくて、 module Main where が何してるか調べてたんじゃん。無くても良いって事だよ？ いや、実は予想してたんだけどさ、マジ要らないみたいね。多分単に Main モ ジュール内で定義するよって言っているだけなんでしょう。無きゃないでい いんでしょう。したらば！</p>
+<blockquote>
+<p>モジュールヘッダ部(moduleで始まる行)が無い場合、`module Main(main) &gt; where’があるものとして処理されます (<a href="http://www.sampou.org/haskell/report-revised-j/modules.html#sect5.1">ここ参照</a>)</p>
+</blockquote>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; --
+&gt; -- simple echo command in Haskell
+&gt; --
+&gt;
+&gt; module Foo where
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args</code></pre>
+<p>って Main を Foo モジュールにしてみよう。</p>
+<pre><code>Foo&gt; main
+
+Foo&gt; </code></pre>
+<p>ちゃんと emacs 上ではロードできるし何か走りそう・・・って思ったら。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="d8bbadacf5abbdb998b2b1b6b1">[email&nbsp;protected]</a>&gt; ./echo.lhs 1 2 3
+runhugs: compileExpr: invalid module</code></pre>
+<p>おーいっっ。無効なモジュールだって叱られちゃいますね。 main ってのがエ ントリポイントとして働くのは Main モジュールだけらしい。ちなみに Main を Prelude にしてやると、</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="e3809697ce908682a3898a8d8a">[email&nbsp;protected]</a>&gt; ./echo.lhs 1 2 3
+runhugs: Error occurred
+Reading file "./echo.lhs":
+Parsing
+
+ERROR "./echo.lhs" - Module "Prelude" already loaded</code></pre>
+<p>すでに Prelude モジュールはロードされとるって叱られます。これはなんと なく分かる気がしたんだけどさ〜。さらに Main を List にしても</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="9efdebeab3edfbffdef4f7f0f7">[email&nbsp;protected]</a>&gt; ./echo.lhs 1 2 3
+runhugs: Error occurred
+Reading file "./echo.lhs":
+Parsing
+ERROR "./echo.lhs" - Module "List" already loaded</code></pre>
+<p>ナゼ？？とりあえず Main じゃなきゃマトモに動作してくれないのは分かった けどエラーメッセージに謎が残っちゃいましたね。ボーゼン。</p>
+<p>えっと、Main じゃなきゃダメだってことだけ押えといて、次の行にいきましょうか。</p>
+<pre><code>&gt; import System</code></pre>
+<p>ハイ！これは System モジュールをインポートしてるんだね。多分以降のコー ドで System モジュールで定義された関数を使ってるんでしょう。おおよその アタリをつけて :find で見てみましょう。えーっとー、 :find getArgs か な？・・・ビンゴ！</p>
+<p>先生！すんません！割り込みますけど気になったんでちょっと試させてくださ い。 :find getArgs ってしたら getProgName ってのが見えるんですよね。こ れ試させてください。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; module Main where
+&gt; import System
+&gt; main = do args &lt;- getProgName       &lt;= ここを変えた
+&gt;           mapM_ (putStrLn) args</code></pre>
+<p>でロードしてみると・・・</p>
+<pre><code>Dependency analysis............................................................
+Type checking
+ERROR "/home/cut-sea/script/haskell/echo.lhs":9 - Type error in application
+*** Expression     : mapM_ putStrLn args
+*** Term           : putStrLn
+*** Type           : String -&gt; IO ()
+*** Does not match : Char -&gt; IO ()
+
+System&gt; </code></pre>
+<p>んーと、何か型が違うって叱られるな。再度 :find getProgName すると</p>
+<pre><code>getArgs                     :: IO [String]
+getArgs                      = do argc &lt;- primArgc
+                                  mapM primArgv [1..argc-1]
+
+getProgName                 :: IO String
+getProgName                  = primArgv 0</code></pre>
+<p>仲良く並んでこうなってます。なんとなくだけど getArgs は引数を複数取れ るんで IO [String] になってるんだろう。一方 getProgName は get Program Name の略だろうからプログラム名は一個しかない。だから IO String になっ てます。ってところじゃないかしらん。</p>
+<p>類推すると、 IO () は IO を通して何の受渡しもしないってことじゃなかろーか？</p>
+<p>とりあえず、 型が違うって言われてるんでさらにイジイジしてみます。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; module Main where
+&gt; import System
+&gt; main = do args &lt;- getProgName
+&gt;           putStrLn args        &lt;= さらにここも変えた。
+
+Main&gt; main
+Hugs</code></pre>
+<p>よし！さらにコマンドラインから実行！</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="6407111049170105240e0d0a0d">[email&nbsp;protected]</a>&gt; ./prog.lhs
+./prog.lhs</code></pre>
+<p>あ！・・・一瞬びっくりしたけど、そっか。そうだね。でも結構嬉しいぞ。初 めて自分で書いた気がするし。何の役にも立たんけどね。(^^;</p>
+<p>じゃあちょっとした満足感が得られたところで元の echo.lhs のコード読み込 みを続行しましょう。</p>
+<h3 id="do-しましょ">do しましょ</h3>
+<pre><code>&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args</code></pre>
+<p>はい、この部分ですね。実は emacs でコードをいじっていると気付くんだけ ど、どのシンボルでもって訳ではないんだけど、word の上にカーソルを持っ ていくとミニバッファのところに型を表示してくれます。実に親切ですね。す ばらしい。</p>
+<p>じゃあ色々カーソルを移動させて調べてみましょう。すると getArgs が IO [String] であることや putStrLn が String-&gt;IO () であることが判ります。 じゃあ mapM_ にカーソルを持っていくと・・・</p>
+<pre><code>Monad m =&gt; (a -&gt; m b) -&gt; [a] -&gt; m ()</code></pre>
+<p>って感じにボスキャラが姿を見せますのでこっちは無視しましょう。多分マッ プ関数の一種だと思うんだよね。動作からして。あとは、args が何の型も持っ てない(？)のが気になりますね。なんとなく getArgs の返値と同じ型になる んでねーか？と思うんですけど。さらに難解なのが do だったりします。</p>
+<pre><code>do { stmts [;] } stmts -&gt; exp [; stmts] | pat &lt;- exp ; stmts | let decllist ; stmts</code></pre>
+<p>って書いてますね。どうも<a href="http://www.sampou.org/haskell/report-revised-j/lexemes.html">このあたり</a>を先に見ておいた方がよさそうな感触 です。あくまでさらっとね、さらっと。あまり真剣になると挫折しちゃいそう なんで。</p>
+<p>で、一行だと分かりにくいので結局助けを求めて、<a href="http://www.sampou.org/haskell/report-revised-j/exps.html#sect3.14">ここ</a>を見ると</p>
+<pre><code>exp     -&gt;      do { stmts }    (do expression)
+stmts   -&gt;      stmt1 ... stmtn exp [;]         (n&gt;=0)
+stmt    -&gt;      exp ;
+        |       pat &lt;- exp ;
+        |       let decls ;
+        |       ;       (empty statement)</code></pre>
+<p>BNFとかとは違うけど、知ってると勘が働くな。</p>
+<p>この場合には stmt(statement)がつらつら書かれてて、その内の最初の stmt が pat &lt;- exp なんだな。もちろん pat が args になってて、 exp 式が getArgs で。その次の stmt が mapM_ (putStrLn) argsになってると。 pat &lt;- exp は exp を評価した返値を pat に束縛してるみたい。しかも stmts の 定義をみると stmt はいくつ書いたって良いということだ。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; --
+&gt; -- simple echo command in Haskell
+&gt; --
+&gt;
+&gt; module Main where
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args
+&gt;           mapM_ (putStr) args</code></pre>
+<p>じゃあお言葉に甘えて、早速。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="83e0f6f7aef0e6e2c3e9eaedea">[email&nbsp;protected]</a>&gt; ./echo.lhs 1 2 3
+1
+2
+3
+<a href="email-protection.html" class="__cf_email__" data-cfemail="7b180e0f56081e1a3b11121512">[email&nbsp;protected]</a>&gt; ./echo.lhs はろ〜 もーにんぐ 娘。
+はろ〜
+もーにんぐ
+娘。
+はろ〜もーにんぐ娘。<a href="email-protection.html" class="__cf_email__" data-cfemail="d8bbadacf5abbdb998b2b1b6b1">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>やったね。</p>
+<p>余談だけど、新たに行を追加する時に、わざわざ &gt; … って書かなくてもい きなり tab キーを押すと勝手に &gt; を追加してインデントしてくれます。 面白いのは、そのインデントです。今回のケースでは３種類のインデントを順 にやってくれます。おそらく レイアウト ってやつに連動しているんじゃねー かなーと思います。</p>
+<p>最初のインデントに任せると、</p>
+<pre><code>&gt; module Main where
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args
+&gt;         mapM_ (putStr) args</code></pre>
+<p>こうなってしまい、ロードすると</p>
+<pre><code>System&gt; :load /home/cut-sea/script/haskell/echo.lhs
+Reading file "/home/cut-sea/script/haskell/echo.lhs":
+Parsing........................................................................
+Reading file "/usr/pkg/share/hugs/lib/System.hs":
+Parsing........................................................................
+Dependency analysis............................................................
+Type checking..................................................................
+Compiling......................................................................
+Reading file "/home/cut-sea/script/haskell/echo.lhs":
+Parsing..................................................
+ERROR "/home/cut-sea/script/haskell/echo.lhs":11 - Syntax error in input (unexpected symbol "mapM_")
+System&gt; </code></pre>
+<p>コマンドラインから実行すると</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="7f1c0a0b520c1a1e3f15161116">[email&nbsp;protected]</a>&gt; ./echo.lhs はろ〜 もーにんぐ 娘。
+runhugs: Error occurred
+Reading file "./echo.lhs":
+Reading file "/usr/pkg/share/hugs/lib/System.hs":
+Reading file "./echo.lhs":
+Parsing
+ERROR "./echo.lhs":11 - Syntax error in input (unexpected symbol "mapM_")</code></pre>
+<p>って構文エラー発生しちゃいます。二番目のインデントに任せると</p>
+<pre><code>&gt; module Main where
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args
+&gt;    mapM_ (putStr) args</code></pre>
+<p>こうなって、ロードもコマンドラインからの実行も同じ結果です。最後のイン デントだと、</p>
+<pre><code>&gt; module Main where
+&gt; import System
+&gt; main = do args &lt;- getArgs
+&gt;           mapM_ (putStrLn) args
+&gt; mapM_ (putStr) args</code></pre>
+<p>こうなって、ロード時とコマンドラインから実行した場合のエラーはってーと、</p>
+<pre><code>ERROR "/home/cut-sea/script/haskell/echo.lhs":13 - Syntax error in declaration (unexpected `}', possibly due to bad layout)
+
+<a href="email-protection.html" class="__cf_email__" data-cfemail="b2d1c7c69fc1d7d3f2d8dbdcdb">[email&nbsp;protected]</a>&gt; ./echo.lhs はろ〜 もーにんぐ 娘。
+runhugs: Error occurred
+Reading file "./echo.lhs":
+Reading file "/usr/pkg/share/hugs/lib/System.hs":
+Reading file "./echo.lhs":
+ERROR "./echo.lhs":13 - Syntax error in declaration (unexpected `}', possibly due to bad layout)</code></pre>
+<p>こうなります。ってワケで結局自分でインデントしました(-,-#) エラーメッセージをちゃんと読んで、 <a href="http://www.sampou.org/haskell/report-revised-j/lexemes.html#sect2.7">レイアウト</a>をちょいと眺めれば、そこ はかとなく漂う雰囲気で「はは〜ん」って外人風にうなずいている自分がいる ことでしょう。</p>
+<p>じゃあ、ここまで来たら多少工夫した Hello, World! を作ってみましょう。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; module Main where
+&gt; import System
+&gt; main :: IO ()
+&gt; main = do arg &lt;- getArgs
+&gt;           putStr (head arg)
+&gt;           putStrLn "さん、こんちわ！！"</code></pre>
+<p>一応 main のデータ型もつけました。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="137066673e60767253797a7d7a">[email&nbsp;protected]</a>&gt; ./hello2.lhs ほげ 
+ほげさん、こんちわ！！
+<a href="email-protection.html" class="__cf_email__" data-cfemail="b3d0c6c79ec0d6d2f3d9daddda">[email&nbsp;protected]</a>&gt; ./hello2.lhs ほげ ふが
+ほげさん、こんちわ！！</code></pre>
+<p>こんな感じです。ん〜っん、ん、ん(^-^)いいですねぇ。 なんかいっぱしにHaskellでコード書けてる気分になって来ましたぞ。</p>
+<p>さらに調子に乗っちゃいましょう。</p>
+<pre><code>&gt; module Main where
+&gt; import System
+&gt; main :: IO ()
+&gt; main = do [arg:rest] &lt;- getArgs
+&gt;           putStr arg
+&gt;           putStrLn "さん、こんちわ！！"</code></pre>
+<p>なんとなく、 pat がパターンになるならこういうのも出来るんじゃねーか？ と思ったんです。つまり、 String の配列だから最初の String にマッチすん じゃない？ってゆーわけですね。 getArgs の返値が [“arg1”,“arg2”, …] という風になりますからね。これって結局 [x:xs]ってのでマッチさせたら x に最初の引数が渡されるだろうと。そういうこってす。・・・が、前置きが長 い割に失敗しました、コレ。</p>
+<pre><code>Dependency analysis............................................................
+Type checking
+ERROR "/home/cut-sea/script/haskell/hello2.lhs":7 - Type error in application
+*** Expression     : putStr arg
+*** Term           : arg
+*** Type           : Char
+*** Does not match : [Char]</code></pre>
+<p>調子に乗りすぎると鼻っパシラをメキっていわされました。はひ。多分なんかを勘違いしてるんでしょう。</p>
+<blockquote>
+<p>[arg:rest] :: [String] == Char<a href="Programming_WayToHaskeller_はいはい.html" class="uri" title="Go to wiki page">?</a> arg:rest :: [Char] arg :: Char, rest :: [Char] になってしまいます。 それを putStr に渡すと…</p>
+<p>Haskell とよく似た Clean なんかではリストを [1:2:[]] などと書くようですが。– Y. Hanatani</p>
+</blockquote>
+<p>なるほど、そうか。神のお告げによると、型も単純に置き換えを考えればいい と。ってことは・・・こうか。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; module Main where
+&gt; import System
+&gt; main :: IO ()
+&gt; main = do arg:rest &lt;- getArgs
+&gt;           putStr arg
+&gt;           putStrLn "さん、こんちわ！！"</code></pre>
+<p>これで思惑通り動作！しかし、このパターンが書けるってのは、強力だのう。</p>
+<p>てなわけで do を使ったら、なんかブロック構造みたいのが使えるっちゅうこ とで、ちゃんちゃん。</p>
+<h3 id="あっちゃの世界の引数とこっちゃの世界の引数">あっちゃの世界の引数とこっちゃの世界の引数</h3>
+<p>今まで考えたことなかったんだけど Haskell触っているうちに気になってきた んで、ちょっと実験してみましょう。Ｃ言語で少し書いてみます。</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main ()
+{
+  static cycle = 1;
+  printf("Hello,world! %d \n", cycle);
+  cycle += 1;
+  main();
+}</code></pre>
+<p>そう、実は main を再帰的に呼び出したこと無かったです。まずは第一段階と してコレが出来るか確認してみます。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="d2b1a7a6ffa1b7b392b8bbbcbb">[email&nbsp;protected]</a>&gt; cc test.c -o test
+<a href="email-protection.html" class="__cf_email__" data-cfemail="9cffe9e8b1eff9fddcf6f5f2f5">[email&nbsp;protected]</a>&gt; ./test
+Hello,world! 1 
+Hello,world! 2 
+Hello,world! 3 
+Hello,world! 4 
+Hello,world! 5 
+Hello,world! 6 
+Hello,world! 7 
+Hello,world! 8 
+Hello,world! 9 
+Hello,world! 10 
+^D</code></pre>
+<p>おおっ、行けますな。うん。まあアセンブラレベルで考えりゃmainラベルへジャ ンプするだけだから行けるだろ。じゃー本題だ。</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main (int argc)
+{
+  printf("Hello,world! %d \n", argc);
+  main(argc+1);
+}</code></pre>
+<p>さあ、これはどうだ？なんせ再帰呼び出しがオモロイことになっとるぞ！？</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="85e6f0f1a8f6e0e4c5efecebec">[email&nbsp;protected]</a>&gt; cc test2.c -o test2
+
+<a href="email-protection.html" class="__cf_email__" data-cfemail="066573722b756367466c6f686f">[email&nbsp;protected]</a>&gt; ./test2
+Hello,world! 1 
+Hello,world! 2 
+Hello,world! 3 
+Hello,world! 4 
+Hello,world! 5 
+Hello,world! 6 
+Hello,world! 7 
+Hello,world! 8 
+Hello,world! 9 
+Hello,world! 10 
+^D
+<a href="email-protection.html" class="__cf_email__" data-cfemail="563523227b253337163c3f383f">[email&nbsp;protected]</a>&gt; ./test2 1 2 3 4 5
+Hello,world! 6 
+Hello,world! 7 
+Hello,world! 8 
+Hello,world! 9 
+Hello,world! 10 
+Hello,world! 11 
+Hello,world! 12 
+Hello,world! 13 
+^D
+<a href="email-protection.html" class="__cf_email__" data-cfemail="87e4f2f3aaf4e2e6c7edeee9ee">[email&nbsp;protected]</a>&gt; ./test2 foo bar moo dar goo
+Hello,world! 6 
+Hello,world! 7 
+Hello,world! 8 
+Hello,world! 9 
+Hello,world! 10 
+Hello,world! 11 
+Hello,world! 12 
+Hello,world! 13 
+^D</code></pre>
+<p>まぁ予想した通りに動いてくれたじゃないの。でも、やっぱし奇妙っちゃ奇妙だよ〜。 そのココロは？って聞いたらＣ言語はなんと答えてくれるじゃろ。</p>
+<p>こうなるとＣにおけるmainの引数argcやargv,envpといった引数とそれがスター トアップルーチンで渡されるメカニズムってやつとＣプログラマが引数を渡す メカニズムってやつが混同してません？ そういう気になるってHaskellに洗脳されかかってますか？ワタクシ？</p>
+<p>じゃあもう少し愚考してみちゃおうか。</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main (int argc, char **argv, char **envp, int rest)
+{
+  printf("Hello,world! %d\n", rest);
+  main(0, NULL, NULL, rest+1);
+}</code></pre>
+<p>これはどうでしょう？これも自分的には初体験。四つ目の引数を渡しちゃいま した。さすがにこれはコンパイルエラーかなぁと思ったら、</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="593a2c2d742a3c381933303730">[email&nbsp;protected]</a>&gt; cc test3.c -o test3
+<a href="email-protection.html" class="__cf_email__" data-cfemail="c2a1b7b6efb1a7a382a8abacab">[email&nbsp;protected]</a>&gt; ./test3
+
+Hello,world! 7597888
+Hello,world! 7597889
+Hello,world! 7597890
+Hello,world! 7597891
+Hello,world! 7597892
+Hello,world! 7597893
+Hello,world! 7597894
+Hello,world! 7597895
+Hello,world! 7597896
+Hello,world! 7597897
+^D
+<a href="email-protection.html" class="__cf_email__" data-cfemail="f0938584dd839591b09a999e99">[email&nbsp;protected]</a>&gt; ./test3 1 2 3
+Hello,world! 7597888
+Hello,world! 7597889
+Hello,world! 7597890
+Hello,world! 7597891
+Hello,world! 7597892
+Hello,world! 7597893
+Hello,world! 7597894
+Hello,world! 7597895
+Hello,world! 7597896
+Hello,world! 7597897
+^D</code></pre>
+<p>ほう？これまた奇っ怪なっ。(^^; いやいや機っ械なというべきか。まぁこれが main じゃなくて hoge なんて関 数なら単に初期化してないからとかなんとかって考えて初期化しちゃうんだけ ど、今回は初期化なんかしちゃったら、ある意味ここで気になってる肝心の部 分、つまり外部からの引数の受け渡しと内部での引数の受け渡し云々について 思いをめぐらすことができねぇっす。</p>
+<p>じーっと考えるとやっぱりＣ言語の方が変に思えます。なんとなく気持ち悪さ の根源らしきところと、 Haskellのプログラムロード時とコマンドラインから の実行時の引数の与え方、渡り方ってのにかすった手応えがあるんだけど。</p>
+<p>どうやらHaskellはある意味で main を特別扱いしてないんだね。もちろん、 main に与える引数の扱いについてって意味でだけど。</p>
+<p>Haskellでは、あの世（外界）との専用チャネルはイタコ（何者よ？）を使う 様にしてて、決して関数呼び出しにおける引数渡しのチャネルは使わない様に してる、ってゆーか、それはもう別口なんだなぁ、きっと。確かにいっしょく たにすると無理が出る気がする。Ｃ言語でも何かキテレツな扱いになってたし さ。 でも、そうすっと入出力なんかも同じだな。ファイルディスクリプタっちゅー 専用のチャネルを使ってやり取りするんだよねぇ。 DB アクセスだってそーだ な。ソケットだってそーだ。・・・ってことは単にＣ言語の（ってかHaskell 以外の言語の）コマンド引数だけが扱いが違ってたの？そ、そーなんか？ (@<a href="email-protection.html" class="__cf_email__" data-cfemail="055a45">[email&nbsp;protected]</a>;)</p>
+<blockquote>
+<p>WiLiKi:Shiro(2004/09/24 18:39:53 JST): C/C++の処理系の場合、_start という隠れたルーチンがあって、それがgetArgs相当の動作を行った上で、「普通の関数」であるmainを呼ぶことになっていますな。(_start は言語規格内には無いですが、その存在は規格でimplyされていると思います。特にC++のstatic変数のconstructor/destructor関連。) この_startが、Haskellではmainになっている、と思えば良いのでは…</p>
+<p>こんな感じかしらん。</p>
+<pre><code>#!/usr/local/bin/runhugs
+
+\begin{code}
+
+import System
+import IO
+import List
+
+main :: IO Int
+main = _start
+
+_start :: IO Int
+_start =   getArgs &gt;&gt;= cmain
+
+
+cmain :: [String] -&gt; IO Int
+cmain args = mapM_ (putStrLn . greeting) args &gt;&gt; return 0
+
+greeting :: String -&gt; String
+greeting = concat . flip intersperse ["もうかりまっか、","はん"]
+
+\end{code}</code></pre>
+<p>でもって、</p>
+<pre><code>% ./greeting.lhs カットシ ノブオ
+もうかりまっか、カットシはん
+もうかりまっか、ノブオはん</code></pre>
+</blockquote>
+<h3 id="モナドを遠目に見る">モナドを遠目に見る</h3>
+<p>神の啓示された高度なコードが(シャレ？)あるので、そっちを見てみることにする。</p>
+<pre><code>#!/usr/local/bin/runhugs
+
+\begin{code}
+
+高度なコード
+
+\end{code}</code></pre>
+<p>まず、いちいち “&gt;” な行にしなくても \begin{code} から \end{code} で括っ てやると同じことが実現できるってことらしい。</p>
+<pre><code>import System
+import IO
+import List</code></pre>
+<p>うーむ、いきなり三つもモジュールをインポートしましたね。 System はさっ きも出て来てたからいいとして、 IO ってやつは手ごわそうだ。 List はリス ト演算だから concat や intersperse をロードしようとしてるんだろう。 :find concat してやると List モジュールのソースが出て来る。そんなかに intersperse もある。</p>
+<p>で、IO については分からない。 return かな？と思ったら、:find return し ても Prelude が引っ張られる。うーっむ。getArgs は System だしなぁ。</p>
+<p>じゃあ例のナサケナイ作戦で確認してみましょう。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; import System
+
+ import IO    &lt;= こんな風にはずしてみる
+
+&gt; import List
+&gt;      
+&gt; main :: IO Int
+&gt; main = _start
+&gt;
+&gt; _start :: IO Int
+&gt; _start = getArgs &gt;&gt;= cmain
+&gt;  
+&gt; cmain :: [String] -&gt; IO Int
+&gt; cmain args = mapM_ (putStrLn . greeting) args &gt;&gt; return 0
+&gt;      
+&gt; greeting :: String -&gt; String
+&gt; greeting = concat . flip intersperse ["もうかりまっか","はん"]
+&gt;    </code></pre>
+<p>んで、ロード！コマンドラインから実行！・・・問題なく動作しますな。って ことは import IO はいらなそうね。じゃぁ、まぁ要らないんだろうってこ とでうっちゃっておいて、以降のコードを読んでみましょう。</p>
+<pre><code>&gt; main :: IO Int
+&gt; main = _start</code></pre>
+<p>C言語をエミュレートしてるんでしょう。 main は Int を返す関数にしてるの かな？で、main はってーと _start だよって丸投げしてます。どこぞの国の 建設業界みたいですね。</p>
+<p>んじゃ、仕事をまかされた _start は？</p>
+<pre><code>&gt; _start :: IO Int
+&gt; _start = getArgs &gt;&gt;= cmain</code></pre>
+<p>こんなんです。当然 main と同じなんだから型も同じじゃなきゃ矛盾しますな。 IO Int 型って書かれてます。</p>
+<p>んで、注目の本体は？</p>
+<pre><code>&gt; _start = getArgs &gt;&gt;= cmain</code></pre>
+<p>getArgs はさっきと同じですよね。 :find getArgs で復習することにします。 実は重度に忘れっぽいです、ワタシ。はい。</p>
+<pre><code>getArgs                     :: IO [String]
+getArgs                      = do argc &lt;- primArgc
+                                  mapM primArgv [1..argc-1]</code></pre>
+<p>あ、そうそうこんなんだった。primArgc ってのはその直前に書いてあるんだけど</p>
+<pre><code>primitive primArgc          :: IO Int
+primitive primArgv          :: Int -&gt; IO String</code></pre>
+<p>こんなんです。行頭の primitive ってのがなんとなく、その名称といい、型 しかなくて実体が無いところといい、 こっから先は関係者以外立ち入り禁止 みたいな香ばしい雰囲気を醸し出してます。根性無しの私はすごすごと引き下 がることにします。えぇ、根性無しですとも。</p>
+<blockquote>
+<p><strong>NOTABENE：</strong> primitive とか、primHogeHage は Hugs 特有のものです。 Haskell 98 の仕様にはありません。また、GHCでも見えないはずです。</p>
+</blockquote>
+<p>でも Argc/Argv と言えばなんとなく分かると思います。 primArgc/primArgv の型がなんでこうなるのかは、まるで分かりません。しょーがないです。今の 私の経験値ではスライムとかゴブリンあたりが相手です。体力の限界！千代の 富士っす。</p>
+<p>それでもこのコードからすっと、</p>
+<pre><code>getArgs                     :: IO [String]
+getArgs                      = do argc &lt;- primArgc
+                                  mapM primArgv [1..argc-1]</code></pre>
+<ol type="1">
+<li>primArgc からの返り値は多分 Int で引数の個数だろ。</li>
+<li>それを argc に束縛してるね。(argc &lt;- primArgc)</li>
+<li>mapM が微妙に mapM_ と違うけど気にしない</li>
+<li>[1..argc-1] は argc が仮に 10 なら [1..9] だから 1 から 9 までのリストになる</li>
+<li>primArgv って関数に引数の個数-1までの数値を与えて評価させてる。</li>
+<li>primArgv は？</li>
+<li>Int -&gt; IO String ってなっとるってことは数値をもらって文字列を返してる。</li>
+<li>その返り値が各引数そのものになってんだね。</li>
+<li>マップ関数だからそれがさらにリストになるんで、文字列リスト[String]だね。</li>
+</ol>
+<p>って感じでざっくりと分かる気がします。んじゃ、元のコードに戻りましょう。</p>
+<pre><code>&gt; _start = getArgs &gt;&gt;= cmain</code></pre>
+<p>これでした。 getArgs は [String] を返すんだけど、その次の &gt;&gt;= ってのが 確かバインドとかって演算だったと思います。まるで分かりません。また降参 です。ただ、周辺のコードとなによりも動作そのものから推測するに getArgs の返した値を cmain に渡しているんじゃないかと思ったりします。</p>
+<p>んじゃ、なんで cmain (getArgs)みたいになってねーんだよ？わざわざ &gt;&gt;= なんて記号でごまかすなよ〜っ！って思いませんか？ 思いますよね？じゃぁ試してみましょう。</p>
+<pre><code>&gt; _start = cmain (getArgs)</code></pre>
+<p>んで、ロードしてくれっ！</p>
+<pre><code>ERROR "/home/cut-sea/script/haskell/greeting.lhs":13 - Type error in application
+*** Expression     : cmain getArgs
+*** Term           : getArgs
+*** Type           : IO [String]
+*** Does not match : [String]</code></pre>
+<p>うーむ、世の中辛口です。型が違うって言われます。確かにちゃんと見ると getArgs は 何か -&gt; [String] じゃなくて IO [String] なんでした。 単なる [String] が渡ってるんじゃないんですねぇ、どうやら。しかも返す返 すって言ってたけど、何か -&gt; [String] じゃなくて IO [String] ってことは getArgs が [String] を返すっていう表現は非常に怪しい感触ですねぇ。つま り関数呼び出しの引数や返り値とは別口くさいです。 広い意味で情報の渡し方には色々あり得て、関数の引数を通じた渡し方とか返 り値を使った渡し方ってのは、その内の一種に過ぎないってことでしょうか。</p>
+<p>まぁ今後も色々実験することで、そのうち敵の姿が捕らえられる様になるでしょ う。楽観主義の O 型です。 IO 型じゃないです。・・・ハァ。</p>
+<p>おっと自分の親父ギャグで自らダメージ受けて気死してる場合じゃないよっ。 まぁ、 &gt;&gt;= ってのは引数のメカニズムで返り値を渡すんじゃなくてなんかイ タコのチャネルを駆使して cmain に渡している様なものと解釈することにし ましょう。その方向の理解で押し切れない時がきたら、その時点で自分の認識 を修正していくと。</p>
+<p>んじゃ、cmain はどうなっとんの？</p>
+<pre><code>&gt; cmain :: [String] -&gt; IO Int
+&gt; cmain args = mapM_ (putStrLn . greeting) args &gt;&gt; return 0</code></pre>
+<p>うーん、型は[String]これはコマンドライン引数のリストですねぇ、こいつを 受け取って IO Int を返す、と。なんだか意識が遠のいて来ましたよ。トホホ。</p>
+<p>実体だけみると、 args ってのが [String] になるんでしょう。こいつにマッ プ関数を適用してますな。コマンドライン引数の各引数に対して作用させる関 数は (putStrLn . greeting) ってことのようです。</p>
+<p>この . ってのが関数合成ってやつでしょう。基本的には</p>
+<pre><code>(f . g) arg == f (g arg)</code></pre>
+<p>と同じことだと思います。ってことはコマンドライン引数の一つに対して、 greeting を適用してそいつの返す値に対して putStrLn を適用すると。って こたぁ greeting は当然 String を受け取って String を返すんでしょう？</p>
+<pre><code>&gt; greeting :: String -&gt; String
+&gt; greeting = concat . flip intersperse ["もうかりまっか","はん"]</code></pre>
+<p>ビンゴ！正解！！すげぇ、型推論できたよ。んじゃ、もうちょっとだ。</p>
+<pre><code>List&gt; concat "はろ" "世界"
+ERROR - Type error in application
+*** Expression     : concat "はろ" "世界"
+*** Term           : concat
+*** Type           : [[d]] -&gt; [d]
+*** Does not match : a -&gt; b -&gt; c</code></pre>
+<p>あ、d<a href="Programming_WayToHaskeller_はいはい.html" class="uri" title="Go to wiki page">?</a> -&gt; [d] か。</p>
+<pre><code>List&gt; concat ["はろ","世界"]
+"\164\207\164\237\192\164\179\166"</code></pre>
+<p>あり？なんで？突如日本語を解さなくなったぞ？！気分悪くしたか？</p>
+<pre><code>Main&gt; putStr $ concat ["はろ","世界"]
+はろ世界</code></pre>
+<p>ふうん。どうやら putStr とかを通さないとダメみたいっすね。</p>
+<pre><code>List&gt; concat ["Hello,","World!"]
+"Hello,World!"</code></pre>
+<p>ま、まぁいいか。こいつで動作確認しとこう。とりあえず、concat ってのは 連結ですね。</p>
+<p>flip はってーと、:find flip すると</p>
+<pre><code>flip           :: (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c
+flip f x y      = f y x</code></pre>
+<p>ふむ。型を見るとごちゃごちゃしてるけど、定義を見ると簡単ですね。</p>
+<pre><code>List&gt; flip (++) "Hello," "World!"
+"World!Hello,"
+List&gt; flip (++) "World!" "Hello,"
+"Hello,World!"</code></pre>
+<p>とまぁこんだけの事の様です。単に関数の引数順序をひっくり返すってのをや るだけです。後で分かるけど、interperse の引数順と関係あるみたいです。</p>
+<p>じゃぁラスト intersperse は確か HowTo:Listで見掛けましたね。リストの各 要素間にある要素を差し込んでたと思います。</p>
+<pre><code>intersperse             :: a -&gt; [a] -&gt; [a]
+intersperse sep []       = []
+intersperse sep [x]      = [x]
+intersperse sep (x:xs)   = x : sep : intersperse sep xs</code></pre>
+<p>そんな難しい定義では無いようです。じゃ、自分で書けって言われたら「無理！ ごめんなさい！！」って即答ですけど。</p>
+<pre><code>List&gt; intersperse " " ["Hello,","World!"]
+["Hello,"," ","World!"]</code></pre>
+<p>んじゃ、これを組合せるトコにいきましょうかね。</p>
+<pre><code>&gt; greeting = concat . flip intersperse ["もうかりまっか","はん"]</code></pre>
+<p>interperse ‘何か’ [“もうかりまっか”,“はん”]ってのが本来の使い方なので、 flip することで interperse [“もうかりまっか”,“はん”] ‘何か’ って形に持 ち込んでいると思われる。つまり</p>
+<pre><code>g = flip interperse ["もうかりまっか","はん"]
+g arg = flip interperse ["もうかりまっか","はん"] arg
+      = interperse arg ["もうかりまっか","はん"]
+      = ["もうかりまっか",arg,"はん"]</code></pre>
+<p>って感じですね。まぁこんな風に Curry 化するために flip って関数を使っ てたんですな。そうして出来た関数 g と concat の関数合成なので結局は " もうかりまっか arg はん"っていう String になるわけかぁ。</p>
+<p>・・・おっと、忘れてたっっ！！</p>
+<pre><code>&gt; cmain args = mapM_ (putStrLn . greeting) args &gt;&gt; return 0</code></pre>
+<p>&gt;&gt; return 0 がまだでした。うぅぅ。(–; また出たよ、記号が・・・ &gt;&gt; って &gt;&gt;= とどう違うんだよ〜単に結果を左から右に引き渡さないだけか？</p>
+<p>emacs 上で &gt;&gt;= とか &gt;&gt; とかにカーソルをあわせてみる。</p>
+<pre><code>&gt;&gt;=   :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+&gt;&gt;    :: Monad m =&gt; m a -&gt; m b -&gt; m b</code></pre>
+<p>となります。例のボスキャラです。正直分からないので、真正面から対決せず、 遠方からその立ち姿を眺めるだけにします。</p>
+<pre><code>&gt; _start = getArgs &gt;&gt;= cmain</code></pre>
+<p>ここで getArgs が IO [String] 型で cmain は [String] -&gt; IO Int 型です。 上の &gt;&gt;= の型は Monad m =&gt; って見たこと無いのが付いてますけど、:find &gt;&gt;= ってやれば分かるように型そのものを意味するものでは無いようですね。 単に m はモナドってやつを意味してるよってことらしい。</p>
+<p>これで &gt;&gt;= の、この局面での型に当てはめてみると、</p>
+<pre><code>m  は  IO
+a  は  [String]
+b  は  Int
+
+getArgs :: IO [String]
+cmain   :: [String] -&gt; IO Int
+&gt;&gt;=     :: IO [String] -&gt; ([String] -&gt; IO Int) -&gt; IO Int
+               ↑                   ↑
+              getArgs              cmain</code></pre>
+<p>ってことで &gt;&gt;= は、やはり中置演算子くさいです。んじゃ、確認しましょう。</p>
+<pre><code>&gt; _start = (&gt;&gt;=) getArgs cmain</code></pre>
+<p>こんな風に書き換えて、同じ動作をすれば、取り合えずは良いんじゃないでしょうか？</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="066573722b756367466c6f686f">[email&nbsp;protected]</a>&gt; ./greeting.lhs カットシ ノブオ
+もうかりまっかカットシはん
+もうかりまっかノブオはん</code></pre>
+<p>ぱちぱちぱち。予想的中。そんじゃ &gt;&gt; の方も確認して心を落ち着かせてみます。</p>
+<pre><code>m  は  IO
+a  は  String
+b  は  Int
+
+greeting  ::  String -&gt; String
+putStrLn  ::  String -&gt; IO ()
+(putStrLn . greeting)  ::  Sting -&gt; IO ()
+mapM_  :: (String -&gt; IO ()) -&gt; [String] -&gt; IO ()
+                  ↑              ↑
+         (putStrLn . greeting)   args
+
+mapM_ (putStrLn . greeting) args  :: IO ()
+return  :: Int -&gt; IO Int    &lt;= return の型は a -&gt; m a なんだけど b -&gt; m b です
+                               この辺は周囲の型との関係からね
+&gt;&gt;  :: IO () -&gt; IO Int -&gt; IO Int
+         ↑        ↑       ↑
+  mapM_ ... args   ｜       ｜     
+                return 0   _start</code></pre>
+<p>とまぁ、多分こんなんでしょうか？んーーーー、だからどーした系の後味。(–; 要は mapM_ … args の部分は IO の絡むアクションをするけど、値は渡さず () っていう(ユニット型っていうらしい)ものを渡して、 &gt;&gt; の右項は IO Int って感じで Int を返す？というか渡す？よと。 どうも左項の mapM_ … args の結果を無視して右項だけでテキトーに結果を 作っちゃってます。全然協調してません。 &gt;&gt; ってのは。えぇ、全然パスが通っ てないです。実際 m a -&gt; m b -&gt; m b って事なんで、 m a と m b の二つの 引数をもらってながら、 m b 型が返値になってるんで、m a が消失してて全 然脈絡がないっす。ひどいヤツです。 &gt;&gt; は。 こういう奴がクラスに一人いると、雨の日に遠足の準備をして学校に来てしま い、一日中授業で肩身の狭い思いをする生徒が出て来てしまうんです。パスを もらえなかった可哀想な return は、自分の判断でオヤツとか「遠足のしおり」 しか持って来てなかったりします。この場合は 0 です。どっから出て来た？っ て数字です。ホントひどい &gt;&gt; ですね。えぇ、私がまさにそうでした。&gt;&gt; な 奴でした。ごめんなさい。m(__)m</p>
+<p>え、えっと、一方で &gt;&gt;= はってーと、</p>
+<pre><code>&gt;&gt;=   :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code></pre>
+<p>って事なんで、一応 (a -&gt; m b) ってところで a から b への関係を持ってま す。一応パスが通ってます。（実は細かくツッコまれると自信ないんだけ ど・・・）そういう関数を取っているところが、私と、いや &gt;&gt; と違うところ の様です。</p>
+<p>まだまだ、ナットクいかねぇってところも有りますが、無理は禁物。肩の力を 抜いて、いい加減なノリで勉強を進めましょう。ユースケサンタマリアに成り 切ると丁度いいです。多分。なんせ、敵は<a href="http://www014.upp.so-net.ne.jp/tetryl/llw2004/ll-samurai.txt">LL侍</a>も恐れるモナドです。じっく り行きます。モナドは理解するより、どう使うのかを考えた方か幸せになれる と、 <a href="http://i.loveruby.net/w/HaskellFAQ.html">どっか</a>に書いてありましたしね。</p>
+<p>あ、最後に一応</p>
+<pre><code>&gt; cmain args = (&gt;&gt;) (mapM_ (putStrLn . greeting) args) (return 0)</code></pre>
+<p>を確認しておきましょう。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="f7948283da849296b79d9e999e">[email&nbsp;protected]</a>&gt; ./greeting.lhs カットシ ノブオ
+もうかりまっかカットシはん
+もうかりまっかノブオはん</code></pre>
+<p>はい、ぱちぱちぱち〜！</p>
+<h3 id="cat.lhs-とかもみとく">cat.lhs とかもみとく</h3>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; --
+&gt; -- cat.hs
+&gt; --
+&gt; -- A simple cat command in Haskell.
+&gt; --
+&gt;
+&gt;module Main where
+&gt;     
+&gt;import System
+&gt;import IO
+&gt;    
+&gt;main :: IO ()
+&gt;main = do args &lt;- getArgs
+&gt;          case args of
+&gt;            [] -&gt; catFile stdin
+&gt;            _ -&gt; mapM_ (\a -&gt; do f &lt;- openFile a ReadMode
+&gt;                                 catFile f
+&gt;                                 hClose f) args
+&gt;         
+&gt;catFile :: Handle -&gt; IO ()
+&gt;catFile f = do eof &lt;- hIsEOF f
+&gt;               if eof then return () else
+&gt;                  do c &lt;- hGetChar f
+&gt;                     putChar c
+&gt;                     catFile f</code></pre>
+<p>これです。ほとんどの部分はこれまでの読み込みで理解できます。新たに出て 来たのが、case ってやつと (\a -&gt; do …) の部分の \ です。また記号。あ と、 catFile の型に現れる Handle や hIsEOF とか hGetChar hPutChar って やつ。名前からおおよそ予想はつきますけど、一応見て行きます。cat は基本 中の基本ですし。</p>
+<p>case については emacs 上でカーソルをあわせると、</p>
+<pre><code>case exp of { alts [;] }</code></pre>
+<p>ってなってます。おそらく args の値に応じて場合分けしてるんでしょ。</p>
+<p>[] だったら catFile って関数に stdin を引数に与えて呼び出します。要は コマンドライン引数が無かった場合は標準入力から読み込むんですね。一方 _ ってのは、なんでしょーか。訳分かんないのがぞくぞく出て来る。でも、どっ かで見たこと有ります。いろいろやって思い出しました。 :find head してみ ると、</p>
+<pre><code>head             :: [a] -&gt; a
+head (x:_)        = x
+
+last             :: [a] -&gt; a
+last [x]          = x
+last (_:xs)       = last xs
+
+tail             :: [a] -&gt; [a]
+tail (_:xs)       = xs
+
+(snip)
+
+null             :: [a] -&gt; Bool
+null []           = True
+null (_:_)        = False</code></pre>
+<p>こんな感じです。どうやら任意の値にマッチするようなもののようです。特殊 なシンボルってより、慣用的に用いられるシンボルでしょうか。試してみましょ う。</p>
+<pre><code>&gt;            x:xs -&gt; mapM_ (\a -&gt; do f &lt;- openFile a ReadMode</code></pre>
+<p>としたり、</p>
+<pre><code>&gt;            _:_ -&gt; mapM_ (\a -&gt; do f &lt;- openFile a ReadMode</code></pre>
+<p>としてみたり、いずれも問題なく動作します。どうやら -&gt; の右側で参照され ることのない任意のシンボルを _ で書きゃいい様です。実際後の例で、もし 右側で _ を参照したら _:_ のどっちなのか分かんないしね。ちなみに <a href="http://www.sampou.org/haskell/tutorial-j/patterns.html">ワイルドカード</a>って言うらしいです、コレ。</p>
+<pre><code>(\a -&gt; do f &lt;- openFile a ReadMode
+          catFile f
+          hClose f)</code></pre>
+<p>お次はこれですね。たびたび出て来る、この手の式はλ式らしいです。 \ a -&gt; … ってのは引数が一個 a ってのを取る匿名の関数を作ってるみたい。</p>
+<pre><code>(lambda (a) (let1 f (openFile a ReadMode)
+               (catFile f)
+               (hClose f)))</code></pre>
+<p>Scheme風に書くとこんな感じでしょう。もち、単なる擬似コードなんですけど。 これもなんとなく a がコマンドライン引数の一つになるので String だと思 いますが (実はハズレ)、こいつを openFile の第一引数に与えて、第二引数 を ReadMode つまり読み取り専用モードにしている。返って来たファイルディ スクリプタらしいものが、f に束縛されます。 おおっ！！出て来ました。ファイルディスクリプタ！これの型は？これの型！ emacs でカーソルをあわせても何にも出ません。しょーがないので :find openFile します。えいや！</p>
+<pre><code>primitive stdin       :: Handle
+primitive stdout      :: Handle
+primitive stderr      :: Handle
+primitive openFile    :: FilePath -&gt; IOMode -&gt; IO Handle  &lt;= コレ
+primitive hClose      :: Handle -&gt; IO ()
+
+primitive hFileSize   :: Handle -&gt; IO Integer
+
+primitive hIsEOF      :: Handle -&gt; IO Bool</code></pre>
+<p>ん〜、 取り合えず IO Handle ってのがファイルディスクリプタに相当する型 くさい。ってことは、 catFile f や hClose f ってのは IO Handle -&gt; 何か なはず！！</p>
+<p>・・・って思ったら、オレってホント学習能力ないです。うーん。そうか、 Handle か。ますます分からなくなった。ガク。</p>
+<p>と、とりあえずファイルディスクリプタってのは Handle 型みたいだ。うーん。 そういや、上の方の primitive を見てみても stdin とか stdout なんかが Handle って書いてあるじゃねーの。</p>
+<p>まぁいいです。とにかくこのλ式はファイル開いて書き出してクローズしてる と。そんだけです。で、「書き出して」の部分をやってる catFile はってー と、</p>
+<pre><code>&gt;catFile :: Handle -&gt; IO ()
+&gt;catFile f = do eof &lt;- hIsEOF f
+&gt;               if eof then return () else
+&gt;                  do c &lt;- hGetChar f
+&gt;                     hPutChar stdout c
+&gt;                     catFile f</code></pre>
+<p>これですね。この辺もさして難しくないように思うんだよね。他の言語の知識 があれば、およそは分かった気になれそう。 if then else もあるんだぁって のがささやかなへぇ〜っです。 ただ一点、しつこいようですが、ディスクリプタを返す openFile の返り値が Handle でいーじゃん！単に Handle を返すんじゃダメなの？なんで？ってト コだけナットクできねっす。(–; do ってのはモナド演算の構文糖衣って書いてあるってことは、実質 &gt;&gt; とか &gt;&gt;= なんかで繋げられたブロックだと思うので、型としての辻褄がそうなって いるらしいのはいいんだけど、ここを IO Handle じゃなくて Handle にする と何か問題でも？！全体としてそれだと、どっかで矛盾が発生するのだろう か？ってゆー疑問を抱きつつ、そろそろつかまり立ち（だから、どういう基準 だよっ？）へＧＯ！</p>
+<blockquote>
+<p>こんな問題が・・・と言っても分かりづらいと思うので、簡単な説明を。</p>
+<p>例えば、getChar :: IO Char の IO を外した readChar :: Char を定義してみます。</p>
+<pre><code>import System.IO.Unsafe
+
+readChar :: Char
+readChar = unsafePerformIO getChar
+
+main :: IO ()
+main = putStrLn [readChar, readChar]</code></pre>
+<p>このコードを実行すると、最初に入力した文字が2回出力されます。 readChar で一度計算された値がキャッシュされるからです。</p>
+<p>Haskell は、参照透明性(ある式の値をいつ評価しても変わらないという性質) を前提として作られています。そのおかげで、評価を必要になるまで遅らせた り、一度評価した結果をキャッシュしておいたりすることが可能になるのです。</p>
+<p>しかし、そのせいで、readChar のように、評価するたびに値が異なる式をう まく扱う事ができなくなっているのです。</p>
+</blockquote>
+<p>まぁ一応 cat.lhs も読めました。(^^)v ・・・まだ、自分じゃ書けないけどね。</p>
+<h3 id="ちょっとひとやすみピュアな怠け者">【ちょっとひとやすみ】ピュアな怠け者</h3>
+<blockquote>
+<p>作成中。。。</p>
+</blockquote>
+<p>(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:%EF%BF%BD%CF%A4%EF%BF%BD%EF%BF%BD%CF%A4%EF%BF%BD&amp;c=e&amp;l=jp">「はいはい」を編集する</a>)|(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&amp;l=jp">Haskellerへの道</a>)</p>
+<hr>
+<p>Last modified : 2009/12/13 20:53:24 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

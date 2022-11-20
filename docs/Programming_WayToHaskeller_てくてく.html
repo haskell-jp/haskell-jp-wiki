@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_WayToHaskeller_てくてく</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_WayToHaskeller_てくてく</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_waytohaskeller_%E3%81%A6%E3%81%8F%E3%81%A6%E3%81%8F"><span>Programming_WayToHaskeller_てくてく</span></a><ul>
+<li><a href="#%E3%81%A6%E3%81%8F%E3%81%A6%E3%81%8F">てくてく</a><ul>
+<li><a href="#%E3%81%A8---%E3%81%A8">= と &lt;- と</a></li>
+<li><a href="#%E3%81%95%E3%82%89%E3%81%AB-%E3%81%A8%E3%81%AE%E9%96%A2%E4%BF%82%E3%81%8C%E5%88%86%E3%81%A3%E3%81%A6%E3%81%97%E3%81%BE%E3%81%88%E3%81%B0%E5%A4%A9%E4%B8%8B%E3%81%8B">さらに&lt;-と&gt;&gt;=の関係が分ってしまえば天下か?</a></li>
+<li><a href="#getcontents%E3%81%AE%E3%83%90%E3%83%A4%E3%82%A4">getContentsのバヤイ</a></li>
+<li><a href="#%E3%81%95%E3%82%89%E3%81%AB%E3%81%95%E3%82%89%E3%81%AB-%E3%81%A3%E3%81%A6%E3%81%AE%E3%81%AF%E3%81%93%E3%81%93%E3%81%AB%E3%82%82%E7%99%BB%E5%A0%B4">さらにさらに&lt;-ってのはここにも登場?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_waytohaskeller_てくてく"><a href="" class="uri" title="Go to wiki page">Programming_WayToHaskeller_てくてく</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/WayToHaskeller" class="uri" title="Go to wiki page">WayToHaskeller</a>:てくてく</p>
+<hr>
+<h2 id="てくてく">てくてく</h2>
+<p>(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:%EF%BF%BD%C6%A4%EF%BF%BD%EF%BF%BD%C6%A4%EF%BF%BD&amp;c=e&amp;l=jp">「てくてく」を編集する</a>)|(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&amp;l=jp">Haskellerへの道</a>)</p>
+<h3 id="と---と">= と &lt;- と</h3>
+<p>なんか分かったとは言えないけどモナドって、実はそんなにムツカシイもんで もないのかもとか思っちゃいました。そのキッカケが=と&lt;-です。ハイ。</p>
+<p>モナドってのはどうやら何か秘密を隠しもってるヤツで、「秘密のある男性っ てステキ！」って感じのダンディーな方だったわけです。 通常関数型言語ではプログラムは式で構成されてて、そいつを評価すると値っ てやつを返してくれる訳ですね。 (通常って語るほど色々しってるわけじゃな いけどさ) で、実際大抵の場合大抵のプログラマにとって重要なのはこの値だっ たりするんですが、モナドの場合はアクションを取るものを返すようで、これ はこれで重要なんですが、実際に次なる(って言葉が曖昧だけど)処理にとって は大抵は役立たずだったりします。本当に欲しいのは隠し持ってる方の情報だっ たりするわけでんがな。</p>
+<p>それを取り出すには x = getArgs とか x = getContents ではダメで、 x &lt;- getArgsとかx &lt;- getContentsなんですね。 当然次のようにして x = getArgsとか出来なくもないんだけど、</p>
+<pre><code>test = let x = getArgs
+         in [x]</code></pre>
+<p>エバると、</p>
+<pre><code>Main&gt; test
+[&lt;&lt;IO action&gt;&gt;]
+Main&gt; </code></pre>
+<p>全然嬉しくないわけです。えぇ。でも、</p>
+<pre><code>test2 x = do args &lt;- head x
+              return args</code></pre>
+<p>さらにこんな風にしてやれば、test2 testでもって内容を取り出せるっちゅー 寸法でんがな。 (あ、しまったreturnってことは…取り出せてねー) ま、まーだいたい意図は分るでしょ？ってことで、モナドに関しては、どうや らその区別がちゃんと分かっちゃうと案外可愛いものなのかもしれません。 つまり値を返してくるものとそいつが隠しもっているもの、そんでもって、そ れらの取り出し方ですな。</p>
+<p>ただ、どうやら&lt;-によってどんな風にその秘密を取り出せるかはそのモナドの 種類によって違うって感じでしょうか。つまりリストにおいてcarっていうか headで取りだすのすら、恐らく一つの方法にすぎないのかもしれません。 (つ まり機構そのものとしては)多値でもって全要素を返すような、Scheme?の receiveみたいなものだとしてもおっけー！なのかもしんないワケっすよ。</p>
+<pre><code> -- あくまでキモチとしてこんな感じデス
+ -- haskell
+do (x, y) &lt;- [1,2]
+   ...
+ -- scheme
+receive (x y) ((lambda args (apply values args)) '(1 2))
+   ...</code></pre>
+<p>こんなイメージですね。じゃあ何でリスト(モナド)では&lt;-ってやった時に今の 仕様になってるのかっていうとワカリマヘンorz なんとなくモナド則とかいう屁理屈と関係あんじゃーねーの？って思ったんで すが、難しい議論は学生時代に足を洗ったのでパスです。</p>
+<p>まーいずれにせよ、そう考えるとモナドってのは「なんでもモナド」(どっか で聞いたことあるな…)って言ってしまってもいいくらい、どこにでも出てき ていいんじゃねーの？とか思い上ってしまいそうです。</p>
+<p>なんでもいいから何か新しい構造だとか型のようなもんを作ったら、それはリ スト同様に、値はその構造を返すし、その中身は&lt;-とかで取り出すのが必然の ようにすら思えてきます。 (ヤバイ洗脳がすすんでるかも…)</p>
+<p>あ、そうそう。ちょっと思ったのは、こんな感じですよ。少し前に別の場所で 書いたScheme?のfoldnってやつです。</p>
+<pre><code>(use srfi-1)
+(use gauche.collection)
+(define (foldn n proc . args)
+  (let ((nils (take args n))
+        (cols (map (cut coerce-to &lt;list&gt; &lt;&gt;) (drop args n))))
+    (if (any null? cols)
+        (apply values nils)
+        (receive vals (apply proc (append (map car cols) nils))
+          (apply foldn n proc (append vals (map cdr cols)))))))</code></pre>
+<p>さて、ここで書いた時から気になってたのは、carやcdrが出て来てるトコです。 これはあまりにもリストに寄った作りで、実際&lt;collection&gt;なものに対応する ために coerce-toを使っているのですが、「これはよくないなー、よくない よー」と山本直樹のマンガに出てくるキャラばりに思ったわけですよ。はい。 そこで本当なら<a href="http://www.shiro.dreamhost.com/scheme/gauche/man/gauche-refj_71.html">イテレータ構築メソッド</a>とやらを使って、nextだかgetだと かいった、一段抽象的なメソッドを使って書くべきなんでしょう。</p>
+<p>エーっと、また何を書こうとしてたのか忘れたぞ。なんだっけ？ あ、そーだ。つまり、これはcollectionだとかsequenceだとかってものに特化 してるんだけど、さらに一般化すると、中に何かを持っているものからそれな りの方法で中身を取り出すという、ただもうそれだけのようです。</p>
+<p>正しくないんだけど、はっきしいって今の私にとっては、ほとんどScheme?の オブジェクトに対するrefとかslot-refとモナドにおける&lt;-ってたいして変わ んねーじゃんって感じなわけです。少なくとも位置付けとしてはそんなもんだ ろうってアバウトに思ってても使えそうな気にはなっちゃってるわけです。思 い上りまくりです。えぇ。</p>
+<p>まぁ実際には、おおーそうなのかー！！とか思う程簡単じゃないわけで、モナ ドのバヤイはそれを使うコンテキスト(?)みたいなのとモナド則を満すような &gt;&gt;=とreturnの組合わせってのがナゾを呼ぶわけですな。 そこに入りだすとなんか地獄が手ぐすね引いて待ってそうなので近寄りません がね。まぁ「臆病なくらいでちょうどいいのよね」とかつぶやいたりしましょ う。</p>
+<h3 id="さらに-との関係が分ってしまえば天下か">さらに&lt;-と&gt;&gt;=の関係が分ってしまえば天下か?</h3>
+<p>でもってさらに衝撃の事実ですが、</p>
+<pre><code>main = do cs &lt;- getArgs
+          mapM_ putStrLn cs</code></pre>
+<p>と</p>
+<pre><code>main = getArgs &gt;&gt;= (\cs -&gt; mapM_ putStrLn cs)</code></pre>
+<p>とは同じなんだそうです。多分以前もどっかで誰かに教えてもらったのかもし れませんが、はっきりいって頭に入ってないっす。そんなに色々覚えらんねー よーって(無礼にも)思ったに違いありません。が、今なら分りますね。 モナド的にはどうも&gt;&gt;=とreturnってプリミティブっぽい気がするんですが、 個人的にはっきり言って &lt;- のがずっとプリミティブって感じがするので、モ ナドって言わずに &lt;- これを ref とでも名付けて&gt;&gt;=とかは、シンタックスシュ ガーというかなんというか、まぁ欲を言えばうやむやにしてくんないかなーと か思ったりします。 思いませんか？そうですか、私だけですか…</p>
+<p>ちなみに、mapM_ ってやつですが、正直mapとかmapMとかmapM_とか、なんでこ んなしちめんどくせーのか知りませんが、まぁ型が違うのでこういうもんなん でしょうね。 emacsのミニバッファに表示される型を見ながらイロイロ試すか、マニュアル を検索するかしてしのぎます。</p>
+<p>あらためて見ておきましょう。</p>
+<pre><code>main = do cs &lt;- getArgs
+          mapM_ putStrLn cs</code></pre>
+<p>こいつはgetArgsがIO [String]なので、アクションなんですが、[String]なヒ ミツを抱えてるワケですね。 でもって、&lt;-でそのヒミツをなんとか取り出してcsに束縛するんです。そう、 &lt;-はモサドみたいな機関で、モナドからモサドが国家機密を探り出すわけです。 (w (ただ、実際の動作はナゾです。そもそもこの時点で、ヒミツを全部取り出す 必要はないし、どういう順で取り出すのかもそのモナドの勝手じゃーんってこ とです。おそらくこれも必要になった時点で秘密がバクロされるという、ご都 合主義の2時間ドラマみたいな仕掛けになっているんでしょうね。 Preludeと いう名前といい、どうもHaskellを作った人は劇作家じゃないだろうかと勘繰っ たり) あとはmapM_で煮て焼いて食ってるだけっす。</p>
+<pre><code>main = getArgs &gt;&gt;= (\cs -&gt; mapM_ putStrLn cs)</code></pre>
+<p>こいつのバヤイも同じです。getArgsが抱えてるヒミツを&gt;&gt;=を通して右に送り つけてる感じでしょうか。右に渡ってるのは見えないけど[String]なデータだ と思えばよく、それをlambdaが処理してIO ()な形で始末してるんです。</p>
+<p>私が&gt;&gt;=より&lt;-の方がプリミティブっぽいと感じたのは、多分データの受け渡 しが見えるからのような気がします。ハイレベルの言語って結局同じことをや るんだけど、暗黙裡にやってくれることが多いっていうか広いっていうか、まぁ いい感じに処理してくれちゃうわけで、見えない部分で活躍する裏方さんが大 勢いらっしゃるんです。 &gt;&gt;=もある意味そうなんですよね。今はlambdaを書い ているからcsが見えてますが、もし、</p>
+<pre><code>printArgs = mapM_ putStrLn</code></pre>
+<p>こんな風になってたら、</p>
+<pre><code>main = getArgs &gt;&gt;= printArgs</code></pre>
+<p>csが消滅しちゃうわけですね。そーすっと、csの存在が見えないのに動作の裏 側で暗躍することになるので、説明された時にイメージできないわけです。 (という言い訳です) 逆に&lt;-を使うとイヤでもcsの存在を書かなきゃならないので、これは表社会の 住人さんだからなんか人に優しい感じがするんですよね。(という言い訳です よ、しつこいけど)</p>
+<h3 id="getcontentsのバヤイ">getContentsのバヤイ</h3>
+<p>ほとんど同じなんだけど、getContentsを見ておきましょう。</p>
+<pre><code>main = do cs &lt;- getContents
+          putStr cs</code></pre>
+<p>getContentsはIO Stringってことで、今度はヒミツはStringなものなので、 mapM_とかせずにそのままputStrに渡すことにしました。なんか全然簡単って 気がしてきましたね。</p>
+<h3 id="さらにさらに-ってのはここにも登場">さらにさらに&lt;-ってのはここにも登場?</h3>
+<p>でもって実は怪しい集会に潜入ルポって来た成果として、次のようなのも。</p>
+<pre><code>[(x,y) | x&lt;-[1..100], y&lt;-[x..100],y==x*2]</code></pre>
+<p>奥さんこれです。 リスト内包表記ってやつね。ここで出てくる&lt;-ってのはまさにモサドです。ハ イ。モナドじゃなくモサドの方ね。すごくないっすか？恐らく逆で、これは数 学の表記をもとに&lt;-な記号を採用して、その後一般化されたんじゃねーのかなー と思ったりするんですが、まさにリストもモナドなわけです。実際これ見たら、 やらずにはいられません。</p>
+<pre><code>Main&gt; [1,2,3]&gt;&gt;=(\x-&gt;(x,x*x))
+ERROR - Type error in application
+*** Expression     : [1,2,3] &gt;&gt;= (\x -&gt; (x,x * x))
+*** Term           : [1,2,3]
+*** Type           : [b]
+*** Does not match : (a,a)</code></pre>
+<p>あら？あーあーあーそうか。</p>
+<pre><code>Main&gt; [1,2,3]&gt;&gt;=(\x-&gt;[] (x,x*x))
+ERROR - Type error in application
+*** Expression     : [] (x,x * x)
+*** Term           : []
+*** Type           : [c]
+*** Does not match : a -&gt; b</code></pre>
+<p>え？えーっとリストにすればいーんだよね。も少し簡単なので確認。</p>
+<pre><code>Main&gt; [1,2,3]&gt;&gt;=(\x-&gt;[] x)
+ERROR - Type error in application
+*** Expression     : [] x
+*** Term           : []
+*** Type           : [c]
+*** Does not match : a -&gt; b</code></pre>
+<p>あうっ！そもそも間違ってんのか。</p>
+<pre><code>Main&gt; [1,2,3]&gt;&gt;=(\x-&gt;x:[x*x])
+[1,1,2,4,3,9]</code></pre>
+<p>おっけー！ちょっと意図が違うけど。</p>
+<pre><code>Main&gt; [1,2,3]&gt;&gt;=(\x-&gt;[(x,x*x)])
+[(1,1),(2,4),(3,9)]</code></pre>
+<p>あ、これがやりたかったの。いーんでないすかね。</p>
+<pre><code>Main&gt; [1,2,3]&gt;&gt;=(\x-&gt; return (x,x*x))
+[(1,1),(2,4),(3,9)]</code></pre>
+<p>勿論こんな風にreturnで[a]なリストモナドを返すのも正しい。ってか &gt;&gt;=と コンビで使うならこっちのが推奨なんでしょう、きっと。 ただ、[]を使うのは、いわば(上に示した)carやcdrを使ったfoldnの定義と同 じで、リストに特化した書き方になってる。一方でreturnを使う書き方はより 一般化された書き方になってるわけさ。</p>
+<p>もう少し頑張ってみます。</p>
+<pre><code>Main&gt; [1..100]&gt;&gt;=(\x-&gt; return [(x,y) | y&lt;-[x..100], y==x*2])
+[[(1,2)],[(2,4)],[(3,6)],[(4,8)],...[],[],[],[]]</code></pre>
+<p>あらら。おしい！所望の結果は</p>
+<pre><code>Main&gt; [(x,y) | x&lt;-[1..100], y&lt;-[x..100],y==x*2]
+[(1,2),(2,4),(3,6),(4,8),...,(47,94),(48,96),(49,98),(50,100)]</code></pre>
+<p>なので、一個リストの構造が余計だなぁ。えーっと、あー分りましたよ！</p>
+<pre><code>Main&gt; [1..100]&gt;&gt;=(\x-&gt; [(x,y) | y&lt;-[x..100], y==x*2])
+[(1,2),(2,4),(3,6),(4,8),....,(47,94),(48,96),(49,98),(50,100)]</code></pre>
+<p>キターーーーーーーー！ ぃよーーーっし、じゃあ続いてやっちゃうよ！</p>
+<pre><code>Main&gt; [1..100]&gt;&gt;=(\x-&gt; [(x,y) | [x..100]&gt;&gt;=(\y-&gt; [y | y==x*2])])
+ERROR - Undefined variable "y"</code></pre>
+<p>あぅ！なんでダメなのさ？落ち付け落ち付け。</p>
+<pre><code>Main&gt; [1..10]&gt;&gt;=(\x-&gt;[x])
+[1,2,3,4,5,6,7,8,9,10]</code></pre>
+<p>いけるよね。じゃあ絞ろう。</p>
+<pre><code>Main&gt; [1..10]&gt;&gt;=(\x-&gt;[x| x==3])
+[3]</code></pre>
+<p>うーん。いけるな。ってことは、[x..100]が駄目なのかなぁ。</p>
+<pre><code>Main&gt; let x=10 in [x..100]
+[10,11,12,13,14,....,95,96,97,98,99,100]</code></pre>
+<p>勿論大丈夫だよね。うーん。えーっと、あらら？そうか。よくよく見てみたら、 [x..100]&gt;&gt;=(\y-&gt;[y| y==x*2])ってしたら、それは単なるリストだからそれが yだってのは結びつかないのか。</p>
+<pre><code>Main&gt; let x=5 in [y | [10..100], y==x*2]
+ERROR - Undefined variable "y"</code></pre>
+<p>みたいな感じになっちゃってんだな。そうか、そりゃダメですわ。 マジに副作用ないの？</p>
+<p>この数日なんだかモナドについてまた考えてたんだけど、またちょっと目覚めたかも。</p>
+<p>よく言われることなんだけど、Haskellって副作用がないって本当？とか 副作 用がなきゃプログラム書けないじゃんとかそーゆーやつです。 色んなところを調べると、モナドに閉じこめたとかモナドがそういう汚い世界 のことを一手に引き受けてくれてるとか書いてあるんだけど、相手からすると、 なーんだ結局あるんじゃん、副作用って言われちゃうわけですね。</p>
+<pre><code>main = do cs &lt;- getContents
+          putStr cs</code></pre>
+<p>こちらにあるコードをGHCを使ってコンパイルします。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="f89b8d8cd58b9d99b89693918b91">[email&nbsp;protected]</a>&gt; ghci cat.hs -o cat</code></pre>
+<p>そうするとcatっていう実行可能コードが出来ます。こいつを使ってみます。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="bbd8cecf96c8dedafbd5d0d2c8d2">[email&nbsp;protected]</a>&gt; ./cat
+hoge
+hoge
+fuga
+fuga
+うひゃ
+うひゃ^D
+<a href="email-protection.html" class="__cf_email__" data-cfemail="bad9cfce97c9dfdbfad4d1d3c9d3">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>これを見ると、readする度に違う値を返してきてるじゃん。って思うわけです。 同じ式が評価する度に違う値を返してきてるってのは副作用があるってことじゃ ん？ BUT!!そりゃ早トチリってもんですね。よーくコードを見ると、どこにもread なんてないんです。勝手にreadしてるって妄想しちゃイヤーンです。</p>
+<p>つまり、一行読んでその文字列を返すなんて関数は使われてないんですよ。 getContentsってのはreadじゃないってのがとっても重要。</p>
+<p>getContentsは誤解を恐れずに言うならば、 私が入力する“hoge”、“fuga”そし て“うひゃ”っていう3行 (もしかしたらそれ以降にも入力されたかもしれない 行)全てを知ってて、 そいつを一種のリストのようなものに入れて返してきて いるんです。 そして、必要になったところで順番に中から取りだして表示しているに過ぎな いんです。 え？だって“うひゃ”ってのを読み込む前に“hoge”を表示してる(putStrしてる) じゃん！？ そりゃそうですYo!だって遅延評価ってそういうもんじゃん。それが許されな きゃ、[1..]なんて無限リストを全部構築しなきゃなんも計算できなくなりま す。 cat.hsでは、“hoge”を表示するときには“うりゃ”が本当に必要になるわ けではないから、べつにアクセスしてないだけなんですね。嘘だと思うなら、 [1..]をHugsのプロンプトに入れてみればいいでしょう。</p>
+<pre><code>Main&gt; [1..]
+[1,2,3,4,5,6,7,8,9,10,11.............................</code></pre>
+<p>おっとっと、すぐ^Cしなきゃじゃんじゃんでちゃいます。ここでは無限大まで のリストを構築しなくても(つーかそんなんできないけど)、最初の方の表示に はなんの問題もないからちゃんと表示できてますよね。もー一個いっときましょ う。</p>
+<pre><code>Main&gt; take 5 [1..]
+[1,2,3,4,5]
+Main&gt; </code></pre>
+<p>この計算がちゃんと終了するのと同じ理由ですね。 そうなんだよね〜。リストもモナドだって衝撃を受けた時に気付くべきでした。</p>
+<pre><code>listA = ["hoge", "fuga", "うひゃ"]</code></pre>
+<p>っていうリストから順にデータを取りだした時に、「listAはアクセスする度 に、“hoge”とか“fuga”とか“うひゃ”とか毎回違う値を返してくるから副作用が ある」なんて言う人はおらんでしょう。それと同じことだったんですね。</p>
+<p>ようやく結論ですが、副作用ってのを本当にうまく消してしまってるんですよ。 副作用はキレイサッパリ消失してしまったんです。押し付けられた一部の関数 が副作用を引き受けたんじゃなくて本当になくしたんです。にも関らず、副作 用と同じことを実現してるんです。</p>
+<p>副作用みたいに毎回違う値が欲しいなら、その毎回変るであろう値ぜーんぶを 持つ一つの値(構造)をでっちあげて、そこから順番にデータを取り出すような 仕組み(モナディックなプログラミング)を作り上げるわけです。</p>
+<p>まー考え方を変えただけって言われるかもしれませんが、上のようにリストに なぞらえて理解すると本当に消えちゃったでしょ？副作用。それでも言い換え ただけって思います？実際そういう仕組みを作ってコードもそーゆー感じに書 いてますってところが徹底してると思いますね。少なくとも私は自分で自分の 説明に納得しちゃたんでもういいです。はい。(^^)</p>
+<p>最初はそんな副作用を使わずに入出力を表現するなんて無理だよーって思って ましたが、あなどれませんHaskellでもってモナド、そしてなにより本質的に それを可能にした遅延評価の世界です。 lazyだからこそ、そういう考え方が 成立するし、そういう意味付けと矛盾しない動作が実現できるんですね。</p>
+<p>(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:%EF%BF%BD%C6%A4%EF%BF%BD%EF%BF%BD%C6%A4%EF%BF%BD&amp;c=e&amp;l=jp">「てくてく」を編集する</a>)|(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&amp;l=jp">Haskellerへの道</a>)</p>
+<hr>
+<p>Last modified : 2006/06/12 12:53:49 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

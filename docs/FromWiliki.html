@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/WikiManagement/FromWiliki"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - WikiManagement/FromWiliki</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/WikiManagement/FromWiliki">edit</a></li><li><a href="https://wiki.haskell.jp/_history/WikiManagement/FromWiliki">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/WikiManagement/FromWiliki">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">WikiManagement/FromWiliki</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#wiliki%E3%81%8B%E3%82%89%E3%81%AE%E7%A7%BB%E8%A1%8C">WiLiKiからの移行</a><ul>
+<li><a href="#%E3%83%9A%E3%83%BC%E3%82%B8%E5%85%88%E9%A0%AD%E3%81%AE%E7%9B%AE%E6%AC%A1%E3%82%92%E6%B6%88%E3%81%97%E3%81%9F%E3%81%84">ページ先頭の目次を消したい</a></li>
+<li><a href="#%E7%B7%A8%E9%9B%86%E6%97%A5%E6%99%82%E3%82%92%E5%85%A5%E5%8A%9B%E3%81%97%E3%81%9F%E3%81%84">編集日時を入力したい</a></li>
+<li><a href="#wiki%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E6%9C%80%E7%B5%82%E6%9B%B4%E6%96%B0%E6%97%A5%E6%99%82%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%97%E3%81%9F%E3%81%84">Wikiページの最終更新日時を表示したい</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="wilikiからの移行">WiLiKiからの移行</h1>
+<h2 id="ページ先頭の目次を消したい">ページ先頭の目次を消したい</h2>
+<p>Wikiページ編集時に先頭に</p>
+<pre class="text"><code>---
+toc: no
+...</code></pre>
+<p>と入れれば、Wikiページの頭のtocを削れる。 詳細は <a href="Help.html#page-metadata" class="uri" title="Go to wiki page">/Help#page-metadata</a> を参照。</p>
+<h2 id="編集日時を入力したい">編集日時を入力したい</h2>
+<p>このWikiでは <a href="https://github.com/jgm/gitit/blob/master/plugins/Signature.hs">Signature.hs</a> pluginが有効になっているので、</p>
+<p><img src="urn:scrapbook:download:error:https://farm8.staticflickr.com/7159/6658022067_235b58bb90_o.png"></p>
+<p>のようにWikiページに入力すると以下のように変換されて登録される。</p>
+<pre class="text"><code>-- masterq (Sun Jan  8 08:07:53 UTC 2012)</code></pre>
+<p>ただし、登録前に日時に変換されるので、再び当該Wikiページを編集すると変換済み日時が見える。</p>
+<h2 id="wikiページの最終更新日時を表示したい">Wikiページの最終更新日時を表示したい</h2>
+<p>LastModified.hs pluginが有効になっているので、ページ下部に最終更新日時が自動的に入ります。</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/WikiManagement/FromWiliki">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/WikiManagement/FromWiliki?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/WikiManagement/FromWiliki">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/WikiManagement/FromWiliki" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

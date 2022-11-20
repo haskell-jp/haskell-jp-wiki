@@ -1,0 +1,718 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会_ConceptualMathematics_Article3-Session20</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会_ConceptualMathematics_Article3-Session20</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第十一回圏論勉強会</a><ul>
+<li><a href="#%E9%9B%91%E8%AB%87">雑談</a></li>
+<li><a href="#article-p222exercise-17-%E3%81%AE%E9%80%94%E4%B8%AD%E3%81%8B%E3%82%89">Article � p222、Exercise 17 の途中から</a></li>
+<li><a href="#session-19---terminal-objects">SESSION 19 - Terminal Objects</a></li>
+<li><a href="#session-20---points-of-an-object">SESSION 20 - Points of an object</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A">二次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%8D%81%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第十回圏論勉強会</a><ul>
+<li><a href="#article-p217exercise-13-%E3%82%88%E3%82%8A">Article �、p217、Exercise 13 より</a></li>
+<li><a href="#%E6%98%BC%E4%BC%91%E3%81%BF">昼休み</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A-1">二次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B9%9D%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第九回圏論勉強会</a><ul>
+<li><a href="#session-15p179-%E3%82%88%E3%82%8A">Session 15、p179 より</a></li>
+<li><a href="#article">Article �</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A-2">二次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%85%AB%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第八回圏論勉強会</a><ul>
+<li><a href="#article-p148-%E3%82%88%E3%82%8A">Article �、p148 より</a></li>
+<li><a href="#session-13">Session 13</a></li>
+<li><a href="#session-14">Session 14</a></li>
+<li><a href="#session-15">Session 15</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A-3">二次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%83%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第七回圏論勉強会</a><ul>
+<li><a href="#article-1">Article�</a></li>
+<li><a href="#%E4%BD%99%E8%AB%87">余談</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A-4">二次会</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h2 id="第十一回圏論勉強会">第十一回圏論勉強会</h2>
+<p>2005-11-18(日) <a href="http://www.coldbreath.jp/access.php">コールドブレス</a> 10:00-18:00</p>
+<p>写真 <a href="http://mixi.jp/view_album.pl?id=197407" class="uri">http://mixi.jp/view_album.pl?id=197407</a></p>
+<p>(このWikiに張るのに便利なように <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/</a> にも一応コピーしておきました)</p>
+<p>出席者</p>
+<pre><code>       久井 酒井 堀江      　　 |ス
+      +------------------+ 　　 |ク
+      |                  | 　　 |リ
+      |                  | 　　 |｜
+      +------------------+  　　|ン
+       今井 Shelarcy 豊福   　　|</code></pre>
+<h3 id="雑談">雑談</h3>
+<ul>
+<li>Mac で gtk を使うのはインストールが大変
+<ul>
+<li>pango が cairo を要求するようになっている
+<ul>
+<li>gtk2hs がどうやって cairo をバインディングしているのか気になってソースを見たら pango_cairo_*** という関数を呼び出しによる実現だったので、これはすぐには wxHaskell に移植できないなとがっかり</li>
+</ul></li>
+<li>darwin ports の gauche-gtk は？
+<ul>
+<li>gauche のバージョンが 0.8.3 と、古い</li>
+<li>向井さんの <a href="http://www.city5.org/letsports.html">ports を書こう</a>を参考にやってみて、darwin ports 版を書くべし</li>
+</ul></li>
+<li>Mac で gauche-gl を使っていると、bus error が出てくるのが困る。何か解決法はないか？
+<ul>
+<li>Haskell の OpenGL パッケージでも、バージョンとか見ようとすると bus error が出てくる</li>
+</ul></li>
+</ul></li>
+<li><p><a href="http://page.freett.com/shelarcy/diary_2005-11.html#novembre122005">Mac も早く OpenAL 1.1 に対応してくれないかな？</a></p></li>
+<li><p>圏論でなにかを考察するためには、考察するものに対する圏を構築する際にきちんと考察の対象物を全てのせてやらないといけないという話</p></li>
+<li>universal とは
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Universal_property">universal property のWikipedia（英語版）にある記事</a>
+<ul>
+<li>一意に定まる射を用いて、何か特殊な特徴を持つ対象が特定できるような性質、ということかな？</li>
+</ul></li>
+</ul></li>
+<li><a href="http://hpcgi2.nifty.com/1to100pen/wiki/wiki.cgi?p=AjointFunctor">アスキーアートで図式を描く</a>のは大変だね。
+<ul>
+<li>便利なツールはないか?
+<ul>
+<li>XyPic?</li>
+</ul></li>
+<li><a href="http://www.chimaira.org/docs/indexCategoryTheory.htm">XMLの檜山さん</a>はフリーハンドでゴリゴリ描いてますね。</li>
+</ul></li>
+<li><p>(今回で)一周年だし、次回は忘年会という形にしない？</p></li>
+</ul>
+<h3 id="article-p222exercise-17-の途中から">Article � p222、Exercise 17 の途中から</h3>
+<ul>
+<li>Exercise 17 endomap のsum
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1383276722.html">解答</a></li>
+</ul></li>
+<li>Exercise 17 の、sumへのpointがinjectionから構成できることの証明
+<ul>
+<li>解答： <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1577113984.html">集合の場合</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_2155009521.html">endomapの場合</a></li>
+<li>irreflexive graphははしょっちゃった</li>
+</ul></li>
+<li>Exercise 18
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_792235049.html">解答</a></li>
+<li>一番下の図が反例。fはB1から来た要素とB2からきた要素の両方にまたがってマップされている</li>
+</ul></li>
+<li>Exercise 19
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1470641740.html">解答1</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_3832168550.html">解答2</a> ２つで１つの解答
+<ul>
+<li>計算が大変 (*´Д｀)</li>
+<li>[f, g]oj1 = f, [f, g]oj2 = g がポイント</li>
+</ul></li>
+</ul></li>
+<li>standard map : (A×B)+(A×C) → A×(B+C) が任意のカテゴリで構成できるか？
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1184946415.html">解答</a>
+<ul>
+<li>この逆は一般には成り立つとは限らない。つまり分配法則は任意のカテゴリで成り立つとは限らない。</li>
+</ul></li>
+</ul></li>
+<li>Exercise 20
+<ul>
+<li>解答：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1258546772.html">解答1（sliced category のsumの構成)</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_1917871645.html">解答２(板書左が反例)</a></li>
+<li>つまり、initial object と terminal object が一致するようなカテゴリでは分配法則が成り立たない。</li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20050215#p02" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20050215#p02</a></li>
+</ul></li>
+<li>Exercise 21
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200511/ct/197407_3784340896.html">解答</a>
+<ul>
+<li>A×A のinternal mapを書くと、板書の左
+<ul>
+<li>確かに A+D+Dになっている。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="session-19---terminal-objects">SESSION 19 - Terminal Objects</h3>
+<h3 id="session-20---points-of-an-object">SESSION 20 - Points of an object</h3>
+<h3 id="二次会">二次会</h3>
+<ul>
+<li>今回は二次会参加者の人数が少ない</li>
+<li>Kahua とか WASH とか継続ベースなので、Ajax との相性が良いんじゃないか？</li>
+</ul>
+<h2 id="第十回圏論勉強会">第十回圏論勉強会</h2>
+<p>2005-10-8(土) <a href="http://www.coldbreath.jp/access.php">コールドブレス</a> 10:00-17:30</p>
+<p>写真 <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/</a></p>
+<p>出席者</p>
+<pre><code>       久井 今井 豊福 堀江 　　 |ス
+      +------------------+ 　　 |ク
+      |                  | 　　 |リ
+      |                  | 　　 |｜
+      +------------------+  　　|ン
+       酒井 Shelarcy        　　|</code></pre>
+<h3 id="article-p217exercise-13-より">Article �、p217、Exercise 13 より</h3>
+<h4 id="products">4. Products</h4>
+<ul>
+<li>Exersize 13
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240183.html">前半解答</a>
+<ul>
+<li>B1、B2のpointの組でB1xB2のpointが一意に定まることの証明</li>
+</ul></li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240184.html">後半解答</a>
+<ul>
+<li>任意の B1, B2のpointの組 がB1xB2のあるpointの射影になってることの証明</li>
+</ul></li>
+</ul></li>
+<li>219ページ上から２つめのダイアグラム、右下はXでなくY（誤植）</li>
+<li>Exercize 14
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240186.html">解答</a></li>
+<li>identity の証明がポイント（解答の下図）</li>
+</ul></li>
+<li>補題: &lt;f,g&gt; o h = &lt;f o h, g o h&gt; ??
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240187.html">解答1</a>
+<ul>
+<li>・・・ hを &lt;&gt; の中に組み入れてる時点で与題を既に使用してるっぽい</li>
+</ul></li>
+<li>ということでやりなおし → <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240188.html">解答2</a>
+<ul>
+<li>universal property を使って書き換え</li>
+<li>「一意に定まる」がポイント（？）</li>
+</ul></li>
+</ul></li>
+<li>練習問題: &lt;p1, p2&gt; = 1_(AxB) を証明せよ。
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240190.html">解答</a>
+<ul>
+<li>ヒント（右図）： e = u</li>
+</ul></li>
+</ul></li>
+<li>Exersize 15
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240191.html">解答</a>
+<ul>
+<li>上図：ξ(α(a,b),x) = ξ(a, ξ(b,x)) for all a,b,x</li>
+<li>下図：ξ(a0,x) = x for all x</li>
+<li>1_A x ξ と α x 1_A がポイント。domainをどうあわせるか？</li>
+</ul></li>
+<li>直観的な理解。Aの要素は関数X-&gt;Xをエンコードしたもの。αは関数の結合。a0は恒等関数。ξはapply。</li>
+<li>A, α、a0はmonoidを形成 → <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240192.html">板書</a>の左側</li>
+</ul></li>
+<li>閑話休題：文脈ってなんですか？
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240192.html">板書</a>の右側
+<ul>
+<li>環境 とだいたい似たようなもの</li>
+<li>dependent type とかこういう感じ</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="commutative-associative-and-identity-laws-for-multiplication">5. Commutative, associative, and identity laws for multiplication</h4>
+<p>of objects</p>
+<ul>
+<li>Exercize 16
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240193.html">解答1</a>, <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240194.html">解答2</a> (同じもの）
+<ul>
+<li>美しい！(･∀･)</li>
+</ul></li>
+<li>ここで最終的に導かれる X → P x Cc は &lt;&lt;fa,fb&gt;,fc&gt;なわけだけど、&lt;fa, fb, fc&gt;にならなくていいの？
+<ul>
+<li>そもそも、&lt;fa, fb, fc&gt; をまだ定義していない。&lt;fa, fb, fc&gt; を &lt;&lt;fa,fb&gt;,fc&gt; と定義する。</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="sums">6. Sums</h4>
+<ul>
+<li>Exercise 17
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240195.html">集合のsum</a></li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240196.html">有向グラフのsum, その1</a>
+<ul>
+<li>sumの構成</li>
+<li>A(arrow)とD(dot)は集合であるから、先の集合のsumの結果を前提</li>
+</ul></li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240197.html">有向グラフのsum, その2</a>, <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200510/ct/CA240198.html">その3</a>
+<ul>
+<li>injectionの構成</li>
+<li>(s1 + s2) o j_1a = j_1d o s1 を s1 + s2 の定義を用いて示す</li>
+<li>あとはt1 + t2 についても同じことを述べて j1完成、j2についても同様に示せる</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="昼休み">昼休み</h3>
+<ul>
+<li>バージョン管理システム
+<ul>
+<li>subversion は使いやすいの？
+<ul>
+<li>(･∀･)イイ！</li>
+<li>CVS でいうタグとかブランチの概念を全部ディレクトリのコピーで代用している</li>
+</ul></li>
+<li>CVS はダメダメ
+<ul>
+<li>Visual Source Safe はもっとダメダメ
+<ul>
+<li>それでも何にもなくて、手元で色々とやっているときよりは価値があった。</li>
+</ul></li>
+<li>CVS と subversion は確か同じ作者</li>
+</ul></li>
+<li>手元のソースにはきちんと管理してあるものだけではなく、適当に作って転がしてあるだけのものがあるけど、これもきちんとバージョン管理した方がいいのかな？
+<ul>
+<li>なんでもバージョン管理に突っ込もう</li>
+<li>そういうものには RCS を使っている</li>
+<li>そういうものには darcs を使いはじめた</li>
+</ul></li>
+<li>darcs 使わないの？
+<ul>
+<li>Haskell の本家のコミュニティでは、結構人が作りかけのものを勝手に cabalise して darcs リポジトリを作っているものを良く見かけるけど (そして、そこにパッチを送ってる)</li>
+</ul></li>
+</ul></li>
+<li>cabal って依存するライブラリとかを検出できる？
+<ul>
+<li>autoconf とかを使って configure でやれっていうのがスタンスだった気がする。最新版は試してないので、今どうなっているか分からないけど。
+<ul>
+<li><a href="http://page.freett.com/shelarcy/diary_2005-09.html#between_ghc6_4_1_and_ghc_6_4">HSQL-1.6 や HaskellDB の CVS HEAD などは、autoconf をやめたせいでいちいちライブラリごとに入れなければいけないという面倒なものになってしまった</a></li>
+</ul></li>
+<li>Setup.(l)hs でそうするように書けば、できる</li>
+</ul></li>
+<li>カオスと複雑系と生物
+<ul>
+<li>カオスの数学的定義は?</li>
+<li>リー・ヨークの定理「F: R-&gt;R が連続であるとする。さらに、Fが基本周期3の周期点を持つとする。そのとき、Fは任意の周期の周期点を持つ」</li>
+<li>シャルコフスキー順序: 3,5,7,9,…,2*3,2*5,2*7,…,2^2*3,2^2*5,2^2*7,…,2^3*3,2^3*5,2^3*7,…2^n,…,2^3,2^2,2^1,1</li>
+<li>シャルコフスキーの定理「F: R-&gt;R が連続であるとする。また、Fは基本周期nの周期点を持ち、nはシャルコフスキーの順序において、kよりも前にあるとする。そのとき、Fは基本周期kの周期の周期点を持つ」</li>
+<li>無限後退</li>
+<li>タルスキの真理階層</li>
+<li>不動点定理</li>
+<li>複雑系の問題 <a href="http://www.math.tohoku.ac.jp/~kuroki/keijiban/e0000.html#e20000224194821" class="uri">http://www.math.tohoku.ac.jp/~kuroki/keijiban/e0000.html#e20000224194821</a></li>
+<li>脳の認識を圏論を使って表現？</li>
+<li><a href="http://www.ritsumei.ac.jp/se/~tjst/doc/n-cat/cs-ncat.html">複雑系と高次元圏論</a></li>
+<li>放送大学でカオスを教えていたのは大木凡人に似た先生だった
+<ul>
+<li><a href="http://www.k.u-tokyo.ac.jp/j/info/pros/kyoujyu/kiban/fukuzatu/fukuzatu/kazuyuki_aihara.html">合原先生</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="二次会-1">二次会</h3>
+<ul>
+<li>自習してないと、間があくとやっぱり忘れる……
+<ul>
+<li>予習してくればいいじゃん -&gt; そのように言われていれば予習してくるけど</li>
+<li>じゃあ、予習してきて、次回はあらかじめ解いてもらった答えをみんなでみるというのはどうだろう</li>
+</ul></li>
+<li>圏論の質問するには
+<ul>
+<li>haskell-jp とは住み分けをしたいと思う</li>
+<li>mixi の圏論勉強会のコミュニティが一番よいんじゃないだろうか？</li>
+<li><a href="http://categorical.org/">圏論メーリングリスト</a>は？
+<ul>
+<li>流量が全然ない</li>
+<li>それなりのレベルの質問をしなければいけないような雰囲気があって、敷居が高い</li>
+<li>自己紹介しなければいけないのも……
+<ul>
+<li>あれはどういう背景を持っている人が参加するのか、知りたいってことでしょ</li>
+</ul></li>
+<li>そもそも流量が全然ないからレベルが測れなくて、それでみんな遠慮しているような感じがあるから、質問をぶつけてこういうことなら質問できるという雰囲気をつくっていくことが重要なんじゃないだろうか？</li>
+</ul></li>
+<li>2ch の圏論スレで聞く
+<ul>
+<li>2ch 使ったことない</li>
+<li>2ch はピンキリ(ピンからキリまで)だけど、自然科学とかプログラミングとかには有用なスレッドがある
+<ul>
+<li>キリには黒い噂も聞く</li>
+<li>ピンとキリって、どっちが良い方で、どっちが悪い方だっけ？ -&gt; <a href="http://www.narupara.com/~netwalker/archives2004/000720.html">ピンが良い方でキリが悪い方</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="https://sourceforge.jp/projects/mephisto">MEPHISTO</a>
+<ul>
+<li>久井 (<a href="http://www.shiro.dreamhost.com/scheme/wiliki/wiliki.cgi?%EF%BF%BD%C8%A4%EF%BF%BD%EF%BF%BD%EB%A1%A3">WiLiKi:とおる。</a>) さんの制約システムによる 3D アニメーション記述言語 (DSL) 実装を行う、未踏ユースのプロジェクト</li>
+<li><a href="https://haskell.org/hawiki/CoMonadArticles">The Essence of Dataflow Programming が公開されて、Comonad や Codata に興味を持った人が Hawiki にリンクを集めている</a>(この論文のプログラムのソースコード自体は <a href="http://plc.inf.elte.hu/cefp/">Central-European Functional Programming School 2005</a> のダウンロードページの <a href="http://plc.inf.elte.hu/cefp/download/Interp.tgz">Interp.tgz</a> にある)けど、これらが参考になるんじゃないかな？</li>
+</ul></li>
+<li>最近 haskell-jp に tanakh さんや Monadius の村主 (nushio) さんなど関西方面の Haskell で有名な人が続々と参加したり、Ruby を実装した <a href="http://mono.kmc.gr.jp/~oxy/hiki.cgi?rtype">RType</a> のアナウンスが出されたりしているものの、反応が薄いことについて
+<ul>
+<li>実際に利用してないし、ソースも見ていないし、特に何か言うことは……
+<ul>
+<li>Monadius は遊んだことはあるけど、ソースを見たことはない</li>
+</ul></li>
+<li>Haskell でこういうことができる、こういう能力があるというアピールをしてくれるのは嬉しいけど、Haskell での実装があって嬉しいかというと微妙
+<ul>
+<li>Haskell で書かれていることによって、アーキテクチャが明確になることに意味がある</li>
+<li>Haskell のソースだと弄れない人がいるから、Python とかで darcs のクローンを作ろうという話がある</li>
+</ul></li>
+</ul></li>
+<li>gonzui の Haskell サポートの作りかけはどうなったの？ 公開しないの？
+<ul>
+<li>今の作りかけのコードを見るより、一から作り直した方が楽だと思う。</li>
+</ul></li>
+<li>Ruby Haskell binding は？
+<ul>
+<li>Haskell から Ruby の eval を呼び出すぐらいしかできない</li>
+<li>ちょっと弄ってあって、今のコードだとコンパイルできない
+<ul>
+<li>それ以前に、Haskell から Ruby のコードを呼び出して、何か嬉しいことはあるのか？</li>
+</ul></li>
+</ul></li>
+<li>奥さんが人狼で結構勝っているという話
+<ul>
+<li>天然狂人なところもあるんだけど、人狼側から「このキャラ殺したくない」って思わせる魅力がある</li>
+</ul></li>
+<li>嫌韓流と韓国
+<ul>
+<li>韓国は存在自体がネタなんじゃないかと思うことが
+<ul>
+<li>米軍を追い出そうとしていたり…</li>
+</ul></li>
+<li>北朝鮮に潰れられると損をすることが眼に見えているので、どの国も今北朝鮮に潰れて欲しくない。生かさず殺さず</li>
+</ul></li>
+<li>自衛隊
+<ul>
+<li>軍隊ではないという建前上、法律的に矛盾するところがあってどうにかして欲しい
+<ul>
+<li>有事を前提に話し合う事自体をタブー視する人たちがいて、議論が全然かみ合わないのはなんとかならないか
+<ul>
+<li>有事法制ができるまでは、上陸されたときに、戦時でも戦車に道交法を適用しなければならなかった。こんなことを是正するのにもすごく揉めた
+<ul>
+<li>上陸される前に手をうちたい -&gt; 日本の国土が広いので全てをカバーするのは無理</li>
+<li>いや、言いたかったのはそういうことじゃなくて、専守防衛で上陸されるまで手を出せないっていうのだと国土に被害がでるから、加えて領海侵犯の時点で手をだしたいな、って</li>
+</ul></li>
+</ul></li>
+<li>すぐそこに海自がいるのに、管轄上手がだせないとか。海自が出て行くべき場面で、海上保安庁(警察)任せになるところとか</li>
+</ul></li>
+<li>憲法を改正して軍隊にすると徴兵制を始めるということを言う人がいるけど、常時訓練されていないような人は欲しくないので、世界的にも徴兵制は廃れてきている
+<ul>
+<li>ドイツで徴兵制が残っているのは、軍にいくかわりにボランティアにいくというオプションでのボランティア活動の規模が大きくなっていて、今更廃止できないため</li>
+<li>韓国はどうして未だに徴兵制を採用してるんだろう？</li>
+<li>スイスの国民皆兵って、どうやってやってるんだろ？</li>
+</ul></li>
+<li>そういう部分での憲法改正自体は文句ないけど、自民党案にしろ民主党案にしろ、憲法を変えるとなると一部ではなく一気に改正してしまおうというところがどうにも賛成できない</li>
+<li>憲法の改正方法って決まってたっけ？ -&gt; いや、決まってないから国民投票の仕方を審議しているところ</li>
+</ul></li>
+<li>朝日の偏向報道とかどうにかならないかな？
+<ul>
+<li>日本はスパイ防止法がないから、その手が朝日のみならず各メディアの上層部に結構くいこんでいるので、まずきちんと報道されることがない</li>
+<li>団塊の世代が安保とかの時代の影響で、左巻きだし</li>
+</ul></li>
+<li>随伴の例
+<ul>
+<li>直積は diagonal functor （Δ:C → C×C） の右随伴</li>
+<li>直和は diagonal functor の左随伴</li>
+<li>自由代数と忘却関手
+<ul>
+<li>自由代数への関手が左随伴、忘却関手がその右随伴になることが多い</li>
+</ul></li>
+<li>興味を持ったので演習としてやってみました。<a href="http://hpcgi2.nifty.com/1to100pen/wiki/wiki.cgi?p=AjointFunctor">随伴関手</a></li>
+</ul></li>
+<li>随伴の右と左はなぜそう呼ぶ?
+<ul>
+<li>hom(F(A),B) 〜 hom(A,G(B)) と書いたときにdomainの側(左)と、codomainの側(右)にくるから?</li>
+</ul></li>
+<li>映画キルビルは突込みどころ満載で面白いらしい
+<ul>
+<li>飛行機の椅子に日本刀ホルダーがついている</li>
+<li>栗山千明がいい味出してる
+<ul>
+<li>今やってる「シン・シティ」の殺人兵器ミホ（デヴォン青木）も結構ポジション的に近い。手裏剣＋二刀流</li>
+</ul></li>
+<li>まだ地上波でTV放送してない。たぶんグロすぎて流せない。</li>
+</ul></li>
+</ul>
+<h2 id="第九回圏論勉強会">第九回圏論勉強会</h2>
+<p>2005-8-13(土) <a href="http://www.coldbreath.jp/access.php">コールドブレス</a> 10:00-18:00</p>
+<h3 id="session-15p179-より">Session 15、p179 より</h3>
+<p>……のつもりが、内容忘却により Session 15 冒頭より</p>
+<ul>
+<li>Excercise 7
+<ul>
+<li>14個あると書いてるけど、12個しかみつからない？？</li>
+</ul></li>
+</ul>
+<h3 id="article">Article �</h3>
+<h3 id="二次会-2">二次会</h3>
+<ul>
+<li>隣の席から GHC とか、プログラミング関係の話題が聞こえるような……
+<ul>
+<li>違う違う、あれはプロレスの話題。GHCは<a href="http://www.noah.co.jp/ghc1.html">ノアって団体のタイトル</a></li>
+</ul></li>
+<li>小泉首相は15日にちゃんと参拝しにいくだろうか？
+<ul>
+<li>本当に行ったら尊敬するね。選挙で負けてしまうだろうけど。</li>
+<li>行ったからといって負けるとは思わないけど、行って負けたらヤバイってのはあるだろうなぁ。個人的にはちゃんと参拝して欲しいけど。</li>
+</ul></li>
+<li>圏論勉強会は論文を読むために型付きλ計算などの型理論の方に進むべきか？ 圏論の基礎をきちんと読めるよう、代数とかやって数学方面に進むべきか？
+<ul>
+<li>まあ今のテキスト読み終わるまでに考えればいいし、間に合わなければ当分論文を読み進めていくんでいいんじゃない？</li>
+</ul></li>
+<li><a href="https://www.haskell.org//pipermail/haskell/2005-August/016208.html">Haskell Standard を改定しないかって話</a></li>
+<li>LLDN
+<ul>
+<li>言語のダメ自慢で Haskell の場合に GHC に対する不満とかあげればたくさんあるけど、Haskell を知らない一般人に分かるようなダメ自慢は難しいよね。</li>
+<li>キミならどう書の電卓って自由課題何がいい？ -&gt; λ計算機とかどうだろう？ -&gt; それでもいいけど、割り算できないのはどうしようか</li>
+<li>Squeak(Smalltalk) はまたデモがすごいんだろうな。 -&gt; そのための機能が最初からたくさんあるし</li>
+</ul></li>
+<li>HD/DVD レコーダーでとってあるはずのビデオが見れないというトラブルについて
+<ul>
+<li>HD/DVD レコーダーでのそういうトラブルってよく聞くよねー
+<ul>
+<li>もともとハードディスクなんで脆いんじゃ</li>
+</ul></li>
+<li>NEC のは Linux を採用しているので、自分で入れ替えたりして自力救済できる
+<ul>
+<li>NEC のってあまり聞かないね。&lt; 宣伝してないから</li>
+</ul></li>
+<li>録画が成功していれば、修理に持っていけば見れる可能性はかなり高いと思う。</li>
+<li><a href="http://www.watch.impress.co.jp/av/docs/20050729/soumu1.htm">(こっちは転送時だけど)コピーワンスでもそういうトラブルが問題になっていた</a></li>
+</ul></li>
+</ul>
+<h2 id="第八回圏論勉強会">第八回圏論勉強会</h2>
+<p>2005-7-2(土) <a href="http://www.coldbreath.jp/access.php">コールドブレス</a> 10:00-18:00</p>
+<p>出席者</p>
+<pre><code>       フク 酒井 久井 　　 |ス
+      +-------------+ 　　 |ク
+ 豊福 |             | 　　 |リ
+      |             | 　　 |｜
+      +-------------+  　　|ン
+       今井 Shelarcy   　　|</code></pre>
+<p>写真 <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200507/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200507/ct/</a></p>
+<h3 id="article-p148-より">Article �、p148 より</h3>
+<h3 id="session-13">Session 13</h3>
+<h3 id="session-14">Session 14</h3>
+<h3 id="session-15">Session 15</h3>
+<h3 id="二次会-3">二次会</h3>
+<ul>
+<li>今後の予定として圏論の基礎を読んでいくのはどうだろうか？
+<ul>
+<li>院生向けにかかれているので、数学の知識がさらりとでてくるので読みこなすのは難しい。</li>
+<li>豊福さんがそういった部分について解説してくれるなら、やってもいいかも。</li>
+</ul></li>
+<li>圏論の基礎知識について初心者にわかりやすく書いたページはあるの？
+<ul>
+<li>なければつくりたい。</li>
+<li>Category の図とかを書くには？
+<ul>
+<li>Visio なんてどうだろうか？</li>
+<li>SVG を使って書くという手も。でも対応しているブラウザが Opera と Amaya くらいで…… Firefox へのサポートってもう入ったっけ？</li>
+</ul></li>
+</ul></li>
+<li>こないだの SICP の飲み会でも話題になったし、<a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/684" class="uri">http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/684</a> にも書いたけど、Haskell Hacks が欲しいな。
+<ul>
+<li>そういう実用的な本も一冊あっても良いかも。</li>
+</ul></li>
+</ul>
+<h2 id="第七回圏論勉強会">第七回圏論勉強会</h2>
+<p>2005-6-11 (土) <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/661">SFC τ：タウ館（大学院棟) 二階 τ22</a> 13:00-18:00</p>
+<p>出席者</p>
+<pre><code>        今井    酒井        |ス
+      +------------------+  |ク
+      |                  |  |リ
+      |                  |  |｜
+      +------------------+  |ン
+       田中 Shelarcy 豊福 　|</code></pre>
+<p>写真 <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200506/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200506/ct/</a></p>
+<h3 id="article-1">Article�</h3>
+<ul>
+<li>英単語とか定義とか
+<ul>
+<li>cohesive … ???</li>
+<li>smooth … 微分可能</li>
+<li>arbitrary map … domain の 任意の point に対して codomain のvalueがuniqueに定まる</li>
+</ul></li>
+<li>カテゴリSの右肩にあるマークをなんと読む？？</li>
+<li><p>人狼BBSは面白いよ</p></li>
+<li>Excersise で下にないものは写真を参照</li>
+<li>Excersise 4
+<ul>
+<li>involution</li>
+<li>不動点：0</li>
+</ul></li>
+<li>Excersise 5
+<ul>
+<li>idempotent</li>
+<li>不動点：0以上</li>
+</ul></li>
+<li>Excersise 6
+<ul>
+<li>α^(-1) (x) = x - 3</li>
+</ul></li>
+<li>Excersise 7
+<ul>
+<li>automorphism ではない</li>
+</ul></li>
+<li>Excersise 10
+<ul>
+<li>b</li>
+<li>No</li>
+</ul></li>
+<li>components (pp.142) の意味
+<ul>
+<li>… グラフの連結成分</li>
+</ul></li>
+<li>Excersise 18 x1 = pa(x1) = p(ax2) = x2</li>
+<li>Excersise 20
+<ul>
+<li>a(x) = y, a(0) = 0 より x0 ≠ x1 ⇒ a(x0) ≠ a(x1) (x0, x1 ∈ X)</li>
+</ul></li>
+<li>Excersise 22
+<ul>
+<li>p(y^) のために p のretraction が定義できない （y^ … y の上に棒）</li>
+</ul></li>
+<li>Excersise 23
+<ul>
+<li>2通り</li>
+</ul></li>
+</ul>
+<h3 id="余談">余談</h3>
+<ul>
+<li>下記漸化式を解く良い方法は？ f(n) = �^(n-1)_{i=1} f(i)f(n-i)
+<ul>
+<li><a href="http://www.ruby-talk.org/cgi-bin/scat.rb/haskell/haskell-jp/662">「木で遊ぶ」</a>の証明のための計算</li>
+</ul></li>
+<li><a href="http://page.freett.com/shelarcy/diary_2005-06.html#hray_and_clean_2_1_1">Clean 2.1.1 に入った Editor 開発のためのライブラリで Arrow</a> 及び (Haskell や Generic Haskell で言う) Generic classes などを使っているようだ。
+<ul>
+<li><a href="http://www.cs.ru.nl/~clean/gec/">Graphical Editor Programming Toolkit</a></li>
+<li><a href="http://sky.zero.ad.jp/~zaa54437/programming/clean/LanguageReport21/Chap7.html">第７章 総称プログラミング</a></li>
+</ul></li>
+</ul>
+<h3 id="二次会-4">二次会</h3>
+<ul>
+<li>読み終わった後どうするか？
+<ul>
+<li>論文をサーベイする回を作る
+<ul>
+<li>みんなで集まってサーベイするだけでは意味ないような……</li>
+</ul></li>
+<li>だれかがサーベイして、それに必要な知識を補ってから読んでいくというのはどうだろうか？
+<ul>
+<li>一人で読むと自分だけでやっていってどんどん先に進めてしまうような感じでむなしいような…</li>
+<li>でも、それを後で他の人に教えるというやり方もありでは？</li>
+</ul></li>
+<li>読みたい論文をまず決めて、それに必要な知識という風に地点を定めてやっていくのはどうだろうか？</li>
+<li>酒井さんの日記にある論文を読んでいく？
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?category=%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD">ヒビルテ:圏論</a></li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?category=%EF%BF%BD%EF%BF%BD%CA%B8">ヒビルテ:論文</a></li>
+</ul></li>
+</ul></li>
+<li><a href="https://www.haskell.org//pipermail/cvs-ghc/2005-June/025451.html">まだだれも試していない……というか試せているはずもない Intel Mac 版 GHC</a>
+<ul>
+<li>いや、Apple の人が試すという可能性がっ!</li>
+<li>GHC が標準開発ツールに…だったらかっこいいな。</li>
+</ul></li>
+<li><a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/620">Haskell の求人は池上さんの投稿のおかげで</a>倍率が高かった模様
+<ul>
+<li>昨日一次面接があった</li>
+</ul></li>
+<li>カテゴリの規則はなぜ identity law と associative law なんだろう？
+<ul>
+<li>半群(結合則)＜モノイド（単位元＋結合則）＜群（単位元＋結合則＋逆元）となるけど、identityをなくしたカテゴリとか別に規則を追加したカテゴリとかもあっておかしくないのでは
+<ul>
+<li>カテゴリはUniversalだから</li>
+<li>逆元の規則を追加したものはある。つまり、mapが全てisomorphism。groupoid</li>
+<li>identityを減らしたものは…???</li>
+<li>モノイドをカテゴリとみなすことができる。オブジェクトはモノイドそのもの(1つだけ）mapはモノイド上の演算。</li>
+<li>逆に対象が唯一つしかない圏をmonoidと定義できる。</li>
+<li>monoidかつgroupoidである圏を群と定義</li>
+</ul></li>
+</ul></li>
+<li>geocity のページを放っておいて消滅 -&gt; 番号なので再利用される
+<ul>
+<li>失恋のメッセージが貼り付けてあって、知らぬ間に自分が失恋したことにされてる</li>
+<li>番号再利用のアルゴリズムは？</li>
+</ul></li>
+</ul>
+<hr>
+<p>最終更新 : 2006/02/21 15:52:45 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

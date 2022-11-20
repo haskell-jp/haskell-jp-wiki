@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Yesod_0.8.2to0.9.3"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Yesod_0.8.2to0.9.3</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Yesod_0.8.2to0.9.3">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Yesod_0.8.2to0.9.3">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Yesod_0.8.2to0.9.3">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Yesod_0.8.2to0.9.3</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#yesod_0.8.2to0.9.3"><span>Yesod_0.8.2to0.9.3</span></a><ul>
+<li><a href="#%E3%81%8B%E3%82%890.9.3%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C">0.8.2から0.9.3への移行</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="yesod_0.8.2to0.9.3"><a href="" class="uri" title="Go to wiki page">Yesod_0.8.2to0.9.3</a></h1>
+<p><a href="Yesod.html" class="uri" title="Go to wiki page">Yesod</a>:0.8.2to0.9.3</p>
+<hr>
+<h2 id="から0.9.3への移行">0.8.2から0.9.3への移行</h2>
+<p><a href="http://www.yesodweb.com/home/snoyberg/blogs/2011/08/yesod-0-9-release-candidate/announcing-yesod-090-release-candidate/migration-guide-yesod-08-to-09.dita">Migration Guide</a>をざっと見ておく。</p>
+<hr>
+<h4 id="今回はghcのバージョンを6.12.3から7.0.3にupdateする">1. 今回はGHCのバージョンを6.12.3から7.0.3にupdateする</h4>
+<p>7.0.*系では7.0.4が最新だけど、Haskell Platformのダウンロードのところで7.0.3でって書かれてるので7.0.3を入れる。</p>
+<pre><code>$ wget http://haskell.org/ghc/dist/7.0.3/ghc-7.0.3-x86_64-unknown-linux.tar.bz2
+$ ./configure
+$ make
+$ sudo make install</code></pre>
+<h4 id="haskell-platform-2011.2.0.1をinstall">2. Haskell Platform 2011.2.0.1をinstall</h4>
+<h5 id="cabal-installをinstallする">cabal-installをinstallする</h5>
+<pre><code>$ wget http://hackage.haskell.org/packages/archive/cabal-install/0.10.2/cabal-install-0.10.2.tar.gz
+$ tar xf cabal-install-0.10.2.tar.gz
+$ cd cabal-install-0.10.2
+$ sh bootstrap.sh</code></pre>
+<p>installできたらcabal updateしておく。</p>
+<pre><code>$ cabal update</code></pre>
+<h4 id="cabal-devのinstall">3. cabal-devのinstall</h4>
+<p>cabal-devをinstallしておく。 こいつはcabalなんだけど、プロジェクト毎にcabal installされたような環境を作って試せるもので、 yesodの開発者が0.8系の開発の際に作ったもの(だったと思う)。 sandbox的な環境の中でやれるので本来のcabal環境を汚さないのが売りかな？ とりあえずyesod的にはyesod develでインタラクティブ開発が出来るんだけど、 yesod –dev develとすることでcabal-devが使われるので安心していろんなライブラリを使ったアプリを試せる。 というわけでyesod的にあった方が便利ってことで入れておく。</p>
+<pre><code>$ cabal install cabal-dev</code></pre>
+<h4 id="yesodのinstall">4. yesodのinstall</h4>
+<pre><code>$ cabal install yesod
+$ sudo apt-get install sqlite3 postgresql libpq-dev
+$ cabal install persistent-sqlite persistent-postgresql</code></pre>
+<p>yesodとsqliteやpostgresqlのinstall。 さらにmongodbなんかもサポートされているので入れてもいい。 けど、ここはmigrateのページなので過去にサポされてなかったDBで作ってるってことは考えない。</p>
+<p>次にscaffoldしたようなコードが必要とするライブラリを入れる。 つまりyesodが必要とするものではなく、scaffoldedなyesodアプリが必要とするライブラリね。</p>
+<pre><code>cabal install hjsmin
+cabal install yesod-default
+cabal install yesod-static
+cabal install web-encodings
+cabal install yesod-newsfeed
+cabal install yesod-sitemap</code></pre>
+<h4 id="修正箇所">5. 修正箇所</h4>
+<ol type="1">
+<li>GHCのupdateによるものだけどTHの[$xhamlet|…|]とかを[xhamlet||]に修正。<strong>$</strong>を消す。</li>
+<li>Migration GuideにもあるけどYesod.Helpers.*がYesod.*になった。つまりHelpersが不要になる。
+<ol type="1">
+<li>ただし、Crudは現状無い。近々にyesod-crud/adminというパッケージが出るらしいので乞うご期待だそうな。</li>
+</ol></li>
+<li>preEscapedTextがText.HamletからText.Blazeに移動</li>
+<li>Migration Guideにまとめられているけど、runFormPost’やstringInput,maybeStringInput,intInputなどが変った。 基本的にはtextFieldとかintFieldと名前を変えた上にmaybeがあるかないかでioptにするかireqが付きます。 たぶんoptional(Maybeの場合)、require(Maybeが無い場合)でしょう。 一方、stringFieldみたいなWidgetになってたものはtextFieldのところはstringInputと同じtextFieldにしてioptやireqのところがaoptとかareqになる模様。</li>
+<li>Migration Guideにある通りSQLのDSLが大幅に変更。これもstringInputなどと同様変更箇所が多いと思うけど難しくないと思います。 Migration Guideに書いてないものを補足しておくと、IN句やNOT IN句は<em>&lt;-.</em>とか<em>/&lt;-.</em>とします。 リスト内包表記の<em>&lt;-</em>のニュアンスかなーと。</li>
+<li><p>KeyがShow/Readできなくなってる。 Keyの構造自体は0.8に上った時に変ったんだったと思うけど、データ構成子を使ったパターンマッチをしてたところは修正対象になる。 例えば、</p>
+<pre><code>getUserR :: UserId -&gt; Handler RepHtml
+getUserR (UserId uid) = do
+   ....</code></pre>
+<p>というコードがあったらマッチできなくてエラーになる。 もし本当に中の数字が必要ならunKeyで取り出すなどしてください。</p>
+<pre><code>getUserR uid = do
+   let uid' = unKey uid</code></pre>
+<p>でも実際にはこんなことせずにuidのまま使っていいはず。 問題になるとしたらunKeyした時に得られるような値をコンテンツなどにシリアライズしている場合。 その場合にはunKeyしてこれまで通りにするか、データ移行できないかを検討する。 私の場合にはアップロードファイルのファイル名をIdで管理していたのでファイル名を変更するsh scriptを書いてデータ移行します。</p></li>
+<li>FilterやOrderもShow/Readできなくなってる。 これは私のアプリの場合だけだけど、カラムによるソートテーブルがあった時にソート情報をクエリパラメータにしてたんだけど、これがread/showで済まなくなったという。 アドバイスを求めたら、手で書いて。って言われたので手で書いてマッピングした。</li>
+<li><p>Model.hsにGADTs拡張が必要だとかYesodPersistクラスのYesodDB型族はYesodPersistBackendになったよとかRenderMessageのインスタンスにする必要あるよとかはMigration Guideに書いてある通りなんで書き換えるなり追加する。</p></li>
+</ol>
+<h4 id="最新のscaffolded-styleヘ">6. 最新のscaffolded styleヘ</h4>
+<hr>
+<p>Last modified : 2011/11/11 08:30:34 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Yesod_0.8.2to0.9.3">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Yesod_0.8.2to0.9.3?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Yesod_0.8.2to0.9.3">Delete this page</a></li>
+      
+    </ul>
+    
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

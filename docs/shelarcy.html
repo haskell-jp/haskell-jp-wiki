@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/shelarcy"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/shelarcy</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/shelarcy">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/shelarcy">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/shelarcy">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/shelarcy</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#shelarcy"><span>shelarcy</span></a><ul>
+<li><a href="#wiliki-%E3%81%AE%E5%86%85%E5%AE%B9%E5%BE%A9%E6%97%A7%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88">WiLiKi の内容復旧のためのスクリプト</a></li>
+<li><a href="#%E9%80%A3%E8%BC%89">連載</a></li>
+<li><a href="#%E6%9C%AA%E8%B8%8F">未踏</a></li>
+<li><a href="#haskell-%E3%81%AB%E3%81%BE%E3%81%A4%E3%82%8F%E3%82%8B%E8%AA%A4%E8%A7%A3">Haskell にまつわる誤解</a></li>
+<li><a href="#haskell-%E3%81%AE%E8%A8%98%E4%BA%8B%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%83%A1%E3%83%A2">Haskell の記事のためのメモ</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="shelarcy"><a href="" class="uri" title="Go to wiki page">shelarcy</a></h1>
+<hr>
+<ul>
+<li>本名:木戸崇裕</li>
+<li><a href="https://haskell.org/haskellwiki/WxHaskell/Development">wxHaskell の開発者の一人</a></li>
+<li><a href="http://mixi.jp/view_community.pl?id=901947">mixi:Haskell Game Magazine</a> の現管理人(引継ぎ)</li>
+<li>手に合う道具を模索の末、Haskell に辿りつく
+<ul>
+<li><a href="http://www.kmonos.net/alang/etc/merd.php">Merd</a> では<a href="http://www.shiro.dreamhost.com/scheme/wiliki/wiliki.cgi?p=Scheme:%EF%BF%BD%EF%BF%BD%EF%BF%BD%D6%A5%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C8%BB%D8%B8%EF%BF%BD%C9%BD%EF%BF%BD%EF%BF%BD&amp;l=jp#1">「X.a.b.c」と書ける</a>ようですね。</li>
+</ul></li>
+<li>Web サイト
+<ul>
+<li><a href="http://page.freett.com/shelarcy/">声なき言葉</a></li>
+</ul></li>
+<li>twitter アカウント
+<ul>
+<li><a href="https://twitter.com/shelarcy">twitter:shelarcy</a></li>
+</ul></li>
+<li>関連ページ
+<ul>
+<li><a href="http://practical-scheme.net/wiliki/wiliki.cgi?shelarcy">WiLiKi:shelarcy</a></li>
+<li><a href="https://www.haskell.org/haskellwiki/User:Shelarcy">HaskellWiki:User:Shelarcy</a></li>
+</ul></li>
+</ul>
+<hr>
+<h2 id="wiliki-の内容復旧のためのスクリプト">WiLiKi の内容復旧のためのスクリプト</h2>
+<p>本家 WiLiKi とは違って、リリースされているもの（およびここで使っているもの）にはまだ前のバージョンに戻る機能がないので(2007/04/21 10:38:27 JST)。</p>
+<ul>
+<li>(2008/06/26 14:17:35 JST)追記:一ヵ月（二ヵ月？）くらい前から新しいバージョンに移行したようなので、今となってはこのスクリプトは不要です。とはいえ、遅延I/Oを適切に扱う方法として参考になると思うので、このテキストは残しておきます。</li>
+</ul>
+<!-- -->
+<pre><code>import Control.Parallel.Strategies (sforce)
+import System.Environment
+import System.IO
+
+main = do
+    args &lt;- getArgs
+    let file = head args
+        process = unlines . map (drop 2) . lines
+    h &lt;- openFile file ReadMode
+    dat &lt;- hGetContents h
+    return $! sforce dat ()
+    hClose h
+    writeFile file $ process dat</code></pre>
+<p>readFile と writeFile で同じファイル名を使うと、<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20070305/263828/?ST=ittrend&amp;P=2">遅延 IO のためそれぞれの操作が衝突してしまいます</a>。<a href="http://www.jmuk.org/diary/2005/11/01/2">この問題の解決方法については向井さんのページに書いてあります</a>が、<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20070305/263828/?ST=ittrend&amp;P=2">seq や $! による簡約の強制は WHNF までにしか簡約してくれない</a>ので全てのデータを取得することはできません。</p>
+<p>…というわけで、先行評価させるために Control.Parallel.Strategies モジュールの sforce 関数（いわゆる deepseq 関数です。微妙な違いはありますが。）を使いました。</p>
+<p>(2007/11/04 00:39:31 JST)追記：GHC 6.8.1 では sforce 関数や force 関数等は非推奨になりました。</p>
+<pre><code>$ runhaskell Restore.hs test.txt
+
+Restore.hs:1:36:
+    Warning: Deprecated use of `sforce'
+             (imported from Control.Parallel.Strategies):
+             Lolita-specific hacks.</code></pre>
+<p>なので、今後は <a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20070605/273615/?P=2&amp;ST=ittrend">NFData クラスの rnf メソッド</a>を使うようにした方が良いと思います。</p>
+<p>rnf メソッドを使うようにした修正版</p>
+<pre><code>import Control.Parallel.Strategies (rnf)
+import System.Environment
+import System.IO
+
+main = do
+    args &lt;- getArgs
+    let file = head args
+        process = unlines . map (drop 2) . lines
+    h &lt;- openFile file ReadMode
+    dat &lt;- hGetContents h
+    return $! rnf dat
+    hClose h
+    writeFile file $ process dat</code></pre>
+<p>(2010/10/19 00:44:29 JST)追記：parallel 3.0.0.0 では NFData クラスが parallel パッケージの Control.Parallel.Strategies モジュールから再エクスポートされなくなりました。なので、rdeepseq 関数か、deepseq パッケージの DeepSeq モジュールを使う必要があります。</p>
+<p>rdeepseq 関数を使うようにした修正版</p>
+<pre><code>import Control.Parallel.Strategies (rdeepseq, withStrategy)
+import System.Environment
+import System.IO
+
+main = do
+    args &lt;- getArgs
+    let file = head args
+        process = unlines . map (drop 2) . lines
+    h &lt;- openFile file ReadMode
+    dat &lt;- hGetContents h
+    return $! withStrategy rdeepseq dat
+    hClose h
+    writeFile file $ process dat</code></pre>
+<p>deepseq パッケージを使うようにした修正版</p>
+<pre><code>import Control.DeepSeq (rnf)
+import System.Environment
+import System.IO
+
+main = do
+    args &lt;- getArgs
+    let file = head args
+        process = unlines . map (drop 2) . lines
+    h &lt;- openFile file ReadMode
+    dat &lt;- hGetContents h
+    return $! rnf dat
+    hClose h
+    writeFile file $ process dat</code></pre>
+<h2 id="連載">連載</h2>
+<p>ITpro の方に目次ができたので、とりあえずここに載せておきます。とりあえず、つっこみが多くなるまでは別ページには分けないという形で。</p>
+<ul>
+<li><a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248215/">連載:「本物のプログラマはHaskellを使う」の目次</a></li>
+</ul>
+<p>何か連載をさすページ名を作って、「Haskellプログラミング」ともどもその下におくという形にしてしまった方が良いのかもしれませんが、適当な名前がちょっと思い浮かびません。ITpro は Magazine には分類できなそうですし。Article かなぁ？</p>
+<p>(2007/03/07 09:03:56 JST)追記:ここに書いていても（あんまり）見ている人がいないとの意見を聞いたため、ページを作成することにしました。</p>
+<ul>
+<li><a href="本物のプログラマはHaskellを使う.html" class="uri" title="Go to wiki page">本物のプログラマはHaskellを使う</a></li>
+</ul>
+<h2 id="未踏">未踏</h2>
+<p>未踏でやっていることが分かるように、リンクを張っておきます。</p>
+<ul>
+<li><a href="https://www.ipa.go.jp/jinzai/esp/2004mito2/gaiyou/9-6.html">IPA の2004年度第2回未踏ソフトウェア創造事業採用概要</a></li>
+<li><a href="https://www.ipa.go.jp/jinzai/esp/2004mito2/kaihatuseika.html">2004年度第２回未踏ソフトウェア創造事業 開発成果＆PMの評価</a>
+<ul>
+<li><a href="https://www.ipa.go.jp/jinzai/esp/2004mito2/mdata/9-6.html">2004年度第2回未踏ソフトウェア創造事業 採択案件評価書</a></li>
+</ul></li>
+<li><span class="citation">[@IT の未踏ソフトウェア創造事業の告知記事]</span>(http://www.atmarkit.co.jp/ad/ipa/mitou0408/pj06/framework.html)
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ad/ipa/mitou0408/top/enquete0508_index.html">開発者まとめアンケートと酒井PMの「総評」</a></li>
+</ul></li>
+<li><a href="http://page.freett.com/shelarcy/log/2006/diary_06.html#preview_release_of_kamiariduki">Preview Version of Kamiraiduki Released (2006年6月2日)</a>
+<ul>
+<li>Preview のコードの重複部とか FFmpeg の膨大な無駄部分とか要整備</li>
+</ul></li>
+</ul>
+<h2 id="haskell-にまつわる誤解">Haskell にまつわる誤解</h2>
+<p>Haskell では正格評価ができない。</p>
+<ul>
+<li>この噂はどこからでてきたんでしょうか？ <a href="http://www.sampou.org/haskell/report-revised-j/decls.html#strictness-flags">正格性フラグ</a>や<a href="http://www.sampou.org/haskell/report-revised-j/basic.html#sect6.2">正格適用関数</a>を使うことで正格評価を強制することができます。</li>
+</ul>
+<p>Clean は Haskell の XX を解決するために……</p>
+<ul>
+<li>不正確な議論。Haskell は非正格純粋関数型言語の共通の汎用言語基盤に位置付けられているので、当然ながら Clean からも成果を取り入れています。</li>
+<li>むしろ Lisp と Scheme の関係だと捉えたほうが良いかもしれません。</li>
+<li><p>Clean 1.0 が Uniqueness Type を導入したのと Haskell 1.3 が Monad を導入したのは、ほぼ同時期です。</p></li>
+<li><a href="http://practical-scheme.net/wiliki/wiliki.cgi?Shiro">WiLiKi:Shiro</a>: 私はCleanは知らないのですが、最近c.l.lispで話題になって、 そこでc.l.functionalでのHaskellとCleanの比較の記事が紹介されていました→ <a href="https://groups.google.com.au/groups?selm=3D2D52DE.93BEF1B1@info.unicaen.fr">http://groups.google.com.au/groups?selm=3D2D52DE.93BEF1B1%40info.unicaen.fr</a>
+<ul>
+<li>そこでも正格性という言葉が……どうしてみんなそれを強調するんだろうと思っていたのですが、そういえば Clean にはいくつか正格文脈と遅延文脈を分ける規則や正格性 analyzer による自動正格性解析があるんでしたね。この辺りにも記事で指摘されている主義の違いがよく現れています。–shelarcy</li>
+</ul></li>
+</ul>
+<h2 id="haskell-の記事のためのメモ">Haskell の記事のためのメモ</h2>
+<dl>
+<dt>fix</dt>
+<dd>
+</dd>
+<dt>繰り返しと再帰</dt>
+<dd>
+</dd>
+<dt>継続</dt>
+<dd><a href="http://practical-scheme.net/wiliki/wiliki.cgi?iriyak">WiLiKi:iriyak</a> でリファレンスのポインタを列挙
+</dd>
+</dl>
+<hr>
+<p>Last modified : 2010/10/19 00:55:08 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/shelarcy">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/shelarcy?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/shelarcy">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/shelarcy" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

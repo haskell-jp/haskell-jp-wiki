@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/HowTo_QuickCheck"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/HowTo_QuickCheck</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/HowTo_QuickCheck">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/HowTo_QuickCheck">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/HowTo_QuickCheck">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/HowTo_QuickCheck</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#howto_quickcheck"><span>HowTo_QuickCheck</span></a><ul>
+<li><a href="#quickcheck-%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B">QuickCheck とは何か。</a></li>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEquickcheck">はじめてのQuickCheck</a></li>
+<li><a href="#%E3%81%A4%E3%81%A5%E3%81%8F">つづく?</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="howto_quickcheck"><a href="" class="uri" title="Go to wiki page">HowTo_QuickCheck</a></h1>
+<p><a href="HowTo.html" class="uri" title="Go to wiki page">HowTo</a>:QuickCheck</p>
+<hr>
+<p>QuickCheck の使い方を覚えたいなぁ。というわけで、まだこれから。</p>
+<hr>
+<p>と、誰かが書いてから一向に文章が増えないので、僕も挑戦しよう。</p>
+<h2 id="quickcheck-とは何か">QuickCheck とは何か。</h2>
+<p>プログラムの満たすべき「性質」を定義すると、その性質を本当に満たしているかどうかを 確認する「テスト」を“自動的に”生成して検査するライブラリ。</p>
+<ul>
+<li><a href="http://www.cs.chalmers.se/~rjmh/QuickCheck/">QuickCheckのページ</a></li>
+<li><a href="http://www.cs.chalmers.se/~rjmh/QuickCheck/manual.html">QuickCheckのマニュアル</a>
+<ul>
+<li><a href="http://haskell.g.hatena.ne.jp/taninsw/20060619/p4">マニュアルの日本語訳その1</a>、<a href="http://haskell.g.hatena.ne.jp/taninsw/20060620/p1">その2</a></li>
+</ul></li>
+</ul>
+<h2 id="はじめてのquickcheck">はじめてのQuickCheck</h2>
+<p>英語が平気な人は、QuickCheck のマニュアルを読んだ方が良い。</p>
+<pre><code>  import Debug.QuickCheck
+  
+  prop_true x = True
+    where types = x::Int
+  prop_false x = False
+    where types = x::Int
+  
+  prop_head x = x == head [x]
+    where types = x::Int
+  prop_head' x xs = x == head (x:xs)
+    where types = (x::Int, xs::[Int])</code></pre>
+<p>接頭辞 prop_ には何の意味もない。適当な名前 (i_want_to_check x = … ) でもよい。 ただし、引数が最低一つは必要で、かつ、引数の型を “types” という関数で教える必要がある(テストできる型に型推論できる場合はその必要はないが、しかしテストできる型が何かなんて最初は知らないので…)。 というのは、自動生成されるテストは引数の型を利用して作られるからである。 (型を持たない言語(Erlang)にもトリックを利用してQuickCheckが移植されているらしい)</p>
+<pre><code>  *Main&gt; quickCheck prop_true
+  OK, passed 100 tests.
+  *Main&gt; quickCheck prop_false
+  Falsifiable, after 0 tests:
+  0
+  *Main&gt; quickCheck prop_head
+  OK, passed 100 tests.
+  *Main&gt; quickCheck prop_head'
+  OK, passed 100 tests.</code></pre>
+<ul>
+<li><a href="shelarcy.html" class="uri" title="Go to wiki page">shelarcy</a>(2008/04/09 13:45:06 JST):確かに GHCi や Hugs などの対話環境上で使う場合には何も意味はありませんが、かといって接頭辞 prop_ を使うということに何の意味もないということはありませんよ。連載の方にも書きましたが、<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20080408/298292/?P=2&amp;ST=develop">接頭辞 prop_ は「quickCheck という自動テスト用のスクリプトで QuickCheck を使用するテストであるかどうかを判断する」のに使われています</a>。また、こうした慣習が今後他の自動化ツールを作る上で参考になっていくと思うので。</li>
+<li>まあ、確かに<a href="http://www.cs.chalmers.se/~rjmh/QuickCheck/manual_body.html#4">マニュアルの quickCheck スクリプトの説明</a>では全然言及されておらず、スクリプトをきちんとダウンロードして確認した人しか気づかないことではあるのですが。</li>
+</ul>
+<p><a href="https://www.gdargaud.net/Humor/OddPrime.html">如何にして全ての奇数は素数たることを証明せしや?</a></p>
+<p>小泉総理: 1 は素数。3 は素数。5 は素数。7 は素数。全てに明確に答弁している。</p>
+<pre><code>  primes = map head $ iterate sieve [2..]
+  sieve (p:xs) = [ x | x &lt;- xs, x `mod` p /= 0]
+  
+  prop_odd_prime x = (mod x 2) == 1 &amp;&amp; (x &gt; 2) ==&gt; elem x (take 1000 primes)
+
+  *Main&gt; quickCheck prop_odd_prime
+  Falsifiable, after 26 tests:
+  9  </code></pre>
+<h2 id="つづく">つづく?</h2>
+<hr>
+<p>Last modified : 2008/04/09 19:54:19 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/HowTo_QuickCheck">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/HowTo_QuickCheck?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/HowTo_QuickCheck">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/HowTo_QuickCheck" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

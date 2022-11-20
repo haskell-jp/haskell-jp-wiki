@@ -1,0 +1,646 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/グローバル変数が欲しい理由？</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/グローバル変数が欲しい理由？</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E5%A4%89%E6%95%B0%E3%81%8C%E6%AC%B2%E3%81%97%E3%81%84%E7%90%86%E7%94%B1"><span>グローバル変数が欲しい理由？</span></a><ul>
+<li><a href="#%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E5%A4%89%E6%95%B0%E3%81%8C%E6%AC%B2%E3%81%97%E3%81%84%E7%90%86%E7%94%B1-1">グローバル変数が欲しい理由？</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="グローバル変数が欲しい理由"><a href="" class="uri" title="Go to wiki page">グローバル変数が欲しい理由？</a></h1>
+<hr>
+<h3 id="グローバル変数が欲しい理由-1">グローバル変数が欲しい理由？</h3>
+<p><a href="http://d.hatena.ne.jp/kazu-yamamoto/20090110/1231552839">グローバル変数が欲しい理由</a>っていうエントリを見まして，忙しかったのでズイブン遅くなっちゃったけど，ちょっと考えてみます．</p>
+<p>実はコメントしている<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>が話をした同僚ってのは私です． で，<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>は完成したプログラムを公開してこうすればいいんじゃない的なブログを書いてますけど， これでは多分相手はナットクしないんじゃねーかなーと思うわけ． だってグローバル変数を避けて実装すりゃ，そらそうでしょうよって思うだけだもの．</p>
+<p>そうじゃなくて<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>をはじめとしてHaskellerがグローバル変数を欲しくならないのか， それとも禁欲的に自分に制約をかけてるだけなのかを示さなきゃならんと思うわけですよ．</p>
+<p>確かにグローバル変数が欲しいとか引数に持ち回らなきゃいけないのってイマイチとか， どっかで聞いたようなセリフだよなぁ．(^^;)<br>
+いや，言いましたよワタシも．</p>
+<p>でも，別に「昔はオレもそうだった」とカッコつけて悦に入りたいわけじゃなくて， 今でもどうかすると同じジレンマっていうかストレスを感じる可能性はあると思ってて， この際「グローバル変数が欲しくなるホントの理由」を明確にしておきたいと思うわけです．</p>
+<p>ですが，机上の空論で議論しても無駄だと思うんですよね．<br>
+実は自分なりには結論がすでにあって，そのためにはあーだこーだと抽象的な議論をしてもムダと思ってるわけです． その自分なりの結論がホントかどうか改めて再確認したいわけです．</p>
+<p>つーわけで，簡単なアプリを実装します． Haskellにおけるプログラミングスタイルというやつに沿って実況中継的に説明します． で，このような開発の仕方をするとどうなるか？というのを皆さんにもトレースしてもらって， それでもグローバル変数を欲しくなるのか？ ならないとしたらなんでなのかを考察あーんど議論しましょうよ．というのが今回のモチベーションでつ．</p>
+<h4 id="とりあえずざっくり型で設計">とりあえずざっくり型で設計</h4>
+<p>とりあえず作ろうとしてるのはcatにします． オプションとして-nくらい持つようにしてみようか． 先頭に行カウントを出すやつ． そこまでやっておけば増やすのは勝手にしてってことで(投げやり)．</p>
+<pre><code>main :: IO ()
+main = undefined</code></pre>
+<p>これはいいっすよね． お約束ってことで．</p>
+<p>で，フィルタプログラムってどういう型になるかなーって考えると</p>
+<pre><code>prog :: String -&gt; String
+prog = undefined</code></pre>
+<p>って感じですかね？ まーいいんじゃないでしょうか．</p>
+<p>とりあえずC-c,C-lでロードして型チェックする． 型チェックできるものなんて無いんだけど，もう癖にしちゃっておく． 手が止まったらC-c,C-lです．</p>
+<p>えっとオプションを取って，それによって振る舞いをかえたいんだからオプションに依存するんだろう． いやいや，それはフィルタプログラムの型じゃなくてフィルタプログラムを生成する関数か．</p>
+<pre><code>genProg :: [Option] -&gt; (String -&gt; String)
+genProg = undefined</code></pre>
+<p>こんな感じ？ あ，ここでいきなり[Option]とかリストに決めちゃうのはやめ．</p>
+<pre><code>genProg :: Options -&gt; (String -&gt; String)
+genProg = undefined</code></pre>
+<p>キモチ的にはオプションの集まりをもらってそれに応じたフィルタプログラムを 返してくれるものってことでこうかなとりあえず． 型の宣言にある-&gt;は右結合だから(String -&gt; String)のカッコは不要だけどなんかprogと同じ型だよってつもり． だったらなんか名前つけれーってことで．</p>
+<pre><code>type FilterProgram = String -&gt; String</code></pre>
+<p>これでC-c,C-lでロード．</p>
+<pre><code>*Main&gt; :load "/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs"
+[1 of 1] Compiling Main             ( /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs, interpreted )
+
+/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:7:11:
+    Not in scope: type constructor or class `Options'
+Failed, modules loaded: none.
+Prelude&gt; </code></pre>
+<p>あーそっか^^;<br>
+Optionsなんてデッチアゲだった．</p>
+<pre><code>type Options = [Option]
+data Option = CFlag | File String</code></pre>
+<p>まー全然考えてないから後で別ものになるかもしれないけど． とりあえずCオプションだけ対応しておこう． あとは入力ファイル名を引数でもらうはずなのでFileというデータ構成子も用意しておく． これでC-c,C-lは通った．</p>
+<p>Optionsはどっから？ということでgetArgsがソースになるはずなんだけど． とりあえず型を見ておく．</p>
+<p>まずgetArgsを使うためにSystemをimportすっかな．</p>
+<pre><code>import System</code></pre>
+<p>これ書いてからロードして型をチェック．</p>
+<pre><code>*Main&gt; :t getArgs
+getArgs :: IO [String]
+*Main&gt; </code></pre>
+<p>あーそうだったそうだった．IO [String]なんだよな． これ見ていきなりIOがついてるーって戦々恐々になるヒトもいるけど， どーってことはない． 引数をもしHaskellプログラマが自分で与えられるとしたら，</p>
+<pre><code>args :: [String]
+args = ["file.-c", "txt",...]</code></pre>
+<p>みたいに書くじゃん？ でもさー与えられないんだよね．だってプログラムの実行時に実行する人が与えるものだから． つまりHaskellプログラムの外のリソースなわけですよ． だから[String]ってわけにはいかず，<strong>外部リソースにある[String]</strong>ってコトになっちゃうわけ． もちっと俗っぽく(？)言えば<strong>入出力して手に入いる[String]</strong>って型なんだよね． IOってのはそういう修飾がついたものだと思えばよろしい． だからコード書くときにはそれがプログラムの外部リソースにあるなーって思ったら IOつけとけってことで割り切っちゃってください．</p>
+<p>ともかくgetArgsで取れるのがIO [String]なんだけど[String]が相手なので， こいつからOptionsを構成できる関数がありゃいーわけだよね．</p>
+<pre><code>parseOpt :: [String] -&gt; Options
+parseOpt = undefined</code></pre>
+<p>これでいいっしょ． OptionsがparseOptで作れたとしようか． そうすっと次に欲しくなるのはなんだろ． あー入力ストリームっつーか入力文字列を作る部分だよね． OptionsにはFile “text.txt”みたいのがあるハズだから，</p>
+<pre><code>getInputs :: Options -&gt; [String]
+getInputs = undefined</code></pre>
+<p>こうかな． 与えられた入力ファイルが複数あるかもしれないので[String]ってリストになってる． リスト内の要素一つで1ファイルの中身全部ね．</p>
+<p>あー!メンゴメンゴ(死語)． さっき自分で言ったばっかじゃん．(ｗ 入力文字列はファイルから取るんだから外部リソースにあるんだった．</p>
+<pre><code>-- キモチ的には外にある文字列のリストだよーん
+getInputs :: Options -&gt; IO [String]</code></pre>
+<p>これでまたC-c,C-l．</p>
+<p>あと何が足りないものは．．．． あーフィルタプログラムを入力に適用してあげなきゃ． 良い名前が思い浮かばないけどとりあえずrunProgjで勘弁．</p>
+<pre><code>runProg :: FilterProgram -&gt; String -&gt; IO ()
+runProg = undefined</code></pre>
+<p>フィルタプログラムをもらって処理対象の文字列をもらってIO ()で外の世界に書き出しちゃうってことで． IO ()は外部のリソース()が欲しいわけじゃないんで，さっきの説明がすでに破綻してっけどゴメンね． 書き出すときは欲しいものがないから()とか強引にナットクしてくれませんか．</p>
+<p>今のところこんな感じでなんか全体としては揃ってそうだからいいかな．</p>
+<pre><code>import System
+
+main :: IO ()
+main = undefined
+
+prog :: FilterProgram
+prog = undefined
+
+-- genProg :: Options -&gt; (String -&gt; String)
+genProg :: Options -&gt; FilterProgram
+genProg = undefined
+
+type FilterProgram = String -&gt; String
+
+type Options = [Option]
+data Option = CFlag | File String
+
+parseOpt :: [String] -&gt; Options
+parseOpt = undefined
+
+getInputs :: Options -&gt; IO [String]
+getInputs = undefined
+
+runProg :: FilterProgram -&gt; String -&gt; IO ()
+runProg = undefined</code></pre>
+<p>一応String -&gt; StringをFilterProgramに書きかえたんだけど，progって必要か？とか思ってしまった． だってさーこれをgenProgが生成するんでしょ？ 一個じゃなくてオプションによって選択するわけだから今書かなくていーじゃん． ってことで削っちゃえ．ということで削りました．</p>
+<pre><code>import System
+
+type FilterProgram = String -&gt; String
+
+type Options = [Option]
+data Option = CFlag | File String
+
+genProg :: Options -&gt; FilterProgram
+genProg = undefined
+
+parseOpt :: [String] -&gt; Options
+parseOpt = undefined
+
+getInputs :: Options -&gt; IO [String]
+getInputs = undefined
+
+runProg :: FilterProgram -&gt; String -&gt; IO ()
+runProg = undefined
+
+main :: IO ()
+main = undefined</code></pre>
+<p>順番とか整理してこんな感じ．</p>
+<h4 id="とりあえずrunprogを実装">とりあえずrunProgを実装</h4>
+<p>じゃあイメージ出来てそうな所から実装します． まずrunProgかな．</p>
+<pre><code>runProg :: FilterProgram -&gt; String -&gt; IO ()
+runProg f inp = putStr $ f inp</code></pre>
+<p>フィルタプログラムにソースになる文字列を与えてputStrすればおしまい． これを</p>
+<pre><code>runProg f = putStr . f</code></pre>
+<p>と書いてもよい． これは「<strong>runProg</strong>は<strong>f</strong>でフィルタしてから<strong>putStr</strong>する」というキモチで書いてる． (.)は右してから左するっていう処理を繋ぐものだからunixの<strong>|</strong>みたいなもんだと思えば当たらずとも遠からず． ここではカッコつけずに最初の形でいきまーす． C-c,C-lでロードもできるしおっけーでーす． 酒入ってるからハイテンションでーす． プログラム書くときはアルコール入れるとキモチいーでーす．</p>
+<h4 id="mainを実装しましょう">mainを実装しましょう</h4>
+<p>えっと，じゃあ次は個人的にはmainを書かないと他がイメージできないのでmainを実装すっかな．</p>
+<pre><code>main = getArgs &gt;&gt;=
+       \argv -&gt; let ...</code></pre>
+<p>えーと，getArgsでIO [String]な引数が貰えるでしょ． そいつを(&gt;&gt;=)でつないで[String]にして，こいつをargvとしておくか．</p>
+<pre><code>main = getArgs &gt;&gt;=
+       \argv -&gt; let ...
+                in mapM_ (runProg f) inputs</code></pre>
+<p>本体はこんな感じだよな． inputsは入力ファイルのストリームのリスト[IO String]だろうか． あれ？なんか違う？</p>
+<pre><code>*Main&gt; :t mapM_
+mapM_ :: (Monad m) =&gt; (a -&gt; m b) -&gt; [a] -&gt; m ()</code></pre>
+<p>mapM_はこーゆー型だから，inputsは[String]じゃないとダメか． runProg fの型は大丈夫かいな？</p>
+<pre><code>*Main&gt; :t runProg id
+runProg id :: String -&gt; IO ()</code></pre>
+<p>これが(a -&gt; m b)の部分なのでaがString，mがIO,bが()だ． そーすっとinputsは[String]であってるかな．</p>
+<p>うーん．なんかファイルの中身は外部にあるからIOがどっかで絡むはずだけど，とりあえずこのまま進めよう．</p>
+<pre><code>main = getArgs &gt;&gt;=
+       \argv -&gt; let f = genProg opts        -- フィルタ f はoptsで決まる(optsはOptionsをもらえるつもり)
+                    opts = parseOpt argv    -- parseOptにargvくわせてOptions型のoptsがもらえる
+                    inputs = getInputs opts -- getInputsでIO [String]ができる
+                in mapM_ (runProg f) inputs -- あら？</code></pre>
+<p>キモチ的には横にコメント書いたとおり． で，ここで気付くんだよなーアホですが． こう書いておいて，C-c,C-lした時に [String]を期待してんのにIO [String]が来てるよクソヤロウと叱られて気付く．</p>
+<pre><code>Prelude&gt; :load "/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs"
+[1 of 1] Compiling Main             ( /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs, interpreted )
+
+/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:25:37:
+    Couldn't match expected type `[String]'
+           against inferred type `IO [String]'
+    In the second argument of `mapM_', namely `inputs'
+    In the expression: mapM_ (runProg f) inputs
+    In the expression:
+        let
+          f = genProg opts
+          opts = parseOpt argv
+          inputs = getInputs opts
+        in mapM_ (runProg f) inputs
+Failed, modules loaded: none.
+Prelude&gt; </code></pre>
+<p>inputsはIO [String]だからmapM_式の形が違うわ． まーこれは簡単だけどな．</p>
+<pre><code>main :: IO ()
+main = getArgs &gt;&gt;=
+       \argv -&gt; let f = genProg opts
+                    opts = parseOpt argv
+                    inputs = getInputs opts
+                in mapM_ (runProg f) =&lt;&lt; inputs -- =&lt;&lt;を入れただけ</code></pre>
+<p>これでC-c,C-lでうまくロードでけたー． mainができたってことでいいのかな．</p>
+<h4 id="parseoptの実装">parseOptの実装</h4>
+<p>じゃあparseOptを作ろうか． これがないとgenProgとかgetInputsとかがどうやって作れんのかわかんないし．</p>
+<pre><code>parseOpt :: [String] -&gt; Options
+parseOpt (x:xs) = ...</code></pre>
+<p>うーんと，順番に文字列をOptionに置き換えていって， 最後に蓄積したやつを返すんだよな． ここで(x:xs)とかパターンマッチしちゃうとよくないかな． parse’をつかって累積変数を用意するか．(なんかfoldlでいけそうだけど)</p>
+<pre><code>parseOpt :: [String] -&gt; Options
+parseOpt argv = parse' argv []
+    where parse' []        opts = opts
+          parse' ("-c":xs) opts = parse' xs (CFlag:opts)
+          parse' (x:xs)    opts = parse' xs (File x:opts)</code></pre>
+<p>これでいけたか． これでもいいんだけど，fold系で書けるよな．</p>
+<pre><code>*Main&gt; :t foldr
+foldr :: (a -&gt; b -&gt; b) -&gt; b -&gt; [a] -&gt; b</code></pre>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%E3%81%A4%E3%81%BE%E3%82%8AOptions">Option</a>がseedになって[String]が処理対象リストになって 返して欲しいのが[Option]ってことですね． じゃあとりあえずfoldrでいっとこう． これが大抵天然自然だからね． そうすると型としては</p>
+<pre><code>foldr :: (String -&gt; [Option] -&gt; [Option]) -&gt; [Option] -&gt; [String] -&gt; [Option]</code></pre>
+<p>って感じになるってことでファイナルアンサー？</p>
+<pre><code>parseOpt :: [String] -&gt; Options
+parseOpt argv = foldr f [] argv
+    where f = undefined</code></pre>
+<p>型だけ見てそれっぽくやるとするとこんな感じかな． fはまだ決めてない(ｗ<br>
+とりあえずundefinedのままでC-c,C-lで型チェックOKなんだから安心して進めちゃう．</p>
+<pre><code>parseOpt :: [String] -&gt; Options
+parseOpt argv = foldr f [] argv
+    where f :: (String -&gt; [Option] -&gt; [Option])
+          f "-c" opts = CFlag:opts
+          f x    opts = (File x):opts</code></pre>
+<p>こうなりますね．うーんあんま最初のとかわりバエしない．．． ってことで，まーどっちでもいーや． じゃあ試してみよう!</p>
+<pre><code>*Main&gt; parseOpt ["-c","file.txt"]
+
+&lt;interactive&gt;:1:0:
+    No instance for (Show Option)
+      arising from a use of `print' at &lt;interactive&gt;:1:0-25
+    Possible fix: add an instance declaration for (Show Option)
+    In a stmt of a 'do' expression: print it</code></pre>
+<p>う？，あーshowできないって言ってんのね．</p>
+<p>ってことで，ここに至って</p>
+<pre><code>data Option = CFlag | File String deriving Show</code></pre>
+<p>という風にOptionをShowできるようにします． それから改めてC-c,C-lでロードしてから試す．</p>
+<pre><code>*Main&gt; parseOpt ["-c","file.txt"]
+[CFlag,File "file.txt"]
+*Main&gt; </code></pre>
+<p>おし．</p>
+<h4 id="getinputsの実装">getInputsの実装</h4>
+<p>じゃあgetInputsを実装てみよう．</p>
+<pre><code>getInputs :: Options -&gt; IO [String]
+getInputs opts = let ...
+                 in mapM_ readFile fpaths</code></pre>
+<p>なんとなくこんな感じかしら．</p>
+<pre><code>*Main&gt; :t readFile
+readFile :: FilePath -&gt; IO String</code></pre>
+<p>readFileの型はファイルの名前を与えればその名前の外部リソースであるファイルの中身であるIO Stringを返すわけでしょ． fpathsというのが<a href="https://wiki.haskell.jp/Old/sampou.org/%E3%81%A4%E3%81%BE%E3%82%8A%5BFilePath%5D%E3%81%A0%E3%81%A8%E6%80%9D%E3%81%86%E3%82%82%E3%81%AE">String</a>のつもりなので， えーっといいのかな．わからんわ．つか考えるの邪魔くせ．</p>
+<pre><code>getInputs opts = let fpaths :: [String]
+                     fpaths = undefined
+                 in mapM_ readFile fpaths</code></pre>
+<p>こうしておいて，C-c,C-lしてみよっと．型チェックまんせー．</p>
+<pre><code>Prelude&gt; :load "/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs"
+[1 of 1] Compiling Main             ( /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs, interpreted )
+
+/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:14:20:
+    Couldn't match expected type `[String]' against inferred type `()'
+      Expected type: IO [String]
+      Inferred type: IO ()
+    In the expression: mapM_ readFile fpaths
+    In the expression:
+        let
+          fpaths :: [String]
+          fpaths = undefined
+        in mapM_ readFile fpaths
+Failed, modules loaded: none.</code></pre>
+<p>あらら？えーっと14行目の20文字目ってmapM_のところか． なんでだ？外部リソースな[String]が欲しいのに()だからか． mapMの方だね．了解，了解．</p>
+<pre><code>getInputs :: Options -&gt; IO [String]
+getInputs opts = let fpaths :: [String]
+                     fpaths = undefined
+                 in mapM readFile fpaths -- mapM_じゃなくてmapMの方だったorz</code></pre>
+<p>おっけー，これでロードでけた． じゃあとはfpathsを定義すればおしまい？</p>
+<pre><code>getInputs :: Options -&gt; IO [String]
+getInputs opts = let fpaths :: [String]
+                     fpaths = getFileNames fopts -- File xxxなOptionのリストからファイル名のリストを返す
+                     fopts = filter isFileName opts -- File xxxなOptionだけを取り出してリストにする
+                 in mapM readFile fpaths</code></pre>
+<p>こんな風になってくれればいいかな，とか． ってするとisFielNameとgetFileNamesが必要になりますた．</p>
+<pre><code>isFileName :: Option -&gt; Bool
+isFileName = undefined
+
+getFileNames :: Options -&gt; [String]
+getFileNames = undefined</code></pre>
+<p>今度はこいつらを実装する必要がでてきちゃったね． つっても簡単簡単． なんてこたぁない．</p>
+<pre><code>isFileName :: Option -&gt; Bool
+isFileName (File _) = True
+isFileName _        = False
+
+getFileNames :: Options -&gt; [String]
+getFileNames opts = map getFileName opts
+    where getFileName (File f) = f
+          getFileName _        = error "Should not reach here."</code></pre>
+<p>これはパツイチですな． ロードもできました．</p>
+<h4 id="genprogの実装">genProgの実装</h4>
+<p>あとはgenProgか．とりあえずこいつは最初はオプション無視のidでしょ．</p>
+<pre><code>genProg :: Options -&gt; FilterProgram
+genProg = const id</code></pre>
+<p>これでとりあえずcatになるんじゃね？</p>
+<pre><code>*Main&gt; :main Cmd.hs
+....</code></pre>
+<p>というわけで基本路線はおっけーじゃん．</p>
+<h4 id="オプション対応">オプション対応</h4>
+<p>じゃあgenProgをオプションでちょっと動作を切り換えてみようか．</p>
+<pre><code>genProg :: Options -&gt; FilterProgram
+genProg opts = if elem CFlag opts
+               then ccat
+               else id
+    where ccat = undefined</code></pre>
+<p>まーこんな感じでさぁね． 例によってccatはundefinedだけど．型チェックします．</p>
+<pre><code>Prelude&gt; :load "/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs"
+[1 of 1] Compiling Main             ( /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs, interpreted )
+
+/home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:9:18:
+    No instance for (Eq Option)
+      arising from a use of `elem'
+                   at /home/cut-sea/script/Haskell/FilterCmd/Cmd.hs:9:18-32
+    Possible fix: add an instance declaration for (Eq Option)
+    In the expression: elem CFlag opts
+    In the expression: if elem CFlag opts then ccat else id
+    In the definition of `genProg':
+        genProg opts
+                  = if elem CFlag opts then ccat else id
+                  where
+                      ccat :: FilterProgram
+                      ccat s = unlines
+                             $ zipWith ((++) . (++ "\t") . show) ([1 .. ]) (lines s)
+Failed, modules loaded: none.
+Prelude&gt; </code></pre>
+<p>あれーっ!？ なになに？elemがダメポ？ えーっとEqクラスのインスタンスになってねーってブータレてんのか． さっき，Showクラスをderivingしたけど，あん時についでにやっておけば良かったのね．</p>
+<pre><code>data Option = CFlag | File String deriving (Show, Eq)</code></pre>
+<p>という風に修正してから再度C-c,C-lだ． オッケー! じゃあccatを実装しましょっかね．</p>
+<pre><code>genProg :: Options -&gt; FilterProgram
+genProg opts = if elem CFlag opts
+               then ccat
+               else id
+    where ccat :: FilterProgram
+          ccat s = unlines $ zipWith ((++).show) [1..] (lines s)</code></pre>
+<p>こんな感じざんす． zipWithに渡してる関数は行番号をshowして数字の文字列にしてから(++)に適用することで さらに文字列をもらったらそれに連結するような関数にしてる． 分りにくいなら本当に泥臭く書いても全然良い． 自分で分りにくいくらいならその方がずっと幸せなので好きにしてーん．</p>
+<p>じゃあ実行してみる．</p>
+<pre><code>*Main&gt; :main -c Cmd.hs
+1import System
+2
+3type FilterProgram = String -&gt; String
+4
+5type Options = [Option]
+6data Option = CFlag | File String deriving (Show, Eq)
+7
+8genProg :: Options -&gt; FilterProgram
+....</code></pre>
+<p>いえーい．とりあえず完成だね． といいたいけど，行番号と行の間にスペース欲しいな． というわけでさらに文字列を連結するように修正．</p>
+<pre><code>genProg :: Options -&gt; FilterProgram
+genProg opts = if elem CFlag opts
+               then ccat
+               else id
+    where ccat :: FilterProgram
+          ccat s = unlines $ zipWith ((++).(++"\t").show) [1..] (lines s)</code></pre>
+<p>うーん．こうなるとzipWithの関数はすでにイミフですが放置プレイで．</p>
+<h4 id="オプションを増やそっと">オプションを増やそっと</h4>
+<p>えっと，これで済ませようと思ったんだけど， オプションが一個とオプション二個以上ってのはもしかして本質的に違うかも？! とか思い直しまして，複数のオプションに対応してみます．ええ． man catとかして，使ってことのありそうな改行位置に<strong>$</strong>を表示したり， タブを<strong>^I</strong>と表示したり，ヘルプを出すなんてのを対応したり，その辺やってみます．</p>
+<p>まずはオプションを追加．</p>
+<pre><code>data Option = CFlag | TFlag | EFlag | HFlag | File String deriving (Show,Eq)</code></pre>
+<p>TFlagはタブを表示するやつ，EFlagは行末を表示するやつ，HFlagはヘルプを出すやつのつもりです．</p>
+<pre><code>parseOpt argv = parse' argv []
+    where parse' []        opts = opts
+          parse' ("-c":xs) opts = parse' xs (CFlag:opts)
+          parse' ("-e":xs) opts = parse' xs (EFlag:opts)
+          parse' ("-t":xs) opts = parse' xs (TFlag:opts)
+          parse' ("-h":xs) opts = parse' xs (HFlag:opts)
+          parse' (x:xs)    opts = parse' xs (File x:opts)</code></pre>
+<p>parseOptはそのままこうなりますねぇ． なんの工夫もなさげです． まぁGetOptだっけ？そういうライブラリを使ってもいいけど， マニアル読むのマンドクセってことで． そのせいで，-ceみたいな書き方はできません．ゴメンネ．</p>
+<p>genProgなんだけど，複数のオプションを同時に指定した時に死ぬよね．今の実装ではさ． でも，FilterProgramってString-&gt;Stringだからこれって閉じてるって感じしねぇ？ SICPの言うところのClosure Propertyってやつね．あのクロージャじゃないよ． つまり普通に(.)で繋いじゃえばいいんじゃね？ってことですわ． そらそうですよね．フィルタなんだから，そうなるのが天然自然だわさ．</p>
+<p>じゃあ、こうしましょう． progFusionerって関数にオプション個別の処理を複数ならべて繋いだ関数を作ってもらいます． たとえば，行番号を振るFilterProgramと行末に$を表示するFilterProgramを(.)で繋いだ FilterProgramを作成してもらうのですよ． 直感的に繋ぐ順番は重要な気がしますけどネ．</p>
+<pre><code>progFusioner :: Options -&gt; FilterProgram -&gt; FilterProgram
+progFusioner = undefined</code></pre>
+<p>こいつはオプションを情報源としてFilterProgramがすでに与えられてるとしたら，そいつに(.)でさらにオプションに対応したFilterProgramを接続して， そうやって合成したFilterProgramを返すってキブンです． ってことは，genProgはこうなるよね．</p>
+<pre><code>genProg :: Options -&gt; FilterProgram
+genProg opts = progFusioner opts id</code></pre>
+<p>なぜidかっていうと，String -&gt; Stringな型でcatのデフォの動作を表現しているのがidだからですよ．念の為． で，具体的にprogFusionerを実装する．</p>
+<pre><code>progFusioner :: Options -&gt; FilterProgram -&gt; FilterProgram
+progFusioner opts f | elem TFlag opts = progFusioner (delete TFlag opts) (tabConv . f)
+                    | elem EFlag opts = progFusioner (delete EFlag opts) (lineSepConv . f)
+                    | elem CFlag opts = progFusioner (delete CFlag opts) (lineCount . f)
+                    | elem HFlag opts = progFusioner (delete HFlag opts) helpMessage
+                    | otherwise       = f</code></pre>
+<p>あれ，意外に簡単そうだ． 新しくスタブが増えちゃったけど． なんかゴールに近付いたと思ったらゴールが離れていきます． 実質は別に離れちゃいないんだけど．</p>
+<p>とりあえず、これでよさげ？ deleteはData.Listとかにあるかな．Preludeにあっても良さげな気もするけど，ないようなのでData.Listをインポート．</p>
+<pre><code>import Data.List</code></pre>
+<p>tabConvとlineSepConvとlineCountとhelpMessageを実装する必要あるけど，まずはスタブで．</p>
+<pre><code>lineCount :: FilterProgram
+lineCount = undefined
+
+tabConv :: FilterProgram
+tabConv = undefined
+
+lineSepConv :: FilterProgram
+lineSepConv = undefined
+
+helpMessage :: FilterProgram
+helpMessage = undefined</code></pre>
+<p>C-c,C-lでロードしたらこれまたパツイチでいけました． じゃあそれぞれ実装しよう．</p>
+<p>まずコレ．一番簡単なやつ</p>
+<pre><code>helpMessage :: FilterProgram
+helpMessage = const "cat [-ecth] filename1 filename2 ...\n"</code></pre>
+<p>オッケーですね． lineCountはそのまま移植．</p>
+<pre><code>lineCount :: FilterProgram
+lineCount s = unlines $ zipWith ((++).(++" ").show)  [1..] (lines s)</code></pre>
+<p>lineConvを実装してみよう．</p>
+<pre><code>lineSepConv :: FilterProgram
+lineSepConv [] = ""
+lineSepConv (c:cs) | c=='\n' = "$"++lineSepConv cs
+                   | otherwise = c:lineSepConv cs</code></pre>
+<p>これはもう最初に勉強するパターンだよなぁ． これもハマることないない．ありえない．</p>
+<pre><code>tabConv :: FilterProgram
+tabConv [] = ""
+tabConv (c:cs) | c=='\t' = "^I"++tabConv cs
+               | otherwise = c:tabConv cs</code></pre>
+<p>じゃあC-c,C-lでロードしたらうまくいったので動作確認してみよう．</p>
+<pre><code>*Main&gt; :main FilterCmd.hs -c -e
+1 #! /usr/bin/env runghc$module Main where$$import System$import Data.List$$main :: IO ()$main = getArgs &gt;&gt;=$       \argv -&gt; let f = genProg opts$                    opts = parseOpt argv$                    i
+...</code></pre>
+<p>あら？(^^； ハマることないない，ありえない．って言っておいたけど，コレかよ． そっか，置換しちゃダメなんだ．$を挿入するんだね．</p>
+<pre><code>lineSepConv :: FilterProgram
+lineSepConv [] = ""
+lineSepConv (c:cs) | c=='\n' = "$\n"++lineSepConv cs
+                   | otherwise = c:lineSepConv cs</code></pre>
+<p>これで行けるハズ．</p>
+<pre><code>*Main&gt; :main FilterCmd.hs -c -e
+1 #! /usr/bin/env runghc$
+2 module Main where$
+3 $
+4 import System$
+...</code></pre>
+<p>最後がtabConvかな．こいつは置換でいいハズ．</p>
+<pre><code>tabConv :: FilterProgram
+tabConv [] = ""
+tabConv (c:cs) | c=='\t' = "^I"++tabConv cs
+               | otherwise = c:tabConv cs</code></pre>
+<p>これで良さげな模様．</p>
+<h4 id="data.list.deleteダメじゃん">Data.List.deleteダメじゃん．</h4>
+<p>完成したと思ったら同じオプションを複数回指定したらダメじゃん．</p>
+<pre><code>*Main&gt; :main FilterCmd.hs -c -e -e -c
+1 1 #! /usr/bin/env runghc$$
+2 2 module Main where$$
+3 3 $$</code></pre>
+<p>もしかしてdeleteって最初に見つけたヤツしか除去しねーの？ なんか全部除去するのありそうだけど探すよか作る方が早いわ!プンプン．</p>
+<pre><code>delete :: (Eq a) =&gt; a -&gt; [a] -&gt; [a]
+delete _ [] = []
+delete x (c:cs) = if c==x then delete x cs else (c:delete x cs)</code></pre>
+<p>今度こそうまくいきますた． 名前衝突するからimport Data.Listはお役御免ってことで削除しちゃっおっと．</p>
+<pre><code>*Main&gt; :main FilterCmd.hs -c -e -e -c
+1 #! /usr/bin/env runghc$
+2 module Main where$
+3 $
+4 import System$</code></pre>
+<h4 id="複数ファイル指定したらダメじゃん">複数ファイル指定したらダメじゃん．</h4>
+<p>ガーン!複数ファイル指定したらまだ複数回処理されてやがる．</p>
+<pre><code>*Main&gt; :main FilterCmd.hs FilterCmd.hs -h
+cat [-ecth] filename1 filename2 ...
+cat [-ecth] filename1 filename2 ...
+*Main&gt; </code></pre>
+<p>これはmainだな．</p>
+<pre><code>main :: IO ()
+main = getArgs &gt;&gt;=
+       \argv -&gt; let f = genProg opts
+                    opts = parseOpt argv
+                    inputs = getInputs opts
+                in mapM_ (runProg f) =&lt;&lt; inputs</code></pre>
+<p>この最後のmapM_で文字列のリストに対して個別に処理してるのがマズいんだ． ってことは行番号を打ってた時もファイル個別に1から順に番号打ち直されてたんだろうな． そらダメだわ．</p>
+<pre><code>main :: IO ()
+main = getArgs &gt;&gt;=
+       \argv -&gt; let f = genProg opts
+                    opts = parseOpt argv
+                    inputs = getInputs opts
+                in (runProg f) . concat =&lt;&lt; inputs</code></pre>
+<p>ってわけでmapM_廃止してrunProg fする前にconcatで一個のストリームにしちゃいます． これでようやく完成しました．</p>
+<pre><code>#! /usr/bin/env runghc
+module Main where
+
+import System
+
+main :: IO ()
+main = getArgs &gt;&gt;=
+       \argv -&gt; let f = genProg opts
+                    opts = parseOpt argv
+                    inputs = getInputs opts
+                in (runProg f) . concat =&lt;&lt; inputs
+
+type FilterProgram = String -&gt; String
+
+runProg :: FilterProgram -&gt; String -&gt; IO ()
+runProg f inp = putStr $ f inp
+
+genProg :: Options -&gt; FilterProgram
+genProg opts = progFusioner opts id
+
+progFusioner :: Options -&gt; FilterProgram -&gt; FilterProgram
+progFusioner opts f | elem TFlag opts = progFusioner (delete TFlag opts) (tabConv . f)
+                    | elem EFlag opts = progFusioner (delete EFlag opts) (lineSepConv . f)
+                    | elem CFlag opts = progFusioner (delete CFlag opts) (lineCount . f)
+                    | elem HFlag opts = progFusioner (delete HFlag opts) helpMessage
+                    | otherwise       = f
+
+delete :: (Eq a) =&gt; a -&gt; [a] -&gt; [a]
+delete _ [] = []
+delete x (c:cs) = if c==x then delete x cs else (c:delete x cs)
+
+lineCount :: FilterProgram
+lineCount s = unlines $ zipWith ((++).(++" ").show)  [1..] (lines s)
+
+tabConv :: FilterProgram
+tabConv [] = ""
+tabConv (c:cs) | c=='\t' = "^I"++tabConv cs
+               | otherwise = c:tabConv cs
+
+lineSepConv :: FilterProgram
+lineSepConv [] = ""
+lineSepConv (c:cs) | c=='\n' = "$\n"++lineSepConv cs
+                   | otherwise = c:lineSepConv cs
+
+helpMessage :: FilterProgram
+helpMessage = const "cat [-ecth] filename1 filename2 ...\n"
+{--
+genProg opts = if elem CFlag opts
+               then ccat
+               else id
+    where ccat :: FilterProgram
+          ccat s = unlines $ zipWith ((++).(++"\t").show) [1..] (lines s)
+--}
+
+getInputs :: Options -&gt; IO [String]
+getInputs opts = let fopts = filter isFileName opts
+                     fpaths = getFileNames fopts
+                 in mapM readFile fpaths
+
+isFileName :: Option -&gt; Bool
+isFileName (File _) = True
+isFileName _        = False
+
+getFileNames :: Options -&gt; [String]
+getFileNames opts = map getFileName opts
+    where getFileName (File f) = f
+          getFileName _        = error "Should not reach here."
+
+parseOpt :: [String] -&gt; Options
+parseOpt argv = parse' argv []
+    where parse' []        opts = opts
+          parse' ("-c":xs) opts = parse' xs (CFlag:opts)
+          parse' ("-e":xs) opts = parse' xs (EFlag:opts)
+          parse' ("-t":xs) opts = parse' xs (TFlag:opts)
+          parse' ("-h":xs) opts = parse' xs (HFlag:opts)
+          parse' (x:xs)    opts = parse' xs (File x:opts)
+
+data Option = CFlag | TFlag | EFlag | HFlag | File String deriving (Show,Eq)
+type Options = [Option]</code></pre>
+<h4 id="ご意見有用">ご意見有用</h4>
+<p>最後までちゃんと読んだ人に．</p>
+<p>さて，ここまで進めて少なくとも実装者の個人的見解としては， グローバル変数を欲しい思う瞬間は意外にもなかったようです． 正直どっかで一回くらい思うかなーって思ってたし，以前は結構思ってたハズなんだけどさ．</p>
+<p>ちなみに別に意図して避けてないからね． そんな制約ワザと作ってコード書ける程ボクチン頭良くありましぇーん．</p>
+<p>じゃあなぜグローバル変数を欲しいと思わなかったんだろうか？ あとなぜ余分な引数を引き回しているとは思わなかったんだろうか？</p>
+<p>いやいや，これとか余分に引き回してるじゃん．アンタがそれに気付いてないだけじゃんとかのツッコミもありです． 考察したやつをどんどんコメントしてちょ．</p>
+<p>私の意見はしばらく待ってから書くことにします． 酒飲んでしまって眠いしさ．オヤスミ．<a href="cut-sea.html" class="uri" title="Go to wiki page">cut-sea</a>:2009/02/04 00:06:51 JST</p>
+<ul>
+<li>cat のオプションは比較的 fusion しやすいですが grep の -i (–ignore-case)オプションなんかは fusion しづらそうな気がします。</li>
+<li>スピードを求めるときは Filter をつなげずに一度にやらせたくなります。</li>
+<li>delete x = filter (/=x) ですね。 – [1..100]&gt;&gt;=pen</li>
+</ul>
+<hr>
+<p>Last modified : 2009/02/06 18:28:49 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

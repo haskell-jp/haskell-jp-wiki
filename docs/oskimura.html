@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/oskimura"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/oskimura</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/oskimura">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/oskimura">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/oskimura">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/oskimura</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#oskimura"><span>oskimura</span></a></li>
+</ul>
+</div>
+
+<h1 id="oskimura"><a href="" class="uri" title="Go to wiki page">oskimura</a></h1>
+<hr>
+<p>[あとでかく] 素人です。よろしくお願いします。</p>
+<ul>
+<li>プロフィール
+<ul>
+<li>名前: きむら おさむ</li>
+<li>生年月日: 1981/01/19</li>
+</ul></li>
+<li>計算機関連参加コミュニティー
+<ul>
+<li>RHG (Ruby,Haskell,Gauche user’s Group)</li>
+<li>TLUG (Tokyo Linux User Group)</li>
+<li>YLUG (Yokohama Linux User Group 別名:カーネル読書会)</li>
+<li>Debian勉強会</li>
+<li>素人くさいSICP</li>
+<li>仮想化技術友の会</li>
+<li>圏論勉強会</li>
+<li>暗黒通信団</li>
+</ul></li>
+<li>Web
+<ul>
+<li><a href="http://d.hatena.ne.jp/oskimura">はてなダイアリー</a></li>
+<li><a href="http://b.hatena.ne.jp/oskimura">はてなブックマーク</a></li>
+<li><a href="https://twitter.com/oskimura">Twitter</a></li>
+<li><a href="http://ustream.tv/oskimura">たまにミーティングの動画中継してる</a></li>
+<li><a href="http://www.iknow.co.jp/user/oskimura">I Know! (友達が開発してる英語学習SNS)</a></li>
+</ul></li>
+<li>memo
+<ul>
+<li>2009/4/29</li>
+</ul></li>
+</ul>
+<p>Control.Monad.Transをインポートしたソースをコンパイルしようとしたら次のようなエラーがでた</p>
+<pre><code>    Could not find module `Control.Monad.Trans':
+      it was found in multiple packages: transformers-0.1.4.0 mtl-1.1.0.2</code></pre>
+<p>なのでGoogle先生にお伺いを立てると次のページがヒットした</p>
+<p><a href="http://www.nabble.com/-GHC---3183:-unhelpful-wording-in-module-error-message-td23160690.html">http://www.nabble.com/-GHC—3183:-unhelpful-wording-in-module-error-message-td23160690.html</a></p>
+<pre><code> We might also want the message to suggest the flags `-hide-all-packages`,
+  `-hide-package` and/or `-package` as part of the solution. </code></pre>
+<p>とのことなので、</p>
+<p>オプションに“-hide-package transformers”をつけることで解決した。</p>
+<hr>
+<p>Last modified : 2009/04/29 03:38:04 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/oskimura">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/oskimura?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/oskimura">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/oskimura" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_玉手箱_その他</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_玉手箱_その他</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_%E7%8E%89%E6%89%8B%E7%AE%B1_%E3%81%9D%E3%81%AE%E4%BB%96"><span>Programming_玉手箱_その他</span></a><ul>
+<li><a href="#%E9%96%A2%E6%95%B0%E5%9E%8B%E8%A1%A8">関数型表</a></li>
+<li><a href="#%E4%B8%8A%E5%90%91%E3%81%8D%E3%81%AB%E3%82%82%E8%BE%BF%E3%82%8C%E3%82%8B%E6%9C%A8">上向きにも辿れる木</a></li>
+<li><a href="#%E5%B9%B3%E8%A1%A1%E6%9C%A8">平衡木</a><ul>
+<li><a href="#%E8%B5%A4%E9%BB%92%E6%9C%A8">赤黒木</a></li>
+<li><a href="#avl-%E6%9C%A8">AVL 木</a></li>
+</ul></li>
+<li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BF%E3%82%A4%E3%83%97%E3%81%8B%E3%82%89%E5%86%8D%E5%B8%B0%E3%82%92%E5%88%86%E9%9B%A2">データタイプから再帰を分離</a></li>
+<li><a href="#%E6%8E%A2%E7%B4%A2">探索</a><ul>
+<li><a href="#%E6%B7%B1%E3%81%95%E5%84%AA%E5%85%88%E6%8E%A2%E7%B4%A2">深さ優先探索</a></li>
+<li><a href="#%E5%B9%85%E5%84%AA%E5%85%88%E6%8E%A2%E7%B4%A2">幅優先探索</a></li>
+</ul></li>
+<li><a href="#graphical-sequence">Graphical Sequence</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_玉手箱_その他"><a href="" class="uri" title="Go to wiki page">Programming_玉手箱_その他</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e7%8e%89%e6%89%8b%e7%ae%b1" class="uri" title="Go to wiki page">玉手箱</a>:その他</p>
+<hr>
+<p><a href="Programming_玉手箱.html" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%96%a2%e6%95%b0%e5%9e%8b%e8%a1%a8" class="uri" title="Go to wiki page">関数型表</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e4%b8%8a%e5%90%91%e3%81%8d%e3%81%ab%e3%82%82%e8%be%bf%e3%82%8c%e3%82%8b%e6%9c%a8" class="uri" title="Go to wiki page">上向きにも辿れる木</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%b9%b3%e8%a1%a1%e6%9c%a8" class="uri" title="Go to wiki page">平衡木</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e8%b5%a4%e9%bb%92%e6%9c%a8" class="uri" title="Go to wiki page">赤黒木</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/AVL%20%e6%9c%a8" title="Go to wiki page">AVL 木</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%87%e3%83%bc%e3%82%bf%e3%82%bf%e3%82%a4%e3%83%97%e3%81%8b%e3%82%89%e5%86%8d%e5%b8%b0%e3%82%92%e5%88%86%e9%9b%a2" class="uri" title="Go to wiki page">データタイプから再帰を分離</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">探索</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%b7%b1%e3%81%95%e5%84%aa%e5%85%88%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">深さ優先探索</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%b9%85%e5%84%aa%e5%85%88%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">幅優先探索</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Graphical%20Sequence" title="Go to wiki page">Graphical Sequence</a></p>
+<hr>
+<h2 id="関数型表">関数型表</h2>
+<p>関数型の表(Table)。結構、味があるとおもいません？</p>
+<pre><code>type Table k v = k -&gt; Maybe v
+ 
+emptyTable :: Table k v
+emptyTable = const Nothing
+
+lookup :: Table k v -&gt; k -&gt; Maybe v
+lookup = id
+ 
+insert :: Eq k =&gt; Table k v -&gt; (k,v) -&gt; Table k v
+insert tbl (k,v) key = if k == key then Just v else tbl key
+ 
+remove :: Eq k =&gt; Table k v -&gt; k -&gt; Table k v
+remove tbl k key = if k == key then Nothing else tbl key</code></pre>
+<hr>
+<h2 id="上向きにも辿れる木">上向きにも辿れる木</h2>
+<p>zipper代わりに。– yts</p>
+<pre><code>import Data.Maybe (isJust, fromJust)
+data Tree a = Tree a [Tree a] deriving Show
+
+data TreeP a =  TreeP { parent :: Maybe (TreeP a), value :: a, children :: [TreeP a] } 
+mkTreeP pmb (Tree a cs)   = let x = TreeP pmb a (map (mkTreeP (Just x)) cs) in x
+parents = map fromJust . takeWhile isJust . iterate (&gt;&gt;= parent) . return
+
+instance Show a =&gt; Show (TreeP a) where
+  showsPrec d (TreeP p a cs) = showParen (d &gt; 10) $ 
+      ("TreeP " ++) . (f p ++) . showsPrec 11 a . (" " ++) . showList cs
+      where f (Just _) = "(Just &lt;parent&gt;) "; f Nothing = "Nothing "
+
+test00 = Tree 0 [Tree 1 [Tree 2 [Tree 3 []], Tree 4 []]]
+test01 = mkTreeP Nothing test00
+test02 = head . children . head . children $ test01
+test03 = parent test02
+test04 = parents test02</code></pre>
+<ul>
+<li><a href="https://www.haskell.org/hawiki/TheZipper">HaWiki:TheZipper</a></li>
+</ul>
+<hr>
+<h2 id="平衡木">平衡木</h2>
+<h3 id="赤黒木">赤黒木</h3>
+<p><a href="http://www.cse.ogi.edu/~hook/cse532f98/haskell1.htm">Haskell Red-Black Set</a>より。 <a href="http://www.cs.kent.ac.uk/people/staff/smk/redblack/">Red Black Trees</a> に deletion 付きのものがある。</p>
+<pre><code>data Color = R | B
+data RedBlackSet a = E | T Color (RedBlackSet a) a (RedBlackSet a)
+
+balance B (T R (T R a x b) y c) z d = T R (T B a x b) y (T B c z d)
+balance B (T R a x (T R b y c)) z d = T R (T B a x b) y (T B c z d)
+balance B a x (T R (T R b y c) z d) = T R (T B a x b) y (T B c z d)
+balance B a x (T R b y (T R c z d)) = T R (T B a x b) y (T B c z d)
+balance color a x b = T color a x b
+
+empty = E
+
+member x E = False
+member x (T _ a y b)
+   | x &lt; y  = member x a
+   | x &gt; y  = member x b
+   | True   = True
+   
+insert x s = T B a y b
+  where 
+    T _ a y b = ins s
+    ins E = T R E x E
+    ins <a href="email-protection.html" class="__cf_email__" data-cfemail="265566">[email&nbsp;protected]</a>(T color a y b) 
+      | x &lt; y  = balance color (ins a) y b
+      | x &gt; y  = balance color a y (ins b)
+      | True   = s</code></pre>
+<p>balance が美しい。</p>
+<h3 id="avl-木">AVL 木</h3>
+<pre><code>data AVLSet a = E | T H (AVLSet a) a (AVLSet a) deriving Show
+data H = L | B | R deriving Show
+
+balanceL R a x b = (False, T B a x b)
+balanceL B a x b = (True,  T L a x b)
+balanceL L (T L a x b) y c = (False, T B a x (T B b y c))
+balanceL L (T B a x b) y c = (True,  T R a x (T L b y c))
+balanceL L (T R a x (T h b y c)) z d = (False, T B (T h' a x b) y (T h'' c z d))
+  where (h', h'') = case h of L -&gt; (B, R); B -&gt; (B, B); R -&gt; (L, B)
+
+balanceR L a x b = (False, T B a x b)
+balanceR B a x b = (True,  T R a x b)
+balanceR R a x (T R b y c) = (False, T B (T B a x b) y c)
+balanceR R a x (T B b y c) = (True,  T L (T R a x b) y c)
+balanceR R a x (T L (T h b y c) z d) = (False, T B (T h' a x b) y (T h'' c z d))
+  where (h', h'') = case h of R -&gt; (L, B); B -&gt; (B, B); L -&gt; (B, R)
+
+member x E = False
+member x (T _ a y b)
+    | x &lt; y = member x a
+    | x &gt; y = member x b
+    | True  = True
+
+insert x E = T B E x E
+insert x t = snd $ ins x t
+
+ins x E = (True, T B E x E)
+ins x <a href="email-protection.html" class="__cf_email__" data-cfemail="384c78">[email&nbsp;protected]</a>(T h l v r)
+    | x &lt; v = case ins x l of
+                (True,  l) -&gt; balanceL h l v r
+                (False, l) -&gt; (False, T h l v r)
+    | x &gt; v = case ins x r of
+                (True,  r) -&gt; balanceR h l v r
+                (False, r) -&gt; (False, T h l v r)
+    | True  = (False, t)
+
+delete x t = snd $ del x t
+
+del x E = (True, E)
+del x (T h l y r)
+    | x &lt; y = case del x l of
+                (False, l) -&gt; balanceR h l y r
+                (True,  l) -&gt; (True, T h l y r)
+    | x &gt; y = case del x r of
+                (False, r) -&gt; balanceL h l y r
+                (True,  r) -&gt; (True, T h l y r)
+    | True  = case l of
+                E -&gt; (False,r)
+                l -&gt; case rightElem l of
+                       (z, (False, l)) -&gt; balanceR h l z r
+                       (z, (True,  l)) -&gt; (True, T h l z r)
+
+rightElem (T h l x E) = (x, (False,l))
+rightElem (T h l x r) = case rightElem r of
+                          (z, (False, r)) -&gt; (z, balanceL h l x r)
+                          (z, (True,  r)) -&gt; (z, (True, T h l x r))
+
+height E = 0
+height (T _ l _ r) = 1 + max (height l) (height r)
+
+toList E = []
+toList (T _ a x b) = toList a ++ [x] ++ toList b
+
+check = snd . check'
+
+check' E = (0, True)
+check' (T h l _ r) =
+    ( 1 + max a c
+    , b &amp;&amp; d &amp;&amp; (case h of
+                 L -&gt; a == c + 1
+                 R -&gt; a + 1 == c
+                 B -&gt; a == c
+                )
+    )
+  where ((a, b), (c, d)) = (check' l, check' r)
+
+permutation [] = [[]]
+permutation xs = concat [map (x:) $ permutation (List.delete x xs) | x &lt;- xs]
+
+test = and $ map (check . foldl (flip insert) E) $ permutation [1..8]
+test' = and [check $ delete x t | t &lt;- map (foldl (flip insert) E) $ permutation [1..7], x &lt;-[1..7]]</code></pre>
+<p>Red-Black Tree をまねしてみたけど、場合分けが多くなってしまった。 – y.hanatani</p>
+<pre><code>height E = 0
+height (T L l _ _) = 1 + height l
+height (T _ _ _ r) = 1 + height r</code></pre>
+<p>これを使ってGADTで遊ばせてもらいました。その際に気付いたのですが、「balanceL L (T B a x b) y c = (True, T L (T B a x b) y c)」は「balanceL L (T B a x b) y c = (True, (T R a x (T L b y c)」ではないでしょうか。– sakai</p>
+<p>あ、insert だけだとこの規則は使われないですね。delete のときにはsakai氏のおっしゃるとおりです。 – y.hanatani</p>
+<pre><code>data Z = Z
+data S n = S n
+
+data (Ord a) =&gt; T a n where
+    E :: T a Z
+    T :: H l r n -&gt; T a l -&gt; a -&gt; T a r -&gt; T a n
+
+data H l r n where
+    B :: H a a (S a)
+    L :: H (S a) a (S (S a))
+    R :: H a (S a) (S (S a))
+
+balanceL :: H l r n -&gt; T a (S l) -&gt; a -&gt; T a r -&gt; Either (T a n) (T a (S n))
+balanceL R a x b = Left  (T B a x b)
+balanceL B a x b = Right (T L a x b)
+balanceL L (T B a x b) y c = Right (T R a x (T L b y c))
+balanceL L (T L a x b) y c = Left  (T B a x (T B b y c))
+balanceL L (T R a x (T h b y c)) z d =
+    case h of
+    L -&gt; Left (T B (T B a x b) y (T R c z d))
+    B -&gt; Left (T B (T B a x b) y (T B c z d))
+    R -&gt; Left (T B (T L a x b) y (T B c z d))
+
+balanceR :: H l r n -&gt; T a l -&gt; a -&gt; T a (S r) -&gt; Either (T a n) (T a (S n))
+balanceR L a x b = Left  (T B a x b)
+balanceR B a x b = Right (T R a x b)
+balanceR R a x (T B b y c) = Right (T L (T R a x b) y c)
+balanceR R a x (T R b y c) = Left  (T B (T B a x b) y c)
+
+balanceR R a x (T L (T h b y c) z d) =
+    case h of
+    R -&gt; Left (T B (T L a x b) y (T B c z d))
+    B -&gt; Left (T B (T B a x b) y (T B c z d))
+    L -&gt; Left (T B (T B a x b) y (T R c z d))
+
+ins :: (Ord a) =&gt; a -&gt; T a n -&gt; Either (T a n) (T a (S n))
+ins x E = Right (T B E x E)
+ins x <a href="email-protection.html" class="__cf_email__" data-cfemail="364276">[email&nbsp;protected]</a>(T h l v r) =
+    case x `compare` v of
+    EQ -&gt; Left t
+    LT -&gt; case ins x l of
+          Left l'  -&gt; Left (T h l' v r)
+          Right l' -&gt; balanceL h l' v r
+    GT -&gt; case ins x r of
+          Left r'  -&gt; Left (T h l v r')
+          Right r' -&gt; balanceR h l v r'
+
+data (Ord a) =&gt; AVLSet a = forall n. AVLSet (T a n)
+
+emptySet :: (Ord a) =&gt; AVLSet a
+emptySet = AVLSet E
+
+insert :: (Ord a) =&gt; a -&gt; AVLSet a -&gt; AVLSet a
+insert x (AVLSet t) =
+    case ins x t of
+    Left u  -&gt; AVLSet u
+    Right u -&gt; AVLSet u
+
+toList :: (Ord a) =&gt; AVLSet a -&gt; [a]
+toList (AVLSet t) = f t
+    where f :: forall a n. T a n -&gt; [a]
+          f E = []
+          f (T _ l x r) = f l ++ [x] ++ f r
+
+height :: (Ord a) =&gt; AVLSet a -&gt; Int
+height (AVLSet t) = f t
+    where f :: forall a n. T a n -&gt; Int
+          f E = 0
+          f (T L l _ r) = 1 + f l
+          f (T _ _ _ r) = 1 + f r
+
+test = height $ foldl (flip insert) emptySet [1..100]</code></pre>
+<p>foldによって書いてみる – yts</p>
+<pre><code>fold :: (forall l n r. H l n r -&gt; b -&gt; a -&gt; b -&gt; b) -&gt; b -&gt; T a d -&gt; b
+fold f z <a href="email-protection.html" class="__cf_email__" data-cfemail="0e764e">[email&nbsp;protected]</a>(T h l a r) = f h (g l) a (g r) where g = fold f z
+fold f z E = z
+
+member :: (Ord a) =&gt; a -&gt; AVLSet a -&gt; Bool
+member (x :: a) (AVLSet t) = fold f False t
+  where f :: H l r n -&gt; Bool -&gt; a -&gt; Bool -&gt; Bool
+        f _ l a r = case compare x a of
+        EQ -&gt; True; LT -&gt; l; GT -&gt; r
+
+-- toList (AVLSet t) = fold (\h l a r -&gt; l ++ [a] ++ r) [] t
+-- height (AVLSet t) = &lt;snip&gt;</code></pre>
+<hr>
+<h2 id="データタイプから再帰を分離">データタイプから再帰を分離</h2>
+<pre><code>newtype Fix f = Fix (f (Fix f)) 
+type Rec r = r (Fix r)
+type Stream a = Rec ((,) a)
+
+stream (x:xs) = (x, Fix (stream xs))
+tolist (a, (Fix b)) = a:tolist b
+
+test = take 10 $ tolist $ stream [1..]</code></pre>
+<p>もっといい項目名をつけたかったのだけど… – yts</p>
+<hr>
+<h2 id="探索">探索</h2>
+<h3 id="深さ優先探索">深さ優先探索</h3>
+<pre><code>dfs :: (a -&gt; [a]) -&gt; a -&gt; [a]
+dfs f x = x:(f x &gt;&gt;= dfs f)</code></pre>
+<h3 id="幅優先探索">幅優先探索</h3>
+<pre><code>bfs :: (a -&gt; [a]) -&gt; a -&gt; [a]
+bfs f = bfs' . (:[])
+  where bfs' [] = []
+        bfs' xs = xs ++ bfs' (xs &gt;&gt;= f)
+
+-- 一行で書くと
+bfs f = concat . takeWhile (not.null) . iterate (&gt;&gt; f) . (:[])</code></pre>
+<hr>
+<h2 id="graphical-sequence">Graphical Sequence</h2>
+<p><a href="http://mput.dip.jp/mput/?date=20051007#p01">mputの日記</a>より</p>
+<pre><code>isGraphic []     = True
+isGraphic (x:xs) = or [isGraphic $ map (subtract 1) xs ++ ys | (xs,ys) &lt;- choice x xs]</code></pre>
+<p>choice の定義は<a href="Programming_玉手箱_組合せ.html" class="uri" title="Go to wiki page">Programming_玉手箱_組合せ</a>にある．</p>
+<p>–nobsun</p>
+<pre><code>splitAt' :: Int -&gt; [a] -&gt; Maybe ([a], [a])
+splitAt' 0 xs = Just ([], xs)
+splitAt' _ [] = Nothing
+splitAt' n (x:xs) = splitAt' (n-1) xs &gt;&gt;= \(ys, zs) -&gt; Just (x:ys, zs)
+ 
+isGraphical :: [Int] -&gt; Bool
+isGraphical = isGraphical' . reverse . sort
+  where
+    isGraphical' []     = True
+    isGraphical' (x:xs) = case splitAt' x xs of
+                          Just (ys, zs) -&gt; isGraphical $ map (subtract 1) ys ++ zs
+                          Nothing       -&gt; False</code></pre>
+<p>グラフ的な列を列挙。</p>
+<pre><code>genGraphical :: Int -&gt; [[Int]]
+genGraphical 0 = [[]]
+genGraphical n = nub $ concat [[ins m $ map (+1) ys ++ zs | (m, (ys, zs)) &lt;- zip [0..] (splits xs)] | xs &lt;- genGraphical (n-1)]
+  where splits xs = zip (inits xs) (tails xs)
+        ins a [] = [a]
+        ins a <a href="email-protection.html" class="__cf_email__" data-cfemail="e0989893a0">[email&nbsp;protected]</a>(x:xs) | x &lt;= a = a:xxs
+                         | True   = x:ins a xs
+
+graphicals :: [[Int]]
+graphicals = concatMap genGraphical [0..]</code></pre>
+<hr>
+<p>Last modified : 2008/05/22 14:05:57 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

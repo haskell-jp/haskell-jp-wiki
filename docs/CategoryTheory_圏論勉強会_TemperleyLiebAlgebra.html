@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会_TemperleyLiebAlgebra</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会_TemperleyLiebAlgebra</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#categorytheory_%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A_temperleyliebalgebra"><span>CategoryTheory_圏論勉強会_TemperleyLiebAlgebra</span></a><ul>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%80%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十一回圏論勉強会</a><ul>
+<li><a href="#s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics”</a></li>
+<li><a href="#%E6%AC%A1%E4%BC%9A">2次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%BA%8C%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十二回圏論勉強会</a><ul>
+<li><a href="#s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-3%E7%AF%80%E3%82%88%E3%82%8A">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 3節より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%89%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十三回圏論勉強会</a><ul>
+<li><a href="#s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-4%E7%AF%80%E3%82%88%E3%82%8A">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 4節より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%9B%9B%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十四回圏論勉強会</a><ul>
+<li><a href="#s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-5.2%E3%82%88%E3%82%8A">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 5.2より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%BA%94%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十五回圏論勉強会</a><ul>
+<li><a href="#s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-6%E7%AF%80%E3%82%88%E3%82%8A">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 6節より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%85%AD%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十六回圏論勉強会</a><ul>
+<li><a href="#s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-6.4%E3%82%88%E3%82%8A">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 6.4より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E4%B8%83%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十七回圏論勉強会</a><ul>
+<li><a href="#s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-6.4.3%E3%82%88%E3%82%8A">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 6.4.3より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%85%AB%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十八回圏論勉強会</a><ul>
+<li><a href="#s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-7.3">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 7.3</a></li>
+<li><a href="#%E5%A7%8B%E3%81%BE%E3%82%8B%E5%89%8D">始まる前</a></li>
+<li><a href="#last">7.3-last</a></li>
+<li><a href="#%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%8C%E7%B5%82%E3%82%8F%E3%81%A3%E3%81%A6%E4%BD%99%E8%AB%87">テキストが終わって・余談</a></li>
+<li><a href="#%E6%AC%A1%E4%BC%9A-1">2次会</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="categorytheory_圏論勉強会_temperleyliebalgebra"><a href="" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_TemperleyLiebAlgebra</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory" class="uri" title="Go to wiki page">CategoryTheory</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a" class="uri" title="Go to wiki page">圏論勉強会</a>:TemperleyLiebAlgebra</p>
+<hr>
+<h2 id="第四十一回圏論勉強会">第四十一回圏論勉強会</h2>
+<p>2008-6-15(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<pre><code>                 モニタ    ホワイトボード
+                ---------
+                 +-----+
+       shelarcy  |     | DekuDekuplex
+  豊福     酒井  |     | 檜山
+ +-----+   hiro  |     | 田中
+ |     |         |     | 今井
+ +-----+         +-----+</code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<p>写真（後半） : <a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080616" class="uri">http://picasaweb.google.co.jp/takeo.bono/Kenron080616</a></p>
+<p>写真（ミラー）：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200806/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200806/ct/</a></p>
+<h3 id="s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics”</h3>
+<ul>
+<li><a href="http://www.comlab.ox.ac.uk/people/samson.abramsky/tambook.pdf" class="uri">http://www.comlab.ox.ac.uk/people/samson.abramsky/tambook.pdf</a></li>
+</ul>
+<h4 id="the-temperly-lieb-algebra">2 The Temperly-Lieb Algebra</h4>
+<ul>
+<li>すんごくよくまとまってるまとめ → <a href="http://d.hatena.ne.jp/hiroki_f/20080615/1213541356">こちら</a></li>
+</ul>
+<h5 id="temperly-lieb-algebra-generators-and-relations">2.1 Temperly-Lieb algebra: generators and relations</h5>
+<h5 id="diagram-monoids">2.2 Diagram Monoids</h5>
+<h5 id="expressiveness-of-the-generators">2.3 Expressiveness of the Generators</h5>
+<ul>
+<li>○ は “scalar”
+<ul>
+<li>平面を飛び越えて、どこにでも移動できる特殊な存在</li>
+<li>○でない図形は、平面上で他の線をまたいだり、切れたりすることはできない</li>
+</ul></li>
+<li>1 は恒等写像</li>
+</ul>
+<h5 id="the-trace">2.4 The Trace</h5>
+<ul>
+<li>trace がないと全体が閉じない
+<ul>
+<li>trace をかけると、0点 → 0点 で全体が閉じる</li>
+<li>単なるgeneratorの合成ではない</li>
+<li>内積はtraceの一種</li>
+</ul></li>
+<li>行列で表せないか？
+<ul>
+<li>cap と cup があるので無理
+<ul>
+<li>バラバラにできる？
+<ul>
+<li>Temperly-Lieb algebra は正方行列でひたすら計算しましょう、という枠組み。なので、cap と cup を別々にはできない。</li>
+</ul></li>
+<li>これはいったい（物理の）何に対応するの？
+<ul>
+<li>ブラとケットの背中合わせとか、＋と-とか。
+<ul>
+<li><a href="http://d.hatena.ne.jp/hiroki_f/20080615/1213541356">ブラケットで計算してみた（後半）</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>trace を計算するプログラム
+<ul>
+<li><a href="CategoryTheory_圏論勉強会ノート.html" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会ノート</a>に書いたのを参照。</li>
+</ul></li>
+</ul>
+<h5 id="the-connection-to-knots">2.5 The Connection to Knots</h5>
+<ul>
+<li>２段落で説明するのは無理がありすぎ、説明はしょりすぎ
+<ul>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080616/photo#5212274321971832322">板書</a></li>
+</ul></li>
+<li>bracket polynomial?
+<ul>
+<li><a href="http://d.hatena.ne.jp/asin/4431708596">参考書</a>からもう少し具体的な定義を見る
+<ul>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080616/photo#5212274334041241538">板書</a></li>
+</ul></li>
+<li>実際に式を作ってみるとどんな風になるか？
+<ul>
+<li><a href="http://d.hatena.ne.jp/bonotake/20080616/1213578037">やってみた</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="次会">2次会</h3>
+<h2 id="第四十二回圏論勉強会">第四十二回圏論勉強会</h2>
+<p>2008-7-6(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<pre><code> モニタ    ホワイトボード
+---------
+          +-----+
+shelarcy  |     | 酒井
+          |     | 
+    hiro  |     | 檜山
+          |     | 
+          +-----+</code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<p>（でしたっけ？）</p>
+<p>写真：<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080706" class="uri">http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080706</a></p>
+<h3 id="s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-3節より">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 3節より</h3>
+<h2 id="第四十三回圏論勉強会">第四十三回圏論勉強会</h2>
+<p>2008-8-10(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<pre><code> モニタ    ホワイトボード
+---------
+          +-----+
+    今井  |     | 檜山
+          |     | 
+shelarcy  |     | 酒井
+          |     | 
+          +-----+
+           hiro
+
+          +-----+
+          |     | 
+          +-----+
+        DekuDekuplex</code></pre>
+<p>写真：<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080810" class="uri">http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080810</a></p>
+<h3 id="s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-4節より">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 4節より</h3>
+<h2 id="第四十四回圏論勉強会">第四十四回圏論勉強会</h2>
+<p>2008-9-14(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<p>写真：<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080914" class="uri">http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron080914</a></p>
+<h3 id="s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-5.2より">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 5.2より</h3>
+<h2 id="第四十五回圏論勉強会">第四十五回圏論勉強会</h2>
+<p>2008-10-12(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<p>写真：<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081012" class="uri">http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081012</a></p>
+<h3 id="s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-6節より">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 6節より</h3>
+<h2 id="第四十六回圏論勉強会">第四十六回圏論勉強会</h2>
+<p>2008-11-09(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<p>写真：<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081109" class="uri">http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081109</a></p>
+<h3 id="s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-6.4より">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 6.4より</h3>
+<h2 id="第四十七回圏論勉強会">第四十七回圏論勉強会</h2>
+<p>2008-12-14(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<p>写真：<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081214" class="uri">http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron081214</a></p>
+<h3 id="s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-6.4.3より">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 6.4.3より</h3>
+<h2 id="第四十八回圏論勉強会">第四十八回圏論勉強会</h2>
+<p>2009-01-11(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00</p>
+<pre><code> モニタ    ホワイトボード
+---------
+       白石=木戸=shelarcy hiro
+      +-----------------------+
+酒井  |                       |
+      +-----------------------+
+        檜山       今井</code></pre>
+<p>写真：<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090111" class="uri">http://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090111</a></p>
+<h3 id="s.-abramsky-temperley-lieb-algebra-from-knot-theory-to-logic-and-computation-via-quantum-mechanics-7.3">S. Abramsky “Temperley-Lieb algebra: From knot theory to logic and computation via quantum mechanics” 7.3</h3>
+<h3 id="始まる前">始まる前</h3>
+<ul>
+<li>GHC 6.10.1 でErrorクラスとExceptionクラスが混在して嫌な雰囲気になっている
+<ul>
+<li>mtl の Error モナドを使って処理を行うには Error クラスのインスタンスが必要</li>
+<li>新しい例外型を定義するには Exception クラスのインスタンスが必要</li>
+</ul></li>
+<li>会場を変更するかもしれない？
+<ul>
+<li>びぎねっとさんは場所は至便だけど、金曜に鍵を確保するのが大変</li>
+<li>慶応大学 日吉キャンパス or 矢上キャンパスになるかも</li>
+</ul></li>
+<li>webからテキストをコピー＆ペーストしたら、川の字がなぜか ||| に変換された？？
+<ul>
+<li>firefoxの仕業？</li>
+</ul></li>
+</ul>
+<h3 id="last">7.3-last</h3>
+<ul>
+<li>二重カッコ（[[ ]]）でくくられているのは何？
+<ul>
+<li>表示（denotation）のこと（<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090111#5290248439654085970">板書</a>）
+<ul>
+<li>等式の左側に記号（の並び）、右側に、その解釈の仕方を書く</li>
+<li>例えば、古典論理でα|-βとなった場合、典型的な解釈ではfalseとtrueの間に順序を割り当て、［[α]］≦［[β]］となるようにする</li>
+</ul></li>
+<li>【】なんかで書かれることもある
+<ul>
+<li>「隅付き括弧」というそうです</li>
+<li>ちなみに、<a href="https://ja.wikipedia.org/wiki/%E6%8B%AC%E5%BC%A7#.E4.BA.8C.E9.87.8D.E4.BA.80.E7.94.B2.E6.8B.AC.E5.BC.A7.E3.80.98.E3.80.99">「二重亀甲括弧」</a>なるものもありました</li>
+</ul></li>
+</ul></li>
+<li>“|-” = turnstile
+<ul>
+<li>自然演繹だと推論規則の前後（分数の上下）を表す記号だけど、このテキストではゲンツェン流の方式を採用しているので、上記の古典論理の例とは意味が違う
+<ul>
+<li>圏論でのdenotationを考えると、［[|-]]= → （射）に対応
+<ul>
+<li>一方、推論規則は射から射への変換（transformation）に対応</li>
+</ul></li>
+</ul></li>
+<li>turnstile のオリジナルの意味は<a href="https://en.wikipedia.org/wiki/File:Turnstile.alewife.agr.jpg">これ</a>らしい</li>
+</ul></li>
+<li>7.4の例：コンビネータB ＝λx.λy.λz.x(yz) と、それを使った Babc の計算
+<ul>
+<li>上のほうの図 … x:C, y: B, z:A |- x(yz):C から、o ＝ x(yz) （の出力）を描いている
+<ul>
+<li>x,y,zについてる+とか-は、それぞれの入力と出力を分けて書いてみたものらしい</li>
+</ul></li>
+<li>下のほうの図 … 上の図の上側を時計回りにぐるっと曲げてみた図 ＝ λ abstraction</li>
+</ul></li>
+<li>7.3の意味論のほうに図をつけてくれればわかりやすいのに
+<ul>
+<li>描いてみました（<a href="https://picasaweb.google.co.jp/Masahiro.Sakai/Kenron090111#5290248445846167234">板書</a>）
+<ul>
+<li>abstraction も application も常に右側？
+<ul>
+<li>左側は別にあるってこと
+<ul>
+<li>planarな（平面上の）操作だから、右と左の操作が一緒にはならない</li>
+<li>7.5によれば、ここでの計算体系は Lambek calculus (a non-commutative logic and λ-calculus)の一部になっている</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="テキストが終わって余談">テキストが終わって・余談</h3>
+<ul>
+<li>BaezがAbramsky流のお絵かき算に手を染め始めた（<a href="http://math.ucr.edu/home/baez/atmcs2008/atmcs2008.pdf">発表資料</a>）
+<ul>
+<li>f, g を四角でなく丸で書くのがトレンドらしい</li>
+<li>参考文献に“Homotopy lambda calculus”!?
+<ul>
+<li>25枚目に怪しい絵が
+<ul>
+<li>未来のλ計算はこうなってるのかもしれない</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>次回のテキストは？
+<ul>
+<li>復刊した<a href="http://d.hatena.ne.jp/m-hiyama/20081218/1229577890">『層・圏・トポス』</a>？
+<ul>
+<li>わかりやすそう</li>
+<li>読みきるのは時間がかかると思う。
+<ul>
+<li>著者がかなり飛ばして書いてるので、行間を埋めるのが大変</li>
+<li>全部を読もうとせずに、章を区切って読むのがいいかも
+<ul>
+<li>圏の基本的な定義については既に知っているので、とばしてしまっても良いし</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>量子系が心残りなので、またそちらを…</li>
+</ul></li>
+</ul>
+<h3 id="次会-1">2次会</h3>
+<ul>
+<li>次回のテキストは？（続き）
+<ul>
+<li>Arrowの論文とかいいんじゃ？
+<ul>
+<li>お絵描きだし</li>
+</ul></li>
+<li>初学者が入ってこれるようなのをやりたい</li>
+</ul></li>
+<li><a href="http://pc11.2ch.net/test/read.cgi/tech/1211010089/961-971">2chのHaskellスレ</a>によると、haskell-jpで圏論の話題が不興を買っているらしい
+<ul>
+<li>「みんな引いてる」？
+<ul>
+<li>まぁ場違いな感じはするが</li>
+<li>それ以前に、最近メールまともに流れてなくね？
+<ul>
+<li>殆ど白石さんの独白ログになってる気が</li>
+</ul></li>
+</ul></li>
+<li><a href="http://www.lingr.com/room/haskell-ja">Lingrのhaskell-ja部屋</a>ならikegamiさんが答えてくれるって（<a href="http://www.lingr.com/room/haskell-ja/archives/2008/12/27#msg-55876292">archive参照</a>）</li>
+</ul></li>
+<li><a href="shelarcy.html" class="uri" title="Go to wiki page">shelarcy</a> の名前の読みについて
+<ul>
+<li>白石さんネタまだ引き摺りますか！
+<ul>
+<li>shelarcy を白石と聞き間違えられることがある
+<ul>
+<li>某氏はハンドルで呼ぶのが気恥ずかしいので白石さんと呼びたい</li>
+</ul></li>
+<li>shelarcy は呼びにくい、書きにくい
+<ul>
+<li>どうせ公表しているし、本名でもよいですけれど。あるいは「しぇら」さんとか</li>
+</ul></li>
+<li>本名のローマ字表記だと同姓同名のアーティストが引っかかる
+<ul>
+<li>継続祭の後、アーティストと間違って検索してくる人がちらほら</li>
+</ul></li>
+<li>区別のためミドルネームをつけた方が良い？
+<ul>
+<li>いや、日本の伝統に沿って（e.g.&nbsp;源九郎義経）寧ろ名前の後ろに付けるべきでは？</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>集合知
+<ul>
+<li>画像認証をクラックするために、エロサイトを利用する方法があるらしい （エロ・グリッド・コンピューティング）
+<ul>
+<li>別のエロサイトに画像を表示して人間に解かせ、その答えを再利用する</li>
+<li>この手法を何かに応用できないか？</li>
+</ul></li>
+<li>『集合知プログラミング』（<a href="https://www.amazon.co.jp/dp/4873113644/" class="uri">http://www.amazon.co.jp/dp/4873113644/</a> ）が、世間での好評に反して使えない件
+<ul>
+<li>3箇所参照して、3箇所とも間違いがあった
+<ul>
+<li>結局、どれも別の文献をあたる羽目に</li>
+</ul></li>
+<li>c.f. <a href="http://d.hatena.ne.jp/naoe/20081130" class="uri">http://d.hatena.ne.jp/naoe/20081130</a></li>
+</ul></li>
+<li>もっと新しくて恥ずかしい方法を考えよう
+<ul>
+<li>「集合恥」とか</li>
+<li>あるいは「集合痴」</li>
+</ul></li>
+</ul></li>
+<li>やっぱりモナドは難しい
+<ul>
+<li>初心者に「モナドって何？」と聞かれたらどう解説したらいいの？</li>
+</ul></li>
+</ul>
+<hr>
+<p>Last modified : 2009/04/27 20:17:09 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

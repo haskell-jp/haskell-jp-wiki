@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise9"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/StartHaskell2/exercise9</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/StartHaskell2/exercise9">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/StartHaskell2/exercise9">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/StartHaskell2/exercise9">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/StartHaskell2/exercise9</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E3%82%82%E3%81%A3%E3%81%A8%E5%85%A5%E5%8A%9B%E3%82%82%E3%81%A3%E3%81%A8%E5%87%BA%E5%8A%9B%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C">『もっと入力、もっと出力』　練習問題</a><ul>
+<li><a href="#%E9%9B%BB%E5%8D%93%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">電卓コマンド</a></li>
+<li><a href="#%E6%95%B0%E5%BD%93%E3%81%A6%E3%82%B2%E3%83%BC%E3%83%A0">数当てゲーム</a></li>
+<li><a href="#echo%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89">echoコマンド</a></li>
+<li><a href="#haskell%E7%89%88-unix%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E9%9B%86">Haskell版 UNIXコマンド集</a></li>
+<li><a href="#project-euler-problem-8">Project Euler problem 8</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="もっと入力もっと出力練習問題">『もっと入力、もっと出力』　練習問題</h1>
+<h2 id="電卓コマンド">電卓コマンド</h2>
+<p>簡単な電卓コマンド calc を作ろう</p>
+<p>calcコマンドは引数にサブコマンド文字列 add, sub, times, div と、さらに２つの数字を受け取る。　</p>
+<p>実行例</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">%</span> calc add <span class="dv">1</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="dv">5</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">%</span> calc sub <span class="dv">10</span> <span class="dv">20</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">-</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="fu">%</span> calc times <span class="dv">4</span> <span class="dv">9</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="dv">36</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="fu">%</span> calc <span class="fu">div</span> <span class="dv">10</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="fl">3.3333333333333335</span></a></code></pre></div>
+<p>ヒント: 文字列から数字を読み取るには、以下のような関数がある。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">read</span><span class="ot">   ::</span> <span class="dt">Read</span> a <span class="ot">=&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> a</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="fu">readLn</span><span class="ot"> ::</span> <span class="dt">Read</span> a <span class="ot">=&gt;</span> <span class="dt">IO</span> a</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="fu">readIO</span><span class="ot"> ::</span> <span class="dt">Read</span> a <span class="ot">=&gt;</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> a</a></code></pre></div>
+<hr>
+<h2 id="数当てゲーム">数当てゲーム</h2>
+<p>ヒミツの数字を当てるプログラムを作ろう。</p>
+<ul>
+<li>プログラムは、最初に4桁のヒミツの数字を１つランダムに生成する。</li>
+<li>ユーザは、標準入力から数字を入力する。</li>
+<li>入力された数字がヒミツの数字と等しいときは、正解の旨を表示して、プログラムを終了する。</li>
+<li>入力された数字がヒミツの数字と異なるときは、以下の仕様に従った２つの数字の組を表示して 2 へ戻る。</li>
+</ul>
+<p>入力された数字の各桁の数字について</p>
+<ul>
+<li>桁と数字が、ヒミツの数字のそれと一致しているものの個数</li>
+<li>数字が、ヒミツの数字のどこかの桁と一致しているものの個数</li>
+</ul>
+<p>実行例</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">%</span> <span class="fu">./</span>guessnumber</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="fu">%</span> <span class="dt">Hello</span>, guess the number<span class="fu">!</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">%</span> <span class="fu">&gt;</span> <span class="dv">1111</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="dv">1</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="fu">%</span> <span class="fu">&gt;</span> <span class="dv">2222</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="dv">1</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="fu">%</span> <span class="fu">&gt;</span> <span class="dv">3210</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="dv">1</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="fu">%</span> <span class="fu">&gt;</span> <span class="dv">0123</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="dv">0</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="fu">%</span> <span class="fu">&gt;</span> <span class="dv">1234</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="dt">Correct</span><span class="fu">!</span></a></code></pre></div>
+<hr>
+<h2 id="echoコマンド">echoコマンド</h2>
+<p>標準入力から入力された行を、そのまま標準出力に表示するコマンドを作ろう。（オプションは実装しなくてよい。）</p>
+<p>余裕のある人は、ソースコードのバイト数を削って、どこまで短くなるか試してみよう。完成したら <a href="http://golf.shinh.org/p.rb?echo">anarchy gol</a>f に投稿しよう。</p>
+<hr>
+<h2 id="haskell版-unixコマンド集">Haskell版 UNIXコマンド集</h2>
+<p>以下のような、UNIXコマンドをHaskellで実装してみよう。</p>
+<pre><code>cat
+head
+tail
+sort
+uniq
+ls</code></pre>
+<p>ヒント：ディレクトリ内のエントリ一覧を取得するには、 System.Directory の getDirectoryContents が使える。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">getDirectoryContents ::</span> <span class="dt">FilePath</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> [<span class="dt">FilePath</span>]</a></code></pre></div>
+<hr>
+<h2 id="project-euler-problem-8">Project Euler problem 8</h2>
+<p><a href="http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&amp;page=Problem%208">Problem</a></p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/StartHaskell2/exercise9">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise9?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/StartHaskell2/exercise9">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise9" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

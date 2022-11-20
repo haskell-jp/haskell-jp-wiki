@@ -1,0 +1,684 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Books_RWH_BugReport"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Books_RWH_BugReport</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Books_RWH_BugReport">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Books_RWH_BugReport">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Books_RWH_BugReport">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Books_RWH_BugReport</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#books_rwh_bugreport"><span>Books_RWH_BugReport</span></a></li>
+</ul>
+</div>
+
+<h1 id="books_rwh_bugreport"><a href="" class="uri" title="Go to wiki page">Books_RWH_BugReport</a></h1>
+<p><a href="Books.html" class="uri" title="Go to wiki page">Books</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/RWH" class="uri" title="Go to wiki page">RWH</a>:BugReport</p>
+<hr>
+<p>翻訳やコードのミスなどを報告していただけると嬉しいです。</p>
+<p>新しい報告ほど上になるように以下に書いてください．<br>
+また，日付けを入れてくださいませ。日付は[[$date]]で入れられます。</p>
+<p>ここで指摘していただいた誤りなどは，<a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>にページ順に反映していきます．– nobsun</p>
+<p>(2010/03/27 13:35:34 JST):正誤表への反映が滞っており，心配をお掛けしております．申し訳けありません．まもなく再開します．–nobsun</p>
+<hr>
+<p>2010/10/17 21:38:14 JST</p>
+<p>P.590 下から二行目 -funbox-strict-fieldsが-fubox-strict-fieldsになっています</p>
+<hr>
+<p>2010/09/23 12:59:31 JST</p>
+<p>P.108 sufixes と suffixes のタイポ</p>
+<hr>
+<p>2010/04/14 01:20:00 JST</p>
+<p>P.231 一番上のコード片</p>
+<p>liftP2 ではなく lift2 になっている</p>
+<hr>
+<p>2010/03/26 11:４0:00 JST</p>
+<p>P.412 上から5行目</p>
+<p>, p_query の定義が記載されていない</p>
+<hr>
+<p>2010/03/26 11:30:00 JST</p>
+<p>P.410 上から2行目</p>
+<p>誤: それぞれの名前と値のペア生成するが付け加わるだけです。</p>
+<p>正: それぞれの名前と値のペア生成が付け加わるだけです。</p>
+<hr>
+<p>2010/03/24 12:35:00 JST</p>
+<p>P.642 下から6行目 sellItem が失敗すれば、orElse は return False アクションを呼びます。</p>
+<p>とあるが、コードがない。 (examples には trySellItem 関数としてあったが、本文にはない。)</p>
+<hr>
+<p>2010/03/23 21:10:00 JST</p>
+<p>P.616 下から12行目 （字抜け）</p>
+<p>誤: ghci&gt; andyCheck 10000 $ prop_suggest_try2</p>
+<p>正: ghci&gt; handyCheck 10000 $ prop_suggest_try2</p>
+<hr>
+<p>2010/03/23 14:43:00 JST</p>
+<p>P.611 上から 11 行目</p>
+<p>「ここでは -fvia-C を含めていますが、」となっているが、GHC-Options の表示がない。</p>
+<p>GHC-Options: -O2 -Wall -fvia-C -optc-O2</p>
+<p>を表示する。</p>
+<hr>
+<p>2010/03/23 14:28:00 JST</p>
+<p>P.618 ./WordTest の実行例（2例とも）</p>
+<p>誤: suggested sizings: Right (xxxxxx,y) の表示が抜けている</p>
+<hr>
+<p>2010/03/22 21:10:00 JST</p>
+<p>P.600 下から15行目</p>
+<p>誤: runSTUArray は、いったんSTUArrayをから UArray を作成</p>
+<p>正: runSTUArray は、いったんSTUArray から UArray を作成</p>
+<hr>
+<p>2010/03/22 21:08:00 JST</p>
+<p>P.534 下から1行目</p>
+<p>誤: au &lt;- xmlGetWidget xml castToDialog "</p>
+<p>正: au &lt;- xmlGetWidget xml castToDialog “addDialog”</p>
+<hr>
+<p>2010/03/22 17:48:00 JST</p>
+<p>P.589 下から9行目</p>
+<p>誤: 最終版では、単純は高階の畳み込みと</p>
+<p>正: 最終版では、単純な高階の畳み込みと</p>
+<hr>
+<p>2010/03/18 20:10:00 JST</p>
+<p>P.450 18.6.1 モナド変換子を作る の下２行</p>
+<p>誤: 型 Maybe a が手に入れましょう。</p>
+<p>正: 型 Maybe a を手に入れましょう。</p>
+<hr>
+<p>2010/03/18 10:45:00 JST</p>
+<p>P.429 下から11行目</p>
+<p>誤: この関数は引数として、Cの型のへのポインタを</p>
+<p>正: この関数は引数として、Cの型へのポインタを</p>
+<hr>
+<p>2010/03/18 01:45:00 JST</p>
+<p>P.302 buildMap の定義</p>
+<pre><code>    M.mapKeys (10 -) はチェックディジットの計算で余りが 0 の場合を考慮していない。</code></pre>
+<p>P.302 firstDigit の定義 bestScores paritySRL を使用しているが、paritySRL は１エントリのラン長の種類が一定ではない(1〜6要素)ので、 bestScores で計算を行うのは適切ではない。</p>
+<p>以下の C で作成したチェックディジットを除いた12桁の P6形式のファイル名の（13桁のバーコードをエンコードした）データに対して、以下の結果となった。（左の列から ファイル名、examplesのソースによる出力、ソース修正後の出力で、 各末尾にチェックディジットを追加 ▲ が不一致）</p>
+<p>“123456789003.ppm” Just [1,2,3,4,5,6,7,8,9,0,0,3,6] Just [1,2,3,4,5,6,7,8,9,0,0,3,6] “123456789013.ppm” Just [1,2,3,4,5,6,7,8,9,0,1,3,5] Just [1,2,3,4,5,6,7,8,9,0,1,3,5] “123456789023.ppm” Just [1,2,3,4,5,6,7,8,9,0,2,3,4] Just [1,2,3,4,5,6,7,8,9,0,2,3,4] “123456789033.ppm” Just [7,0,3,4,5,6,7,8,9,0,3,3,3] ▲ Just [1,2,3,4,5,6,7,8,9,0,3,3,3] “123456789043.ppm” Just [7,0,3,4,5,6,7,8,9,0,4,3,2] ▲ Just [1,2,3,4,5,6,7,8,9,0,4,3,2]</p>
+<p>“123456789053.ppm” Just [7,0,3,4,5,6,7,8,9,0,5,3,1] ▲ Just [1,2,3,4,5,6,7,8,9,0,5,3,1] “123456789063.ppm” Just [8,2,5,4,5,6,7,8,9,0,6,3,1] ▲ Just [1,2,3,4,5,6,7,8,9,0,6,3,0] “123456789073.ppm” Just [1,2,3,4,5,6,7,8,9,0,7,3,9] Just [1,2,3,4,5,6,7,8,9,0,7,3,9] “123456789083.ppm” Just [1,2,3,4,5,6,7,8,9,0,8,3,8] Just [1,2,3,4,5,6,7,8,9,0,8,3,8] “123456789093.ppm” Just [1,2,3,4,5,6,7,8,9,0,9,3,7] Just [1,2,3,4,5,6,7,8,9,0,9,3,7]</p>
+<p>paritySRL の bestScores を求める時は、左６桁の偶奇パリティ選択のZero,Oneによる length [Run] が paritySRL のエントリの length [Run] と等しい場合に distance の計算を行い、等しくない場合は、大きな値(6%1)をbestScores の結果とする。buildMap では mapKeys (`mod` 10) . を追加するかinsertMap の key を[0-9]から[1-10]にする などの修正が必要とおもいます</p>
+<pre><code>   bestScores 関数</code></pre>
+<p>誤: where scores = zip [distance d ( scaleToOne ps) | d &lt;- srl] digits</p>
+<p>正: where scores = zip [if length d == length ps</p>
+<pre><code>                            then distance d (scaleToOne ps)
+                            else 1 % 1 | d &lt;- srl] digits
+
+  insertMap 関数 (buildMap 関数を修正しない場合)</code></pre>
+<p>誤: where key’ = (key + digit) `mod` 10</p>
+<p>正: where calckey = (key + digit) `mod` 10</p>
+<pre><code>          key' | calckey == 0    = 10
+               | otherwise       = calckey         
+  </code></pre>
+<hr>
+<p>2010/03/17 09:07:00 JST</p>
+<p>P.395 下から７行目</p>
+<p>誤: このプログラムのまさの最後でparseCSV関数を定義します。</p>
+<p>正: このプログラムのまさに最後でparseCSV関数を定義します。</p>
+<hr>
+<p>2010/03/17 09:05:00 JST</p>
+<p>P.394 cells 関数定義 の first と次の２行のインデントが違う</p>
+<hr>
+<p>2010/03/14 13:05:00 JST</p>
+<p>P.292 12.8.4 一致のパリティを覚えるの直前の行</p>
+<p>誤: – 全部をリスト内包表記で書いた同じ式</p>
+<pre><code>   [(distance d (scaleToOne ps), n) | d &lt;- srl, n &lt;- digits]</code></pre>
+<p>正: なし</p>
+<p>本文の式では 100 要素のタプルのリストができてしまうのでは？ 他の式では 10 要素のタプルのリストになるはず</p>
+<hr>
+<p>2010/03/12 19:30:00 JST</p>
+<p>P.278 下から6行目</p>
+<p>誤: そのパリティビットはバーコードの13番目の桁をエンコードしたものです。</p>
+<p>正: そのパリティビットはバーコードの1番目の桁をエンコードしたものです。</p>
+<p>P.283 上から12行目 (すみません。すでに報告されていました。)</p>
+<p>誤: where (left, right) = splitAt 5 rest</p>
+<p>正: where (left, right) = splitAt 6 rest</p>
+<p>バーコード 9 780132 11467 7 の 最左の 9 でパリティテーブルのエントリを決定して 次の 780132 の 6桁の偶奇パリティを定め左のグループとし、残りの5桁と算出したチェックディジットの6桁を右のグループとしていると思われます。</p>
+<hr>
+<p>2010/03/12 05:50:00 JST</p>
+<p>P.470 上から1行目</p>
+<p>誤: あれば、IOError を呼んでその例外を投げ直します。</p>
+<p>正: あれば、ioError を呼んでその例外を投げ直します。</p>
+<hr>
+<p>2010/03/11 23:55:00 JST</p>
+<p>P.390 下段</p>
+<pre><code> Writer [Event] を MonadoHandle のインスタンスにできますが、特殊目的のモナドを作るのが安く簡単でより安全です。</code></pre>
+<p>となっていますが、インスタンス宣言、関数定義が記載されていません。サポートページのexamples にはありましたが、本文にも記載すべきでは？ （examplesの存在を知らず、P.391 上から６行目の ghci&gt; runWriterIO(safeHello “foo”) の実行結果を理解するのに時間がかかった。）</p>
+<hr>
+<p>2010/03/10 10:40:00 JST</p>
+<p>P.355 中段 translated3 = の展開</p>
+<p>誤: do act2</p>
+<pre><code>       let f pattern = do act2
+       actN</code></pre>
+<p>正: do act2</p>
+<pre><code>       {- ... etc. -}
+       actN</code></pre>
+<hr>
+<p>2010/03/10 10:27:00 JST</p>
+<p>P.351 中段 returnSingleton x = [x] の次行</p>
+<p>誤: return の型と同じ置換の手法を a -&gt; [a] の型にも適用すると、型 a -&gt; [a] になる</p>
+<p>正: return の型と同じ置換の手法を (&gt;&gt;=) の型にも適用すると、型[a] -&gt; (a -&gt; [b]) -&gt; [b] になる</p>
+<hr>
+<p>2010/03/09 17:37:00 JST</p>
+<p>P.325 上から4行目</p>
+<p>誤: まず、Unitsがあります。</p>
+<p>正: まず、unitsがあります。</p>
+<hr>
+<p>2010/03/05 15:27:17 JST</p>
+<p>P.236 上から9行目</p>
+<p>誤: この指示はIterator型のデータ構成子として表現されています。</p>
+<p>正: この指示はIterate型のデータ構成子として表現されています。</p>
+<hr>
+<p>2010/02/21 17:38:17 JST</p>
+<p>P.448 最上段</p>
+<p>誤: getをStateTをReaderTへ持ち上げればよいわけです。</p>
+<p>正: getをStateTからReaderTへ持ち上げればよいわけです。</p>
+<hr>
+<p>2010/02/16 15:37:41 JST kazu</p>
+<p>P 234 の一番下</p>
+<p>誤: Maybe コンビネータ 正: maybe コンビネータ</p>
+<hr>
+<p>2010/01/19 12:35:32 JST</p>
+<p>P.463 上から1行目の最後から2行目の初めにかけての文で「通常」が重なっている。</p>
+<hr>
+<p>2010/01/16 13:15:12 JST</p>
+<p>P.365 上から7行目</p>
+<p>誤: (&gt;&gt;=)の定義中のfmapをmapで置き換えることができます。</p>
+<p>正: (&gt;&gt;=)の定義中のmapをfmapで（に）置き換えることができます。</p>
+<hr>
+<p>2010/01/14 21:07:34 JST</p>
+<p>P.328 で append’ 関数を定義しているが、P.329 のモジュールヘッダで、および、P.330 の Monoid 型クラスのインスタンス宣言では append 関数というようにアポストロフィを省いた名前で参照している。</p>
+<hr>
+<p>2010/01/12 22:26:46 JST</p>
+<p>P.283 encodeDigits 関数の記述</p>
+<p>誤: splitAt 5 rest</p>
+<p>正: splitAt 6 rest</p>
+<hr>
+<p>2010/01/10 01:24:54 JST</p>
+<p>P.307 16 行目</p>
+<p>誤: Eq a =&gt; a -&gt; [(a,b)] -&gt; Maybe a</p>
+<p>正: Eq a =&gt; a -&gt; [(a,b)] -&gt; Maybe b</p>
+<hr>
+<p>2010/01/06 22:43:02 JST</p>
+<p>P.254 一番下のコード片</p>
+<p>誤: fmap (1+) filter odd [1..10]</p>
+<p>正: fmap (1+) (filter odd [1..10])</p>
+<hr>
+<p>2010/01/04 23:57:05 JST</p>
+<p>P.207-208</p>
+<p>207ページの globToRegex 関数および globToRegex’ 関数の内容と、208ページ1-2行目の文とで矛盾が起きている。</p>
+<p>「最初の選択肢はグロブパターンの終端にぶつかったら（空文字を見ることになった時）、「行終端にマッチ」正規表現のシンボル＄を返すことを要求しています。」</p>
+<p>と208ページに書かれているが、最初の選択肢というのが207ページの globToRegex’ 関数の "" にマッチするパターンであるのなら、この関数は “<span class="math inline">\(" を返していないので誤りであり、正しくはこの関数で "\)</span>” を返し、かつ globToRegex 関数の最後の ++ “$” も不要である。</p>
+<p>逆にこれらの関数が正しければ、208ページの文が誤りである。</p>
+<hr>
+<p>2010/01/04 19:50:42 JST</p>
+<p>P.154 最下行の文</p>
+<p>誤: やはりその型のインスタンス</p>
+<p>正: やはりその型クラスのインスタンス</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:52:30 JST)</li>
+</ul>
+<hr>
+<p>2010/01/04 15:01:27 JST</p>
+<p>P.128 [5.11 配列、オブジェクト、モジュールヘッダ] 直前のコード</p>
+<p>ここで、説明無しに Data.Char.ord 関数を使用している。</p>
+<p>一応130ページで import しているが、今まで Numeric.showHex 関数などもその都度＊＊のライブラリにあるからインポートする必要があると説明していたので、ここでも同様に説明すべき。</p>
+<hr>
+<p>2010/01/04 14:25:53 JST</p>
+<p>P.127 上から4行目（コードを含めず）。</p>
+<p>誤: simpleEscape の値はペアのリストです。</p>
+<p>正: simpleEscapes の値はペアのリストです。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:52:30 JST)</li>
+</ul>
+<hr>
+<p>2010/01/04 13:47:23 JST</p>
+<p>P.124 下から2行目</p>
+<p>誤: rederJValueという名前のままにしましょう。</p>
+<p>正: renderJValueという名前のままにしましょう。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:52:30 JST)</li>
+</ul>
+<hr>
+<p>2009/12/31 22:22:16 JST</p>
+<p>P.496 下から4行目のコメント</p>
+<p>誤: – 走っているHaskellコマンドのサポート</p>
+<p>正: – Haskellコマンドの実行をサポート</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:42:19 JST)</li>
+</ul>
+<hr>
+<p>2009/12/31 14:54:36 JST</p>
+<p>P.475 コンパイラ通らねー</p>
+<p>誤: optional p = (Just `liftM` p) `catchError` _ -&gt; return Nothing</p>
+<p>正: optional p = (Just `liftM` p) `catchError` \_ -&gt; return Nothing</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:42:19 JST)</li>
+</ul>
+<hr>
+<p>2009/12/16 18:31:51 JST (nakanowatari)</p>
+<p>P.420</p>
+<p>誤：runghc Enum.hs</p>
+<p>正：runghc Enum1.hs</p>
+<p>実行結果を得るには、実行するファイル名が異なります。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:42:19 JST)</li>
+</ul>
+<hr>
+<p>2009/12/16 14:33:51 JST (kazu)</p>
+<p>P. 572</p>
+<p>main が掲載されてないのに、駆動関数(main)に触れています。</p>
+<hr>
+<p>2009/12/16 14:33:32 JST (kazu)</p>
+<p>P. 570</p>
+<p>誤：前方へ改行文字まで 正：ファイルの末尾に向かって改行の文字まで (あるいは、後方へ)</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:42:19 JST)</li>
+</ul>
+<hr>
+<p>2009/12/16 14:33:32 JST (kazu)</p>
+<p>P.430</p>
+<p>コード中の erroffset nullPtr は、前の行の後ろにくっつけるべき</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:42:19 JST)</li>
+</ul>
+<hr>
+<p>2009/12/13 20:08:11 JST</p>
+<p>P.452 練習問題の中(タイポ)</p>
+<p>誤: Either String をモナドにしていまので、</p>
+<p>正: Either String をモナドにしていますので、</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/05/22 12:42:19 JST)</li>
+</ul>
+<hr>
+<p>2009/12/10 00:34:04 JST</p>
+<p>P.75 下から8行目</p>
+<p>誤：「もう一つのファイルに書くという*のも*です。」</p>
+<p>正：「もの」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/01/03 10:07:39 JST)</li>
+</ul>
+<p>P.172 下から10行目</p>
+<p>誤？:「アクションはどこでも生成、*割り当て、引き渡し*が可能です」</p>
+<p>正？：「代入、引数渡し」の方がよい？ 特に「割り当て」の方はallocをイメージしてしまう。あれ？Haskellには「代入」という言葉は馴染まないんだっけ。ダメかな。</p>
+<ul>
+<li>assignment には割り当てを割り当てることにします．– nobsun (2010/01/03 10:07:39 JST)</li>
+</ul>
+<p>P.180 脚注</p>
+<p>誤：「*相当するのかどうか*に興味があるかもしれない」</p>
+<dl>
+<dt>正：「相当することに」「相当するという事実に」</dt>
+<dd><p>– RWH東京読書会にて。</p>
+</dd>
+</dl>
+<ul>
+<li>be interested to know that 〜 は 「(that以下のこと)を知ることに興味がある」なので，確認のニュアンスがあると判断します．–nobsun (2010/01/03 10:07:39 JST)</li>
+</ul>
+<p>P.226 下から11行目</p>
+<p>誤？：「これは特別に*致命的な*バグです」</p>
+<p>正？：「悪性の」の方がよいか。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2010/01/03 10:07:39 JST)</li>
+</ul>
+<p>P.226 下から8行目</p>
+<p>誤：「別のファイルを開こうとしている呼び出し元に返ってきたときにだけ」</p>
+<p>正：「呼び出し元に帰ってきて別のファイルを開こうとしたときにだけ」（「返って」=&gt;「帰って」の変更も含む）</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun(2010/05/22 11:15:54 JST)</li>
+</ul>
+<p>P.227 上から8行目</p>
+<p>誤：「これを…しましょう。これは…保証するものです」</p>
+<p>正：「If the “acquire” action succeeds, the “release” action is always called. 」の訳が抜けている。</p>
+<p>P.226 下から9行目</p>
+<p>誤？：「「使用」と「解放」の…*リソースを渡します*」</p>
+<p>正？：「リソースが渡されることになります」の方がよいか。</p>
+<p>P.227 真ん中辺り</p>
+<p>誤：「不具合が発生するような*ことは*なくなります」</p>
+<p>正：「ことも」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun(2010/05/22 11:15:54 JST)</li>
+</ul>
+<p>P.228 上から11行目</p>
+<p>誤：「最初の*１歩*は」</p>
+<p>正：「一歩」の方がよいのでは。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun(2010/05/22 11:15:54 JST)</li>
+</ul>
+<p>P.230 上から14行目</p>
+<p>誤：「コンビネータを使っても簡潔性を回復できます」</p>
+<p>正：「コンビネータを使ってその（引数の順序のまずさによって失われた）簡潔性をある程度回復することができます」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun(2010/05/22 11:15:54 JST)</li>
+</ul>
+<p>P.231 上から7行目</p>
+<p>誤：「引数として*別の*関数を取り」</p>
+<p>正：「別の」はない方がよいのでは。英文では「we refer to functions that take other functions as …」と functions が続くので明確な区別のために other を付けているのではないか。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun(2010/05/22 11:15:54 JST)</li>
+</ul>
+<p>P.231 真ん中辺り</p>
+<p>誤：「この関数を使って新しいコンビネータをどう書くかを説明しましょう」</p>
+<p>正：「新しいコンビネータを使ってこの関数を書き換えるとどうなるかみてみましょう」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun(2010/05/22 11:15:54 JST)</li>
+</ul>
+<p>P.231 下から3行目</p>
+<p>誤：「最大の優先順位」</p>
+<p>意見：優先順位が高いのか低いのかよくわからない。「at the highest precedence level」では「level」となっている。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun(2010/05/22 11:15:54 JST)</li>
+</ul>
+<p>P.232 下から15行目（「9.7走査方法の制御」の次行）</p>
+<p>誤：「どのディレクトリに、*いつ*入るべきか」</p>
+<dl>
+<dt>正：「どういう順番で」（意訳。後に出てくる「このリストは要素が削除されたり、要素の順番が入れ替わったりします」に合わせて。）</dt>
+<dd><p>– [1..100]&gt;&gt;=pen</p>
+</dd>
+</dl>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun(2010/05/22 11:15:54 JST)</li>
+</ul>
+<hr>
+<p>2009/12/01 05:45:15 JST (nakanowatari)</p>
+<p>p563 並列GCC(typo)</p>
+<p>誤：「並列GCCはまだ開発中」</p>
+<p>正：「並列GCはまだ開発中」</p>
+<p>原書には「a parallel garbage collector is under development for GHC」とあります。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/12/08 16:14:46 JST)</li>
+</ul>
+<hr>
+<p>2009/11/30 11:07:09 JST (kazu)</p>
+<p>p558</p>
+<p>誤：「このコードの変更は、いままでは言及する必要のなかったことがすべて注目すべきことになっています」</p>
+<p>意味が分かりません。原文は「These changes to our code are remarkable for all the things we have not needed to say」です。“for” は、理由の for でしょう。僕ならこんな感じに訳します。</p>
+<p>「このコードの変更で注目すべきことは、何について指示する必要がなかったかという点である。」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/12/08 16:14:46 JST)</li>
+</ul>
+<hr>
+<p>2009/11/28 00:04:36 JST</p>
+<p>P.382, 383 Supply.hs SupplyClass.hs のコード。間違いではないけど、冗長(原著も)</p>
+<p>誤: return (show “a:” ++ show a ++ …</p>
+<p>正: return (“a:” ++ show a ++ …</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/12/08 16:14:46 JST)</li>
+</ul>
+<hr>
+<p><strong>以下は2刷で反映されました．</strong></p>
+<hr>
+<p>2009/11/21 21:28:31 JST</p>
+<p>P.407 最後の段落(typo)</p>
+<p>誤: hexify をトップレベル巻き上げて</p>
+<p>正: hexify をトップレベルに巻き上げて</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/11/25 01:39:59 JST)</li>
+</ul>
+<hr>
+<p>2009/11/16 00:18:53 JST</p>
+<p>P.102 練習問題</p>
+<p>問題番号の数値 2 が飛ばされている．</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/11/25 01:39:59 JST)</li>
+</ul>
+<hr>
+<p>2009/11/14 01:39:37 JST</p>
+<p>P.164 「6.8.2 要約:型に命名する3つの方法」の type の解説にタイポ</p>
+<p>誤: 〜元の型名も別名も同じ意味使え、交換可能です。</p>
+<p>正: 〜元の型名も別名も同じ意味で使え、交換可能です。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/11/15 10:37:13 JST)</li>
+</ul>
+<hr>
+<p>2009/11/14 01:24:31 JST</p>
+<p>P.286/P.303 (こうしないと動かないはず)</p>
+<p>P.286 parseRawPPM 関数の最後</p>
+<p>誤:</p>
+<pre><code>  identity (listArray ((0,0),(width-1,height-1)) pxs)</code></pre>
+<p>正:</p>
+<pre><code>  identity (listArray ((0,0),(height-1,width-1)) pxs)</code></pre>
+<p>P.303 row関数の定義</p>
+<p>誤:</p>
+<pre><code>  row j a = ixmap (l,u) project a
+      where project i = (i,j)
+            ((l,_),(u,_)) = bounds a</code></pre>
+<p>正:</p>
+<pre><code>  row i a = ixmap (l,u) project a
+      where project j = (i,j)
+            ((_,l), (_,u)) = bounds a</code></pre>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/11/25 01:39:59 JST)</li>
+</ul>
+<hr>
+<p>2009/11/14 01:13:39 JST</p>
+<p>P.347 (「正」が判らないんですが……)</p>
+<p>誤: モナドは評価順を制御する - モナドはある計算が他の計算より先に行なわれることを指定できるので……</p>
+<p>正: (この章は「誤解を正す」章なので「モナドは評価順を制御する」のは誤解であって、解説には反駁が書かれるはず。ちなみに原著には「モナドは評価順を制御する」とだけ書かれていて、解説はなし)</p>
+<ul>
+<li>原文では解説がなかったので，原著者に問い合わせたところ，<br>
+Many monads make it possible to specify that some computations should take place before others, so we can perform tasks like input and output, for which the ordering of operations is important.<br>
+という文を補うようにメールがあり，それをそのまま翻訳したものです．反論になっていないのですが，時間切れでそのままになっています． –nobsun (2009/11/15 10:37:13 JST)</li>
+</ul>
+<hr>
+<p>2009/11/13 21:23:01 JST</p>
+<p>P393 本文最後の行</p>
+<p>誤：「構文解析噐」</p>
+<p>正：「構文解析器」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/11/15 10:37:13 JST)</li>
+</ul>
+<hr>
+<p>2009/11/13 11:38:31 JST</p>
+<p>P648 下から4行目 (kazu)</p>
+<p>誤：「HTTPリダイレクトリスポンスは何回かたどります。」</p>
+<p>正：「HTTPリダイレクトリスポンスは、数回しかたどりません。」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/11/15 10:37:13 JST)</li>
+</ul>
+<hr>
+<p>2009/11/12 20:39:48 JST</p>
+<p>P.225 下から5行目</p>
+<p>誤：「betterFindで、あらゆる … を呼んでいます。もしエントリが … 被せて返します」</p>
+<dl>
+<dt>正：「betterFindで、あらゆる … を呼んでいるので、もしエントリが … 被せて返すべきです」</dt>
+<dd><p>– [1..100]&gt;&gt;=pen</p>
+</dd>
+</dl>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました．– nobsun (2009/11/12 23:11:48 JST)</li>
+</ul>
+<hr>
+<p>2009/11/12 06:05:38 JST</p>
+<p>P481 最後の実行例と段落</p>
+<pre><code>ghci&gt; TOD 1000 0
+Thu Jan 1 09:16:40 JST 1970</code></pre>
+<p>「1つめは1,000秒後にUTCの1970年1月1日の午前0時になる時点を表現するClockTimeを構成します。」</p>
+<p>実行例と説明のどちらかが間違っている?</p>
+<ul>
+<li>明かに説明の誤訳です．orz 「1つめはUTCの1970年1月1日の午前0時から1,000秒後の時点を表現するClockTimeを構成します。」とします．nobsun (2009/11/12 23:11:01 JST)</li>
+</ul>
+<hr>
+<p>2009/11/12 02:00:09 JST</p>
+<p>P.224 6行目</p>
+<p>誤かな？：「これらの関数はすべて自由に使えるものです」</p>
+<p>正かな？：「これらの関数（getPermissions と getModificationTime）は（ファイルタイプに関係なくどのファイルに対しても）自由に使うことのできる（ファイルの属性を取得できる？）関数のすべてです」</p>
+<p>: – [1..100]&gt;&gt;=pen</p>
+<ul>
+<li>「自由に使えるのはこれらのSystem.Directoryモジュールの関数だけです」とします．–nobsun (2009/11/12 23:11:01 JST)</li>
+</ul>
+<hr>
+<p>2009/11/10 20:11:50 JST</p>
+<p>P210 4段落目（2つ目のコードの後）</p>
+<p>誤：「非正格評では」</p>
+<p>正：「非正格評価では」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映済 –nobsun (2009/11/11 19:51:31 JST</li>
+</ul>
+<hr>
+<p>2009/11/10 20:07:25 JST</p>
+<p>P198 2段落目の冒頭</p>
+<p>誤：「正格bytestring型は、」</p>
+<p>正：「正格ByteString型は、」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映済 –nobsun (2009/11/11 19:51:31 JST</li>
+</ul>
+<hr>
+<p>2009/11/10 20:02:51 JST</p>
+<p>P187 上から5行目</p>
+<p>誤：「putStr（およびこれに類する出力関数は）データが」</p>
+<p>正： 「putStr（およびこれに類する出力関数）はデータが」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました –nobsun (2009/11/11 19:51:31 JST</li>
+</ul>
+<hr>
+<p>2009/11/10 19:53:53 JST</p>
+<p>P79 「4.3.1 行終端変換プログラム」の上から1行目から2行目にかけて</p>
+<p>誤： 「Interact.hsファイルをコピーします。」</p>
+<p>正： 「InteractWith.hsファイルをコピーします。」</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました –nobsun (2009/11/11 20:08:12 JST)</li>
+</ul>
+<hr>
+<p>2009/11/10 19:48:22 JST</p>
+<p>P76 2段落目の「読むべきファイルの名前と書くべきファイルの名前です。」の下にあるコンソールへの入力</p>
+<p>誤： $ ./Interact</p>
+<p>正： $ ./InteractWith</p>
+<p>同じ間違いが2ヶ所ある（引数ありと、引数無し）。</p>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました –nobsun (2009/11/11 20:08:12 JST)</li>
+</ul>
+<hr>
+<p>2009/11/10 19:39:05 JST</p>
+<p>P69 「3.11 case式」の上から3行目</p>
+<p>誤：「defaultは値がNothingのときに」</p>
+<p>正：「defvalは値がNothingのときに」</p>
+<ul>
+<li>訳文を見直して以下のようにします –nobsun (2009/11/11 19:59:43 JST)<br>
+「defaultは値がNothingのときに使われます。」→「値がNothingのときにはデフォルト値を使います。」</li>
+</ul>
+<hr>
+<p>2009/11/10 02:43:42 JST</p>
+<p>P215 下から10行目</p>
+<dl>
+<dt>「失敗の可能性を*織り込められます*」=&gt;「織り込めます」「織り込むことができます」</dt>
+<dd><p>– [1..100]&gt;&gt;=pen</p>
+</dd>
+</dl>
+<ul>
+<li>「織り込めます」とします –nobsun (2009/11/10 05:42:14 JST)</li>
+</ul>
+<hr>
+<p>2009/11/10 02:43:42 JST</p>
+<p>P202 下から4行目</p>
+<p>誤：「結果を使って置き換えをする方法により」</p>
+<dl>
+<dt>正：なんだっけ？</dt>
+<dd><p>– RWH東京読書会にて</p>
+</dd>
+</dl>
+<ul>
+<li>「結果の使い方によって」とします –nobsun (2009/11/10 06:58:32 JST)</li>
+</ul>
+<hr>
+<p>2009/11/10 02:26:34 JST</p>
+<p>P.221 13行目</p>
+<dl>
+<dt>「ループが長くデータ部が*長い*場合にはforMを使います。」=&gt;「短い」</dt>
+<dd><p>– [1..100]&gt;&gt;=pen</p>
+</dd>
+</dl>
+<ul>
+<li><a href="http://hop.timedia.co.jp/show/book/Real%20World%20Haskell">正誤表</a>に反映しました。–nobsun (2009/11/10 07:13:55 JST)</li>
+</ul>
+<hr>
+<p>2009/11/09 23:31:26 JST</p>
+<p>P.310 (13.2 マップ)</p>
+<p>誤: Map.insertのような関数の動作は通常のHaskellの作法にしたがいます。入力データのコピーを返します。そのとき要求された変更を適用します。</p>
+<p>正: Map.insertのような関数の動作は通常のHaskellの作法にしたがいます。要求された変更が適用された入力データのコピーを返します。</p>
+<ul>
+<li>「要求された変更を適用した入力データのコピーを返します。」とします –nobsun (2009/11/10 07:26:45 JST)</li>
+</ul>
+<hr>
+<p>Last modified : 2010/11/01 12:37:26 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Books_RWH_BugReport">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Books_RWH_BugReport?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Books_RWH_BugReport">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Books_RWH_BugReport" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

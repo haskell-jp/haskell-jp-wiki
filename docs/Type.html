@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Type"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Type</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Type">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Type">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Type">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Type</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#type"><span>Type</span></a><ul>
+<li><a href="#%E5%9E%8B%E6%8E%A8%E8%AB%96">型推論</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="type"><a href="" class="uri" title="Go to wiki page">Type</a></h1>
+<hr>
+<p>Type, Type System, Type Inference などの話題</p>
+<h3 id="型推論">型推論</h3>
+<p><a href="Programming_WayToHaskeller.html" class="uri" title="Go to wiki page">Programming_WayToHaskeller</a> より、</p>
+<blockquote>
+<p>nobsun(2004/09/23 00:54:22 JST): 括弧なしで、</p>
+<p>&gt; main = putStr “Hello,” ++ " ほげさん!\n"</p>
+<p>と書くと何故、叱られるかというと。関数適用の結合力は、二項演算子 ++ の結合力より強いので、上は</p>
+<p>&gt; main = (putStr “Hello,”) ++ " ほげさん!\n"</p>
+<p>と解釈されてしまいます。(putStr “Hello,”) の型は IO () で、" ほげ さん!\n" の型は String です。これは、++ の型 [a] -&gt; [a] -&gt; [a] と いうのに矛盾します。で、エラー。</p>
+<p>Haskellの型推論のシステムが、上のように型を推論してくれて、プログラマ の意図と実際に書かれたプログラムとの齟齬を教えてくれます。こんなのが実 行時エラーだったらやだよねぇ。型推論マンセー！</p>
+<p><a href="http://practical-scheme.net/wiliki/wiliki.cgi?Shiro">WiLiKi:Shiro</a> (2004/09/23 11:24:53 JST): でもでも、最初の関数の型が [Char] -&gt; [Char] だったら、エラーは出ないよね。プログラマの意図を完全 に表現しきるのは無理なんだから、結局程度問題ってことにならない? (いや、 型推論があるのはうらやましいんだけどさ。)</p>
+</blockquote>
+<p>nobsun(2004/09/24 15:42:36 JST): Haskell では、実行可能なプログラムは、 「プログラム全体」を通して、型の整合性がとれていることが保証されていま す。もちろん、2 + 3 という意図と 2 * 3 というプログラム(算譜)の表現の 齟齬を型で発見するのは無理ですが、2 + length “Hello” という意図と、算 譜に表れた 2 + “Hello” のタイポによるバグは、型推論で発見可能です。まぁ。 程度の問題といってしまうと確かにそうなんだけど。これが、相当にでかい差 だと思いますよ。</p>
+<p>上の例だと putStr の型が [Char] -&gt; [Char] だったら、++ とは矛盾しない けど、今度は、main と矛盾しますよね。main は特別な名前の変数で、main はプログラムの外側とやりとりをするアクションなので型は必ず IO a です。</p>
+<p>一般にHaskellでは、型の整合さえとれていれば、実行可能なので、実は、プ ログラマの意図とは違うプログラムができる可能性はあります。しかし、バグ は、プログラマが自分の意図が正しいという前提のもとでは、算譜に転写する ときに入り込むものです。それゆえ、その間違いを犯したあとでも、プログラ ム全体で、型の整合がとれていることは稀だといっていいでしょう。</p>
+<h4 id="制約の強さの度合">制約の強さの度合</h4>
+<p>Shiro(2004/09/24 18:31:04 JST): 一般的に動的型付けに対する静的型付けの そういうメリットを否定するつもりではなく、むしろ静的型付けの枠組のスペ クトルの中で、Haskellが選んでいる現在の形に対して、Haskellerがどういう 評価をしているかに興味があっての発言です。Haskellの現在の標準の選択は、 広い意味での静的型付けの唯一の解では無いはずで、「プログラマの意図」の 表現の度合で測ればより緩いものもよりきついものもあるはずですよね。それ を指して「程度問題」と言いました。</p>
+<p>例えば、absの型は Num a =&gt; a -&gt; a となっていますね。logの型は Floating a =&gt; a -&gt; a です。従って、 log(-abs(-3)) という式の評価が出来ないこと は、実行時までわかりません。でも、absの値域やlogの定義閾が型で表現され ていたとすれば、上記の式が不正であることはコンパイル時に検出できるでしょ う。</p>
+<p>別の例として、文字列処理ライブラリを作っているとします。非常に多くの関 数が [Char] -&gt; [Char] という型を持つことでしょう。そのようなドメインで は、「バグがあったら型の整合がとれることは稀」とは言えないと思います。 実は、動的型付けもこのスペクトルの一番端にあるでしょう。可変長引数の話 を置いておけば、全ての関数は Anything -&gt; Anything ってことでOK。</p>
+<p>現実には、普通に使い易い落としどころを探っていって今の形に落ち着いてい るんだと思うんですね。緩くしてゆけば、プログラマの意図とは違うプログラ ムが実行できてしまう可能性が増える。きつくして行くと、プログラムがます ます書き難くなってゆく(表現が冗長になり、型システムを納得させるのも難 しくなる)。 Haskellの現在の形は、もともとはその最適化のカーブの極大点 にすぎないでしょう。</p>
+<p>しかし、そこに「本質的」な差異があるとすれば、それは何なのでしょうか。</p>
+<p>(例えば、全てはチューリングマシンだと言ってしまえば全ては程度問題になっ てしまいますが、再帰が出来るかできないかというポイントは、そのスペクト ルにおいてひとつのギャップになってると思うんですよ。現在のHaskellの型 システムが落ち着いた背景に、どちらにシフトするにせよギャップがあるんで、 かなり必然的にここに落ちるんだ、みたいな背景があるのかなあ、とか。)</p>
+<p>nobsun(2004/09/27 11:08:33 JST): うまく、まとめられませんが。とりあえ ず、つらつらと。</p>
+<p>私の場合は、Haskellの型システムは、「なかなか、いいんじゃない」という 感じです。Haskellの型推論は単純で、そのアルゴリズムはプログラマが自分 でやってもできる程度のものでしょう。ならば、そのくらいのチェック作業は、 処理系がやってくれてもいいかなと思います。</p>
+<p>では、型推論の前提となる静的な強い型付けが、プログラミングのしやすさに どれほど制約を与えているかというと、これはプログラミングスタイルによる と思います。関数的に書くときには、型を意識しますので、静的な強い型付け はむしろあたりまえ、型推論機構があるのも当然(ないと不便)と思います。</p>
+<p>型推論機構があることで、型が抽象化の強力な道具となり、プログラマの意図 の一部を型に載せることができます。もちろん、なにもかもが型に載るわけで はありませんし、値に依存するような型は使えると便利でしょうけど、今のと ころ決定版というべき実装法はありません。</p>
+<p>「バグがあるとすれば、それは型のバグである」ということがいいたいのでは なく、タイポでは型のバグになることが多く、そのくらいはコンパイル時に弾 けるほうが良いでしょう、ということを言おうとしました。もちろん、2 + 3 とすべきところを 2 * 3 としたという類いのバグまではカバーしきれません ね。</p>
+<p>文字列処理ライブラリを作っているとすると、API としては多くの関数が [Char] -&gt; [Char] になるでしょうが、その関数の多くは、高階関数をつかっ て合成されるでしょう。高階関数は型としては、ずっと複雑で、合成の際に引 数順などの誤りを型でチェックできると楽ができると思いませんか？</p>
+<p>私自身には、静的型付けを「きつくして行くと、プログラムがますます書き難 くなってゆく」という感覚があまりありません。表現が冗長になる度合にもよ りますが、型システムを納得させられないようなものは、私の場合、自明なバ グである可能性が高いので、そのようなものはさっさと弾いてもらうほうがい いのです。</p>
+<p>Haskell の型システムのおとしどころは、機械的な静的型付けが実用的な範囲 で実装可能であるというところでしょうか。 (実際、Haskellの型システムの 基本は変ることはないでしょうけど、すこしずつ進化はしています。Haskell 98 の仕様にはない機能が Hugs や GHC に追加されていて、一部は事実上の標 準になっています。)</p>
+<p>再帰の可不可と同様のギャップが静的型付け、動的型付けの間にあるといえる かどうかちょっとわからないです。スペクトルの端にあるか中間にあるかは決 定的にちがうような気もするしそうではないような気もします。ただ、関数の 型による抽象化を(意識的に)行うプログラミングスタイルかどうかの違いはあ るとおもいます。</p>
+<p>Shiro: ふむ。納得です。静的型という制約を、抽象化のための思考の道具と して使うわけですね。動的型では、やはり思考がランタイムでの値中心になり がちなように思います。</p>
+<p>高階関数の合成に関しては、静的型が圧倒的に有利だと思います。動的型だと 人間の頭で追わないとだめだし。引数順の誤りは、同じ議論になるので(引数 が同じ型だったら? という)アレですが、引数の数だけでもチェックできたら ずいぶん違うと思います</p>
+<hr>
+<p>Last modified : 2009/06/08 05:53:43 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Type">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Type?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Type">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Type" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

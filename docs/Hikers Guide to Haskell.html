@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Hikers%20Guide%20to%20Haskell"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Hikers Guide to Haskell</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Hikers%20Guide%20to%20Haskell">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Hikers%20Guide%20to%20Haskell">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Hikers%20Guide%20to%20Haskell">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Hikers Guide to Haskell</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#haskell%E3%81%AE%E6%AD%A9%E3%81%8D%E6%96%B9">Haskellの歩き方</a><ul>
+<li><a href="#%E5%A4%A7%E5%8E%9F%E5%89%87">大原則</a></li>
+<li><a href="#%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%81%82%E3%82%8B%E3%81%84%E3%81%AF%E6%A7%98%E3%80%85%E3%81%AA%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%81%A8%E3%81%AE%E4%BB%98%E3%81%8D%E5%90%88%E3%81%84%E6%96%B9">ポイントフリースタイル、あるいは様々なスタイルとの付き合い方</a></li>
+<li><a href="#%E8%A8%80%E8%AA%9E%E6%8B%A1%E5%BC%B5%E3%81%A8%E3%81%AE%E4%BB%98%E3%81%8D%E5%90%88%E3%81%84%E6%96%B9">言語拡張との付き合い方</a></li>
+<li><a href="#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%84%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E8%AA%BF%E3%81%B9%E6%96%B9">ドキュメントやパッケージの調べ方</a><ul>
+<li><a href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E5%90%8D%E5%89%8D%E3%82%84%E6%A6%82%E8%A6%81%E3%81%8B%E3%82%89%E6%A4%9C%E7%B4%A2%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AF">パッケージの名前や、概要から検索したい場合は</a></li>
+<li><a href="#%E3%81%A9%E3%81%93%E3%81%8B%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E5%85%A5%E3%81%A3%E3%81%A6%E3%81%84%E3%82%8B%E9%96%A2%E6%95%B0%E3%81%AE%E5%90%8D%E5%89%8D%E3%82%84%E9%96%A2%E6%95%B0%E3%81%AE%E3%82%B7%E3%82%B0%E3%83%8D%E3%83%81%E3%83%A3%E5%9E%8B%E3%81%8B%E3%82%89%E6%A4%9C%E7%B4%A2%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88%E3%81%AF">どこかのパッケージに入っている、関数の名前や関数のシグネチャ（型）から検索したい場合は</a></li>
+<li><a href="#%E3%81%9D%E3%81%AE%E3%81%BB%E3%81%8B%E8%A8%98%E5%8F%B7%E3%81%AE%E8%AA%BF%E3%81%B9%E6%96%B9">そのほか、記号の調べ方</a></li>
+</ul></li>
+<li><a href="#%E6%83%85%E5%A0%B1%E5%8F%8E%E9%9B%86%E3%81%AB%E5%BD%B9%E7%AB%8B%E3%81%A4%E3%82%B5%E3%82%A4%E3%83%88">情報収集に役立つサイト</a></li>
+<li><a href="#%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E3%81%AE%E4%BB%95%E6%96%B9">デバッグの仕方</a></li>
+<li><a href="#%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%AE%E4%BB%98%E3%81%8D%E5%90%88%E3%81%84%E6%96%B9">パッケージとの付き合い方</a></li>
+<li><a href="#%E8%A6%81%E7%B4%A0%E6%8A%80%E8%A1%93">要素技術</a><ul>
+<li><a href="#%E3%83%93%E3%83%AB%E3%83%89%E3%83%84%E3%83%BC%E3%83%AB">ビルドツール</a></li>
+<li><a href="#web%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3">Webアプリケーション</a></li>
+<li><a href="#monad">Monad</a></li>
+<li><a href="#monad-transformer">Monad Transformer</a></li>
+<li><a href="#lens%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%83%BC">lensライブラリー</a></li>
+<li><a href="#%E3%81%BE%E3%81%A0%E3%81%BE%E3%81%A0%E3%81%82%E3%82%8B%E3%81%9E">まだまだあるぞ！</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="haskellの歩き方">Haskellの歩き方</h1>
+<p>この文章は、<a href="https://employment.en-japan.com/engineerhub/entry/2017/10/03/110000#%E8%B6%85%E7%99%BA%E5%B1%95%E7%B7%A8%E3%82%82%E3%81%A3%E3%81%A8%E5%8B%89%E5%BC%B7%E3%81%97%E3%81%9F%E3%81%84%E4%BA%BA%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AB">発展編！ Haskellで「型」のポテンシャルを最大限に引き出すには？【第二言語としてのHaskell】 - エンジニアHub｜若手Webエンジニアのキャリアを考える！の「【超発展編】もっと勉強したい人のために！」</a>を新しい情報に合わせて加筆・更新したものです。<br>
+Haskellの入門書などで学習した人が、知っておくと良いトピックについて網羅するよう努めています。</p>
+<p>なお、Haskellの学習コンテンツの一覧やその他日本語の情報については、<a href="Links.html">リンク集</a>もご覧ください。</p>
+<h2 id="大原則">大原則</h2>
+<p><strong>すべてを完全に理解しようとは思わないでください。</strong><br>
+Haskellはもともとプログラミング言語の研究者が作ったという背景があるためか、日夜新しい機能や概念が実験されています。<br>
+それらは追いかけるだけでも大変ですし、理解しようにも抽象度が高く、難しい概念がたくさんあります。<br>
+自分にとって有益なものを、詳しい人たちの解説を待ちながら使うのでもよいでしょう（その割には日本語の解説が少なくて恐縮ですが…）</p>
+<h2 id="ポイントフリースタイルあるいは様々なスタイルとの付き合い方">ポイントフリースタイル、あるいは様々なスタイルとの付き合い方</h2>
+<p>「Haskellは上級者のコードほどコードゴルフのようになって読みづらい」みたいな声をたまに聞きます。<br>
+これは一面の真実で、Haskellはポイントフリースタイルなどを駆使することで、同じコードをすごく短くも書ければ、長めに書くこともできるようになっている言語です。<br>
+「<a href="https://github.com/haskell-jp/makeMistakesToLearnHaskell">失敗しながら学ぶHaskell入門</a>」でも追々触れる予定ですが、そうした、短く書くための機能がたくさんあります。<br>
+そうした機能を駆使したコードを指して「上級者のコードほど読みづらい」という認識が生まれるのではないかと推測しています。</p>
+<p>いずれにしてもここで大事なことは、「<strong>短く書ける人を上級者と呼ぶな</strong>」ということです。<br>
+当然Haskellに限った話ではありませんが、短<strong>すぎる</strong>コードは読みづらいコードになりがちです。<br>
+ポイントフリースタイルなどを勉強して、より簡潔に、より本質的な部分のみを書けるようになることはHaskellerとして重要なことです。<br>
+しかし同時に、コードの読み手のことを考えて、理解できるコードを書くことは、プログラマーとして極めて重要なことです。<br>
+「読み手」はプロジェクトや場面によって変わるわけですから、それぞれの習熟度や好みに合わせて書き分ける、という至極当たり前のことは、Haskellerの常識としても広めていきましょう。</p>
+<p>もちろん、そうして選択肢が多いために、「逐一書き方を考えなくてはならない」ところはHaskellを現場に導入する上での障害になり得ます。心得ておきたいものですね。</p>
+<p>ちなみに、<a href="https://hackage.haskell.org/package/hlint">HLint</a>というツールは、そうしたHaskellの（主に構文以外の）スタイルを統一する上で、必要不可欠なツールです。<br>
+デフォルトでも冗長な書き方を改善するための指摘をたくさんしてくれますし、細かく設定すれば「この関数はこのモジュール以外では使わないでください」などというプロジェクト固有のルールも強制できます。<br>
+これはスタイルの問題以上に有益なもので、「危険な関数を避けて、それをラップしたバージョンのみを使う」といった、バグを防ぐための習慣も作り出せるのです。 詳細は、<a href="https://haskell.e-bigmoon.com/posts/2018/01-29-awesome-hlint.html">素晴らしき HLint を使いこなす</a>をご覧ください。</p>
+<h2 id="言語拡張との付き合い方">言語拡張との付き合い方</h2>
+<p>Haskell製のライブラリーのソースコードやサンプルコードを眺めていると、冒頭で次のような行をたくさん目にすると思います。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">{-# LANGUAGE FlexibileInstances #-}</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="ot">{-# LANGUAGE MultiParamTypeClasses #-}</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="ot">{-# LANGUAGE OverloadedStrings #-}</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ot">{-# LANGUAGE TemplateHaskell #-}</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ot">{-# LANGUAGE TypeFamilies #-}</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="fu">...</span></a></code></pre></div>
+<p>これらは、言語拡張と呼ばれている機能を有効にする、特殊なコメントです。<br>
+言語拡張は、<a href="https://www.haskell.org/onlinereport/haskell2010/">Haskellの標準</a>として定められた機能に対して、（主に）GHCが加えた新しい機能です。<br>
+言語拡張は、初見では何のために有効にされたのかわからず、面食らってしまうことも多いと思います。<br>
+しかし、ご安心ください。<br>
+一部を除いて、言語拡張を有効にして起こる悪影響はあまりありません。<br>
+GHCが提供するHaskellに対する言語拡張は、<strong>ライブラリーが必要としているものであればとりあえずコピペ</strong>して使いましょう。</p>
+<p>ちなみに、GHC 9.2より<a href="https://github.com/ghc-proposals/ghc-proposals/blob/master/proposals/0380-ghc2021.rst">GHC2021</a>という新しい機能ができるので、このように言語拡張がずらずらと並べられる状態は今後緩和されるかも知れません。</p>
+<h2 id="ドキュメントやパッケージの調べ方">ドキュメントやパッケージの調べ方</h2>
+<h3 id="パッケージの名前や概要から検索したい場合は">パッケージの名前や、概要から検索したい場合は</h3>
+<p>※このセクションはもともと<a href="https://qiita.com/igrep/items/e7926ef2d015ca85c18e">最近のHaskell製パッケージのドキュメント事情について簡単に - Qiita</a>からコピペして、若干修正しました。</p>
+<ul>
+<li><a href="https://hackage.haskell.org/">Hackage</a>から検索するか、</li>
+<li><a href="https://www.stackage.org/">Stackage</a>のトップから「browse packages」というリンクをクリックして、LTS-Haskellに載っているパッケージを<strong>ページ内検索</strong>してください。</li>
+<li>実は、次のセクションで紹介するHoogleなどの検索エンジンも、パッケージの名前による検索をサポートしています。</li>
+</ul>
+<p>2つめのStackageは、LTS-Haskellに載っているパッケージのみの一覧なので、Hackageに公開されているすべてのパッケージが載っているわけではありません。<br>
+詳しくは<a href="http://qiita.com/tanakh/items/6866d0f570d0547df026#stackage%E3%81%A8%E3%81%AF">tanakhさんの記事のこのへん</a>が参考になるかと思います。</p>
+<h3 id="どこかのパッケージに入っている関数の名前や関数のシグネチャ型から検索したい場合は">どこかのパッケージに入っている、関数の名前や関数のシグネチャ（型）から検索したい場合は</h3>
+<p>実際にHaskellでプログラムを書いていくと、「こんな型の関数がほしい」「こんな名前の関数ないかな」などと感じるケースが頻繁に出てくるでしょう。<br>
+そのような場合に便利なのが下記のサイトです。</p>
+<ul>
+<li><a href="https://www.haskell.org/hoogle/">Hoogle</a></li>
+<li><a href="https://hayoo.fh-wedel.de/">Hayoo! Haskell API Search</a></li>
+<li><a href="https://www.stackage.org/">Stackage Server</a>（右上の検索ボックス）</li>
+</ul>
+<p>いずれも、関数の名前や関数の型から調べることができる、ほかのプログラミング言語ではちょっと珍しいタイプのドキュメント検索エンジンです。</p>
+<p>たとえば<code>filter</code>関数の型は<code>(a -&gt; Bool) -&gt; [a] -&gt; [a]</code>ですが、 これを上記の<a href="https://www.haskell.org/hoogle/?hoogle=%28a+-%3E+Bool%29+-%3E+%5Ba%5D+-%3E+%5Ba%5D">Hoogleで検索してみる</a>と、<code>filter</code>関数以外にもたくさんの関数がヒットするのがわかります。</p>
+<p>ただ、3つとも収録されている内容が異なる場合があります。<br>
+新しいバージョンがでた場合に、ドキュメントの生成が追いついていないことがあるためです。<br>
+どれを使うべきか簡単に言うと、stackを主に使って開発する場合には、上記の<a href="https://www.stackage.org/">StackageのHoogle</a>を使うのが個人的なおすすめです（筆者自身これを最もよく使います）。<br>
+どれかを使ってみて目的の関数が見つからなかった場合は、ほかのエンジンを試してみてください。</p>
+<h3 id="そのほか記号の調べ方">そのほか、記号の調べ方</h3>
+<p>Haskellには記号だけの名前を持った関数（記号関数、あるいは演算子）ユーザーが定義できるという特徴があります。<br>
+前述したHoogleは、そうした記号関数も記号を入力すれば、名前から検索することが出来ます。便利！<br>
+そのうち、特によく使う記号関数は<a href="https://haskell.fpcomplete.com/tutorial/operators">Operator Glossary</a>にまとまっているので、一度目を通すといいでしょう。</p>
+<p>加えて、記号関数ではない、構文の一部として使われている記号もたくさんあります。<br>
+そうしたものをまとめた一覧が<a href="https://github.com/takenobu-hs/haskell-symbol-search-cheatsheet">takenobu-hs/haskell-symbol-search-cheatsheet</a>です。<br>
+Haskell標準外のものやたまにしか使わないであろうものもたくさんあるので、知らない記号が出てきたときに調べてみてください。</p>
+<h2 id="情報収集に役立つサイト">情報収集に役立つサイト</h2>
+<ul>
+<li><a href="https://haskell.jp/antenna/">Haskell Antenna</a><br>
+QiitaのHaskellタグが着いた記事や、日本人のHaskellerによるブログのRSSを収集したサイトです。<br>
+昔はHerokuの無料プランで運用していたため非常に反応が遅かったですが、今はGitHub Pages上の静的サイトを定期的に更新する、という運用に変えたため、非常に速くなりました。</li>
+<li><a href="https://haskellweekly.news/">Haskell Weekly</a> 話題になったHaskellの記事や新しいHaskell製パッケージを、毎週紹介してくれるサービスです。 メールで購読もできます。</li>
+<li><a href="https://haskell-jp.slack.com/messages/C5666B6BB/convo/C4M4TT8JJ-1541321220.051500/">日本HaskellユーザーグループのSlack Workspace</a><br>
+各種チャンネルで、日夜情報のやりとりをしています。<br>
+<a href="https://haskell.jp/signin-slack.html">登録はこちらからどうぞ</a>。</li>
+</ul>
+<h2 id="デバッグの仕方">デバッグの仕方</h2>
+<p><strong>(要検証)</strong>: 標準で付いている<a href="https://hackage.haskell.org/package/base-4.12.0.0/docs/Debug-Trace.html">Debug.Traceパッケージ</a>のほか、<a href="https://hackage.haskell.org/package/debug-0.1.1/docs/Debug-Variables.html">debug</a>というサードパーティーのパッケージが便利そうです。GHC標準のデバッガーは、正直あまり使いやすくないのでおすすめしません…。</p>
+<h2 id="パッケージとの付き合い方">パッケージとの付き合い方</h2>
+<p>これはHaskellに限った話ではないですが、パッケージ（特に、そのまま実行できるプログラムではなく、プログラムが依存するライブラリー）を選ぶときの基準について簡単に説明します。</p>
+<p>同じテーマについて解説した記事が<a href="http://www.haskellforall.com/2018/05/how-i-evaluate-haskell-packages.html">Haskell for all: How I evaluate Haskell packages</a>にもあります。<br>
+共通する部分もありますが、こちらの方がより詳細で、詳しい人向けです。</p>
+<p>一番に大事なことは、あなたがそのパッケージを使えることです。<br>
+Haskellには高度で便利なパッケージがたくさんありますが、抽象度が高すぎて使い方がわかりづらかったり、同じような目的のパッケージが複数見つかる、といったことがしばしばあります。<br>
+そうした状況で、対象のパッケージを使うか使わないか判断するためには、やはりドキュメントを読んでその使い方をあなたが理解できるか否か、という点にあります。<br>
+特に以下の点に注目してみてください。</p>
+<ul>
+<li>関数の型を見て、使い方がなんとなくわかるか
+<ul>
+<li>Haskellでは、関数の型、つまりどんな型の値を受け取ってどんな型の値を返すか、といった情報が、重要なドキュメントになることがしばしばあります。<br>
+十分に単純なパッケージでは、それだけで十分な場合も多いです。GHCiなどに頼りつつ、「とりあえず型を合わせたらどんな挙動になるか」確認してみるのも良いでしょう。</li>
+</ul></li>
+<li>サンプルコードや使い方の説明を見てなんとなくわかるか
+<ul>
+<li>一方、特に抽象度の高いパッケージでは、型宣言がすごく複雑だったりして、型を見てもよくわからない、といったことがしばしばあります。<br>
+そうした場合は、逆にサンプルコードなどを見て、使い方が推測できるか考えてみてください。<br>
+ここで仕組みを完璧に理解する必要はないでしょう。よくできたパッケージは、雰囲気で使っても型さえあっていれば正しく動作して然るべきです。</li>
+</ul></li>
+<li>（同じ目的のパッケージがほかに存在している場合に）競合との違いを明確にしているか。
+<ul>
+<li>後発のパッケージでこれを明確にしていないものは、作者のモチベーションが低いか、あるいはそもそも競合の存在に気づかないうちに作った、つまり車輪の再発明をしてしまった可能性があります。</li>
+</ul></li>
+</ul>
+<p>これらの情報を見てもわからない、あるいはそもそも載っていない場合は、無理にそのパッケージを使おうとしないでください。<br>
+どうしても必要なのであれば、<a href="Links.html#%E5%90%84%E7%A8%AE%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A7%E3%81%AEhaskell%E3%82%BF%E3%82%B0">リンク集</a>に上げたteratailやStack Overflowなどの質問サイト、<a href="https://haskell-jp.slack.com/messages/C5666B6BB/convo/C4M4TT8JJ-1541321220.051500/">Haskell-jpのSlack Workspaceにある、#questionsチャンネル</a>で質問してみると良いでしょう。<br>
+Slack Workspaceについては、<a href="https://haskell.jp/signin-slack.html">こちらから登録してください</a>。</p>
+<h2 id="要素技術">要素技術</h2>
+<h3 id="ビルドツール">ビルドツール</h3>
+<p><a href="https://haskellstack.org/">stack</a>、あるいは<a href="https://www.haskell.org/cabal/">cabal-install</a>というツールがよく使われています。どちらも、内部でCabalというライブラリを使用しています。<br>
+結論から言うと、とりあえず無難に使うならstack、なんですが、それぞれについてざっくり紹介しておきます。</p>
+<p>cabal-installは、ほかのプログラミング言語にもあるようなパッケージマネージャーの機能を備えています。<br>
+Javaで言うところのMaven, Rubyで言うところのRubyGems, などといったところです。<br>
+<a href="https://hackage.haskell.org/">Hackage</a>というウェブサイトにアップロードされたHaskell製のパッケージ（ライブラリーやアプリケーション）を簡単にビルド・インストールできるようにしてくれます。</p>
+<p>stackは<a href="https://www.stackage.org/">Stackage</a>というウェブサイトに書かれた、「resolver」と呼ばれる「この組み合わせなら必ずビルドできるバージョン」のパッケージ群を使用することで、パッケージの依存関係を確実に解決できるような後発のツールです。 stackができる前は、「cabal地獄」などと呼ばれる、「パッケージの依存関係を解決できず、まともにインストールできない」といった事態がしばしば発生していました。<br>
+ちなみに、実際にパッケージをダウンロードするのはHackageからです。</p>
+<p>これらのツールをより深く使いこなすには、下記の公式ドキュメントに加え、日本語での解説も読んでみてください。</p>
+<ul>
+<li><a href="https://docs.haskellstack.org/en/stable/README/">Home - The Haskell Tool Stack</a></li>
+<li><a href="https://www.haskell.org/cabal/users-guide/">Welcome to the Cabal User Guide — Cabal &lt;release&gt; User’s Guide</a></li>
+<li><a href="https://haskell.e-bigmoon.com/stack/">Haskell Development</a></li>
+<li><a href="https://qiita.com/tanakh/items/6866d0f570d0547df026">Haskellのビルドツール“stack”の紹介 - Qiita</a></li>
+<li><a href="https://qiita.com/tanakh/items/1ca4ba9e1f5006a30106">Stackを使って楽しくHaskellスクリプティング - Qiita</a></li>
+</ul>
+<h3 id="webアプリケーション">Webアプリケーション</h3>
+<p>HaskellでWebアプリケーションを作る上で、昨今よく使われるライブラリーは次の3つかと思います。</p>
+<ul>
+<li><a href="https://haskell-servant.github.io/">Servant</a></li>
+<li><a href="https://www.yesodweb.com/">Yesod</a></li>
+<li><a href="https://github.com/scotty-web/scotty">scotty</a></li>
+</ul>
+<p><a href="https://haskell-servant.github.io/">Servant</a>はいわゆるRESTfulなAPIに特化したフレームワークです。<br>
+<a href="https://www.yesodweb.com/">Yesod</a>に比べて、サーバー側のコードについてフレームワークがやってくれることが少ないみたい<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>ですが、代わりに、専用の言語内DSLでAPIの仕様を記述するだけで、JavaScriptをはじめとした、クライアント側がそのAPIにアクセスするためのコードを自動生成してくれる、という珍しい機能があります。</p>
+<p>対する<a href="https://www.yesodweb.com/">Yesod</a>は、いわゆるRailsをきっかけに広まったような、「フルスタックWebアプリケーションフレームワーク」を標榜しています。<br>
+その分、Servantよりも手早く開発するのを支援してくれるでしょう。</p>
+<p>ただしServant, Yesod, 共通した困った特徴があります。<br>
+それぞれがHaskellの高度な機能を利用した独特なDSLを提供しているため、仕組みがわかりづらい、という点です。<br>
+Servantは、「型レベルプログラミング」と呼ばれる、GHCの言語拡張を使った仕組みを駆使して、型宣言だけでREST APIの仕様を記述できるようにしています。<br>
+YesodもGHCの言語拡張をたくさん使っているのに加え、特に変わった特徴として、TemplateHaskellやQuasiQuoteという仕組みを利用して、独自のDSLを提供しています。<br>
+それぞれ、見慣れたHaskellと多かれ少なかれ異なる構文で書かなければいけない部分があるのです。<br>
+つまり、これらのうちどちらかを使う以上、どちらかの魔法を覚えなければならないのです。</p>
+<p>その点、Scottyは遙かにシンプルです。<br>
+RubyのSinatra（その他、各言語に輸出された同種のフレームワーク）をHaskellの<code>do</code>記法でそのまま再現したようなDSLで書くことができるので、結構とっつきやすいでしょう。<br>
+YesodやServantにあるような高度な機能はありませんが、とりあえずHaskellでWebアプリケーションを作ってみたい、という方のはじめの一歩としてはちょうどいいかもしれません。</p>
+<h3 id="monad">Monad</h3>
+<p>MonadはHaskellの学習における鬼門とも言われています。<br>
+これを読んでいる皆さんの中にも、Monadで消耗しちゃった人がいらっしゃるかも知れません。<br>
+MonadをHaskellの一機能として理解する上で最も大事なことは、<strong>「Monad」というコンセプトがなんなのかを正確に理解することより、各種の具体的なMonadの使い方を理解する</strong>ことに時間を割くことです。<br>
+そうしていけば、やがて「なんとなく」つかめるかと思います。<br>
+実用上は本当に「なんとなく」でよいのです。</p>
+<p>ポイントとして、下記の、一見すると何の共通点もないような処理を<code>do</code>という魔法の構文糖で実現してくれるもの、という点を抑えておきましょう。<br>
+それらが必要になったときに、その使い方を知れば良いのです。</p>
+<ul>
+<li>入出力処理 (<code>IO</code> Monad)</li>
+<li>処理が失敗した場合などにブロックから脱出すること (<code>Maybe</code> Monadや<code>Either</code> Monad)</li>
+<li>何重にもネストされたmap関数やconcatMap関数をフラットにすること (リスト Monad)</li>
+<li>ブロックで暗黙に共有している変数の参照や更新（ダイナミックスコープのシミュレーション） (<code>State</code> Monad, <code>Reader</code> Monad, <code>Writer</code> Monad)</li>
+<li>などなど</li>
+</ul>
+<p>なお、Monadは、「圏論」という数学の一分野における「モナド」という概念に由来してはいるものの、HaskellのMonadを使いこなすために圏論を理解する必要はまったくありません。「プログラミングのためのモナド」として、圏論のモナドとは分けて考えてもいいぐらいでしょう。</p>
+<h3 id="monad-transformer">Monad Transformer</h3>
+<p>Monadを使いこなせるようになると、複数のMonadの機能を同時に（同じ<code>do</code>ブロックで）使用したくなることがあります。<br>
+Monad Transformerは、既存のMonadを組み合わせることで、そうしたニーズを満たすための仕組みです。</p>
+<p>Monad Transformerの比較的わかりやすい解説としては、「Monad Transformers Step by Step」という記事が有名です。</p>
+<ul>
+<li><a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.71.596&amp;rep=rep1&amp;type=pdf">Monad Transformers Step by Step（原文PDF）</a></li>
+<li><a href="http://bicycle1885.hatenablog.com/entry/2012/12/08/165236">上記記事の和訳</a></li>
+</ul>
+<p>ここでも軽くポイントに触れておきます。</p>
+<h4 id="mtlについて">mtlについて</h4>
+<p>最もよく使われているMonad Transformerのライブラリーは、<a href="https://hackage.haskell.org/package/mtl">mtl</a>パッケージが提供しています。<br>
+各種Monad Transformerの機能を型クラスで抽象化することにより、複数のMonad Transformerを積み重ねた場合でも、積み重ねた各層のMonad Transformerの機能に簡単にアクセスさせてくれます。</p>
+<p>具体的には、以下のルールを大雑把に覚えておくと良いでしょう。</p>
+<ul>
+<li><code>ReaderT</code>や<code>StateT</code>などのように、<code>HogeT</code>という形式の名前の型が、実際に<code>Hoge</code>の機能を提供するMonad Transformer。</li>
+<li><code>MonadReader</code>や<code>MonadState</code>などのように、<code>MonadHoge</code>という形式の名前の型クラスが、<code>Hoge</code>の機能を提供するMonad Transformerを、抽象化した型クラス。</li>
+<li><code>ReaderT r (StateT s (HogeT m)) a</code>のように、<code>HogeT</code>を一段でも重ねているMonad Transformerは、すべて<code>MonadHoge</code>のインスタンスとなっているため、<code>HogeT</code>が提供する機能をそのまま使用できる。</li>
+<li>こうした慣習は、mtlパッケージ以外でも広く採用されている。なので<code>MonadFooBar</code>という型クラスを見かけたら<code>FooBar</code>という機能を実装したMonad全般を抽象化した型クラスとなっていることが多い。</li>
+</ul>
+<h4 id="よく見る-hogehoget-や-foobarmについて">よく見る <code>HogeHogeT</code> や <code>FooBarM</code>について</h4>
+<p>あなたは「Monad Transformer」という概念に出遭う前に、<a href="https://hackage.haskell.org/package/hspec">Hspec</a>や<a href="https://hackage.haskell.org/package/haskeline">haskeline</a>、<a href="https://hackage.haskell.org/package/relational-record">relational-record</a>などの内部DSLを提供するパッケージを通じて、Monad Transformerをすでに使っているかも知れません。<br>
+これらのパッケージが提供する<code>SpecM</code>や<code>InputT</code>など見慣れないMonadっぽいものを見つけても、「何じゃこりゃ！？どんなMonadやねん？」などと戸惑わないでください。<br>
+先に挙げたパッケージのように、こうした型はパッケージごとに固有のものが存在していることがあります。<br>
+基本的にはこれらの型は、<strong>何かの<code>Monad</code>を組み合わせたものに別名をつけた、あるいは<code>newtype</code>でラップしただけ</strong>のものです。<br>
+<code>newtype</code>でラップすることで、内部構造を隠蔽しているんですね。<br>
+その点を知っておくと、こうしたライブラリーへの理解が深まり、何をしているのかイメージしやすくなるでしょう。</p>
+<p>ちなみに、「Webアプリケーション」の節で紹介した、scottyの<code>ScottyM</code>や、Servantの<code>Handler</code>もそうです。調べてませんがYesodにも同じようなものがあるのではないかと。</p>
+<h3 id="lensライブラリー">lensライブラリー</h3>
+<p>lensは、「任意のデータ構造に対するjQuery」ともいわれる巨大なユーティリティーライブラリーです。 さまざまなデータ構造、特に複雑に入れ子になった構造に対して自由自在にアクセスしたり、中身を一部だけ書き換えたバージョンを返したりといった処理を、非常に簡潔に書くことができます。</p>
+<p>日本語の入門資料としては、下記がおすすめです。 lensを導入するモチベーション、基本的な使い方、さらにlensの仕組みまで踏み込んで説明されています。</p>
+<ul>
+<li><a href="https://www.slideshare.net/itsoutoftunethismymusic/ekmett-17955009">Ekmett勉強会発表資料 LensでHaskellをもっと格好良く！</a></li>
+<li><a href="https://tokiwoousaka.github.io/takahashi/contents/20150530LensPrism.html">Lens&amp;Prism勉強会 LensでHaskellをもっと格好良く！</a></li>
+</ul>
+<p>lensについてもigrepの個人的な所感を一つ。<br>
+lensは確かに便利ですが、その分学習コストが高く、特に複雑な操作を行う<code>Traversal</code>などの機能に至っては、実際のアプリケーションで使われることはそんなに多くありません。<br>
+そもそも特定の入れ子構造に依存した処理というのは、対象のデータ構造の変更に弱く、ある程度の規模のアプリケーションでは、避けるべきものです。<br>
+なので、実際によく使われるのは比較的使い方がわかりやすい、<code>Lens</code>型のみであることが多いです。<br>
+そんなに深く知りたくもないな、という方は、そのあたりの機能のみを押さえておくといいでしょう。すべてを理解しようとは思わないことです。</p>
+<p>そうした需要を反映してか、よく使う機能に絞ることで、依存関係を軽くしたlensライブラリーが、いくつもあります。<br>
+その中では、<a href="https://hackage.haskell.org/package/microlens">microlens</a>がおすすめです。<br>
+競合との比較も明確にしていますし、なによりドキュメントが充実しています。</p>
+<p>それでもlens沼にハマることで得られる知識の応用方法と言えば、HTMLのスクレイピングだったり、一部分だけ書き換えると言った、書き捨てのスクリプトでの、複雑な入れ子構造の書き換えでしょう。<br>
+実はそうした用途に特化したツールが（<strong>まだ開発中で、Hackageにも公開されてません</strong>が）あります。<br>
+<a href="https://github.com/SuperpowersCorp/refactorio">refactorio</a>というツールです。<br>
+refactorioはlensライブラリーと、lensでJSONやHTML, HaskellやJavaScriptなどのソースコードを操作する各種のライブラリーを組み合わせることで、そうしたソースコードの一括置換を支援してくれます。<br>
+具体的には、引数で指定した、Haskellの<code>ByteString -&gt; ByteString</code>な式を評価し、その結果を指定したディレクトリーにあるファイルすべてに適用することで、一括置換してくれます。<br>
+その引数で指定する式で、lensライブラリーをはじめとする、各種のライブラリーを自動で使えるようにしてくれる、というものです。</p>
+<h3 id="まだまだあるぞ">まだまだあるぞ！</h3>
+<p>Wikiなので、適宜紹介したいトピックを追記してください。</p>
+<section class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>とはいえ、昔に比べてServantを補助するライブラリーは増えたみたいなので、それらを自分で組み合わせれば、それなりに楽ができそうではありますが。<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Hikers%20Guide%20to%20Haskell">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Hikers%20Guide%20to%20Haskell?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Hikers%20Guide%20to%20Haskell">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Hikers%20Guide%20to%20Haskell" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

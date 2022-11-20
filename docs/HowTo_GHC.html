@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/HowTo_GHC</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/HowTo_GHC">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/HowTo_GHC">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/HowTo_GHC">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/HowTo_GHC</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#howto_ghc"><span>HowTo_GHC</span></a><ul>
+<li><a href="#ghc%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9">GHCの使い方</a><ul>
+<li><a href="#ghc%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3">GHCのバージョン</a></li>
+<li><a href="#%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%82%AC%E3%82%A4%E3%83%89">ユーザーガイド</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB-on-ubuntu-8.04">インストール on Ubuntu-8.04</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB-on-microsoft-windows-xpvista7">インストール on Microsoft Windows XP/Vista/7</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB-on-macos-x-10.6">インストール on MacOS X 10.6</a></li>
+<li><a href="#ghci-%E3%81%AE%E8%B5%B7%E5%8B%95%E3%81%A8%E7%B5%82%E4%BA%86">GHCi の起動と終了</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="howto_ghc"><a href="" class="uri" title="Go to wiki page">HowTo_GHC</a></h1>
+<p><a href="HowTo.html" class="uri" title="Go to wiki page">HowTo</a>:GHC</p>
+<hr>
+<h2 id="ghcの使い方">GHCの使い方</h2>
+<h3 id="ghcのバージョン">GHCのバージョン</h3>
+<p>現時点(2011/11/23 14:14:29 JST)での安定版は 7.0.3 または 7.0.4 です（最新の 7.2.2 はいつもの安定版ではなく、“technology preview” という扱いです。）</p>
+<h3 id="ユーザーガイド">ユーザーガイド</h3>
+<ul>
+<li><a href="https://www.haskell.org/ghc/docs/latest/html/users_guide/index.html">The User’s Guide</a></li>
+<li><a href="http://www.kotha.net/ghc_users_guide_ja/">栄光のグラスゴーHaskellコンパイルシステム利用の手引き バージョン6.8.2</a></li>
+</ul>
+<h3 id="インストール-on-ubuntu-8.04">インストール on Ubuntu-8.04</h3>
+<p>Ubuntuにはghc6というパッケージがあって、これを使うと簡単にghc-6.4.2がインストールできるのだが <a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>は(安定版の)最新をつねに追い掛けたいとか、ライブラリは野良ビルドしたいとか、いろいろで、 tarボールで最新版を/usr/local/以下にインストールすることにしている。</p>
+<pre><code>% wget http://www.haskell.org/ghc/dist/6.8.3/ghc-6.8.3-i386-unknown-linux.tar.bz2
+% tar xvf ghc-6.8.3-i386-unknown-linux.tar.bz2
+% cd ghc-6.8.3
+% ./configure
+% sudo make install</code></pre>
+<p>Ubuntu 8.04をデフォルトでインストールした直後の状態でghcをインストールしようとしても、 いくつかのライブラリやツールがないためにちゃんとインストールできないはず。これについては <strong>あとで書く</strong></p>
+<h3 id="インストール-on-microsoft-windows-xpvista7">インストール on Microsoft Windows XP/Vista/7</h3>
+<p><a href="https://hackage.haskell.org/platform/windows.html">Haskell Platform の Windows 版バイナリ</a>に GHC が同梱されています。これをインストールしましょう。</p>
+<h3 id="インストール-on-macos-x-10.6">インストール on MacOS X 10.6</h3>
+<p><a href="https://hackage.haskell.org/platform/mac.html">Haskell Platform の Mac OS X 版バイナリ</a>に GHC が同梱されています。これをインストールしましょう。64 bit 版は Experimental なので、32 bit 版をインストールした方が良いでしょう。</p>
+<h3 id="ghci-の起動と終了">GHCi の起動と終了</h3>
+<p><strong>起動</strong>: シェルでghciコマンドをタイプ</p>
+<pre><code>% ghci
+GHCi, version 7.0.4: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package ffi-1.0 ... linking ... done.
+Prelude&gt; </code></pre>
+<p>プロンプト Prelude&gt; が表示されればOK</p>
+<p><strong>終了</strong>: プロンプトに対してコマンド :quit または :q をタイプ。コマンドは : (コロン)ではじまるので 忘れずに。</p>
+<pre><code>Prelude&gt; :quit
+Leaving GHCi.
+%   </code></pre>
+<hr>
+<p>Last modified : 2011/11/23 14:18:03 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/HowTo_GHC">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/HowTo_GHC">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

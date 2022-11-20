@@ -1,0 +1,2059 @@
+{
+ "version": 2,
+ "indexPages": [
+  "index.html"
+ ],
+ "files": [
+  {
+   "path": "index.json"
+  },
+  {
+   "path": "index.dat"
+  },
+  {
+   "path": "index.rdf"
+  },
+  {
+   "path": "history.rdf"
+  },
+  {
+   "path": "^metadata^"
+  },
+  {
+   "path": "index.html",
+   "url": "https://wiki.haskell.jp/Front%20Page",
+   "role": "document",
+   "token": "e8910e9a84e1664a95e806e668b394054fe3f2dc"
+  },
+  {
+   "path": "index.xhtml",
+   "role": "document"
+  },
+  {
+   "path": "index.svg",
+   "role": "document"
+  },
+  {
+   "path": "logo.png",
+   "url": "https://wiki.haskell.jp/img/logo.png",
+   "role": "resource",
+   "token": "002087ed02e159a52e88a70238d12305415e6605"
+  },
+  {
+   "path": "footnotes.js",
+   "url": "https://wiki.haskell.jp/js/footnotes.js",
+   "role": "resource",
+   "token": "c0aa06e280a313d208b3e61a30fac2d34da646b6"
+  },
+  {
+   "path": "jquery.min.js",
+   "url": "https://wiki.haskell.jp/js/jquery.min.js",
+   "role": "resource",
+   "token": "6753a5328c38876b18979f4b93fd9adb9661fdaf"
+  },
+  {
+   "path": "jquery-ui.min.js",
+   "url": "https://wiki.haskell.jp/js/jquery-ui.min.js",
+   "role": "resource",
+   "token": "0920e687164773c019a1a9c4ae565a2a28f4f085"
+  },
+  {
+   "path": "mathjax.js",
+   "url": "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML-full",
+   "role": "resource",
+   "token": "0f104f5bcd1596478e7c9f6740552c431a5650ae"
+  },
+  {
+   "path": "jquery-ui.min.css",
+   "url": "https://wiki.haskell.jp/css/jquery-ui.min.css",
+   "role": "css",
+   "token": "45049ed5c8c21830421857b30bea63e16d86d4de"
+  },
+  {
+   "path": "print.css",
+   "url": "https://wiki.haskell.jp/css/print.css",
+   "role": "css",
+   "token": "10f43d9618066f4067e356b7deac8b4170b99429"
+  },
+  {
+   "path": "custom.css",
+   "url": "https://wiki.haskell.jp/css/custom.css",
+   "role": "css",
+   "token": "8e1251700a88f6168a3d3888fd21ebc380abea56"
+  },
+  {
+   "path": "screen.css",
+   "url": "https://wiki.haskell.jp/css/screen.css",
+   "role": "css",
+   "token": "3f61fe6dbc78455e9d6006701c5e04e5b5f37cb9"
+  },
+  {
+   "path": "highlighting.css",
+   "url": "https://wiki.haskell.jp/css/highlighting.css",
+   "role": "css",
+   "token": "9859c2dbc6dc276529feafecb1b1f03cf87ba166"
+  },
+  {
+   "path": "reset-fonts-grids.css",
+   "url": "https://wiki.haskell.jp/css/reset-fonts-grids.css",
+   "role": "css",
+   "token": "700ca2deb05c156dcc3abd37ee7004f545d3fe32"
+  },
+  {
+   "path": "mailinglist.html",
+   "url": "https://wiki.haskell.jp/MailingList",
+   "role": "document",
+   "token": "d32568c66dab4ed671de909696f001e666e19807"
+  },
+  {
+   "path": "chatroom.html",
+   "url": "https://wiki.haskell.jp/ChatRoom",
+   "role": "document",
+   "token": "6ea82f1291add927cedbfa7059ff61bed2bc06e7"
+  },
+  {
+   "path": "workshop.html",
+   "url": "https://wiki.haskell.jp/Workshop",
+   "role": "document",
+   "token": "f3871445df55cc7de23cec37caeddbd68367f527"
+  },
+  {
+   "path": "links.html",
+   "url": "https://wiki.haskell.jp/Links",
+   "role": "document",
+   "token": "b1d8ced7688ac1a0d26e83983a91ab55f4edc52f"
+  },
+  {
+   "path": "データ構造列伝.html",
+   "url": "https://wiki.haskell.jp/%E3%83%87%E3%83%BC%E3%82%BF%E6%A7%8B%E9%80%A0%E5%88%97%E4%BC%9D",
+   "role": "document",
+   "token": "5807521d8a757b7cf3cc489883133d09b3b84d2e"
+  },
+  {
+   "path": "hikers guide to haskell.html",
+   "url": "https://wiki.haskell.jp/Hikers%20Guide%20to%20Haskell",
+   "role": "document",
+   "token": "26ca8d0c5034580cb27249bb4bb8f1d98a4cff0a"
+  },
+  {
+   "path": "haskell-jp logo history.html",
+   "url": "https://wiki.haskell.jp/Haskell-jp%20Logo%20History",
+   "role": "document",
+   "token": "b92f4abe00970c306c440d552f1828cd1dd7d841"
+  },
+  {
+   "path": "first-logo.png",
+   "url": "https://wiki.haskell.jp/first-logo.png",
+   "role": "resource",
+   "token": "1640f7df7082f4a7865d07dab4504027722180e5"
+  },
+  {
+   "path": "sefond-logo-candidate1.png",
+   "url": "https://wiki.haskell.jp/sefond-logo-candidate1.png",
+   "role": "resource",
+   "token": "bed8800d7894e9072e0cba5f1a2a825c414d7b91"
+  },
+  {
+   "path": "sefond-logo-candidate2.png",
+   "url": "https://wiki.haskell.jp/sefond-logo-candidate2.png",
+   "role": "resource",
+   "token": "070003da0a3e85062938b62120f5600e87171f46"
+  },
+  {
+   "path": "second-logo.png",
+   "url": "https://wiki.haskell.jp/second-logo.png",
+   "role": "resource",
+   "token": "f0d10b91b8f39a46b54ecb7ccb98d79aa84bc0bc"
+  },
+  {
+   "path": "sandbox.html",
+   "url": "https://wiki.haskell.jp/Sandbox",
+   "role": "document",
+   "token": "2ee514bfa92383c39f294aab7a06f4f4c2ad21fc"
+  },
+  {
+   "path": "wikimanagement.html",
+   "url": "https://wiki.haskell.jp/WikiManagement",
+   "role": "document",
+   "token": "248bc9d0fdba06dd9491e283a0183062451bf514"
+  },
+  {
+   "path": "_.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/",
+   "role": "document",
+   "token": "65abdaec03e479635047f1684139d759efd668c1"
+  },
+  {
+   "path": "license.html",
+   "url": "https://wiki.haskell.jp/License",
+   "role": "document",
+   "token": "a33b9502c25fd5ea8c2e4da82f34b19c7641ec40"
+  },
+  {
+   "path": "_-1.html",
+   "url": "https://wiki.haskell.jp/",
+   "role": "document",
+   "token": "6ee317b7442df2432afb4b0b98dfb5c73f8b1c28"
+  },
+  {
+   "path": "_index.html",
+   "url": "https://wiki.haskell.jp/_index",
+   "role": "document",
+   "token": "66a0007e99ab862bb7fa240ae66bcf140d795250"
+  },
+  {
+   "path": "_categories.html",
+   "url": "https://wiki.haskell.jp/_categories",
+   "role": "document",
+   "token": "02e983ffc2b7b3a45f6cf92d26249d47ca2a824d"
+  },
+  {
+   "path": "search.js",
+   "url": "https://wiki.haskell.jp/js/search.js",
+   "role": "resource",
+   "token": "5864555d7e3ef83af1270a0cde718c78d1f1e7a2"
+  },
+  {
+   "path": "help.html",
+   "url": "https://wiki.haskell.jp/Help",
+   "role": "document",
+   "token": "d61bff2f91b48f3976bfb3f26604cb19328b9c6a"
+  },
+  {
+   "path": "folder.png",
+   "url": "https://wiki.haskell.jp/img/icons/folder.png",
+   "role": "resource",
+   "token": "513e5aaac38dec01d43892bf4a6ad3f79877fb34"
+  },
+  {
+   "path": "slackadmin.html",
+   "url": "https://wiki.haskell.jp/ChatRoom/SlackAdmin",
+   "role": "document",
+   "token": "181e56f18cabf2d91a028251e32a3bb7d3662795"
+  },
+  {
+   "path": "_-2.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell/",
+   "role": "document",
+   "token": "aa67bb31c9b247496bd66c06e40c58ffb6d5d74c"
+  },
+  {
+   "path": "_-3.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/",
+   "role": "document",
+   "token": "c183566e4f1544ecd94709eee034718ea3c09c6c"
+  },
+  {
+   "path": "_-4.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/",
+   "role": "document",
+   "token": "e9c3e4b62b3b310fbb5bd1c62f3d6e6cc56f376e"
+  },
+  {
+   "path": "_-5.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellR/",
+   "role": "document",
+   "token": "b2891476b6a0c269c0404d0e168dd0ae572b80a9"
+  },
+  {
+   "path": "_-6.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadGHC/",
+   "role": "document",
+   "token": "d5837dab45cde9a785d26d37875afb937fe0a674"
+  },
+  {
+   "path": "_-7.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadJhc/",
+   "role": "document",
+   "token": "df2cd1da3446c342af578d123ae47f5dbed9b646"
+  },
+  {
+   "path": "_-8.html",
+   "url": "https://wiki.haskell.jp/Workshop/yesod/",
+   "role": "document",
+   "token": "f038af8435e5d188e042ae3351848ddb6c03a6af"
+  },
+  {
+   "path": "_-9.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellDay/",
+   "role": "document",
+   "token": "d85d4ba63e81403ae2c9df8e5a36c9d7ae9cc130"
+  },
+  {
+   "path": "_-10.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/",
+   "role": "document",
+   "token": "a9b40439ed550fba57880848ac8421575195a226"
+  },
+  {
+   "path": "_-11.html",
+   "url": "https://wiki.haskell.jp/Workshop/pfad/",
+   "role": "document",
+   "token": "18cce06e9ec5fa86526704bd5002d7b24be7461e"
+  },
+  {
+   "path": "_-12.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/",
+   "role": "document",
+   "token": "ad18146b8a90852fc04e9de89823e030b54fdf81"
+  },
+  {
+   "path": "_-13.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellBonenkai/",
+   "role": "document",
+   "token": "7cd8ffffe6d156d732ec9c8ff099bcf1160fa972"
+  },
+  {
+   "path": "_-14.html",
+   "url": "https://wiki.haskell.jp/Workshop/KodokuNoHaskell/",
+   "role": "document",
+   "token": "8456d017a0738c493d57426d94398488cf744cce"
+  },
+  {
+   "path": "_-15.html",
+   "url": "https://wiki.haskell.jp/Workshop/Metasepi/",
+   "role": "document",
+   "token": "031bdd12d1fc93e3c1428df1cb0e1b6852b30d12"
+  },
+  {
+   "path": "_-16.html",
+   "url": "https://wiki.haskell.jp/Workshop/PCPjH/",
+   "role": "document",
+   "token": "6bc100b3fb1e661242302e745b5d69efb67975f0"
+  },
+  {
+   "path": "_-17.html",
+   "url": "https://wiki.haskell.jp/Workshop/hasmoku/",
+   "role": "document",
+   "token": "dfead9d2e0b285c1c8a770e33aac6ffdc5af50d1"
+  },
+  {
+   "path": "fromwiliki.html",
+   "url": "https://wiki.haskell.jp/WikiManagement/FromWiliki",
+   "role": "document",
+   "token": "a3dd4e09d0c2fc61c6f9922c9c145373bb83dfb7"
+  },
+  {
+   "path": "_-18.html",
+   "url": "https://wiki.haskell.jp/Old/",
+   "role": "document",
+   "token": "790bf047f9eb17e9546b3ab6e05f4812758a1934"
+  },
+  {
+   "path": "2009年忘年会.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/2009%e5%b9%b4%e5%bf%98%e5%b9%b4%e4%bc%9a",
+   "role": "document",
+   "token": "7def1293055f646ee12aa2c000d0b02de98a508b"
+  },
+  {
+   "path": "books.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Books",
+   "role": "document",
+   "token": "b1a6dbba5c6d0adea421a47f15082bee47a082e3"
+  },
+  {
+   "path": "books_fop_bugreport.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Books_FOP_BugReport",
+   "role": "document",
+   "token": "8327002c26b4cff8ff29a8b24791081e72ed0f6b"
+  },
+  {
+   "path": "books_fop_mag.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Books_FOP_MAG",
+   "role": "document",
+   "token": "728c7fdfb12f3b7f8209cbf909caa1c78c3b1c91"
+  },
+  {
+   "path": "books_fop_練習問題.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Books_FOP_%e7%b7%b4%e7%bf%92%e5%95%8f%e9%a1%8c",
+   "role": "document",
+   "token": "4daa32d296eafd05c9f347558f3026c8dc67b4bb"
+  },
+  {
+   "path": "books_rwh_bugreport.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Books_RWH_BugReport",
+   "role": "document",
+   "token": "a3fc734b2f58759134bc525688943b92b117da63"
+  },
+  {
+   "path": "books_rwh_読書会.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Books_RWH_%e8%aa%ad%e6%9b%b8%e4%bc%9a",
+   "role": "document",
+   "token": "c1d0c15a7f02317b5e0935152640221572a6b97c"
+  },
+  {
+   "path": "books_rwh読書会.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Books_RWH%e8%aa%ad%e6%9b%b8%e4%bc%9a",
+   "role": "document",
+   "token": "8ea767efe102f9061b8964c35da888c985085902"
+  },
+  {
+   "path": "categorytheory_clttr.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_CLTTr",
+   "role": "document",
+   "token": "1c1a8e4dfb1d5d3883fcbb463dcd0be779d57125"
+  },
+  {
+   "path": "categorytheory_圏論勉強会.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a",
+   "role": "document",
+   "token": "a3eb69a8a7950b33eb45faeef3f935d3353451c7"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_categoriestypesandstructures.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures",
+   "role": "document",
+   "token": "c041de071d6f7fa21f8c2863d5dc8fb6d973c473"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_categoriestypesandstructures_chapter1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter1",
+   "role": "document",
+   "token": "12d7b0c2d901afe9b682376b8dc8389a7a873731"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_categoriestypesandstructures_chapter2.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2",
+   "role": "document",
+   "token": "2da0465fafbfdee73b8bd388d7c6f401799b7140"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics",
+   "role": "document",
+   "token": "cdc4fe1f17c6041ae09d578d05bd184b04f079cf"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_article3-session20.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Article3-Session20",
+   "role": "document",
+   "token": "c8502bc439f65cf6c1db3adcfa3bc45aa75a4783"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session1-2.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session1-2",
+   "role": "document",
+   "token": "e576d42831c77019299aec59603b5eba8f62f257"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session10.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session10",
+   "role": "document",
+   "token": "8112cef55003137cacdf8d1b9768b9b60b63a29a"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session21-22.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session21-22",
+   "role": "document",
+   "token": "01b2edff6fe0c6c08c420dfcfbd27116b11ce6c8"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session23-24.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24",
+   "role": "document",
+   "token": "5fad77b543afc043156df9c6fc25f3e09b57247a"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session25.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session25",
+   "role": "document",
+   "token": "93ffe1d8cf9e54f6b6b883f28c5c500e85bb5573"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session26.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session26",
+   "role": "document",
+   "token": "dc55fcc51bec04c8b9abdd03b1b75d257cf2838a"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session27-test5.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session27-Test5",
+   "role": "document",
+   "token": "0fa6169cba3cf35ffe8bb70f047769b4b35312b6"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session29-session31.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session29-Session31",
+   "role": "document",
+   "token": "41a0a21e8337b9508b87dda60c3e648b5d0032ad"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session3-4.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4",
+   "role": "document",
+   "token": "35da4ce5b2100ee2a04430bc2a87250beaa6b15a"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session32-session33.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session32-Session33",
+   "role": "document",
+   "token": "0239abdfc7a589834f956ea2e76dedfd3503bf12"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_conceptualmathematics_session5-test1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session5-Test1",
+   "role": "document",
+   "token": "7124e9a172a0138ba10d1447568618df74b01b9b"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_temperleyliebalgebra.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TemperleyLiebAlgebra",
+   "role": "document",
+   "token": "80709cc99da10b7ab9f184299b369a1a740ab389"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_thehaskellprogrammersguidetotheiomonad.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad",
+   "role": "document",
+   "token": "058d68448d3b649de4456712adc29f93137560c0"
+  },
+  {
+   "path": "categorytheory_圏論勉強会_量子ファイナンス工学入門.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_%e9%87%8f%e5%ad%90%e3%83%95%e3%82%a1%e3%82%a4%e3%83%8a%e3%83%b3%e3%82%b9%e5%b7%a5%e5%ad%a6%e5%85%a5%e9%96%80",
+   "role": "document",
+   "token": "489f2b9a9b20a0211554210119f1bf0a89e6fd13"
+  },
+  {
+   "path": "categorytheory_圏論勉強会ノート.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88",
+   "role": "document",
+   "token": "89a8845a5f8783492b9000f63a531e49db91fc82"
+  },
+  {
+   "path": "categorytheory_圏論関係リンク集.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e9%96%a2%e4%bf%82%e3%83%aa%e3%83%b3%e3%82%af%e9%9b%86",
+   "role": "document",
+   "token": "a92ac44643aff8c071bd536eb7856cb25266fbfe"
+  },
+  {
+   "path": "chatroom-1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ChatRoom",
+   "role": "document",
+   "token": "c0de6ee2e9e2827060181977fded42221f84e14d"
+  },
+  {
+   "path": "definition.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Definition",
+   "role": "document",
+   "token": "ad9091b8870b8ffd6340722fb29099890f5d3acb"
+  },
+  {
+   "path": "ghchacks.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/GHCHacks",
+   "role": "document",
+   "token": "6b18486d0a58a7987af0f0356bdb6c055d03ad0b"
+  },
+  {
+   "path": "ghchacks_nobsun.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/GHCHacks_nobsun",
+   "role": "document",
+   "token": "57e57eeb6668d9b99c3b103109416cef5904bc29"
+  },
+  {
+   "path": "email-decode.min.js",
+   "url": "https://wiki.haskell.jp/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+   "role": "resource",
+   "token": "3c6ff72ede21a87f5a326add24670672d59528cf"
+  },
+  {
+   "path": "ghclibraries.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/GHCLibraries",
+   "role": "document",
+   "token": "914797d92e6cbd6d40255274c0045d62810ae5b4"
+  },
+  {
+   "path": "ghclibraries_haddock.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/GHCLibraries_Haddock",
+   "role": "document",
+   "token": "720d6a72a1785e189759dd6e4e27bedd0e725a37"
+  },
+  {
+   "path": "haskell.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Haskell",
+   "role": "document",
+   "token": "ce6a18a04857bb331d06129c12ccc7362acf20ee"
+  },
+  {
+   "path": "haskell2009autumnen english.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Haskell2009AutumnEN%20English",
+   "role": "document",
+   "token": "d1e5e0d0bc09997111cff441c12e4c6796464478"
+  },
+  {
+   "path": "haskell2009autumnen.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Haskell2009AutumnEN",
+   "role": "document",
+   "token": "1f6fb0cafbd9858fa7fa36a486e7da8ea402b2ba"
+  },
+  {
+   "path": "haskell2009autumnjp.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Haskell2009AutumnJP",
+   "role": "document",
+   "token": "d85a0d9a8a555ed637a71db725abe0d1bbda1655"
+  },
+  {
+   "path": "haskellcamp.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HaskellCamp",
+   "role": "document",
+   "token": "879224ba2d9b089546002c5a8cd3a79f5b164165"
+  },
+  {
+   "path": "haskellclub.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HaskellClub",
+   "role": "document",
+   "token": "da31a1e7b696f71eb82a1a05643ea99cfb2bac73"
+  },
+  {
+   "path": "haskellevent.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HaskellEvent",
+   "role": "document",
+   "token": "878e4e9b8f0d059eb12c71413efdd5b76cf1cbfb"
+  },
+  {
+   "path": "haskellevent_finished.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HaskellEvent_Finished",
+   "role": "document",
+   "token": "2b63cba45abbe74370a47e39cfc984fd3c5afa46"
+  },
+  {
+   "path": "haskellhackathon.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HaskellHackathon",
+   "role": "document",
+   "token": "3888a778e067466a53df219909773acce62d033b"
+  },
+  {
+   "path": "haskellidea.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HaskellIdea",
+   "role": "document",
+   "token": "52b52f29faede4226d2e755134645784d5f7a68e"
+  },
+  {
+   "path": "haskellnight2009.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HaskellNight2009",
+   "role": "document",
+   "token": "b337bac96493ab2d4e1894862b7c3d10bbb5af61"
+  },
+  {
+   "path": "haskell_report.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Haskell_Report",
+   "role": "document",
+   "token": "51f79ea7066b36548a22cd6445f7c2595b43c79f"
+  },
+  {
+   "path": "howto.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo",
+   "role": "document",
+   "token": "c8d350b3e741f954a8be112455baa8b63b5fbe9b"
+  },
+  {
+   "path": "howto_array.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_Array",
+   "role": "document",
+   "token": "bde661ecb56ccdbce23946ad21ff420e9e4b7c6c"
+  },
+  {
+   "path": "howto_ghc-head.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC-HEAD",
+   "role": "document",
+   "token": "cae2956ac8c4729c7ab9140e6911c0de657a734a"
+  },
+  {
+   "path": "howto_ghc-head_hackages.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC-HEAD_Hackages",
+   "role": "document",
+   "token": "cdc05035102bc36b70f99935cfffb476e2484b13"
+  },
+  {
+   "path": "howto_ghc.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC",
+   "role": "document",
+   "token": "0a74babec4b8d56b41b941042a4cbba349fb13f8"
+  },
+  {
+   "path": "howto_hugs.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_Hugs",
+   "role": "document",
+   "token": "52af44bd093e8bc1340009cab75ca58595a7669d"
+  },
+  {
+   "path": "howto_programmingenviornment_ubuntu8.04.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.04",
+   "role": "document",
+   "token": "95fc32b5a5b542bf0cf370a7cf2ec163fb4dd3bc"
+  },
+  {
+   "path": "howto_programmingenviornment_ubuntu8.10.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10",
+   "role": "document",
+   "token": "a0cbc4a395bb5d84d54cafd6f8cae7948552dd2d"
+  },
+  {
+   "path": "howto_programmingenvironment.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnvironment",
+   "role": "document",
+   "token": "ecdb6e6324bd6403957aacaa575dfbfd69a51fd4"
+  },
+  {
+   "path": "howto_programmingenvironment_ubuntu9.04.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04",
+   "role": "document",
+   "token": "81ace0039949ded9512c5288b8d47b17a02bb467"
+  },
+  {
+   "path": "howto_quickcheck.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/HowTo_QuickCheck",
+   "role": "document",
+   "token": "05573cf5e8d405b8dd9ceebb9702ae47d46d0ec9"
+  },
+  {
+   "path": "icfp.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ICFP",
+   "role": "document",
+   "token": "8c63b562de54bdb260beece3f2a1aae76572bd12"
+  },
+  {
+   "path": "icfp2007.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ICFP2007",
+   "role": "document",
+   "token": "d5306cf6d839a39e9c04ec653332bc381ee396b3"
+  },
+  {
+   "path": "icfp2007_execute.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ICFP2007_execute",
+   "role": "document",
+   "token": "55a8edc820a43d658991b09355f860950a26ba6d"
+  },
+  {
+   "path": "icfp2008.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ICFP2008",
+   "role": "document",
+   "token": "1edc9fde10afe95ce5093d7392744618b86206e2"
+  },
+  {
+   "path": "icfp2009.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ICFP2009",
+   "role": "document",
+   "token": "a7448424a34f0454a26f34cbbb1527d5a38f5d87"
+  },
+  {
+   "path": "interwikiname.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/InterWikiName",
+   "role": "document",
+   "token": "6d8de06bb325cbc8083ee4cbdbcd02b4589dfb68"
+  },
+  {
+   "path": "introduction.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Introduction",
+   "role": "document",
+   "token": "d19a0c73008d2a808f56b5bffe3368f1f664d17d"
+  },
+  {
+   "path": "lazy.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Lazy",
+   "role": "document",
+   "token": "667911008b27881d7f95a8edae54b3bd6c92c190"
+  },
+  {
+   "path": "mailinglist-1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/MailingList",
+   "role": "document",
+   "token": "4ed8684d6371993bc49c85129bc113d2ef614945"
+  },
+  {
+   "path": "memoise.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Memoise",
+   "role": "document",
+   "token": "84d9bd19521b4283ed1af2fa55c4472c14b752b9"
+  },
+  {
+   "path": "modules.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Modules",
+   "role": "document",
+   "token": "a6265f94d1780f2e9e8741958694d0452ce6fd21"
+  },
+  {
+   "path": "programming_marathon.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_Marathon",
+   "role": "document",
+   "token": "d2e44399cea6b5668093ec26162bf9cd22a7d369"
+  },
+  {
+   "path": "programming_network.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_Network",
+   "role": "document",
+   "token": "e7b0b476957be22b927749f4d0ad52c2f5fd3cd0"
+  },
+  {
+   "path": "programming_waytohaskeller.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller",
+   "role": "document",
+   "token": "5342f03615878682d7c4129d76ee164a232a6189"
+  },
+  {
+   "path": "programming_waytohaskeller_すきっぷ.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%99%e3%81%8d%e3%81%a3%e3%81%b7",
+   "role": "document",
+   "token": "dc4172c815b4573108f427f5062d345ab2c4f543"
+  },
+  {
+   "path": "programming_waytohaskeller_つかまり立ち.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1",
+   "role": "document",
+   "token": "223bdba18e082912b465b1769db981264cb1a89a"
+  },
+  {
+   "path": "programming_waytohaskeller_てくてく.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a6%e3%81%8f%e3%81%a6%e3%81%8f",
+   "role": "document",
+   "token": "ea4779820e8d7d34710b5cba4524819462067503"
+  },
+  {
+   "path": "programming_waytohaskeller_はいはい.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%af%e3%81%84%e3%81%af%e3%81%84",
+   "role": "document",
+   "token": "d9bc9720be2cbd741932b02666e060b4c19b78a2"
+  },
+  {
+   "path": "programming_waytohaskeller_よちよち歩き.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%82%88%e3%81%a1%e3%82%88%e3%81%a1%e6%ad%a9%e3%81%8d",
+   "role": "document",
+   "token": "ba68cc029170081fb7bcfb7af82753c792c8cc84"
+  },
+  {
+   "path": "programming_waytohaskeller_ダンスダンスダンス.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%83%80%e3%83%b3%e3%82%b9%e3%83%80%e3%83%b3%e3%82%b9%e3%83%80%e3%83%b3%e3%82%b9",
+   "role": "document",
+   "token": "5932b470ebecb74012974bed58fabc17e38a38f4"
+  },
+  {
+   "path": "programming_waytohaskeller_寝がえり.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a",
+   "role": "document",
+   "token": "8bbed92d7043303eaa146fdad2f5252ff8cda66a"
+  },
+  {
+   "path": "programming_玉手 箱_その他.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%20%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96",
+   "role": "document",
+   "token": "6f3e022c0166006380ca8162a9c7be5f9c3d89b2"
+  },
+  {
+   "path": "programming_玉手箱.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1",
+   "role": "document",
+   "token": "5695db743390fb98a13a88103b36bf8a103df51c"
+  },
+  {
+   "path": "programming_玉手箱_その他.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%81%9d%e3%81%ae%e4%bb%96",
+   "role": "document",
+   "token": "ed9a2e1f4429f4309027929f2d947ff277dac3a6"
+  },
+  {
+   "path": "programming_玉手箱_リスト.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88",
+   "role": "document",
+   "token": "3064ec737065a49b138266b90f34b3b41bad0c28"
+  },
+  {
+   "path": "programming_玉手箱_整数論.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%95%b4%e6%95%b0%e8%ab%96",
+   "role": "document",
+   "token": "1220cc34234444825428c0d06839032996265e9f"
+  },
+  {
+   "path": "programming_玉手箱_文字列.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97",
+   "role": "document",
+   "token": "e0261b57f00c49a99bfc714cabbf9687715885b9"
+  },
+  {
+   "path": "programming_玉手箱_組合せ.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b",
+   "role": "document",
+   "token": "65c1113e0ff82f75a8a7870590339f08ea0326fc"
+  },
+  {
+   "path": "rwh読書会.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/RWH%e8%aa%ad%e6%9b%b8%e4%bc%9a",
+   "role": "document",
+   "token": "7f850ddc05c644a852eaffe40787d22f5236678d"
+  },
+  {
+   "path": "sd_200904.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/SD_200904",
+   "role": "document",
+   "token": "75904ece6c7619cea8abc1dba981dd21bd76a6db"
+  },
+  {
+   "path": "shelarcyseminar.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ShelarcySeminar",
+   "role": "document",
+   "token": "c58be03bedbdeb7d83f9869d8cc7be9b9a4b7c46"
+  },
+  {
+   "path": "shiraishiseminar.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ShiraishiSeminar",
+   "role": "document",
+   "token": "0bc455f559119910661ae503b53c5a7240e61108"
+  },
+  {
+   "path": "topics.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Topics",
+   "role": "document",
+   "token": "a2cd876bd019d44cce516bbdff02fd59a66f3266"
+  },
+  {
+   "path": "trace.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Trace",
+   "role": "document",
+   "token": "5bc19427b99ba6271012423c02feecf53f3305da"
+  },
+  {
+   "path": "tutorial.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Tutorial",
+   "role": "document",
+   "token": "a8a3b19afb308b94da25b7eb8486da16ce2f06ef"
+  },
+  {
+   "path": "tutorial_agentleintroductiontohaskell.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Tutorial_AGentleIntroductionToHaskell",
+   "role": "document",
+   "token": "7e5cf0d8f331c7e5480eb16990c6638b022963dc"
+  },
+  {
+   "path": "tutorial_allaboutmonads.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Tutorial_AllAboutMonads",
+   "role": "document",
+   "token": "2a98c5dafbd8b7d52f3c73073502bd7568bdd641"
+  },
+  {
+   "path": "tutorial_whyfunctionalprogrammingmatters.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Tutorial_WhyFunctionalProgrammingMatters",
+   "role": "document",
+   "token": "a941537e47159779809b8cd314247f8f966a0e41"
+  },
+  {
+   "path": "type.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Type",
+   "role": "document",
+   "token": "f31bd1858236e533a0a8b15becac32af7b5beb79"
+  },
+  {
+   "path": "yesod.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Yesod",
+   "role": "document",
+   "token": "ec0015b4db02d0e977f86942d509a4e8817b1327"
+  },
+  {
+   "path": "yesod_0.6.7to0.7.1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Yesod_0.6.7to0.7.1",
+   "role": "document",
+   "token": "cf05f193c9f05290b287c8f73c8ef6bdf4abea15"
+  },
+  {
+   "path": "yesod_0.7.1to0.8.1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Yesod_0.7.1to0.8.1",
+   "role": "document",
+   "token": "00cf768a8790694419ddd31d30dc7141e80a9956"
+  },
+  {
+   "path": "yesod_0.8.2to0.9.3.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Yesod_0.8.2to0.9.3",
+   "role": "document",
+   "token": "d1a7b557812c17eed9c3494662e9c15ed527583d"
+  },
+  {
+   "path": "yesod_internationalization.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Yesod_Internationalization",
+   "role": "document",
+   "token": "43cced26867e24d462acef4930026ba1d9dc41b6"
+  },
+  {
+   "path": "yesod_programmingenvironment.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Yesod_ProgrammingEnvironment",
+   "role": "document",
+   "token": "46bcd41d78f06bb51880daa3fd002b269383662b"
+  },
+  {
+   "path": "yesod_programming_tips.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Yesod_Programming_Tips",
+   "role": "document",
+   "token": "d096975eef5a5f628aebfb033ec37bfe0f319b2c"
+  },
+  {
+   "path": "yesod_programming_tutorial.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/Yesod_Programming_Tutorial",
+   "role": "document",
+   "token": "7ba661bd9f7ab3cba3f09e3992dfb24bcd07135c"
+  },
+  {
+   "path": "allaboutmonad.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/allaboutmonad",
+   "role": "document",
+   "token": "91f03306f54b8892e88d53b4317b7c6869620057"
+  },
+  {
+   "path": "allaboutmonads.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/allaboutmonads",
+   "role": "document",
+   "token": "561946f2350234fe01d4bb47142e6de257ab9a50"
+  },
+  {
+   "path": "categorytheory.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/categorytheory",
+   "role": "document",
+   "token": "620954c1362ddcaa010dfb5c20dc0556b2d56a58"
+  },
+  {
+   "path": "categorytheory_愀鵐.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/categorytheory_%e6%84%80%e9%b5%90",
+   "role": "document",
+   "token": "5c38c018336126846abe5e2f8b49e0997eef6a17"
+  },
+  {
+   "path": "categorytheory_拔_categoriestypesandstructures.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/categorytheory_%e6%8b%94_categoriestypesandstructures",
+   "role": "document",
+   "token": "2a71766bee3fe3c591d737ec46cb29792a542e85"
+  },
+  {
+   "path": "cut-sea.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/cut-sea",
+   "role": "document",
+   "token": "a2356551108650fab7bc42eee61e99a9d10681ec"
+  },
+  {
+   "path": "definition-1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/definition",
+   "role": "document",
+   "token": "a35f38d0bed13feccf8d61d8bf62eb06006fb791"
+  },
+  {
+   "path": "dekudekuplex.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/dekudekuplex",
+   "role": "document",
+   "token": "ff8b7982210bdf657906f7302146d6463b70f16f"
+  },
+  {
+   "path": "everyday.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/everyday",
+   "role": "document",
+   "token": "b206b624260f7240bc7fa0460b137e6e4ce7c56f"
+  },
+  {
+   "path": "haskell-1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/haskell",
+   "role": "document",
+   "token": "66b547e5740b50b8991b507505edd24af80ed778"
+  },
+  {
+   "path": "howto_ghc-1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/howto_ghc",
+   "role": "document",
+   "token": "9a2229d8b2b21113285b1bf7fa55b4c95c5168f7"
+  },
+  {
+   "path": "howto_ide.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/howto_ide",
+   "role": "document",
+   "token": "29a6cb2134551be36caeb12ef020c5250e0717b6"
+  },
+  {
+   "path": "howto_list.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/howto_list",
+   "role": "document",
+   "token": "c77b48b411a2b9365c7eefb5b8ada3ad4c66abee"
+  },
+  {
+   "path": "howto_maybe.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/howto_maybe",
+   "role": "document",
+   "token": "5e8e738aa7ff99dcbd25218da9a0e6498eb089bf"
+  },
+  {
+   "path": "hyuki.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/hyuki",
+   "role": "document",
+   "token": "deb1b9772962c7461b2d28d8eb15f3ab9d810462"
+  },
+  {
+   "path": "ikegami.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/ikegami",
+   "role": "document",
+   "token": "4a2f4bddeaa51dd6307020557a03ca5c59e54095"
+  },
+  {
+   "path": "introduction-1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/introduction",
+   "role": "document",
+   "token": "d29a3bb59a6b698fc6bca1b56344e9e06be6dea4"
+  },
+  {
+   "path": "mailinglist-2.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/mailinglist",
+   "role": "document",
+   "token": "00c5788194d05bd9cbe68765a5e452db058bc0cd"
+  },
+  {
+   "path": "nobsun.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun",
+   "role": "document",
+   "token": "8039a340cf579fec6bfe96491cdb66971d01242e"
+  },
+  {
+   "path": "nobsun_cerf.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun_cerf",
+   "role": "document",
+   "token": "53892e7471f868f7b278130c7982d345b60236fd"
+  },
+  {
+   "path": "nobsun_decomment.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun_decomment",
+   "role": "document",
+   "token": "3fb8b2a0678ccbe7ee714bfe073612e012e77a99"
+  },
+  {
+   "path": "nobsun_gentree.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun_gentree",
+   "role": "document",
+   "token": "772d9d39ac517c13266af0009e282cd0741a0329"
+  },
+  {
+   "path": "nobsun_glossary.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun_glossary",
+   "role": "document",
+   "token": "936b80a653066b2a206455cc314c0bb8c90ee8fd"
+  },
+  {
+   "path": "nobsun_interact.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun_interact",
+   "role": "document",
+   "token": "c18c2b2ca68574273b939b3ee296a5feaafacb2d"
+  },
+  {
+   "path": "nobsun_kana.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun_kana",
+   "role": "document",
+   "token": "6734c5794a9119bba0e8411c67713114b6076b34"
+  },
+  {
+   "path": "nobsun_memo.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun_memo",
+   "role": "document",
+   "token": "8911eede7fa9c38046a8f65fa99009aec7c1cda5"
+  },
+  {
+   "path": "nobsun_utf8.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobsun_utf8",
+   "role": "document",
+   "token": "bcd4927b10ad3a76fe91663c93561f9205a8839b"
+  },
+  {
+   "path": "nobu_toyofuku.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/nobu_toyofuku",
+   "role": "document",
+   "token": "ca90a0cd97c17bbcec0be42780f367e4fc5723f5"
+  },
+  {
+   "path": "oskimura.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/oskimura",
+   "role": "document",
+   "token": "765dfbdc397afb91732b6128d7894e53fea2cc3e"
+  },
+  {
+   "path": "programming_network-1.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/programming_network",
+   "role": "document",
+   "token": "2598388ff96e471fda4bb7fa5c11c64421a7a65d"
+  },
+  {
+   "path": "sakai.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/sakai",
+   "role": "document",
+   "token": "06f796a03a1e9b97964d3428ecd7c3abd7297267"
+  },
+  {
+   "path": "shelarcy.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/shelarcy",
+   "role": "document",
+   "token": "7fa1e690d66eb99526c143df9db19eb3b4d8c8f2"
+  },
+  {
+   "path": "takeo.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/takeo",
+   "role": "document",
+   "token": "46a834eb028ac697526c098a98b19b1acec0ee52"
+  },
+  {
+   "path": "グローバル変数が欲しい理由？.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/%e3%82%b0%e3%83%ad%e3%83%bc%e3%83%90%e3%83%ab%e5%a4%89%e6%95%b0%e3%81%8c%e6%ac%b2%e3%81%97%e3%81%84%e7%90%86%e7%94%b1%ef%bc%9f",
+   "role": "document",
+   "token": "37bafeede71acae8448b5bec1c5e420b09921e41"
+  },
+  {
+   "path": "本物のプログラマはhaskellを使う.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/%e6%9c%ac%e7%89%a9%e3%81%ae%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9e%e3%81%afHaskell%e3%82%92%e4%bd%bf%e3%81%86",
+   "role": "document",
+   "token": "0a7a7497d63e932a3a3d25c648f8d5878f246abb"
+  },
+  {
+   "path": "諸君 私はhaskellが好きだ.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/%e8%ab%b8%e5%90%9b%20%e7%a7%81%e3%81%afHaskell%e3%81%8c%e5%a5%bd%e3%81%8d%e3%81%a0",
+   "role": "document",
+   "token": "d949a26033ee63c5f370bfbde42ef867cfe923dd"
+  },
+  {
+   "path": "逆引き.html",
+   "url": "https://wiki.haskell.jp/Old/sampou.org/%e9%80%86%e5%bc%95%e3%81%8d",
+   "role": "document",
+   "token": "69352a832b9b4a0c73768303b080b6f6809f9eaa"
+  },
+  {
+   "path": "_-19.html",
+   "url": "https://wiki.haskell.jp/ChatRoom/",
+   "role": "document",
+   "token": "d34867af2d623bfc7afffcd14e03bbe03c224c03"
+  },
+  {
+   "path": "dockerfile.html",
+   "url": "https://wiki.haskell.jp/Dockerfile",
+   "role": "document",
+   "token": "5327b3343689950ce417f80a0b56b3dcf7f948f1"
+  },
+  {
+   "path": "eventcalendar.html",
+   "url": "https://wiki.haskell.jp/EventCalendar",
+   "role": "document",
+   "token": "08670184a9e92607dadf0c9c2fc30233f4729e07"
+  },
+  {
+   "path": "gitit user's guide.html",
+   "url": "https://wiki.haskell.jp/Gitit%20User's%20Guide",
+   "role": "document",
+   "token": "8adafec3c53ba80d8d82184ae82dce2917c72632"
+  },
+  {
+   "path": "readme.md.html",
+   "url": "https://wiki.haskell.jp/README.md",
+   "role": "document",
+   "token": "e391ca35128b99e69751b8afa5c79930f160f670"
+  },
+  {
+   "path": "_-20.html",
+   "url": "https://wiki.haskell.jp/WikiManagement/",
+   "role": "document",
+   "token": "c5e5311e3e21c482f77cb00f8b72bfc7f485f43e"
+  },
+  {
+   "path": "_-21.html",
+   "url": "https://wiki.haskell.jp/Workshop/",
+   "role": "document",
+   "token": "e43f7244364113e84425a08aa5fc11a11825df29"
+  },
+  {
+   "path": "gitit.conf.html",
+   "url": "https://wiki.haskell.jp/gitit.conf",
+   "role": "document",
+   "token": "0a5dc2a1e504263f0ff74afead27ff5ae6a58aee"
+  },
+  {
+   "path": "heroku.yml.html",
+   "url": "https://wiki.haskell.jp/heroku.yml",
+   "role": "document",
+   "token": "83c3ce7fecd7eb45a23450f7d15be035d35a5c40"
+  },
+  {
+   "path": "run-gitit.sh.html",
+   "url": "https://wiki.haskell.jp/run-gitit.sh",
+   "role": "document",
+   "token": "bf43284b6aba9846b51236e238f3dc22184a7ec9"
+  },
+  {
+   "path": "_-22.html",
+   "url": "https://wiki.haskell.jp/static/",
+   "role": "document",
+   "token": "0a6c735b16b491adfa817512bb220217748f69b7"
+  },
+  {
+   "path": "_-23.html",
+   "url": "https://wiki.haskell.jp/templates/",
+   "role": "document",
+   "token": "4ef6c5b0eaa097a8202d1e925f6c64b08dd8110a"
+  },
+  {
+   "path": "0.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell/0",
+   "role": "document",
+   "token": "12adb3646db343fc67cd6250e8d0ecb0ded7a0d3"
+  },
+  {
+   "path": "1.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell/1",
+   "role": "document",
+   "token": "c6eb0a92d5b93b480750e6cb80588f090b09d0a4"
+  },
+  {
+   "path": "2.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell/2",
+   "role": "document",
+   "token": "785d4d20e77e064a2d07ffc1d1b0c598aa5aca86"
+  },
+  {
+   "path": "4.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell/4",
+   "role": "document",
+   "token": "8275098e948a96e468d4d9e95ed47cfc13bd4d7a"
+  },
+  {
+   "path": "6.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell/6",
+   "role": "document",
+   "token": "f9c943b51b288fbe4f3f9d9ae8589a9f5633482d"
+  },
+  {
+   "path": "recursion.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell/recursion",
+   "role": "document",
+   "token": "7454ebcbd432c9debd568f0a99ebe4888ed403f2"
+  },
+  {
+   "path": "1-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/1",
+   "role": "document",
+   "token": "dd09fe9eab056bcbd421c9b329f0612a3305e921"
+  },
+  {
+   "path": "faq.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/FAQ",
+   "role": "document",
+   "token": "eeeed908725f0005a656c58cef234e979d081bdc"
+  },
+  {
+   "path": "answer1.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/answer1",
+   "role": "document",
+   "token": "f6a2c5c88e5b8ab8fff284204cc8d28f6087e20c"
+  },
+  {
+   "path": "answer2.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/answer2",
+   "role": "document",
+   "token": "ece24d028bf6afbdb5577582fbcf11582ddbcb8d"
+  },
+  {
+   "path": "answer3.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/answer3",
+   "role": "document",
+   "token": "6c3298f30964dbbf5bcd791220f3b5cea5b476fe"
+  },
+  {
+   "path": "answer4.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/answer4",
+   "role": "document",
+   "token": "25ac6cc856787f6cf56be64a74023e41b2d6ba1e"
+  },
+  {
+   "path": "exercise1.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise1",
+   "role": "document",
+   "token": "ce74273c12004a712c52089b2d5a0517e2678b76"
+  },
+  {
+   "path": "exercise10.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise10",
+   "role": "document",
+   "token": "1371f4bc831f73178f69723493c6c92bc3fe3dca"
+  },
+  {
+   "path": "exercise11.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise11",
+   "role": "document",
+   "token": "6dc5deecf2f8e3f4b08ed4697909614924ac1f46"
+  },
+  {
+   "path": "exercise12.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise12",
+   "role": "document",
+   "token": "534fd4a7faa38fa32890a68ec99bbcd28db5962f"
+  },
+  {
+   "path": "exercise13.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise13",
+   "role": "document",
+   "token": "2b69b5434dc841558b6b992a76ed8de3f34275d3"
+  },
+  {
+   "path": "exercise14.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise14",
+   "role": "document",
+   "token": "0824dadac4471d17fb358724908b3dcbdd235164"
+  },
+  {
+   "path": "exercise15.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise15",
+   "role": "document",
+   "token": "67bd4f56a90ebc6e7e8bc061c46772ed74f03805"
+  },
+  {
+   "path": "exercise2.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise2",
+   "role": "document",
+   "token": "789d9d84b22e4e5a981f0b387e1f1e1a0a733386"
+  },
+  {
+   "path": "exercise3.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise3",
+   "role": "document",
+   "token": "fc685afd5e52b3c7d5c1c59797334506c92171d2"
+  },
+  {
+   "path": "exercise4.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise4",
+   "role": "document",
+   "token": "a5a0591aa20afcd6b4439a0dbe6970d7b28c7012"
+  },
+  {
+   "path": "exercise5.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise5",
+   "role": "document",
+   "token": "463889891f4e2247140d659715e77abf66b1e5d1"
+  },
+  {
+   "path": "exercise8.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise8",
+   "role": "document",
+   "token": "aaa34d3e4474765f3bafbc465c9c9bbccb99bdde"
+  },
+  {
+   "path": "exercise9.html",
+   "url": "https://wiki.haskell.jp/Workshop/StartHaskell2/exercise9",
+   "role": "document",
+   "token": "b3ad5f36a9e8e05c5f79f7832bacc402d7f56445"
+  },
+  {
+   "path": "1-2.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/1",
+   "role": "document",
+   "token": "304758a9e683e3d00453e38fff06e8f2cd990e0f"
+  },
+  {
+   "path": "10.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/10",
+   "role": "document",
+   "token": "890a15fd98ab95e7076c73a5dbe5534c6383a24a"
+  },
+  {
+   "path": "11.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/11",
+   "role": "document",
+   "token": "a108c60a37cf633889391a397545ce97b16b5846"
+  },
+  {
+   "path": "12.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/12",
+   "role": "document",
+   "token": "e6e3fd049134775725add60d0af7cf4bb005c3f3"
+  },
+  {
+   "path": "2-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/2",
+   "role": "document",
+   "token": "bae185c349bbb45d3f23ecbd7a244ad6b37e32b4"
+  },
+  {
+   "path": "3.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/3",
+   "role": "document",
+   "token": "672ee8df87d34150021175b26c17d6c7531b2dac"
+  },
+  {
+   "path": "4-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/4",
+   "role": "document",
+   "token": "138ba9c627094e155fdf03e438b69c64141e4121"
+  },
+  {
+   "path": "5.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/5",
+   "role": "document",
+   "token": "ca1ce11b5140edd630bf6b95198db08e1cd1fdf9"
+  },
+  {
+   "path": "6-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/6",
+   "role": "document",
+   "token": "62e9b80f1e019632a2a19dc65b71c09c03caa496"
+  },
+  {
+   "path": "8.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/8",
+   "role": "document",
+   "token": "e0f38a3be60bdde4a541e318c07e59bb70eb9111"
+  },
+  {
+   "path": "2ec44558-b133-49a1-89a4-683456f888e9.html",
+   "url": "http://partake.in/images/2ec44558-b133-49a1-89a4-683456f888e9",
+   "role": "resource",
+   "token": "5a197a6f52bd6d17463bfc32f35f903589d7cdd8"
+  },
+  {
+   "path": "016052b9-b193-41b3-b7ce-1770da59a701.html",
+   "url": "http://partake.in/images/016052b9-b193-41b3-b7ce-1770da59a701",
+   "role": "resource",
+   "token": "35f86ac0a3235c7c22b59a9dfc15f45c385cfb2c"
+  },
+  {
+   "path": "9.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadPFDS/9",
+   "role": "document",
+   "token": "369d0d70f4a54238551b816995f370c128c3389e"
+  },
+  {
+   "path": "1-3.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellR/1",
+   "role": "document",
+   "token": "3603e25406e3d503787e1c4bb664c85952c4b958"
+  },
+  {
+   "path": "2-2.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellR/2",
+   "role": "document",
+   "token": "4088c3f294968b702bdee9af4376bc431af5bcea"
+  },
+  {
+   "path": "3-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellR/3",
+   "role": "document",
+   "token": "a8f31a87a49d54a3e67a4ac5d859865ab33fd28f"
+  },
+  {
+   "path": "5758670438_6756914019.jpg",
+   "url": "https://farm4.static.flickr.com/3184/5758670438_6756914019.jpg",
+   "role": "resource",
+   "token": "593959ad9aeb9e9ba1a247737d7de069e2a0c597"
+  },
+  {
+   "path": "5758673614_82336d58bf_m.jpg",
+   "url": "https://farm6.static.flickr.com/5103/5758673614_82336d58bf_m.jpg",
+   "role": "resource",
+   "token": "7c2757f397ad564604c2aedbc2682ef3616dffaf"
+  },
+  {
+   "path": "4-2.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellR/4",
+   "role": "document",
+   "token": "211c1642ed6f5b5b1dd6877667df396fd8a8ea8f"
+  },
+  {
+   "path": "5811491599_d097353de6_m.jpg",
+   "url": "https://farm6.static.flickr.com/5113/5811491599_d097353de6_m.jpg",
+   "role": "resource",
+   "token": "911b02ed629a35e79a367aa9d653a2b1a56cc4f6"
+  },
+  {
+   "path": "0-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadGHC/0",
+   "role": "document",
+   "token": "c77ed232078363e726d6cd1c5c7db38b92b47646"
+  },
+  {
+   "path": "1-4.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadGHC/1",
+   "role": "document",
+   "token": "f7529964b5917b7d1340a7911186b67e86e5e719"
+  },
+  {
+   "path": "2-3.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadGHC/2",
+   "role": "document",
+   "token": "fd01b7011e9555a9477333382047b8f63b06f994"
+  },
+  {
+   "path": "map.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadGHC/Map",
+   "role": "document",
+   "token": "120295c1913ced9e1220d5607171315eadcdc370"
+  },
+  {
+   "path": "8195711060_de8437e563.jpg",
+   "url": "https://farm9.staticflickr.com/8202/8195711060_de8437e563.jpg",
+   "role": "resource",
+   "token": "42248aeee67ea91813c696a12fc85ae935098c4f"
+  },
+  {
+   "path": "0-2.html",
+   "url": "https://wiki.haskell.jp/Workshop/ReadJhc/0",
+   "role": "document",
+   "token": "f841b9bc1f21b24527e196f2c50d471b3defad7f"
+  },
+  {
+   "path": "0-3.html",
+   "url": "https://wiki.haskell.jp/Workshop/yesod/0",
+   "role": "document",
+   "token": "977b9bccc9e432cb7b53ad6bd7044dac04c67a35"
+  },
+  {
+   "path": "2012.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellDay/2012",
+   "role": "document",
+   "token": "bd0170189f693bdd32404e1c090357211bf56059"
+  },
+  {
+   "path": "2016.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellDay/2016",
+   "role": "document",
+   "token": "1da03e6573f78a784dfc698a56aa136c75c90685"
+  },
+  {
+   "path": "2018.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellDay/2018",
+   "role": "document",
+   "token": "f8cbe72daca796ec6d63ddc56ad5961840e4f2f5"
+  },
+  {
+   "path": "0-4.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/0",
+   "role": "document",
+   "token": "1856eaba6e6067cc2a3edbd6ad6ff29026e9bd47"
+  },
+  {
+   "path": "1-5.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/1",
+   "role": "document",
+   "token": "f548ae53f02178352a8a37cb81a115f0990271aa"
+  },
+  {
+   "path": "2-4.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/2",
+   "role": "document",
+   "token": "5128523e104adc672da8634e6fa85e942db7cf19"
+  },
+  {
+   "path": "3-2.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/3",
+   "role": "document",
+   "token": "1f60570fbd02a3c974da4c13badd1c815db8507a"
+  },
+  {
+   "path": "4-3.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/4",
+   "role": "document",
+   "token": "eac7c4f3bbd8b7f948097bd2ddb19db4e9efe2f0"
+  },
+  {
+   "path": "5-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/5",
+   "role": "document",
+   "token": "250cafb36a550b42bd89081ab49743ed07c8e4cf"
+  },
+  {
+   "path": "6-2.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/6",
+   "role": "document",
+   "token": "0ce293184b08306418b2b6aefbe1c568b913bceb"
+  },
+  {
+   "path": "_-24.html",
+   "url": "https://twitpic.com/",
+   "role": "resource",
+   "token": "1658875ba26d28dfa2febd47a1764629ec18e3c3"
+  },
+  {
+   "path": "7.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/7",
+   "role": "document",
+   "token": "ec223abefda1208e1d3051abc7cb3bd5baa31110"
+  },
+  {
+   "path": "8-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/8",
+   "role": "document",
+   "token": "6aaba073ad8dccf21796919f1ca1ead3e59510a6"
+  },
+  {
+   "path": "bb2lcd.html",
+   "url": "https://twitpic.com/bb2lcd",
+   "role": "resource",
+   "token": "b5d7b3f1986a73034b6b9fcc757042946aaf2948"
+  },
+  {
+   "path": "bb2kgj.html",
+   "url": "https://twitpic.com/bb2kgj",
+   "role": "resource",
+   "token": "ad13138c6acbda242c5d8487ea6495794963acb4"
+  },
+  {
+   "path": "bb2wjg.html",
+   "url": "https://twitpic.com/bb2wjg",
+   "role": "resource",
+   "token": "b887dea07b53a2e85ebea6db4d47fc4afcb18ba6"
+  },
+  {
+   "path": "bb2roj.html",
+   "url": "https://twitpic.com/bb2roj",
+   "role": "resource",
+   "token": "b92622921da98a64d16a819c17b152b5f44dd544"
+  },
+  {
+   "path": "bb2g9j.html",
+   "url": "https://twitpic.com/bb2g9j",
+   "role": "resource",
+   "token": "21a9e66b11a3f1c35b7cef09c6e335cbd22d5999"
+  },
+  {
+   "path": "bb27bj.html",
+   "url": "https://twitpic.com/bb27bj",
+   "role": "resource",
+   "token": "a8d26c3b75a16f956fe1b26cf932d61dd6927cfe"
+  },
+  {
+   "path": "bb30od.html",
+   "url": "https://twitpic.com/bb30od",
+   "role": "resource",
+   "token": "bc03c209fb5ec04a42f1f4099a87ee9cf6e00975"
+  },
+  {
+   "path": "9-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/tapl/9",
+   "role": "document",
+   "token": "0b9d80fbded48cf37ff73ce40da9d4e28cf76094"
+  },
+  {
+   "path": "bf3e0i.html",
+   "url": "https://twitpic.com/bf3e0i",
+   "role": "resource",
+   "token": "15158e5fa9797081fb4c780abaee535593ba6c0d"
+  },
+  {
+   "path": "1-6.html",
+   "url": "https://wiki.haskell.jp/Workshop/pfad/1",
+   "role": "document",
+   "token": "d9120c3fb8bddbd76e6866effe321daf38ba15da"
+  },
+  {
+   "path": "000.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/000",
+   "role": "document",
+   "token": "fba61a4492532490f123b025f8243fa2bb42cbf2"
+  },
+  {
+   "path": "001.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/001",
+   "role": "document",
+   "token": "dba47e53328a1b362d8c813798959dc8f5368a57"
+  },
+  {
+   "path": "002.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/002",
+   "role": "document",
+   "token": "1ea287f780e0509c5c0330b00c20604b2721c6ee"
+  },
+  {
+   "path": "003.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/003",
+   "role": "document",
+   "token": "90899c1ad57c5951556177b20dc3bf677a937ca0"
+  },
+  {
+   "path": "004.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/004",
+   "role": "document",
+   "token": "fdc89b54715b158acc8011c9f0d53adfec1f2faa"
+  },
+  {
+   "path": "005.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/005",
+   "role": "document",
+   "token": "ac50c42b9ccff72c77515b852f33e379e063a020"
+  },
+  {
+   "path": "006.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/006",
+   "role": "document",
+   "token": "452ef95a2b8206bdc01c357ffbb03fc846bd39cd"
+  },
+  {
+   "path": "007.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/007",
+   "role": "document",
+   "token": "f1c07af73d2637f91e50095d8493639f336926f6"
+  },
+  {
+   "path": "008.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/008",
+   "role": "document",
+   "token": "e9cbbf5f64fe62cf22fa2442b1098f1fc9b2869d"
+  },
+  {
+   "path": "009.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/009",
+   "role": "document",
+   "token": "720d20d4dfa158d70107780bc133a33a245f668c"
+  },
+  {
+   "path": "010.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/010",
+   "role": "document",
+   "token": "365673a394b23d8cde53066bb160890f1a889b43"
+  },
+  {
+   "path": "011.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/011",
+   "role": "document",
+   "token": "e4d639267beed6aeb99f3af8c3b2762735396a01"
+  },
+  {
+   "path": "012.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/012",
+   "role": "document",
+   "token": "1bb7412433960020c6e58168ff3ce6fb51513980"
+  },
+  {
+   "path": "013.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/013",
+   "role": "document",
+   "token": "234c03a8bc70550d6796d4c716f5d3c5c636aa4d"
+  },
+  {
+   "path": "014.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/014",
+   "role": "document",
+   "token": "be9be3f333c5b3536d7d72c6b70745199d077378"
+  },
+  {
+   "path": "015.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/015",
+   "role": "document",
+   "token": "7324a2353335e505a4479e69dd223784e85ea93a"
+  },
+  {
+   "path": "016.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/016",
+   "role": "document",
+   "token": "7435204280204aeab8a76e8e8589006aee5c8527"
+  },
+  {
+   "path": "017.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/017",
+   "role": "document",
+   "token": "5465e8b2582565964ae2adc6043e45133bad2a73"
+  },
+  {
+   "path": "018-answer.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/018-answer",
+   "role": "document",
+   "token": "7b7488ca672040bbbda8d589451aa45643ed8447"
+  },
+  {
+   "path": "018.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/018",
+   "role": "document",
+   "token": "7da609bf76e2b1fd41687c4331ceb3f3325374a7"
+  },
+  {
+   "path": "019-answer.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/019-answer",
+   "role": "document",
+   "token": "49f404414e032ee9a2669c281fa0d2d7d0c97e80"
+  },
+  {
+   "path": "8138261767_be359fea74_z.jpg",
+   "url": "https://farm9.staticflickr.com/8046/8138261767_be359fea74_z.jpg",
+   "role": "resource",
+   "token": "6de92baffbe84f80aedf7dc144998c5109bedc29"
+  },
+  {
+   "path": "8138291208_5c55fe6a7b_z.jpg",
+   "url": "https://farm9.staticflickr.com/8043/8138291208_5c55fe6a7b_z.jpg",
+   "role": "resource",
+   "token": "3c6e93ec99199609a4b4abe20db07dad1ca05437"
+  },
+  {
+   "path": "019.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/019",
+   "role": "document",
+   "token": "d8952d72eb2e98cdeda057f6791e1813676bac45"
+  },
+  {
+   "path": "020.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/020",
+   "role": "document",
+   "token": "93dafebdcee102744254b0f693849b8274356e29"
+  },
+  {
+   "path": "021-answer.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/021-answer",
+   "role": "document",
+   "token": "47c4fbd6d3243591d763f6e68b316e4a82e61b28"
+  },
+  {
+   "path": "021.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/021",
+   "role": "document",
+   "token": "2a39000a78eb85e00c11a76ea260d587c31a18ef"
+  },
+  {
+   "path": "022.html",
+   "url": "https://wiki.haskell.jp/Workshop/MiracleHaskell/022",
+   "role": "document",
+   "token": "669afcbde52853212bcf7476ec19faf203de1f14"
+  },
+  {
+   "path": "2012-1.html",
+   "url": "https://wiki.haskell.jp/Workshop/HaskellBonenkai/2012",
+   "role": "document",
+   "token": "2349856d2792d427a9a8add3b37e9899bacdfef8"
+  },
+  {
+   "path": "1-7.html",
+   "url": "https://wiki.haskell.jp/Workshop/KodokuNoHaskell/1",
+   "role": "document",
+   "token": "1f294be257aab7bad54dde4839c52bb2cd327f47"
+  },
+  {
+   "path": "1-8.html",
+   "url": "https://wiki.haskell.jp/Workshop/Metasepi/1",
+   "role": "document",
+   "token": "112797c41025132687a8752bd3b1bccd70b10cea"
+  },
+  {
+   "path": "2-5.html",
+   "url": "https://wiki.haskell.jp/Workshop/Metasepi/2",
+   "role": "document",
+   "token": "bf26e815f804a3d977ead97d46f5c5b8b90dd825"
+  },
+  {
+   "path": "1-9.html",
+   "url": "https://wiki.haskell.jp/Workshop/PCPjH/1",
+   "role": "document",
+   "token": "d1c50ca477ae7dcb016b1ddde054a81311bf7f90"
+  },
+  {
+   "path": "2-6.html",
+   "url": "https://wiki.haskell.jp/Workshop/PCPjH/2",
+   "role": "document",
+   "token": "938dfea0f903ff564d56371866731c6902786739"
+  },
+  {
+   "path": "15.html",
+   "url": "https://wiki.haskell.jp/Workshop/hasmoku/15",
+   "role": "document",
+   "token": "e89738d7168cc1aa931bb32f3149bf45bc3acb89"
+  },
+  {
+   "path": "16.html",
+   "url": "https://wiki.haskell.jp/Workshop/hasmoku/16",
+   "role": "document",
+   "token": "88ea5917fe5e541cab11c39f3ff6f76eef0752cd"
+  },
+  {
+   "path": "organizerguide.html",
+   "url": "https://wiki.haskell.jp/Workshop/hasmoku/OrganizerGuide",
+   "role": "document",
+   "token": "e65686f706c4fb98639841a56e69bfa5bc7509e3"
+  },
+  {
+   "path": "_-25.html",
+   "url": "https://wiki.haskell.jp/Old/openspace.timedia.co.jp/",
+   "role": "document",
+   "token": "07949a9152ea4bb240e626933dbff8c5fe98696d"
+  },
+  {
+   "path": "email-protection.html",
+   "url": "https://wiki.haskell.jp/cdn-cgi/l/email-protection",
+   "role": "document",
+   "token": "8df7159884878a0ee20b49b785cbf9b0f73ae2f7"
+  },
+  {
+   "path": "cf.errors.css",
+   "url": "https://wiki.haskell.jp/cdn-cgi/styles/cf.errors.css",
+   "role": "css",
+   "token": "96f7f66e88e8adb5cd15fd69690323f4aee6e0be"
+  },
+  {
+   "path": "icon-exclamation.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/icon-exclamation.png?1376755637",
+   "role": "resource",
+   "token": "9de4825439620e653344ebaf615da566be7a4bd0"
+  },
+  {
+   "path": "cf-icon-horizontal-arrow.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/cf-icon-horizontal-arrow.png",
+   "role": "resource",
+   "token": "576859d22508a6a9d74c5790005c79f3ab93a0b0"
+  },
+  {
+   "path": "browser-bar.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/browser-bar.png?1376755637",
+   "role": "resource",
+   "token": "10f29f049fa0bbabdb76422053962e3a8c3f3776"
+  },
+  {
+   "path": "cf-no-screenshot-warn.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/cf-no-screenshot-warn.png",
+   "role": "resource",
+   "token": "756d50ea16df88c2eb5637844792a2304e8c98c7"
+  },
+  {
+   "path": "cf-no-screenshot-error.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/cf-no-screenshot-error.png",
+   "role": "resource",
+   "token": "30b5e03695f85112dce9763579e87c0f466c4577"
+  },
+  {
+   "path": "cf-icon-error.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/cf-icon-error.png",
+   "role": "resource",
+   "token": "385b73ebc765aa0a9787adc4d84de168fe567b54"
+  },
+  {
+   "path": "cf-icon-ok.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/cf-icon-ok.png",
+   "role": "resource",
+   "token": "2866fa8d027f51233fb4eaba1bd42b778c949da8"
+  },
+  {
+   "path": "cf-icon-browser.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/cf-icon-browser.png",
+   "role": "resource",
+   "token": "1d1260778f206069b6beb72389e7217e821260f0"
+  },
+  {
+   "path": "cf-icon-cloud.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/cf-icon-cloud.png",
+   "role": "resource",
+   "token": "7531d7b905e8507249ababa5bcfc1038934c770f"
+  },
+  {
+   "path": "cf-icon-server.png",
+   "url": "https://wiki.haskell.jp/cdn-cgi/images/cf-icon-server.png",
+   "role": "resource",
+   "token": "4e5f9d0985bcc69d20ab46179023cc27d9517c22"
+  },
+  {
+   "path": "rrb-all.html",
+   "url": "https://wiki.haskell.jp/Old/openspace.timedia.co.jp/marthon/RRB-all",
+   "role": "document",
+   "token": "534039eb2d0dd2fae980edb63dcff1c6f1c6036c"
+  },
+  {
+   "path": "calendar.html",
+   "url": "https://wiki.haskell.jp/Workshop/Calendar",
+   "role": "document",
+   "token": "42c05f0ebb285b8c2c2a2cc56b9fffff544978de"
+  },
+  {
+   "path": "_-26.html",
+   "url": "https://wiki.haskell.jp/static/img/",
+   "role": "document",
+   "token": "ed8a54be57cecd21960df3825fadf966a60a2865"
+  },
+  {
+   "path": "_-27.html",
+   "url": "https://wiki.haskell.jp/Old/openspace.timedia.co.jp/marthon/",
+   "role": "document",
+   "token": "1c3a4f1f99831ca45ea970c08386149269956eac"
+  }
+ ]
+}

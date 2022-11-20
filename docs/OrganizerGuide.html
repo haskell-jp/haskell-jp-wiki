@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/hasmoku/OrganizerGuide"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/hasmoku/OrganizerGuide</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/hasmoku/OrganizerGuide">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/hasmoku/OrganizerGuide">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/hasmoku/OrganizerGuide">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/hasmoku/OrganizerGuide</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#haskell-jp%E3%82%82%E3%81%8F%E3%82%82%E3%81%8F%E4%BC%9A-%E9%81%8B%E5%96%B6%E3%82%AC%E3%82%A4%E3%83%89">Haskell-jpもくもく会 運営ガイド</a><ul>
+<li><a href="#%E5%8B%95%E6%A9%9F">動機</a></li>
+<li><a href="#%E5%89%8D%E6%8F%90">前提</a></li>
+<li><a href="#%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E9%96%8B%E5%82%AC%E3%81%AE%E5%A0%B4%E5%90%88">オンライン開催の場合</a><ul>
+<li><a href="#%E5%89%8D%E5%9B%9E%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E6%8B%85%E5%BD%93%E8%80%85%E3%81%8B%E3%82%89%E4%BB%BB%E5%91%BD%E3%81%95%E3%82%8C%E3%81%9F%E5%BE%8C-%E9%96%8B%E5%82%AC%E5%91%8A%E7%9F%A5%E3%81%BE%E3%81%A7">前回のイベント担当者から任命された後 ～ 開催告知まで</a></li>
+<li><a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E9%96%8B%E5%82%AC%E5%91%8A%E7%9F%A5%E5%BE%8C-%E5%89%8D%E6%97%A5">イベント開催告知後 ～ 前日</a></li>
+<li><a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E5%BD%93%E6%97%A5-%E7%B5%82%E4%BA%86%E5%BE%8C">イベント当日: 終了後</a></li>
+</ul></li>
+<li><a href="#%E3%82%AA%E3%83%95%E3%83%A9%E3%82%A4%E3%83%B3%E9%96%8B%E5%82%AC%E3%81%AE%E5%A0%B4%E5%90%88">オフライン開催の場合</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="haskell-jpもくもく会-運営ガイド">Haskell-jpもくもく会 運営ガイド</h1>
+<p>Haskell-jpもくもく会を、今後参加者の持ち回りで運営して行くために、開催の手順をまとめておきます。</p>
+<h2 id="動機">動機</h2>
+<ul>
+<li>かつてリアル会場のみで運営していた頃は、「オンラインもくもく会なんてあんま意味なくね？」と懐疑的であったが、やってみると意外とモチベーションや集中力を高めるのに効果的なことに気づいた。なので継続して高頻度に行いたいが、igrep一人では難しそう</li>
+<li>運営に関わるメンバーと、運営に関わる機会を増やすことで、よりHaskell-jpの活動を活発なものにしたい
+<ul>
+<li>関連: <a href="https://the.igreque.info/slides/2019-11-29-stack-cabal.html#(4)">「『公式面して』発信する人」を増やしたい</a></li>
+<li>COVID-19の流行が落ち着いてからは、慣れた人がリアル会場でも月一回程度開催する体制も目指す</li>
+</ul></li>
+</ul>
+<h2 id="前提">前提</h2>
+<p>以下の権限が必要です。「自分も協力したい！」という方は、あらかじめ<a href="https://twitter.com/igrep">igrep</a>はじめ、他のHaskell-jpもくもく会運営にご連絡ください。</p>
+<ul>
+<li><a href="https://haskell-jp.connpass.com/">connpassのグループ</a>の管理者権限</li>
+<li>コピーしたいconnpassのイベントにおける管理者権限</li>
+<li><a href="https://tweetdeck.twitter.com/">TweetDeck</a>における<a href="https://twitter.com/haskell_jp">@haskell_jp</a>としての投稿権限</li>
+<li><a href="https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ">Googleカレンダーの、「Haskell勉強会」カレンダーへの追加権限</a></li>
+</ul>
+<h2 id="オンライン開催の場合">オンライン開催の場合</h2>
+<p>前回の開催担当者から任命された方は、以下👇の手順を踏んでください。</p>
+<h3 id="前回のイベント担当者から任命された後-開催告知まで">前回のイベント担当者から任命された後 ～ 開催告知まで</h3>
+<ol type="1">
+<li>次回のイベント開催日程を決めます</li>
+<li>前回のイベントページのページから「コピーを作成」して、次回のイベントページを作成・公開します
+<ul>
+<li>最新のイベントページへは <a href="https://haskell-jp.connpass.com/" class="uri">https://haskell-jp.connpass.com/</a> からたどりましょう</li>
+<li>特に連絡事項がなければ日付とタイトルのみ変更してください</li>
+</ul></li>
+<li>イベントページが作成できたら、イベントページ右側の「Googleカレンダー」というリンクをクリックして、<a href="https://calendar.google.com/calendar?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ">「Haskell勉強会」カレンダー</a>に予定を追加します
+<ul>
+<li>これによって、<a href="https://app.slack.com/client/T4LFB6C4C/C4NDY2TF1">Slackの #event-announcementチャンネル</a>に、イベントが自動で告知されるようになります</li>
+<li>同様に、IFTTTによって、自動で告知のツイートが @haskell_jp より投稿されます
+<ul>
+<li>例: <a href="https://twitter.com/haskell_jp/status/1348203848175906816" class="uri">https://twitter.com/haskell_jp/status/1348203848175906816</a></li>
+</ul></li>
+<li>イベントの「説明」は書き換えないでください！IFTTTやZapierによって自動投稿される際にこの「説明」がそのままツイートされます
+<ul>
+<li>これを始めIFTTTやZapierによる自動投稿については、 <a href="Calendar.html" class="uri">https://wiki.haskell.jp/Workshop/Calendar</a> をご覧ください。</li>
+</ul></li>
+</ul></li>
+</ol>
+<h3 id="イベント開催告知後-前日">イベント開催告知後 ～ 前日</h3>
+<ol type="1">
+<li>これ以降の手順はIFTTT・Zapierで自動化しています。以下のメッセージがそれぞれの時刻に投稿されます。
+<ol type="1">
+<li>イベント24時間前にTwitterで告知
+<ul>
+<li>Tweet例: <a href="https://twitter.com/haskell_jp/status/1354813987729281026" class="uri">https://twitter.com/haskell_jp/status/1354813987729281026</a></li>
+</ul></li>
+<li>イベント開始時刻にイベント開始を告げる発言がSlackの #mokumoku-online チャンネルと Twitterの @haskell_jp アカウントに投稿されます。
+<ul>
+<li>Tweetの例: <a href="https://twitter.com/haskell_jp/status/1350291895830896643" class="uri">https://twitter.com/haskell_jp/status/1350291895830896643</a></li>
+<li>Slackの例: 「第66回Haskell-jpもくもく会 @ オンラインの時間です！好きなタイミングでいいので、自己紹介と今日やりたいことを書き込んでいただけると！ hask(_ _)eller」</li>
+</ul></li>
+<li>イベントの終了時刻に終了を告げる発言がやはりSlackの #mokumoku-online チャンネルと Twitterの @haskell_jp アカウントに投稿されます。
+<ul>
+<li>Tweetの例: <a href="https://twitter.com/haskell_jp/status/1350367358196588544" class="uri">https://twitter.com/haskell_jp/status/1350367358196588544</a></li>
+<li>Slackの例: 「成果報告の時間です！何か、やったことを軽くご共有いただけると幸いです hask(_ _)eller」</li>
+</ul></li>
+</ol></li>
+</ol>
+<h3 id="イベント当日-終了後">イベント当日: 終了後</h3>
+<p>次回のイベント担当者と、開催日程を投票結果に基づいて決めてください。<br>
+なるべく毎週開催したいですが、イベント担当者の都合が付かない場合は無理をなさらず！</p>
+<h2 id="オフライン開催の場合">オフライン開催の場合</h2>
+<p>※次回開催したときぐらいに書きます。</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/hasmoku/OrganizerGuide">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/hasmoku/OrganizerGuide?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/hasmoku/OrganizerGuide">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/hasmoku/OrganizerGuide" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

@@ -1,0 +1,1371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/ICFP2007_execute"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/ICFP2007_execute</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/ICFP2007_execute">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/ICFP2007_execute">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/ICFP2007_execute">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/ICFP2007_execute</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#icfp2007_execute"><span>ICFP2007_execute</span></a><ul>
+<li><a href="#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E5%8B%95%E3%81%8B%E3%81%97%E3%81%8B%E3%81%9F">プログラムの動かしかた</a><ul>
+<li><a href="#dna%E3%83%87%E3%83%BC%E3%82%BF%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%BA%96%E5%82%99">DNAデータファイルの準備</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB">コンパイル</a></li>
+<li><a href="#%E8%B5%B7%E5%8B%95">起動</a></li>
+</ul></li>
+<li><a href="#%E3%83%80%E3%83%A1%E3%83%80%E3%83%A1%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3ver.0">ダメダメバージョン(ver.0)</a><ul>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89-execute-0.hs">コード (execute-0.hs)</a></li>
+</ul></li>
+<li><a href="#%E9%9D%9E%E5%8A%B9%E7%8E%87%E3%81%AA%E3%82%A2%E3%83%9A%E3%83%B3%E3%83%89%E3%82%92%E4%BD%BF%E3%82%8F%E3%81%AA%E3%81%84%E7%89%88-version-1">非効率なアペンドを使わない版 (version 1)</a><ul>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89execute-1.hs">コード(execute-1.hs)</a></li>
+</ul></li>
+<li><a href="#dna%E5%88%97%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%81%E3%81%ABtext.regex%E3%81%AE%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AAapi%E3%82%92%E4%BD%BF%E3%81%86%E7%89%88-version-2">DNA列のサーチにText.Regexの正規表現ライブラリAPIを使う版 (version 2)</a><ul>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89execute-2.hs">コード(execute-2.hs)</a></li>
+</ul></li>
+<li><a href="#dna%E3%81%AE%E8%A1%A8%E7%8F%BE%E3%81%AB-bytestring-%E3%82%92%E4%BD%BF%E3%81%86%E7%89%88-version-3">DNAの表現に ByteString を使う版 (version 3)</a><ul>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89execute-3.hs">コード(execute-3.hs)</a></li>
+</ul></li>
+<li><a href="#dna%E3%81%AE%E8%A1%A8%E7%8F%BE%E3%81%AB-seq-char-%E3%82%92%E4%BD%BF%E3%81%86%E7%89%88-version-4">DNAの表現に Seq Char を使う版 (version 4)</a><ul>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89execute-4.hs">コード(execute-4.hs)</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="icfp2007_execute"><a href="" class="uri" title="Go to wiki page">ICFP2007_execute</a></h1>
+<p><a href="ICFP2007.html" class="uri" title="Go to wiki page">ICFP2007</a>:execute</p>
+<hr>
+<p>Endo の DNA から RNA を構成するプログラム</p>
+<hr>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0%e3%81%ae%e5%8b%95%e3%81%8b%e3%81%97%e3%81%8b%e3%81%9f" class="uri" title="Go to wiki page">プログラムの動かしかた</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/DNA%e3%83%87%e3%83%bc%e3%82%bf%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%ae%e6%ba%96%e5%82%99" class="uri" title="Go to wiki page">DNAデータファイルの準備</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%b3%e3%83%91%e3%82%a4%e3%83%ab" class="uri" title="Go to wiki page">コンパイル</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e8%b5%b7%e5%8b%95" class="uri" title="Go to wiki page">起動</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%80%e3%83%a1%e3%83%80%e3%83%a1%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3(ver.0)" class="uri" title="Go to wiki page">ダメダメバージョン(ver.0)</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%bc%e3%83%89%20(execute-0.hs)" title="Go to wiki page">コード (execute-0.hs)</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%9d%9e%e5%8a%b9%e7%8e%87%e3%81%aa%e3%82%a2%e3%83%9a%e3%83%b3%e3%83%89%e3%82%92%e4%bd%bf%e3%82%8f%e3%81%aa%e3%81%84%e7%89%88%20(version%201)" title="Go to wiki page">非効率なアペンドを使わない版 (version 1)</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%bc%e3%83%89(execute-1.hs)" class="uri" title="Go to wiki page">コード(execute-1.hs)</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/DNA%e5%88%97%e3%81%ae%e3%82%b5%e3%83%bc%e3%83%81%e3%81%abText.Regex%e3%81%ae%e6%ad%a3%e8%a6%8f%e8%a1%a8%e7%8f%be%e3%83%a9%e3%82%a4%e3%83%96%e3%83%a9%e3%83%aaAPI%e3%82%92%e4%bd%bf%e3%81%86%e7%89%88%20(version%202)" title="Go to wiki page">DNA列のサーチにText.Regexの正規表現ライブラリAPIを使う版 (version 2)</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%bc%e3%83%89(execute-2.hs)" class="uri" title="Go to wiki page">コード(execute-2.hs)</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/DNA%e3%81%ae%e8%a1%a8%e7%8f%be%e3%81%ab%20ByteString%20%e3%82%92%e4%bd%bf%e3%81%86%e7%89%88%20(version%203)" title="Go to wiki page">DNAの表現に ByteString を使う版 (version 3)</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%bc%e3%83%89(execute-3.hs)" class="uri" title="Go to wiki page">コード(execute-3.hs)</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/DNA%e3%81%ae%e8%a1%a8%e7%8f%be%e3%81%ab%20Seq%20Char%20%e3%82%92%e4%bd%bf%e3%81%86%e7%89%88%20(version%204)" title="Go to wiki page">DNAの表現に Seq Char を使う版 (version 4)</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%bc%e3%83%89(execute-4.hs)" class="uri" title="Go to wiki page">コード(execute-4.hs)</a></li>
+</ul>
+<hr>
+<h2 id="プログラムの動かしかた">プログラムの動かしかた</h2>
+<h3 id="dnaデータファイルの準備">DNAデータファイルの準備</h3>
+<p>ダウンロード</p>
+<pre><code>$ wget http://www.icfpcontest.org/endo.zip</code></pre>
+<p>解凍</p>
+<pre><code>$ unzip endo.zip</code></pre>
+<h3 id="コンパイル">コンパイル</h3>
+<p>走らせたいコードを execute-{version}.hs という名前で保存する． {version} の部分はバージョン番号です． コンパイラには ghc-6.6.1 を使った．</p>
+<pre><code>$ ghc --make -O -o execute-{version} execute-{version}.hs</code></pre>
+<h3 id="起動">起動</h3>
+<p>execute-{version}は，コマンドラインで繰り返しの数を指定(必須)するよう につくってあります．これに負の数を指定すると最後までやることになります． このようにしてあるのは初期バージョンでは，実行がおわるまではとても待て ないからです．RNA は標準出力に，実行ログは標準エラーに出力されます． 実行ログは繰り返し1回ごとに，繰り返し番号(0からはじまる)，パターン，テ ンプレートを出力します．パターン，テンプレートについては課題文書を 参照してください．</p>
+<pre><code>$ ./execute-0 50 &lt; endo.dna 2&gt; log.0</code></pre>
+<p>bash では上のコマンドで，version 0 が 50 回のくりかえしまで計算し 標準出力にRNAの出力が，log.0 には実行ログが出力されます．</p>
+<pre><code>$ time ./execute-4 -1 &lt; endo.dna &gt; endo.rna 2&gt; log.4</code></pre>
+<p>上では version 4 を実行し，endo.dna をすべて処理し，RNA を endo.rna へ 実行ログを log.4 に出力し，最後に実行時間が表示されます． ちなみに正しいプログラムに endo.dna を処理させると繰り返し回数は 1,891,886 回で，生成される RNA の数は 302450 個です．</p>
+<h2 id="ダメダメバージョンver.0">ダメダメバージョン(ver.0)</h2>
+<p>課題文書にある疑似コードをナイーブに Haskell のコードの落しただけ． アペンド(リストの ls 最後に要素 e を加える操作)をなにも考えずに</p>
+<pre><code>ls ++ [e] </code></pre>
+<p>なんてことをやって，それをループの中で使っているもんだから，正しく動く けど恐しく非効率，全く使いものにならない．どれほど遅いかは実行してみれ ばわかります．繰り返し 50 程度を指定しましょう．100 を指定すると 96 回 目のくりかえしに恐しく時間がかかり,まちきれないかもしれません．</p>
+<h3 id="コード-execute-0.hs">コード (execute-0.hs)</h3>
+<pre><code>module Main (main) where
+
+import Data.List
+import Data.Maybe
+import Debug.Trace
+import System.Environment
+
+-- S combinator
+
+starling :: (a -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)
+starling f g x = f x (g x)
+
+-- Debug print utilities
+
+infixr 0 .$.
+infixr 9 ...
+
+tracing' :: Show a =&gt; (String -&gt; String) -&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing' f = (. starling (flip trace) (f . show))
+
+tracing :: Show a =&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing = (. starling (flip trace) show)
+
+(.$.) :: Show a =&gt; (a -&gt; b) -&gt; a -&gt; b
+(.$.) = tracing
+
+(...) :: Show b =&gt; (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+(...) = (.) . (.$.)
+
+-- Data types
+
+type Base = Char
+type DNA  = [Base]
+
+type Environment = [DNA]
+
+type Pattern  = [PItem]
+data PItem    = PB { pbase :: Base }
+              | PS { pskip :: Int }
+              | PD { pdna  :: DNA }
+              | POpen
+              | PClose
+  deriving Eq
+
+instance Show PItem where
+  show (PB b) = [b]
+  show (PS n) = '!':show n
+  show (PD d) = d
+  show POpen  = "("
+  show PClose = ")"
+                   
+type Template = [TItem]
+data TItem = TB { tbase :: Base }
+           | TR { tref :: Int, tlev :: Int }
+           | TL { tlen  :: Int }
+  deriving (Eq)
+
+instance Show TItem where
+  show (TB b) = [b]
+  show (TR r l) = show r++'-':show l
+  show (TL n)   = '|':show n++"|"
+
+-- Main
+
+main :: IO ()
+main = execute . read . head =&lt;&lt; getArgs
+
+execute :: Int -&gt; IO ()
+execute mx = exec mx 0 =&lt;&lt; getContents
+
+exec :: Int -&gt; Int -&gt; DNA -&gt; IO () -- the first and sencond arguments are only for debugging
+exec _ _  [] = return ()
+exec mx n dna | mx == n = return ()
+exec mx n dna
+ = trace (show n) $
+   do { mp &lt;- pattern $ dna
+      ; case mp of
+          Nothing -&gt; return ()
+          Just (p,dna') 
+            -&gt; do { mt &lt;- template $ dna'
+                  ; case mt of
+                      Nothing -&gt; return ()
+                      Just (t,dna'')
+                        -&gt; exec mx (n+1) $ ((matchReplace .$. p) .$. t) $ dna''
+                  }
+      }
+
+pattern :: DNA -&gt; IO (Maybe (Pattern, DNA))
+pattern = ploop [] 0
+
+ploop :: Pattern -&gt; Int -&gt; DNA -&gt; IO (Maybe (Pattern, DNA))
+ploop _ _   [] = return Nothing
+ploop p lvl dna
+ = case dna of
+     'C':dna' -&gt; ploop (p++[PB 'I']) lvl dna'
+     'F':dna' -&gt; ploop (p++[PB 'C']) lvl dna'
+     'P':dna' -&gt; ploop (p++[PB 'F']) lvl dna'
+     'I':'C':dna' -&gt; ploop (p++[PB 'P']) lvl dna'
+     'I':'P':dna' -&gt; case nat dna' of
+                       Nothing        -&gt; return Nothing
+                       Just (n,dna'') -&gt; ploop (p++[PS n]) lvl dna''
+     'I':'F': _ :dna' -&gt; case consts dna' of
+                           (s,dna'') -&gt; ploop (p++[PD s]) lvl dna''
+     'I':'I':'P':dna' -&gt; ploop (p++[POpen]) (lvl+1) dna'
+     'I':'I': c :dna' | elem c "CF"
+                      -&gt; if lvl == 0 then return $ Just (p,dna')
+                         else ploop (p++[PClose]) (lvl-1) dna'
+     'I':'I':'I':dna' -&gt; case splitAt 7 dna' of
+                           (rna,dna'') -&gt; putStrLn rna &gt;&gt; ploop p lvl dna''
+     _ -&gt; return Nothing
+
+nat :: DNA -&gt; Maybe (Int,DNA)
+nat dna
+ = case dna of 
+     'P':dna' -&gt; Just (0,dna')
+     c  :dna' | elem c "IF"
+              -&gt; case nat dna' of
+                   Nothing -&gt; Nothing
+                   Just (n,dna'') -&gt; Just (n*2,dna'')
+     'C':dna' -&gt; case nat dna' of
+                   Nothing -&gt; Nothing
+                   Just (n,dna'') -&gt; Just (2*n+1,dna'')
+     _        -&gt; Nothing
+
+consts :: DNA -&gt; (DNA,DNA)
+consts dna
+ = case dna of
+     'C':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('I':d,dna'')
+     'F':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('C':d,dna'')
+     'P':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('F':d,dna'')
+     'I':'C':dna' -&gt; case consts dna' of (d,dna'') -&gt; ('P':d,dna'')
+     _            -&gt; ([],dna)
+
+template :: DNA -&gt; IO (Maybe (Template,DNA))
+template = tloop []
+tloop :: Template -&gt; DNA -&gt; IO (Maybe (Template,DNA))
+tloop t dna
+ = case dna of
+     'C':dna' -&gt; tloop (t++[TB 'I']) dna'
+     'F':dna' -&gt; tloop (t++[TB 'C']) dna'
+     'P':dna' -&gt; tloop (t++[TB 'F']) dna'
+     'I':'C':dna' -&gt; tloop (t++[TB 'P']) dna'
+     'I': c :dna' | elem c "FP"
+                  -&gt; case nat dna' of
+                       Nothing -&gt; return Nothing
+                       Just (l,dna'') -&gt; case nat dna'' of
+                            Nothing -&gt; return Nothing
+                            Just (n,dna''') -&gt; tloop (t++[TR n l]) dna'''
+     'I':'I': c :dna' | elem c "CF"
+                      -&gt; return $ Just (t,dna')
+     'I':'I':'P':dna' -&gt; case nat dna' of
+                           Nothing -&gt; return Nothing
+                           Just (n,dna'') -&gt; tloop (t++[TL n]) dna''
+     'I':'I':'I':dna' -&gt; case splitAt 7 dna' of
+                           (rna,dna'') -&gt; putStrLn rna &gt;&gt; tloop t dna''
+     _ -&gt; return Nothing
+
+matchReplace :: Pattern -&gt; Template -&gt; DNA -&gt; DNA
+matchReplace p t dna
+ = case mloop dna (0,[],[]) p of
+     Nothing    -&gt; dna
+     Just (i,e) -&gt; replace t e (drop i dna)
+
+mloop :: DNA -&gt; (Int,Environment,[Int]) -&gt; Pattern -&gt; Maybe (Int,Environment)
+mloop dna (i,e,c) p
+ = case p of
+     PB b:p'  -&gt; if dna !! i == b then mloop dna (i+1,e,c) p' else Nothing
+     PS n:p'  -&gt; let i' = i+n
+                 in if i' &gt; length dna then Nothing else mloop dna (i',e,c) p'
+     PD s:p'  -&gt; case search s (drop i dna) of
+                   Nothing -&gt; Nothing
+                   Just n  -&gt; mloop dna (i+n+length s,e,c) p'
+     POpen:p' -&gt; mloop dna (i,e,i:c) p'
+     PClose:p'-&gt; mloop dna (i,e++[drop (head c) (take i dna)], tail c) p'
+     _        -&gt; Just (i,e)
+
+search :: DNA -&gt; DNA -&gt; Maybe Int
+search s dna
+ = case break id (map (s `isPrefixOf`) (tails dna)) of
+     (xs,[]) -&gt; Nothing
+     (xs,_)  -&gt; Just (length xs)
+
+replace :: Template -&gt; Environment -&gt; DNA -&gt; DNA
+replace t e dna = rloop [] e t ++ dna
+
+rloop :: DNA  -&gt; Environment -&gt; Template-&gt; DNA
+rloop d e t
+ = case t of
+     TB b  :t' -&gt; rloop (d++[b]) e t'
+     TR n l:t' -&gt; case index n e of
+                    Nothing -&gt; d
+                    Just d' -&gt; rloop (d++protect l d') e t'
+     TL n  :t' -&gt; case index n e of
+                    Nothing -&gt; rloop (d++asnat 0) e t'
+                    Just d' -&gt; rloop (d++asnat (length d')) e t'
+     _         -&gt; d
+
+index :: Int -&gt; [a] -&gt; Maybe a
+index _ [] = Nothing
+index i (x:xs) | i &lt; 0     = Nothing
+               | i == 0    = Just x
+               | otherwise = index (i-1) xs
+
+protect :: Int -&gt; DNA -&gt; DNA
+protect l d = if l == 0 then d
+              else protect (l-1) (quote d)
+
+quote :: DNA -&gt; DNA
+quote d = case d of
+  'I':ds -&gt; 'C':quote ds
+  'C':ds -&gt; 'F':quote ds
+  'F':ds -&gt; 'P':quote ds
+  'P':ds -&gt; 'I':'C':quote ds
+  _      -&gt; []
+
+asnat :: Int -&gt; DNA
+asnat 0 = ['P']
+asnat n | even n    = 'I':asnat (n `div` 2)
+        | otherwise = 'C':asnat (n `div` 2)</code></pre>
+<h2 id="非効率なアペンドを使わない版-version-1">非効率なアペンドを使わない版 (version 1)</h2>
+<p>前バージョンより速いけど．．．繰り返し100で 190秒だった．</p>
+<h3 id="コードexecute-1.hs">コード(execute-1.hs)</h3>
+<pre><code>module Main (main) where
+
+import Data.List
+import Debug.Trace
+import System.Environment
+
+-- combinator
+
+starling :: (a -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)
+starling f g x = f x (g x)
+
+fstapp :: (a -&gt; b) -&gt; (a,c) -&gt; (b,c)
+fstapp f (x,y) = (f x, y)
+
+-- Debug print utilities
+
+infixr 0 .$.
+infixr 9 ...
+
+tracing' :: Show a =&gt; (String -&gt; String) -&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing' f = (. starling (flip trace) (f . show))
+
+tracing :: Show a =&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing = (. starling (flip trace) show)
+
+(.$.) :: Show a =&gt; (a -&gt; b) -&gt; a -&gt; b
+(.$.) = tracing
+
+(...) :: Show b =&gt; (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+(...) = (.) . (.$.)
+
+-- Data types
+
+type Base = Char
+type DNA  = [Base]
+
+type Environment = [DNA]
+
+type Pattern  = [PItem]
+data PItem    = PB { pbase :: Base }
+              | PS { pskip :: Int }
+              | PD { pdna  :: DNA }
+              | POpen
+              | PClose
+  deriving Eq
+
+instance Show PItem where
+  show (PB b) = [b]
+  show (PS n) = '!':show n
+  show (PD d) = d
+  show POpen  = "("
+  show PClose = ")"
+                   
+type Template = [TItem]
+data TItem = TB { tbase :: Base }
+           | TR { tref :: Int, tlev :: Int }
+           | TL { tlen  :: Int }
+  deriving (Eq)
+
+instance Show TItem where
+  show (TB b) = [b]
+  show (TR r l) = show r++'-':show l
+  show (TL n)   = '|':show n++"|"
+
+-- Main
+
+main :: IO ()
+main = execute . read . head =&lt;&lt; getArgs
+
+execute :: Int -&gt; IO ()
+execute mx = exec mx 0 =&lt;&lt; getContents
+
+exec :: Int -&gt; Int -&gt; DNA -&gt; IO ()
+exec _ _  [] = return ()
+exec mx n dna | mx == n = return ()
+exec mx n dna
+ = trace (show n) $
+   do { mp &lt;- pattern $ dna
+      ; case mp of
+          Nothing -&gt; return ()
+          Just (p,dna') 
+            -&gt; do { mt &lt;- template $ dna'
+                  ; case mt of
+                      Nothing -&gt; return ()
+                      Just (t,dna'')
+                        -&gt; exec mx (n+1) $ ((matchReplace .$. p) .$. t) $ dna''
+                  }
+      }
+
+pattern :: DNA -&gt; IO (Maybe (Pattern, DNA))
+pattern = ploop [] 0
+
+ploop :: Pattern -&gt; Int -&gt; DNA -&gt; IO (Maybe (Pattern, DNA))
+ploop _ _   [] = return Nothing
+ploop p lvl dna
+ = case dna of
+     'C':dna' -&gt; ploop (PB 'I':p) lvl dna'
+     'F':dna' -&gt; ploop (PB 'C':p) lvl dna'
+     'P':dna' -&gt; ploop (PB 'F':p) lvl dna'
+     'I':'C':dna' -&gt; ploop (PB 'P':p) lvl dna'
+     'I':'P':dna' -&gt; case nat dna' of
+                       Nothing        -&gt; return Nothing
+                       Just (n,dna'') -&gt; ploop (PS n:p) lvl dna''
+     'I':'F': _ :dna' -&gt; case consts dna' of
+                           (s,dna'') -&gt; ploop (PD s:p) lvl dna''
+     'I':'I':'P':dna' -&gt; ploop (POpen:p) (lvl+1) dna'
+     'I':'I': c :dna' | elem c "CF"
+                      -&gt; if lvl == 0 then return $ Just (reverse p,dna')
+                         else ploop (PClose:p) (lvl-1) dna'
+     'I':'I':'I':dna' -&gt; case splitAt 7 dna' of
+                           (rna,dna'') -&gt; putStrLn rna &gt;&gt; ploop p lvl dna''
+     _ -&gt; return Nothing
+
+nat :: DNA -&gt; Maybe (Int,DNA)
+nat dna
+ = case dna of 
+     'P':dna' -&gt; Just (0,dna')
+     c  :dna' | elem c "IF"
+              -&gt; return . fstapp (2*) =&lt;&lt; nat dna'
+     'C':dna' -&gt; return . fstapp ((1+).(2*)) =&lt;&lt; nat dna'
+     _        -&gt; Nothing
+
+consts :: DNA -&gt; (DNA,DNA)
+consts dna
+ = case dna of
+     'C':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('I':d,dna'')
+     'F':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('C':d,dna'')
+     'P':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('F':d,dna'')
+     'I':'C':dna' -&gt; case consts dna' of (d,dna'') -&gt; ('P':d,dna'')
+     _            -&gt; ([],dna)
+
+template :: DNA -&gt; IO (Maybe (Template,DNA))
+template = tloop []
+tloop :: Template -&gt; DNA -&gt; IO (Maybe (Template,DNA))
+tloop t dna
+ = case dna of
+     'C':dna' -&gt; tloop (TB 'I':t) dna'
+     'F':dna' -&gt; tloop (TB 'C':t) dna'
+     'P':dna' -&gt; tloop (TB 'F':t) dna'
+     'I':'C':dna' -&gt; tloop (TB 'P':t) dna'
+     'I': c :dna' | elem c "FP"
+                  -&gt; case nat dna' of
+                       Nothing -&gt; return Nothing
+                       Just (l,dna'') -&gt; case nat dna'' of
+                            Nothing -&gt; return Nothing
+                            Just (n,dna''') -&gt; tloop (TR n l:t) dna'''
+     'I':'I': c :dna' | elem c "CF"
+                      -&gt; return $ Just (reverse t,dna')
+     'I':'I':'P':dna' -&gt; case nat dna' of
+                           Nothing -&gt; return Nothing
+                           Just (n,dna'') -&gt; tloop (TL n:t) dna''
+     'I':'I':'I':dna' -&gt; case splitAt 7 dna' of
+                           (rna,dna'') -&gt; putStrLn rna &gt;&gt; tloop t dna''
+     _ -&gt; return Nothing
+
+matchReplace :: Pattern -&gt; Template -&gt; DNA -&gt; DNA
+matchReplace p t dna
+ = case mloop dna (0,[],[]) p of
+     Nothing    -&gt; dna
+     Just (i,e) -&gt; replace t e (drop i dna)
+
+mloop :: DNA -&gt; (Int,Environment,[Int]) -&gt; Pattern -&gt; Maybe (Int,Environment)
+mloop dna (i,e,c) p
+ = case p of
+     PB b:p'  -&gt; if dna !! i == b then mloop dna (i+1,e,c) p' else Nothing
+     PS n:p'  -&gt; let i' = i+n
+                 in if i' &gt; length dna then Nothing else mloop dna (i',e,c) p'
+     PD s:p'  -&gt; case search s (drop i dna) of
+                   Nothing -&gt; Nothing
+                   Just n  -&gt; mloop dna (i+n+length s,e,c) p'
+     POpen:p' -&gt; mloop dna (i,e,i:c) p'
+     PClose:p'-&gt; mloop dna (i,drop (head c) (take i dna):e, tail c) p'
+     _        -&gt; Just (i,reverse e)
+
+search :: DNA -&gt; DNA -&gt; Maybe Int
+search s dna
+ = case break id (map (s `isPrefixOf`) (tails dna)) of
+     (xs,[]) -&gt; Nothing
+     (xs,_)  -&gt; Just (length xs)
+
+replace :: Template -&gt; Environment -&gt; DNA -&gt; DNA
+replace t e dna = rloop [] e t ++ dna
+
+rloop :: DNA  -&gt; Environment -&gt; Template-&gt; DNA
+rloop d e t
+ = case t of
+     TB b  :t' -&gt; rloop (b:d) e t'
+     TR n l:t' -&gt; case index n e of
+                    Nothing -&gt; reverse d
+                    Just d' -&gt; rloop (rappend (protect l d') d) e t'
+     TL n  :t' -&gt; case index n e of
+                    Nothing -&gt; rloop (rappend (asnat 0) d) e t'
+                    Just d' -&gt; rloop (rappend (asnat (length d')) d) e t'
+     _         -&gt; reverse d
+
+rappend :: [a] -&gt; [a] -&gt; [a]
+rappend = flip (foldl snoc)
+
+snoc :: [a] -&gt; a -&gt; [a]
+snoc = flip (:) 
+
+index :: Int -&gt; [a] -&gt; Maybe a
+index _ [] = Nothing
+index i (x:xs) | i &lt; 0     = Nothing
+               | i == 0    = Just x
+               | otherwise = index (i-1) xs
+
+protect :: Int -&gt; DNA -&gt; DNA
+protect l d = if l == 0 then d
+              else protect (l-1) (quote d)
+
+quote :: DNA -&gt; DNA
+quote d = case d of
+  'I':ds -&gt; 'C':quote ds
+  'C':ds -&gt; 'F':quote ds
+  'F':ds -&gt; 'P':quote ds
+  'P':ds -&gt; 'I':'C':quote ds
+  _      -&gt; []
+
+asnat :: Int -&gt; DNA
+asnat 0 = ['P']
+asnat n | even n    = 'I':asnat (n `div` 2)
+        | otherwise = 'C':asnat (n `div` 2)</code></pre>
+<h2 id="dna列のサーチにtext.regexの正規表現ライブラリapiを使う版-version-2">DNA列のサーチにText.Regexの正規表現ライブラリAPIを使う版 (version 2)</h2>
+<p>前 version と大差ない．</p>
+<h3 id="コードexecute-2.hs">コード(execute-2.hs)</h3>
+<pre><code>module Main (main) where
+
+import Debug.Trace
+import System.Environment
+import Text.Regex
+
+-- combinator
+
+starling :: (a -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)
+starling f g x = f x (g x)
+
+fstapp :: (a -&gt; b) -&gt; (a,c) -&gt; (b,c)
+fstapp f (x,y) = (f x, y)
+
+-- Debug print utilities
+
+infixr 0 .$.
+infixr 9 ...
+
+tracing' :: Show a =&gt; (String -&gt; String) -&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing' f = (. starling (flip trace) (f . show))
+
+tracing :: Show a =&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing = (. starling (flip trace) show)
+
+(.$.) :: Show a =&gt; (a -&gt; b) -&gt; a -&gt; b
+(.$.) = tracing
+
+(...) :: Show b =&gt; (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+(...) = (.) . (.$.)
+
+-- Data types
+
+type Base = Char
+type DNA  = [Base]
+
+type Environment = [DNA]
+
+type Pattern  = [PItem]
+data PItem    = PB { pbase :: Base }
+              | PS { pskip :: Int }
+              | PD { pdna  :: DNA }
+              | POpen
+              | PClose
+  deriving Eq
+
+instance Show PItem where
+  show (PB b) = [b]
+  show (PS n) = '!':show n
+  show (PD d) = d
+  show POpen  = "("
+  show PClose = ")"
+                   
+type Template = [TItem]
+data TItem = TB { tbase :: Base }
+           | TR { tref  :: Int, tlev :: Int }
+           | TL { tlen  :: Int }
+  deriving (Eq)
+
+instance Show TItem where
+  show (TB b) = [b]
+  show (TR r l) = show r++'-':show l
+  show (TL n)   = '|':show n++"|"
+
+-- Main
+
+main :: IO ()
+main = execute . read . head =&lt;&lt; getArgs
+
+execute :: Int -&gt; IO ()
+execute mx = exec mx 0 =&lt;&lt; getContents
+
+exec :: Int -&gt; Int -&gt; DNA -&gt; IO ()
+exec _ _  [] = return ()
+exec mx n dna | mx == n = return ()
+exec mx n dna
+ = trace (show n) $
+   do { mp &lt;- pattern $ dna
+      ; case mp of
+          Nothing -&gt; return ()
+          Just (p,dna') 
+            -&gt; do { mt &lt;- template $ dna'
+                  ; case mt of
+                      Nothing -&gt; return ()
+                      Just (t,dna'')
+                        -&gt; exec mx (n+1) $ ((matchReplace .$. p) .$. t) $ dna''
+                  }
+      }
+
+pattern :: DNA -&gt; IO (Maybe (Pattern, DNA))
+pattern = ploop [] 0
+
+ploop :: Pattern -&gt; Int -&gt; DNA -&gt; IO (Maybe (Pattern, DNA))
+ploop _ _   [] = return Nothing
+ploop p lvl dna
+ = case dna of
+     'C':dna' -&gt; ploop (PB 'I':p) lvl dna'
+     'F':dna' -&gt; ploop (PB 'C':p) lvl dna'
+     'P':dna' -&gt; ploop (PB 'F':p) lvl dna'
+     'I':'C':dna' -&gt; ploop (PB 'P':p) lvl dna'
+     'I':'P':dna' -&gt; case nat dna' of
+                       Nothing        -&gt; return Nothing
+                       Just (n,dna'') -&gt; ploop (PS n:p) lvl dna''
+     'I':'F': _ :dna' -&gt; case consts dna' of
+                           (s,dna'') -&gt; ploop (PD s:p) lvl dna''
+     'I':'I':'P':dna' -&gt; ploop (POpen:p) (lvl+1) dna'
+     'I':'I': c :dna' | elem c "CF"
+                      -&gt; if lvl == 0 then return $ Just (reverse p,dna')
+                         else ploop (PClose:p) (lvl-1) dna'
+     'I':'I':'I':dna' -&gt; case splitAt 7 dna' of
+                           (rna,dna'') -&gt; putStrLn rna &gt;&gt; ploop p lvl dna''
+     _ -&gt; return Nothing
+
+nat :: DNA -&gt; Maybe (Int,DNA)
+nat dna
+ = case dna of 
+     'P':dna' -&gt; Just (0,dna')
+     c  :dna' | elem c "IF"
+              -&gt; return . fstapp (2*) =&lt;&lt; nat dna'
+     'C':dna' -&gt; return . fstapp ((1+).(2*)) =&lt;&lt; nat dna'
+     _        -&gt; Nothing
+
+consts :: DNA -&gt; (DNA,DNA)
+consts dna
+ = case dna of
+     'C':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('I':d,dna'')
+     'F':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('C':d,dna'')
+     'P':dna'     -&gt; case consts dna' of (d,dna'') -&gt; ('F':d,dna'')
+     'I':'C':dna' -&gt; case consts dna' of (d,dna'') -&gt; ('P':d,dna'')
+     _            -&gt; ([],dna)
+
+template :: DNA -&gt; IO (Maybe (Template,DNA))
+template = tloop []
+tloop :: Template -&gt; DNA -&gt; IO (Maybe (Template,DNA))
+tloop t dna
+ = case dna of
+     'C':dna' -&gt; tloop (TB 'I':t) dna'
+     'F':dna' -&gt; tloop (TB 'C':t) dna'
+     'P':dna' -&gt; tloop (TB 'F':t) dna'
+     'I':'C':dna' -&gt; tloop (TB 'P':t) dna'
+     'I': c :dna' | elem c "FP"
+                  -&gt; case nat dna' of
+                       Nothing -&gt; return Nothing
+                       Just (l,dna'') -&gt; case nat dna'' of
+                            Nothing -&gt; return Nothing
+                            Just (n,dna''') -&gt; tloop (TR n l:t) dna'''
+     'I':'I': c :dna' | elem c "CF"
+                      -&gt; return $ Just (reverse t,dna')
+     'I':'I':'P':dna' -&gt; case nat dna' of
+                           Nothing -&gt; return Nothing
+                           Just (n,dna'') -&gt; tloop (TL n:t) dna''
+     'I':'I':'I':dna' -&gt; case splitAt 7 dna' of
+                           (rna,dna'') -&gt; putStrLn rna &gt;&gt; tloop t dna''
+     _ -&gt; return Nothing
+
+matchReplace :: Pattern -&gt; Template -&gt; DNA -&gt; DNA
+matchReplace p t dna
+ = case mloop dna (0,[],[]) p of
+     Nothing    -&gt; dna
+     Just (i,e) -&gt; replace t e (drop i dna)
+
+mloop :: DNA -&gt; (Int,Environment,[Int]) -&gt; Pattern -&gt; Maybe (Int,Environment)
+mloop dna (i,e,c) p
+ = case p of
+     PB b:p'  -&gt; if dna !! i == b then mloop dna (i+1,e,c) p' else Nothing
+     PS n:p'  -&gt; let i' = i+n
+                 in if i' &gt; length dna then Nothing else mloop dna (i',e,c) p'
+     PD s:p'  -&gt; case search s (drop i dna) of
+                   Nothing -&gt; Nothing
+                   Just n  -&gt; mloop dna (i+n+length s,e,c) p'
+     POpen:p' -&gt; mloop dna (i,e,i:c) p'
+     PClose:p'-&gt; mloop dna (i,drop (head c) (take i dna):e, tail c) p'
+     _        -&gt; Just (i,reverse e)
+
+search :: DNA -&gt; DNA -&gt; Maybe Int
+search s dna
+ = matchRegexAll (mkRegex s) dna &gt;&gt;= return . length . fst4
+   where fst4 (x,_,_,_) = x
+
+replace :: Template -&gt; Environment -&gt; DNA -&gt; DNA
+replace t e dna = rloop [] e t ++ dna
+
+rloop :: DNA  -&gt; Environment -&gt; Template-&gt; DNA
+rloop d e t
+ = case t of
+     TB b  :t' -&gt; rloop (b:d) e t'
+     TR n l:t' -&gt; case index n e of
+                    Nothing -&gt; reverse d
+                    Just d' -&gt; rloop (rappend (protect l d') d) e t'
+     TL n  :t' -&gt; case index n e of
+                    Nothing -&gt; rloop (rappend (asnat 0) d) e t'
+                    Just d' -&gt; rloop (rappend (asnat (length d')) d) e t'
+     _         -&gt; reverse d
+
+rappend :: [a] -&gt; [a] -&gt; [a]
+rappend = flip (foldl snoc)
+
+snoc :: [a] -&gt; a -&gt; [a]
+snoc = flip (:) 
+
+index :: Int -&gt; [a] -&gt; Maybe a
+index _ [] = Nothing
+index i (x:xs) | i &lt; 0     = Nothing
+               | i == 0    = Just x
+               | otherwise = index (i-1) xs
+
+protect :: Int -&gt; DNA -&gt; DNA
+protect l d = if l == 0 then d
+              else protect (l-1) (quote d)
+
+quote :: DNA -&gt; DNA
+quote d = case d of
+  'I':ds -&gt; 'C':quote ds
+  'C':ds -&gt; 'F':quote ds
+  'F':ds -&gt; 'P':quote ds
+  'P':ds -&gt; 'I':'C':quote ds
+  _      -&gt; []
+
+asnat :: Int -&gt; DNA
+asnat 0 = ['P']
+asnat n | even n    = 'I':asnat (n `div` 2)
+        | otherwise = 'C':asnat (n `div` 2)</code></pre>
+<h2 id="dnaの表現に-bytestring-を使う版-version-3">DNAの表現に ByteString を使う版 (version 3)</h2>
+<p>10000 回のくりかえしで 230 秒 前バージョンより 80倍弱速くなった． でも endo.dna 全部処理するには 12 時間ほどかかりそう．</p>
+<p>正直に言うと ByteString は cons が定数手間ではないことに気づいては いたんだけど．実はこれ以上速くするアイデアは全然思いつかなかった．</p>
+<h3 id="コードexecute-3.hs">コード(execute-3.hs)</h3>
+<pre><code>module Main (main) where
+
+import Debug.Trace
+import qualified Data.ByteString.Char8 as B
+import System.Environment
+
+-- combinator
+
+starling :: (a -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)
+starling f g x = f x (g x)
+
+fstapp :: (a -&gt; b) -&gt; (a,c) -&gt; (b,c)
+fstapp f (x,y) = (f x,y)
+
+-- Debug print utilities
+
+infixr 0 .$.
+infixr 9 ...
+
+tracing' :: Show a =&gt; (String -&gt; String) -&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing' f = (. starling (flip trace) (f . show))
+
+tracing :: Show a =&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing = (. starling (flip trace) show)
+
+(.$.) :: Show a =&gt; (a -&gt; b) -&gt; a -&gt; b
+(.$.) = tracing
+
+(...) :: Show b =&gt; (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+(...) = (.) . (.$.)
+
+-- Data types
+
+type Base = Char
+type DNA  = B.ByteString
+
+type Environment = [DNA]
+
+type Pattern  = [PItem]
+data PItem    = PB { pbase :: Base }
+              | PS { pskip :: Int }
+              | PD { pdna  :: DNA }
+              | POpen
+              | PClose
+  deriving Eq
+
+instance Show PItem where
+  show (PB b) = [b]
+  show (PS n) = '!':show n
+  show (PD d) = B.unpack d
+  show POpen  = "("
+  show PClose = ")"
+
+
+type Template = [TItem]
+data TItem = TB { tbase :: Base }
+           | TR { tref  :: Int, tlev :: Int }
+           | TL { tlen  :: Int }
+  deriving (Eq)
+
+instance Show TItem where
+  show (TB b) = [b]
+  show (TR r l) = show r++'-':show l
+  show (TL n)   = '|':show n++"|"
+
+-- Main
+
+main :: IO ()
+main = execute . read . head =&lt;&lt; getArgs
+
+execute :: Int -&gt; IO ()
+execute mx = exec mx 0 =&lt;&lt; B.getContents
+            
+exec :: Int -&gt; Int -&gt; DNA -&gt; IO ()
+exec mx n dna
+ | B.null dna = return ()
+ | mx == n    = return ()
+ | otherwise 
+    = trace (show n) $
+      do { mp &lt;- pattern $ dna
+         ; case mp of 
+             Nothing -&gt; return ()
+             Just (p,dna') 
+               -&gt; do { mt &lt;- template $ dna'
+                     ; case mt of
+                         Nothing -&gt; return ()
+                         Just (t,dna'')
+                           -&gt; exec mx (n+1) $ ((matchreplace .$. p) .$. t) $ dna''
+                     }
+         }
+
+pattern :: DNA -&gt; IO (Maybe (Pattern, DNA))
+pattern = ploop [] 0
+
+ploop :: Pattern -&gt; Int -&gt; DNA -&gt; IO (Maybe (Pattern, DNA))
+ploop p lvl dna
+ = if B.null dna then return Nothing
+   else
+    let (b',dna') = (B.head dna, B.tail dna)
+    in case b' of
+        'C' -&gt; ploop (PB 'I':p) lvl dna'
+        'F' -&gt; ploop (PB 'C':p) lvl dna'
+        'P' -&gt; ploop (PB 'F':p) lvl dna'
+        'I' -&gt; if B.null dna' then return Nothing
+               else 
+                let (b'',dna'') = (B.head dna',B.tail dna')
+                in case b'' of
+                    'C' -&gt; ploop (PB 'P':p) lvl dna''
+                    'P' -&gt; case nat dna'' of
+                            Nothing         -&gt; return Nothing
+                            Just (n,dna''') -&gt; ploop (PS n:p) lvl dna'''
+                    'F' -&gt; if B.null dna'' then return Nothing
+                           else 
+                            case consts (B.tail dna'') of
+                              (s,dna''') -&gt; ploop (PD s:p) lvl dna'''
+                    'I' -&gt; if B.null dna' then return Nothing
+                           else
+                            let (b''',dna''') = (B.head dna'',B.tail dna'')
+                            in case b''' of
+                                'P' -&gt; ploop (POpen:p) (lvl+1) dna'''
+                                'C' -&gt; if lvl == 0 then return $ Just (reverse p,dna''')
+                                       else ploop (PClose:p) (lvl-1) dna'''
+                                'F' -&gt; if lvl == 0 then return $ Just (reverse p,dna''')
+                                       else ploop (PClose:p) (lvl-1) dna'''
+                                'I' -&gt; case B.splitAt 7 dna''' of
+                                         (rna,dna'''') -&gt; B.putStrLn rna
+                                                          &gt;&gt; ploop p lvl dna''''
+
+nat :: DNA -&gt; Maybe (Int, DNA)
+nat dna
+ = if B.null dna then Nothing
+   else 
+    let (b',dna') = (B.head dna, B.tail dna)
+    in case b' of
+        'P' -&gt; Just (0,dna')
+        'I' -&gt; nat dna' &gt;&gt;= return . fstapp (2*)   
+        'F' -&gt; nat dna' &gt;&gt;= return . fstapp (2*)
+        'C' -&gt; nat dna' &gt;&gt;= return . fstapp ((1+).(2*))
+
+consts :: DNA -&gt; (DNA,DNA)
+consts dna 
+ = if B.null dna then (B.empty,dna)
+   else 
+    let (b',dna') = (B.head dna,B.tail dna)
+    in case b' of
+        'C' -&gt; case consts dna' of (d,dna'') -&gt; (B.cons 'I' d,dna'')
+        'F' -&gt; case consts dna' of (d,dna'') -&gt; (B.cons 'C' d,dna'')
+        'P' -&gt; case consts dna' of (d,dna'') -&gt; (B.cons 'F' d,dna'')
+        'I' -&gt; if B.null dna' then (B.empty,dna)
+               else 
+                let  (b'',dna'') = (B.head dna',B.tail dna')
+                in case b'' of
+                    'C' -&gt; case consts dna'' of (d,dna''') -&gt; (B.cons 'P' d,dna''')
+                    _   -&gt; (B.empty,dna)
+
+template :: DNA -&gt; IO (Maybe (Template, DNA))
+template = tloop []
+tloop :: Template -&gt; DNA -&gt; IO (Maybe (Template, DNA))
+tloop t dna
+ = if B.null dna then return Nothing
+   else 
+    let (b',dna') = (B.head dna,B.tail dna)
+    in case b' of
+        'C' -&gt; tloop (TB 'I':t) dna'
+        'F' -&gt; tloop (TB 'C':t) dna'
+        'P' -&gt; tloop (TB 'F':t) dna'
+        'I' -&gt; if B.null dna' then return Nothing
+               else
+                let (b'',dna'') = (B.head dna',B.tail dna')
+                in case b'' of
+                    'C' -&gt; tloop (TB 'P':t) dna''
+                    'F' -&gt; case nat dna'' of
+                            Nothing -&gt; return Nothing
+                            Just (l,dna''') -&gt; case nat dna''' of
+                              Nothing -&gt; return Nothing
+                              Just (n,dna'''') -&gt; tloop (TR n l:t) dna''''
+                    'P' -&gt; case nat dna'' of
+                            Nothing -&gt; return Nothing
+                            Just (l,dna''') -&gt; case nat dna''' of
+                              Nothing -&gt; return Nothing
+                              Just (n,dna'''') -&gt; tloop (TR n l:t) dna''''
+                    'I' -&gt; if B.null dna'' then return Nothing 
+                           else 
+                            let (b''',dna''') = (B.head dna'',B.tail dna'')
+                            in case b''' of
+                                'C' -&gt; return $ Just (reverse t,dna''')
+                                'F' -&gt; return $ Just (reverse t,dna''')
+                                'P' -&gt; case nat dna''' of
+                                         Nothing -&gt; return Nothing
+                                         Just (n,dna'''') -&gt; tloop (TL n:t) dna''''
+                                'I' -&gt; case B.splitAt 7 dna''' of
+                                         (rna,dna'''') -&gt; B.putStrLn rna
+                                                          &gt;&gt; tloop t dna''''
+
+matchreplace :: Pattern -&gt; Template -&gt; DNA -&gt; DNA
+matchreplace p t dna
+ = case mloop (0,[],[]) p dna of
+     Nothing    -&gt; dna
+     Just (i,e) -&gt; replace t e (B.drop i dna)
+
+mloop :: (Int,Environment,[Int]) -&gt; Pattern -&gt; DNA -&gt; Maybe (Int,Environment)
+mloop (i,e,c) p dna
+ = case p of
+     PB b : p' -&gt; if B.index dna i == b then mloop (i+1,e,c) p' dna else Nothing
+     PS n : p' -&gt; let j = i+n
+                  in if j &gt; B.length dna then Nothing
+                     else mloop (j,e,c) p' dna
+     PD s : p' -&gt; B.findSubstring s (B.drop i dna)
+                  &gt;&gt;= \ n -&gt; mloop (i+n+B.length s,e,c) p' dna
+     POpen: p' -&gt; mloop (i,e,i:c) p' dna
+     PClose:p' -&gt; mloop (i,B.drop (head c) (B.take i dna):e,trace (show c) tail c) p' dna
+     _         -&gt; Just (i,reverse e)
+
+replace :: Template -&gt; Environment -&gt; DNA -&gt; DNA
+replace t e dna = B.append (rloop [B.empty] e t) dna
+
+rloop :: [DNA] -&gt; Environment -&gt; Template -&gt; DNA
+rloop d e t
+ = case t of
+     TB b  :t' -&gt; rloop (B.singleton b:d) e t'
+     TR n l:t' -&gt; rloop ((protect l (e!!!n)):d) e t'
+     TL n  :t' -&gt; rloop (asnat (B.length (e!!!n)):d) e t'
+     _         -&gt; B.concat $ reverse d
+
+(!!!) :: [B.ByteString] -&gt; Int -&gt; B.ByteString
+[]     !!!  _ = B.empty
+(x:_)  !!! 0 = x
+(_:xs) !!! n = xs !!! (n-1)
+
+protect :: Int -&gt; DNA -&gt; DNA
+protect l d = if l == 0 then d
+              else protect (l-1) (quote d)
+
+quote :: DNA -&gt; DNA
+quote dna 
+ = if B.null dna then B.empty
+   else
+     let (b',dna') = (B.head dna,B.tail dna)
+     in case b' of
+          'I' -&gt; B.cons 'C' $ quote dna'
+          'C' -&gt; B.cons 'F' $ quote dna'
+          'F' -&gt; B.cons 'P' $ quote dna'
+          'P' -&gt; B.cons 'I' $ B.cons 'C' $ quote dna'
+
+asnat :: Int -&gt; DNA
+asnat 0 = B.singleton 'P'
+asnat n | even n    = B.cons 'I' $ asnat (n `div` 2)
+        | otherwise = B.cons 'C' $ asnat (n `div` 2)</code></pre>
+<h2 id="dnaの表現に-seq-char-を使う版-version-4">DNAの表現に Seq Char を使う版 (version 4)</h2>
+<p><a href="sakai.html" class="uri" title="Go to wiki page">sakai</a>さんが Data.Sequence モジュールを使って実装したものを他のバー ジョンと同じ形式にすこし改変(本質的な部分はまったく同じ)．endo.dna を 全部処理してもたった</p>
+<p><strong>80秒</strong> 爆速!!!</p>
+<p>前バージョンの540倍!!!はっきりいってびっくらこいた．270行ほどのプログ ラムでこれだけ速いのはすごい気がする．C で書いてもここまで速くするのは それほど簡単ではないと思うなぁ．とても C で書く気がしないのでやってみ たりはしないけど．．．</p>
+<h3 id="コードexecute-4.hs">コード(execute-4.hs)</h3>
+<pre><code>module Main (main) where
+
+import qualified Data.Foldable as F
+import qualified Data.Sequence as S
+import Data.Sequence (Seq,(&lt;|), (&gt;&lt;), (|&gt;),ViewL(..))
+import Data.Monoid
+import Debug.Trace
+import System.Environment
+
+-- combinators
+
+starling :: (a -&gt; b -&gt; c) -&gt; (a -&gt; b) -&gt; (a -&gt; c)
+starling f g x = f x (g x)
+
+fstapp :: (a -&gt; b) -&gt; (a,c) -&gt; (b,c)
+fstapp f (x,y) = (f x, y)
+
+-- For debug print 
+
+infixr 0 .$.
+infixr 9 ...
+
+tracing' :: Show a =&gt; (String -&gt; String) -&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing' f = (. starling (flip trace) (f . show))
+
+tracing :: Show a =&gt; (a -&gt; b) -&gt; (a -&gt; b)
+tracing = (. starling (flip trace) show)
+
+(.$.) :: Show a =&gt; (a -&gt; b) -&gt; a -&gt; b
+(.$.) = tracing
+
+(...) :: Show b =&gt; (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+(...) = (.) . (.$.)
+
+-- Utilities for Seq
+
+shead :: Seq a -&gt; a
+shead s = case S.viewl s of x :&lt; xs -&gt; x
+
+stail :: Seq a -&gt; Seq a
+stail s = case S.viewl s of x :&lt; xs -&gt; xs
+
+-- Data type 
+
+type Base = Char
+type DNA  = Seq Base
+
+type Environment = [DNA]
+
+type Pattern = [PItem]
+data PItem   = PB { pbase :: Base }
+             | PS { pskip :: Int }
+             | PD { pdna  :: DNA }
+             | POpen
+             | PClose
+ deriving Eq
+
+instance Show PItem where
+ show (PB b) = [b]
+ show (PS n) = '!':show n
+ show (PD d) = F.toList d
+ show POpen  = "("
+ show PClose = ")"
+
+type Template = [TItem]
+data TItem = TB { tbase :: Base }
+           | TR { tref :: Int, tlev :: Int }
+           | TL { tlen  :: Int }
+ deriving (Eq)
+
+instance Show TItem where
+ show (TB b) = [b]
+ show (TR r l) = show r++'-':show l
+ show (TL n)   = '|':show n++"|"
+
+-- Main
+
+main :: IO ()
+main = execute . read . head =&lt;&lt; getArgs
+
+execute :: Int -&gt; IO ()
+execute mx = exec mx 0 . S.fromList =&lt;&lt; getContents
+
+exec :: Int -&gt; Int -&gt; DNA -&gt; IO ()
+exec mx n dna
+ | n == mx    = return ()
+ | S.null dna = return ()
+ | otherwise
+   = trace (show n) $
+     do { mp &lt;- pattern $ dna
+        ; case mp of
+            Nothing -&gt; return ()
+            Just (p,dna')
+              -&gt; do { mt &lt;- template $ dna'
+                    ; case mt of
+                        Nothing -&gt; return ()
+                        Just (t,dna'')
+                          -&gt; exec mx (n+1) $ ((matchReplace .$. p) .$. t) $ dna''
+                    }
+        }
+
+pattern :: DNA -&gt; IO (Maybe (Pattern, DNA))
+pattern = ploop [] 0
+
+ploop :: Pattern -&gt; Int -&gt; DNA -&gt; IO (Maybe (Pattern, DNA))
+ploop p lvl dna
+ = if S.null dna then return Nothing
+   else
+    let (b',dna') = (shead dna, stail dna)
+    in case b' of
+        'C' -&gt; ploop (PB 'I':p) lvl dna'
+        'F' -&gt; ploop (PB 'C':p) lvl dna'
+        'P' -&gt; ploop (PB 'F':p) lvl dna'
+        'I' -&gt; if S.null dna' then return Nothing
+                else
+                 let (b'',dna'') = (shead dna', stail dna')
+                 in case b'' of
+                     'C' -&gt; ploop (PB 'P':p) lvl dna''
+                     'P' -&gt; case nat dna'' of
+                              Nothing       -&gt; return Nothing
+                              Just (n,dna''') -&gt; ploop (PS n:p) lvl dna'''
+                     'F' -&gt; if S.null dna'' then return Nothing
+                            else
+                             case consts (stail dna'') of
+                              (s,dna''') -&gt; ploop (PD s:p) lvl dna'''
+                     'I' -&gt; if S.null dna'' then return Nothing
+                            else
+                             let (b''',dna''') = (shead dna'',stail dna'')
+                             in case b''' of
+                                 'P' -&gt; ploop (POpen:p) (lvl+1) dna'''
+                                 'C' -&gt; if lvl == 0 then return $ Just (reverse p,dna''')
+                                        else ploop (PClose:p) (lvl-1) dna'''
+                                 'F' -&gt; if lvl == 0 then return $ Just (reverse p,dna''')
+                                        else ploop (PClose:p) (lvl-1) dna'''
+                                 'I' -&gt; case S.splitAt 7 dna''' of
+                                          (xs,ys) -&gt; putStrLn (F.toList xs)
+                                                     &gt;&gt; ploop p lvl ys
+
+nat :: DNA -&gt; Maybe (Int, DNA)
+nat dna
+ = if S.null dna then Nothing
+   else
+    let (b',dna') = (shead dna, stail dna)
+    in case b' of
+        'P' -&gt; return (0,dna')
+        'I' -&gt; nat dna' &gt;&gt;= return . fstapp (2*)
+        'F' -&gt; nat dna' &gt;&gt;= return . fstapp (2*)
+        'C' -&gt; nat dna' &gt;&gt;= return . fstapp ((1+).(2*))
+
+consts :: DNA -&gt; (DNA,DNA)
+consts dna
+ = if S.null dna then (S.empty,dna)
+   else
+    let (b',dna') = (shead dna,stail dna)
+    in case b' of
+        'C' -&gt; case consts dna' of (d,dna'') -&gt; ('I' &lt;| d,dna'')
+        'F' -&gt; case consts dna' of (d,dna'') -&gt; ('C' &lt;| d,dna'')
+        'P' -&gt; case consts dna' of (d,dna'') -&gt; ('F' &lt;| d,dna'')
+        'I' -&gt; if S.null dna' then (S.empty,dna)
+               else
+                let (b'',dna'') = (shead dna',stail dna')
+                in case b'' of
+                    'C' -&gt; case consts dna'' of (d,dna''') -&gt; ('P' &lt;| d,dna''')
+                    _   -&gt; (S.empty,dna)
+
+template :: DNA -&gt; IO (Maybe (Template, DNA))
+template = tloop []
+tloop :: Template -&gt; DNA -&gt; IO (Maybe (Template, DNA))
+tloop t dna
+ = if S.null dna then return Nothing
+   else
+    let (b',dna') = (shead dna,stail dna)
+    in case b' of
+        'C' -&gt; tloop (TB 'I':t) dna'
+        'F' -&gt; tloop (TB 'C':t) dna'
+        'P' -&gt; tloop (TB 'F':t) dna'
+        'I' -&gt; if S.null dna' then return Nothing
+               else
+                let (b'',dna'') = (shead dna',stail dna')
+                in case b'' of
+                    'C' -&gt; tloop (TB 'P':t) dna''
+                    'F' -&gt; case nat dna'' of
+                            Nothing -&gt; return Nothing
+                            Just (l,dna''') -&gt; case nat dna''' of
+                              Nothing -&gt; return Nothing
+                              Just (n,dna'''') -&gt; tloop (TR n l:t) dna''''
+                    'P' -&gt; case nat dna'' of
+                            Nothing -&gt; return Nothing
+                            Just (l,dna''') -&gt; case nat dna''' of
+                              Nothing -&gt; return Nothing
+                              Just (n,dna'''') -&gt; tloop (TR n l:t) dna''''
+                    'I' -&gt; if S.null dna'' then return Nothing
+                           else
+                            let (b''',dna''') = (shead dna'',stail dna'')
+                            in case b''' of
+                                'C' -&gt; return $ Just (reverse t,dna''')
+                                'F' -&gt; return $ Just (reverse t,dna''')
+                                'P' -&gt; case nat dna''' of
+                                         Nothing -&gt; return Nothing
+                                         Just (n,dna'''') -&gt; tloop (TL n:t) dna''''
+                                'I' -&gt; case S.splitAt 7 dna''' of
+                                         (xs,ys) -&gt; putStrLn (F.toList xs)
+                                                    &gt;&gt; tloop t ys
+
+findSubstring :: Eq a =&gt; Seq a -&gt; Seq a -&gt; Maybe Int
+findSubstring s | S.null s = const (Just 0)
+findSubstring s = f [] 0
+  where str = F.toList s
+        f ([]:_) n _  = Just $ n - S.length s
+        f s      n xs = case S.viewl xs of
+            x :&lt; xs' -&gt; f [s' | (c:s') &lt;- (s ++ [str]), x==c] (n+1) xs'
+            EmptyL   -&gt; Nothing
+
+matchReplace :: Pattern -&gt; Template -&gt; DNA -&gt; DNA
+matchReplace p t dna
+ = case mloop (0,[],[]) p dna of
+    Nothing    -&gt; dna
+    Just (i,e) -&gt; replace t e (S.drop i dna)
+
+mloop :: (Int,Environment,[Int]) -&gt; Pattern -&gt; DNA -&gt; Maybe (Int,Environment)
+mloop (i,e,c) p dna
+ = case p of
+    PB b : p' -&gt; if S.index dna i == b then mloop (i+1,e,c) p' dna else Nothing
+    PS n : p' -&gt; let j = i+n
+                 in if j &gt; S.length dna then Nothing
+                    else mloop (j,e,c) p' dna
+    PD s : p' -&gt; findSubstring s (S.drop i dna)
+                 &gt;&gt;= \ n -&gt; mloop (i+n+S.length s,e,c) p' dna
+    POpen: p' -&gt; mloop (i,e,i:c) p' dna
+    PClose:p' -&gt; mloop (i,S.drop (head c) (S.take i dna):e,tail c) p' dna
+    _         -&gt; Just (i,reverse e)
+
+(!!!) :: [Seq a] -&gt; Int -&gt; Seq a
+[]     !!! _ = S.empty
+(x:_)  !!! 0 = x
+(_:xs) !!! n = xs !!! (n-1)
+
+replace :: Template -&gt; Environment -&gt; DNA -&gt; DNA
+replace t e dna = rloop e [S.empty] t &gt;&lt; dna
+
+rloop :: Environment -&gt; [DNA] -&gt; Template -&gt; DNA
+rloop e d t
+ = case t of
+     TB b  :t' -&gt; rloop e (S.singleton b:d) t'
+     TR n l:t' -&gt; rloop e (protect l (e!!!n):d) t'
+     TL n  :t' -&gt; rloop e (asnat (S.length (e!!!n)):d) t'
+     _         -&gt; mconcat $ reverse d
+
+protect :: Int -&gt; DNA -&gt; DNA
+protect l d = if l == 0 then d
+              else protect (l-1) (quote d)
+
+quote :: DNA -&gt; DNA
+quote dna
+ = if S.null dna then S.empty
+   else
+     let (b',dna') = (shead dna, stail dna)
+     in case b' of
+          'I' -&gt; 'C' &lt;| quote dna'
+          'C' -&gt; 'F' &lt;| quote dna'
+          'F' -&gt; 'P' &lt;| quote dna'
+          'P' -&gt; 'I' &lt;| 'C' &lt;| quote dna'
+
+asnat :: Int -&gt; DNA
+asnat 0 = S.singleton 'P'
+asnat n | even n    = 'I' &lt;| asnat (n `div` 2)
+        | otherwise = 'C' &lt;| asnat (n `div` 2)</code></pre>
+<hr>
+<p>Last modified : 2007/07/25 10:08:52 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/ICFP2007_execute">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/ICFP2007_execute?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/ICFP2007_execute">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/ICFP2007_execute" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

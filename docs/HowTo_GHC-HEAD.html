@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC-HEAD"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/HowTo_GHC-HEAD</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/HowTo_GHC-HEAD">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/HowTo_GHC-HEAD">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/HowTo_GHC-HEAD">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/HowTo_GHC-HEAD</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#howto_ghc-head"><span>HowTo_GHC-HEAD</span></a><ul>
+<li><a href="#ghc-head-%E3%81%AE%E8%BF%BD%E3%81%A3%E3%81%8B%E3%81%91">GHC-HEAD の追っかけ</a><ul>
+<li><a href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99">事前準備</a></li>
+<li><a href="#ghc-head-tarball-%E3%82%92%E5%8F%96%E5%BE%97">ghc-HEAD tarball を取得</a></li>
+<li><a href="#%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%92%E6%9C%80%E6%96%B0%E7%8A%B6%E6%85%8B%E3%81%AB%E5%90%8C%E6%9C%9F%E3%81%99%E3%82%8B">リポジトリを最新状態に同期する</a></li>
+<li><a href="#%E3%83%93%E3%83%AB%E3%83%89">ビルド</a></li>
+<li><a href="#%E5%9B%9E%E7%9B%AE%E4%BB%A5%E9%99%8D%E3%81%AE%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E5%90%8C%E6%9C%9F%E3%81%A8%E3%83%93%E3%83%AB%E3%83%89">2 回目以降のリポジトリ同期とビルド</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="howto_ghc-head"><a href="" class="uri" title="Go to wiki page">HowTo_GHC-HEAD</a></h1>
+<p><a href="HowTo.html" class="uri" title="Go to wiki page">HowTo</a>:GHC-HEAD</p>
+<hr>
+<h2 id="ghc-head-の追っかけ">GHC-HEAD の追っかけ</h2>
+<p>この情報は 2008/09/22 13:38:12 JST 時点のものです。 Ubuntu 8.04 Linux (i386) 上に<a href="HowTo_ProgrammingEnvironment.html" class="uri" title="Go to wiki page">HowTo_ProgrammingEnvironment</a>にある 環境を構築ずみであることを前提としています。</p>
+<hr>
+<h3 id="事前準備">事前準備</h3>
+<p>ここは必須ではないがやっておく方が便利。</p>
+<h4 id="端末制御系のライブラリ群">端末制御系のライブラリ群</h4>
+<p>現HEADではreadlineではなくeditlineが採用されている。 libedit-devをインストールするとlibedit2とlibncurses5-devが入るはず。 この後でインストールすればghciでターミナル起動すると行編集が出来たりC-cでプロンプトから抜けられる。</p>
+<pre><code>$ sudo apt-get install libedit-dev</code></pre>
+<h4 id="hscolourのインストール">hscolourのインストール</h4>
+<p>ghcはビルドするのにghcを利用するが、そのghcにhscolourパッケージがインストールされていると、 作成されるhtmlドキュメントにソースへのリンクが作成されてソースの閲覧も出来るのでオススメ。</p>
+<pre><code>% wget http://hackage.haskell.org/packages/archive/hscolour/1.10.1/hscolour-1.10.1.tar.gz
+% tar xvf hscolour-1.10.1.tar.gz
+% cd hscolour-1.10.1/
+% runghc Setup.hs configure
+% runghc Setup.hs build
+% runghc Setup.hs install</code></pre>
+<hr>
+<h3 id="ghc-head-tarball-を取得">ghc-HEAD tarball を取得</h3>
+<p>darcs では全リポジトリは巨大すぎて持ってこれない。ある時点でのリポジトリを 固めた tarball があるので、それを取得する。</p>
+<pre><code>$ wget http://darcs.haskell.org/ghc-HEAD-2008-09-07-ghc-corelibs-testsuite.tar.gz</code></pre>
+<p>展開</p>
+<pre><code>$ tar xvf ghc-HEAD-2008-09-07-ghc-corelibs-testsuite.tar.gz</code></pre>
+<h3 id="リポジトリを最新状態に同期する">リポジトリを最新状態に同期する</h3>
+<pre><code>$ cd ghc
+$ darcs pull -av
+$ ./darcs-all --extra --dph get
+$ ./darcs-all pull -av</code></pre>
+<h3 id="ビルド">ビルド</h3>
+<pre><code>$ echo "XMLDocWays   = html" &gt; mk/build.mk
+$ echo "HADDOCK_DOCS = YES" &gt;&gt; mk/build.mk
+$ sh boot
+$ ./configure --prefix=$HOME/ghc-HEAD
+$ make</code></pre>
+<p>インストール</p>
+<pre><code>$ make install</code></pre>
+<p>docのインストール</p>
+<pre><code>$ make install-docs</code></pre>
+<hr>
+<h3 id="回目以降のリポジトリ同期とビルド">2 回目以降のリポジトリ同期とビルド</h3>
+<h4 id="同期">同期</h4>
+<pre><code>$ darcs pull -av
+$ ./darcs-all pull -av</code></pre>
+<h4 id="ビルドとインストール">ビルドとインストール</h4>
+<pre><code>$ make distclean
+$ sh boot
+$ ./configure --prefix=$HOME/ghc-HEAD
+$ make
+$ make install
+$ make install-docs</code></pre>
+<hr>
+<h4 id="議論">議論</h4>
+<ul>
+<li><a href="shelarcy.html" class="uri" title="Go to wiki page">shelarcy</a> (2008/09/23 13:46:00 JST): GHC 6.10 からは GHC のビルド時に haddock がビルドされるようになっているので、別途インストールする必要はないはずです。あと、GHC インストール時に haddock もインストールされるようになっていますね。</li>
+<li>ここは前提が<a href="HowTo_ProgrammingEnvironment.html" class="uri" title="Go to wiki page">HowTo_ProgrammingEnvironment</a>なので6.8.3です。なので6.8.3を踏み台にするなら必要ってことで正しいのでは？</li>
+<li><a href="shelarcy.html" class="uri" title="Go to wiki page">shelarcy</a>: ええと、GHC 6.10 がどうのこうのと書くのは、良くありませんでしたね。</li>
+<li>「GHC HEAD (つまり GHC 6.9-6.11?)では stage-2 の GHC を使って haddock (utils/haddock) をビルドし、その haddock を使ってドキュメントを生成するようになっているので別途インストールする必要ないのでは？」ということなのですが、どうでしょうか？ <a href="http://darcs.haskell.org/ghc/compiler/Makefile" class="uri">http://darcs.haskell.org/ghc/compiler/Makefile</a></li>
+<li>了解。インストールする人が見やすいようにコメントを下に移します。hscolourはインストールする方向で。</li>
+</ul>
+<hr>
+<p>Last modified : 2008/10/09 23:32:17 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/HowTo_GHC-HEAD">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC-HEAD?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/HowTo_GHC-HEAD">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/HowTo_GHC-HEAD" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

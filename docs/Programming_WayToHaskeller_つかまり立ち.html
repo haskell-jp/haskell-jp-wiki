@@ -1,0 +1,1349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_WayToHaskeller_つかまり立ち</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_WayToHaskeller_つかまり立ち</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_waytohaskeller_%E3%81%A4%E3%81%8B%E3%81%BE%E3%82%8A%E7%AB%8B%E3%81%A1"><span>Programming_WayToHaskeller_つかまり立ち</span></a><ul>
+<li><a href="#%E3%81%A4%E3%81%8B%E3%81%BE%E3%82%8A%E7%AB%8B%E3%81%A1">つかまり立ち</a><ul>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%82%82%E3%83%A2%E3%83%8A%E3%83%89">リストもモナド？</a></li>
+<li><a href="#main-%E3%81%AF%E9%96%A2%E6%95%B0%E3%81%98%E3%82%83%E3%81%AD%E3%83%BC%E3%81%AE%E3%81%8B">main は関数じゃねーのか？</a></li>
+<li><a href="#io-a-%E3%81%AE-a-%E3%81%A8-a-%E3%81%AE-a">IO a の a と [a] の a</a></li>
+<li><a href="#thunk-%E3%81%AF%E3%81%A9%E3%81%86%E6%9B%B8%E3%81%8F%E3%81%AE%E3%81%8B">thunk はどう書くのか？</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_waytohaskeller_つかまり立ち"><a href="" class="uri" title="Go to wiki page">Programming_WayToHaskeller_つかまり立ち</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/WayToHaskeller" class="uri" title="Go to wiki page">WayToHaskeller</a>:つかまり立ち</p>
+<hr>
+<h2 id="つかまり立ち">つかまり立ち</h2>
+<p>(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:%EF%BF%BD%C4%A4%EF%BF%BD%EF%BF%BD%DE%A4%EF%BF%BD%CE%A9%EF%BF%BD%EF%BF%BD&amp;c=e&amp;l=jp">「つかまり立ち」を編集する</a>)|(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&amp;l=jp">Haskellerへの道</a>)</p>
+<p>すでに勉強してきたネタも尽きたし、改めて <a href="http://www.sampou.org/haskell/tutorial-j/index.html">やさしいHaskell入門</a>とか<a href="http://www.sampou.org/haskell/a-a-monads/html/index.html">モナドのすべて</a>とか読み込まないといかん。</p>
+<h3 id="リストもモナド">リストもモナド？</h3>
+<p>んで早速、<a href="http://www.sampou.org/haskell/a-a-monads/html/meet.html">ここ</a>を読んでたら、 リストもモナドなんだってさ。これって実は 以前も読んでたんだけど、それほど気にならなかった。でも、今の自分にはな ぜか衝撃的！ だってさ、そうだとするとオイラはモナドなんぞチンプンカンプン・・・・ ってこたリストを分かってねーじゃんっ！！げげげ。(+_+;</p>
+<p>んで、リストの型構築子は [] だっちゅーわけですな。 [a] ってな感じで a を [ と ] ではさんでやれば、 a を要素にもつリストです。</p>
+<p>ほほぅ、こんなんは表記の問題だからさ、もしかしたら、実装者の気の向きよ うによってはList a ってな書き方してたとしてもいーわけよ。逆に IO a っ てやつも &lt;&lt;a&gt;&gt; って表記する様になってた可能性だってあるよね？</p>
+<p>実際に、</p>
+<pre><code>Haskell の構文では[t] を[] t と書くことも許されています。</code></pre>
+<p>って<a href="http://www.sampou.org/haskell/tutorial-j/goodies.html">ここ</a>にも書いとる。これって List ってのが [] になっただけじゃん？ じゃーさじゃーさ、</p>
+<pre><code>main :: IO a</code></pre>
+<p>だっつー感じで書けるんだとすると、</p>
+<pre><code>main :: List a</code></pre>
+<p>って書けたっていーじゃんね？っちゅーことはさ、</p>
+<pre><code>main :: List a
+     ↓
+main :: [] a
+     ↓
+main :: [a]</code></pre>
+<p>なんだよね？・・・・・・・・・・・・・・・えぇぇぇぇええええぇぇっっっ！！？ ちょい待て、 [a] ってリストだよん？これってどういう関数だ？</p>
+<h3 id="main-は関数じゃねーのか">main は関数じゃねーのか？</h3>
+<p>どういう関数もこういう関数もリストはリストだわなぁ。</p>
+<p><a href="http://www.sampou.org/haskell/tutorial-j/goodies.html">ここ</a>とかには -&gt; ってのも型構築子の一種で a -&gt; b って書くと a を引数に 取って、b を返す関数って型になると書いてあった記憶がある。</p>
+<p>同じように -&gt; は型構築子です。与えられた 2 つの型 t と u に対して、 t-&gt;u は型 t の要素から型 u の要素への写像をおこなう関数の型です。</p>
+<p>あ、コレコレ！この文章！・・・ってことはやっぱり、これ関数じゃないよ？ main って名前なもんだから、何の疑いも持たずに関数だと思い込んでたけど、</p>
+<pre><code>main :: IO a</code></pre>
+<p>って、どこをどうみても関数らしい型宣言になってねーぞ？じゃあ何よ？</p>
+<pre><code>#!/usr/pkg/bin/runhugs
+
+&gt; main :: [a]
+&gt; main = [1,2,3]</code></pre>
+<p>ってしてみて、ロードしてみる。</p>
+<pre><code>Type checking
+ERROR "/home/cut-sea/script/haskell/test2.lhs":3 - Cannot justify constraints in type annotation
+*** Expression    : [1,2,3]
+*** Type          : [b]
+*** Given context : ()
+*** Constraints   : Num b
+
+Prelude&gt; </code></pre>
+<p>ありゃ？なんで？ Type は [b] ってことは、別に [a] でも正しいような気が するんだけど、とりあえず型を外してみるか？</p>
+<pre><code>#!/usr/pkg/bin/runhugs
+
+&gt; main = [1,2,3]</code></pre>
+<p>これでどーだ！ロード！！</p>
+<pre><code>Main&gt; main
+[1,2,3]
+Main&gt; main 1   &lt;= 例の常套手段で型を教えてもらってる
+ERROR - Type error in application
+
+*** Expression     : main 1
+*** Term           : main
+*** Type           : [Integer]
+*** Does not match : a -&gt; b</code></pre>
+<p>あー、[a] じゃダメなんだ。[Integer] なのかぁ。間違っちゃいない気もする んだけどなぁ。 (<a href="Type.html" class="uri" title="Go to wiki page">Type</a>参照：ほう、なるほど) まぁいいや。今はそれどころじゃ ないし。</p>
+<pre><code>#!/usr/pkg/bin/runhugs
+
+&gt; main :: [Integer]
+&gt; main = [1,2,3]
+
+Main&gt; main
+[1,2,3]</code></pre>
+<p>おっけー！走るとは思えないけど一応コマンドラインから実行！</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="abc8dedf86d8cecaebc1c2c5c2">[email&nbsp;protected]</a>&gt; ./test.lhs 
+
+Program error: fromDyn failed.  Expecting &lt;&lt;IO ()&gt;&gt; found &lt;&lt;[()]&gt;&gt;
+runhugs: Error occurred</code></pre>
+<p>うむ。まぁいい。これは無視！ とにかく、これと同じことなんじゃないだろうか？つまり、これまで悶々とし ててイマイチ釈然としなかったんだけど、 IO () とかを関数だと思ってたの が間違いなんじゃね？もしかすっと。</p>
+<p>恐れ多くてとても口に出来ないので書いちゃいますけど。もしかするともしか してIO ()型の main は関数じゃなくて値 なんでないすか？</p>
+<p>んじゃーどういう値よ？って言われたらアクションっていう値なんじゃないか？</p>
+<pre><code>Main&gt; main
+[1,2,3]</code></pre>
+<p>って感じで、main がたまたまリストの場合は評価された結果、リスト[1,2,3]っ てのがオメミエするわけだけど、 main の値がたまたまアクションの場合は評 価結果としてアクションを取って見せる、と。</p>
+<p>全然話が違うけど ASCII コードの 07h ってコードに bell ってのがあるね。 ほとんど、どのコードも印字された時の表示形式があるけど、 bell は我々の 目には見えず、耳に聞こえる形で、その存在をみせてくれる。平たく言えば ビーッって泣きやがる。あ、良く見たら他にもあるわ。BS とか DEL とか。。。 そだ！ BS や DEL なんか、まさにそのアクションでもって、その文字コード がそこにあることを教えてくれるよね？</p>
+<p>・・・えっと、何言いたかったんだっけ？(^^;; ・・・ど、どーゆー理屈だか自分でも不可解だけど、値ってやつが全て印字さ れたときの表示形式を持ってなくちゃならないって決まってなくて、我々の視 覚以外の感覚器官に訴える形であっても良いわけよ。あるいは何も訴えなくたっ ていいわけで、cp.lhs なんかその最右翼じゃない？ (まだ作ってねーけど) アクション型(勝手につけてるし・・・)の場合には、我々の目に見えるとか聞 こえるとかが本質じゃなくて、まさに何らかのアクションをするって形で、そ の存在を示すんじゃないかしらん。たまたま、Hello,World!って印字したりと か、ビーってビープ音を出すかもしれんけど。</p>
+<p>数値だって本質は整数の何番目の数とか、そーゆー難しい抽象的な存在なわけ で、それ自体はそもそも目に見えるものじゃないんじゃないかな。多分。その 印字名として 1 とか 2 とかって表示が与えられてるにすぎねーのよ。人間に とって便利だからさ。うん。 逆に数値だって印字表現がなくてカワイイ女の子の声で「いち♪」とか「に♪」 とかって表現されたらどうよ？もしそうだったら数値は目には見えないけど、 やっぱりデータだよね？この論法、かなり無理くさいですか？そうですか・・・</p>
+<blockquote>
+<p>Haskell では印字可能クラスというのあります。Show class です。Integerや Charなどは Prelude で、Show class のインスタンスとして宣言されています ので、評価結果が Integer や Char になるものはインタープリタで評価した ときに評価結果が表示されます。要素 a が Show クラスのインスタンスであ れば、[a] も Show クラスのインスタンスであることが宣言されていますので、 [Integer] なども印字可能です。</p>
+<p>しかし、id とか head とか Prelude で Show クラスのインスタンスであるこ とが宣言されていない関数は、評価すると印字用の show 関数(Show クラスの メソッド)がないぞ、というエラーが出るはずです。</p>
+</blockquote>
+<h3 id="io-a-の-a-と-a-の-a">IO a の a と [a] の a</h3>
+<p>でもさ、そうすっと IO a って本来は、そのお姿を見せてくれないんだから、 IO () だろうが、 IO String だろうが、 IO [String] だろうが同じじゃねぇ か？つまり、String とか [String] とか IO にとっては違いは関係ないんじゃ ね？</p>
+<p>・・・うーむ、脳味噌が沸騰しはじめた。ε=(+_+;=3</p>
+<p>いやいやリストだって同じだ。確かに IO a において a は内部に隠されてて 見えないけど、 [Integer] とか [String] ってリストだって同じなんだよ、 きっと。</p>
+<p>実際には List a の a は内部に隠し持ってて、本来リストとして見たときに は Integer とか String とかは見えないんじゃねーかな？</p>
+<pre><code>Main&gt; [1,2,3]
+[1,2,3]
+Main&gt; ["cut-sea","nobsun"]
+["cut-sea","nobsun"]</code></pre>
+<p>こんな風に確かに 1 とか 2 とか “cut-sea” とか “nobsun” とか見えている けど、そりゃーたまたま(？) Haskell の実装においてリストの表示は、その 内部に隠し持っているメンバであるところの 1 とか 2 とか “cut-sea” とか “nobsun” とかを表示する様になってるだけなんじゃん？</p>
+<p>もしかしたら、実装者になんかの気の迷いがあったりして、</p>
+<pre><code>Main&gt; [1,2,3]
+#&lt;List 0x8121e60&gt;          &lt;= こんな印字形式とかさ
+Main&gt; ["cut-sea","nobsun"]
+#&lt;List 0x8121e64&gt;</code></pre>
+<p>みたいな、そういうリストの印字表現を持つような、そんな実装があったとし ても、それはそれでいいんじゃないかなぁ。 リストの先頭っていうかルートへのポインタを指すオブジェクトをこう、さ。うん。</p>
+<p>そのポインタから継っている全体がリスト、そういう構造みたいなのがリスト であって、内部に持っている要素にアクセスする手段として car/cdr じゃねー や、 Haskell だと head/tail があって、これを使えば、全要素にアクセスで きるし、それにアクセスした時にリストが [Integer] なら Integer の 1 と か 2 とか、 [String]なら “cut-sea” とか “nobsun” が見えると。これは実 際には [Char] だから、そういう実装だと、 “cut-sea” とは表示されずに、 さらに #&lt;List 0x8121e68&gt;みたいな表示になっちゃうだろうから〜・・・ うぇっ！すんげー不便だ、なんだこりゃ！美的センスゼロじゃん。 ともかく、そういう実装だとしたらリストだって、結局 [a] の a ってのは内 部に 隠し持たれてるものであって、リストの印字表現に含まれなきゃならな いものじゃないんだよ〜、多分。リストの本質は head とか tail とかって演 算によってアクセスされたり、 :って演算によって構成されたりする、そうい う構造そのものが本質だと。</p>
+<p>同じ様に IO a でも IO () ってのと IO String ってのと IO [String] って のは、 IO っていう(リストと同様に何らかの構造とか性質を持った)値として 存在してて、そいつが内部に隠し持っているデータとして () とか String と か [String] とかがある？</p>
+<p>んじゃ、そういう目でもっかい echo.lhs を見てみるとしようか。</p>
+<pre><code>Main&gt; main 1 2 3
+ERROR - Type error in application
+*** Expression     : main 1 2 3
+*** Term           : main
+*** Type           : IO ()
+*** Does not match : a -&gt; b -&gt; c -&gt; d
+
+Main&gt; main
+
+Main&gt; </code></pre>
+<p>うむ。やっぱ関数じゃない。main の値が現れました。 おぉっ、見える！わたしにも値が見えるぞ！ラ○ァ！！ ・・・えっと、とり あえず、自分の中ではナットク出来た気がするんだけどなぁ。</p>
+<p>見えねぇもんが見えるなんて、なんか瞳孔おっぴろげて変な宗教にハマってる ヒトみたく、危ない方向につっ走ってますか、私？</p>
+<h3 id="thunk-はどう書くのか">thunk はどう書くのか？</h3>
+<p>うぅっ、こんなつもりじゃなかったのに、次々に疑問が湧き出す。 そもそもアクションが値なんて勢いで言ったけど、アクションて結局は関数の 評価プロセスそのものなんじゃないか？ カッコがないと、いまいち違いが分かりにくいので、あえてScheme?で書くけど、</p>
+<pre><code>gosh&gt; (define f (lambda () body))</code></pre>
+<p>ってな定義があったときに、</p>
+<pre><code>gosh&gt; f</code></pre>
+<p>これを評価した結果得られるのは、関数実体つまり第一級のデータですねぇ。</p>
+<pre><code>gosh&gt; (f)</code></pre>
+<p>これは関数を評価した結果生まれるアクションですねぇ。 UNIX システムで言 えば、 f の評価の結果として得られるのはプログラムで、 (f) の評価の結果 得られるのはプロセスだな。これ、トーゼン全くの別人さんです。はい。</p>
+<p>前者は関数型言語におけるデータと言って差し支えないけど、その評価プロセ ス(？)は違うな。 [] a と IO a とのアナロジーからの話の展開に自信持っ ちゃってましたけど。 あぁぁあ((((( ;゜Д゜))))ガクガク。 要は何が言いたいかっちゅーと、アクションが値だってーのはかなり嘘くさい ぞ？私のゴーストがそうささやいとる。つまり勘です。はい。</p>
+<p>そーすっとすぐさま気になるのは！ ‘引数を持たない関数 thunk は Haskell ではどう書くのか？’ っちゅーことです。そういや、勉強はじめてからまだ一度も見てない気がする。</p>
+<p>純粋関数型言語では同じ式は何度評価しても同じ値を返すっちゅーので、引数 という、関数の動作を変更する源が無い場合には、結局即値と同じモノって気 がしないでもない。</p>
+<blockquote>
+<p>ell にはサンクという概念がありません。だって、Lazy なんだから。値は必要になるまで計算されません。敢て言うなら、全部サンク。</p>
+<pre><code> = sum [1..]</code></pre>
+<p>いてあっても、hoge の値は必要とされているわけではありませんよね。 、ここでクイズ、hoge の値は、何時、どんな場合に必要とされるでしょう？ –nobsun</p>
+<p>型は？その本体の定義は？っちゅー訳で探し回ってみる。 ・って、探している内に神の声で thunk って概念はないよ、とのこと。 む、thunk についての理解が足りてないのか？？どうも神の問かけに詰まっ まった。</p>
+<p>げーおーげー、まぁ落ち着け。ここは一つクールにいこう。・・・まず、 トが含まれている。と思う。</p>
+<pre><code> = sum [1..]</code></pre>
+<p>は’敢えて言うなら全部サンク’の例でしょう。 も停止しない式として書かれておる。</p>
+<p>&gt; hoge 123 &lt;= 例の常套手段 R - Type error in application Expression : hoge 123 Term : hoge Type : Integer Does not match : a -&gt; b</p>
+<p>。 Type は Integer か。実は、</p>
+<pre><code> :: -&gt; Int     &lt;= 苦しまぎれ</code></pre>
+<p>ってすると、</p>
+<p>ing file “/home/cut-sea/script/haskell/test.lhs”: ing……………………………………………………. R “/home/cut-sea/script/haskell/test.lhs”:16 - Syntax error in type signature (unexpected `-&gt;’) ude&gt;</p>
+<p>構文エラーが出るし、</p>
+<pre><code> :: _ -&gt; Int   &lt;= 悪あがき</code></pre>
+<p>すると、</p>
+<p>ing file “/home/cut-sea/script/haskell/test.lhs”: ing……………………………………………………. R “/home/cut-sea/script/haskell/test.lhs”:16 - Haskell 98 does not support anonymous type variables ude&gt;</p>
+<p>叱られる。 Haskell では関数は引数が無きゃならんのかもしれん。と思 めてたとこだったりする。引数の無い関数ってのは、そのままデータだっ うことか。 言えば、あらゆるデータは全て thunk だってことでしょう。</p>
+<p>ゃ、 thunk を復習してみるとしよう。</p>
+<p>&gt; (define (f x y) (* 2 x)) &lt;= 第二引数は評価の必要無い関数を定義</p>
+<p>&gt; (f (+ 2 3) (read)) &lt;= 正格評価を試してみる</p>
+<pre><code>                       &lt;= 第二引数が停止しないので強制終了！
+                          標準入力から何か打ち込みゃ良いけど疑似的にね</code></pre>
+<p>ERROR: unhandled signal 2 (SIGINT) k Trace: ___________________________________</p>
+<pre><code> (read)
+    At line 9 of "(stdin)"</code></pre>
+<p>&gt; (define (h x y) (* 2 (x))) &lt;= thunk 用です。やはり第二引数評価は不要</p>
+<p>&gt; (h (lambda () (+ 2 3)) (lambda () (read))) &lt;= 非正格評価</p>
+<p>&gt;</p>
+<p>ですね。Haskell においてはデータは全てサンクだってことは、 Haskell 全ての値は (lambda () value) って感じにくるまれているのか。でもっ Haskell の式評価は (thunk) って感じで force しているのか。</p>
+<p>ゃ、問題の hoge の値は何時、どんな場合に必要とされるか？ですな。</p>
+<p>&gt; (define (h x y) (* 2 (x)))</p>
+<p>&gt; (define hoge (lambda ()</p>
+<pre><code>                 (let loop ((n 1))
+                   (+ n (loop (+ n 1))))))  &lt;= hoge はこう</code></pre>
+<p>&gt; (define five (lambda () 5)) &lt;= Haskell での 5 はこうか？</p>
+<p>&gt; (h five hoge) &lt;= Haskell での評価をエミュレート</p>
+<p>&gt; (h hoge five) &lt;= hoge が必要な計算の例</p>
+<pre><code>                                      &lt;= したがって強制終了</code></pre>
+<p>ERROR: unhandled signal 2 (SIGINT) k Trace: ___________________________________</p>
+<pre><code> (loop (+ n 1))
+    At line 7 of "/home/cut-sea/script/scheme/test.scm"
+ (loop (+ n 1))
+    At line 7 of "/home/cut-sea/script/scheme/test.scm"
+ (loop (+ n 1))
+    At line 7 of "/home/cut-sea/script/scheme/test.scm"</code></pre>
+<p>&gt;</p>
+<p>む。・・・ムツカシイ(–;) ゃ、どんな場合に必要とされないか？を考えてみるか。</p>
+<p>&gt; (h (lambda () (+ 2 3)) (lambda () (read))) &lt;= 非正格評価</p>
+<p>&gt;</p>
+<p>場面で (lambda () (read)) は結局必要とはされなかったなぁ。実際私が しなくても計算は勝手に完了した。これはまさに (read) が評価されなかっ 拠だな。うん。</p>
+<pre><code> て値は (read) に無関係に決まった値ですねぇ。</code></pre>
+<p>り、ある式が結果として、ある値に至る場合を考えると、その値に hoge が影響を与える場合に hoge は必要とされるんですね！</p>
+<p>・って分かったような気になったけど、コレってお題を言い換えただけ？(^^; ません。いっぱいいっぱいまで脳圧上げて考えましたが降参です。お許し下せぇ。</p>
+<blockquote>
+<p>例えば、次のような関数を定義してみよう。</p>
+<pre><code>isLT7 :: Int -&gt; Bool
+isLT7 = \ n -&gt; n &lt; 7</code></pre>
+<p>これは、与えられた引数が 7 より小さいかを判定する関数です。さて、 Haskell では、hoge も isLT7 も定義しただけでは、計算は何もおこりません。 これがまず、Scheme と違うところです。</p>
+<p>では、計算はいつ起るかというと、式を評価しようとした時です。</p>
+<pre><code>isLT7 hoge </code></pre>
+<p>をインタープリタのプロンプトのところで評価すると何が起るかを考えてみましょう。</p>
+<p>注意することは、 lazy evaluation では、必要になるまでは計算されないと いうことです。</p>
+<p>つまり、なにを求められているか、それには何が必要か、という順で考えることです。</p>
+<p>インタープリタのプロンプトのところに、isLT7 hoge と入力すると、</p>
+<ol type="1">
+<li>インタープリタは、isLT7 hoge の値を印字しようとする</li>
+<li>印字ためには、isLT7 hoge の値を(False または True に)確定しなければならない</li>
+<li>そこで、isLT7 hoge の関数適用を計算する
+<ol type="1">
+<li>isLT7 を定義にしたがって、置き換えると (\ n -&gt; n &lt; 7) hoge</li>
+<li>λ式の本体の仮引数を、実引数で置き換えると hoge &lt; 7</li>
+<li>これが、確定したBool型を返すには、hoge と 7 の確定値が必要
+<ol type="1">
+<li>hoge の確定値を計算</li>
+<li>7 の確定値を計算(これは 7 ですね)</li>
+</ol></li>
+<li>hoge &lt; 7 の確定値計算</li>
+</ol></li>
+<li>isLT7 hoge の確定値を得たので、これを印字</li>
+</ol>
+<p>となる(はず)ですね。つまり、hoge の(確定)値は 3.3. のところで始めて必 要とされるわけです。で、実際には、この値を確定しにいくところで、無限の 計算にはいってしまって、先へは進まなくなるわけです。このような状態の hoge の値は ⊥ です。</p>
+<p>正格(strict)とは、x ＝ ⊥ ならば f x ＝ ⊥ となるような関数 f の性質 のことで、非正格(non-strict)とは、x ＝ ⊥ であっても g x ≠ ⊥ となる ような 関数 g の性質のことを言います。</p>
+<p>もうひとつ別の例を考えてみましょう。</p>
+<pre><code>from :: Int -&gt; [Int]
+from n =  n : from (n + 1)
+
+longerThan :: Int -&gt; [a] -&gt; Bool
+
+longerThan 0 (_:_)  = True
+longerThan _ []     = False
+longerThan n (x:xs) = longerThan (n-1) xs
+
+hage :: [Int]
+hage = from 0</code></pre>
+<p>こんな定義をしておいて、今度は、</p>
+<pre><code>longerThan 3 hage</code></pre>
+<p>を評価すると何がおこりますか？</p>
+<pre><code>longerThan 3 (repeat (1 `div` 0))</code></pre>
+<p>ではどうでしょう？</p>
+<blockquote>
+<p>(2004/09/30 11:48:42 JST): ごめん。(0/0)じゃなくて(1 `div` 0)にしてく ださいな。 (0/0) だと、⊥にならなくて,NaNになっちゃう。以下の (0/0) を 全部、(1 `div` 0) に置き換えちゃいます。</p>
+</blockquote>
+</blockquote>
+<p>うぅむ。 何を求められているか？ってのが、すんげぇポイントなのかぁ。</p>
+<p>これまで未定義値を含む式は誰がなんと言おうと未定義値！ってそういう頑固 オヤジだと思ってましたよ、あたしゃ。（いや、非正格を非正確に認識してま したねぇ。まだまだブルーだわ。） んが、どうも様子が変なんだよなぁ。それを求めて（要求して）いるヤツ（な んちゅーか継続？）ってのがいて、どの辺まで突っ込んだモノを求められて （要求されて）いるか？ってのが評価されるかどうかのミソ？</p>
+<p>最後の例で repeat (1 `div` 0) って式がありますなぁ。こいつは (lambda () (1 `div` 0)) って thunk を一要素として無限のリストを構成する。</p>
+<p>こいつは直感的には</p>
+<pre><code>[(lambda () (1 `div` 0)),(lambda () (1 `div` 0)),(lambda () (1 `div` 0))..]</code></pre>
+<p>おぉっ、 Haskell と Scheme? のダブルさんだ。(^^; ま、とりあえず、こんなんだねぇ？あくまで直感的にね。こいつをトップレベ ルが求めているのだとすると (lambda () (1 `div` 0)) の 印字をするところ まで求められる。っちゅーことは、これを印字したい、印字する必要が出てき たところで _|_ か。</p>
+<p>ところが、上の例で repeat (1 `div` 0) の値を求めている longerThan って やつは、そこまで突っ込んだものは欲しがってないんだ！</p>
+<h3 id="型宣言をみてみよー">型宣言をみてみよー！</h3>
+<p>ん、んん？・・・どあぁーーーーーっ！！！ なんかめちゃくちゃ当ったり前のことに今ごろ気付いたかもしんない。もう、 まるで巨大恐竜が足を蚊に刺されてから何分も経って、ようやく気付いて「か ゆ〜」って思う様に私の頭脳はめちゃめちゃ遅延評価です。はい。（意味がち が・・・）</p>
+<pre><code>longerThan :: Int -&gt; [a] -&gt; Bool</code></pre>
+<p>これ！これを見ると [a] ってのがある。これは [Int] だっていいし、 [String] だって許される。もち、 [IO ()] だって、きっと許されるだろう。 多分。単にそういう任意の型を表すという側面でしか見れて無かったです、 えぇ。(^^;</p>
+<p>これって別の言いまわしをすると、 longerThan は [a] っていうリスト構造 にのみ関心があり、 リスト構造までを要求しており、リストの内部までは要 求してない っていうことでも有りますよね？そうですよね？！そうだ！そう に決まった！！！</p>
+<p>もう、目が血走って、今にも犯罪犯しそうな雰囲気マンマンにコーフンしちゃっ てます。こういう時にイキオイで書いた文章が間違ってると、死ぬほどはずい です。えぇ。でも私は懲りません。全然。漢（オトコ）って感じしませんか？ そうですかしませんか。がっくり。</p>
+<pre><code>longerThan :: Int -&gt; [a] -&gt; Bool</code></pre>
+<p>この型宣言において、</p>
+<pre><code>longerThan 3 hage
+longerThan 3 (repeat (1 `div` 0))</code></pre>
+<p>この二つの式は、（ hage も repeat も）ともに longerThan からは [a] ま でしか求められておらず、リスト構造さえ作って提供してくれりゃ、中に格納 されているデータが (lambda () (1 `div` 0)) だろうが、気にしな〜い気に しな〜い♪ってことだ。</p>
+<p>もしも、もしもですよ？</p>
+<pre><code>longerThan :: Int -&gt; [Int] -&gt; Bool
+                       ↑
+                     コレね</code></pre>
+<p>なんて型宣言になるような関数だったら、そんな longerThan 関数から呼ばれ た repeat (1 `div` 0) は [Int] って形までを求められる。つまり、 (lambda () (1 `div` 0)) の値を評価する必要を迫られる。</p>
+<pre><code>[(lambda () (1 `div` 0)),(lambda () (1 `div` 0)),(lambda () (1 `div` 0))..]</code></pre>
+<p>こいつを</p>
+<pre><code>[1/0の値,1/0の値,1/0の値..]</code></pre>
+<p>な形にまで簡約されることを求められる。ゆえにぃ、v(^^)v 1/0 の値を求め る段で多分 _|_ を返すと。</p>
+<p>んじゃ、お題に戻ると、こういう回答になるんでしょうか？</p>
+<pre><code>hoge :: Int
+hoge = sum [1..]</code></pre>
+<p>と書いてあっても、hoge の値は必要とされているわけではありませんよね。<br>
+では、ここでクイズ、hoge の値は、何時、どんな場合に必要とされるでしょう？</p>
+<p>それは、 hoge を引数に持つ関数が評価される場面において、その関数の型宣 言で hoge が位置する引数の型が Int として型宣言している場合は hoge の 値は必要とされる。</p>
+<p>仮に</p>
+<pre><code>fuga :: a -&gt; Bool
+deya :: Int -&gt; Bool</code></pre>
+<p>という二種類の関数の型宣言があって、 fuga および deya の値が要求されて いる場面において、 fuga hoge とある場合には hoge はその値までは必要と はしないし、 deya hoge とある場合には hoge はその計算された値を必要と する。と。</p>
+<p>もちろん、再帰的に呼び出し元にも同じ事が言えて、 deya を引数に持つもの が、 Bool を必要としてれば、その値を要求されるけど、 deya を呼んでいる のが、 deya の引数のところの型を a として宣言しているなら、deya hoge であっても hoge は値を要求されることはないと。 結局 main などのエントリポイントから a とかって型変数に行き当たったら、 そっから先は値そのものは要求されない。多分 リストだとかほにゃららモナ ドと称される様な構造にしか関心はないんじゃね？一方で、末端構成員まで具 体的な型が宣言され続けている場合には値が必要になる・・・可能性がある？ （if とかがあるんでちょっと自信なくした）のかと。</p>
+<p>遡って確認すると、 isLT7 はどうなっとる？</p>
+<pre><code>isLT7 :: Int -&gt; Bool
+isLT7 = \ n -&gt; n &lt; 7</code></pre>
+<p>これで、</p>
+<pre><code>isLT7 hoge</code></pre>
+<p>を評価すると、 isLT7 は引数 hoge に対して Int まで突っ込んだ情報を欲し がってる。つまり、hoge は計算された値を必要とされる。</p>
+<p>・・・ってことで終了しねぇ計算がぁ〜！</p>
+<blockquote>
+<p>あうあうあう じゃあ、</p>
+<p>dorya :: Int -&gt; Int dorya = const 1</p>
+<p>と定義しておいて、</p>
+<p>dorya (1 `div` 0)</p>
+<p>を評価するとどうなる？</p>
+</blockquote>
+<p>がぁん！なにやらイキオイで書いたのが、案の定間違っとるくさいぞ？(^^; やべぇ。ネット中引き回しの上さらし首だ。</p>
+<p>const ってのは多分固定値を返すんじゃないかと思うんだけど、まぁここでは あまり本質的な問題じゃないな。いちおー、 const を調べておくか。</p>
+<pre><code>const          :: a -&gt; b -&gt; a
+const k _       = k</code></pre>
+<p>あら？引数二つ持つのか。でも第二引数はシカトしとる。</p>
+<p>とにかく、引数が dorya 本体に無関係だってのがポイントなんだ。にも関わ らず、その引数の型は Int に縛られとるがな。そんな御無体な・・・(–;</p>
+<p>・・・ここで dorya ってのは Int -&gt; Int ってあるけど、この型宣言は a -&gt; Int でも良さげに思えますねぇ。っつーか私の理屈だと、それなら通るんだよ なぁ。でも Int -&gt; Int となると、確かにダメだわ、こりゃ。早速、破綻しちゃ いましたねぇ。</p>
+<p>デジャブったので、ずーっと上の方を見ると、</p>
+<pre><code>&gt; main :: [a]
+&gt; main = [1,2,3]</code></pre>
+<p>ってした時にもエラーを食らってますな〜。この時私は「間違っては無い気が する」って感想を漏らしておる。</p>
+<p>ここでも同じく a -&gt; Int で間違っちゃいない気がするのだが、多分 a -&gt; Int ってすると全く同じエラー食らっちゃいそうだな。とにかく試してみるか？</p>
+<pre><code>&gt; dorya :: a -&gt; Int
+&gt; dorya = const 1</code></pre>
+<p>こうしておいて、どりゃ？！</p>
+<pre><code>Main&gt; dorya (1 `div` 0)
+1</code></pre>
+<p>あー、そっか。 dorya の型としては a -&gt; Int でいけるんだ、 const が a -&gt; b -&gt; a だから。うん。じゃさ、じゃさー Haskell の型推論システムとし てはどうなんじゃろ。予想は多分同じじゃねーかと思うんだけどね。ってわけ で型宣言を削って例の常套手段でお伺いを立ててみる。</p>
+<pre><code>Main&gt; dorya
+ERROR - Cannot find "show" function for:
+*** Expression : dorya
+*** Of type    : a -&gt; Integer</code></pre>
+<p>・・・ということは、ユーザがコードに書く型宣言て Haskell の型推論と同 じか、もしくは、それより厳しい方向には宣言可能？なんでしょか。ゆるゆる にする方向には叱られたもんねぇ。多分厳しくする分には問題ないけど、ゆる ゆるにすると、本体で足し算してるのに、ゆるゆるの隙を突いて String とか IO () とか、足し算をすることが出来ないシロモノが入って来ちゃうからかな。</p>
+<p>いずれにせよ、型宣言を見て値の計算が要求されるかどうかを見分けるのは無 理なんですねぇ。</p>
+<p>んじゃ、 Haskell の型推論で見たらどうなんでしょ？ Haskell の型推論がコー ド全体を解析した結果、ある関数の型の引数部分に a って型変数が残ったも のは、型を具体的に特定できなかったってことっすよね？ ・・・あれ？？、なんで特定出来なかったんだろ。(?_?;) とりあえず、その関数の評価においては、その型変数が残った引数は値を求め られず、先送りにされるんでないすかね？</p>
+<p>あーでも、違うわ、こりゃ。 const ってのがまさに、それを物語っておる。</p>
+<pre><code>const          :: a -&gt; b -&gt; a</code></pre>
+<p>これは全部型変数だけど、</p>
+<pre><code>Main&gt; const (1 `div` 0) 0
+
+Program error: {primQrmInteger 1 0}
+
+Main&gt;</code></pre>
+<p>こんなんなります。つまり、 (1 `div` 0) の値を求めようとされてる。えぇ。 ガックリ、型変数 a だけどキッチリ値を求められることを要求されとるがな。</p>
+<p>って思ったんだけど、いやいやこれってトップレベルか要求してるからじゃね？ トップレベルに印字することを要求されるからか。例えば、</p>
+<pre><code>Main&gt; length [const (1 `div` 0) "cut-sea"]
+1</code></pre>
+<p>うむ。ここで (1 `div` 0) の値は最後まで評価されずに遅延されて、評価さ れず仕舞いだよね。結局誰も、(1 `div` 0) の値に関心を持たなかった、それ を要求しなかったからだ。 length の型は</p>
+<pre><code>length           :: [a] -&gt; Int</code></pre>
+<p>だしね。</p>
+<p>あー違う！頭ぐるぐるんなる・・・。これって longerThan でやったのと変わっ てねーじゃん。同じトコぐぅるぐぅる回ってますよ〜いつもよりたくさん回っ てます。はい。</p>
+<p>何を求められているか、何が必要かがポイントなんだった。落ち着けオレ！返 り値と引数をちゃんと区別せんといかんように思う。</p>
+<pre><code>const          :: a -&gt; b -&gt; a</code></pre>
+<p>ここで、 最初の a と二番目の b は引数だ。この引数の値については const は必要としないのではないかな？</p>
+<p>んで、返り値の a については const 式を引数として呼び出した側の関数がど う思っているかだよね？その呼び出し側が値を求めて（要求して）れば計算さ れるし、求めて（要求して）なければ計算されずにさらに先送り。と。</p>
+<p>・・・ってことは、トップレベルってどういう関数になってんだろ？これって 絶対に値を要求してるけど、型は不問だよねぇ。 まぁ考えても無駄ってか、ハマルと挫折が待ってそうなんで逃げます。はい。 あっしの脳ミソの限界はるか彼方に越えてます。</p>
+<p>ただ、一応メモっておこう。 main から末端構成員に向けて調べるってのは逆 だわ。少なくとも。 末端構成員から、そいつが値を求められる(要求される)のはどこか？ってのを main なんかのエントリポイントに向かって調べることになりそう。最後まで 値の計算を先送りにされた時に行きつくのがそこだしねぇ。</p>
+<blockquote>
+<p>型の計算ってのは実行の前処理として行われるだけなんじゃないでしょうか。 型推論機構と評価機構は分けて考えるべきものなのでは。</p>
+</blockquote>
+<h3 id="型推論より厳しい型宣言の必要性">型推論より厳しい型宣言の必要性</h3>
+<p>んで、結論は分かんないけど、疑問だけはどんどんでてくるわけよ。(^^; Int -&gt; Int な dorya において、引数の型チェックを Int とする事に意味が あるような、そんな場面てどんな状況だろう。そもそもあるのだろうか。</p>
+<p>Haskell ではそれを許しているってことは必要だからかなぁ、やっぱ。一つ言 えることは、振舞の上で、こんな違いが生まれますなー。</p>
+<pre><code>&gt; dorya :: a -&gt; Int
+&gt; dorya = const 1</code></pre>
+<p>でもって、</p>
+<pre><code>Main&gt; dorya "cut-sea"
+1</code></pre>
+<p>いえーす！おっけ。じゃぁこっちね。</p>
+<pre><code>&gt; dorya :: Int -&gt; Int
+&gt; dorya = const 1
+
+Main&gt; dorya "cut-sea"
+ERROR - Type error in application
+*** Expression     : dorya "cut-sea"
+*** Term           : "cut-sea"
+*** Type           : String
+*** Does not match : Int</code></pre>
+<p>うん。まぁそだね。なんかの入力チェックか？でも弾いても弾かなくても結果 同じ気がする。むむむ(–; そろそろコードを・・・</p>
+<p>まぁ、今の私がこーゆーもろもろの疑問を抱えてるって事を未来の自分に託し ておいて、 (問題先送り、これぞ遅延評価？)そろそろコードを書かんといか んすねぇ。はい。 多分 Haskell のコードを書かないと、いつまで立っても二足歩行に行けません。</p>
+<p>その前に、上でさらっと流しちゃった部分を確認しときます。 `div` っての は、ここ にあるように関数値を中置演算にするものだそうです。あ、 div が じゃなくて注目はバッククウォートで括ってるってトコです。中置演算を前置 にするのが (++) みたいにするのに対して、その逆ですね。んじゃ、早速ため してみましょう。</p>
+<pre><code>Main&gt; 1 `const` 2
+1</code></pre>
+<p>できました。んじゃ、これはどーなんでしょ？</p>
+<pre><code>Main&gt; "abc" `(++)` "xyz"
+ERROR - Syntax error in expression (unexpected `(')
+Main&gt; (`const`) 1 2
+ERROR - Syntax error in expression (unexpected `)')</code></pre>
+<p>あらら、どうも構文エラーになっちゃいますね。まぁ、そういうものみたいね。</p>
+<p>あと、も一個確認してみます。なんとなく IO a 型の main において、 a は本体内にどんな影響があんのか(どんな風に現れるのか)が気になってます。</p>
+<pre><code>#! /usr/pkg/bin/runhugs
+
+&gt; main :: IO ()
+&gt; main = putStrLn "んちゃ!"</code></pre>
+<p>これはうまく動作しますね。んじゃ、 main を IO Int にするとどうなるんで しょうか？</p>
+<pre><code>&gt; main :: IO Int
+&gt; main = putStrLn "んちゃ!"
+
+ERROR "/home/cut-sea/script/haskell/dummy.lhs":4 - Type error in explicitly typed binding
+*** Term           : main
+*** Type           : IO ()
+*** Does not match : IO Int</code></pre>
+<p>型が違うって叱られました。なんとなく、こうかなぁ？</p>
+<pre><code>&gt; main :: IO Int
+&gt; main = putStrLn "んちゃ!" &gt;&gt; return 123</code></pre>
+<p>おー、おっけーみたいですね。じゃ、同じようにこんなんも出来そうです。</p>
+<pre><code>&gt; main :: IO String
+&gt; main = putStrLn "んちゃ!" &gt;&gt; return "うりゃ!"</code></pre>
+<p>さらに</p>
+<pre><code>&gt; main :: IO [String]
+&gt; main = putStrLn "んちゃ!" &gt;&gt; return (repeat "うりゃ")</code></pre>
+<p>おぉ？ return は</p>
+<pre><code>return :: Monad m =&gt; a -&gt; m a</code></pre>
+<p>だからいいのかな。repeat “うりゃ” 自体は値を必要としないんだね。なんか 実行前にはプロンプトに戻ってくんのか不安でしたけど。</p>
+<p>さらにさらに</p>
+<pre><code>&gt; main :: IO (IO Int)
+&gt; main = putStrLn "んちゃ!" &gt;&gt; return child
+&gt; 
+&gt; child :: IO Int
+&gt; child = putStrLn "ぷびー" &gt;&gt; return 0</code></pre>
+<p>いや、単に IO (IO Int) を main の型にしてみたかっただけっすけど。 ここまでの所結果は全部</p>
+<pre><code>Main&gt; main
+んちゃ!</code></pre>
+<p>って感じです。はい。いやぁ実に変わり映えしないですね。すんません。ん じゃ、これは？</p>
+<pre><code>&gt; main :: IO a
+&gt; main = putStrLn "んちゃ!" &gt;&gt; return child
+&gt; 
+&gt; child :: IO a
+&gt; child = putStrLn "ぷびー" &gt;&gt; return main</code></pre>
+<p>相互再帰的にしちゃろうと思ったんですけど、どうでしょう？</p>
+<pre><code>ERROR "/home/cut-sea/script/haskell/dummy.lhs":7 - Inferred type is not general enough
+*** Expression    : child
+*** Expected type : IO a
+*** Inferred type : IO (IO a)</code></pre>
+<p>うーん。ダメでした。ちょっと調子に乗りすぎましたね。まぁ、いいです。 ずーっと振り返ってみると何となく分かった気がしないでもないですが、 IO () だけ return が無くてもおっけーなのがちょい気になります。</p>
+<pre><code>&gt; main :: IO ()
+&gt; main = putStrLn "んちゃ!" &gt;&gt; return ()</code></pre>
+<p>これでイケるかな〜？まさかなぁって思ったら、</p>
+<pre><code>Main&gt; main
+んちゃ!</code></pre>
+<p>あらら、大丈夫でした。なんか統一的に扱えるんですね。いちおー。 return ってのが生み出したものは、一体どこへ消えていくのでしょう？(?-?)</p>
+<blockquote>
+<p>Hugsでは、インタープリタのプロンプトに IO a 型が渡されると、対応するア クションが実行され、結果の値は無視されるようです。ただ、‘:set +I’ とす ると、結果の値が表示されるようです。 (<a href="http://cvs.haskell.org/Hugs/pages/users_guide/using-hugs.html#BASIC-COMMANDS">ここ</a>参照)</p>
+</blockquote>
+<p>ここまで &gt;&gt; ってやつを使ってましたが、これは例のパスを渡さない奴なんで、 右項側で好き勝手出来るんで、こうやって遊んでみるのには楽チンな感じです。 はい。</p>
+<p>とにかく、 main が IO a 型なら、最終的に return a が返ればおっけーそう ですね。理解は出来てないですけど、一応押えておきます。はい。 return は</p>
+<pre><code>Monad m =&gt; a -&gt; m a</code></pre>
+<p>なので、どっから m が IO だと知るのかが、謎ですけどね。もし良きに計らっ てくれるんだとすれば、</p>
+<pre><code>IO String
+   ↓
+[] String</code></pre>
+<p>って置き換えても良さげですね。っちゅーわけでぇ</p>
+<pre><code>&gt; main :: [] String
+&gt; main = return "んちゃ!"</code></pre>
+<p>んじゃ、ロード！</p>
+<pre><code>Main&gt; main
+["\164\243\164\193\164\227!"]</code></pre>
+<p>いいですね。</p>
+<pre><code>&gt; main :: [String]
+&gt; main = return "んちゃ!"</code></pre>
+<p>上のはこれと同じですんで、 return ってのは、モナドのインスタンスを作っ てるようなものってことでしょうか？そうだとすると、どんなプログラムも取 り合えず return 使って終端すりゃー万事おっけーですかい？</p>
+<p>でも、String のリストを作るのかと思ったら、</p>
+<pre><code>&gt; main :: [String]
+&gt; main = return "んちゃ!" "ぷぽ?"</code></pre>
+<p>えい！</p>
+<pre><code>ERROR "/home/cut-sea/script/haskell/dummy.lhs":4 - Type error in explicitly typed binding
+*** Term           : main
+*** Type           : [Char]
+*** Does not match : [String]</code></pre>
+<p>型から言えば当然ですけど、さすがに [“んちゃ!”,“ぷぽ?”] を作ってくれる わけでは無いんすねぇ。(–; うーむ、 return って一体・・・</p>
+<blockquote>
+<p>リストがモナドである事を示すために定義されているのでしょう。 一応、<a href="http://www.sampou.org/haskell/tutorial-j/monads.html">ここ</a>にリストのreturnの使用例があります</p>
+</blockquote>
+<h3 id="たらいまわし関数">たらいまわし関数</h3>
+<p>えーっと、たらいまわし関数を作って結果を印字させるプログラムを組んでみ ます。なんせ、たらいまわし関数なら LL 中、 まぁ<strong>最速</strong>じゃねぇ？と言われ ている位です。たらいまわし関数を計算するコマンドは、やはり Haskell で 実装すべきでしょ。 それ以外考えられません。はい。 え？一体何に使うのかって？そんなちっちぇコト気にしちゃダメっす。もっと おーっきな目で見ないとね、おーっきな目で。</p>
+<p>もち、現時点でホントに私の手元には影も形もありません。内容的にはそれほ ど難しいとは思ってないのですが、ここまでで出て来なかった関数なんかも必 要になりそうな気がしてます。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="85e6f0f1a8f6e0e4c5efecebec">[email&nbsp;protected]</a>&gt; tak 12 6 0</code></pre>
+<p>みたいにコマンドラインから実行出来るようにしたいと思っているので、真っ 先に、どうやるんだろ？って浮かぶ課題が、</p>
+<ol type="1">
+<li>引数は文字列で渡されるので、こいつを数値に変換</li>
+<li>計算した数値を文字列にして、結果を印字</li>
+</ol>
+<p>この二点です。で、「やさしいHaskell入門」とかを斜め読みしてると、まぁ た横道それるんだけど、 <a href="http://www.sampou.org/haskell/tutorial-j/io.html">ここ</a>に「アクションは Haskellの値です」って書い てある。ってことは、理詰めで導いたのは正しくて、私のゴーストのささやき （要はカンね）の方が間違ってたらしい。まさに「自分のゴーストが信じられ ない」状態に。うますぎ(^^; ちなみにすぐ横道にそれたり、どんどんスタック積み上げまくって本筋に戻っ て来れずにオーバーフローするのは私の特技だったりします。しかもスタック の上限が異常に浅いです。はい。</p>
+<p>おっとっと、いかんいかん！目的をすぐ見失いそうになります。数値を文字列 に変換したり、文字列を数値に変換するんだった。</p>
+<p>えーっとー。・・・結構探したけどそれっぽいのが見当たらないっす。まぁい いです。何事も勉強です。 digitToInt とか intToDigit ってのが <a href="http://www.sampou.org/haskell/report-revised-j/char.html">ここ</a>にあっ て、型からして、使えそうなんで試してみましょう。</p>
+<pre><code>Main&gt; digitToInt '7'
+7
+Main&gt; digitToInt '9'
+9</code></pre>
+<p>はい、まずはこれが文字列から数値に変換する時に使えそうな気がします。</p>
+<pre><code>Main&gt; intToDigit 7
+'7'
+Main&gt; intToDigit 9
+'9'</code></pre>
+<p>これが、数値から文字列を作るのに使えそうな感じなんですけど、あまりにも 遠そうですんで、もしかしたら作ってるうちに使えそうな関数に出会えるのを 期待することにします。まぁ、こいつはキープってことで。</p>
+<p>無謀ですけど、まず型宣言を書いてみましょう。実際に Haskeller な方がど ういう感じでコーディングするのかは、リアルタイムで見たことが無いのでど ういう順かは知りませんが、多分、型から入るんじゃないかなぁと思ったって ことでチャレンジ！</p>
+<p>まず、main です。とりあえず、印字だけさせようと思います。 return も書 かないつもり。</p>
+<pre><code>main :: IO ()</code></pre>
+<p>main 内では putStrLn とかを使って書こうと思います。したがって、 putStrLn に渡すたらいまわし関数の返り値を文字列に変換する必要があるん で、その関数は整数から文字列への関数になると。</p>
+<pre><code>numberToStr :: Int -&gt; String</code></pre>
+<p>あ、その前に getArgs から貰った引数の文字列を整数に変換する関数が要りますな。</p>
+<pre><code>strToNumber :: String -&gt; Int</code></pre>
+<p>んで、このコマンドのまさに核部分です。言わずと知れた超有名な関数です。 ちなみに tak 関数とかたらいまわし関数とか色々言われるみたいなんですけ ど、正式にはどうなんですかね？まぁ、引数に整数を三つ貰って、んでから返 り値も整数です。</p>
+<pre><code>tak :: Int -&gt; Int -&gt; Int -&gt; Int</code></pre>
+<p>こんなとこでしょうか？あと必要になったら、気付いた時点で追加することにします。</p>
+<p>んじゃ、まず文字列を整数に変換してみます。</p>
+<pre><code>Prelude&gt; map digitToInt "123"
+[1,2,3]</code></pre>
+<p>map に関しては実は mapM だの mapM_ だのを見てたので、どーしよーかと思っ たんですが、小細工なしで map でいったれ！ってやってみたら、すんなり動 いてくれちゃいました。</p>
+<p>んじゃ、[1,2,3] とかってなったリストを各桁と見なした複数桁の数値にします。</p>
+<pre><code>Prelude&gt; foldl1 (\x y -&gt; 10*x+y) [1,2,3]
+123</code></pre>
+<p>わーい、意外とすんなりいきました。ちょっと飲み会の後で少しアルデヒドが 脳細胞に刺激を与えている位が丁度いいのかもしれません。このすんなり具合 は中毒症状では無いので大丈夫(^^)v</p>
+<p>んじゃ、strToNumber を作ります。</p>
+<pre><code>#!/usr/pkg/bin/runhugs
+
+\begin{code}
+
+main :: IO ()
+
+numberToStr :: Int -&gt; String
+
+strToNumber :: String -&gt; Int
+strToNumber str = foldl1 (\x y-&gt;10*x+y) $ map digitToInt str
+
+tak :: Int -&gt; Int -&gt; Int -&gt; Int
+
+\end{code}</code></pre>
+<p>これでロードしてみます。</p>
+<pre><code>Reading file "/home/cut-sea/script/haskell/tak.lhs":
+Parsing........................................................................
+ERROR "/home/cut-sea/script/haskell/tak.lhs":5 - Missing binding for variable "main" in type signature</code></pre>
+<p>ありゃ？えーっと、なになに？ main 変数に束縛がねーぞって叱ってる。あー、 本体の定義後まわしにしようと思ったんだけど、ダメなんだぁ。残念。</p>
+<p>んじゃ、</p>
+<pre><code>#!/usr/pkg/bin/runhugs
+
+main :: IO ()
+
+numberToStr :: Int -&gt; String
+
+\begin{code}
+
+strToNumber :: String -&gt; Int
+strToNumber str = foldl1 (\x y-&gt;10*x+y) $ map digitToInt str
+
+\end{code}
+
+tak :: Int -&gt; Int -&gt; Int -&gt; Int</code></pre>
+<p>こんな感じになるかな？んで、走れ！</p>
+<pre><code>Main&gt; strToNumber "123"
+123</code></pre>
+<p>いぇーい！！d(^-^)b いや、感心してないで次いきましょう。 numberToStr です。</p>
+<pre><code>numberToStr :: Int -&gt; String
+numberToStr num = do (q,r) &lt;- (quotRem num 10)
+                     (numberToStr q) ++ [intToDigit r]</code></pre>
+<p>パターンなんぞをタプルに適用してみました。いや、使えるのかどうか知らん けどね。これでいけんじゃね？えいやー！</p>
+<pre><code>Type checking
+ERROR "/home/cut-sea/script/haskell/tak.lhs":13 - Type error in generator
+*** Term           : (q,r)
+*** Type           : (a,b)
+*** Does not match : Int</code></pre>
+<p>うがっ？なんだこれ？</p>
+<pre><code>quotRem :: Integral a =&gt; a -&gt; a -&gt; (a, a)</code></pre>
+<p>ってある。なんか Integral が意味分からんが、 (a, a) を返している。問題 は上のエラーメッセージ中で (a, b) って出ているところ。んーと、んじゃ、 これはどうよ？</p>
+<pre><code>numberToStr :: Int -&gt; String
+numberToStr num = do q &lt;- quot num 10
+                     r &lt;- rem num 10
+                     if (q == 0) then [intToDigit r]
+                                 else (numberToStr q) ++ [intToDigit r]</code></pre>
+<p>タプルをパターンにするのがダメだったのかもしれんと思ったわけだ。ほれ！</p>
+<pre><code>Type checking
+ERROR "/home/cut-sea/script/haskell/tak.lhs":13 - Type error in generator
+*** Term           : num `quot` 10
+*** Type           : Int
+*** Does not match : a b</code></pre>
+<p>あ？だめだこりゃ。 <a href="http://www.sampou.org/haskell/report-revised-j/exps.html#sect3.14">これ</a>見てもどうも何が悪いのかよくわかんねぇっす。はい。</p>
+<blockquote>
+<p>doはモナド専用なので、 <a href="http://www.sampou.org/haskell/tutorial-j/patterns.html">let,where</a>を使いましょう</p>
+</blockquote>
+<p>・・・・・・・・・・・・・・・・・・・・・・・・おっと、ついのめり込ん でしまっちゃって実況中継忘れた。もう意地で do にこだわったんだけど、全 然型が通らない。押してダメなら引いてみなってことで、もちっと簡単にして みる。</p>
+<pre><code>numberToStr :: Int -&gt; String
+numberToStr num = if (num &lt; 10)
+                  then [intToDigit num]
+                  else (numberToStr $ quot num 10) ++ [intToDigit $ rem num 10]</code></pre>
+<p>こいつでどーだっ！！</p>
+<pre><code>Main&gt; numberToStr 123
+"123"
+Main&gt; numberToStr 987654321
+"987654321"</code></pre>
+<p>ほっ。よっしゃ！何とかいけたね。</p>
+<p>んじゃ、 tak 関数を作ってみます。えーっと、私のずたぼろの「はじめての 人のためのLISP」を見ます。私を S式の世界にいざなってくれた真っ赤なハレ ンチ本です。</p>
+<pre><code>tak :: Int -&gt; Int -&gt; Int -&gt; Int
+tak x y z = if (x &gt; y) then tak (tak (x-1) y z)
+                                (tak (y-1) z x)
+                                (tak (z-1) x y)
+                       else y
+
+んで、ロード！
+
+Main&gt; tak 6 3 0
+6
+Main&gt; tak 8 4 0
+8
+Main&gt; tak 10 5 0
+10
+Main&gt; tak 12 6 0
+12
+Main&gt; tak 100 50 0
+100
+Main&gt; tak 200 100 0
+200</code></pre>
+<p>うーっむ、定義を間違ってねーか？って思うくらい異常に早いです。信じらん 無いくらい。ボーゼンとしてしまいます。</p>
+<p>えっと、残るは main だけ？よしゃ。その前にだいたいの流れを確認。</p>
+<pre><code>Main&gt; map (strToNumber) ["200","100","0"]
+[200,100,0]</code></pre>
+<p>こいつに tak を適用すりゃいいだけ！うわ (^^) 取ったもドーゼン！！へへへ〜 ・・・あら？リストの各要素に適用しないとダメじゃん。しまった、どしよ。</p>
+<p>とりあえず、 Scheme? とかだと apply とかってのを使う方向に考えるんだけど、 :find apply とかしても出て来ない。しょーがないから、急遽関数を作ることにしましょう。</p>
+<pre><code>apply f [x,y,z] = f x y z</code></pre>
+<p>こんなんアリ？だいたい型はどーなるんだよ？</p>
+<pre><code>Main&gt; map (strToNumber) ["200","100","0"]
+[200,100,0]
+Main&gt; apply tak [200,100,0]
+200</code></pre>
+<p>おぉっ！動くじゃん。すげえすげえ。じゃあ例の常套手段を使って〜って、今回は違うぞ！一応型を自分で作ってみよう。</p>
+<pre><code>apply :: (tak の型) -&gt; [a] -&gt; a</code></pre>
+<p>かな？ってーことは、</p>
+<pre><code>apply :: (Int -&gt; Int -&gt; Int -&gt; Int) -&gt; [a] -&gt; a</code></pre>
+<p>え、違うわ、 全部 Int かな。</p>
+<pre><code>apply :: (Int -&gt; Int -&gt; Int -&gt; Int) -&gt; [Int] -&gt; Int</code></pre>
+<p>んでロードだ。</p>
+<pre><code>Main&gt; apply (tak) [100,50,0]
+100</code></pre>
+<p>おっけー！もー得意気になっちゃうよ！天狗天狗！！</p>
+<p>一応 Haskell の型推論を確認すっと、</p>
+<pre><code>Main&gt; apply
+ERROR - Cannot find "show" function for:
+*** Expression : apply
+*** Of type    : (a -&gt; a -&gt; a -&gt; b) -&gt; [a] -&gt; b</code></pre>
+<p>あらら。めちゃめちゃ応用範囲広いじゃん。オレってばすんげぇ apply の活 用を絞りすぎた。やっぱ難しいなぁ。型宣言するのが良いのって、ある程度プ ログラマの方も型推論がしっかり出来なきゃあまり意味無いって思うのオイラ だけっすか？ どーも、具体例が頭にあるだけについ絞っちゃうんだよね。型宣言するときに、 具体的に考えている使い方以上に抽象化して考えないと、実際には Haskell の型推論レベルのものが得られない気がする。</p>
+<pre><code>import System
+
+main :: IO ()
+main = do args &lt;- getArgs
+          putStr $ numberToStr $ apply (tak) $ map (strToNumber) args</code></pre>
+<p>こんなんですね。えっと、ロードがうまくいくんでファイルに実行権限つけて コマンドラインから実行！</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="f2918786df819793b2989b9c9b">[email&nbsp;protected]</a>&gt; ./tak.lhs 6 3 0
+<a href="email-protection.html" class="__cf_email__" data-cfemail="80b6e3f5f4adf3e5e1c0eae9eee9">[email&nbsp;protected]</a>&gt;</code></pre>
+<p>あ、そっか。 putStr じゃなくて putStrLn の方がいいか。 んで、書き換えたんでコード全体はこんな感じになります。</p>
+<pre><code>#!/usr/pkg/bin/runhugs
+
+\begin{code}
+
+import System
+
+main :: IO ()
+main = do args &lt;- getArgs
+          putStrLn $ numberToStr $ apply (tak) $ map (strToNumber) args
+
+apply :: (a -&gt; a -&gt; a -&gt; b) -&gt; [a] -&gt; b
+apply f [x,y,z] = f x y z
+
+numberToStr :: Int -&gt; String
+numberToStr num = if (num &lt; 10)
+                  then [intToDigit num]
+                  else (numberToStr $ quot num 10) ++ [intToDigit $ rem num 10]
+
+strToNumber :: String -&gt; Int
+strToNumber str = foldl1 (\x y-&gt;10*x+y) $ map digitToInt str
+
+tak :: Int -&gt; Int -&gt; Int -&gt; Int
+tak x y z = if (x &gt; y) then tak (tak (x-1) y z)
+                                (tak (y-1) z x)
+                                (tak (z-1) x y)
+                       else y
+
+\end{code}</code></pre>
+<p>実行例じゃー。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="096a7c7d247a6c684963606760">[email&nbsp;protected]</a>&gt; ./tak.lhs 6 3 0
+6
+<a href="email-protection.html" class="__cf_email__" data-cfemail="1576606138667074557f7c7b7c">[email&nbsp;protected]</a>&gt; ./tak.lhs 100 50 0
+100
+<a href="email-protection.html" class="__cf_email__" data-cfemail="86e5f3f2abf5e3e7c6ecefe8ef">[email&nbsp;protected]</a>&gt; ./tak.lhs 200 100 0
+200
+<a href="email-protection.html" class="__cf_email__" data-cfemail="c3a0b6b7eeb0a6a283a9aaadaa">[email&nbsp;protected]</a>&gt; ./tak.lhs 300 150 0
+300
+<a href="email-protection.html" class="__cf_email__" data-cfemail="c7a4b2b3eab4a2a687adaea9ae">[email&nbsp;protected]</a>&gt; ./tak.lhs 400 200 0
+400</code></pre>
+<p>よしゃ！すばらしい！！オレってすげぇ！！ んじゃ、引続きこのコードを他にも書き換えられねぇか少し遊んでみよう。</p>
+<p>しかし、やっぱはえぇっ！！ 400 200 0 って与えた時はさすがに回答まで一 呼吸置くんだけど全然待たされてる気がしない。同一マシンで Emacs Lisp で の 12 6 0 を評価した時は、カップラーメンが作れちゃったくらいでしたよ？ しかもかなりふやけてしまってスカスカになってたし。いや、そこまで律義に 待つオイラもどーかと思うけどさ。</p>
+<blockquote>
+<pre><code>#!/usr/local/bin/runhugs
+\begin{code}
+module Main where
+import System
+import IO
+main :: IO ()
+main = do args &lt;- getArgs
+          case args of 
+            x:y:z:_ -&gt; print $ tarai (read x) (read y) (read z)
+            _       -&gt; hPutStr stderr usage
+usage :: String
+usage = "Usage: tarai x y z"
+
+tarai :: Int -&gt; Int -&gt; Int -&gt; Int
+tarai x y z | x &lt;= y    = y
+            | otherwise = tarai (tarai (x-1) y z)
+
+                                (tarai (y-1) z x)
+                                (tarai (z-1) x y)
+\end{code}</code></pre>
+</blockquote>
+<p>おぉっ、引数チェックの様なものを入れたいと思ってたとこ。いくつか確認し たいので自分のコードをいじくる前にちょい見てみる。まず、大幅に楽チンに 済ませているのが read と print ですな。</p>
+<p>んーっと :find read ってすると、なんだかごちゃごちゃしてるんだよな。芋 づる式でぐちゃぐちゃ readHogeってのが出てくるんすよ。マニュアル類を見 ていると ここに read ってのと show ってのが出てくるなぁ。ふむふむ。ど うやら型だの型クラスだのを少しかじっておいた方が良さげな感じ。</p>
+<p>でもいきなり意味不明用語連発で死にたくなってくる。少しもどって、ちまち まやってみよう。 カタにハメてやろうか</p>
+<p>さらに戻ってみると、 Color って型を定義してます。 んが、イマイチよう分からん。まぁ、よく理解できない時にはHaskellとお話 をして反応をうかがうんです。</p>
+<pre><code>data Color = Red | Blue | Green
+isColor :: Color-&gt;Bool
+isColor c = case c of
+              Red -&gt; True
+              Blue -&gt; True
+              Green -&gt; True
+              _ -&gt; False</code></pre>
+<p>んで、遊んでみましょう。</p>
+<pre><code>Main&gt; :e color.hs
+Main&gt; isColor Red
+True
+Main&gt; isColor 123
+ERROR - Cannot infer instance
+*** Instance   : Num Color
+*** Expression : isColor 123
+
+Main&gt; isColor "Red"
+ERROR - Type error in application
+*** Expression     : isColor "Red"
+*** Term           : "Red"
+*** Type           : String
+*** Does not match : Color
+
+Main&gt; isColor Yellow
+ERROR - Undefined constructor function "Yellow"
+
+Main&gt; Red == Red
+ERROR - Cannot infer instance
+*** Instance   : Eq Color
+*** Expression : Red == Red</code></pre>
+<p>ふむ。なんとも面白いのは Red だの Blue だの Green だのってリテラルが data Color の右辺、つまりデータ構築子として出現しただけで、存在しちゃ うってこと。 C の enum なんかと同じみたいなんだけど、これってScheme?で 言えばどういうこと？敢えて書くとするとこんな感じでシンボル自身を指すシ ンボルを作るって感じだろうか？</p>
+<pre><code>(define Color '(Red Blue Green))
+(define Red 'Red)
+(define Blue 'Blue)
+(define Green 'Green)
+(define (isColor c) (if (memq c Color) #t #f))</code></pre>
+<p>と思ったら、</p>
+<pre><code>Main&gt; Red
+ERROR - Cannot find "show" function for:
+*** Expression : Red
+*** Of type    : Color</code></pre>
+<p>あー、 show クラスじゃないから印字表現がねぇよって言われます。つまり、</p>
+<pre><code>(define Red 'Red)
+(define Blue 'Blue)
+(define Green 'Green)</code></pre>
+<p>ってトコまではやりすぎかな。まぁ全然内部でやってることは違うくさいけど。 どうも、RedとかBlueとかGreenとかってシンボルをColorってグループの一員 としてインターンしているって感じだろう。とりあえず、そう思ってみる。</p>
+<p>んじゃ、お次は show クラスってやつだね。でも、つらつら見ててやっぱりキ ビシー！！いや、一部が分からない分にはいいんです。えぇ、大半が分からな いと気持ちが萎えます。</p>
+<p>それでもケナゲに <a href="http://www.sampou.org/haskell/tutorial-j/stdclasses.html">ここ</a>の導出されたインスタンスを見て、deriving ってな単 語に遭遇！わおっ。由来するとかって意味？しかもクラスっぽいのを継承して ますよ〜って電波をバシバシ感じます。</p>
+<pre><code>data  Tree a            =  Leaf a | Branch (Tree a) (Tree a)  deriving Eq</code></pre>
+<p>こーゆーとこに(^^) ちゅーわけで、</p>
+<pre><code>data Color = Red | Blue | Green deriving (Eq, Show)</code></pre>
+<p>これならどーよ！じゃじゃじゃーん！！</p>
+<pre><code>Main&gt; Red
+Red
+Main&gt; Green
+Green
+Main&gt; Blue
+Blue</code></pre>
+<p>やたっ。正解じゃん。なんかそれっぽいのを継承したみたいっす。 でまぁ、 Eq ってクラスも継承してるつもりなんで、</p>
+<pre><code>Main&gt; Red == Red
+True
+Main&gt; Red == Blue
+False
+Main&gt; Red == 123
+ERROR - Cannot infer instance
+*** Instance   : Num Color
+*** Expression : Red == 123</code></pre>
+<p>ってなワケでさっきは叱られた == なんかも適用可能と。クラスってのは他の 言語でいうクラスと同じようなもんなんでしょう。適用可能なメソッドとかも そのレベルで持っていると思われる。</p>
+<p>・・・えーっ？そーいや、ずっと型がクラスみたいなもんかと思ってたぞ。(^^; そうか、違うのか。んー(-"-)</p>
+<blockquote>
+<p>Haskell でのクラスとほかの言語でのクラスの意味が違うだけでしょう。 Java と比較するとこんなかんじ。</p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align:left">Haskell</td>
+<td style="text-align:left">Java</td>
+</tr>
+<tr class="even">
+<td style="text-align:left">クラス</td>
+<td style="text-align:left">インターフェイス</td>
+</tr>
+<tr class="odd">
+<td style="text-align:left">インスタンス</td>
+<td style="text-align:left">(型) クラス</td>
+</tr>
+<tr class="even">
+<td style="text-align:left">値</td>
+<td style="text-align:left">インスタンス(オブジェクト)</td>
+</tr>
+</tbody>
+</table>
+<p>まーいーや、show クラスってのがなんか見えてきた。多分関数なんかも show クラスを継承させられると、Scheme?みたく関数だけを入力してやるとエラー じゃなくてそれっぽい印字名で見えてくるんだろう。しかし、さっきはどう表 示するのか指定しなかったのによきに計らってくれたな。関数とかだとどう指 定するんだろうね。</p>
+</blockquote>
+<p>じゃあ引き続き、read クラスに行ってみようか。</p>
+<pre><code>Main&gt; read
+ERROR - Unresolved overloading
+*** Type       : Read a =&gt; String -&gt; a
+*** Expression : read</code></pre>
+<p>って感じになってますな。 Read a ってのが List a ってのや IO a ってのと 似た様に a をなんかでくるんでるモノってやつです。</p>
+<blockquote>
+<p>Read a は、型 a がクラス Read のインスタンスでなければならない、という 制約です。 <a href="http://www.sampou.org/haskell/tutorial-j/classes.html">ここ</a>参照</p>
+</blockquote>
+<pre><code>Main&gt; read "123"
+ERROR - Unresolved overloading
+*** Type       : Read a =&gt; a
+*** Expression : read "123"
+
+Main&gt; read "Hello"
+ERROR - Unresolved overloading
+*** Type       : Read a =&gt; a
+*** Expression : read "Hello"</code></pre>
+<p>んー、どうもトップレベルは Read a ってやつの印字表現が分からず困ってる んでしょうか。そのままでは使えない感じです。でも、</p>
+<pre><code>Main&gt; (read "123") + (read "456")
+579 </code></pre>
+<p>ってのは動作してくれますねぇ。どういうこったろ。</p>
+<pre><code>Main&gt; (read "Hello") ++ (read "World")
+ERROR - Unresolved overloading
+*** Type       : Read a =&gt; [a]
+*** Expression : read "Hello" ++ read "World"</code></pre>
+<p>って感じでだめだしさぁ。(–;</p>
+<p>ちゅうわけで再度<a href="http://www.sampou.org/haskell/tutorial-j/stdclasses.html">この辺</a>を読んでみます。さっきより若干なりとも触った経験があるので、少しは読めるようになってんじゃない？っていうとっても甘い考えです。</p>
+<pre><code>Read クラスには、その値を表現する文字列を構文解析する演算が用意されています。
+Show クラスの最も単純な関数は show です。</code></pre>
+<p>だそうですね。これってあるデータオブジェクトの印字表現をXとするような データオブジェクトxがあったら、Read X により x を作りますよってことか な。だとすると、read “Hello” ってのはまずくて、 read “\”Hello\"" って しないとだね。</p>
+<pre><code>Main&gt; read "\"Hello\""
+ERROR - Unresolved overloading
+*** Type       : Read a =&gt; a
+*** Expression : read "\"Hello\""</code></pre>
+<p>は？もしかして受取り側がいるのかな。</p>
+<pre><code>Main&gt; putStrLn $ read "\"Hello\""
+Hello</code></pre>
+<p>うむ。どうもそうみたいね。では、 ++ に渡してみましょう。えいや！</p>
+<pre><code>Main&gt; (read "\"Hello\"") ++ (read "\"World\"")
+ERROR - Unresolved overloading
+*** Type       : Read a =&gt; [a]
+*** Expression : read "\"Hello\"" ++ read "\"World\""</code></pre>
+<p>あ、そっかすぐ忘れる。これでどーよ？</p>
+<pre><code>Main&gt; putStrLn $ (read "\"Hello,\"") ++ (read "\"World\"")
+Hello,World</code></pre>
+<p>おおーっ、ぱちぱちぱち。</p>
+<blockquote>
+<pre><code>Main&gt; (read "123")::Int
+123
+Main&gt; (read "\"123\"")::String
+"123"
+Main&gt; (read "\"Hello, \"" ++ read "\"World!\"")::String
+"Hello, World!"</code></pre>
+</blockquote>
+<p>お？何やら神のお告げによると、値の型を指定出来ちゃうんだ？んー、 :: っ て一体・・・？(+_+) Cで言えば強制的に値をキャストするようなもんだろか。</p>
+<blockquote>
+<p>型を指定するというよりは、型推論とプログラマの意志の突き合わせができるという感じかなあ。</p>
+</blockquote>
+<pre><code>Main&gt; ((read "123")::Int) + ((read "456")::Int)
+579
+Main&gt; ((read "\"123\"")::String) ++ ((read "\"456\"")::String)
+"123456"</code></pre>
+<p>うむ。これで所望の型に指定できちゃうわけね。なかなか便利じゃん。これ。</p>
+<blockquote>
+<p>Main&gt; read “\”Hello,\"" ++ " " ++ read “\”World!\"" “Hello, World!” Main&gt; let x = read “123” in x + 0 123 Main&gt; (\ x -&gt; x + 0) (read “123”) 123 Main&gt; read “123” `asTypeOf` length [1..] 123</p>
+</blockquote>
+<p>ほう。</p>
+<pre><code>Main&gt; let x = read "123" in x + 0
+123</code></pre>
+<p>これ見た瞬間に awk の var "" とか var+0 とか思い出してしまった。どうも 周囲の型とつき合わせて、 辻褄が合うような解釈が可能なら、そういう型だ と解釈してくれる って感じかなあ。 でも、そうするってーと、</p>
+<pre><code>Main&gt; (read "\"Hello\"") ++ (read "\"World\"")
+ERROR - Unresolved overloading
+*** Type       : Read a =&gt; [a]
+*** Expression : read "\"Hello\"" ++ read "\"World\""</code></pre>
+<p>これと</p>
+<pre><code>Main&gt; read "\"Hello,\"" ++ " " ++ read "\"World!\""
+"Hello, World!"</code></pre>
+<p>これの差がわかんないね。なんで上のはエラーが発生しちゃったんだろ。(?_?) " " ってやつは空白文字１文字を含むリストだな。ん？もしかして read “\”Hello\"" は [a] であって a = Char までは解決してくんないのか。あー はいはい。 ++ はあくまでリスト同士をつなぐだけだからこいつは、中に格納 されている要素が ‘H’ だとか ‘e’ だとか評価せずに [a] ってリスト構造を そのまんま返すんだ。</p>
+<p>・・・いやいや、やっぱ納得できてないや。そいつを受け取ったトップレベル は印字できねぇの？印字しようとして値を求めた瞬間に具体的に “Hello,World” って分かるはずだよね。んむむ〜。</p>
+<p>とにかく " " ってのが具体的にリスト内の型を特定するのに役立っているん だろうけど、どうにも釈然としないぞ。順を追ってみようか。</p>
+<pre><code>Main&gt; (read "\"Hello\"") ++ (read "\"World\"")</code></pre>
+<p>ここで “\”Hello\"" ってのは [‘"’,‘H’,‘e’,‘l’,‘l’,‘o’,‘"’] だよね。こい つに read を apply すると read 自身は String-&gt;a (但し a は Read a) だ から、 “\”Hello\""自体が String ってのはいいんだ。こいつが Read a って のを返すんだな。あー、こいつに ++ を apply しようとしたってダメなんか？ ++ は [b] と [b] とを引数にとるわけだから、 Read a なんてリストじゃな いものを渡したらそりゃ怒るわ。カンカンですわ。そっかトップレベルが印字 できねぇって怒ってるんじゃなかったのか?もしかして。</p>
+<p>んじゃ、オッケーな方を検証してみようでないの。</p>
+<pre><code>Main&gt; read "\"Hello,\"" ++ " " ++ read "\"World!\""</code></pre>
+<p>これは read “\”Hello,\"" ってした結果 Read a な a が得られるよ、と。 " " については [Char] だね。そうすっと ++ は [b]-&gt;[b]-&gt;[b] だから [b]-&gt;[Char]-&gt;[b] で b = Char だと。んで、 Read a な a は [b] なわけだ から a = [Char] だとみなされる？あーやっぱ awk の var "" を連想します ね。私は。</p>
+<p>もっかいダメダメな方を考えると (read “\”Hello\"“) ++ (read”\“World\”") は a ++ a （但し a は Read a）なんだけど、 ++ 自体は確か に [b]-&gt;[b]-&gt;[b] だから a はリストだとはみなしてくれるのかもしれない なぁ。ありゃ？(^^; だったら、やっぱリストとして ++ をしてくれて、トップレベルが印字しよう と評価した瞬間に String だと分かるんで無いか？やっぱダメじゃん。理解で きてねーじゃん。うぁぁああ。(+,+;;</p>
+<ol type="1">
+<li>read “Hello” てしたら多分 Hello ってのを内部にもった Read オブジェクトを作るんだよね？</li>
+<li>read “\”Hello\"" ってしたら “Hello” ってのを内部にもった Read オブジェクトを作るんだろう。</li>
+<li>read “123” ってしたら 123 を内部にもつ Read オブジェクトを作るだろうし、</li>
+<li>read “\”123\"" なら “123” ってのを内部にもった Read オブジェクトを作るはず。</li>
+</ol>
+<p>仮に read が Scheme? で言うところの read-from-string 的なものだとすれ ば、 1番目のやつはシンボルHelloなオブジェクトを作り出すだろう。 2番目 と4番目は文字列オブジェクトを作るし、 3番目のだと数値データオブジェク トを作るはず。</p>
+<p>ただ、Haskellだとreadが返す時点では、まだシンボルだとか数値だとか文字 列だとかってのは分かってないんじゃないかと思うのだ。別に根拠ねーんだけ どさ。</p>
+<blockquote>
+<p>shiro: たぶん、「ここで帰って来る値はこういうオブジェクト」という考え方をしない方がいいんじゃないかと思います。Schemeなんかだと、実際にメモリ上にある型タグ付きのオブジェクトに触っている感触がありますが、 Haskellの場合、実行前に型推論が解決してるので、実行時にオブジェクトの型を見る必要は無い。「何かを中に持つReadオブジェクト」なんて存在しないんですよ。実行時にはreadが何の型を返すかは既に決まっていて、それを実行時に判断する必要はない。ただ、そのためには、readが何の型を返すかがコンパイル時にわかってないとならないってわけです。</p>
+</blockquote>
+<p>へぇっ。最初よくわからなかったんだけど、何度か反芻してるうちにようやく ウンウン！て激しくヘッドバンキング！ くくぅ！年も考えずに変なコトしたから首の筋痛めたくさい・・・。osz</p>
+<p>そっか。型推論と評価は完全に分離したフェーズなんだ。だから型推論してい るフェーズ（段階）では、値を求めた結果として分かる様な具体的な型っての は分からないよと。型推論の段階で決め切れなかった結果、 showメソッドが ないねぇって思われたらジエンドっすね？</p>
+<p>ってことはだ、</p>
+<pre><code>Main&gt; read "\"Hello,\"" ++ " " ++ read "\"World!\""</code></pre>
+<p>ここで " " をはさむって行為は ::[Char] って感じで型を指定（プログラマ の意図とすり合わせる？）のと同じ意味を持つんだ。もちろん、ここでは実際 に空白文字を一文字挟んじゃうわけだけど。</p>
+<p>とか何とか思ってたら、<a href="Lazy.html" class="uri" title="Go to wiki page">Lazy</a>ってページに遅延評価についても、いろいろ解説 されてるようだよ。実にタイムリー！ってかオイラの理解が一向に好転しない んで見かねて解説はじめてくれちゃったか？</p>
+<p>ふむふむと分かった気になるかと思ったが、また新たな敵（味方？）が・・・ WHNF? ってなんや〜！！</p>
+<p>ってわけで google に教えてもらったら、haskell-jp の豊福さんのスレッド に遭遇。ふむふむ。やっぱ同じようなとこで同じような疑問を持つんだよなぁ と感心。しかしやはり WHNFってほとんど断りなく使ってるな。 Weak Head Normal Formってのか?なんのこったか分からんが[Lazy]には、</p>
+<pre><code>WHNF というのは、乱暴にいうと一番外側(の一番左)に
+データコンストラクタが出てきた形、または、 λが出てきた形です。</code></pre>
+<p>だそうだ。この一番外の一番左ってのは、後続の具体例を読まないとイマイチ 釈然としなかったんだが、引数ってわけでもなさそうね。 show (1+1) だと show ってのがそうらしい。そいつが WHNF? になるまでは評価（簡約？）され るんだと。</p>
+<p>うーむ。いろいろ出てきて自分が立っているところが分からなくなってきたよ。ガク。</p>
+<p>ただ、haskell-jp のスレッドの<a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/181">Nothing</a>と<a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/181">putChar</a>のあたりをざーっと読ん で、<a href="Lazy.html" class="uri" title="Go to wiki page">Lazy</a>もふんがーって読むと、</p>
+<pre><code>Prelude&gt; 1 + 1</code></pre>
+<p>を入力すると、show (1 + 1)を「評価をする」というのが 出発点と考えられるわけです。</p>
+<p>ってのが、知りたかったとこかもしれん。実質 show は print から必要とさ れているんで、段階を踏むんだけどさ。この show ってやつが、ここずーーーっ と引っ掛かってる部分なわけだったんだ。</p>
+<p>とりあえず、確認のため :find print ってしてみると、</p>
+<pre><code>print     :: Show a =&gt; a -&gt; IO ()
+print      = putStrLn . show</code></pre>
+<p>ふむ。show して文字列にしてから putStrLn に渡すと。</p>
+<p>あ、あとさっきの haskell-jp の話題でおぉっってのは「トップレベルのロジッ クはフツーに read-eval-print-loop だよ〜」ってとこ。但し eval はクセモ ノだけど。</p>
+<p>その辺を気にかけながら、read とか show を使ってもっかい Haskell と対話 してみようか。</p>
+<pre><code>Main&gt; show $ putStr "Hello"
+"&lt;&lt;IO action&gt;&gt;"
+
+Main&gt; show [putStr "Hello",putStr "World"]
+"[&lt;&lt;IO action&gt;&gt;,&lt;&lt;IO action&gt;&gt;]"</code></pre>
+<p>まずは噂の &lt;&lt;IO action&gt;&gt; を拝んでおこう。 putStr “Hello” は印字までは 実行せずとも WHNF? ってやつになるらしく、 “Hello” とは印字せず、そうす る IO 型のオブジェクトになる。そいつを show に渡したら一応 show クラス らしくて印字表現があるため、 (っつっても &lt;&lt;IO action&gt;&gt; だけだけど)って のを印字すると。二番目の例だと show が適用される段階では [IO a] だって ことなんだろうな。</p>
+<pre><code>Main&gt; "Hello"
+"Hello"
+
+Main&gt; show "Hello"
+"\"Hello\""
+
+Main&gt; show $ show "Hello"
+"\"\\\"Hello\\\"\""
+
+Main&gt; show $ show $ show "Hello"
+"\"\\\"\\\\\\\"Hello\\\\\\\"\\\"\""
+
+Main&gt; show $ show $ show $ show "Hello"
+"\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"Hello\\\\\\\\\\\\\\\"\\\\\\\"\\\"\""</code></pre>
+<p>・・・爆笑。いや、オレってば何がしたいんだ？って。 えっと、何したかったんだか忘れちゃった。えーっと、これは “Hello” 自体 は印字形式は文字列 “Hello” になる。つまり、こいつは <a href="https://wiki.haskell.jp/Old/sampou.org/=%22Hello%22">‘H’,‘l’,‘l’,‘o’</a> になるね。こいつに show を適用すると、</p>
+<pre><code>show :: show a =&gt; a -&gt; String</code></pre>
+<p>なので、この場合、 a 自体も String になっている。たまたまね。そのため に左右のダブルクォーテーションもリストのメンバに取り込まれるんだね。 <a href="https://wiki.haskell.jp/Old/sampou.org/=%22%22Hello%22%22">‘"’,‘H’,‘l’,‘l’,‘o’,‘"’</a>ってな感じにさ。さらにそいつがエ スケープされると。まぁ print も同じなんだろうな。</p>
+<pre><code>Main&gt; print $ show "Hello"
+"\"Hello\""
+
+あれ？ print も一発 show を含んでいるから show $ show "Hello" ってしたのと同じようになると思ったんだけど、なんでだろ？
+
+Main&gt; print "Hello"
+"Hello"
+
+Main&gt; putStrLn "Hello"
+Hello</code></pre>
+<p>あー、 putStrLn がこうなるんだっけ。これは返り値が文字列ってワケじゃな くて、イタコのチャネル（この場合には標準出力）に Hello ってディスプレ イするっていうアクションの結果として見えているんだな。出力先がファイル ディスクリプタだったら書きこまれるだけで、モニタ上にはなんも出ないと。</p>
+<h3 id="続たらいまわし">続たらいまわし</h3>
+<p>だいぶスタックの深いトコから一気に戻るけど、窒素酔いを起こさないよーに。 たらいまわしコマンドをHaskellで実装したわけだが、こいつを色々いじくり まわして遊んでみようじゃないかってことです。</p>
+<p>っつーわけで再掲。</p>
+<pre><code>#!/usr/pkg/bin/runhugs
+
+\begin{code}
+
+import System
+
+main :: IO ()
+main = do args &lt;- getArgs
+          putStrLn $ numberToStr $ apply (tak) $ map (strToNumber) args
+
+apply :: (a -&gt; a -&gt; a -&gt; b) -&gt; [a] -&gt; b
+apply f [x,y,z] = f x y z
+
+numberToStr :: Int -&gt; String
+numberToStr num = if (num &lt; 10)
+                  then [intToDigit num]
+                  else (numberToStr $ quot num 10) ++ [intToDigit $ rem num 10]
+
+strToNumber :: String -&gt; Int
+strToNumber str = foldl1 (\x y-&gt;10*x+y) $ map digitToInt str
+
+tak :: Int -&gt; Int -&gt; Int -&gt; Int
+tak x y z = if (x &gt; y) then tak (tak (x-1) y z)
+                                (tak (y-1) z x)
+                                (tak (z-1) x y)
+                       else y
+
+\end{code}</code></pre>
+<p>まずは一度挫折している numberToStr の一時的な束縛を使ったコード。あの 後、神のささやきにて let,where を使うよろし！だって。(なぜに中国人風？)</p>
+<pre><code>numberToStr :: Int -&gt; String
+numberToStr num = let (q,r) = (quotRem num 10)
+                  in (numberToStr q) ++ [intToDigit r]</code></pre>
+<p>こんな感じになるはず。多分。 let decl in body ってな具合です。んで emacs 上で試してみる。</p>
+<pre><code>Main&gt; numberToStr 123
+"
+Process hugs illegal instruction (core dumped)</code></pre>
+<p>あ、がぁん！！Hugs殺しちゃったよ〜。そんなに悪いことした？オレ(++;アタフタ えっとーどういうこったろ。</p>
+<pre><code>Main&gt; numberToStr 1
+"
+Process hugs illegal instruction (core dumped)</code></pre>
+<p>ダメだ。でもよーく見るとコアダンプの直前に " ってダブルクォーテーショ ン一個だけの断末魔の叫びが。</p>
+<p>どうやら処理しようとはしてくれている。しばし考えててようやく分かりまし た。いやぁ、何とも間抜けなんだけど再帰で書いてて基底条件が無いじゃん。</p>
+<pre><code>numberToStr :: Int -&gt; String
+numberToStr num = let (q,r) = (quotRem num 10)
+                  in if q == 0
+                     then [intToDigit r]
+                     else (numberToStr q) ++ [intToDigit r]</code></pre>
+<p>こんな風に in の中に書いてやる。そんでからプロンプトにぃ〜食らえ！！</p>
+<pre><code>Main&gt; numberToStr 123
+"123"
+Main&gt; numberToStr 987654321
+"987654321"
+Main&gt; </code></pre>
+<p>やたっ！ちなみに where 節ってのも使えるらしいから、試しておこう。</p>
+<pre><code>numberToStr :: Int -&gt; String
+numberToStr num | q == 0 = [intToDigit r]
+                | otherwise = (numberToStr q) ++ [intToDigit r]
+                where (q,r) = (quotRem num 10)</code></pre>
+<p>otherwise とかいけんのかな？って思ってたら大丈夫でした。えーっともしか して _ とか使えないかな？</p>
+<pre><code>                | _ = (numberToStr q) ++ [intToDigit r]</code></pre>
+<p>こうやって、ロードしてやると・・・</p>
+<pre><code>Type checking..................................................................
+Compiling......................................................................
+Reading file "/home/cut-sea/script/haskell/tak.lhs":
+Parsing........................................................................
+Dependency analysis
+ERROR "/home/cut-sea/script/haskell/tak.lhs":27 - Illegal `_' in expression
+System&gt; </code></pre>
+<p>あーだめか。 case っぽいのとはまた違うのかな？うーん。どうも整理できて ないんだよな。まーいーんだけどね。</p>
+<blockquote>
+<p>‘_’はパターン部(’|‘の前)でしか使えません。ガード部(’|‘の後)には真偽値しか来ません。 ちなみに、’otherwise’ が使えるのは、Prelude で True と 定義 されているからです。</p>
+</blockquote>
+<p>とにかく time とかで計測してみたけど、この三種類ではあんまし大差ない感 じ。ところが、意外だったのは神の提示された read を使っているコードが若 干遅めだったこと。これって凄い不思議な感じ。なんでかって？だって read って個人的には言語核の read-eval-print における read だと思ってたんだ よね。これは高速だろうなと、はい。</p>
+<p>一方 numberToStr はっつーと別の関数として実装してて、一文字ずつ読み込 んでは変換してって作業をしているわけだから明らかに遅そうじゃん？一体全 体なんなんでしょう。もしかして read ってのは read-eval-print の read とは別モンなんだろうか。(–; それとも read 自体の問題じゃなくて他になんか遅くなる要因があるんだろう か。もしくは私のread は速えぇって感覚の方がおかしいんだろうか。</p>
+<p>プロファイラとかあればいいんだろうけどなぁ。そういやデバッグの標準的な やり方とかも知らんな。なんとなくエラーメッセージからアタリつけたり、あ と神のツッコミだよりって感じ。あ、あと遅延評価(要は問題先送り精神のこ とね)。</p>
+<blockquote>
+<p><a href="http://cvs.haskell.org/Hugs/pages/users_guide/observe.html" class="uri">http://cvs.haskell.org/Hugs/pages/users_guide/observe.html</a>[ Hugs のマ ニュアル]によると、デバッグには Observe (もしくは Hugs.Observe)モジュー ルが使えるようです。このモジュールをインポートして、監視したい値の前に ‘observe “name”’ と付ければ、実行後に値を表示してくれます。</p>
+<pre><code>Observe&gt; let f x = if x == 0 then 1 else x * observe "f" f (x-1) in f 10
+3628800
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Observations &lt;&lt;&lt;&lt;&lt;&lt;
+
+f
+  { \ 9  -&gt; 362880
+  , \ 8  -&gt; 40320
+  , \ 7  -&gt; 5040
+  , \ 6  -&gt; 720
+  , \ 5  -&gt; 120
+  , \ 4  -&gt; 24
+  , \ 3  -&gt; 6
+  , \ 2  -&gt; 2
+  , \ 1  -&gt; 1
+  , \ 0  -&gt; 1
+  }
+
+strToNumber = foldl1 (\x y -&gt; 10 * x + y) . map digitToInt</code></pre>
+<p>に対して hugs +s で</p>
+<pre><code>Main&gt; strToNumber "123"
+123
+(124 reductions, 212 cells)
+Main&gt; read "123" :: Int
+123
+(1048 reductions, 1537 cells)</code></pre>
+<p>でした。</p>
+<p>readはただの関数でRead Intも /usr/local/lib/hugs/libraries/Hugs/Prelude.hs で定義されています。御参 考まで。</p>
+<p>余計なお世話かもしれませんが、型推論の時のエラーと実行時のエラーを混同 されているように見受けられます。 (特に read の辺り) Hugs では、実行時のエラーは ‘Program error:’ と表示されます。</p>
+<pre><code>Prelude&gt; [1] !! (-1)
+
+Program error: Prelude.!!: negative index</code></pre>
+<p>ここまでの WayToHaskeller に載っているエラーメッセージで、 ‘Program error:’ と表示されているのは2箇所だけです。つまり、今までのエラーは、 ほとんど型推論の段階で起きていて、コードはいっさい実行されていない、と いう事になります。</p>
+</blockquote>
+<p>ふむふむ。ちょっとしたデバッグプリントやオプションが使えるんだぁ。言わ れてみれば確かに read って色々分岐しまくってたな。 reduction ってのは 何回簡約されたかですな。cells ってのは消費したメモリセル？ Lispのご本 尊みたいなものの消費量かなぁとか予想してみる。とりあえず簡約回数だけみ ても、あー read って何回も色々やることがあるんだぁってのが伺えちゃいま す。</p>
+<h3 id="デバッグの手段を知ろう">デバッグの手段を知ろう</h3>
+<p>この辺りを知って、しかも話の流れからすると・・・たらいまわし関数の値の デバッグプリントとか見てみたくないですかい？わしゃ見たい！っちゅーわけ で見てみることにしてみましょう。はい。</p>
+<p>まずは、Observe をインポートすんだね。import System の下あたりに追加します。</p>
+<pre><code>import System
+import Observe  &lt;= コレ</code></pre>
+<p>でもって emacs 上で Ctrl-c Ctrl-l でロードしてから、</p>
+<pre><code>Main&gt; observe "tak" tak 6 3 0
+6
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Observations &lt;&lt;&lt;&lt;&lt;&lt;
+
+tak
+  { \ 6 3 0  -&gt; 6
+  }</code></pre>
+<p>あれぇ？ 6 3 0 じゃ小さいのか？そんな問題じゃねーよな。でも、一応確認 してみよう。</p>
+<pre><code>Main&gt; observe "tak" tak 200 100 0
+200
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Observations &lt;&lt;&lt;&lt;&lt;&lt;
+
+tak
+  { \ 200 100 0  -&gt; 200
+  }</code></pre>
+<p>うーん。やっぱ関係ないね。もっかい神の啓示を振り返ってみると、</p>
+<pre><code>Observe&gt; let f x = if x == 0 then 1 else x * observe "f" f (x-1) in f 10</code></pre>
+<p>・・・あーっそっか！ハイハイ。デバッグプリントだった。評価するステップ で印字するんだ。</p>
+<pre><code>Main&gt; let tak x y z = if (x &gt; y)
+                      then tak (observe "tak" tak (x-1) y z)
+                               (tak (y-1) z x)
+                               (tak (z-1) x y)
+                      else y in tak 10 5 0
+10
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Observations &lt;&lt;&lt;&lt;&lt;&lt;
+
+tak
+  { \ 9 5 0  -&gt; 9
+  , \ 8 5 0  -&gt; 8
+  , \ 7 5 0  -&gt; 7
+  , \ 6 5 0  -&gt; 6
+  , \ 5 5 0  -&gt; 5
+  , \ 3 0 6  -&gt; 6
+  , \ 2 0 6  -&gt; 6
+  , \ 1 0 6  -&gt; 6
+  , \ 0 0 6  -&gt; 0
+  , \ 3 0 7  -&gt; 7
+  , \ 2 0 7  -&gt; 7
+  , \ 1 0 7  -&gt; 7
+  , \ 0 0 7  -&gt; 0
+  , \ 3 0 8  -&gt; 8
+  , \ 2 0 8  -&gt; 8
+  , \ 1 0 8  -&gt; 8
+  , \ 0 0 8  -&gt; 0
+  , \ 3 0 9  -&gt; 9
+  , \ 2 0 9  -&gt; 9
+  , \ 1 0 9  -&gt; 9
+  , \ 0 0 9  -&gt; 0
+  , \ 3 0 10  -&gt; 10
+  , \ 2 0 10  -&gt; 10
+  , \ 1 0 10  -&gt; 10
+  , \ 0 0 10  -&gt; 0
+  }</code></pre>
+<p>おおぉっ！でけたでけた。ぱちぱちぱち。 一方Schemeインタプリタだと、どうなるかってーと、</p>
+<pre><code>gosh&gt; (define (tak x y z) (if (&gt; x y)
+                              (tak #?=(tak (- x 1) y z)
+                                      (tak (- y 1) z x)
+                                      (tak (- z 1) x y))
+                              y))
+tak</code></pre>
+<p>さぁ、試してみましょう。</p>
+<pre><code>gosh&gt; (tak 10 5 0)
+      :
+      :</code></pre>
+<p>・・・(+_+)えぇ、とても書き込めません。そんな必要無いですし。 しかし、最初の引数を observe しただけでもアレですから大変なもんです。 全部を observe したらどうなるでしょうかね。</p>
+<pre><code>Main&gt; let tak x y z = if (x &gt; y)
+                      then tak (observe "tak" tak (x-1) y z)
+                               (observe "tak" tak (y-1) z x)
+                               (observe "tak" tak (z-1) x y)
+                      else y in tak 10 5 0
+10
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Observations &lt;&lt;&lt;&lt;&lt;&lt;
+
+tak
+  { \ 9 5 0  -&gt; 9
+  , \ 8 5 0  -&gt; 8
+  , \ 7 5 0  -&gt; 7
+  , \ 6 5 0  -&gt; 6
+  , \ 5 5 0  -&gt; 5
+  , \ 4 0 6  -&gt; 6
+  , \ 3 0 6  -&gt; 6
+  , \ 2 0 6  -&gt; 6
+  , \ 1 0 6  -&gt; 6
+  , \ 0 0 6  -&gt; 0
+  , \ (-1) 6 1  -&gt; 6
+  , \ (-1) 6 2  -&gt; 6
+  , \ (-1) 6 3  -&gt; 6
+  , \ (-1) 6 4  -&gt; 6
+  , \ 4 0 7  -&gt; 7
+  , \ 3 0 7  -&gt; 7
+  , \ 2 0 7  -&gt; 7
+  , \ 1 0 7  -&gt; 7
+  , \ 0 0 7  -&gt; 0
+  , \ (-1) 7 1  -&gt; 7
+  , \ (-1) 7 2  -&gt; 7
+  , \ (-1) 7 3  -&gt; 7
+  , \ (-1) 7 4  -&gt; 7
+  , \ 4 0 8  -&gt; 8
+  , \ 3 0 8  -&gt; 8
+  , \ 2 0 8  -&gt; 8
+  , \ 1 0 8  -&gt; 8
+  , \ 0 0 8  -&gt; 0
+  , \ (-1) 8 1  -&gt; 8
+  , \ (-1) 8 2  -&gt; 8
+  , \ (-1) 8 3  -&gt; 8
+  , \ (-1) 8 4  -&gt; 8
+  , \ 4 0 9  -&gt; 9
+  , \ 3 0 9  -&gt; 9
+  , \ 2 0 9  -&gt; 9
+  , \ 1 0 9  -&gt; 9
+  , \ 0 0 9  -&gt; 0
+  , \ (-1) 9 1  -&gt; 9
+  , \ (-1) 9 2  -&gt; 9
+  , \ (-1) 9 3  -&gt; 9
+  , \ (-1) 9 4  -&gt; 9
+  , \ 4 0 10  -&gt; 10
+  , \ 3 0 10  -&gt; 10
+  , \ 2 0 10  -&gt; 10
+  , \ 1 0 10  -&gt; 10
+  , \ 0 0 10  -&gt; 0
+  , \ (-1) 10 1  -&gt; 10
+  , \ (-1) 10 2  -&gt; 10
+  , \ (-1) 10 3  -&gt; 10
+  , \ (-1) 10 4  -&gt; 10
+  }
+
+Main&gt; </code></pre>
+<p>スゴイデスネ〜ワタクシビックリギョウテンデゴザイマス〜。 こりゃ速いハズだわ。うん。ちなみに observe したやつはコマンドラインか ら ./tak.lhs 10 5 0 とかってしても印字はされません。投げてるポートか違 うんでしょうね。</p>
+<p>でもってよーく考えてみると、事実上たらいまわし関数の値を求めるのに必要 な評価ってのはこれだけで済む訳で、考えようによっては、これって一種のコ ンパイラの最適化じゃない？</p>
+<p>さらに trace なんかもあるらしい。こいつも試してみよう。 Everyday:2004-10-31を参考にしてみる。</p>
+<pre><code>apply :: (a -&gt; a -&gt; a -&gt; b) -&gt; [a] -&gt; b
+apply f [x,y,z] = trace ("trace:"++show x++","++show y++","++show z++"=") $ f x y z</code></pre>
+<p>さあ、これでどーよ？</p>
+<pre><code>Type checking
+ERROR "/home/cut-sea/script/haskell/tak.lhs":31 - Cannot justify constraints in explicitly typed binding
+*** Expression    : apply
+*** Type          : (a -&gt; a -&gt; a -&gt; b) -&gt; [a] -&gt; b
+*** Given context : ()
+*** Constraints   : Show a
+
+Trace&gt; </code></pre>
+<p>？！ Cannot justify constraints in explicitly typed binding って型があ わねぇっておっしゃってるんだろうか。 show a がまずいのかな？ってゆーか、 もしかしてこうかい？</p>
+<pre><code>-- apply :: (a -&gt; a -&gt; a -&gt; b) -&gt; [a] -&gt; b
+apply :: (Int -&gt; Int -&gt; Int -&gt; Int) -&gt; [Int] -&gt; Int
+apply f [x,y,z] = trace ("trace:"++show x++","++show y++","++show z++"=") $ f x y z</code></pre>
+<blockquote>
+<pre><code>apply :: Show a =&gt; (a -&gt; a -&gt; a -&gt; b) -&gt; [a] -&gt; b</code></pre>
+<p>でもうまくいきます。</p>
+</blockquote>
+<p>どうかな？</p>
+<pre><code>Main&gt; apply tak [6,3,0]
+trace:6,3,0=6
+Main&gt; </code></pre>
+<p>あ、おっけーですね。でもまた同じ間違いをしちゃいました。こんなトコに書 いたってしょーがねーじゃんね。</p>
+<pre><code>tak :: Int -&gt; Int -&gt; Int -&gt; Int
+tak x y z = if (x &gt; y)
+            then trace ("trace:"++show x++","++show y++","++show z++"\n") $ tak (tak (x-1) y z)
+                                                                                (tak (y-1) z x)
+                                                                                (tak (z-1) x y)
+            else y</code></pre>
+<p>ここでした。これで一応それっぽい動きが確認できますな。</p>
+<pre><code>Main&gt; tak 6 3 0
+trace:6,3,0
+trace:5,3,0
+trace:4,3,0
+trace:2,0,4
+trace:1,0,4
+trace:2,0,5
+trace:1,0,5
+trace:2,0,6
+trace:1,0,6
+6</code></pre>
+<p>ってね。ぱちぱちぱち〜。 でも正直 observe の方が便利な気がするんですけどね。それって gosh の #?= に慣れちゃってるからかなぁ。</p>
+<p>いずれにせよデバッグの秘宝も手にしたし、ページもでかくなって来てそろそ ろ編集するのも辛いので (すでに理由をナメてんな)よちよち歩きへGO！！</p>
+<h3 id="ちょっとひとやすみメイビー">【ちょっとひとやすみ】メイビー？</h3>
+<blockquote>
+<p>やっぱりまだまだ先。。。</p>
+</blockquote>
+<p>(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:%EF%BF%BD%C4%A4%EF%BF%BD%EF%BF%BD%DE%A4%EF%BF%BD%CE%A9%EF%BF%BD%EF%BF%BD&amp;c=e&amp;l=jp">「つかまり立ち」を編集する</a>)|(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&amp;l=jp">Haskellerへの道</a>)</p>
+</blockquote>
+<hr>
+<p>Last modified : 2006/06/12 12:48:43 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e3%81%a4%e3%81%8b%e3%81%be%e3%82%8a%e7%ab%8b%e3%81%a1" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

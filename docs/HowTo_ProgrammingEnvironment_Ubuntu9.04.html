@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#howto_programmingenvironment_ubuntu9.04"><span>HowTo_ProgrammingEnvironment_Ubuntu9.04</span></a><ul>
+<li><a href="#ubuntu-9.04-i386%E4%B8%8A%E3%81%ABhaskell%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%82%8B">Ubuntu 9.04 (i386)上にHaskellプログラミング環境を作る</a><ul>
+<li><a href="#ghc-6.10.4%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">ghc-6.10.4のインストール</a></li>
+<li><a href="#%E9%96%8B%E7%99%BA%E7%94%A8%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E7%92%B0%E5%A2%83">開発用のライブラリ環境</a></li>
+<li><a href="#cabal-%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">cabal コマンドのインストール</a></li>
+<li><a href="#darcs-%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">darcs のインストール</a></li>
+<li><a href="#%E3%83%91%E3%83%BC%E3%82%B6%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF">パーザジェネレータ</a></li>
+<li><a href="#%E3%81%9D%E3%81%AE%E3%81%BB%E3%81%8B%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA">そのほかのライブラリ</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="howto_programmingenvironment_ubuntu9.04"><a href="" class="uri" title="Go to wiki page">HowTo_ProgrammingEnvironment_Ubuntu9.04</a></h1>
+<p><a href="HowTo.html" class="uri" title="Go to wiki page">HowTo</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/ProgrammingEnvironment" class="uri" title="Go to wiki page">ProgrammingEnvironment</a>:Ubuntu9.04</p>
+<hr>
+<p>以下は2009/08/06 02:40:44 JST現在の情報である．</p>
+<h2 id="ubuntu-9.04-i386上にhaskellプログラミング環境を作る">Ubuntu 9.04 (i386)上にHaskellプログラミング環境を作る</h2>
+<h3 id="ghc-6.10.4のインストール">ghc-6.10.4のインストール</h3>
+<p>ubuntuのパッケージにghc6というのがあるのだが，最新のリリースバージョンではないとか，最小構成になっているので少し使いにくいとか，いろいろ不満がでる．それで，コンパイル済のバイナリがはいった，tarballからインストールする．これは非常に簡単です．</p>
+<h4 id="tarballを取得展開設定インストール">tarballを取得，展開，設定，インストール</h4>
+<pre><code>% wget http://www.haskell.org/ghc/dist/6.10.4/ghc-6.10.4-i386-unknown-linux-n.tar.bz2
+% tar xf ghc-6.10.4-i386-unknown-linux-n.tar.bz2
+% cd ghc-6.10.4
+% ./configure
+% sudo make install</code></pre>
+<hr>
+<h3 id="開発用のライブラリ環境">開発用のライブラリ環境</h3>
+<pre><code>% sudo apt-get install libgmp3-dev
+% sudo apt-get install zlib1g-dev
+% sudo apt-get install freeglut3-dev</code></pre>
+<hr>
+<h3 id="cabal-コマンドのインストール">cabal コマンドのインストール</h3>
+<p>これは必須</p>
+<h4 id="cabal-install-パッケージのインストール">cabal-install パッケージのインストール</h4>
+<pre><code>% wget http://hackage.haskell.org/packages/archive/cabal-install/0.6.2/cabal-install-0.6.2.tar.gz
+% tar xf cabal-install-0.6.2.tar.gz
+% cd cabal-install-0.6.2/
+% ./bootstrap.sh</code></pre>
+<h4 id="home.cabalbin-にpathを通す">$HOME/.cabal/bin にPATHを通す</h4>
+<pre><code>% export PATH=$HOME/.cabal/bin:$PATH
+% echo 'export PATH=$HOME/.cabal/bin:$PATH' &gt;&gt; ~/.zshrc</code></pre>
+<hr>
+<h3 id="darcs-のインストール">darcs のインストール</h3>
+<p>これも必須</p>
+<pre><code>% sudo apt-get install libncurses5-dev libcurl4-gnutls-dev
+% cabal update
+% cabal install darcs</code></pre>
+<hr>
+<h3 id="パーザジェネレータ">パーザジェネレータ</h3>
+<pre><code>% cabal install alex happy</code></pre>
+<hr>
+<h3 id="そのほかのライブラリ">そのほかのライブラリ</h3>
+<pre><code>% cabal install cgi fgl GLUT haskell-src-exts html HUnit hscolour</code></pre>
+<hr>
+<p>Last modified : 2010/09/18 00:54:29 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnvironment_Ubuntu9.04" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/README.md"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - README.md</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_history/README.md">history</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">README.md</a></h1>
+  
+  <div class="sourceCode"><pre class="sourceCode numberSource"><code class="sourceCode"><a class="sourceLine" id="1" href="#1" title="1"><span class="fu"># Haskell-jp Wiki</span></a>
+<a class="sourceLine" id="2" href="#2" title="2"></a>
+<a class="sourceLine" id="3" href="#3" title="3">Haskell関連情報を日本語でまとめるためのWikiのソースコードです。  </a>
+<a class="sourceLine" id="4" href="#4" title="4">Wikiの内容そのものに対するPull Request, Issueは受け付けておりません。 &nbsp;</a>
+<a class="sourceLine" id="5" href="#5" title="5">http://wiki.haskell.jp/ を直接編集するか、「disscuss」タブで議論して下さい。</a>
+<a class="sourceLine" id="6" href="#6" title="6"></a>
+<a class="sourceLine" id="7" href="#7" title="7">このWikiに限らず、Haskellに関して日本語で情報を共有したい場合や質問がある場合は<span class="ot">[Haskell-jpのSlackチーム](https://haskell.jp/signin-slack.html)</span>に投稿してください！</a>
+<a class="sourceLine" id="8" href="#8" title="8"></a>
+<a class="sourceLine" id="9" href="#9" title="9"><span class="fu">## 管理者メモ</span></a>
+<a class="sourceLine" id="10" href="#10" title="10"></a>
+<a class="sourceLine" id="11" href="#11" title="11">デプロイしてログの確認をするときは</a>
+<a class="sourceLine" id="12" href="#12" title="12"></a>
+<a class="sourceLine" id="13" href="#13" title="13"><span class="bn">```</span></a>
+<a class="sourceLine" id="14" href="#14" title="14"><span class="bn">heroku container:push web -a $HEROKU_APP_NAME &amp;&amp; heroku container:release web -a $HEROKU_APP_NAME &amp;&amp; heroku logs --tail -a $HEROKU_APP_NAME</span></a>
+<a class="sourceLine" id="15" href="#15" title="15"><span class="bn">```</span></a></code></pre></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/README.md">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/README.md?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/README.md">Delete this page</a></li>
+      
+    </ul>
+    
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

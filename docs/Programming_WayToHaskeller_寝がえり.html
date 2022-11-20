@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_WayToHaskeller_寝がえり</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_WayToHaskeller_寝がえり</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_waytohaskeller_%E5%AF%9D%E3%81%8C%E3%81%88%E3%82%8A"><span>Programming_WayToHaskeller_寝がえり</span></a><ul>
+<li><a href="#%E5%AF%9D%E3%81%8C%E3%81%88%E3%82%8A">寝がえり</a><ul>
+<li><a href="#%E5%8B%89%E5%BC%B7%E3%82%88%E3%82%8A%E3%81%BE%E3%81%9A%E5%87%A6%E7%90%86%E7%B3%BB%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">勉強よりまず処理系のインストール</a></li>
+<li><a href="#%E3%81%A9%E3%82%8C%E3%81%AB%E3%81%97%E3%82%88%E3%81%86%E3%81%8B%E3%81%AA">ど・れ・に・し・よ・う・か・な</a></li>
+<li><a href="#prelude%E3%81%A3%E3%81%A6%E3%81%AA%E3%82%93%E3%81%9E%E3%82%84">Preludeってなんぞや?</a></li>
+<li><a href="#%E3%83%98%E3%83%AB%E3%83%97">ヘルプ</a></li>
+<li><a href="#emacs-%E3%82%92%E4%BD%BF%E3%81%84%E3%81%9F%E3%81%84">Emacs を使いたい</a></li>
+<li><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%B2%E3%81%A8%E3%82%84%E3%81%99%E3%81%BF%E9%9D%9E%E6%AD%A3%E6%A0%BC%E3%81%A3%E3%81%A6">【ちょっとひとやすみ】「非正格」って？</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_waytohaskeller_寝がえり"><a href="" class="uri" title="Go to wiki page">Programming_WayToHaskeller_寝がえり</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/WayToHaskeller" class="uri" title="Go to wiki page">WayToHaskeller</a>:寝がえり</p>
+<hr>
+<h2 id="寝がえり">寝がえり</h2>
+<p>(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD&amp;c=e&amp;l=jp">「ねがえり」を編集する</a>)|(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&amp;l=jp">Haskellerへの道</a>)</p>
+<h3 id="勉強よりまず処理系のインストール">勉強よりまず処理系のインストール</h3>
+<p>まずはHaskellをインストールしてみる訳だけど、面倒なのはいきなりくじけ る。私のモットーはまずは動かしてみる。だ。(今決めた) もう何年も前から PC-UNIXの世界ではサードパーティー製のソフトをワンタッチでインストール できる仕組みがあったりする。 Linux だと rpm か? FreeBSD なら ports collection、 NetBSD だと package など。まぁ、NetBSDなんかだとバージョ ンが古かったりする可能性もあるが、気にしない。（そりゃ単に私がちゃんと 最新化管理してないからか?）</p>
+<p>私の生活環境は NetBSD1.6.2 なので package から make してインストールしてみる。</p>
+<p>インストール作業そのものが好きな人には何の刺激もないが、まずバカチョン でインストールできるHaskell処理系にはどんなんがあるんかいな?</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="6d0e1819401e080c2d07040304">[email&nbsp;protected]</a>&gt; pwd
+/usr/pkgsrc
+<a href="email-protection.html" class="__cf_email__" data-cfemail="6506101148160004250f0c0b0c">[email&nbsp;protected]</a>&gt; ./pkglocate Haskell
+(snip)
+lang/ghc/DESCR:GHC: The Glasgow Haskell Compiler.
+lang/ghc/DESCR:The Glasgow Haskell Compiler is a robust, fully-featured, optimising
+lang/ghc/DESCR:compiler for the functional programming language Haskell 98
+
+(snip)
+
+lang/hugs/DESCR:The Nottingham and Yale Haskell interpreter and programming environment.
+lang/hugs/DESCR:   a Haskell interpreter and programming environment for developing
+lang/hugs/DESCR:   cool Haskell programs.  Sources and binaries are freely available
+
+(snip)
+
+lang/nhc98/DESCR:nhc98 is a fully-fledged compiler for Haskell 98, the standard lazy
+lang/nhc98/DESCR:compiler for an earlier version of the language. Written in Haskell,
+lang/nhc98/DESCR:With hmake, a replacement for the other makes used in Haskell</code></pre>
+<p>どうやら <a href="https://www.haskell.org/hugs">Hugs</a>、 <a href="https://www.haskell.org/ghc/">GHC</a>、<a href="https://www.haskell.org/nhc98/">nhc98</a> ってのがそうらしいので、全部入れちゃう。ここはHaskellの話題じゃないの でインストールの詳細は書かない。とにかくすでにインストールしてくれた先 人のおかげで失敗することなんてないでしょ。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="fd9e8889d08e989cbd97949394">[email&nbsp;protected]</a>&gt; which nhc98
+/usr/pkg/bin/nhc98
+<a href="email-protection.html" class="__cf_email__" data-cfemail="debdabaaf3adbbbf9eb4b7b0b7">[email&nbsp;protected]</a>&gt; which ghc
+/usr/pkg/bin/ghc
+<a href="email-protection.html" class="__cf_email__" data-cfemail="d8bbadacf5abbdb998b2b1b6b1">[email&nbsp;protected]</a>&gt; which ghci
+/usr/pkg/bin/ghci
+<a href="email-protection.html" class="__cf_email__" data-cfemail="6f0c1a1b421c0a0e2f05060106">[email&nbsp;protected]</a>&gt; which hugs
+/usr/pkg/bin/hugs</code></pre>
+<p>はい。処理系が手に入りましたね。</p>
+<h3 id="どれにしようかな">ど・れ・に・し・よ・う・か・な</h3>
+<p>とりあえず、石橋を叩かず渡る派の私はこれらのコマンドをまんま呼び出して みる。まぁいざとなれば外から kill すりゃいいじゃないの。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="83e0f6f7aef0e6e2c3e9eaedea">[email&nbsp;protected]</a>&gt; ghc
+ghc-5.04.3: no input files
+Usage: For basic information, try the `--help' option.</code></pre>
+<p>ありゃ、だめだ。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="f3908687de809692b3999a9d9a">[email&nbsp;protected]</a>&gt; nhc98
+nhc98: error: no source, object or archive file specified</code></pre>
+<p>お前もかブルータス。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="375442431a445256775d5e595e">[email&nbsp;protected]</a>&gt; ghci
+   ___         ___ _
+  / _ ? /?  /?/ __(_)
+ / /_?// /_/ / /  | |      GHC Interactive, version 5.04.3, for Haskell 98.
+/ /_??/ __  / /___| |      http://www.haskell.org/ghc/
+?____/?/ /_/?____/|_|      Type :? for help.
+
+Loading package base ... linking ... done.
+Loading package haskell98 ... linking ... done.
+Prelude&gt; ^D Leaving GHCi.</code></pre>
+<p>お、いけそう。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="0e6d7b7a237d6b6f4e64676067">[email&nbsp;protected]</a>&gt; hugs
+__   __ __  __  ____   ___      _________________________________________
+||   || ||  || ||  || ||__      Hugs 98: Based on the Haskell 98 standard
+||___|| ||__|| ||__||  __||     Copyright (c) 1994-2001
+||---||         ___||           World Wide Web: http://haskell.org/hugs
+||   ||                         Report bugs to: <a href="email-protection.html" class="__cf_email__" data-cfemail="0b637e6c7826697e6c784b636a78606e67672564796c">[email&nbsp;protected]</a>
+||   || Version: December 2001  _________________________________________
+
+Haskell 98 mode: Restart with command line option -98 to enable extensions
+
+Reading file "/usr/pkg/share/hugs/lib/Prelude.hs":
+                   
+Hugs session for:
+/usr/pkg/share/hugs/lib/Prelude.hs
+Type :? for help
+Prelude&gt; ^D [Leaving Hugs]</code></pre>
+<p>ほほー、こいつが hugs ね。</p>
+<p>実は ghc と nhc98 てのはコンパイラらしい。オンラインマニュアルの最初に compilerって出てたりもするんで多分そうだろう。今のところ、あまり細かい ことは気にしない。 一方 ghci と hugs ってのが何やらプロンプトが現れたので interactive に遊べそう。</p>
+<p>最初はプロンプトからちまちま入力してみるのがいい。すぐに反応も見れて楽 しめた方が勉強する気にもなるってもんだ。とりあえずプロンプトが出て来た 奴で進めることにしましょう。</p>
+<p>hugs ってのが軽くてよさそうってのをどっかで読んだような気がするんで hugs で GO!</p>
+<h3 id="preludeってなんぞや">Preludeってなんぞや?</h3>
+<p>インタプリタのプロンプトって</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="e98a9c9dc49a8c88a983808780">[email&nbsp;protected]</a>&gt; gosh
+gosh&gt; ^D
+<a href="email-protection.html" class="__cf_email__" data-cfemail="d8bbadacf5abbdb998b2b1b6b1">[email&nbsp;protected]</a>&gt; stk
+Welcome to the STk interpreter version 4.0.1 [NetBSD-1.6.2-i386]
+Copyright 1993-1999 Erick Gallesio - I3S - CNRS / ESSI &lt;<a href="email-protection.html" class="__cf_email__" data-cfemail="f89d9fb88d96919b9dd69e8a">[email&nbsp;protected]</a>&gt;
+STk&gt; ^D Bye.</code></pre>
+<p>みたいに「俺は gosh だぜ！」とか「我輩は STk なり！」って主張するか、 もしくは全く主張なく“&gt;”みたいに印字するものと思ってた。なぜか Haskell は “ghci&gt;” とか “hugs&gt;” とかってんじゃなく、“Prelude&gt;” ってのがプロン プトになってる。Prelude とは何ぞや? と気になるもの。辞書引くと前奏曲と か序幕とかなんだけど、芝居がかった名前ですぞ。</p>
+<h3 id="ヘルプ">ヘルプ</h3>
+<p>この WiKi の HowTo:List<a href="Programming_WayToHaskeller_寝がえり.html" class="uri" title="Go to wiki page">?</a> とか HowTo:Maybe<a href="Programming_WayToHaskeller_寝がえり.html" class="uri" title="Go to wiki page">?</a> とか見ると入力事例が あるんで、真似してみましょう。ただ、ところどころプロンプトがなぜか List&gt; とかって変わってるのが気になる。</p>
+<p>どうも事例の雰囲気をじーーーーっっと見ているとプロンプトのところに出て いるのはモジュールの様なものかな〜そんな感触である。 (念のため断ってお くが現時点で本当に私は入門者なので正しいかどうか不明だから信用しないよ うに)</p>
+<p>まずは起動メッセージのところに :? ってしたらヘルプが見れる様なことが書 いてあったので、メッセージを確認して、色々試してみよう。</p>
+<pre><code>Prelude&gt; :?
+LIST OF COMMANDS:  Any command may be abbreviated to :c where
+c is the first character in the full name.
+
+:load &lt;filenames&gt;   load modules from specified files
+:load               clear all files except prelude
+:also &lt;filenames&gt;   read additional modules
+:reload             repeat last load command
+:project &lt;filename&gt; use project file
+:edit &lt;filename&gt;    edit file
+:edit               edit last module
+:module &lt;module&gt;    set module for evaluating expressions
+&lt;expr&gt;              evaluate expression
+:type &lt;expr&gt;        print type of expression
+
+:?                  display this list of commands
+:set &lt;options&gt;      set command line options
+:set                help on command line options
+:names [pat]        list names currently in scope
+:info &lt;names&gt;       describe named objects
+:browse &lt;modules&gt;   browse names defined in &lt;modules&gt;
+:find &lt;name&gt;        edit module containing definition of name
+:!command           shell escape
+
+:cd dir             change directory
+:gc                 force garbage collection
+:version            print Hugs version
+:quit               exit Hugs interpreter
+Prelude&gt; [Leaving Hugs]</code></pre>
+<p>おお？なんか scheme48 を思い出してしまった。えっと、勘が正しければこう かな？えいっ！</p>
+<pre><code>Prelude&gt; :module List
+ERROR - Cannot find module "List"</code></pre>
+<p>あらハズレだ。エラーが出るところを見ると Prelude ってのがモジュール名かと思ってたのはハズレかもしれん。ならば！！と言うことで</p>
+<pre><code>Prelude&gt; :load List
+Reading file "/usr/pkg/share/hugs/lib/List.hs":
+Reading file "/usr/pkg/share/hugs/lib/Maybe.hs":
+Reading file "/usr/pkg/share/hugs/lib/List.hs":
+                   
+Hugs session for:
+/usr/pkg/share/hugs/lib/Prelude.hs
+/usr/pkg/share/hugs/lib/Maybe.hs
+/usr/pkg/share/hugs/lib/List.hs
+List&gt;          &lt;= コレ！！</code></pre>
+<p>おおっ、なんかイけたみたいだよ。じゃあ、調子に乗って Maybe にも。</p>
+<pre><code>List&gt; :load Maybe
+Reading file "/usr/pkg/share/hugs/lib/Maybe.hs":
+                   
+Hugs session for:
+
+/usr/pkg/share/hugs/lib/Prelude.hs
+/usr/pkg/share/hugs/lib/Maybe.hs
+Maybe&gt; [Leaving Hugs]</code></pre>
+<p>ぱちぱちぱち。って、まだ何の式も打ち込んでないぞ。いいのか?</p>
+<p>で、これって分かると思うけどファイルの path ですよね。じゃぁ現物見ましょ う。なんせインストールをバカチョンでやったんで、どこに何のファイルが入っ たかなんて押えてないしね。</p>
+<pre><code>-----------------------------------------------------------------------------
+-- Standard Library: List operations
+--
+-- Suitable for use with Hugs 98
+-----------------------------------------------------------------------------
+
+module List (
+    elemIndex, elemIndices,
+    find, findIndex, findIndices,
+    nub, nubBy, delete, deleteBy, (??), deleteFirstsBy,
+    union, unionBy, intersect, intersectBy,
+    intersperse, transpose, partition, group, groupBy,
+    inits, tails, isPrefixOf, isSuffixOf,</code></pre>
+<p>List.hs の中身です。しっかと module List の文字が光って見えますね。光っ て見えませんか？てなわけで、やーっぱモジュールじゃん。しかもいっぱい haskell のコードがあるんで、いずれ勉強に役立つやもしれず。</p>
+<p>それで、もう一度ようく、 :load の結果を見てみると、 :load List の結果 として、どうやら Prelude.hs/Maybe.hs/List.hs の三つが出現している。</p>
+<p>そこでロードした後に、もしかしたらモジュールを飛び回れるかも？とか思い 試してみる。</p>
+<pre><code>Prelude&gt; :load List
+Reading file "/usr/pkg/share/hugs/lib/List.hs":
+Reading file "/usr/pkg/share/hugs/lib/Maybe.hs":
+Reading file "/usr/pkg/share/hugs/lib/List.hs":
+                   
+Hugs session for:
+/usr/pkg/share/hugs/lib/Prelude.hs
+
+/usr/pkg/share/hugs/lib/Maybe.hs
+/usr/pkg/share/hugs/lib/List.hs
+List&gt; :module List
+List&gt; :module Maybe
+Maybe&gt; :module Prelude
+Prelude&gt; :module List
+List&gt; :module Maybe
+Maybe&gt; :module Prelude
+Prelude&gt; [Leaving Hugs]</code></pre>
+<p>ぱちぱちぱちぱち。でも原理はよく分からないね。ただ、List ってモジュー ルが Maybe ってモジュールを必要とするらしく、芋づる的にロードされるら しいってのは分かる。 :module ってのは Gauche とかで言うところの select-module みたいなもんかなぁ。</p>
+<p>ちなみに ghci だと、</p>
+<p>Prelude&gt; :module List Prelude List&gt; :module Maybe Prelude Maybe&gt; :module List Maybe Prelude Maybe List&gt; Leaving GHCi.</p>
+<p>こんな風にプロンプトに複数の module をロードしてやることでプロンプトに も複数のものが表示されますね。意味は知らんが、直観的にはなんとなく分か るような気がしますよね？この辺もその内分かるようになるでしょう。多分。</p>
+<h3 id="emacs-を使いたい">Emacs を使いたい</h3>
+<p>さらに調子に乗って関数なんぞを定義してみよう。 まずはなんてったって、クイックソートでしょう。 Haskell の入門だと大抵 出ているので、試してみましょう。</p>
+<pre><code>quicksort  []           =  []
+quicksort (x:xs)        =  quicksort [y | y &lt;- xs, y&lt;x ]
+                        ++ [x]
+                        ++ quicksort [y | y &lt;- xs, y&gt;=x]</code></pre>
+<p>こんなコードだね。んじゃレッツトライ！</p>
+<pre><code>Prelude&gt; quicksort [] = []
+ERROR - Syntax error in input (unexpected `=')</code></pre>
+<p>ありゃりゃ？もしかしてデータ型の定義が先にいるのかしらん。</p>
+<pre><code>Prelude&gt; quicksort :: [a]-&gt;[a]
+ERROR - Undefined variable "quicksort"
+Prelude&gt; </code></pre>
+<p>むむむ、だめだぞコレ。なんだろう？？？</p>
+<p>というちょっとわざとらしいフリをしてしまったけど、実際最初は結構迷った りします。私の場合にも結局教えてもらったんですよね。 実はプロンプトから直接定義したりできないんだってさ。これってちょっと、 いや、かなり不便かも。対話的にイロイロできないってのはコーディングから デバッグまでのサイクルがひょいひょい回らないんで、個人的にはひどく嫌な わけだ。</p>
+<p>実は hugs から :e を使うと環境変数 EDITOR で設定されたエディタが立ち上 がる。こいつを使ってみよう。使えればまぁなんとかなるかも知れない。</p>
+<p>その前に、 lhs っていう拡張子のファイルについて簡単に説明しちゃいます。 hugs のオンラインマニュアルを見ると literate scripts と紹介してある。 これは基本的に haskell 処理系に対しては、全部コメント扱いになるファイ ルなのだが、行頭から &gt; という風に</p>
+<p>リダイレクト記号と空白から始まる行だけはコードと認識されるんだって。 例えば、こんな感じに書くんだとさ。</p>
+<pre><code>begin tag ...
+
+&gt; quicksort  []           =  []
+&gt; quicksort (x:xs)        =  quicksort [y | y &lt;- xs, y&lt;x ]
+&gt;                         ++ [x]
+&gt;                         ++ quicksort [y | y &lt;- xs, y&gt;=x]
+
+end tag ...</code></pre>
+<p>使い道としては コメント扱いにするエリアに HTML のタグや WiKi のタグ、 TeX のタグなんぞを書いておけば、そのまま test.lhs を文書などに貼り付け ることが出来ちゃうのだ。(わー便利ー) もちろん普通に test.hs なプログラムを書いておいてもいいんだけどさ。</p>
+<p>じゃぁ早速、少しプログラムにバグを仕込んでおいて、試してみましょう。</p>
+<pre><code>Prelude&gt; :load test.lhs
+Reading file "test.lhs":
+Parsing
+ERROR "test.lhs":3 - Program line next to comment</code></pre>
+<p>うむ、では正しいコードに修正してみる。</p>
+<pre><code>Prelude&gt; :e test.lhs
+Reading file "test.lhs":
+                   
+Hugs session for:
+/usr/pkg/share/hugs/lib/Prelude.hs
+test.lhs</code></pre>
+<p>エディタで修正後、保存して抜けるとこんな感じになるので、ちょいと quicksort を実行してみましょう。</p>
+<pre><code>Main&gt; quicksort [2,9,1,0,3,6,2,7,6,4,8,9]
+[0,1,2,2,3,4,6,6,7,8,9,9]
+Main&gt; </code></pre>
+<p>わーい。ぱちぱちぱち。素晴らしい！</p>
+<p>ちなみによーく見るとプロンプトが Main になっておりますね。これがどうも user のためのモジュールっつうか評価環境なんだろうか。そんな雰囲気。</p>
+<p>さてと。。。</p>
+<p>それでも scheme + emacs でコードを書いていた私としては、どうもイマイチ 感は拭えない。 なんせエディタとプロンプトを行ったり来たりしないといけないしさ。</p>
+<p>もちろん、NetBSD の package から make した hugs だと readline が生きて いるらしく、hugs のプロンプトからちゃんと行編集も可能だったりするんだ けど、やっぱりねぇ。。。 というわけで emacs で画面を分割して使えないんかな？というと、実は使え ます。ハイ。</p>
+<p>まずは準備としてここに emacs のための haskell modeってのがあるんで、 emacs 使いの方は引っ張って来るよろし。でもってインストールしましょう。 これも別に難しくないので installation-guide を見て使えるようにしてくだ さい。</p>
+<p>そしたら配布物に入っている .emacs を自分の .emacs にコピぺしましょう。 もしあなたが、hugs じゃなくて ghci を使っているなら</p>
+<pre><code>;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+;(add-hook 'haskell-mode-hook 'turn-on-haskell-hugs)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)</code></pre>
+<p>こんな風に最後の方を修正してください。 hugs を ghci に変えた行を追加し て haskell-mode-hook ってのに add-hook します。 hugs の方はコメントア ウトしちゃっていいです。 もち、 hugs を使っている人はそのまま使えちゃいます。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="e0839594cd938581a08a898e89">[email&nbsp;protected]</a>&gt; emacs test.lhs &amp;</code></pre>
+<p>って emacs を立ち上げたらコードを開いているバッファ上で C-c C-l って打 ち込んでみればいいんだって、ワクワク。 (コントロールキーを押しながら c(シー)とl(エル)です)</p>
+<pre><code>Hugs session for:
+/usr/pkg/share/hugs/lib/Prelude.hs
+Type :? for help
+Prelude&gt; :load /home/cut-sea/script/haskell/test.lhs
+
+Reading file "/home/cut-sea/script/haskell/test.lhs":
+Parsing........................................................................
+Dependency analysis............................................................
+Type checking..................................................................
+Compiling......................................................................
+
+Hugs session for:
+/usr/pkg/share/hugs/lib/Prelude.hs
+/home/cut-sea/script/haskell/test.lhs
+Main&gt; </code></pre>
+<p>どうでしょうか？画面分割されて、こんな風に Main プロンプトが出なかった でしょうか？ここまでくればかなり便利になりますね？ emacs の編集機能を 駆使しつつ、適当に C-c C-l ってやれば良いんです。だいぶ便利じゃぁあり ませんか？</p>
+<p>ちなみにghciの方を有効にして同様に試すと、</p>
+<pre><code>Prelude&gt; :load /home/cut-sea/script/haskell/test.lhs
+Compiling Main             ( /home/cut-sea/script/haskell/test.lhs, interpreted )
+
+
+/home/cut-sea/script/haskell/test.lhs:2:
+    Warning: No 'main' defined in module Main
+Ok, modules loaded: Main.
+*Main&gt;</code></pre>
+<p>あり？ main が無いって叱られます。 でも、 quicksort を実行するとちゃんと評価可能ですんで、あまり気にしな いで良いのかも知れません。まぁ warning だしね。メッセージからする とHaskellってCみたく main がいるのやも知れんな。 ともあれ便利な開発環境が手に入ったところで、そろそろ腰を据えて取り掛か ろうかしらん。</p>
+<h3 id="ちょっとひとやすみ非正格って">【ちょっとひとやすみ】「非正格」って？</h3>
+<blockquote>
+<p>Haskell は非正格純粋関数型言語っていう冠がついてたりする。いーじゃない ですか。なんかこう難しそうで。会社で「非正格純粋関数型言語Haskellって のがあってさ〜」なんて話そうもんならなんか恰好よさげじゃないですか。え え。もしかしたら女の子の瞳がハートマークになるかも知れませんよ。</p>
+<p>ところが、「非正格」って何さ？って聞かれて「いや、まあそのなんだ」とか なんとかしどろもどろになると途端に株が下がるかもしれない。</p>
+<p>どうも正格関数ってのは</p>
+<pre><code>f _|_  = _|_</code></pre>
+<p>ってなる様なfって関数で、そうじゃないものを非正格って言うんだとさ。ちなみに _|_ は本当は一文字の記号でボトムとか読むらしい。</p>
+<p>上司：「おいおい、良くわかんねぇよ。 いきなり_|_とかワケわかんない記号出して誤魔化そうとするな。 おまえは大体そういう・・・」</p>
+<p>はい、そうですね。ごもっともでございます。</p>
+<pre><code>_|_ は未定義値</code></pre>
+<p>です。つまりこんな感じですね。</p>
+<pre><code>妻：「ねぇ、あなた！いつもいつも仕事仕事って、私と仕事とどっちが大切なの！？」
+夫：「そんなん決められっかよ！比較できるもんじゃねーだろ！！」</code></pre>
+<p>コレですコレ！ドラマにありがちなシチュエーションだけどさ。妻は " 私 &gt; 仕事 " っていう式を夫に評価させようとするわけだけど、夫はそんな式は評価できねぇよ！って評価できません値を返すよね？ あと、水割りならぬトリカブト割り “1/0” なんてのを飲ませると 死んじゃったり。これも無限大の値を返せないんで _|_ になる。いや、無限大を意味するものを返してもいいけどさ。話が続かないから返せないことにしてよ。</p>
+<pre><code>上司：「おい、田中君いつもの仕事、あれやっといてよ。
+　　　　必要な資料はコレとコイツでいいんだよな。」
+田中：「はい、分かりました」</code></pre>
+<p>ってな会話の後、田中君はいつもの仕事って関数に渡されたデータを適用する んですね。</p>
+<pre><code>itumono_sigoto kore koitu
+       =&gt; kekka</code></pre>
+<p>翌日も同じ様なやり取りが繰り返されます。</p>
+<pre><code>上司：「おい、田中君いつもの仕事、あれやっといてよ。
+　　　　必要な書類はコレとコイツでいいんだよな。
+　　　　あっ、あとん〜とコレコレ！
+　　　　必要になるかどうかわかんねぇけど一応渡しとくわ、
+　　　　あとよろしく。」
+田中：「はい、分かりました（おいおい必要かどうかわかんねぇものってなんだよ）」</code></pre>
+<p>そう、実は今田中君が渡されたコレコレってのは「会社と家庭どっち取るんだ よ！？」とか、“トリカブト割り”みたいに田中君がもし扱ってしまったら大変 なことになっちゃうアレです。</p>
+<p>まさに</p>
+<pre><code>itumono_sigoto kore koitu korekore</code></pre>
+<p>ってのは</p>
+<pre><code>itumono_sigoto kore koitu _|_</code></pre>
+<p>な訳ですね。</p>
+<p>これに対して正格な田中くんは仕事するまえに、渡されたデータを必要かどう か判断するべく最初に評価するんだけど、コレコレを見た瞬間に「そんなん決 められっかよ！」とか死んじゃったりとかしちゃいます。</p>
+<pre><code>itumono_sigoto kore koitu _|_
+       =&gt; _|_　（これがそういう状態なわけです）</code></pre>
+<p>それに対して非正格な田中君であれば、必ずしもそうなるとは限りません。も ちろん「必要になるかどうか分からないけど」って渡されたコレコレってやつ が本当に必要になってしまって、田中君が見てしまうと結果は同じなんだけど、 もし結果的に必要なければ、田中君はちゃんと_|_以外の値を返せるんですよ ね。</p>
+<p>それがつまり、</p>
+<pre><code>正格関数ってのは
+f _|_  = _|_
+ってなる様なfって関数で、そうじゃないものを非正格関数という。</code></pre>
+<p>これなんですね。ちなみに正格ってのは strict つまり厳格なとかって意味だ けど、まぁ真面目なやつが変に不必要な情報に頭悩ませてしまって、それが元 で仕事を放り出す結果になってしまい、そうじゃないnon-strict（非正格）な やつはなぜか問題なく仕事をしちゃうことがままあるのは因果なもんですね。</p>
+<p>さらには文脈によっては“非正格な”評価ってのを “怠惰な”評価とかって言わ れることがあるんですが、怠惰なヤツの方が仕事をしちゃう可能性があるって のも・・・。（冗談ですってば）</p>
+<p>(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?p=Programming:WayToHaskeller:%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD&amp;c=e&amp;l=jp">「ねがえり」を編集する</a>)|(<a href="http://www.sampou.org/cgi-bin/haskell.cgi?Programming:WayToHaskeller&amp;l=jp">Haskellerへの道</a>)</p>
+</blockquote>
+<hr>
+<p>Last modified : 2007/05/25 00:05:58 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_WayToHaskeller_%e5%af%9d%e3%81%8c%e3%81%88%e3%82%8a" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

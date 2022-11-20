@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise4"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/StartHaskell2/exercise4</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/StartHaskell2/exercise4">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/StartHaskell2/exercise4">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/StartHaskell2/exercise4">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/StartHaskell2/exercise4</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#hello-%E5%86%8D%E5%B8%B0%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C">『Hello 再帰！』　練習問題</a><ul>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E9%95%B7%E3%81%95">リストの長さ</a></li>
+<li><a href="#%E7%B7%8F%E5%92%8C%E3%81%A8%E7%B7%8F%E7%A9%8D">総和と総積</a></li>
+<li><a href="#%E5%81%B6%E6%95%B0%E3%81%A8%E5%A5%87%E6%95%B0%E3%81%AB%E3%82%8F%E3%81%91%E3%82%8B">偶数と奇数にわける</a></li>
+<li><a href="#%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97">等比数列</a></li>
+<li><a href="#%E3%83%95%E3%82%A3%E3%83%9C%E3%83%8A%E3%83%83%E3%83%81%E6%95%B0%E5%88%97">フィボナッチ数列</a></li>
+</ul></li>
+<li><a href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C%E3%83%AA%E3%83%B3%E3%82%AF%E9%9B%86">練習問題リンク集</a></li>
+</ul>
+</div>
+
+<h1 id="hello-再帰練習問題">『Hello 再帰！』　練習問題</h1>
+<h2 id="リストの長さ">リストの長さ</h2>
+<p>リストの長さを返す関数を、再帰を使って自分で書いてみよう。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">myLength   ::</span> [a] <span class="ot">-&gt;</span> <span class="dt">Int</span></a></code></pre></div>
+<hr>
+<h2 id="総和と総積">総和と総積</h2>
+<p>リストの要素を全部足す関数と、全部かける関数を、再帰を使って書いてみよう。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">mySum      ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="ot">myProduct  ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span></a></code></pre></div>
+<p>実行例</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1">ghci<span class="fu">&gt;</span> mySum [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="dv">10</span></a>
+<a class="sourceLine" id="cb3-3" title="3">ghci<span class="fu">&gt;</span> myProduct [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="dv">24</span></a></code></pre></div>
+<hr>
+<h2 id="偶数と奇数にわける">偶数と奇数にわける</h2>
+<p>整数のリストを受け取って、奇数だけのリストと偶数だけのリストに分ける関数を、再帰を使って書いてみよう。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="ot">oddEven ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> ([<span class="dt">Int</span>],[<span class="dt">Int</span>])</a></code></pre></div>
+<p>実行例</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1">ghci<span class="fu">&gt;</span> oddEven [<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">11</span>]</a>
+<a class="sourceLine" id="cb5-2" title="2">([<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">11</span>], [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">10</span>])</a></code></pre></div>
+<hr>
+<h2 id="等比数列">等比数列</h2>
+<p>等比数列を生成する関数を作ろう。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="ot">gp ::</span> <span class="dt">Num</span> a <span class="ot">=&gt;</span> a      <span class="co">-- 初項</span></a>
+<a class="sourceLine" id="cb6-2" title="2">            <span class="ot">-&gt;</span> a      <span class="co">-- 公比</span></a>
+<a class="sourceLine" id="cb6-3" title="3">            <span class="ot">-&gt;</span> [a]    <span class="co">-- 等比数列（無限）</span></a></code></pre></div>
+<p>実行例</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1">ghci<span class="fu">&gt;</span> <span class="fu">take</span> <span class="dv">6</span> (gp <span class="dv">1</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2">[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">16</span>,<span class="dv">32</span>]</a></code></pre></div>
+<hr>
+<h2 id="フィボナッチ数列">フィボナッチ数列</h2>
+<p>フィボナッチ数列のn番目を返す関数を作ろう。 <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%9C%E3%83%8A%E3%83%83%E3%83%81%E6%95%B0">フィボナッチ数 - Wikipedia</a></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1">fib<span class="ot"> n ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">Integer</span></a></code></pre></div>
+<p>実行例</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1">ghci<span class="fu">&gt;</span> fib <span class="dv">0</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="dv">0</span></a>
+<a class="sourceLine" id="cb9-3" title="3">ghci<span class="fu">&gt;</span> fib <span class="dv">1</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="dv">1</span></a>
+<a class="sourceLine" id="cb9-5" title="5">ghci<span class="fu">&gt;</span> fib <span class="dv">20</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="dv">6765</span></a>
+<a class="sourceLine" id="cb9-7" title="7">ghci<span class="fu">&gt;</span> fib <span class="dv">100</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="dv">354224848179261915075</span></a></code></pre></div>
+<h1 id="練習問題リンク集">練習問題リンク集</h1>
+<ul>
+<li><a href="https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter04/Chapter04-ja.md">スタートHaskell 2011 関数定義 練習問題</a></li>
+<li><a href="https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter06/Chapter06-ja.md">スタートHaskell 2011 再帰関数 練習問題</a></li>
+</ul></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/StartHaskell2/exercise4">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise4?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/StartHaskell2/exercise4">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise4" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

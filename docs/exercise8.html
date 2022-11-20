@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise8"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/StartHaskell2/exercise8</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/StartHaskell2/exercise8">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/StartHaskell2/exercise8">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/StartHaskell2/exercise8">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/StartHaskell2/exercise8</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E5%85%A5%E5%87%BA%E5%8A%9B%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C">『入出力』　練習問題</a><ul>
+<li><a href="#%E4%BD%95%E3%82%82%E3%81%97%E3%81%AA%E3%81%84">何もしない</a></li>
+<li><a href="#io%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B">I/Oアクションを実行する</a></li>
+<li><a href="#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AE%E7%B5%82%E4%BA%86">プログラムの終了</a></li>
+<li><a href="#%E6%95%B0%E3%81%AE%E7%B5%B1%E8%A8%88%E6%83%85%E5%A0%B1%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B">数の統計情報を表示する</a></li>
+<li><a href="#%E3%82%A8%E3%82%B3%E3%83%BC">エコー</a></li>
+<li><a href="#%E7%B4%A0%E6%95%B5%E3%81%AA%E5%90%8D%E5%89%8D">素敵な名前</a></li>
+<li><a href="#%E4%B9%9D%E4%B9%9D%E3%81%AE%E8%A1%A8">九九の表</a></li>
+<li><a href="#%E3%83%95%E3%82%A3%E3%83%9C%E3%83%8A%E3%83%83%E3%83%81%E6%95%B0%E5%88%97%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B">フィボナッチ数列を表示する</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="入出力練習問題">『入出力』　練習問題</h1>
+<h2 id="何もしない">何もしない</h2>
+<p>returnを使って「何もしない」プログラムを書いてみましょう。</p>
+<hr>
+<h2 id="ioアクションを実行する">I/Oアクションを実行する</h2>
+<p>下の３つのI/Oアクションを使って、これらを上から順番に実行する関数を、do構文を使ったものと、sequence関数を使ったものと２通りで書いてみよう。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">hello ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-2" title="2">hello <span class="fu">=</span> <span class="fu">putStrLn</span> <span class="st">"Hello!"</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ot">myName ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-5" title="5">myName <span class="fu">=</span> <span class="fu">putStrLn</span> <span class="st">"My name is Haskell."</span></a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="ot">bye ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb1-8" title="8">bye <span class="fu">=</span> <span class="fu">putStrLn</span> <span class="st">"Bye!"</span></a></code></pre></div>
+<hr>
+<h2 id="プログラムの終了">プログラムの終了</h2>
+<p>“q”と入力されたら終了するプログラムを書こうと思ったが、バグっていてうまく終了しない。このプログラムを直して、ちゃんと動くようにしよう。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  x <span class="ot">&lt;-</span> <span class="fu">getLine</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">if</span> x <span class="fu">==</span> <span class="st">"q"</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">then</span> <span class="fu">return</span> ()</a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="kw">else</span> <span class="fu">putStrLn</span> x</a>
+<a class="sourceLine" id="cb2-6" title="6">  main</a></code></pre></div>
+<hr>
+<h2 id="数の統計情報を表示する">数の統計情報を表示する</h2>
+<p>ユーザーから空白区切りの数の入力をもらって、その合計と平均値を表示するコードを書いてみよう。</p>
+<p>実行例</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">&gt;</span> <span class="dv">0</span> <span class="dv">10</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="fu">sum:</span> <span class="dv">20</span> </a>
+<a class="sourceLine" id="cb3-3" title="3">avg<span class="fu">:</span> <span class="fl">6.666666666666667</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="fu">&gt;</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="fu">sum:</span> <span class="dv">55</span></a>
+<a class="sourceLine" id="cb3-6" title="6">avg<span class="fu">:</span> <span class="fl">5.5</span></a></code></pre></div>
+<hr>
+<h2 id="エコー">エコー</h2>
+<p>ユーザーの入力をそのまま表示するプログラムを作ろう。</p>
+<p>ただし “quit” と入力されたときは “Do you really want to quit? (yes/no)” と表示して、次の入力が “yes” だったらプログラムを終了する。</p>
+<p>実行例</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1">aaaaa</a>
+<a class="sourceLine" id="cb4-2" title="2">aaaaa</a>
+<a class="sourceLine" id="cb4-3" title="3">a b ccc d</a>
+<a class="sourceLine" id="cb4-4" title="4">a b ccc d</a>
+<a class="sourceLine" id="cb4-5" title="5">quit</a>
+<a class="sourceLine" id="cb4-6" title="6">本当に終了しますか？(yes<span class="fu">/</span>no)</a>
+<a class="sourceLine" id="cb4-7" title="7">yes</a></code></pre></div>
+<p>文字出力の際、バッファリングの関係ですぐに表示されないことがある。そのときは <a href="https://hackage.haskell.org/packages/archive/base/latest/doc/html/System-IO.html#v:hFlush">hFlush</a>を使うとよい。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">import</span> <span class="dt">System.IO</span> (hFlush, stdout)</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3">main <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="fu">putStr</span> <span class="st">"input text: "</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  hFlush stdout</a>
+<a class="sourceLine" id="cb5-6" title="6">  txt <span class="ot">&lt;-</span> <span class="fu">getLine</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="fu">putStrLn</span> txt</a></code></pre></div>
+<hr>
+<h2 id="素敵な名前">素敵な名前</h2>
+<p>名前をキーボードから入力させ、入力した名前があなたの名前と同じだったら、「いい名前だね！」と表示するプログラムを書いてみましょう。</p>
+<hr>
+<h2 id="九九の表">九九の表</h2>
+<p>こんな感じの九九の表を表示してみよう。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"> <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span></a>
+<a class="sourceLine" id="cb6-2" title="2"> <span class="dv">2</span>  <span class="dv">4</span>  <span class="dv">6</span>  <span class="dv">8</span> <span class="dv">10</span> <span class="dv">12</span> <span class="dv">14</span> <span class="dv">16</span> <span class="dv">18</span></a>
+<a class="sourceLine" id="cb6-3" title="3"> <span class="dv">3</span>  <span class="dv">6</span>  <span class="dv">9</span> <span class="dv">12</span> <span class="dv">15</span> <span class="dv">18</span> <span class="dv">21</span> <span class="dv">24</span> <span class="dv">27</span></a>
+<a class="sourceLine" id="cb6-4" title="4"> <span class="dv">4</span>  <span class="dv">8</span> <span class="dv">12</span> <span class="dv">16</span> <span class="dv">20</span> <span class="dv">24</span> <span class="dv">28</span> <span class="dv">32</span> <span class="dv">36</span></a>
+<a class="sourceLine" id="cb6-5" title="5"> <span class="dv">5</span> <span class="dv">10</span> <span class="dv">15</span> <span class="dv">20</span> <span class="dv">25</span> <span class="dv">30</span> <span class="dv">35</span> <span class="dv">40</span> <span class="dv">45</span></a>
+<a class="sourceLine" id="cb6-6" title="6"> <span class="dv">6</span> <span class="dv">12</span> <span class="dv">18</span> <span class="dv">24</span> <span class="dv">30</span> <span class="dv">36</span> <span class="dv">42</span> <span class="dv">48</span> <span class="dv">54</span></a>
+<a class="sourceLine" id="cb6-7" title="7"> <span class="dv">7</span> <span class="dv">14</span> <span class="dv">21</span> <span class="dv">28</span> <span class="dv">35</span> <span class="dv">42</span> <span class="dv">49</span> <span class="dv">56</span> <span class="dv">63</span></a>
+<a class="sourceLine" id="cb6-8" title="8"> <span class="dv">8</span> <span class="dv">16</span> <span class="dv">24</span> <span class="dv">32</span> <span class="dv">40</span> <span class="dv">48</span> <span class="dv">56</span> <span class="dv">64</span> <span class="dv">72</span></a>
+<a class="sourceLine" id="cb6-9" title="9"> <span class="dv">9</span> <span class="dv">18</span> <span class="dv">27</span> <span class="dv">36</span> <span class="dv">45</span> <span class="dv">54</span> <span class="dv">63</span> <span class="dv">72</span> <span class="dv">81</span> </a></code></pre></div>
+<p>Haskellには、いわゆるprintf関数もある。printfを使うときは Text.Printf モジュールをインポートする。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="dt">Prelude</span><span class="fu">&gt;</span> <span class="kw">import</span> <span class="dt">Text.Printf</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="dt">Prelude</span> <span class="dt">Text.Printf</span><span class="fu">&gt;</span> <span class="fu">mapM_</span> (printf <span class="st">"%3d\n"</span>) [<span class="dv">1</span><span class="fu">..</span><span class="dv">10</span>]</a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="dv">2</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="dv">3</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="dv">4</span></a>
+<a class="sourceLine" id="cb7-7" title="7">  <span class="dv">5</span></a>
+<a class="sourceLine" id="cb7-8" title="8">  <span class="dv">6</span></a>
+<a class="sourceLine" id="cb7-9" title="9">  <span class="dv">7</span></a>
+<a class="sourceLine" id="cb7-10" title="10">  <span class="dv">8</span></a>
+<a class="sourceLine" id="cb7-11" title="11">  <span class="dv">9</span></a>
+<a class="sourceLine" id="cb7-12" title="12"> <span class="dv">10</span></a></code></pre></div>
+<hr>
+<h2 id="フィボナッチ数列を表示する">フィボナッチ数列を表示する</h2>
+<p>ユーザーから数字の入力を受け取り、その長さだけフィボナッチ数列を表示するプログラムを作ろう。</p>
+<p>実行例</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1">input number<span class="fu">&gt;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="dv">0</span></a>
+<a class="sourceLine" id="cb8-3" title="3">input number<span class="fu">&gt;</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">8</span> <span class="dv">13</span> <span class="dv">21</span> <span class="dv">34</span></a></code></pre></div></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/StartHaskell2/exercise8">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise8?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/StartHaskell2/exercise8">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise8" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

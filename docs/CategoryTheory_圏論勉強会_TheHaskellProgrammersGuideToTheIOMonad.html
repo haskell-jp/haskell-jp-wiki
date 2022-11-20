@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会_TheHaskellProgrammersGuideToTheIOMonad</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会_TheHaskellProgrammersGuideToTheIOMonad</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#categorytheory_%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A_thehaskellprogrammersguidetotheiomonad"><span>CategoryTheory_圏論勉強会_TheHaskellProgrammersGuideToTheIOMonad</span></a><ul>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%83%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十七回圏論勉強会</a><ul>
+<li><a href="#categories-types-and-structures-section-2.4.1.3">“Categories, Types and Structures” Section 2.4.1.3</a></li>
+<li><a href="#the-haskell-programmers-guide-to-the-io-monad-dont-panic">“The Haskell Programmer’s Guide to the IO Monad — Don’t Panic”</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AB%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十八回圏論勉強会</a><ul>
+<li><a href="#the-haskell-programmers-guide-to-the-io-monad-dont-panic-1">“The Haskell Programmer’s Guide to the IO Monad — Don’t Panic”</a></li>
+<li><a href="#%E6%AC%A1%E4%BC%9A">2次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B9%9D%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十九回圏論勉強会</a><ul>
+<li><a href="#%E9%9B%91%E8%AB%87">雑談</a></li>
+<li><a href="#the-haskell-programmers-guide-to-the-io-monad-dont-panic-2">“The Haskell Programmer’s Guide to the IO Monad — Don’t Panic”</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A">二次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E5%8D%81%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第四十回圏論勉強会</a><ul>
+<li><a href="#%E9%9B%91%E8%AB%87-1">雑談</a></li>
+<li><a href="#the-haskell-programmers-guide-to-the-io-monad-dont-panic-3">“The Haskell Programmer’s Guide to the IO Monad — Don’t Panic”</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A-1">二次会</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="categorytheory_圏論勉強会_thehaskellprogrammersguidetotheiomonad"><a href="" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_TheHaskellProgrammersGuideToTheIOMonad</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory" class="uri" title="Go to wiki page">CategoryTheory</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a" class="uri" title="Go to wiki page">圏論勉強会</a>:TheHaskellProgrammersGuideToTheIOMonad</p>
+<hr>
+<h2 id="第三十七回圏論勉強会">第三十七回圏論勉強会</h2>
+<p>2008-2-10(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00 の予定</p>
+<pre><code>       モニタ
+      ---------
+  shelarcy  日下部
+ +-----------------+
+ |                 |  |ホワイトボード
+ +-----------------+
+  酒井 穗苅 今井 </code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<p>写真（仮） : <a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080210" class="uri">http://picasaweb.google.co.jp/takeo.bono/Kenron080210</a></p>
+<p>写真（ミラー）：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200802/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200802/ct/</a></p>
+<h3 id="categories-types-and-structures-section-2.4.1.3">“Categories, Types and Structures” Section 2.4.1.3</h3>
+<p>はやめました。</p>
+<h3 id="the-haskell-programmers-guide-to-the-io-monad-dont-panic">“The Haskell Programmer’s Guide to the IO Monad — Don’t Panic”</h3>
+<ul>
+<li><a href="http://stefan-klinger.de/" class="uri">http://stefan-klinger.de/</a></li>
+</ul>
+<h4 id="preface-chapter-1-chapter-2">Preface, Chapter 1, Chapter 2</h4>
+<p>は前置き。</p>
+<h4 id="chapter-3-categories">Chapter 3 Categories</h4>
+<h2 id="第三十八回圏論勉強会">第三十八回圏論勉強会</h2>
+<p>2008-3-9(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:00 の予定</p>
+<pre><code>       モニタ
+      ---------
+  日下部 shelarcy
+ +-----------------+
+ |                 |  |ホワイトボード
+ +-----------------+
+  青谷 酒井 今井 </code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<p>写真（仮） : <a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309" class="uri">http://picasaweb.google.co.jp/takeo.bono/Kenron080309</a></p>
+<p>写真（ミラー）： <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200803/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200803/ct/</a></p>
+<h3 id="the-haskell-programmers-guide-to-the-io-monad-dont-panic-1">“The Haskell Programmer’s Guide to the IO Monad — Don’t Panic”</h3>
+<h4 id="chapter-4-functor">Chapter 4 “Functor”</h4>
+<ul>
+<li>4.1.6
+<ul>
+<li>identity が Functor になる証明 <a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475667457042802">解答</a>
+<ul>
+<li>記法に混乱が見られますが気にしないでください</li>
+</ul></li>
+<li>GFがFunctorになる証明 <a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475684636912002">解答</a></li>
+</ul></li>
+<li>4.2 Functorの例
+<ul>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475714701683090">pair</a></li>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475757651356082">power set</a></li>
+</ul></li>
+<li>4.3
+<ul>
+<li>HaskellでのList Char、Maybe Charの例
+<ul>
+<li>写真なし。</li>
+</ul></li>
+</ul></li>
+<li>4.3.1 Maybe、ListがFunctorになっている事の証明
+<ul>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475792011094466">Maybe</a></li>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475822075865554">List</a></li>
+</ul></li>
+</ul>
+<h4 id="chapter-5-natural-transformation">Chapter 5 “Natural Transformation”</h4>
+<ul>
+<li>5.2 Natural transformation in Haskell
+<ul>
+<li>Just は natural transformation (<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475847845669346">板書</a>上)</li>
+<li>maybeToList, ListToMaybeの自然性の証明
+<ul>
+<li>maybeToList (<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475847845669346">板書</a>下、<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475882205407730">解答</a>)</li>
+<li>listToMaybe (<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475912270178818">解答</a>、<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475938039982610">解答続き</a>)</li>
+</ul></li>
+</ul></li>
+<li>5.3 Composing transformations and functors
+<ul>
+<li>5.3.3 Proof
+<ul>
+<li>図式で書いてみた
+<ul>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475955219851810">PartI</a></li>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176475980989655602">PartII</a></li>
+</ul></li>
+</ul></li>
+<li>“vertical” composition
+<ul>
+<li>vertical vs horizontal (<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080309/photo#5176476015349393986">板書</a>)</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="次会">2次会</h3>
+<ul>
+<li>はてなの「Haskell」を含む日記をいろいろと読んでいる
+<ul>
+<li>あのへんで色々とつっこみたいことはあるんだけれど……
+<ul>
+<li><a href="http://d.hatena.ne.jp/Otter_O/20080308">MaybeT が処理系についてきていない</a>のはなぜ？
+<ul>
+<li>mtl は <a href="http://web.cecs.pdx.edu/~mpj/pubs.html">Mark P. Jones の論文</a> に書かれているモナド変換子を提供するためのライブラリだからじゃないかな？
+<ul>
+<li>(2008/03/12 00:07:52 JST: MaybeT の例も出ていました……。mtl で提供するモナドのモナド変換子しか提供していない感じでしょうか？)</li>
+<li>加えれば良いじゃん。</li>
+<li>昔と違って<a href="https://haskell.org/haskellwiki/Library_submissions">新しくライブラリに加えるには Proposal が必要になった</a>ので、ちょっと面倒
+<ul>
+<li>純粋関数の場合には QuickCheck、そうでない場合には HUnit によるテストが必要</li>
+</ul></li>
+</ul></li>
+<li><a href="http://darcs.haskell.org/ghc/compiler/utils/Maybes.lhs">実は GHC の実装には MaybeT が使われている（ただし Current のみ）</a></li>
+</ul></li>
+</ul></li>
+<li>つっこめば良いじゃん</li>
+<li>そのうち連載（<a href="本物のプログラマはHaskellを使う.html" class="uri" title="Go to wiki page">本物のプログラマはHaskellを使う</a>）で書けば、それで良いかなとも思って。</li>
+</ul></li>
+</ul>
+<h2 id="第三十九回圏論勉強会">第三十九回圏論勉強会</h2>
+<p>2008-4-12(土) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:30?</p>
+<pre><code>       モニタ
+      ---------
+  shelarcy 今井
+ +-----------------+
+ |                 |  |ホワイトボード
+ +-----------------+
+  酒井     檜山 </code></pre>
+<h3 id="雑談">雑談</h3>
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20080411#p01">coarbitrary の co-について</a>作者に聞きました
+<ul>
+<li>variant と co-variant の関係と同じものとして名づけた</li>
+<li>ただし、co-variant は variant の双対でもあるので、co-arbitrary の co- が双対を意味するというのも正しい、とのこと。
+<ul>
+<li>その意味における（co-variant と双対な意味を持つ）variant って何よ？</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="the-haskell-programmers-guide-to-the-io-monad-dont-panic-2">“The Haskell Programmer’s Guide to the IO Monad — Don’t Panic”</h3>
+<p>Chapter 6 “Monad”より</p>
+<h3 id="二次会">二次会</h3>
+<ul>
+<li>色々とマンガの話
+<ul>
+<li>カイジ</li>
+</ul></li>
+<li>ゲシュタルト崩壊
+<ul>
+<li>発端： 漫画に出てくる女刺客「あざみ」「あずみ？」「そういえばあずみだったような気が？」「あれ、本当にあずみだったっけ？」「わだち？（次の『わだちべにおふめん』に続く）」喧々諤々。（これはゲシュタルト崩壊とは違うが繰り返せば繰り返すほど混乱する過程は似ている）</li>
+</ul></li>
+<li>たほいや
+<ul>
+<li>わだちべにおふめん</li>
+</ul></li>
+<li>鳥居みゆき</li>
+<li>エクストリーム聖火リレー
+<ul>
+<li>「大東亜戦争への道」中村 粲 (著)</li>
+</ul></li>
+<li>継続</li>
+<li>org をなんて読むか</li>
+</ul>
+<h2 id="第四十回圏論勉強会">第四十回圏論勉強会</h2>
+<p>2008-5-11(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜17:50</p>
+<pre><code>       モニタ
+      ---------
+  shelarcy    DekuDekuplex
+ +-----------------+
+ |                 |  |ホワイトボード
+ +-----------------+
+  酒井 穗苅 日下部</code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<h3 id="雑談-1">雑談</h3>
+<ul>
+<li><a href="https://hackage.haskell.org/trac/ghc/wiki/Status/May08">将来の GHC では impredicative polymorphism の実装が変わるかも</a></li>
+</ul>
+<h3 id="the-haskell-programmers-guide-to-the-io-monad-dont-panic-3">“The Haskell Programmer’s Guide to the IO Monad — Don’t Panic”</h3>
+<p>Section 6.3 “An alternative definition of the monad”より</p>
+<ul>
+<li>今回で終了
+<ul>
+<li>次は何を読む？</li>
+</ul></li>
+</ul>
+<h3 id="二次会-1">二次会</h3>
+<ul>
+<li>GC の話
+<ul>
+<li>Python
+<ul>
+<li>Reference Count。論外らしい</li>
+</ul></li>
+<li>GHC
+<ul>
+<li>incremental GC はまだ入ってない
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20040821#p01">比較的安価に実装できる</a>はず</li>
+<li><a href="https://hackage.haskell.org/trac/ghc/wiki/Status/Releases">Parallel GC が GHC 6.10 に入る予定</a>なので、単に優先順位の問題？</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<hr>
+<p>Last modified : 2011/06/30 04:42:33 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_TheHaskellProgrammersGuideToTheIOMonad" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

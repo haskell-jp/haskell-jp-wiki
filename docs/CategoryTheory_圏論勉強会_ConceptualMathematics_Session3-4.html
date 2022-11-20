@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会_ConceptualMathematics_Session3-4</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会_ConceptualMathematics_Session3-4</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#categorytheory_%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A_conceptualmathematics_session3-4"><span>CategoryTheory_圏論勉強会_ConceptualMathematics_Session3-4</span></a><ul>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第二回圏論勉強会</a><ul>
+<li><a href="#%E5%A7%8B%E3%81%BE%E3%82%8B%E5%89%8D">始まる前</a></li>
+<li><a href="#session-3">Session 3</a></li>
+<li><a href="#article-ii">Article II</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A">二次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三回圏論勉強会</a><ul>
+<li><a href="#article-ii-1">Article II</a></li>
+<li><a href="#session-4">Session 4</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A-1">二次会</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="categorytheory_圏論勉強会_conceptualmathematics_session3-4"><a href="" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_ConceptualMathematics_Session3-4</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory" class="uri" title="Go to wiki page">CategoryTheory</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a" class="uri" title="Go to wiki page">圏論勉強会</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/ConceptualMathematics" class="uri" title="Go to wiki page">ConceptualMathematics</a>:Session3-4</p>
+<hr>
+<h2 id="第二回圏論勉強会">第二回圏論勉強会</h2>
+<p>2004-12-11 (土) タイムインターメディアにて 14:20 - 18:40</p>
+<p>出席者</p>
+<pre><code>田中    +------+        |ス
+田原    |      | とおる |ク
+Shelarcy|      | 酒井   |リ
+ 今井   |      | 山下   |｜
+        +------+        |ン
+          豊福 </code></pre>
+<h3 id="始まる前">始まる前</h3>
+<ul>
+<li>高校の時点でやっている人は高等数学とかやっている
+<ul>
+<li>あの時圏論とか知っていたら頑張って勉強したのに</li>
+<li>入試は計算問題しか出していけないという縛り</li>
+<li>抽象数学とか入れたらどんな問題になるんだろう？</li>
+<li>Haskell で未踏は伊知地さんではなく、株式会社イグナイトジャパンの酒井さん (オープンソース関係)
+<ul>
+<li>伊知地さんは競争率が高かったらしい</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="session-3">Session 3</h3>
+<ul>
+<li>再び BOOKKEEPING について
+<ul>
+<li>借りてる側があれば、貸してる側もないといけない</li>
+</ul></li>
+</ul>
+<h3 id="article-ii">Article II</h3>
+<ul>
+<li>cartesian座標の cartesian は Descartes（デカルト）に由来する
+<ul>
+<li>‘Des’ は付かないんだ</li>
+</ul></li>
+<li>algebraとalgorithmの語源
+<ul>
+<li>ちなみに al は英語の the にあたるらしい</li>
+</ul></li>
+<li>なぜ「g=k =&gt; fg=fk」か
+<ul>
+<li>等しいものを代入しても等しいことは暗黙の前提</li>
+</ul></li>
+<li>Exercise 9(p.54)
+<ul>
+<li>map r が a retraction of f なので、f とrの合成写像ｒo f は、ｒo f=1_A をみたす。 e o e=(f o r) o (f o r)=f o (r o f) o r=f o (1_A) o r=f o r=e</li>
+<li>後半： map f：A →Bが isomorphismなので、 map g： B→ A があって、gf=1_A(= identity map of A)、 fg=1_B(= identity map of B) をみたす。fg=1_B より、g は section 。ｒを retraction of f とすると、Theorem(p.54) より r=g となって、e=fr=fg=1_B で、identity。</li>
+</ul></li>
+<li>retractionとsectionの日本語訳は？
+<ul>
+<li>sectionは「切断」、retractionはよくわからない</li>
+<li>retractionを左逆元、sectionを右逆元と言ったりもする</li>
+</ul></li>
+</ul>
+<h3 id="二次会">二次会</h3>
+<ul>
+<li>Template Haskell は Modern C++ Design とか見てうらやましいと思ったやつだから</li>
+<li>ささださんばりに Haskell での実装の詳細について書いていたら、Haskeller の注目すべき日記になるんだろうな</li>
+<li>GHC Hacking Guide 欲しい
+<ul>
+<li>一応 Commentary はあるけど</li>
+<li>だれかソース整備して</li>
+<li>名前重要</li>
+<li>型宣言が書いてない
+<ul>
+<li>コンパイラに手を入れれば型宣言を付加する pretty printer ができるのでは</li>
+<li>そのコンパイラのソースに型宣言が書いてない =&gt; 振り出しに戻る</li>
+<li>Proxima にソースから型を判定して ソース中の型宣言を出す機能があったけど、あれ(Proxima のプロトタイプ)きちんとコンパイルできない</li>
+</ul></li>
+</ul></li>
+<li>オープンソフトウェア活用基盤はあっちの狙いとずれていて通らなかった</li>
+<li>ある Webページからどんな情報で submit されるのか知りたい
+<ul>
+<li>Achilles（アキレス）proxy が使えるのでは</li>
+<li>Mozilla用なら LiveHTTPHeaders が良さそう。</li>
+</ul></li>
+<li>ブッシュが勝ったのには安楽死とかの議論の兼ね合いが
+<ul>
+<li>ケリーに投票したにも関わらず、ブッシュに投票したのではないのではありませんねというよく分からない確認メッセージを出す投票機の話</li>
+</ul></li>
+<li>今振り返って日本の大東亜・太平洋戦争の（回避も含めて）最善の策はなんだったのか
+<ul>
+<li>宣戦布告に失敗して奇襲の汚名を着せられてしまったのが痛かった
+<ul>
+<li>それさえ無ければ、ベトナム戦争時のようにアメリカ国内で反戦運動が盛り上がったりという展開もありえたのではないか</li>
+</ul></li>
+<li>ハルノートに従っていたら日米開戦は避けられたか?
+<ul>
+<li>ルーズベルトは、日本に最初の一発を撃たせることで第二次世界大戦に参戦する口実を得ようとしていたし、さらなる要求を突きつけられていただけでは?</li>
+</ul></li>
+<li>日英同盟を解消していなかった場合はどうか?</li>
+<li>元寇の時に負けるべきだった</li>
+<li>秀吉が生きていて、明(あるいはヨーロッパまで進出したモンゴル帝国)を攻め落とす</li>
+<li>関が原で西軍が勝っていたら標準語が名古屋弁になっていたという小説。清水義範の「金鯱の夢」</li>
+</ul></li>
+<li>日中戦争の始まりを盧溝橋事件とするのはあまり正しくないと思う
+<ul>
+<li>その後一度は停戦協定も結ばれている</li>
+<li>通州事件によって日本の世論の収まりがつかなくなってしまったことも忘れるべきではない。</li>
+</ul></li>
+<li>Ruby の IO が stdio ではなくなった</li>
+<li>RDoc とか Doxygen をみんな使えばいいのに
+<ul>
+<li>言語ごとに色々あってうざい。誰か統一してくれ。</li>
+<li>でも Boost あたりはクラスよりも演算子のオーバーロードとテンプレートの展開を組み合わせる形なので
+<ul>
+<li>それって C++ 使う価値あるの？</li>
+<li>関数型言語使えって感じだけど、C++ のクラスとか呼べるから……6行のコンパイルに 10 分かかったりすることもあるけど</li>
+</ul></li>
+<li>Boost は BoostBook という DocBook 形式</li>
+</ul></li>
+<li>日本語プログラミング言語でラムダを表記するときは「入」を使えばよい？
+<ul>
+<li>「λ」って書けるやん</li>
+<li>たまに「人」になる</li>
+</ul></li>
+<li>darcs って使ってる？
+<ul>
+<li>あれは最初の(initial)コミットもパッチだから……</li>
+<li>最初のバージョンとそこからのパッチの列で管理してるので、最初にチェックアウトするときには、パッチを当てまくって凄いことになる</li>
+</ul></li>
+<li>make ではなく configure の代替を目指したパッケージツール Cabal</li>
+<li>清水義範の著作『バールのようなもの』に倣って『Perlのようなもの』という言語(Something Like Perl)を作ってはどうか
+<ul>
+<li>SyntaxはPerlと同じでSemanticsが違うとか</li>
+</ul></li>
+<li>Computational Category Theory のマニュアルが <a href="http://www.cs.man.ac.uk/~david/categories/" class="uri">http://www.cs.man.ac.uk/~david/categories/</a> から入手できるけど、これって絶版になってしまった本と中身は同じ?</li>
+<li>最初に無理数と分かったのは？ √2？黄金比？</li>
+<li>Conceptual Mathematics を amazon で買った後にエロエロな本を買ったら「この本を買った人はこんな本も買っています」に載るのだろうか。</li>
+</ul>
+<h2 id="第三回圏論勉強会">第三回圏論勉強会</h2>
+<p>2005-1-29 (土) タイムインターメディアにて 13:00-16:30</p>
+<p>出席者</p>
+<pre><code>        +------+        |ス
+今井    |      | 酒井   |ク
+Shelarcy|      | 豊福   |リ
+のなか  |      | 山下   |｜
+        +------+        |ン
+         とおる </code></pre>
+<h3 id="article-ii-1">Article II</h3>
+<h3 id="session-4">Session 4</h3>
+<h3 id="二次会-1">二次会</h3>
+<ul>
+<li>wxHaskell の GUI を宣言的に書くためのライブラリの問題点</li>
+<li>GHC 6.4
+<ul>
+<li>みんな CVS HEAD の GHC を使おう</li>
+<li>Purely Functional Data Structure のアイデアを元に実装された Queue などの例のライブラリが 6.4 に入る</li>
+<li>6.4 で Concurrent Haskell に入る STM</li>
+<li>Template Haskell で wxHaskell 上に Pan を実装した PanTHeon は 6.3 以降の Template を使っている</li>
+</ul></li>
+<li>Monad / Adjunction / 自由代数 / Kleisli construction</li>
+<li>Rubyのいいリファレンス本ってない？
+<ul>
+<li>オンラインマニュアルが一番。。。</li>
+</ul></li>
+</ul>
+<hr>
+<p>Last modified : 2006/06/15 01:53:03 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session3-4" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

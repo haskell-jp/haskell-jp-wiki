@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_Network"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_Network</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_Network">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_Network">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_Network">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_Network</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_network"><span>Programming_Network</span></a><ul>
+<li><a href="#%E3%81%A8%E3%82%8A%E3%81%82%E3%81%88%E3%81%9A%E3%81%AE-echo-%E3%82%B5%E3%83%BC%E3%83%90">とりあえずの Echo サーバ</a></li>
+<li><a href="#%E3%81%A8%E3%82%8A%E3%81%82%E3%81%88%E3%81%9A%E3%81%AEecho%E3%82%B5%E3%83%BC%E3%83%90%E4%BD%8E%E3%83%AC%E3%83%99%E3%83%ABapi-%E9%9D%9E%E9%96%A2%E6%95%B0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E5%BF%97%E5%90%91-%E6%9C%80%E4%BD%8E%E4%BB%95%E6%A7%98">とりあえずのEchoサーバ(低レベルAPI, 非関数プログラミング志向, 最低仕様)</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_network"><a href="" class="uri" title="Go to wiki page">Programming_Network</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:Network</p>
+<hr>
+<h3 id="とりあえずの-echo-サーバ">とりあえずの Echo サーバ</h3>
+<pre><code>\begin{code}
+module Main where
+
+import Control.Concurrent
+import Network
+import System.IO
+
+type Service = String -&gt; String
+
+port :: PortNumber
+port = 8888
+
+echo :: Service
+echo = id
+
+main :: IO ()
+main = server port echo
+
+server :: PortNumber -&gt; Service -&gt; IO ()
+server p sc = withSocketsDo $ listenOn (PortNumber p) &gt;&gt;=  serve sc
+
+serve :: Service -&gt; Socket -&gt; IO ()
+serve sc sock =  accept sock &gt;&gt;= forkIO . service sc &gt;&gt; serve sc sock
+
+service :: Service -&gt; (Handle, HostName, PortNumber) -&gt; IO ()
+service sc (h,_,_) = hSetBuffering h LineBuffering &gt;&gt; loop h sc
+
+loop :: Handle -&gt; Service -&gt; IO ()
+loop h sc =  hIfEOF h (return ()) $ hGetLine h &gt;&gt;= hPutStrLn h . sc &gt;&gt; loop h sc
+
+hIfEOF :: Handle -&gt; IO a -&gt; IO a -&gt; IO a
+hIfEOF h t e = hIsEOF h &gt;&gt;= \ eof -&gt; if eof then t else e
+
+\end{code}</code></pre>
+<h3 id="とりあえずのechoサーバ低レベルapi-非関数プログラミング志向-最低仕様">とりあえずのEchoサーバ(低レベルAPI, 非関数プログラミング志向, 最低仕様)</h3>
+<p>私の環境では上記のHigh Level API利用だとservname no supportedになる。 アドレス解決ができない模様なのでLow Level APIを叩いてみた。<a href="cut-sea.html" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/05 05:24:09 JST</p>
+<ul>
+<li>クライアント側でのアドレス指定をFQDNじゃなくて、IPアドレス(127.0.0.1)でやってもアクセスできませんか？ MacOSでもはこれで上手くいった。Ubuntu 8.04 では問題なし。</li>
+<li>あークライアント以前に上記サーバが起動に失敗するのでつ。<a href="cut-sea.html" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/05 11:47:28 JST</li>
+<li><p>これかも <a href="https://hackage.haskell.org/trac/ghc/ticket/2103">GHC ticket#2103</a> iquiw:2008/06/11 14:10:52 JST</p></li>
+<li>低レベルAPI : 低レイヤのNetworkライブラリ(Network.Socket)を利用した。</li>
+<li>非関数プログラミング志向 : 関数プログラミング志向で書けなかっただけ。</li>
+<li><p>最低仕様 : 複数接続やら切断など一切処理してない最低限のecho。終了にはserverをCtrl-Cなどで殺す。</p></li>
+</ul>
+<!-- -->
+<pre><code>import Network.Socket
+
+server sv = do s0 &lt;- sock0
+               bindSocket s0 addr0
+               listen s0 5
+               (s1,a1) &lt;- accept s0
+               sv s1
+    where
+    sock0 = socket AF_INET Stream 0
+    addr0 = SockAddrInet 8888 0x0100007f -- 127.0.0.1:8888
+
+echo s =  do (rcv, len, addr) &lt;- recvFrom s 2048
+             send s rcv
+             echo s
+
+main :: IO a
+main = server echo</code></pre>
+<p>なぜかIP Addressの指定が1.0.0.127的にしないと127.0.0.1にならない。<br>
+もしかしてBig/Little Endianがおかしい？(pkgsrcからbuildしたghcなんだけど)<br>
+</p>
+<p>正直流れが見えるまで、何故こんなAPIになってるのかムカついてたんだけど…</p>
+<p>ステップバイステップでないと書けない子なので、</p>
+<pre><code>sock0 = socket AF_INET Stream 0
+addr0 = SockAddrInet 8888 0x0100007f -- 127.0.0.1:8888
+                :
+                :</code></pre>
+<p>みたいな調子でロードしてはsock0やらaddr0やら確認してた。 するとbindとlistenのところでハマって、 ようやくsocketの返すのがIO Socketという風にIOモナドに包まれている理由が分った。 なーる。</p>
+<hr>
+<p>Last modified : 2008/06/11 14:10:52 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_Network">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_Network?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_Network">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_Network" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>
