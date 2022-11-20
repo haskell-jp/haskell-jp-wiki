@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Yesod_0.7.1to0.8.1"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Yesod_0.7.1to0.8.1</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Yesod_0.7.1to0.8.1">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Yesod_0.7.1to0.8.1">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Yesod_0.7.1to0.8.1">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Yesod_0.7.1to0.8.1</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#yesod_0.7.1to0.8.1"><span>Yesod_0.7.1to0.8.1</span></a><ul>
+<li><a href="#%E3%81%8B%E3%82%890.8.1%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C">0.7.1から0.8.1への移行</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="yesod_0.7.1to0.8.1"><a href="" class="uri" title="Go to wiki page">Yesod_0.7.1to0.8.1</a></h1>
+<p><a href="Yesod.html" class="uri" title="Go to wiki page">Yesod</a>:0.7.1to0.8.1</p>
+<hr>
+<h2 id="から0.8.1への移行">0.7.1から0.8.1への移行</h2>
+<p><a href="http://www.yesodweb.com/book/migrate7to8">Migration Guide</a>をざっと見ておく。</p>
+<hr>
+<h4 id="まずは.cabalと.ghcのバックアップを取っておく">1. まずは.cabalと.ghcのバックアップを取っておく</h4>
+<pre><code>$ tar zcvf .cabal.tgz ~/.cabal
+$ tar zcvf .ghc.tgz ~/.ghc</code></pre>
+<p>いつでも現環境に戻れるようにしておいた方がいざというとき安心。</p>
+<h4 id="でプロジェクトをscaffoldしておく">2. 0.7.1でプロジェクトをscaffoldしておく</h4>
+<pre><code>$ yesod
+   :</code></pre>
+<p>これは後でyesod-0.8.1でも同じプロジェクト名とかでscaffoldしてdiff -rで変更点を確認するのに使う。</p>
+<h4 id="alexhappyやhaskell-platformからクリーンインストール">3. alex/happyやhaskell-platformからクリーンインストール</h4>
+<pre><code>$ rm -rf ~/.cabal ~/.ghc</code></pre>
+<p>今回も一応updateで作業できるらしいけど、yesod以外のライブラリなんかでも結構ハマったりするのでクリーンインストールの方が結局楽だったように思う。</p>
+<p>ちなみに私は事情があって未だにghc-6.12.3でまだ7系に移行してないので、 これはこれで色々あるけど、やっぱり一気にアップデートしすぎると問題点が分らなくなってしまうので、今回もyesodのみのアップデートを進める。 以下を順に再インストール。</p>
+<blockquote>
+<ul>
+<li>cabal-install-0.8.2</li>
+<li>alex-2.3.3</li>
+<li>happy-1.18.5</li>
+<li>haskell-platform-2010.2.0.0</li>
+<li>haskell-mode</li>
+<li>ghc-mod-0.5.5</li>
+<li><strong>file-embed-0.0.3.1</strong></li>
+<li>yesod</li>
+</ul>
+</blockquote>
+<p>file-embedとかはここでこのバージョンを入れておかないと後のyesodのインストールでこけたので。 ただしこれは私の環境がGHC6.12.3という古い状態だからかも。<br>
+あとは自分のアプリがどんなライブラリを使っているかによる。 私の場合で言えば、pandocの1.6系を使ってたんだけど、こいつをインストールした瞬間にHTTPライブラリが壊れるってことでHTTP-4000.1.1をインストールしてからyesod以下のライブラリ群をインストールするなどした。<br>
+古い環境を引きずっているのが逆に足を引っぱっているだけなのかもしれないけど、 使っているライブラリによっては何度か環境構築をやり直すことにはなると思う。</p>
+<h4 id="yesod-0.8.1でテストアプリをscaffoldしてみる">4. yesod-0.8.1でテストアプリをscaffoldしてみる</h4>
+<pre><code>$ yesod
+Usage: yesod &lt;command&gt;
+Available commands:
+    init         Scaffold a new site
+    build        Build project (performs TH dependency analysis)
+    devel        Run project with the devel server
+$ yesod init</code></pre>
+<p>0.8.1からはyesodにはinit/build/develの引数がサポート。 説明のまんまだけど、以前はwai-handler-develで使えるようになったインタラクティブ開発のための機能が標準サポートされるようになっている。<br>
+scaffoldするにはyesod initとする。 あとは0.7.1の頃とほとんど一緒。</p>
+<h4 id="修正箇所">5. 修正箇所</h4>
+<p>0.7.1と0.8.1のscaffolded codeのdiff -rを見ると結構変っているが、 変更として最もインパクトの大きいのはStringをTextにするというミッション。</p>
+<p>というわけで、</p>
+<pre><code>{-# LANGUAGE OverloadedStrings #-}
+ 
+import Data.Text (Text)
+import qualified Data.Text as T</code></pre>
+<p>あたりの追加は必要になることが多い。<br>
+多分たいていの実用的なアプリを書いてたら関係しそうな点を書いておくと、</p>
+<ul>
+<li>Model.hsではStringなフィールドをすべてTextに変更。</li>
+<li>Controller.hsをscaffoldしたコードを見て修正。（合わせちゃっていい）</li>
+<li>setTitleとかsetMessageでstringしてから渡してた部分はstring不要になる。 setTitle $ string “サイトタイトル” =&gt; setTitle “サイトタイトル”みたく。 ただしこれはワーニングが出るだけなので最後でもかまわないと思う。</li>
+<li>ルートの型も変わってきている。クエリパラメータは[(String,String)]から[(Text,Text)]とか。 当然getUrlRenderで取得したレンダラ—を使っている箇所に修正が入ることもある。 具体的にはData.Text.unpackすればいい。</li>
+<li>jsonScalarやatomLinkなどyesod-newsfeedやyesod-jsonなどがまだStringなので、こいつ周辺ではunpackが要る。</li>
+<li>redirectStringに対してはredirectTextが用意されているのでそっちに書き換え。</li>
+<li>lines,unlines,(++),head,tailの他にintercalateのようにリスト操作関数なんだけど文字列を文字のリストとして仮定して使っている箇所があったら変更がいる。 ただしData.Textに必要そうな関数がほとんどそろっているのでそういうのはそっちに切り替えればよい。</li>
+<li><p>Web.EncodingsからencodeUrlを使っている人もいるはず。 その場合には</p>
+<pre><code>import Web.Encodings.StringLike ()
+import Data.Text (Text)</code></pre>
+<p>により、encodeUrlをTextに対して適用できるのでpack/unpackはいらないはず。</p></li>
+<li>文字列に対してパターンマッチを使っている部分についてはしょうがないのでガード式に書き換える。 ほとんど機械的にできると思う。</li>
+<li>preEscapedStringもpreEscapedTextとかpreEscapedLazyTextがあるのでこっちで代用できる。</li>
+<li>MultiPieceの型とかもEitherからMaybeに変わったのでRightをJustにする。</li>
+<li>永続データのuidにあたるfooIdがIntとはかぎらなくなった影響でYesodAuthとかでshowAuthIdやreadAuthIdがなくなったので消す。</li>
+<li><p>Settings.hsなどがconfigディレクトリ以下に移動になっているので移してもいい。</p></li>
+</ul>
+<p>あとは結構頻繁に使ったのは以下のラッパー。</p>
+<pre><code>import qualified Data.Text as T
+
+(+++) :: Text -&gt; Text -&gt; Text
+(+++) = T.append
+showText :: (Show a) =&gt; a -&gt; Text
+showText = T.pack . show
+readText :: (Read a) =&gt; Text -&gt; a
+readText = read . T.unpack</code></pre>
+<p>基本的にはyesodの本体に関してはText化されているけど、使っているライブラリが全てそうなっているわけはなく、yesodの周辺ライブラリでもjsonScalarやatomLinkなんかがまだStringだったりするので頻出する。</p>
+<p>devel-server.hsは不要になったけど、yesod develとコマンドを入力すると、 distディレクトリ以下にビルドしつつdevel.hsとかを作ってこいつで走らせるようになる。 こいつが正常に機能するにはcabalファイルにいくつか記述する必要がある。</p>
+<ul>
+<li>yesodは0.8以上0.9未満にする。</li>
+<li>cabalのlibraryセクションでControllerをexposeする。</li>
+<li>other-modulesにも開発したモジュールを全部列挙しておく。</li>
+</ul>
+<p>ざっとこんなところだけど、基本的にはscaffoldしたプロジェクトのcabalファイルを参考に修正すれば良い。</p>
+<hr>
+<p>Last modified : 2011/06/06 00:25:56 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Yesod_0.7.1to0.8.1">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Yesod_0.7.1to0.8.1?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Yesod_0.7.1to0.8.1">Delete this page</a></li>
+      
+    </ul>
+    
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

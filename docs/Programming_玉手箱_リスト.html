@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_玉手箱_リスト</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_玉手箱_リスト</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_%E7%8E%89%E6%89%8B%E7%AE%B1_%E3%83%AA%E3%82%B9%E3%83%88"><span>Programming_玉手箱_リスト</span></a><ul>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E9%95%B7%E3%81%95%E3%81%AE%E6%AF%94%E8%BC%83">リストの長さの比較</a></li>
+<li><a href="#pos">pos+</a></li>
+<li><a href="#%E9%80%A3%E7%B6%9A%E3%81%97%E3%81%9F-n-%E8%A6%81%E7%B4%A0%E3%81%AE%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E3%83%AA%E3%82%B9%E3%83%88">連続した n 要素のリストのリスト</a></li>
+<li><a href="#graph-%E3%81%AE%E7%B5%B1%E5%90%88">Graph の統合</a><ul>
+<li><a href="#%E6%9C%A8%E3%81%AE%E7%B5%B1%E5%90%88">木の統合</a></li>
+</ul></li>
+<li><a href="#%E9%9B%86%E5%90%88%E3%81%AE%E7%B5%B1%E5%90%88">集合の統合</a></li>
+<li><a href="#xzip">xzip</a></li>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%82%92%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%8C%96%E3%81%99%E3%82%8B">リストをグループ化する</a><ul>
+<li><a href="#n-%E7%95%AA%E9%A3%9B%E3%81%B0%E3%81%97%E6%AF%8E%E3%81%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%AB%E5%88%86%E3%81%91%E3%82%8B">n 番飛ばし毎にグループに分ける</a></li>
+<li><a href="#n-%E5%80%8B%E3%81%9A%E3%81%A4%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%8C%96%E3%81%99%E3%82%8B">n 個ずつグループ化する</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_玉手箱_リスト"><a href="" class="uri" title="Go to wiki page">Programming_玉手箱_リスト</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e7%8e%89%e6%89%8b%e7%ae%b1" class="uri" title="Go to wiki page">玉手箱</a>:リスト</p>
+<hr>
+<p><a href="Programming_玉手箱.html" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e9%95%b7%e3%81%95%e3%81%ae%e6%af%94%e8%bc%83" class="uri" title="Go to wiki page">リストの長さの比較</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/pos+" class="uri" title="Go to wiki page">pos+</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%80%a3%e7%b6%9a%e3%81%97%e3%81%9f%20n%20%e8%a6%81%e7%b4%a0%e3%81%ae%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e3%83%aa%e3%82%b9%e3%83%88" title="Go to wiki page">連続した n 要素のリストのリスト</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Graph%20%e3%81%ae%e7%b5%b1%e5%90%88" title="Go to wiki page">Graph の統合</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%9c%a8%e3%81%ae%e7%b5%b1%e5%90%88" class="uri" title="Go to wiki page">木の統合</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%9b%86%e5%90%88%e3%81%ae%e7%b5%b1%e5%90%88" class="uri" title="Go to wiki page">集合の統合</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/xzip" class="uri" title="Go to wiki page">xzip</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e5%8c%96%e3%81%99%e3%82%8b" class="uri" title="Go to wiki page">リストをグループ化する</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/n%20%e7%95%aa%e9%a3%9b%e3%81%b0%e3%81%97%e6%af%8e%e3%81%ab%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e3%81%ab%e5%88%86%e3%81%91%e3%82%8b" title="Go to wiki page">n 番飛ばし毎にグループに分ける</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/n%20%e5%80%8b%e3%81%9a%e3%81%a4%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e5%8c%96%e3%81%99%e3%82%8b" title="Go to wiki page">n 個ずつグループ化する</a></li>
+</ul>
+<hr>
+<h2 id="リストの長さの比較">リストの長さの比較</h2>
+<p>リスト同士の長さを比較するというより、むしろ指定した値と指定したリスト の長さを比較するという方がよくありそう。これならリストに無限リストを渡 されても大丈夫。</p>
+<pre><code>shorterThan, longerThan :: Int -&gt; [a] -&gt; Bool 
+shorterThan n = null . drop (n-1)
+longerThan  n = not . null . drop n</code></pre>
+<p>あれっ。これ名前は逆の方がいいかな？ Curry 化されてなきゃ。逆だろうな。 逆にするなら、</p>
+<pre><code>cmpLen :: Int -&gt; [a] -&gt; Ordering
+cmpLen 0 [] = EQ 
+cmpLen n ls = case splitAt (n-1) ls of
+                (_,[])  -&gt; GT
+                (_,[_]) -&gt; EQ
+                _       -&gt; LT</code></pre>
+<p>というのを定義しておけばいいかな。</p>
+<hr>
+<h2 id="pos">pos+</h2>
+<p>整数のリストをもらって、おのおのの要素にその位置を示す数を加えてかえす – Ansi Common Lisp Ex 3.5</p>
+<pre><code>posAdd :: [Int] -&gt; [Int]
+posAdd = zipWith (+) [0..]</code></pre>
+<hr>
+<h2 id="連続した-n-要素のリストのリスト">連続した n 要素のリストのリスト</h2>
+<pre><code>contElems 3 [1,2,3,4,5] → [ [1,2,3],[2,3,4],[3,4,5] ]</code></pre>
+<p>2ch よりの話題 80さんと同じもの</p>
+<pre><code>contElems :: Int -&gt; [a] -&gt; [[a]]
+contElems n = (!! n) . transpose . map inits . tails</code></pre>
+<hr>
+<h2 id="graph-の統合">Graph の統合</h2>
+<p><a href="http://practical-scheme.net/wiliki/wiliki.cgi?Scheme:%EF%BF%BD%EA%A5%B9%EF%BF%BD%C8%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD">WiLiKi:Scheme:リスト処理</a>「木の統合」での話題から。</p>
+<blockquote>
+<p>ノード(シンボル)の親子関係の集合が与えられているとき、それらを全て満たす木の集合を求める。</p>
+<p>親子関係はこんなリストで与えられている:</p>
+<p>(親 子1 子2 …)</p>
+<p>子の親は常にユニーク。循環は無いものとする。兄弟関係(親を共有する子の順序)は保存する。入力には同じシンボルが「親」に二度以上出現しないものとする。</p>
+<p>例えば、最初のセットが ((A B C) (B D E) (F G) (H F I) (J A))の場合、出力は：</p>
+<p>((J (A (B (D) (E)) (C))) (H (F (G)) (I)))</p>
+</blockquote>
+<h3 id="木の統合">木の統合</h3>
+<p>先ずは簡単な木の場合</p>
+<pre><code>import List
+type Vertex = Char
+type Relation = (Vertex, [Vertex])
+
+data Tree a =  Tree a [Tree a] deriving (Show, Read)
+
+roots :: [Relation] -&gt; [Vertex]
+roots rels = filter (not . flip elem children) parents
+             where children = nub $ concat $ map snd rels
+                   parents  = map fst rels
+
+makeTree :: [Relation] -&gt; Vertex -&gt; Tree Char
+makeTree rels v = Tree v $ map (makeTree rels) $ lookupTos v rels
+
+lookupTos :: Vertex -&gt; [Relation] -&gt; [Vertex]
+lookupTos v []                  = []
+lookupTos v (r:rs) | v == fst r = snd r
+                   | otherwise  = lookupTos v rs
+
+makeForest :: [Relation] -&gt; [Tree Char]
+makeForest rels = map (makeTree rels) $ roots rels</code></pre>
+<hr>
+<h2 id="集合の統合">集合の統合</h2>
+<p><a href="http://www.namikilab.tuat.ac.jp/~sasada/diary/200308.html#d20">はずかしいだいありー</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20030821#p02">ヒビルテ</a>、<a href="http://practical-scheme.net/wiliki/wiliki.cgi?Scheme:%EF%BF%BD%EA%A5%B9%EF%BF%BD%C8%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD">WiLiKi:Scheme:リスト処理</a>より、</p>
+<blockquote>
+<p>(子)リストのリストがあって、子リストにはシンボルが2個以上入ってたとする。たとえば、((A B) (C D) (E F) (A G) (H F I)) のような感じ。</p>
+<p>これを、同じシンボルを含む子リストはまとめたいとする。たとえば、例で言えば ((A B G) (C D) (E F H I)) のようなリストを返す。</p>
+</blockquote>
+<p>nobsun の解</p>
+<pre><code>import List
+
+solve :: Eq a =&gt; [[a]] -&gt; [[a]]
+solve = foldr foo [] 
+
+foo :: Eq a =&gt; [a] -&gt; [[a]] -&gt; [[a]]
+foo x [] = [x]
+foo x <a href="email-protection.html" class="__cf_email__" data-cfemail="5c3f3f2f1c">[email&nbsp;protected]</a>(c:cs)
+ = case bar x c of
+     [] -&gt; c:foo x cs
+     xc -&gt; foo xc cs
+
+bar :: Eq a =&gt; [a] -&gt; [a] -&gt; [a]
+bar ps qs = case intersect ps qs of
+              [] -&gt; []
+              is -&gt; union ps qs</code></pre>
+<p><a href="http://www.lab2.kuis.kyoto-u.ac.jp/~hanatani/tdiary/?date=20030822">Y. Hanatani さんによるスマートな解</a></p>
+<pre><code>import List
+ 
+solve xs = foldr solve' xs (concat xs)
+ 
+solve' x xs = case partition (elem x) xs of
+              (p, q) -&gt; foldl union [] p : q</code></pre>
+<ul>
+<li>(concat xs) の代わりに (nub (concat xs)) あるいは (foldl union [] xs) でもいいっかもしれない。– nobsun</li>
+</ul>
+<hr>
+<h2 id="xzip">xzip</h2>
+<p><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20030617">ヒビルテ</a>より</p>
+<blockquote>
+<p>長さの等しい二つのリスト[a1; a2…; an]と [b1; b2…; bn]を受け取って, [(a1, bn); (a2, bn - 1); …; (an, b1)] を返す関数を書きなさい。ただし、</p>
+<ul>
+<li>nをあらかじめ知ることはできない</li>
+<li>与えられた二つのリスト以外のリストを使ってはならない</li>
+<li>再帰呼び出しは高々(n + 1)回しか行ってはならない</li>
+<li>全体の計算量はO(n)でなければならない</li>
+</ul>
+</blockquote>
+<p>nobsun の最初の解</p>
+<pre><code>xzip xs ys = zip xs (reverse ys)</code></pre>
+<p>(reverse ys) で中間リストをつくっているので駄目？再帰呼び出しも2n回になるのかなぁ</p>
+<p>あおきさんの解</p>
+<pre><code>xzip xs ys = f where (f,s) = xzip' xs ys
+
+xzip' [] ys = ([], ys)
+xzip' (x:xs) ys = ((x,y):list, ys')
+                  where (list, (y:ys')) = xzip' xs ys </code></pre>
+<p>なるほどですね。</p>
+<p>で、nobsun の改良解？</p>
+<pre><code>import List (mapAccumR)
+xzip xs ys = snd $ xzip' xs ys
+             where xzip' = flip $ mapAccumR f 
+                   f (y:ys) x = (ys,(x,y))</code></pre>
+<hr>
+<h2 id="リストをグループ化する">リストをグループ化する</h2>
+<h3 id="n-番飛ばし毎にグループに分ける">n 番飛ばし毎にグループに分ける</h3>
+<p>blog:Everyday:2005-01-11</p>
+<pre><code>f n = foldr (\x y -&gt; (x:last y):init y) (replicate n [])
+
+f5 n = transpose . unfoldr phi
+    where phi [] = Nothing
+          phi xs = Just $ splitAt n xs</code></pre>
+<h3 id="n-個ずつグループ化する">n 個ずつグループ化する</h3>
+<p>blog:Everyday:2005-01-13</p>
+<pre><code>f1 n = unfoldr phi
+    where phi [] = Nothing
+          phi xs = Just $ splitAt n xs</code></pre>
+<hr>
+<p>Last modified : 2008/07/03 21:36:01 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e3%83%aa%e3%82%b9%e3%83%88" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

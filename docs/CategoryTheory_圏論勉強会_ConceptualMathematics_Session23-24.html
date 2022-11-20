@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会_ConceptualMathematics_Session23-24</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会_ConceptualMathematics_Session23-24</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E7%AC%AC%E5%8D%81%E4%B8%89%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第十三回圏論勉強会</a><ul>
+<li><a href="#%E9%9B%91%E8%AB%87">雑談</a></li>
+<li><a href="#session-23">Session 23</a></li>
+<li><a href="#session-24">Session 24</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A">二次会</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h2 id="第十三回圏論勉強会">第十三回圏論勉強会</h2>
+<p>2006-1-22(日) <a href="http://www.kissport.or.jp/sisetu/libra/index.html">男女共同参画センター 学習室B</a> 8:45〜16:30</p>
+<p>写真 <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/</a></p>
+<p>出席者</p>
+<pre><code>       shelarcy 久井  　　 |ス
+      +-------------+ 　　 |ク
+      |             | 　　 |リ
+      |             | 　　 |｜
+      +-------------+  　　|ン
+           酒井 今井   　　|</code></pre>
+<h3 id="雑談">雑談</h3>
+<ul>
+<li>Haskell の標準数値 Class の再デザイン
+<ul>
+<li><a href="http://www.nerimadors.or.jp/~kando/TITECH/TypeSystem/OverLoading.doc">Haskell の Num が備える + や * は環 (ring) が備えるべきという議論</a>
+<ul>
+<li>(だけど、Haskell では user の手で Class をより小さな Class にすることのできる仕組みがないので問題を悪化させる、ってもとの <a href="http://lampwww.epfl.ch/~odersky/papers/fpca95.ps.gz">A Second Look at Overloading</a> には書いてあるね)</li>
+</ul></li>
+<li><a href="https://www.haskell.org/communities/11-2005/html/report.html#sect4.2.10">Numeric prelude</a>
+<ul>
+<li>物理計算などをやるときに便利なように線形代数などを導入したり、QuickCheck に対応させたりしている (やはり Num を Ring という名前に変更したいらしい)</li>
+<li>代数的な構造をきっちりやりたい、っいうと、どこまでやるかが問題になるけど……
+<ul>
+<li><a href="https://haskell.org/docon/">DoCon</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="session-23">Session 23</h3>
+<ul>
+<li>category CからC_{B1,B2}を作る
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0532.JPG">C_{B1,B2｝がcategoryになっているかのチェック</a>
+<ul>
+<li>(<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0533.JPG">同じ図</a>)</li>
+</ul></li>
+<li>このC_{B1,B2}における terminal object が、Cにおける B1, B2の product と同じものになる。</li>
+</ul></li>
+<li>Exercise 1
+<ul>
+<li>B1×B2の uniqueness を、２通りの方法で証明
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0534.html">Cの中で直接証明</a></li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0535.JPG">C_{B1,B2} の terminal object の uniqueness と、これが C における B1×B2 と同じになることから証明</a></li>
+</ul></li>
+</ul></li>
+<li>Exercise 2
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0536.JPG">解答</a></li>
+</ul></li>
+</ul>
+<h3 id="session-24">Session 24</h3>
+<ul>
+<li>Exercise 1
+<ul>
+<li>Session 23 の Ex.1 とほぼ同様につき略</li>
+</ul></li>
+<li>Exercise 2
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0537.html">解答1</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0538.html">解答2</a></li>
+</ul></li>
+<li>Exercise 3
+<ul>
+<li>難しい…</li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0539.html">板書1</a>, <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200601/ct/IMG_0542.html">板書1</a></li>
+</ul></li>
+<li>人手で確かめるのはほとんど無理に近いので、Haskellでソルバを書いてみる…？
+<ul>
+<li>書いてはみたけど、グラフに出してみるのはまたあとで。</li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/images/20060122_4.png">グラフ</a>
+<ul>
+<li>おお、すごい！</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="二次会">二次会</h3>
+<ul>
+<li>Haskell の Integral という Class は integral domain (整域) を指しているんじゃないだろうか？</li>
+</ul>
+<hr>
+<p>最終更新 : 2006/02/21 15:52:45 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_ConceptualMathematics_Session23-24" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

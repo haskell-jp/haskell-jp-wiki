@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise14"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/StartHaskell2/exercise14</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/StartHaskell2/exercise14">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/StartHaskell2/exercise14">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/StartHaskell2/exercise14">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/StartHaskell2/exercise14</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E3%82%82%E3%81%86%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%A0%E3%81%91%E3%83%A2%E3%83%8A%E3%83%89%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C">『もうちょっとだけモナド』　練習問題</a><ul>
+<li><a href="#writer%E3%83%A2%E3%83%8A%E3%83%89%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86">Writerモナドを使ってみよう</a></li>
+<li><a href="#%E5%B7%AE%E5%88%86%E3%83%AA%E3%82%B9%E3%83%88">差分リスト</a></li>
+<li><a href="#%E3%83%A2%E3%83%8A%E3%83%89%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE%E9%96%A2%E6%95%B0">モナドとしての関数</a></li>
+<li><a href="#reader%E3%83%A2%E3%83%8A%E3%83%89%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86">Readerモナドを使ってみよう</a></li>
+<li><a href="#state%E3%83%A2%E3%83%8A%E3%83%89%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86">Stateモナドを使ってみよう</a></li>
+<li><a href="#%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%82%92%E6%8B%A1%E5%BC%B5%E3%81%97%E3%82%88%E3%81%86">スタックを拡張しよう</a></li>
+<li><a href="#either%E3%83%A2%E3%83%8A%E3%83%89">Eitherモナド</a></li>
+<li><a href="#prob%E7%A2%BA%E7%8E%87%E3%83%A2%E3%83%8A%E3%83%89">Prob(確率)モナド</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="もうちょっとだけモナド練習問題">『もうちょっとだけモナド』　練習問題</h1>
+<h2 id="writerモナドを使ってみよう">Writerモナドを使ってみよう</h2>
+<p>逆ポーランド記法で書かれた式を計算する関数 solveRPN (p.214) に、Writerモナドを使って計算経過ログをとる機能を追加してみよう。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">import</span> <span class="dt">Control.Monad.Writer</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="ot">solveRPN ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></a>
+<a class="sourceLine" id="cb1-4" title="4">solveRPN <span class="fu">=</span> <span class="fu">head</span> <span class="fu">.</span> <span class="fu">foldl</span> foldingFunction [] <span class="fu">.</span> <span class="fu">words</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    foldingFunction (x<span class="fu">:</span>y<span class="fu">:</span>ys) <span class="st">"*"</span> <span class="fu">=</span> (y <span class="fu">*</span> x) <span class="fu">:</span> ys</a>
+<a class="sourceLine" id="cb1-7" title="7">    foldingFunction (x<span class="fu">:</span>y<span class="fu">:</span>ys) <span class="st">"+"</span> <span class="fu">=</span> (y <span class="fu">+</span> x) <span class="fu">:</span> ys</a>
+<a class="sourceLine" id="cb1-8" title="8">    foldingFunction (x<span class="fu">:</span>y<span class="fu">:</span>ys) <span class="st">"-"</span> <span class="fu">=</span> (y <span class="fu">-</span> x) <span class="fu">:</span> ys</a>
+<a class="sourceLine" id="cb1-9" title="9">    foldingFunction xs       str <span class="fu">=</span> <span class="fu">read</span> str <span class="fu">:</span> xs</a></code></pre></div>
+<hr>
+<h2 id="差分リスト">差分リスト</h2>
+<p>誰かよろしくお願いします</p>
+<hr>
+<h2 id="モナドとしての関数">モナドとしての関数</h2>
+<p>関数のモナドの定義を見ながら、無理やり使える例を探してみよう。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">instance</span> <span class="dt">Monad</span> ((<span class="ot">-&gt;</span> r) <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="fu">return</span> x <span class="fu">=</span> \_ <span class="ot">-&gt;</span> x</a>
+<a class="sourceLine" id="cb2-3" title="3">  h <span class="fu">&gt;&gt;=</span> f <span class="fu">=</span> \w <span class="ot">-&gt;</span> f (h w) w</a></code></pre></div>
+<p>たとえば、リストの前半分だけ取る関数 takeHalf は、こんな風に書ける。（あまり書こうとは思わないけど）</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">import</span> <span class="dt">Control.Monad.Instances</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="ot">takeHalf ::</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb3-4" title="4">takeHalf <span class="fu">=</span> (<span class="ot">`div`</span><span class="dv">2</span>)<span class="fu">.length</span> <span class="fu">&gt;&gt;=</span> <span class="fu">take</span></a></code></pre></div>
+<hr>
+<h2 id="readerモナドを使ってみよう">Readerモナドを使ってみよう</h2>
+<p>いまUnixの環境変数を、変数名と値の連想リストで表すことにする。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">type</span> <span class="dt">Env</span> <span class="fu">=</span> [(<span class="dt">String</span>, <span class="dt">String</span>)]</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="ot">environment ::</span> <span class="dt">Env</span></a>
+<a class="sourceLine" id="cb4-4" title="4">environment <span class="fu">=</span> </a>
+<a class="sourceLine" id="cb4-5" title="5">  [ (<span class="st">"HOME"</span>, <span class="st">"/home/haskell"</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6">  , (<span class="st">"PATH"</span>, <span class="st">"/bin:/usr/bin"</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7">  , (<span class="st">"LANG"</span>, <span class="st">"ja_JP.UTF-8"</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8">  ]</a></code></pre></div>
+<p><a href="https://hackage.haskell.org/packages/archive/mtl/latest/doc/html/Control-Monad-Reader.html">Control.Monad.Reader</a>で定義されている Reader モナドでは、 ask 関数を使って、環境を参照することができる。</p>
+<p>環境変数から指定された変数名の値を探してくる関数 lookupEnv を実装しよう。ただし、変数名が見つからない場合は、空文字を返す。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">import</span> <span class="dt">Control.Monad.Reader</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="ot">lookupEnv ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Reader</span> <span class="dt">Env</span> <span class="dt">String</span></a>
+<a class="sourceLine" id="cb5-4" title="4">lookupEnv key <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  env <span class="ot">&lt;-</span> ask</a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="fu">...</span></a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8">test <span class="fu">=</span> runReader (lookupEnv <span class="st">"LANG"</span>) environment</a></code></pre></div>
+<p>また、$HOME が設定されていればその値を返し、なければ “/etc” を返す関数 getConfPath を書いてみよう。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">import</span> <span class="dt">Control.Monad.Reader</span></a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="ot">getConfPath ::</span> <span class="dt">Reader</span> <span class="dt">Env</span> <span class="dt">String</span></a></code></pre></div>
+<hr>
+<h2 id="stateモナドを使ってみよう">Stateモナドを使ってみよう</h2>
+<p>2次元平面上を移動する処理を書いてみよう。（上下左右の座標実装はお任せ）</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">import</span> <span class="dt">Control.Monad.State</span></a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">type</span> <span class="dt">Point</span> <span class="fu">=</span> (<span class="dt">Int</span>, <span class="dt">Int</span>)</a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="ot">move ::</span> <span class="dt">Char</span> <span class="ot">-&gt;</span> <span class="dt">State</span> <span class="dt">Point</span> ()</a>
+<a class="sourceLine" id="cb7-6" title="6">move <span class="ch">'u'</span> <span class="fu">=</span>  <span class="co">-- 上へ移動</span></a>
+<a class="sourceLine" id="cb7-7" title="7">move <span class="ch">'d'</span> <span class="fu">=</span>  <span class="co">-- 下へ移動</span></a>
+<a class="sourceLine" id="cb7-8" title="8">move <span class="ch">'l'</span> <span class="fu">=</span>  <span class="co">-- 左へ移動</span></a>
+<a class="sourceLine" id="cb7-9" title="9">move <span class="ch">'r'</span> <span class="fu">=</span>  <span class="co">-- 右へ移動</span></a>
+<a class="sourceLine" id="cb7-10" title="10"></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="ot">moveGame ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">State</span> <span class="dt">Point</span> ()</a>
+<a class="sourceLine" id="cb7-12" title="12">moveGame []     <span class="fu">=</span></a>
+<a class="sourceLine" id="cb7-13" title="13">moveGame (c<span class="fu">:</span>cs) <span class="fu">=</span></a>
+<a class="sourceLine" id="cb7-14" title="14"></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
+<a class="sourceLine" id="cb7-16" title="16">main <span class="fu">=</span> <span class="fu">print</span> <span class="fu">$</span> evalState (moveGame <span class="st">"ulrdddlr"</span>) (<span class="dv">0</span>,<span class="dv">0</span>)</a></code></pre></div>
+<hr>
+<h2 id="スタックを拡張しよう">スタックを拡張しよう</h2>
+<p>(p.333) で出てきたスタックに、以下の操作を追加しよう。</p>
+<ul>
+<li>undo : 直前の操作を取り消し、状態を元に戻す</li>
+<li>clear : スタックを空にする。ただし操作履歴の情報は残る（undoできるようにしておく）</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">type</span> <span class="dt">Stack</span> <span class="fu">=</span>  <span class="co">-- 新しいスタックの定義</span></a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="ot">pop ::</span> <span class="dt">Stack</span> <span class="ot">-&gt;</span> <span class="dt">State</span> <span class="dt">Stack</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb8-4" title="4"></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="ot">push ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Stack</span> <span class="ot">-&gt;</span> <span class="dt">State</span> <span class="dt">Stack</span> ()</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="ot">undo ::</span> <span class="dt">Stack</span> <span class="ot">-&gt;</span> <span class="dt">State</span> <span class="dt">Stack</span> ()</a>
+<a class="sourceLine" id="cb8-8" title="8"></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="ot">clear ::</span> <span class="dt">Stack</span> <span class="ot">-&gt;</span> <span class="dt">State</span> <span class="dt">Stack</span> ()</a></code></pre></div>
+<p>実行例</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1">ghci<span class="fu">&gt;</span> runState (push <span class="dv">1</span> <span class="fu">&gt;&gt;</span> clear) [<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb9-2" title="2">((), [])</a>
+<a class="sourceLine" id="cb9-3" title="3">ghci<span class="fu">&gt;</span> runState (push <span class="dv">1</span> <span class="fu">&gt;&gt;</span> clear <span class="fu">&gt;&gt;</span> undo) [<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb9-4" title="4">((), [<span class="dv">1</span>, <span class="dv">0</span>])</a>
+<a class="sourceLine" id="cb9-5" title="5">ghci<span class="fu">&gt;</span> runState (pop <span class="fu">&gt;&gt;</span> undo) [<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb9-6" title="6">((), [<span class="dv">0</span>])</a></code></pre></div>
+<hr>
+<h2 id="eitherモナド">Eitherモナド</h2>
+<p>(p.342 NOTE) ピエールのバランス棒に鳥がとまる様子をシミュレートしました。ピエールが滑って落ちた瞬間に棒の左右に何羽の鳥が止まってるか分かるように、Eitherモナドを使って書き直してみよう。</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">import</span> <span class="dt">Control.Monad.Error</span></a>
+<a class="sourceLine" id="cb10-2" title="2"></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="kw">type</span> <span class="dt">Birds</span> <span class="fu">=</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="kw">type</span> <span class="dt">Pole</span>  <span class="fu">=</span> (<span class="dt">Birds</span>, <span class="dt">Birds</span>)</a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="ot">landLeft ::</span> <span class="dt">Birds</span> <span class="ot">-&gt;</span> <span class="dt">Pole</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Pole</span></a>
+<a class="sourceLine" id="cb10-7" title="7">landLeft n (left, right)</a>
+<a class="sourceLine" id="cb10-8" title="8">  <span class="fu">|</span> <span class="fu">abs</span> ((left <span class="fu">+</span> n) <span class="fu">-</span> right) <span class="fu">&lt;</span> <span class="dv">4</span> <span class="fu">=</span> <span class="dt">Just</span> (left <span class="fu">+</span> n, right)</a>
+<a class="sourceLine" id="cb10-9" title="9">  <span class="fu">|</span> <span class="fu">otherwise</span>                    <span class="fu">=</span> <span class="dt">Nothing</span></a>
+<a class="sourceLine" id="cb10-10" title="10"></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="ot">landRight ::</span> <span class="dt">Birds</span> <span class="ot">-&gt;</span> <span class="dt">Pole</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Pole</span></a>
+<a class="sourceLine" id="cb10-12" title="12">landRight n (left, right)</a>
+<a class="sourceLine" id="cb10-13" title="13">  <span class="fu">|</span> <span class="fu">abs</span> (left <span class="fu">-</span> (right <span class="fu">+</span> n)) <span class="fu">&lt;</span> <span class="dv">4</span> <span class="fu">=</span> <span class="dt">Just</span> (left, right <span class="fu">+</span> n)</a>
+<a class="sourceLine" id="cb10-14" title="14">  <span class="fu">|</span> <span class="fu">otherwise</span>                    <span class="fu">=</span> <span class="dt">Nothing</span></a>
+<a class="sourceLine" id="cb10-15" title="15"></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="ot">banana ::</span> <span class="dt">Pole</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Pole</span></a>
+<a class="sourceLine" id="cb10-17" title="17">banana _ <span class="fu">=</span> <span class="dt">Nothing</span></a>
+<a class="sourceLine" id="cb10-18" title="18"></a>
+<a class="sourceLine" id="cb10-19" title="19"><span class="ot">routine ::</span> <span class="dt">Maybe</span> <span class="dt">Pole</span></a>
+<a class="sourceLine" id="cb10-20" title="20">routine <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb10-21" title="21">  start  <span class="ot">&lt;-</span> <span class="fu">return</span> (<span class="dv">0</span>,<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb10-22" title="22">  first  <span class="ot">&lt;-</span> landLeft <span class="dv">2</span> start</a>
+<a class="sourceLine" id="cb10-23" title="23">  second <span class="ot">&lt;-</span> landRight <span class="dv">2</span> first</a>
+<a class="sourceLine" id="cb10-24" title="24">  landLeft <span class="dv">1</span> second</a></code></pre></div>
+<hr>
+<h2 id="prob確率モナド">Prob(確率)モナド</h2>
+<p>(p.361) 結果が一致する事象の確率をまとめる関数 joinSameOutcomes を書いてみよう。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">import</span> <span class="dt">Data.Ratio</span></a>
+<a class="sourceLine" id="cb11-2" title="2"></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">newtype</span> <span class="dt">Prob</span> a <span class="fu">=</span> <span class="dt">Prob</span> {<span class="ot"> getProb ::</span> [(a, <span class="dt">Rational</span>)] } <span class="kw">deriving</span> <span class="dt">Show</span></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="kw">instance</span> <span class="dt">Functor</span> <span class="dt">Prob</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb11-6" title="6">  <span class="fu">fmap</span> f (<span class="dt">Prob</span> xs) <span class="dt">Prob</span> <span class="fu">$</span> <span class="fu">map</span> (\(x, p) <span class="ot">-&gt;</span> (f x, p)) xs</a>
+<a class="sourceLine" id="cb11-7" title="7"></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="kw">instance</span> <span class="dt">Monad</span> <span class="dt">Prob</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="fu">return</span> x <span class="fu">=</span> <span class="dt">Prob</span> [(x, <span class="dv">1</span><span class="fu">%</span><span class="dv">1</span>)]</a>
+<a class="sourceLine" id="cb11-10" title="10">  m <span class="fu">&gt;&gt;=</span> f <span class="fu">=</span> flatten (<span class="fu">fmap</span> f m)</a>
+<a class="sourceLine" id="cb11-11" title="11">  <span class="fu">fail</span> _ <span class="fu">=</span> <span class="dt">Prob</span> []</a>
+<a class="sourceLine" id="cb11-12" title="12"></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="ot">flatten ::</span> <span class="dt">Prob</span> (<span class="dt">Prob</span> a) <span class="ot">-&gt;</span> <span class="dt">Prob</span> a</a>
+<a class="sourceLine" id="cb11-14" title="14">flatten (<span class="dt">Prob</span> xs) <span class="fu">=</span> <span class="dt">Prob</span> <span class="fu">$</span> <span class="fu">concat</span> <span class="fu">$</span> <span class="fu">map</span> multAll xs</a>
+<a class="sourceLine" id="cb11-15" title="15">  <span class="kw">where</span> multAll (<span class="dt">Prob</span> innerxs, p) <span class="fu">=</span> <span class="fu">map</span> (\(x, r) <span class="ot">-&gt;</span> (x, p<span class="fu">*</span>r)) innerxs</a>
+<a class="sourceLine" id="cb11-16" title="16"></a>
+<a class="sourceLine" id="cb11-17" title="17"><span class="ot">joinSameOutcomes ::</span> <span class="dt">Eq</span> a <span class="ot">=&gt;</span> <span class="dt">Prob</span> a <span class="ot">-&gt;</span> <span class="dt">Prob</span> a</a>
+<a class="sourceLine" id="cb11-18" title="18">joinSameOutcomes <span class="fu">=</span> <span class="fu">....</span></a></code></pre></div></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/StartHaskell2/exercise14">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise14?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/StartHaskell2/exercise14">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise14" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

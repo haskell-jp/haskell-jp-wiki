@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnvironment"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/HowTo_ProgrammingEnvironment</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/HowTo_ProgrammingEnvironment">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/HowTo_ProgrammingEnvironment">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/HowTo_ProgrammingEnvironment">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/HowTo_ProgrammingEnvironment</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#howto_programmingenvironment"><span>HowTo_ProgrammingEnvironment</span></a><ul>
+<li><a href="#ubuntu-10.04-lts-i386%E7%89%88-desktop%E6%97%A5%E6%9C%AC%E8%AA%9E-remix-cd-%E7%89%88%E4%B8%8A%E3%81%ABhaskell%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%82%8B">Ubuntu 10.04 LTS (i386版) Desktop（日本語 Remix CD 版）上にHaskellプログラミング環境を作る</a><ul>
+<li><a href="#%E7%92%B0%E5%A2%83%E3%81%AE%E5%89%8D%E6%BA%96%E5%82%99">環境の前準備</a></li>
+<li><a href="#haskell-%E3%81%AE%E8%A8%80%E8%AA%9E%E5%87%A6%E7%90%86%E7%B3%BB%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">Haskell の言語処理系のインストール</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="howto_programmingenvironment"><a href="" class="uri" title="Go to wiki page">HowTo_ProgrammingEnvironment</a></h1>
+<p><a href="HowTo.html" class="uri" title="Go to wiki page">HowTo</a>:ProgrammingEnvironment</p>
+<hr>
+<p><strong>Haskellプログラミング環境のSetup</strong></p>
+<p>ghc の HEAD の追っかけをするには <a href="HowTo_GHC-HEAD.html" class="uri" title="Go to wiki page">HowTo_GHC-HEAD</a> を参照のこと．</p>
+<ul>
+<li>現時点(2010/09/18 00:53:16 JST)では<a href="HowTo_GHC-HEAD.html" class="uri" title="Go to wiki page">HowTo_GHC-HEAD</a>の記述は古い．近々更新する予定．</li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Ubuntu%2010.04%20LTS%20(i386%e7%89%88)%20Desktop%ef%bc%88%e6%97%a5%e6%9c%ac%e8%aa%9e%20Remix%20CD%20%e7%89%88%ef%bc%89%e4%b8%8a%e3%81%abHaskell%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0%e7%92%b0%e5%a2%83%e3%82%92%e4%bd%9c%e3%82%8b" title="Go to wiki page">Ubuntu 10.04 LTS (i386版) Desktop（日本語 Remix CD 版）上にHaskellプログラミング環境を作る</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%92%b0%e5%a2%83%e3%81%ae%e5%89%8d%e6%ba%96%e5%82%99" class="uri" title="Go to wiki page">環境の前準備</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/zsh%20%e3%81%ae%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab" title="Go to wiki page">zsh のインストール</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/emacs%20%e3%81%ae%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab" title="Go to wiki page">emacs のインストール</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%97%a5%e6%9c%ac%e8%aa%9e%e7%92%b0%e5%a2%83" class="uri" title="Go to wiki page">日本語環境</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%9b%e3%83%bc%e3%83%a0%e3%83%87%e3%82%a3%e3%83%ac%e3%82%af%e3%83%88%e3%83%aa%e4%b8%8b%e3%81%ae%e6%97%a5%e6%9c%ac%e8%aa%9e%e5%90%8d%e3%83%87%e3%82%a3%e3%83%ac%e3%82%af%e3%83%88%e3%83%aa%e3%82%92%e8%8b%b1%e8%aa%9e%e5%90%8d%e3%81%ab%e3%81%99%e3%82%8b" class="uri" title="Go to wiki page">ホームディレクトリ下の日本語名ディレクトリを英語名にする</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/M+IPA%e3%83%95%e3%82%a9%e3%83%b3%e3%83%88" class="uri" title="Go to wiki page">M+IPAフォント</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/skk" class="uri" title="Go to wiki page">skk</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/ibus-skk" class="uri" title="Go to wiki page">ibus-skk</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Haskell%20%e3%81%ae%e8%a8%80%e8%aa%9e%e5%87%a6%e7%90%86%e7%b3%bb%e3%81%ae%e3%82%a4%e3%83%b3%e3%82%b9%e3%83%88%e3%83%bc%e3%83%ab" title="Go to wiki page">Haskell の言語処理系のインストール</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%89%8d%e6%ba%96%e5%82%99" class="uri" title="Go to wiki page">前準備</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/ghc-6.12.3" class="uri" title="Go to wiki page">ghc-6.12.3</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Haskell-Platform-2010" class="uri" title="Go to wiki page">Haskell-Platform-2010</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%89%8d%e6%ba%96%e5%82%99" class="uri" title="Go to wiki page">前準備</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/cabal%e7%89%88%e3%81%aehaskell-platform" class="uri" title="Go to wiki page">cabal版のhaskell-platform</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%88%86%e6%95%a3%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3%e7%ae%a1%e7%90%86%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0" class="uri" title="Go to wiki page">分散バージョン管理システム</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/haskell-mode" class="uri" title="Go to wiki page">haskell-mode</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/ghc-mod_%20Happy%20Haskell%20Programming%20on%20Emacs" title="Go to wiki page">ghc-mod_ Happy Haskell Programming on Emacs</a></p>
+<ul>
+<li><a href="HowTo_ProgrammingEnvironment_Ubuntu9.04.html" class="uri" title="Go to wiki page">HowTo_ProgrammingEnvironment_Ubuntu9.04</a></li>
+<li><a href="HowTo_ProgrammingEnviornment_Ubuntu8.10.html" class="uri" title="Go to wiki page">HowTo_ProgrammingEnviornment_Ubuntu8.10</a></li>
+<li><a href="HowTo_ProgrammingEnviornment_Ubuntu8.04.html" class="uri" title="Go to wiki page">HowTo_ProgrammingEnviornment_Ubuntu8.04</a></li>
+</ul>
+<hr>
+<p>以下は2010/09/18 00:53:16 JST現在の情報である．</p>
+<h2 id="ubuntu-10.04-lts-i386版-desktop日本語-remix-cd-版上にhaskellプログラミング環境を作る">Ubuntu 10.04 LTS (i386版) Desktop（日本語 Remix CD 版）上にHaskellプログラミング環境を作る</h2>
+<p>ここに書いてあるのは Ubuntu 10.04 をクリーンインストールしてから生活(?)環境を作るまでです． この通りにしなければならないわけではなく，単なる一例，あるいは参考例として見てください． ここの情報の利用はあくまでも on own risk でお願いします．</p>
+<p>Haskell 環境とは直接関係のない部分もありますが，その直接関係のない部分を構成するときに依存関係によりインストールされたライブラリが Haskell 環境を構成するのに必要であるものもあります．</p>
+<p>以下は2010/09/18 00:53:16 JST現在の情報です．</p>
+<h3 id="環境の前準備">環境の前準備</h3>
+<h4 id="zsh-のインストール">zsh のインストール</h4>
+<pre><code>$ sudo apt-get install zsh
+$ chsh -s /bin/zsh
+Password: xxxxxxxx</code></pre>
+<h4 id="emacs-のインストール">emacs のインストール</h4>
+<p>Ubuntu 10.04 LTS では Emacs 23 がインストールされる． Elisp のパッケージをインストールしておく．</p>
+<pre><code>% sudo apt-get install emacs emacs-goodies-el</code></pre>
+<h4 id="日本語環境">日本語環境</h4>
+<p>これも Haskell とは関係ない．</p>
+<h5 id="ホームディレクトリ下の日本語名ディレクトリを英語名にする">ホームディレクトリ下の日本語名ディレクトリを英語名にする</h5>
+<pre><code>% LANG=C xdg-user-dirs-gtk-update</code></pre>
+<h5 id="mipaフォント">M+IPAフォント</h5>
+<p>デフォルトのフォントでは \ が¥になってしまうので，M+IPA合成フォントを使う． 在処は「M+IPAフォント」でググるとわかる． ダウンロードしてきたら展開して，フォントデータを /usr/share/fonts/truetype/m+ipa/ 以下にコピー</p>
+<pre><code>% tar xvf mixfont-mplus-ipa-TrueType-20060520p1.tar.bz2
+% sudo cp -a mixfont-mplus-ipa-TrueType-20060520p1/opfc-ModuleHP-1.1.1_withIPAFonts_and_Mplus/fonts /usr/share/fonts/truetype/m+ipa</code></pre>
+<p>[システム]-[設定]-[外観の設定]メニューから[フォント]タブを開いて，フォントを設定する． 筆者の場合は，M+1P+IPAG circle と M+1VM+IPAG circle（固定幅のフォント）を使っている．</p>
+<h5 id="skk">skk</h5>
+<p>Emacs では SKK を使うのでインストールする．</p>
+<pre><code>% sudo apt-get install ddskk</code></pre>
+<h5 id="ibus-skk">ibus-skk</h5>
+<p>Ubuntu 10.04 のパッケージはバージョンが古いのでインストールせず，github にあるものを取得して野良ビルド． ビルドのためには git-core といくつかライブラリパッケージが必要になるので前もってインストールする．</p>
+<pre><code>% sudo apt-get install git-core libgtk2.0-dev gnome-common libibus-dev skkdic</code></pre>
+<p>ビルド &amp; インストール</p>
+<pre><code>% git clone http://github.com/ueno/ibus-skk.git
+% cd ibus-skk
+% ./autogen.sh --prefix=/usr
+% make
+% sudo make install</code></pre>
+<p>ibusの設定は，[システム]-[IBusの設定]メニュー，</p>
+<ul>
+<li>[一般]でキーボードショートカット，切り替えに Shift+space を割り当てる．</li>
+<li>[インプットメソッド]で「日本語-SKK」を追加して，リストのトップにしておく．</li>
+</ul>
+<h3 id="haskell-の言語処理系のインストール">Haskell の言語処理系のインストール</h3>
+<p>Haskell-Platform-2010 の deb パッケージをインストールするという手もありますが，ghc と Haskell-Platform-2010 は別々にインストールしたほうが融通が効きそうなので（単なる思い込みの可能性大:p），別々にインストールする．</p>
+<h4 id="前準備">前準備</h4>
+<p>いくつかのライブラリパッケージを予めインストールしておく．</p>
+<pre><code>% apt-get install libgmp3-dev libcurl4-gnutls-dev libncurses5-dev libncursesw5-dev libglut3-dev</code></pre>
+<h4 id="ghc-6.12.3">ghc-6.12.3</h4>
+<p>もうすぐメジャーバージョンアップがありそうだが，とりあえず 6.12.3</p>
+<pre><code>% wget http://darcs.haskell.org/download/dist/6.12.3/ghc-6.12.3-i386-unknown-linux-n.tar.bz2
+% tar xf ghc-6.12.3-i386-unknown-linux-n.tar.bz2
+% cd ghc-6.12.3
+% ./configure
+% sudo make install</code></pre>
+<h4 id="haskell-platform-2010">Haskell-Platform-2010</h4>
+<p>cabalパッケージからインストールする．前準備が必要．</p>
+<h5 id="前準備-1">前準備</h5>
+<p>まず cabal-install をインストールする．</p>
+<pre><code>% wget http://hackage.haskell.org/packages/archive/cabal-install/0.8.2/cabal-install-0.8.2.tar.gz
+% tar xf cabal-install-0.8.2.tar.gz
+% cd cabal-install-0.8.2
+% sh bootstrap.sh</code></pre>
+<p>PATH を $HOME/.cabal/bin に通す．</p>
+<pre><code>export PATH=$HOME/.cabal/bin:$PATH</code></pre>
+<p>次に cabal コマンドを使ってツールやライブラリをインストールする． alex/happyともにバージョン指定。 これしてないと最新のバージョンがインストールされてhaskell-platformのinstallでこける。</p>
+<pre><code>% cabal update
+% cabal install alex-2.3.3
+% cabal install happy-1.18.5</code></pre>
+<h5 id="cabal版のhaskell-platform">cabal版のhaskell-platform</h5>
+<p>アーカイブファイルをダウンロードしてインストールする．</p>
+<pre><code>% wget http://hackage.haskell.org/platform/2010.2.0.0/cabal/haskell-platform-2010.2.0.0.tar.gz
+% tar xvf haskell-platform-2010.2.0.0.tar.gz
+% cd haskell-platform-2010.2.0.0
+% cabal install</code></pre>
+<h4 id="分散バージョン管理システム">分散バージョン管理システム</h4>
+<p>Haskeller なら darcs にきまっとる ;)</p>
+<pre><code>% cabal install darcs</code></pre>
+<h4 id="haskell-mode">haskell-mode</h4>
+<p>Ubuntu には haskell-mode というパッケージがあるが，これはインストールせず，最新版をダウンロードして野良インストールする． 現時点での最新は 2.8.0</p>
+<pre><code>% wget http://projects.haskell.org/haskellmode-emacs/haskell-mode-2.8.0.tar.gz</code></pre>
+<p>あとは展開して README に従ってインストール．</p>
+<h4 id="ghc-mod-happy-haskell-programming-on-emacs">ghc-mod: Happy Haskell Programming on Emacs</h4>
+<p>山本和彦さん作．もうこれなしではコードは書きたくなくなりつつある．</p>
+<pre><code>% cabal install ghc-mod</code></pre>
+<p>設定，使い方については，<a href="http://www.mew.org/~kazu/proj/ghc-mod/">山本さんのサイト</a>を参照してください．</p>
+<hr>
+<p>Last modified : 2011/01/28 15:35:23 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/HowTo_ProgrammingEnvironment">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnvironment?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/HowTo_ProgrammingEnvironment">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnvironment" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

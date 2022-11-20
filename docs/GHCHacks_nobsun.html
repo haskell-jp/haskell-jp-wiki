@@ -1,0 +1,915 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/GHCHacks_nobsun"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/GHCHacks_nobsun</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/GHCHacks_nobsun">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/GHCHacks_nobsun">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/GHCHacks_nobsun">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/GHCHacks_nobsun</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#ghchacks_nobsun"><span>GHCHacks_nobsun</span></a><ul>
+<li><a href="#ghchacks-by-nobsun">GHCHacks by <span>nobsun</span></a><ul>
+<li><a href="#%E6%BA%96%E5%82%99">準備</a></li>
+<li><a href="#%E6%96%B0%E3%81%97%E3%81%84%E6%A7%8B%E6%96%87%E8%A6%81%E7%B4%A0%E3%81%AE%E8%BF%BD%E5%8A%A0">新しい構文要素の追加</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="ghchacks_nobsun"><a href="" class="uri" title="Go to wiki page">GHCHacks_nobsun</a></h1>
+<p><a href="GHCHacks.html" class="uri" title="Go to wiki page">GHCHacks</a>:nobsun</p>
+<hr>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/GHCHacks%20by%20nobsun" title="Go to wiki page">GHCHacks by nobsun</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%ba%96%e5%82%99" class="uri" title="Go to wiki page">準備</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%b0%e3%81%97%e3%81%84%e6%a7%8b%e6%96%87%e8%a6%81%e7%b4%a0%e3%81%ae%e8%bf%bd%e5%8a%a0" class="uri" title="Go to wiki page">新しい構文要素の追加</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%9e%8b%e6%8e%a8%e8%ab%96%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%a8%e3%81%93%e3%82%8d%e3%81%be%e3%81%a7" class="uri" title="Go to wiki page">型推論できるところまで</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%9e%8b%e3%81%ae%e3%83%97%e3%83%aa%e3%83%86%e3%82%a3%e3%83%97%e3%83%aa%e3%83%b3%e3%83%88" class="uri" title="Go to wiki page">型のプリティプリント</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e8%90%bd%e7%a9%82%e3%81%b2%e3%82%8d%e3%81%84" class="uri" title="Go to wiki page">落穂ひろい</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b5%84%e8%be%bc%e3%81%bf%e3%81%ae%e5%be%8c%e7%bd%ae%e6%bc%94%e7%ae%97%e5%ad%90%20?" title="Go to wiki page">組込みの後置演算子 ?</a></li>
+</ul>
+<hr>
+<h2 id="ghchacks-by-nobsun">GHCHacks by <a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a></h2>
+<p>純粋な関数型言語で非決定性を表現する手法として Pseudo data というものを 提案している10年以上前の論文があって、ずっと気になっている。Haskellの仕様 範囲ではこんな変なのは扱えないんだけど、これがあると More beautiful concurrency が実現できそう。でも処理系をつくらないと実証 できない。というわけで、GHC Hack</p>
+<p>とは言うものの、GHG (GHC Hacking Guide) を青木さんが書いている…</p>
+<p>わけないので:)、手探りでちょこちょこやることになる。どうなることやら。</p>
+<h3 id="準備">準備</h3>
+<p>HEAD のソースを使う(なんと無謀な :)</p>
+<pre><code>% wget http://darcs.haskell.org/ghc-HEAD-2008-09-07-ghc-corelibs-testsuite.tar.gz</code></pre>
+<p>展開</p>
+<pre><code>% tar xvf ghc-HEAD-2008-09-07-ghc-corelibs-testsuite.tar.gz</code></pre>
+<p>darcs で最新状態にする</p>
+<pre><code>% cd ghc
+% darcs pull -a -v
+...
+% ./darcs-all get
+...
+% ./darcs-all pull -a -v
+...</code></pre>
+<p>とりあえず、この状態でビルドしてみることに。そのままだと時間がかかるので mk/build.mk をつくって、quickest ビルドする。</p>
+<pre><code>% cd mk
+% cp build.mk.sample build.mk
+% emacs build.mk
+% cat build.mk
+# -----------------------------------------------------------------------------
+# A Sample build.mk
+#
+# Uncomment one of the following BuildFlavour settings to get the desired
+# overall build type, and then tweak the options in the relevant section
+# below.
+
+# Uncomment one of these to select a build profile below:
+
+# Full build with max optimisation (slow build)
+#BuildFlavour = perf
+
+# Fastest build (libs unoptimised):
+BuildFlavour = quickest                        # ← ここをアンコメント
+
+# Fast build with optimised libraries:
+#BuildFlavour = quick
+
+# A development build, working on the stage 1 compiler:
+#BuildFlavour = devel1
+
+# A development build, working on the stage 2 compiler:
+#BuildFlavour = devel2
+
+...</code></pre>
+<p>で、ビルド</p>
+<pre><code>% cd ..
+% sh boot
+...
+% ./configure --prefix=$HOME
+...
+% make</code></pre>
+<p>ちゃんとビルドできれば、このソースツリーを出発点にする。 HEAD リポジトリは常に新しくなっている。 それゆえ、ビルドに失敗することもありうる。 その場合には、すこし時間を置いて darcs pull -a -v、./darcs-all pull -a -v を 再度試す。</p>
+<ul>
+<li><a href="shelarcy.html" class="uri" title="Go to wiki page">shelarcy</a>(2008/09/18 19:31:44 JST): GHC HEAD (Current) をビルドしたのなら、ghc/compiler/dist-stage2/doc/html/ghc の Haddock ドキュメントを見ると少し幸せになれるかも。（まだまだ、ソース内のコメントの Haddock 化は不十分ですが。）</li>
+<li>あっ、build.mk に HADDOCK_DOCS = YES が入っていないので、ドキュメントは生成されていませんね。</li>
+<li><p><a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>(2008/09/18 22:10:55 JST): README には次のような記述がありますね。</p>
+<blockquote>
+<p>If you want the documentation too then use these commands instead:</p>
+<pre><code>    $ echo "XMLDocWays   = html" &gt; mk/build.mk
+    $ echo "HADDOCK_DOCS = YES" &gt;&gt; mk/build.mk
+    $ sh boot
+    $ ./configure
+    $ make
+    $ make install
+    $ make install-docs</code></pre>
+<p>These steps give you the default build, which includes everything optimised and built in various ways (eg. profiling libs are built). It can take a long time. To customise the build, see the file HACKING.</p>
+</blockquote>
+<p>今回はとにかく速くbuildすることに主眼を置いているので、こいつは無視しました。</p></li>
+<li><p>とはいったものの、型の一覧だけであっても、一度つくっておけば便利そうなので やってみました。(2008/09/22 12:25:11 JST)</p></li>
+</ul>
+<h3 id="新しい構文要素の追加">新しい構文要素の追加</h3>
+<p>「確定すると」a 型の値になるような値の型を型 a に対応する擬データ型という。 これは Pseudo a などと表現すればいいのだが {a} などという組込みの型構成子 を導入して簡潔な表現にしたい。</p>
+<p>さてどうしよう(2008/09/18 16:39:15 JST)。</p>
+<h4 id="型推論できるところまで">型推論できるところまで</h4>
+<pre><code>diff -rN -u old-ghc/compiler/basicTypes/Unique.lhs new-ghc/compiler/basicTypes/Unique.lhs
+--- old-ghc/compiler/basicTypes/Unique.lhs      2008-09-18 18:44:35.000000000 +0900
++++ new-ghc/compiler/basicTypes/Unique.lhs      2008-09-18 18:44:39.000000000 +0900
+@@ -46,6 +46,7 @@
+        mkPreludeMiscIdUnique, mkPreludeDataConUnique,
+        mkPreludeTyConUnique, mkPreludeClassUnique,
+        mkPArrDataConUnique,
++       mkPseudoDataConUnique,
+ 
+        mkBuiltinUnique,
+        mkPseudoUniqueC,
+@@ -309,6 +310,7 @@
+ mkPrimOpIdUnique       :: Int -&gt; Unique
+ mkPreludeMiscIdUnique  :: Int -&gt; Unique
+ mkPArrDataConUnique    :: Int -&gt; Unique
++mkPseudoDataConUnique  :: Int -&gt; Unique
+ 
+ mkAlphaTyVarUnique i            = mkUnique '1' i
+ 
+@@ -344,6 +346,8 @@
+ -- tag 
+ mkPArrDataConUnique a          = mkUnique ':' (2*a)
+ 
++mkPseudoDataConUnique a                = mkUnique '&amp;' (2*a)
++
+ -- The "tyvar uniques" print specially nicely: a, b, c, etc.
+ -- See pprUnique for details
+ 
+diff -rN -u old-ghc/compiler/hsSyn/HsTypes.lhs new-ghc/compiler/hsSyn/HsTypes.lhs
+--- old-ghc/compiler/hsSyn/HsTypes.lhs  2008-09-18 18:44:35.000000000 +0900
++++ new-ghc/compiler/hsSyn/HsTypes.lhs  2008-09-18 18:44:40.000000000 +0900
+@@ -130,6 +130,8 @@
+ 
+   | HsPArrTy           (LHsType name)  -- Elem. type of parallel array: [:t:]
+ 
++  | HsPseudoTy         (LHsType name)  -- Elem. type of pseudo data: {t}
++
+   | HsTupleTy          Boxity
+                        [LHsType name]  -- Element types (length gives arity)
+ 
+diff -rN -u old-ghc/compiler/parser/Parser.y.pp new-ghc/compiler/parser/Parser.y.pp
+--- old-ghc/compiler/parser/Parser.y.pp 2008-09-18 18:44:36.000000000 +0900
++++ new-ghc/compiler/parser/Parser.y.pp 2008-09-18 18:44:40.000000000 +0900
+@@ -1055,6 +1055,7 @@
+        | '(#' comma_types1 '#)'        { LL $ HsTupleTy Unboxed $2     }
+        | '[' ctype ']'                 { LL $ HsListTy  $2 }
+        | '[:' ctype ':]'               { LL $ HsPArrTy  $2 }
++       | '{' ctype '}'                 { LL $ HsPseudoTy   $2 }
+        | '(' ctype ')'                 { LL $ HsParTy   $2 }
+        | '(' ctype '::' kind ')'       { LL $ HsKindSig $2 (unLoc $4) }
+ -- Generics
+diff -rN -u old-ghc/compiler/parser/RdrHsSyn.lhs new-ghc/compiler/parser/RdrHsSyn.lhs
+--- old-ghc/compiler/parser/RdrHsSyn.lhs        2008-09-18 18:44:36.000000000 +0900
++++ new-ghc/compiler/parser/RdrHsSyn.lhs        2008-09-18 18:44:40.000000000 +0900
+@@ -118,6 +118,7 @@
+       HsAppTy ty1 ty2                  -&gt; extract_lty ty1 (extract_lty ty2 acc)
+       HsListTy ty                      -&gt; extract_lty ty acc
+       HsPArrTy ty                      -&gt; extract_lty ty acc
++      HsPseudoTy ty                    -&gt; extract_lty ty acc
+       HsTupleTy _ tys                  -&gt; foldr extract_lty acc tys
+       HsFunTy ty1 ty2                  -&gt; extract_lty ty1 (extract_lty ty2 acc)
+       HsPredTy p               -&gt; extract_pred p acc
+diff -rN -u old-ghc/compiler/prelude/PrelNames.lhs new-ghc/compiler/prelude/PrelNames.lhs
+--- old-ghc/compiler/prelude/PrelNames.lhs      2008-09-18 18:44:36.000000000 +0900
++++ new-ghc/compiler/prelude/PrelNames.lhs      2008-09-18 18:44:40.000000000 +0900
+@@ -232,7 +232,7 @@
+ pRELUDE                = mkBaseModule_ pRELUDE_NAME
+ 
+ gHC_PRIM, gHC_TYPES, gHC_BOOL, gHC_UNIT, gHC_ORDERING, gHC_GENERICS, gHC_CLASSES, gHC_BASE, gHC_ENUM,
+-    gHC_SHOW, gHC_READ, gHC_NUM, gHC_INTEGER, gHC_LIST, gHC_PARR,
++    gHC_SHOW, gHC_READ, gHC_NUM, gHC_INTEGER, gHC_LIST, gHC_PARR, gHC_PSEUDO,
+     gHC_TUPLE, dATA_TUPLE, dATA_EITHER, dATA_STRING, gHC_PACK, gHC_CONC, gHC_IO_BASE,
+     gHC_ST, gHC_ARR, gHC_STABLE, gHC_ADDR, gHC_PTR, gHC_ERR, gHC_REAL,
+     gHC_FLOAT, gHC_TOP_HANDLER, sYSTEM_IO, dYNAMIC, tYPEABLE, gENERICS,
+@@ -253,6 +253,7 @@
+ gHC_INTEGER    = mkIntegerModule (fsLit "GHC.Integer")
+ gHC_LIST       = mkBaseModule (fsLit "GHC.List")
+ gHC_PARR       = mkBaseModule (fsLit "GHC.PArr")
++gHC_PSEUDO     = mkBaseModule (fsLit "GHC.Pseudo")
+ gHC_TUPLE      = mkPrimModule (fsLit "GHC.Tuple")
+ dATA_TUPLE     = mkBaseModule (fsLit "Data.Tuple")
+ dATA_EITHER    = mkBaseModule (fsLit "Data.Either")
+@@ -1022,6 +1023,10 @@
+ stringTyConKey :: Unique
+ stringTyConKey                         = mkPreludeTyConUnique 134
+ 
++-- Pseudo data type constructor
++pseudoTyConKey :: Unique
++pseudoTyConKey                         = mkPreludeTyConUnique 135
++
+ ---------------- Template Haskell -------------------
+ --     USES TyConUniques 100-129
+ -----------------------------------------------------
+@@ -1068,6 +1073,10 @@
+ leftDataConKey, rightDataConKey :: Unique
+ leftDataConKey                         = mkPreludeDataConUnique 25
+ rightDataConKey                                = mkPreludeDataConUnique 26
++
++-- Data constructor for pseudo data (only in pattern)
++pseudoDataConKey :: Unique
++pseudoDataConKey                       = mkPreludeDataConUnique 27
+ \end{code}
+ 
+ %************************************************************************
+diff -rN -u old-ghc/compiler/prelude/TysWiredIn.lhs new-ghc/compiler/prelude/TysWiredIn.lhs
+--- old-ghc/compiler/prelude/TysWiredIn.lhs     2008-09-18 18:44:36.000000000 +0900
++++ new-ghc/compiler/prelude/TysWiredIn.lhs     2008-09-18 18:44:40.000000000 +0900
+@@ -53,7 +53,12 @@
+         -- * Parallel arrays
+        mkPArrTy,
+        parrTyCon, parrFakeCon, isPArrTyCon, isPArrFakeCon,
+-       parrTyCon_RDR, parrTyConName
++       parrTyCon_RDR, parrTyConName,
++
++        -- * Pseudo data
++       mkPseudoTy,
++       pseudoTyCon, isPseudoTyCon,
++       pseudoTyCon_RDR, pseudoTyConName
+     ) where
+ 
+ import {-# SOURCE #-} MkId( mkDataConIds )
+@@ -86,7 +91,7 @@
+                           rightCoercionTyCon, instCoercionTyCon )
+ import TypeRep          ( mkArrowKinds, liftedTypeKind, ubxTupleKind )
+ import Unique          ( incrUnique, mkTupleTyConUnique,
+-                         mkTupleDataConUnique, mkPArrDataConUnique )
++                         mkTupleDataConUnique, mkPArrDataConUnique, mkPseudoDataConUnique )
+ import Array
+ import FastString
+ import Outputable
+@@ -129,6 +134,7 @@
+              , intTyCon
+              , listTyCon
+              , parrTyCon
++             , pseudoTyCon
+               , unsafeCoercionTyCon
+               , symCoercionTyCon
+               , transCoercionTyCon
+@@ -177,8 +183,12 @@
+ parrTyConName    = mkWiredInTyConName   BuiltInSyntax gHC_PARR (fsLit "[::]") parrTyConKey parrTyCon 
+ parrDataConName   = mkWiredInDataConName UserSyntax    gHC_PARR (fsLit "PArr") parrDataConKey parrDataCon
+ 
++pseudoTyConName, pseudoDataConName :: Name
++pseudoTyConName          = mkWiredInTyConName   BuiltInSyntax gHC_PSEUDO (fsLit "{}") pseudoTyConKey pseudoTyCon 
++pseudoDataConName = mkWiredInDataConName UserSyntax    gHC_PSEUDO (fsLit "{}") pseudoDataConKey pseudoDataCon
++
+ boolTyCon_RDR, false_RDR, true_RDR, intTyCon_RDR, charTyCon_RDR,
+-    intDataCon_RDR, listTyCon_RDR, consDataCon_RDR, parrTyCon_RDR:: RdrName
++    intDataCon_RDR, listTyCon_RDR, consDataCon_RDR, parrTyCon_RDR, pseudoTyCon_RDR:: RdrName
+ boolTyCon_RDR   = nameRdrName boolTyConName
+ false_RDR      = nameRdrName falseDataConName
+ true_RDR       = nameRdrName trueDataConName
+@@ -188,6 +198,7 @@
+ listTyCon_RDR  = nameRdrName listTyConName
+ consDataCon_RDR = nameRdrName consDataConName
+ parrTyCon_RDR  = nameRdrName parrTyConName
++pseudoTyCon_RDR        = nameRdrName pseudoTyConName
+ {-
+ tySuperKindTyCon_RDR     = nameRdrName tySuperKindTyConName
+ coSuperKindTyCon_RDR = nameRdrName coSuperKindTyConName
+@@ -616,4 +627,38 @@
+ isPArrFakeCon dcon  = dcon == parrFakeCon (dataConSourceArity dcon)
+ \end{code}
+ 
++%************************************************************************
++%*                                                                     *
++\subsection[TysWiredIn-Pseudo]{The @{}@ type}
++%*                                                                     *
++%************************************************************************
++
++Special syntax for pseudo data needs some wired in definitions.
++
++\begin{code}
++-- | Construct a type representing the application of the parallel array constructor 
++mkPseudoTy    :: Type -&gt; Type
++mkPseudoTy ty  = mkTyConApp pseudoTyCon [ty]
+ 
++-- | Represents the type constructor of pseudo data
++--
++--  * This must match the definition in @<a href="email-protection.html" class="__cf_email__" data-cfemail="e2b290878eb2918797868da2">[email&nbsp;protected]</a>
++--
++-- NB: Although the constructor is given here, it will not be accessible in
++--     user code as it is not in the environment of any compiled module except
++--     @<a href="email-protection.html" class="__cf_email__" data-cfemail="c999bbaca599baacbcada689e7">[email&nbsp;protected]</a>
++--
++pseudoTyCon :: TyCon
++pseudoTyCon  = pcNonRecDataTyCon pseudoTyConName alpha_tyvar [pseudoDataCon]
++
++pseudoDataCon :: DataCon
++pseudoDataCon  = pcDataCon 
++                pseudoDataConName 
++                alpha_tyvar            -- forall'ed type variables
++                alpha_ty
++                pseudoTyCon
++
++-- | Check whether a type constructor is the constructor for pseudo data
++isPseudoTyCon    :: TyCon -&gt; Bool
++isPseudoTyCon tc  = tyConName tc == pseudoTyConName
++\end{code}
+diff -rN -u old-ghc/compiler/rename/RnHsSyn.lhs new-ghc/compiler/rename/RnHsSyn.lhs
+--- old-ghc/compiler/rename/RnHsSyn.lhs 2008-09-18 18:44:36.000000000 +0900
++++ new-ghc/compiler/rename/RnHsSyn.lhs 2008-09-18 18:44:40.000000000 +0900
+@@ -6,7 +6,7 @@
+ \begin{code}
+ module RnHsSyn(
+         -- Names
+-        charTyCon_name, listTyCon_name, parrTyCon_name, tupleTyCon_name,
++        charTyCon_name, listTyCon_name, parrTyCon_name, pseudoTyCon_name, tupleTyCon_name,
+         extractHsTyVars, extractHsTyNames, extractHsTyNames_s,
+         extractFunDepNames, extractHsCtxtTyNames, extractHsPredTyNames,
+ 
+@@ -20,7 +20,7 @@
+ 
+ import HsSyn
+ import Class            ( FunDep )
+-import TysWiredIn       ( tupleTyCon, listTyCon, parrTyCon, charTyCon )
++import TysWiredIn       ( tupleTyCon, listTyCon, parrTyCon, pseudoTyCon, charTyCon )
+ import Name             ( Name, getName, isTyVarName )
+ import NameSet
+ import BasicTypes       ( Boxity )
+@@ -36,10 +36,11 @@
+ These free-variable finders returns tycons and classes too.
+ 
+ \begin{code}
+-charTyCon_name, listTyCon_name, parrTyCon_name :: Name
++charTyCon_name, listTyCon_name, parrTyCon_name, pseudoTyCon_name :: Name
+ charTyCon_name    = getName charTyCon
+ listTyCon_name    = getName listTyCon
+ parrTyCon_name    = getName parrTyCon
++pseudoTyCon_name  = getName pseudoTyCon
+ 
+ tupleTyCon_name :: Boxity -&gt; Int -&gt; Name
+ tupleTyCon_name boxity n = getName (tupleTyCon boxity n)
+@@ -59,6 +60,7 @@
+     get (HsAppTy ty1 ty2)      = getl ty1 `unionNameSets` getl ty2
+     get (HsListTy ty)          = unitNameSet listTyCon_name `unionNameSets` getl ty
+     get (HsPArrTy ty)          = unitNameSet parrTyCon_name `unionNameSets` getl ty
++    get (HsPseudoTy ty)        = unitNameSet pseudoTyCon_name `unionNameSets` getl ty
+     get (HsTupleTy _ tys)      = extractHsTyNames_s tys
+     get (HsFunTy ty1 ty2)      = getl ty1 `unionNameSets` getl ty2
+     get (HsPredTy p)           = extractHsPredTyNames p
+diff -rN -u old-ghc/compiler/rename/RnTypes.lhs new-ghc/compiler/rename/RnTypes.lhs
+--- old-ghc/compiler/rename/RnTypes.lhs 2008-09-18 18:44:36.000000000 +0900
++++ new-ghc/compiler/rename/RnTypes.lhs 2008-09-18 18:44:40.000000000 +0900
+@@ -155,6 +155,10 @@
+     ty' &lt;- rnLHsType doc ty
+     return (HsPArrTy ty')
+ 
++rnHsType doc (HsPseudoTy ty) = do
++    ty' &lt;- rnLHsType doc ty
++    return (HsPseudoTy ty')
++
+ -- Unboxed tuples are allowed to have poly-typed arguments.  These
+ -- sometimes crop up as a result of CPR worker-wrappering dictionaries.
+ rnHsType doc (HsTupleTy tup_con tys) = do
+diff -rN -u old-ghc/compiler/typecheck/TcHsType.lhs new-ghc/compiler/typecheck/TcHsType.lhs
+--- old-ghc/compiler/typecheck/TcHsType.lhs     2008-09-18 18:44:36.000000000 +0900
++++ new-ghc/compiler/typecheck/TcHsType.lhs     2008-09-18 18:44:40.000000000 +0900
+@@ -306,6 +306,10 @@
+     ty' &lt;- kcLiftedType ty
+     return (HsPArrTy ty', liftedTypeKind)
+ 
++kc_hs_type (HsPseudoTy ty) = do
++    ty' &lt;- kcLiftedType ty
++    return (HsPseudoTy ty', liftedTypeKind)
++
+ kc_hs_type (HsNumTy n)
+    = return (HsNumTy n, liftedTypeKind)
+ 
+@@ -500,6 +504,11 @@
+     checkWiredInTyCon parrTyCon
+     return (mkPArrTy tau_ty)
+ 
++ds_type (HsPseudoTy ty) = do
++    tau_ty &lt;- dsHsType ty
++    checkWiredInTyCon pseudoTyCon
++    return (mkPseudoTy tau_ty)
++
+ ds_type (HsTupleTy boxity tys) = do
+     tau_tys &lt;- dsHsTypes tys
+     checkWiredInTyCon tycon</code></pre>
+<p>おっと、GHC.Pseudo.hs を追加したんだ</p>
+<pre><code>% cd libraries/base
+% darcs diff -u
+diff -rN -u old-base/GHC/Pseudo.hs new-base/GHC/Pseudo.hs
+--- old-base/GHC/Pseudo.hs      1970-01-01 09:00:00.000000000 +0900
++++ new-base/GHC/Pseudo.hs      2008-09-18 19:31:47.000000000 +0900
+@@ -0,0 +1,9 @@
++{-# OPTIONS_GHC -XNoImplicitPrelude #-}
++{-# OPTIONS_HADDOCK hide #-}
++module GHC.Pseudo (deref) where
++
++import GHC.Err
++
++deref :: {a} -&gt; a
++deref = error "GHC.Pseudo.deref: not yet implemented"
++
+diff -rN -u old-base/base.cabal new-base/base.cabal
+--- old-base/base.cabal 2008-09-18 19:31:47.000000000 +0900
++++ new-base/base.cabal 2008-09-18 19:31:47.000000000 +0900
+@@ -43,6 +43,7 @@
+             GHC.List,
+             GHC.Num,
+             GHC.PArr,
++            GHC.Pseudo,
+             GHC.Pack,
+             GHC.Ptr,
+             GHC.Read,
+
+% cd ../..</code></pre>
+<p>ビルドして、インストールして試してみる</p>
+<pre><code>% make &amp;&amp; make install
+...
+% export PATH=$HOME/bin:$PATH
+% ghci
+GHCi, version 6.9.20080917: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer ... linking ... done.
+Loading package base ... linking ... done.
+Prelude&gt; let { f :: {a} ; f = undefined }
+Prelude&gt; :type f
+f :: {} a
+Prelude&gt; let { g :: {a} -&gt; b ; g = undefined }
+Prelude&gt; :type g
+g :: {} a -&gt; b
+Prelude&gt; :type g f
+g f :: b
+Prelude&gt; </code></pre>
+<p>ううむ。プリティプリント辺りに手を入れないと。。。</p>
+<p>今日(2008/09/18 19:39:15 JST)はここまで とりあえず、ローカルにコミット</p>
+<pre><code>% darcs record -a
+...
+% cd libraries/base
+% darcs record -a</code></pre>
+<h4 id="型のプリティプリント">型のプリティプリント</h4>
+<p>型のpprあたりは、帰宅途中の電車 de Hack! でできたみたい。</p>
+<pre><code>diff -rN -u old-ghc/compiler/hsSyn/HsTypes.lhs new-ghc/compiler/hsSyn/HsTypes.lhs
+--- old-ghc/compiler/hsSyn/HsTypes.lhs  2008-09-18 21:45:36.000000000 +0900
++++ new-ghc/compiler/hsSyn/HsTypes.lhs  2008-09-18 21:45:42.000000000 +0900
+@@ -360,6 +360,7 @@
+ ppr_mono_ty _         (HsKindSig ty kind) = parens (ppr_mono_lty pREC_TOP ty &lt;+&gt; dcolon &lt;+&gt; pprKind kind)
+ ppr_mono_ty _         (HsListTy ty)      = brackets (ppr_mono_lty pREC_TOP ty)
+ ppr_mono_ty _         (HsPArrTy ty)      = pabrackets (ppr_mono_lty pREC_TOP ty)
++ppr_mono_ty _         (HsPseudoTy ty)    = braces (ppr_mono_lty pREC_TOP ty)
+ ppr_mono_ty _         (HsPredTy pred)     = ppr pred
+ ppr_mono_ty _         (HsNumTy n)         = integer n  -- generics only
+ ppr_mono_ty _         (HsSpliceTy s)      = pprSplice s
+diff -rN -u old-ghc/compiler/iface/BinIface.hs new-ghc/compiler/iface/BinIface.hs
+--- old-ghc/compiler/iface/BinIface.hs  2008-09-18 21:45:36.000000000 +0900
++++ new-ghc/compiler/iface/BinIface.hs  2008-09-18 21:45:42.000000000 +0900
+@@ -899,13 +899,14 @@
+    put_ bh IfaceCharTc               = putByte bh 3
+    put_ bh IfaceListTc               = putByte bh 4
+    put_ bh IfacePArrTc               = putByte bh 5
+-   put_ bh IfaceLiftedTypeKindTc   = putByte bh 6
+-   put_ bh IfaceOpenTypeKindTc     = putByte bh 7
+-   put_ bh IfaceUnliftedTypeKindTc = putByte bh 8
+-   put_ bh IfaceUbxTupleKindTc     = putByte bh 9
+-   put_ bh IfaceArgTypeKindTc      = putByte bh 10
+-   put_ bh (IfaceTupTc bx ar) = do { putByte bh 11; put_ bh bx; put_ bh ar }
+-   put_ bh (IfaceTc ext)      = do { putByte bh 12; put_ bh ext }
++   put_ bh IfacePseudoTc      = putByte bh 6
++   put_ bh IfaceLiftedTypeKindTc   = putByte bh 7
++   put_ bh IfaceOpenTypeKindTc     = putByte bh 8
++   put_ bh IfaceUnliftedTypeKindTc = putByte bh 9
++   put_ bh IfaceUbxTupleKindTc     = putByte bh 10
++   put_ bh IfaceArgTypeKindTc      = putByte bh 11
++   put_ bh (IfaceTupTc bx ar) = do { putByte bh 12; put_ bh bx; put_ bh ar }
++   put_ bh (IfaceTc ext)      = do { putByte bh 13; put_ bh ext }
+ 
+    get bh = do
+        h &lt;- getByte bh
+@@ -915,12 +916,13 @@
+          3 -&gt; return IfaceCharTc
+          4 -&gt; return IfaceListTc
+          5 -&gt; return IfacePArrTc
+-          6 -&gt; return IfaceLiftedTypeKindTc 
+-          7 -&gt; return IfaceOpenTypeKindTc 
+-          8 -&gt; return IfaceUnliftedTypeKindTc
+-          9 -&gt; return IfaceUbxTupleKindTc
+-          10 -&gt; return IfaceArgTypeKindTc
+-         11 -&gt; do { bx &lt;- get bh; ar &lt;- get bh; return (IfaceTupTc bx ar) }
++         6 -&gt; return IfacePseudoTc
++          7 -&gt; return IfaceLiftedTypeKindTc 
++          8 -&gt; return IfaceOpenTypeKindTc 
++          9 -&gt; return IfaceUnliftedTypeKindTc
++          10 -&gt; return IfaceUbxTupleKindTc
++          11 -&gt; return IfaceArgTypeKindTc
++         12 -&gt; do { bx &lt;- get bh; ar &lt;- get bh; return (IfaceTupTc bx ar) }
+          _ -&gt; do { ext &lt;- get bh; return (IfaceTc ext) }
+ 
+ instance Binary IfacePredType where
+diff -rN -u old-ghc/compiler/iface/IfaceType.lhs new-ghc/compiler/iface/IfaceType.lhs
+--- old-ghc/compiler/iface/IfaceType.lhs        2008-09-18 21:45:36.000000000 +0900
++++ new-ghc/compiler/iface/IfaceType.lhs        2008-09-18 21:45:42.000000000 +0900
+@@ -73,7 +73,7 @@
+ data IfaceTyCon        -- Abbreviations for common tycons with known names
+   = IfaceTc Name       -- The common case
+   | IfaceIntTc | IfaceBoolTc | IfaceCharTc
+-  | IfaceListTc | IfacePArrTc
++  | IfaceListTc | IfacePArrTc | IfacePseudoTc
+   | IfaceTupTc Boxity Arity 
+   | IfaceLiftedTypeKindTc | IfaceOpenTypeKindTc | IfaceUnliftedTypeKindTc
+   | IfaceUbxTupleKindTc | IfaceArgTypeKindTc 
+@@ -85,6 +85,7 @@
+ ifaceTyConName IfaceCharTc       = charTyConName
+ ifaceTyConName IfaceListTc       = listTyConName
+ ifaceTyConName IfacePArrTc       = parrTyConName
++ifaceTyConName IfacePseudoTc     = pseudoTyConName
+ ifaceTyConName (IfaceTupTc bx ar) = getName (tupleTyCon bx ar)
+ ifaceTyConName IfaceLiftedTypeKindTc   = liftedTypeKindTyConName
+ ifaceTyConName IfaceOpenTypeKindTc     = openTypeKindTyConName
+@@ -223,6 +224,7 @@
+ ppr_tc_app _         tc         []   = ppr_tc tc
+ ppr_tc_app _         IfaceListTc [ty] = brackets   (pprIfaceType ty)
+ ppr_tc_app _         IfacePArrTc [ty] = pabrackets (pprIfaceType ty)
++ppr_tc_app _         IfacePseudoTc [ty] = braces (pprIfaceType ty)
+ ppr_tc_app _         (IfaceTupTc bx arity) tys
+   | arity == length tys 
+   = tupleParens bx (sep (punctuate comma (map pprIfaceType tys)))
+@@ -329,6 +331,7 @@
+   | nm == charTyConName             = IfaceCharTc 
+   | nm == listTyConName             = IfaceListTc 
+   | nm == parrTyConName             = IfacePArrTc 
++  | nm == pseudoTyConName           = IfacePseudoTc 
+   | nm == liftedTypeKindTyConName   = IfaceLiftedTypeKindTc
+   | nm == unliftedTypeKindTyConName = IfaceUnliftedTypeKindTc
+   | nm == openTypeKindTyConName     = IfaceOpenTypeKindTc
+diff -rN -u old-ghc/compiler/types/TypeRep.lhs new-ghc/compiler/types/TypeRep.lhs
+--- old-ghc/compiler/types/TypeRep.lhs  2008-09-18 21:45:38.000000000 +0900
++++ new-ghc/compiler/types/TypeRep.lhs  2008-09-18 21:45:42.000000000 +0900
+@@ -507,6 +507,7 @@
+ ppr_tc_app _ tc [ty]
+   | tc `hasKey` listTyConKey = brackets (pprType ty)
+   | tc `hasKey` parrTyConKey = ptext (sLit "[:") &lt;&gt; pprType ty &lt;&gt; ptext (sLit ":]")
++  | tc `hasKey` pseudoTyConKey = braces (pprType ty)
+   | tc `hasKey` liftedTypeKindTyConKey   = ptext (sLit "*")
+   | tc `hasKey` unliftedTypeKindTyConKey = ptext (sLit "#")
+   | tc `hasKey` openTypeKindTyConKey     = ptext (sLit "(?)")</code></pre>
+<p>で build して install</p>
+<pre><code>% make distclean
+...
+% sh boot
+...
+% ./configure --prefix=$HOME
+...
+% make &amp;&amp; make install
+...</code></pre>
+<p>さきほどの実行例をもう一度</p>
+<pre><code>Prelude&gt; let { f :: {a} ; f = undefined }
+Prelude&gt; :type f
+f :: {a}
+Prelude&gt; let { g :: {Int} -&gt; Integer ; g = undefined }
+Prelude&gt; :type g
+g :: {Int} -&gt; Integer
+Prelude&gt; :type g f
+g f :: Integer
+Prelude&gt; </code></pre>
+<p>OK!!!</p>
+<h4 id="落穂ひろい">落穂ひろい</h4>
+<p>ちょい抜けてた</p>
+<pre><code>diff -rN -u old-ghc/compiler/iface/TcIface.lhs new-ghc/compiler/iface/TcIface.lhs
+--- old-ghc/compiler/iface/TcIface.lhs  2008-09-19 17:02:29.000000000 +0900
++++ new-ghc/compiler/iface/TcIface.lhs  2008-09-19 17:02:36.000000000 +0900
+@@ -1056,6 +1056,7 @@
+ tcIfaceTyCon IfaceCharTc       = tcWiredInTyCon charTyCon
+ tcIfaceTyCon IfaceListTc       = tcWiredInTyCon listTyCon
+ tcIfaceTyCon IfacePArrTc       = tcWiredInTyCon parrTyCon
++tcIfaceTyCon IfacePseudoTc     = tcWiredInTyCon pseudoTyCon
+ tcIfaceTyCon (IfaceTupTc bx ar) = tcWiredInTyCon (tupleTyCon bx ar)
+ tcIfaceTyCon (IfaceTc name)     = do { thing &lt;- tcIfaceGlobal name 
+                                     ; return (check_tc (tyThingTyCon thing)) }
+diff -rN -u old-ghc/compiler/parser/Lexer.x new-ghc/compiler/parser/Lexer.x</code></pre>
+<h4 id="組込みの後置演算子">組込みの後置演算子 ?</h4>
+<p>擬データの確定を強制する単項後置演算子 ・? を導入する。</p>
+<pre><code>diff -rN -u old-ghc/compiler/hsSyn/HsExpr.lhs new-ghc/compiler/hsSyn/HsExpr.lhs
+--- old-ghc/compiler/hsSyn/HsExpr.lhs   2008-09-19 17:02:29.000000000 +0900
++++ new-ghc/compiler/hsSyn/HsExpr.lhs   2008-09-19 17:02:36.000000000 +0900
+@@ -108,6 +108,9 @@
+   | NegApp      (LHsExpr id)    -- negated expr
+                 (SyntaxExpr id) -- Name of 'negate'
+ 
++  | PdDerefApp  (LHsExpr id)    -- dereferenced pseudo data var
++                (SyntaxExpr id) -- Name of 'dereference'
++
+   | HsPar       (LHsExpr id)    -- parenthesised expr
+ 
+   | SectionL    (LHsExpr id)    -- operand
+@@ -349,6 +352,8 @@
+ 
+ ppr_expr (NegApp e _) = char '-' &lt;+&gt; pprDebugParendExpr e
+ 
++ppr_expr (PdDerefApp e _) = pprDebugParendExpr e &lt;&gt; char '?'
++
+ ppr_expr (SectionL expr op)
+   = case unLoc op of
+       HsVar v -&gt; pp_infixly v
+diff -rN -u old-ghc/compiler/parser/Lexer.x new-ghc/compiler/parser/Lexer.x
+--- old-ghc/compiler/parser/Lexer.x     2008-09-19 17:02:30.000000000 +0900
++++ new-ghc/compiler/parser/Lexer.x     2008-09-19 17:02:36.000000000 +0900
+@@ -326,6 +326,10 @@
+ }
+ 
+ &lt;0&gt; {
++  @varid \?     { chop_one_varid ITPDderefvarid }
++}
++
++&lt;0&gt; {
+   "(#" / { ifExtension unboxedTuplesEnabled `alexAndPred` notFollowedBySymbol }
+          { token IToubxparen }
+   "#)" / { ifExtension unboxedTuplesEnabled }
+@@ -529,6 +533,8 @@
+ 
+   | ITdupipvarid   FastString  -- GHC extension: implicit param: ?x
+ 
++  | ITPDderefvarid   FastString   -- Psudo data dereference: x?
++
+   | ITpragma StringBuffer
+ 
+   | ITchar       Char
+@@ -724,6 +730,10 @@
+ skip_one_varid f span buf len 
+   = return (L span $! f (lexemeToFastString (stepOn buf) (len-1)))
+ 
++chop_one_varid :: (FastString -&gt; Token) -&gt; Action
++chop_one_varid f span buf len
++ = return (L span $! f (lexemeToFastString buf (len-1)))
++
+ strtoken :: (String -&gt; Token) -&gt; Action
+ strtoken f span buf len = 
+   return (L span $! (f $! lexemeToString buf len))
+diff -rN -u old-ghc/compiler/parser/Parser.y.pp new-ghc/compiler/parser/Parser.y.pp
+--- old-ghc/compiler/parser/Parser.y.pp 2008-09-19 17:02:30.000000000 +0900
++++ new-ghc/compiler/parser/Parser.y.pp 2008-09-19 17:02:36.000000000 +0900
+@@ -316,6 +316,7 @@
+  QCONSYM       { L _ (ITqconsym  _) }
+ 
+  IPDUPVARID    { L _ (ITdupipvarid   _) }              -- GHC extension
++ PDDEREFVARID          { L _ (ITPDderefvarid   _) }            -- dereference pseudo data
+ 
+  CHAR          { L _ (ITchar     _) }
+  STRING                { L _ (ITstring   _) }
+@@ -1376,6 +1377,7 @@
+ 
+ aexp2  :: { LHsExpr RdrName }
+        : ipvar                         { L1 (HsIPVar $! unLoc $1) }
++        | pdderefvar                    { $1 }
+        | qcname                        { L1 (HsVar   $! unLoc $1) }
+        | literal                       { L1 (HsLit   $! unLoc $1) }
+ -- This will enable overloaded strings permanently.  Normally the renamer turns HsString
+@@ -1549,6 +1551,12 @@
+ -- We are reusing `lexps' and `flattenedpquals' from the list case.
+ 
+ -----------------------------------------------------------------------------
++-- Dereferenced pseudo data var
++
++pdderefvar :: { LHsExpr RdrName }
++        : PDDEREFVARID { LL (mkHsPdDerefApp (L1 (HsVar (mkUnqual varName (getPDDEREFVARID $1))))) }
++
++-----------------------------------------------------------------------------
+ -- Guards
+ 
+ guardquals :: { Located [LStmt RdrName] }
+@@ -1989,6 +1997,7 @@
+ getQVARSYM     (L _ (ITqvarsym  x)) = x
+ getQCONSYM     (L _ (ITqconsym  x)) = x
+ getIPDUPVARID   (L _ (ITdupipvarid   x)) = x
++getPDDEREFVARID (L _ (ITPDderefvarid x)) = x
+ getCHAR                (L _ (ITchar     x)) = x
+ getSTRING      (L _ (ITstring   x)) = x
+ getINTEGER     (L _ (ITinteger  x)) = x
+diff -rN -u old-ghc/compiler/parser/RdrHsSyn.lhs new-ghc/compiler/parser/RdrHsSyn.lhs
+--- old-ghc/compiler/parser/RdrHsSyn.lhs        2008-09-19 17:02:30.000000000 +0900
++++ new-ghc/compiler/parser/RdrHsSyn.lhs        2008-09-19 17:02:36.000000000 +0900
+@@ -17,6 +17,7 @@
+  
+        mkHsOpApp, mkClassDecl,
+        mkHsIntegral, mkHsFractional, mkHsIsString,
++        mkHsPdDerefApp,
+        mkHsDo, mkHsSplice,
+         mkTyData, mkPrefixCon, mkRecCon, mkInlineSpec, 
+        mkRecConstrOrUpdate, -- HsExp -&gt; [HsFieldUpdate] -&gt; P HsExp
+@@ -200,6 +201,11 @@
+             tcdKindSig = ksig, tcdDerivs = maybe_deriv }
+ \end{code}
+ 
++\begin{code}
++mkHsPdDerefApp :: LHsExpr RdrName -&gt; HsExpr RdrName
++mkHsPdDerefApp v = PdDerefApp v noSyntaxExpr
++\end{code}
++
+ %************************************************************************
+ %*                                                                     *
+ \subsection[cvBinds-etc]{Converting to @<a href="email-protection.html" class="__cf_email__" data-cfemail="9ed6eddcf7f0faedde">[email&nbsp;protected]</a>, etc.}
+diff -rN -u old-ghc/compiler/prelude/PrelNames.lhs new-ghc/compiler/prelude/PrelNames.lhs
+--- old-ghc/compiler/prelude/PrelNames.lhs      2008-09-19 17:02:30.000000000 +0900
++++ new-ghc/compiler/prelude/PrelNames.lhs      2008-09-19 17:02:36.000000000 +0900
+@@ -212,6 +212,9 @@
+        -- dotnet interop
+        , objectTyConName, marshalObjectName, unmarshalObjectName
+        , marshalStringName, unmarshalStringName, checkDotnetResName
++
++        -- pseudo data
++        , pdDerefName
+     ]
+ 
+ genericTyConNames :: [Name]
+@@ -796,12 +799,14 @@
+        -- objectTyConName was "wTcQual", but that's gone now, and
+        -- I can't see why it was wired in anyway...
+ unmarshalObjectName, marshalObjectName, marshalStringName,
+-    unmarshalStringName, checkDotnetResName :: Name
++    unmarshalStringName, checkDotnetResName, pdDerefName :: Name
+ unmarshalObjectName = varQual  dOTNET (fsLit "unmarshalObject") unmarshalObjectIdKey
+ marshalObjectName   = varQual  dOTNET (fsLit "marshalObject") marshalObjectIdKey
+ marshalStringName   = varQual  dOTNET (fsLit "marshalString") marshalStringIdKey
+ unmarshalStringName = varQual  dOTNET (fsLit "unmarshalString") unmarshalStringIdKey
+ checkDotnetResName  = varQual  dOTNET (fsLit "checkResult")     checkDotnetResNameIdKey
++
++pdDerefName         = varQual gHC_PSEUDO (fsLit "deref") pdDerefIdKey
+ \end{code}
+ 
+ %************************************************************************
+@@ -1258,6 +1263,11 @@
+ fromStringClassOpKey :: Unique
+ fromStringClassOpKey         = mkPreludeMiscIdUnique 125
+ 
++-- pseudo data dereference
++pdDerefIdKey :: Unique
++pdDerefIdKey                  = mkPreludeMiscIdUnique 126
++
++
+ ---------------- Template Haskell -------------------
+ --     USES IdUniques 200-399
+ -----------------------------------------------------
+diff -rN -u old-ghc/compiler/rename/RnExpr.lhs new-ghc/compiler/rename/RnExpr.lhs
+--- old-ghc/compiler/rename/RnExpr.lhs  2008-09-19 17:02:30.000000000 +0900
++++ new-ghc/compiler/rename/RnExpr.lhs  2008-09-19 17:02:37.000000000 +0900
+@@ -27,13 +27,13 @@
+ import TcRnMonad
+ import RnEnv
+ import RnTypes         ( rnHsTypeFVs, 
+-                         mkOpFormRn, mkOpAppRn, mkNegAppRn, checkSectionPrec)
++                         mkOpFormRn, mkOpAppRn, mkNegAppRn, mkPdDerefAppRn, checkSectionPrec)
+ import RnPat
+ import DynFlags                ( DynFlag(..) )
+ import BasicTypes      ( FixityDirection(..) )
+ import PrelNames       ( thFAKE, hasKey, assertIdKey, assertErrorName,
+                          loopAName, choiceAName, appAName, arrAName, composeAName, firstAName,
+-                         negateName, thenMName, bindMName, failMName, groupWithName )
++                         negateName, pdDerefName, thenMName, bindMName, failMName, groupWithName )
+ 
+ import Name
+ import NameSet
+@@ -166,6 +166,12 @@
+     mkNegAppRn e' neg_name     `thenM` \ final_e -&gt;
+     returnM (final_e, fv_e `plusFV` fv_neg)
+ 
++rnExpr (PdDerefApp e _)
++  = rnLExpr e                   `thenM` \ (e', fv_e) -&gt;
++    lookupSyntaxName pdDerefName `thenM` \ (deref_name, fv_deref) -&gt;
++    mkPdDerefAppRn e' deref_name `thenM` \ final_e -&gt;
++    returnM (final_e, fv_e `plusFV` fv_deref)
++
+ ------------------------------------------
+ -- Template Haskell extensions
+ -- Don't ifdef-GHCI them because we want to fail gracefully
+diff -rN -u old-ghc/compiler/rename/RnTypes.lhs new-ghc/compiler/rename/RnTypes.lhs
+--- old-ghc/compiler/rename/RnTypes.lhs 2008-09-19 17:02:30.000000000 +0900
++++ new-ghc/compiler/rename/RnTypes.lhs 2008-09-19 17:02:37.000000000 +0900
+@@ -10,7 +10,7 @@
+        rnHsSigType, rnHsTypeFVs,
+ 
+        -- Precence related stuff
+-       mkOpAppRn, mkNegAppRn, mkOpFormRn, mkConOpPatRn,
++       mkOpAppRn, mkNegAppRn, mkPdDerefAppRn, mkOpFormRn, mkConOpPatRn,
+        checkPrecMatch, checkSectionPrec
+   ) where
+ 
+@@ -378,6 +378,11 @@
+   = ASSERT( not_op_app (unLoc neg_arg) )
+     return (NegApp neg_arg neg_name)
+ 
++mkPdDerefAppRn :: LHsExpr id -&gt; SyntaxExpr id -&gt; RnM (HsExpr id)
++mkPdDerefAppRn deref_arg deref_name
++  = ASSERT( not_op_app (unLoc deref_arg) )
++    return (PdDerefApp deref_arg deref_name)
++
+ not_op_app :: HsExpr id -&gt; Bool
+ not_op_app (OpApp _ _ _ _) = False
+ not_op_app _              = True
+diff -rN -u old-ghc/compiler/typecheck/TcExpr.lhs new-ghc/compiler/typecheck/TcExpr.lhs
+--- old-ghc/compiler/typecheck/TcExpr.lhs       2008-09-19 17:02:30.000000000 +0900
++++ new-ghc/compiler/typecheck/TcExpr.lhs       2008-09-19 17:02:37.000000000 +0900
+@@ -170,6 +170,9 @@
+        ; expr' &lt;- tcMonoExpr expr res_ty
+        ; return (NegApp expr' neg_expr') }
+ 
++tcExpr (PdDerefApp expr deref_expr) res_ty
++  = tcExpr (HsApp df expr) res_ty where df = L (getLoc expr) (HsVar pdDerefName)
++
+ tcExpr (HsIPVar ip) res_ty
+   = do { let origin = IPOccOrigin ip
+                -- Implicit parameters must have a *tau-type* not a </code></pre>
+<p>実行してみる</p>
+<pre><code>*Main&gt; let { y :: { Integer }; y = undefined }
+*Main&gt; let z = y?
+*Main&gt; :t z
+z :: Integer
+*Main&gt; :t ?
+
+&lt;interactive&gt;:1:0: parse error on input `?'
+*Main&gt; :t (?)
+
+&lt;interactive&gt;:1:0: Not in scope: `?'</code></pre>
+<p>? 単独では型を問いあわせられないけど、意図した型にはなっている。</p>
+<hr>
+<p>Last modified : 2008/09/22 12:25:11 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/GHCHacks_nobsun">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/GHCHacks_nobsun?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/GHCHacks_nobsun">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/GHCHacks_nobsun" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

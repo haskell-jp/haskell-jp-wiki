@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/dekudekuplex"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/dekudekuplex</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/dekudekuplex">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/dekudekuplex">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/dekudekuplex">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/dekudekuplex</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#dekudekuplex"><span>dekudekuplex</span></a></li>
+</ul>
+</div>
+
+<h1 id="dekudekuplex"><a href="" class="uri" title="Go to wiki page">dekudekuplex</a></h1>
+<hr>
+<h4 id="プロフィール">プロフィール</h4>
+<ul>
+<li>生年月日:
+<ul>
+<li>1968/11/09</li>
+</ul></li>
+<li>URL:
+<ul>
+<li><a href="http://d.hatena.ne.jp/DekuDekuplex/" class="uri">http://d.hatena.ne.jp/DekuDekuplex/</a></li>
+</ul></li>
+<li>職業：
+<ul>
+<li>特許明細書の日英翻訳家</li>
+</ul></li>
+<li>好きなプログラミング言語：
+<ul>
+<li>Haskell、Scheme</li>
+</ul></li>
+<li>自然言語：
+<ul>
+<li>英語、日本語</li>
+</ul></li>
+</ul>
+<hr>
+<p>DekuDekuplexです。</p>
+<p>主に、Haskell言語とScheme言語を勉強中です。</p>
+<p>最近、<a href="http://plt-scheme.org/">PLT Scheme</a>の<a href="http://www.ccs.neu.edu/home/samth/typed-scheme/">Typed Scheme</a>を少し使っています。</p>
+<h4 id="ハノイの塔の問題">「ハノイの塔」の問題</h4>
+<p>好きな電気計算科学関連の問題は<a href="https://ja.wikipedia.org/wiki/%E3%83%8F%E3%83%8E%E3%82%A4%E3%81%AE%E5%A1%94">ハノイの塔</a>です。以下に僕の作った「ハノイの塔」の問題を解決する為のプログラムをHaskell言語とPLT Typed Scheme言語で紹介させて頂きます：</p>
+<h5 id="haskell言語">Haskell言語</h5>
+<p>※このhanoiプログラムは、必ず「putStr (hanoi_shower (hanoi 1 2 3 n))」または「putStr (hanoi_shower (hanoi ‘a’ ‘b’ ‘c’ n))」のように使ってください。</p>
+<pre><code>-- hanoi_general_merged_v1.1.hs
+-- Revised version of hanoi_general.hs, which was a Haskell function to compute the Towers 
+-- of Hanoi problem recursively, merging hanoi and hanoi_helper
+-- 
+-- Usage: putStr (hanoi_shower (hanoi 1 2 3 n)), or 
+--        putStr (hanoi_shower (hanoi 'a' 'b' 'c' n)), 
+--        where the first three arguments of hanoi may be polymorphic types
+--        (i.e., Chars, Ints, or any other suitable type), and n is the number
+--        of discs to move from the source peg to the destination peg
+-- 
+-- Copyright(c) April 17, 2008, at 15:47, 
+-- by Benjamin L. Russell
+-- 
+-- Update History:
+-- 
+-- Version 1.1
+-- Added usage information.
+-- April 22, 2008, at 21:47
+
+hanoi :: a -&gt; a -&gt; a -&gt; Int -&gt; [(a, a)]
+hanoi source using dest n
+    | n == 1 = [(source, dest)]
+    | otherwise = hanoi source dest using (n-1) 
+                  ++ hanoi source using dest 1
+                         ++ hanoi using source dest (n-1)
+
+hanoi_shower :: Show a =&gt; [(a, a)] -&gt; String
+hanoi_shower moves = unlines ["Move " ++ show a ++ " to "++ show b ++ "." | (a, b) &lt;- moves]</code></pre>
+<p>実行例：</p>
+<pre><code>__   __ __  __  ____   ___      _______________________________________________
+||   || ||  || ||  || ||__      Hugs 98: Based on the Haskell 98 standard
+||___|| ||__|| ||__||  __||     Copyright (c) 1994-2005
+||---||         ___||           World Wide Web: http://haskell.org/hugs
+||   ||                         Bugs: http://hackage.haskell.org/trac/hugs
+||   || Version: Sep 2006       _______________________________________________
+
+Haskell 98 mode: Restart with command line option -98 to enable extensions
+
+Type :? for help
+Hugs&gt;:load "C:\\Program Files\\WinHugs\\hanoi_general_merged_v1.1.hs"
+Main&gt;putStr (hanoi_shower (hanoi 'a' 'b' 'c' 3))
+Move 'a' to 'c'.
+Move 'a' to 'b'.
+Move 'c' to 'b'.
+Move 'a' to 'c'.
+Move 'b' to 'a'.
+Move 'b' to 'c'.
+Move 'a' to 'c'.
+ :: IO ()
+Main&gt;</code></pre>
+<h5 id="plt-typed-scheme言語">PLT Typed Scheme言語</h5>
+<h6 id="普通のplt-typed-scheme言語関数">普通のPLT Typed Scheme言語関数</h6>
+<pre><code>;; hanoi-typed.ss
+;; Typed Scheme version of Towers of Hanoi
+;; 
+;; Based on regular-plus function by Carl Eastlund.
+;; Copyright(C) October 16, 2008, at 20:54, 
+;; by Benjamin L. Russell
+
+#lang typed-scheme
+
+(: hanoi-typed (Number -&gt; Void))
+(define (hanoi-typed n)
+  (hanoi-helper-typed 'A 'B 'C n))
+
+(: hanoi-helper-typed (Symbol Symbol Symbol Number -&gt; Void))
+(define (hanoi-helper-typed source using destination n)
+  (cond ((= n 1)
+         (printf "Moving from disc ~a to ~a.\n" source destination))
+        (else
+         (hanoi-helper-typed source destination using (- n 1))
+         (hanoi-helper-typed source using destination 1)
+         (hanoi-helper-typed using source destination (- n 1)))))</code></pre>
+<p>実行例：</p>
+<pre><code>Welcome to DrScheme, version 4.1.1 [3m].
+Language: Module.
+&gt; (hanoi-typed 3)
+Moving from disc A to C.
+Moving from disc A to B.
+Moving from disc C to B.
+Moving from disc A to C.
+Moving from disc B to A.
+Moving from disc B to C.
+Moving from disc A to C.
+&gt; </code></pre>
+<h6 id="カリー化されたplt-typed-scheme言語関数">カリー化されたPLT Typed Scheme言語関数</h6>
+<pre><code>;; hanoi-curried.ss
+;; Curried Typed Scheme version of Towers of Hanoi
+;; 
+;; Based on curried-plus function by Carl Eastlund.
+;; Copyright(C) October 16, 2008, at 20:54, 
+;; by Benjamin L. Russell
+
+#lang typed-scheme
+
+(: hanoi-curried (Number -&gt; Void))
+(define (hanoi-curried n)
+  ((((hanoi-helper-curried 'A) 'B) 'C) n))
+
+(: hanoi-helper-curried (Symbol -&gt; (Symbol -&gt; (Symbol -&gt; (Number -&gt; Void)))))
+(define ((((hanoi-helper-curried source) using) destination) n)
+  (cond ((= n 1)
+         (printf "Moving from disc ~a to ~a.\n" source destination))
+        (else
+
+         ((((hanoi-helper-curried source) destination) using) (- n 1))
+         ((((hanoi-helper-curried source) using) destination) 1)
+         ((((hanoi-helper-curried using) source) destination) (- n 1)))))</code></pre>
+<p>実行例：</p>
+<pre><code>Welcome to DrScheme, version 4.1.1 [3m].
+Language: Module.
+&gt; (hanoi-curried 3)
+Moving from disc A to C.
+Moving from disc A to B.
+Moving from disc C to B.
+Moving from disc A to C.
+Moving from disc B to A.
+Moving from disc B to C.
+Moving from disc A to C.
+&gt; </code></pre>
+<h4 id="これから">これから・・・・・・</h4>
+<p>現在（平成２０年１０月１７日（金曜日）現在）、回帰的な定義の「ハノイの塔」に代わる、高等関数的な定義の究極の面白い、創造しやすい、魔法的なプログラミング問題を模索中です。数値をいじるだけでは面白くありません。何か、もっと代表的でカタチとして想像し易い、楽しくて不思議な問題を探しています。見つけましたら、またここで報告させて頂きます。御楽しみに・・・・・・。</p>
+<h4 id="好きなことば">好きなことば</h4>
+<ul>
+<li>「古池や蛙飛びこむ水の音」— 松尾芭蕉</li>
+<li>“Common sense is the collection of prejudices acquired by age eighteen.” — Albert Einstein (US (German-born) physicist (1879 - 1955)), (attributed)</li>
+<li>“Any sufficiently advanced technology is indistinguishable from magic.” — Arthur C. Clarke (English physicist &amp; science fiction author (1917 - )), “Profiles of The Future”, 1961 (Clarke’s third law)</li>
+<li>“Computer Science is no more about computers than astronomy is about telescopes.” — E. W. Dijkstra</li>
+</ul>
+<h4 id="関連ページ">関連ページ</h4>
+<ul>
+<li>他のサイトでのDekuDekuplexのユーザーページ
+<ul>
+<li><a href="https://www.haskell.org/haskellwiki/User:DekuDekuplex">HaskellWiki</a></li>
+<li><a href="https://en.wikipedia.org/wiki/User:DekuDekuplex">Wikipedia</a></li>
+</ul></li>
+</ul>
+<hr>
+<p>Last modified : 2008/11/20 11:54:57 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/dekudekuplex">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/dekudekuplex?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/dekudekuplex">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/dekudekuplex" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

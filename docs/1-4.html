@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/ReadGHC/1"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/ReadGHC/1</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/ReadGHC/1">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/ReadGHC/1">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/ReadGHC/1">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/ReadGHC/1</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E8%AA%BF%E6%95%B4%E5%BD%93%E6%97%A5%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB">調整/当日スケジュール</a><ul>
+<li><a href="#%E4%BC%9A%E5%A0%B4%E6%A1%88">会場案</a></li>
+</ul></li>
+<li><a href="#%E8%B3%87%E6%96%99">資料</a><ul>
+<li><a href="#ghc-rts%E8%B5%B7%E5%8B%95%E6%99%82%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%A9%E3%83%95">GHC RTS起動時のコールグラフ</a></li>
+</ul></li>
+<li><a href="#%E8%AD%B0%E4%BA%8B%E9%8C%B2">議事録</a><ul>
+<li><a href="#%E7%99%BA%E8%A1%A8%E8%B3%87%E6%96%99">発表資料</a></li>
+<li><a href="#togetter">togetter</a></li>
+<li><a href="#%E9%8C%B2%E7%94%BB%E3%81%A8%E5%86%99%E7%9C%9F">録画と写真</a></li>
+<li><a href="#%E3%83%8D%E3%82%BF%E6%A1%88%E5%87%BA%E3%81%97">ネタ案出し</a></li>
+</ul></li>
+<li><a href="#%E6%87%87%E8%A6%AA%E4%BC%9A">懇親会</a></li>
+<li><a href="#%E6%AC%A1%E5%9B%9E">次回</a></li>
+</ul>
+</div>
+
+<h1 id="調整当日スケジュール">調整/当日スケジュール</h1>
+<p><a href="http://partake.in/events/6b514842-c0bf-48c9-962b-4f5d60b908c0">(日程調整中) GHCソースコードリーディング勉強会 第1回(RTS編？) - [PARTAKE]</a></p>
+<h2 id="会場案">会場案</h2>
+<ul>
+<li><span class="citation">@kazu_yamamoto</span> : <span class="citation">@master_q</span> GHC ソースコードリーディングですが、6月9日以降の土日なら、IIJ の会議室 を貸し出せると思います。</li>
+<li>田町のミラクルリナックス会議室を貸してもらえそう 最大15人が限界</li>
+<li>結局ミラクルリナックスで開催となった。</li>
+</ul>
+<h1 id="資料">資料</h1>
+<h2 id="ghc-rts起動時のコールグラフ">GHC RTS起動時のコールグラフ</h2>
+<pre class="text"><code>hs_init(int *argc, char **argv[])
+-&gt; hs_init_ghc(int *argc, char **argv[], RtsConfig rts_config)
+   -&gt; initScheduler()
+      -&gt; initCapabilities()
+         -&gt; moreCapabilities(0, RtsFlags.ParFlags.nNodes)
+            for i in 0..RtsFlags.ParFlags.nNodes
+            -&gt; initCapability(&amp;capabilities[i], i)
+               initMutex(capabilities[i].lock)
+               # その他capabilities[i]のメンバーを初期値でうめる
+         n_capabilities = RtsFlags.ParFlags.nNodes
+         enabled_capabilities = n_capabilities
+         last_free_capability = &amp;capabilities[0] # 後でIOスレッド用に使う
+      -&gt; initTaskManager()
+      -&gt; startWorkerTasks(1, n_capabilities)
+         for i in 1..n_capabilities
+         -&gt; startWorkerTask(&amp;capabilities[i])
+            task = newTask(rtsTrue)
+            task-&gt;cap = &amp;capabilities[i]
+            capabilities[i].running_task = task
+            createOSThread(&amp;tid, (OSThreadProc*)workerStart, task)
+            -&gt; workerStart(Task *task) # 新しいスレッド
+               -&gt; setMyTask(task)
+                  setThreadLocalVar(&amp;currentTaskKey,task)
+               -&gt; newInCall(task)
+                  incall = stgMallocBytes((sizeof(InCall)), "newBoundTask")
+                  incall-&gt;task = task
+                  incall-&gt;prev_stack = task-&gt;incall
+                  task-&gt;incall = incall
+               -&gt; scheduleWorker(task-&gt;cap,task)
+                  cap = schedule(task-&gt;cap,task) # スケジュールループ
+                  releaseCapability_(cap,rtsFalse)
+                  workerTaskStop(task)
+            task-&gt;id = tid
+            # これでCapabilityの数だけWorkerスレッド(Task)を作れた
+            # この時点ではCapability&lt;=&gt;Task&lt;=&gt;InCallは1対1対1写像
+   -&gt; initStorage()
+      xxxxxxxxxxxxxxxxxxxxxxxx この中はもっと読む必要有り
+   -&gt; getStablePtr((StgPtr)xxxx_closure) # xxxxxxxxx GCルートの設定？
+   -&gt; initTimer()
+   -&gt; startTimer()
+   -&gt; ioManagerStart()
+      -&gt; cap = rts_lock()
+         -&gt; task = newBoundTask()
+            -&gt; task = allocTask()
+               -&gt; task = myTask()
+                  task = newTask(rtsFalse)
+                  ask-&gt;id = osThreadId()
+                  setMyTask(task)
+                  return task
+            newInCall(task)
+         -&gt; waitForReturnCapability(&amp;cap, task)
+            cap = last_free_capability
+            task-&gt;cap = cap
+            cap-&gt;running_task = task
+         return cap
+      -&gt; ioManagerStartCap(&amp;cap)
+         -&gt; rts_evalIO(cap,&amp;base_GHCziConcziIO_ensureIOManagerIsRunning_closure,NULL)
+            -&gt; tso = createStrictIOThread(*cap, RtsFlags.GcFlags.initialStkSize, p)
+               -&gt; StgTSO *t = createThread(cap, stack_size)
+                  stack = (StgStack *)allocate(cap, stack_size)
+                  tso = (StgTSO *)allocate(cap, sizeofW(StgTSO))
+                  tso-&gt;what_next = ThreadRunGHC
+                  tso-&gt;stackobj = stack
+                  tso-&gt;id = next_thread_id++
+                  tso-&gt;global_link = g0-&gt;threads
+                  g0-&gt;threads = tso
+               pushClosure(t, (W_)&amp;stg_forceIO_info)
+               pushClosure(t, (W_)&amp;stg_ap_v_info)
+               pushClosure(t, (W_)closure) # base_GHCziConcziIO_ensureIOManagerIsRunning_closure
+               pushClosure(t, (W_)&amp;stg_enter_info)
+               # xxxxx このクロージャの設定がHaskell worldとの橋？
+               #     pushClosureを読むかぎりだとStgTSOのスタックに積むだけ
+               return t
+            -&gt; scheduleWaitThread(tso,ret,cap)
+               task = cap-&gt;running_task
+               tso-&gt;bound = task-&gt;incall
+               tso-&gt;cap = cap
+               task-&gt;incall-&gt;tso = tso
+               -&gt; appendToRunQueue(cap,tso)
+                  cap-&gt;run_queue_hd = tso
+                  tso-&gt;block_info.prev = END_TSO_QUEUE
+                  cap-&gt;run_queue_tl = tso
+               cap = schedule(cap,task) # スケジュールループ</code></pre>
+<h1 id="議事録">議事録</h1>
+<h2 id="発表資料">発表資料</h2>
+<ul>
+<li><a href="http://www.slideshare.net/dec9ue/rts-gc">GCをみればRTSが見えてくる、かも。。。</a></li>
+<li><a href="https://nothingcosmos.github.com/LLVM/src/ghcllvm.html">ghc llvm backend — LLVM 0.1 documentation</a></li>
+<li><a href="https://github.com/khibino/ghc-src-read/raw/master/01/GhcSimplGVN.pdf">GHC へのプログラム変換パスの追加(pdf)</a></li>
+<li><a href="http://www.slideshare.net/master_q/dive-into-rts-another-side">Dive into RTS - another side</a></li>
+</ul>
+<h2 id="togetter">togetter</h2>
+<p><a href="https://togetter.com/li/381712">#readghc 第一回 - Togetter</a></p>
+<h2 id="録画と写真">録画と写真</h2>
+<p><a href="https://www.flickr.com/photos/masterq/sets/72157631649911818/">写真</a></p>
+<p><a href="http://www.justin.tv/kiwamu/b/333861161">録画1</a> <a href="http://www.justin.tv/kiwamu/b/333861204">録画2</a> <a href="http://www.justin.tv/kiwamu/b/333861287">録画3</a></p>
+<p>録画1は途中まで音が入ってないです。ごめんなさい。。。</p>
+<h2 id="ネタ案出し">ネタ案出し</h2>
+<p><img src="urn:scrapbook:download:error:https://farm9.staticflickr.com/8459/8035488859_567ce685f1.jpg"></p>
+<h1 id="懇親会">懇親会</h1>
+<p>ピザ頼んだ。</p>
+<pre><code>■ご注文明細
+└─────────────
+　----------------------------------------
+　○マルゲリータ
+　　レギュラークラスト　Lサイズ
+　　数量:1　計:2,800円
+　----------------------------------------
+　○ドミノ・デラックス
+　　レギュラークラスト　Lサイズ
+　　数量:1　計:3,000円
+　----------------------------------------
+　○グリル野菜たっぷりのピッツァ
+　　レギュラークラスト　Lサイズ
+　　数量:1　計:3,280円
+　----------------------------------------
+　△ネット注文特典 5%OFF
+　　数量:1　計:454円引き
+　----------------------------------------
+
+　合計金額　8,626円（うち消費税410円）</code></pre>
+<p>他会計。ビアバッシュ安いですね。</p>
+<p><img src="urn:scrapbook:download:error:https://farm9.staticflickr.com/8173/8035466175_557db848a6_n.jpg"></p>
+<h1 id="次回">次回</h1>
+<p><a href="2-3.html" class="uri" title="Go to wiki page">2</a></p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/ReadGHC/1">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/ReadGHC/1?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/ReadGHC/1">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/ReadGHC/1" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

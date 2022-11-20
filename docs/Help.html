@@ -1,0 +1,382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Help"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Help</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_history/Help">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Help">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Help</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#navigating">Navigating</a></li>
+<li><a href="#creating-and-modifying-pages">Creating and modifying pages</a><ul>
+<li><a href="#registering-for-an-account">Registering for an account</a></li>
+<li><a href="#editing-a-page">Editing a page</a></li>
+<li><a href="#page-metadata">Page metadata</a></li>
+<li><a href="#creating-a-new-page">Creating a new page</a></li>
+<li><a href="#reverting-to-an-earlier-version">Reverting to an earlier version</a></li>
+<li><a href="#deleting-a-page">Deleting a page</a></li>
+</ul></li>
+<li><a href="#uploading-files">Uploading files</a></li>
+<li><a href="#markdown">Markdown</a><ul>
+<li><a href="#wiki-links">Wiki links</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="navigating">Navigating</h1>
+<p>The most natural way of navigating is by clicking wiki links that connect one page with another. The “Front page” link in the navigation bar will always take you to the Front Page of the wiki. The “All pages” link will take you to a list of all pages on the wiki (organized into folders if directories are used). Alternatively, you can search using the search box. Note that the search is set to look for whole words, so if you are looking for “gremlins”, type that and not “gremlin”. The “go” box will take you directly to the page you type.</p>
+<h1 id="creating-and-modifying-pages">Creating and modifying pages</h1>
+<h2 id="registering-for-an-account">Registering for an account</h2>
+<p>In order to modify pages, you’ll need to be logged in. To register for an account, just click the “register” button in the bar on top of the screen. You’ll be asked to choose a username and a password, which you can use to log in in the future by clicking the “login” button. While you are logged in, these buttons are replaced by a “logout so-and-so” button, which you should click to log out when you are finished.</p>
+<p>Note that logins are persistent through session cookies, so if you don’t log out, you’ll still be logged in when you return to the wiki from the same browser in the future.</p>
+<h2 id="editing-a-page">Editing a page</h2>
+<p>To edit a page, just click the “edit” button at the bottom right corner of the page.</p>
+<p>You can click “Preview” at any time to see how your changes will look. Nothing is saved until you press “Save.”</p>
+<p>Note that you must provide a description of your changes. This is to make it easier for others to see how a wiki page has been changed.</p>
+<h2 id="page-metadata">Page metadata</h2>
+<p>Pages may optionally begin with a metadata block. Here is an example:</p>
+<pre><code>---
+format: latex+lhs
+categories: haskell math
+toc: no
+title: Haskell and
+  Category Theory
+...
+
+\section{Why Category Theory?}</code></pre>
+<p>The metadata block consists of a list of key-value pairs, each on a separate line. If needed, the value can be continued on one or more additional line, which must begin with a space. (This is illustrated by the “title” example above.) The metadata block must begin with a line <code>---</code> and end with a line <code>...</code> optionally followed by one or more blank lines.</p>
+<p>Currently the following keys are supported:</p>
+<dl>
+<dt>format</dt>
+<dd>Overrides the default page type as specified in the configuration file. Possible values are <code>markdown</code>, <code>rst</code>, <code>latex</code>, <code>html</code>, <code>markdown+lhs</code>, <code>rst+lhs</code>, <code>latex+lhs</code>. (Capitalization is ignored, so you can also use <code>LaTeX</code>, <code>HTML</code>, etc.) The <code>+lhs</code> variants indicate that the page is to be interpreted as literate Haskell. If this field is missing, the default page type will be used.
+</dd>
+<dt>categories</dt>
+<dd>A space or comma separated list of categories to which the page belongs.
+</dd>
+<dt>toc</dt>
+<dd>Overrides default setting for table-of-contents in the configuration file. Values can be <code>yes</code>, <code>no</code>, <code>true</code>, or <code>false</code> (capitalization is ignored).
+</dd>
+<dt>title</dt>
+<dd>By default the displayed page title is the page name. This metadata element overrides that default.
+</dd>
+</dl>
+<h2 id="creating-a-new-page">Creating a new page</h2>
+<p>To create a new page, just create a wiki link that links to it, and click the link. If the page does not exist, you will be editing it immediately.</p>
+<h2 id="reverting-to-an-earlier-version">Reverting to an earlier version</h2>
+<p>If you click the “history” button at the bottom of the page, you will get a record of previous versions of the page. You can see the differences between two versions by dragging one onto the other; additions will be highlighted in yellow, and deletions will be crossed out with a horizontal line. Clicking on the description of changes will take you to the page as it existed after those changes. To revert the page to the revision you’re currently looking at, just click the “revert” button at the bottom of the page, then “Save”.</p>
+<h2 id="deleting-a-page">Deleting a page</h2>
+<p>The “delete” button at the bottom of the page will delete a page. Note that deleted pages can be recovered, since a record of them will still be accessible via the “activity” button on the top of the page.</p>
+<h1 id="uploading-files">Uploading files</h1>
+<p>To upload a file–a picture, a PDF, or some other resource–click the “upload” button in the navigation bar. You will be prompted to select the file to upload. As with edits, you will be asked to provide a description of the resource (or of the change, if you are overwriting an existing file).</p>
+<p>Often you may leave “Name on wiki” blank, since the existing name of the file will be used by default. If that isn’t desired, supply a name. Note that uploaded files <em>must</em> include a file extension (e.g. <code>.pdf</code>).</p>
+<p>If you are providing a new version of a file that already exists on the wiki, check the box “Overwrite existing file.” Otherwise, leave it unchecked.</p>
+<p>To link to an uploaded file, just use its name in a regular wiki link. For example, if you uploaded a picture <code>fido.jpg</code>, you can insert the picture into a (markdown-formatted) page as follows: <code>![fido](fido.jpg)</code>. If you uploaded a PDF <code>projection.pdf</code>, you can insert a link to it using: <code>[projection](projection.pdf)</code>.</p>
+<h1 id="markdown">Markdown</h1>
+<p>This wiki’s pages are written in <a href="http://johnmacfarlane.net/pandoc">pandoc</a>’s extended form of <a href="https://daringfireball.net/projects/markdown">markdown</a>. If you’re not familiar with markdown, you should start by looking at the <a href="https://daringfireball.net/projects/markdown/basics">markdown “basics” page</a> and the <a href="https://daringfireball.net/projects/markdown/syntax">markdown syntax description</a>. Consult the <a href="http://johnmacfarlane.net/pandoc/README.html">pandoc User’s Guide</a> for information about pandoc’s syntax for footnotes, tables, description lists, and other elements not present in standard markdown.</p>
+<p>Markdown is pretty intuitive, since it is based on email conventions. Here are some examples to get you started:</p>
+<table>
+<tbody><tr>
+<td>
+<code>*emphasized text*</code>
+</td>
+<td>
+<em>emphasized text</em>
+</td>
+</tr>
+<tr>
+<td>
+<code>**strong emphasis**</code>
+</td>
+<td>
+<strong>strong emphasis</strong>
+</td>
+</tr>
+<tr>
+<td>
+<code>`literal text`</code>
+</td>
+<td>
+<code>literal text</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>\*escaped special characters\*</code>
+</td>
+<td>
+*escaped special characters*
+</td>
+</tr>
+<tr>
+<td>
+<code>[external link](http://google.com)</code>
+</td>
+<td>
+<a href="https://google.com/">external link</a>
+</td>
+</tr>
+<tr>
+<td>
+<code>![folder](/img/icons/folder.png)</code>
+</td>
+<td>
+<img src="folder.png" alt="folder">
+</td>
+</tr>
+<tr>
+<td>
+Wikilink: <code>[Front Page]()</code>
+</td>
+<td>
+Wikilink: <a href="index.html" title="Go to wiki page">Front Page</a>
+</td>
+</tr>
+<tr>
+<td>
+<code>H~2~O</code>
+</td>
+<td>
+H<sub>2</sub>O
+</td>
+</tr>
+<tr>
+<td>
+<code>10^100^</code>
+</td>
+<td>
+10<sup>100</sup>
+</td>
+</tr>
+<tr>
+<td>
+<code>~~strikeout~~</code>
+</td>
+<td>
+<del>strikeout</del>
+</td>
+</tr>
+<tr>
+<td>
+<code>$x = \frac{{ - b \pm \sqrt {b^2 - 4ac} }}{{2a}}$</code>
+</td>
+<td>
+<span class="math inline">\(x = \frac{{ - b \pm \sqrt {b^2 - 4ac} }}{{2a}}\)</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+</td>
+</tr>
+<tr>
+<td>
+<code>A simple footnote.^[Or is it so simple?]</code>
+</td>
+<td>
+A simple footnote.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+</td>
+</tr>
+<tr>
+<td>
+<pre>&gt; an indented paragraph,
+&gt; usually used for quotations
+</pre>
+</td>
+<td>
+<blockquote>
+<p>an indented paragraph, usually used for quotations</p>
+</blockquote>
+</td>
+</tr><tr>
+<td>
+<pre>    #!/bin/sh -e
+    # code, indented four spaces
+    echo "Hello world"
+</pre>
+</td>
+<td>
+<pre><code>#!/bin/sh -e
+# code, indented four spaces
+echo "Hello world"</code></pre>
+</td>
+</tr>
+<tr>
+<td>
+<pre>* a bulleted list
+* second item
+    - sublist
+    - and more
+* back to main list
+    1. this item has an ordered
+    2. sublist
+        a) you can also use letters
+        b) another item
+</pre>
+</td>
+<td>
+<ul>
+<li>a bulleted list</li>
+<li>second item
+<ul>
+<li>sublist</li>
+<li>and more</li>
+</ul></li>
+<li>back to main list
+<ol type="1">
+<li>this item has an ordered</li>
+<li>sublist
+<ol type="a">
+<li>you can also use letters</li>
+<li>another item</li>
+</ol></li>
+</ol></li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+<pre>Fruit        Quantity
+--------  -----------
+apples         30,200
+oranges         1,998
+pears              42
+
+Table:  Our fruit inventory
+</pre>
+</td>
+<td>
+<table>
+<caption>Our fruit inventory</caption>
+<thead>
+<tr class="header">
+<th style="text-align:left">Fruit</th>
+<th style="text-align:right">Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align:left">apples</td>
+<td style="text-align:right">30,200</td>
+</tr>
+<tr class="even">
+<td style="text-align:left">oranges</td>
+<td style="text-align:right">1,998</td>
+</tr>
+<tr class="odd">
+<td style="text-align:left">pears</td>
+<td style="text-align:right">42</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table><table></table>
+<p>For headings, prefix a line with one or more <code>#</code> signs: one for a major heading, two for a subheading, three for a subsubheading. Be sure to leave space before and after the heading.</p>
+<pre><code># Markdown
+
+Text...
+
+## Some examples...
+
+Text...</code></pre>
+<h2 id="wiki-links">Wiki links</h2>
+<p>Links to other wiki pages are formed this way: <code>[Page Name]()</code>. (Gitit converts markdown links with empty targets into wikilinks.)</p>
+<p>To link to a wiki page using something else as the link text: <code>[something else](Page Name)</code>.</p>
+<p>Note that page names may contain spaces and some special characters. They need not be CamelCase. CamelCase words are <em>not</em> automatically converted to wiki links.</p>
+<p>Wiki pages may be organized into directories. So, if you have several pages on wine, you may wish to organize them like so:</p>
+<pre><code>Wine/Pinot Noir
+Wine/Burgundy
+Wine/Cabernet Sauvignon</code></pre>
+<p>Note that a wiki link <code>[Burgundy]()</code> that occurs inside the <code>Wine</code> directory will link to <code>Wine/Burgundy</code>, and not to <code>Burgundy</code>. To link to a top-level page called <code>Burgundy</code>, you’d have to use <code>[Burgundy](/Burgundy)</code>.</p>
+<p>To link to a directory listing for a subdirectory, use a trailing slash: <code>[Wine/]()</code> will link to a listing of the <code>Wine</code> subdirectory.</p>
+<section class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>If this looks like code, it’s because jsMath is not installed on your system. Contact your administrator to request it.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Or is it so simple?<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</section></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Help">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Help?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Help">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Help" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

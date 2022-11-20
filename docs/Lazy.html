@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Lazy"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Lazy</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Lazy">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Lazy">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Lazy">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Lazy</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#lazy"><span>Lazy</span></a><ul>
+<li><a href="#lazy-evaluation-%E6%80%A0%E3%81%91%E8%80%85%E8%A9%95%E4%BE%A1%E9%81%85%E5%BB%B6%E8%A9%95%E4%BE%A1%E3%81%A3%E3%81%A6">Lazy Evaluation 怠け者評価(遅延評価)って？</a></li>
+<li><a href="#haskell-%E3%81%AE-lazy-evaluation-%E3%82%92%E8%BF%BD%E3%81%84%E3%81%8B%E3%81%91%E3%82%8B">Haskell の Lazy Evaluation を追いかける</a></li>
+<li><a href="#%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E3%81%84%E3%81%9F%E3%81%9A%E3%82%89">ちょっといたずら</a></li>
+<li><a href="#%E3%82%82%E3%81%A3%E3%81%A8%E3%81%84%E3%81%9F%E3%81%9A%E3%82%89">もっといたずら</a></li>
+<li><a href="#%E7%A9%B6%E6%A5%B5%E3%81%AE%E3%81%84%E3%81%9F%E3%81%9A%E3%82%89-20041112">究極(?)のいたずら (2004/11/12)</a></li>
+<li><a href="#samefringe-problem">samefringe problem</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="lazy"><a href="" class="uri" title="Go to wiki page">Lazy</a></h1>
+<hr>
+<p>Lazy Evaluation、怠け者評価、遅延評価の話題</p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/Lazy%20Evaluation%20%e6%80%a0%e3%81%91%e8%80%85%e8%a9%95%e4%be%a1(%e9%81%85%e5%bb%b6%e8%a9%95%e4%be%a1)%e3%81%a3%e3%81%a6%ef%bc%9f" title="Go to wiki page">Lazy Evaluation 怠け者評価(遅延評価)って？</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/Haskell%20%e3%81%ae%20Lazy%20Evaluation%20%e3%82%92%e8%bf%bd%e3%81%84%e3%81%8b%e3%81%91%e3%82%8b" title="Go to wiki page">Haskell の Lazy Evaluation を追いかける</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%81%a1%e3%82%87%e3%81%a3%e3%81%a8%e3%81%84%e3%81%9f%e3%81%9a%e3%82%89" class="uri" title="Go to wiki page">ちょっといたずら</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%82%e3%81%a3%e3%81%a8%e3%81%84%e3%81%9f%e3%81%9a%e3%82%89" class="uri" title="Go to wiki page">もっといたずら</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%a9%b6%e6%a5%b5(?)%e3%81%ae%e3%81%84%e3%81%9f%e3%81%9a%e3%82%89%20(2004/11/12)" title="Go to wiki page">究極(?)のいたずら (2004/11/12)</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/samefringe%20problem" title="Go to wiki page">samefringe problem</a></li>
+</ul>
+<h3 id="lazy-evaluation-怠け者評価遅延評価って">Lazy Evaluation 怠け者評価(遅延評価)って？</h3>
+<p>子供の頃(今でも？)、「他人にやれと言われる前に自分から、さっさとやりな さい。」などと言われませんでしたか？一般社会では、普通に会社や組織に所 属して他人に雇用されているときには、これが常識でしょう。</p>
+<p>コンピュータプログラムの世界でも同じで、計算はできるだけ前もって済ませ ておくというのが普通らしいです。関数に渡すにもまず、ちゃんと値を計算し て渡す。根がまじめで人がいいので、渡した値が実は使われないかもしれない なんて、疑ったりはしないのね。</p>
+<p>でもね、Haskellでは、評価は必要になって、尻をたたかれないかぎり、やり ません。前もってやっておくなんて「信〜じられな〜い」。これをLazy Evaluationといったりします。</p>
+<p>いわれて始めて仕事を始めるというやつですね。しかも、いわれた分だけしか やらないというやつですね。</p>
+<p>Haskellでプログラムを書き、それを走らせることができています。というこ とは、どこかで、最初に要求を出すやつがいて、そいつが要求を出して、計算 がはじまり、それが連鎖して、計算が継続され、最初の要求に答えたら計算が 終るということがおこっていると考えられますね。</p>
+<h3 id="haskell-の-lazy-evaluation-を追いかける">Haskell の Lazy Evaluation を追いかける</h3>
+<p>Haskellのプログラムは、どのような契機で評価が開始され、どのように評価 が進み、どこまで評価が到達するのでしょう？</p>
+<p>単純な計算で、遅延評価を追いかけてみましょう。</p>
+<p>Hugs の対話型インタープリタを起動しましょう。</p>
+<pre><code>% hugs
+Prelude&gt; </code></pre>
+<p>対話型のインタープリタにプロンプトが出たましたね。このとき、インタープ リタは何か要求されるのを待っている状態です。さて、今、1 + 1 の結果が知 りたいとしましょう。</p>
+<pre><code>Prelude&gt; 1 + 1
+2
+Prelude&gt;</code></pre>
+<p>答の 2 が表示されましたね。なにが起こったのか詳細に考えていきましょう。</p>
+<ul>
+<li>1 + 1 とタイプして、リターンキーを押した</li>
+</ul>
+<p>これは、インタープリタに対する「1 + 1 の結果を印字(PRINT)せよ」という 要求です。処理系は、この要求を理解するために、準備処理をします。いまは、 この準備処理については詳しく考えません(要するに、1 + 2 というデータを、 内部的なプログラムの表現に変換します。その際、入力が Haskell のプログ ラムとして正しいかどうかをチェックします)。</p>
+<p>次に、インタープリタは</p>
+<ul>
+<li>印字ルーチン print に入力渡して、結果を印字するように要求</li>
+</ul>
+<p>で print は、文字列を出力するルーチン putStr を使って、印字を実行する のですが、putStr は文字列しか扱えません。文字列を完全に使える状態にし て出力がおこなわれます。データを文字列に変換する関数は show です。</p>
+<pre><code>show (1 + 1)</code></pre>
+<p>を「評価をする」というのが出発点です。</p>
+<p>一般には Int型に対する show の定義はちょっと複雑ですが、以下のような定 義と同等と、今は、考えてください(ここの説明では、 1 + 2 の結果がInt 型 であることを暗黙の前提としています)。</p>
+<pre><code>show = \ i -&gt;  case i of
+                 0  -&gt; "0"
+                 1  -&gt; "1" 
+                 2  -&gt; "2"
+                 ...</code></pre>
+<p>さて、</p>
+<pre><code>show (1 + 1)</code></pre>
+<p>の評価ですが、どこまで評価するかというと、 WHNF になったら評価がおわり ます。WHNF というのは、乱暴にいうと一番外側(の一番左)にデータコンスト ラクタが出てきた形、または、 λが出てきた形です。</p>
+<p>さて、show (1 + 1) は WHNF でしょうか？違いますね。関数適用ですね。関 数適用を評価するには、まず関数部分を評価します。そして出てきた、λ式の body 部にある仮引数を、実引数で置き換えます。</p>
+<pre><code>show を評価
+==&gt; \ i -&gt; case i of 
+              0 -&gt; "0"
+              1 -&gt; "1"
+              2 -&gt; "2"
+              ...</code></pre>
+<p>いちばん外の左に、λがでてきましたね。ですから、show の評価はこれでお しまい。出てきた、λ式の body 部にある仮引数を、実引数で置き換えます。</p>
+<pre><code>仮引数を実引数でおきかえる
+
+==&gt; case (1 + 1) of 
+      0 -&gt; "0"
+      1 -&gt; "1"
+      2 -&gt; "2"
+      ...</code></pre>
+<p>で、ここで、case 式の簡約ですが、</p>
+<pre><code>case expr of
+  pat1 -&gt; expr1
+  pat2 -&gt; expr2
+  ...</code></pre>
+<p>とある場合、この式は pat_n で照合ができるようになるまで、 expr を評価 し、適合したパターンの後にある式に簡約されます。もし、expr が pat_2 と 適合したら、この case 式全体は、expr2 に簡約されます。</p>
+<p>そこで、次に、1 + 1 の評価を行います。</p>
+<p>Int 型に対する + は通常、組込みです。 (x + y)という式を評価すると + は x 、y を共に評価してから、足し算をして、その結果を返します。</p>
+<p>仮想的には以下のように定義されていると思ってください。</p>
+<pre><code>(+) :: Int -&gt; Int -&gt; Int
+(+) = \ i -&gt; \ j -&gt; case i of
+                      0 -&gt; j
+                      1 -&gt; case j of 
+                             0 -&gt; 1
+                             1 -&gt; 2
+                             ...
+                      ...</code></pre>
+<p>というわけで、1 + 1 の評価結果は 2 です。さて、show の計算のとことで、 (1 + 1) が評価されて 2 になったので show のなかの case 式のパターンマッチ</p>
+<pre><code>   2 → "2" </code></pre>
+<p>によって、show (1 + 1) の値として、“2” が選択されます。これが putStr に渡って、2 が印字されるというわけです。</p>
+<p>これで、インタープリタが 1 + 1 を評価する時の動きを追いかけられました</p>
+<p>要点は、</p>
+<ul>
+<li>最初の部分は特別だか、それ以外では評価は WHNF が要求されると行なわれる</li>
+<li>WHNF を要求するのは、case 式のパターンマッチだ</li>
+<li>Lazy Evaluation をまじめに追跡するのは難しい</li>
+</ul>
+<p>ということです。</p>
+<h3 id="ちょっといたずら">ちょっといたずら</h3>
+<p>インタープリタに、1 + (error “hoge”) というのを評価させてみましょう。 (Hugs のシステムには評価のようすをトレースする機能がないので、手でなに かに書きながら追い掛けます。)</p>
+<pre><code>Prelude&gt; 1 + (error "hoge")
+
+Program error: hoge</code></pre>
+<p>error “hoge” は評価されるとエラーを起します。これはどの段階でエラーを起したのでしょう。これは、</p>
+<pre><code>show (1 + (error "hoge"))
+
+==&gt; (\ i -&gt; case i of 
+              0 -&gt; "0"
+              1 -&gt; "1"
+              ...)
+    (1 + (error "hoge"))
+==&gt; case (1 + (error "hoge")) of
+      0 -&gt; "0"
+      1 -&gt; "1"
+      ...</code></pre>
+<p>パターンマッチのために、1 + (error “hoge”) を簡約</p>
+<pre><code>  ==&gt; (\ i -&gt; \ j -&gt; case i of
+                       0 -&gt; j
+                       1 -&gt; case j of 
+                              0 -&gt; 1
+                              1 -&gt; 2
+                              ...
+                       ...
+       ) 1 (error "hoge")
+  ==&gt; case 1 of
+        0 -&gt; j
+        1 -&gt; case (error "hoge") of
+               0 -&gt; 1
+               1 -&gt; 2
+               ...
+        ...</code></pre>
+<p>最初のパターンマッチを行うために、1 が評価され、パターンマッチの結果</p>
+<pre><code>  ==&gt; case (error "hoge") of
+        0 -&gt; 1
+        1 -&gt; 2
+        ...</code></pre>
+<p>となる。このパターンマッチを行うために、error “hoge” が評価するところ でエラーが起きます。</p>
+<h3 id="もっといたずら">もっといたずら</h3>
+<p>上のエラーの契機は、show (1 + (error “hoge”)) の評価を行うときに (1 + (error “hoge”) の評価を行う際に、ありました。 + が引数を2つとも必ず評 価する関数だからですね。</p>
+<p>では、+ のかわりに、次のように定義された k という関数をつかってみましょう。</p>
+<pre><code>k :: Int -&gt; Int -&gt; Int
+k = \ x -&gt; \ y -&gt; x + 1</code></pre>
+<p>こんなふうに定義して、hoge.hs にセーブしたものを読み込んで、 1 `k` (error “hoge”) を評価してみましょう。</p>
+<pre><code>Prelude&gt; :load hoge.hs
+Main&gt; 1 `k` (error "hoge")
+2</code></pre>
+<p>今度はエラーが起りませんね。つまり、error “hoge” は評価されていないわ けです。追いかけてみましょう。</p>
+<pre><code>show (1 `k` (error "hoge"))
+
+==&gt; (\ i -&gt; case i of
+              0 -&gt; "0"
+              1 -&gt; "1"
+              2 -&gt; "2"
+              ...
+    ) (1 `k` (error "hoge"))
+==&gt; case (1 `k` (error "hoge")) of
+      0 -&gt; "0"
+      1 -&gt; "1"
+      2 -&gt; "2"
+      ...</code></pre>
+<p>パターンマッチのために、1 `k` (error “hoge”) を評価</p>
+<pre><code>==&gt; (\ x -&gt; y -&gt; x + 1) 1 (error "hoge")
+==&gt; 1 + 1
+==&gt; 2</code></pre>
+<p>というわけで、(error “hoge”)は評価されなかったわけで、エラーは起きない というわけですね。</p>
+<h3 id="究極のいたずら-20041112">究極(?)のいたずら (2004/11/12)</h3>
+<p>対話型のインタープリタ内で、プロンプトに対して式 exp を入力すると、そ の式の入力の値を印字しようとして、評価が進むといいましたよね。印字のルー チン (print)内で、show exp が返す値を完全に評価された文字列にしようと することで、評価が進みます。では、show が完全な文字列をつくるのに exp を評価しなくてもいいことになっていればどうでしょう。ちょっと解りにくい ですが、とりあえず実験してみましょう。</p>
+<p>hugs98-Nov2003 をソースからデフォルトの設定のまま(すなわち、configure スクリプトをオプションなしで)インストールしたと仮定して説明します。こ の場合、/usr/local/lib/hugs/libraries/Hugs/ に、Prelude.hs がインストー ルされています。これの 299行目あたり</p>
+<pre><code>instance Show Int where
+    showsPrec   = primShowsInt</code></pre>
+<p>となっているところを</p>
+<pre><code>instance Show Int where
+--    showsPrec   = primShowsInt
+    showsPrec _ _ _ = "&lt;Int&gt;"</code></pre>
+<p>と書き換えてください。これは何をやったかというと、Int 型の値を文字列 (String型)の値に変換する関数を定義を、与えられた Int 型の値にかかわら ず(つまり評価することなく)単に、“&lt;Int&gt;”とという文字列を返すように変更 を施しています。</p>
+<p>さて、これで、hugs インタープリタを起動して、実験です。まず、プロンプ トから length [1,2,3] を入力してみましょう。まずは、予想をして、何が印 字されるでしょう。</p>
+<p>length [1,2,4] を評価すると 3 になるはずですよね。</p>
+<pre><code>Prelude&gt; length [1,2,4]
+"&lt;Int&gt;"</code></pre>
+<p>length の型は、[a] -&gt; Int なので、lenght [1,2,4] の値は Int 型です。先 程の変更が効果を発揮して、&lt;Int&gt; が印字されています。</p>
+<p>では、length [1,2,4] は評価されたのでしょうか。これだけではわかりませ んね。どうしたら解るでしょう？ length [1,2,4] が評価されたとすると、 length の定義から、引数のリストを最後まで辿って、要素の数を特定してい るはずですね。そこで最後まで辿りきれない無限リスト[1..] を length に渡 してみましょう。</p>
+<pre><code>Prelude&gt; length [1..]
+&lt;Int&gt;</code></pre>
+<p>ちゃんとプロンプトが返ってきますね。つまり、lenght [1..] は評価されて いないのです。</p>
+<p>なぜでしょう。それは、Int型に対する show 関数がその引数の値を使ってい ないからです。すなわち、Int型を印字するのに、Int型の値を必要としないよ うに書換えてしまったからです。length [1..] の値が Int 型であることを知 るのに length [1..] を評価する必要がないことを思い出してください。</p>
+<p>length [1,2,4] + error “hoge” をプロンプトから入力してみましょう。</p>
+<pre><code>Prelude&gt; length [1,2,4] + error "hoge"
+&lt;Int&gt;</code></pre>
+<p>これもエラーは発生しません。さらに、</p>
+<pre><code>Prelude&gt; error "hoge" :: Int
+&lt;Int&gt;</code></pre>
+<p>これでさえ大丈夫です。もちろん、ちゃんと length [1..] を評価するとそれ は停止しません。確かめてみましょう。</p>
+<pre><code>Prelude&gt; take (length [1,2,4]) "The Haskell Language"
+"The"
+Prelude&gt; take (length [1..]) "The Haskell Language"
+"{Interrupted!}</code></pre>
+<p>“{Interrupted!} は実行を Ctrl-C で止めたときに出たものです。 length [1,2,4] + error”hoge" はちゃんと評価すると、もちろんエラーになります。</p>
+<pre><code>Prelude&gt; take (length [1,2,4] + error "hoge") "The Haskell Language"
+"
+Program error: hoge</code></pre>
+<p><strong>究極の実験の後始末を忘れないようにしましょう。無茶な変更を加えたところを元にもどしておきましょう。忘れると変なところで、ワケワカなことになりますからね。</strong></p>
+<h3 id="samefringe-problem">samefringe problem</h3>
+<p><a href="http://d.hatena.ne.jp/Uuutokuda/20051115/1132069191">Uuutokudaの日記(2005-11-15)</a>より</p>
+<p>Haskell なら単に fringe を比べればいいだけだよーん．</p>
+<pre><code>data Tree a = Leaf a | Branch [Tree a]
+
+fringe :: Tree a -&gt; [a]
+fringe (Leaf x)    = [x]
+fringe (Branch cs) = foldr ((++) . fringe) [] cs
+
+samefringe :: Eq a =&gt; Tree a -&gt; Tree a -&gt; Bool
+samefringe t u = fringe t == fringe u</code></pre>
+<hr>
+<p>Last modified : 2006/11/22 22:35:38 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Lazy">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Lazy?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Lazy">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Lazy" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

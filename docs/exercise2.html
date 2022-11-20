@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise2"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/StartHaskell2/exercise2</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/StartHaskell2/exercise2">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/StartHaskell2/exercise2">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/StartHaskell2/exercise2">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/StartHaskell2/exercise2</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E5%9E%8B%E3%82%92%E4%BF%A1%E3%81%98%E3%82%8D%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C">『型を信じろ！』　練習問題</a><ul>
+<li><a href="#%E5%9E%8B%E3%81%AE%E6%84%8F%E5%91%B3">型の意味</a></li>
+<li><a href="#%E5%9E%8B%E3%82%92%E8%80%83%E3%81%88%E3%82%88%E3%81%86">型を考えよう</a></li>
+<li><a href="#%E6%95%B0%E5%AD%97%E3%81%AE%E5%9E%8B%E3%82%AF%E3%83%A9%E3%82%B9">数字の型クラス</a></li>
+<li><a href="#%E5%9E%8B%E3%81%8B%E3%82%89%E5%8B%95%E3%81%8D%E3%82%92%E8%80%83%E3%81%88%E3%82%8B">型から動きを考える</a></li>
+<li><a href="#hoogle%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86">hoogleを使ってみよう</a></li>
+<li><a href="#%E4%B8%8E%E3%81%88%E3%82%89%E3%81%88%E3%81%9F%E5%9E%8B%E3%81%8B%E3%82%89%E5%80%A4%E3%82%92%E6%83%B3%E5%83%8F%E3%81%97%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86">与えらえた型から値を想像してみよう</a></li>
+<li><a href="#%E4%B8%8E%E3%81%88%E3%82%89%E3%81%88%E3%81%9F%E5%9E%8B%E3%81%8B%E3%82%89%E5%80%A4%E3%82%92%E6%83%B3%E5%83%8F%E3%81%97%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86-1">与えらえた型から値を想像してみよう２．</a></li>
+<li><a href="#%E5%9E%8B%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%92%E6%8E%A2%E3%81%9D%E3%81%86">型クラスのインスタンスを探そう</a></li>
+<li><a href="#bounded%E3%82%AF%E3%83%A9%E3%82%B9">Boundedクラス</a></li>
+<li><a href="#%E5%9E%8B%E3%82%92%E5%A4%89%E3%81%88%E3%82%8B%E3%81%A0%E3%81%91%E3%81%A7%E5%8B%95%E3%81%8D%E3%81%8C%E5%A4%89%E3%82%8F%E3%82%8B">型を変えるだけで動きが変わる</a></li>
+<li><a href="#%E5%9E%8B%E3%82%A8%E3%83%A9%E3%83%BC">型エラー</a></li>
+<li><a href="#%E5%9E%8B%E5%A4%89%E6%8F%9B">型変換</a></li>
+<li><a href="#%E5%9E%8B%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%92%E7%9B%B4%E3%81%99">型エラーを直す</a></li>
+</ul></li>
+<li><a href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C%E3%83%AA%E3%83%B3%E3%82%AF%E9%9B%86">練習問題リンク集</a></li>
+</ul>
+</div>
+
+<h1 id="型を信じろ練習問題">『型を信じろ！』　練習問題</h1>
+<h2 id="型の意味">型の意味</h2>
+<p>null関数の型はこんな感じです。これはどういう意味でしたか。(p.24)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1">ghci<span class="fu">&gt;</span> <span class="fu">:</span>t <span class="fu">null</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">null</span><span class="ot"> ::</span> [a] <span class="ot">-&gt;</span> <span class="dt">Bool</span></a></code></pre></div>
+<p>数字の絶対値をとる関数absはこんな感じです。どういう意味でしたか。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">abs</span><span class="ot"> ::</span> <span class="dt">Num</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a</a></code></pre></div>
+<p>またtake関数の型はどうでしょうか。</p>
+<hr>
+<h2 id="型を考えよう">型を考えよう</h2>
+<p>次の値の型は何ですか？</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ch">'a'</span></a>
+<a class="sourceLine" id="cb3-2" title="2">[<span class="ch">'a'</span>, <span class="ch">'b'</span>, <span class="ch">'c'</span>]</a>
+<a class="sourceLine" id="cb3-3" title="3">(<span class="ch">'a'</span>, <span class="ch">'b'</span>, <span class="ch">'c'</span>)</a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="ch">'a'</span> <span class="fu">==</span> <span class="ch">'a'</span></a>
+<a class="sourceLine" id="cb3-5" title="5">(<span class="st">"Hello"</span>, <span class="st">"world!"</span>)</a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="dv">100</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="fu">show</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="fu">take</span> <span class="dv">3</span> [<span class="dv">1</span><span class="fu">..</span>]</a>
+<a class="sourceLine" id="cb3-9" title="9">[(<span class="dt">False</span>, <span class="ch">'o'</span>), (<span class="dt">True</span>, <span class="ch">'1'</span>)]</a>
+<a class="sourceLine" id="cb3-10" title="10">([<span class="dt">False</span>, <span class="dt">True</span>], [<span class="ch">'0'</span>, <span class="ch">'1'</span>])</a>
+<a class="sourceLine" id="cb3-11" title="11">[<span class="fu">init</span> , <span class="fu">tail</span> , <span class="fu">reverse</span>]</a></code></pre></div>
+<p>次の関数の型は何ですか？</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1">second xs <span class="fu">=</span> <span class="fu">head</span> (<span class="fu">tail</span> xs)</a>
+<a class="sourceLine" id="cb4-2" title="2">swap (x, y) <span class="fu">=</span> (y, x)</a>
+<a class="sourceLine" id="cb4-3" title="3">pair x y <span class="fu">=</span> (x, y)</a>
+<a class="sourceLine" id="cb4-4" title="4">double x <span class="fu">=</span> x <span class="fu">*</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-5" title="5">palindrome xs <span class="fu">=</span> <span class="fu">reverse</span> xw <span class="fu">==</span> xs</a>
+<a class="sourceLine" id="cb4-6" title="6">twice f x <span class="fu">=</span> f (f x)</a></code></pre></div>
+<p>上の答えを、ghci を使って確かめましょう。</p>
+<hr>
+<h2 id="数字の型クラス">数字の型クラス</h2>
+<p>以下の２つの式の型は同じですか、異なりますか。何故ですか。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="dv">10</span> <span class="fu">*</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="dv">1000</span> <span class="fu">/</span> <span class="dv">10</span></a></code></pre></div>
+<p>（ヒント： * と / の型を調べてみよう）</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1">ghci<span class="fu">&gt;</span> <span class="fu">:</span>t (<span class="fu">*</span>)</a></code></pre></div>
+<hr>
+<h2 id="型から動きを考える">型から動きを考える</h2>
+<p>以下の関数がどういう動きをするか、型から想像できますか。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">id</span><span class="ot">        ::</span> a <span class="ot">-&gt;</span> a</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="fu">splitAt</span><span class="ot">   ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> ([a],[a])</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="fu">takeWhile</span><span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]</a></code></pre></div>
+<hr>
+<h2 id="hoogleを使ってみよう">hoogleを使ってみよう</h2>
+<p>succ関数とは反対に、ひとつ前の値を返す関数は何ですか。（ヒント：<a href="https://www.haskell.org/hoogle/">Hoogle</a>で型を検索してみよう）</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">succ</span><span class="ot"> ::</span> <span class="dt">Enum</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a</a></code></pre></div>
+<hr>
+<h2 id="与えらえた型から値を想像してみよう">与えらえた型から値を想像してみよう</h2>
+<p>ある日、ghciを使って遊んでいて以下のような結果が得られました。</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1"><span class="dt">Prelude</span><span class="fu">&gt;</span> <span class="fu">:</span>t <span class="dt">XXX</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="dt">XXX</span><span class="ot"> ::</span> <span class="dt">Num</span> t <span class="ot">=&gt;</span> [(t, [a] <span class="ot">-&gt;</span> a)]</a></code></pre></div>
+<p>ところがXXXの部分を覚えていません。 XXXはどのような式になるでしょうか。 (答は一つではありません)</p>
+<hr>
+<h2 id="与えらえた型から値を想像してみよう-1">与えらえた型から値を想像してみよう２．</h2>
+<p>以下の型になる式を探してみよう。</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" title="1">[<span class="dt">Char</span>]</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="dt">Integer</span></a>
+<a class="sourceLine" id="cb10-3" title="3">[<span class="dt">Double</span>]</a>
+<a class="sourceLine" id="cb10-4" title="4">(a, b, c)</a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="dt">Num</span> a <span class="ot">=&gt;</span> a</a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="dt">Num</span> a <span class="ot">=&gt;</span> [a]</a>
+<a class="sourceLine" id="cb10-7" title="7">(a, a)</a></code></pre></div>
+<hr>
+<h2 id="型クラスのインスタンスを探そう">型クラスのインスタンスを探そう</h2>
+<p>Eq クラスに属する型にはどんなものがありますか。 (ヒント：<a href="https://www.haskell.org/hoogle/">Hoogle</a>で Eq を検索してみよう)</p>
+<p>また Eq クラスと Show クラスの両方に属する型はありますか。</p>
+<hr>
+<h2 id="boundedクラス">Boundedクラス</h2>
+<p>Bounded クラスに属する型を探して、その上限値を表示してみよう。 (p.32)</p>
+<hr>
+<h2 id="型を変えるだけで動きが変わる">型を変えるだけで動きが変わる</h2>
+<p>円の直径を求めるcircumference関数の型を Float -&gt; Float から Double -&gt; Double に書き換えると、値の制度が倍になります (p.25)</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" title="1"><span class="ot">circumference ::</span> <span class="dt">Float</span> <span class="ot">-&gt;</span> <span class="dt">Float</span></a>
+<a class="sourceLine" id="cb11-2" title="2">circumference r <span class="fu">=</span> <span class="dv">2</span> <span class="fu">*</span> <span class="fu">pi</span> <span class="fu">*</span> r</a></code></pre></div>
+<p>しかし, この関数の型を Int -&gt; Int に書き換えるとエラーになります。何故ですか。（ヒント： pi の型を確認してみよう）</p>
+<hr>
+<h2 id="型エラー">型エラー</h2>
+<p>以下の式は型エラーになります。何故ですか。</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" title="1"><span class="dt">Prelude</span><span class="fu">&gt;</span> (<span class="dv">1</span><span class="ot"> ::</span> <span class="dt">Int</span>) <span class="fu">+</span> (<span class="fl">1.0</span><span class="ot"> ::</span> <span class="dt">Double</span>)</a></code></pre></div>
+<p>しかし、以下の式はえらーになりません。何故ですか。(P.33)</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" title="1"><span class="dt">Prelude</span><span class="fu">&gt;</span> <span class="dv">1</span> <span class="fu">+</span> <span class="fl">1.0</span></a></code></pre></div>
+<hr>
+<h2 id="型変換">型変換</h2>
+<p>上述の問題で, Int型とDouble型は足せないことを見ました。</p>
+<p>この２つを足したいときは, 明示的に型変換をする必要があり、そのための関数が用意されています。(P.33)</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">fromIntegral</span><span class="ot"> ::</span> (<span class="dt">Num</span> b, <span class="dt">Integral</span> a) <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> b</a></code></pre></div>
+<p>この関数を使って, 1 + 1.0 をInt型として足してみましょう。</p>
+<hr>
+<h2 id="型エラーを直す">型エラーを直す</h2>
+<p>以下のプログラムにはエラーが三つある。エラーを修正し、正しく動くか確かめよ。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" title="1"><span class="dt">N</span> <span class="fu">=</span> a 'div' <span class="fu">length</span> xs</a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb15-3" title="3">    a <span class="fu">=</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb15-4" title="4">   xs <span class="fu">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</a></code></pre></div>
+<p>(プログラミングHaskell演習2-3)</p>
+<h1 id="練習問題リンク集">練習問題リンク集</h1>
+<ul>
+<li><a href="https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter04/Chapter03-ja.md">スタートHaskell 2011 型とクラス 練習問題</a></li>
+</ul></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/StartHaskell2/exercise2">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise2?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/StartHaskell2/exercise2">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise2" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

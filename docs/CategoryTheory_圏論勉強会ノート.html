@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会ノート</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会ノート</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#categorytheory_%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A%E3%83%8E%E3%83%BC%E3%83%88"><span>CategoryTheory_圏論勉強会ノート</span></a><ul>
+<li><a href="#%E3%82%B0%E3%83%A9%E3%83%95%E3%81%AE%E5%9C%8F-graph%E3%81%A7xxx%E3%82%92%E6%BA%80%E3%81%9F%E3%81%99x%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B">グラフの圏 Graphで、X×X＝Xを満たすXを求める</a></li>
+<li><a href="#test-5-%E3%81%AE-1-p.301">Test 5 の 1 (P.301)</a></li>
+<li><a href="#test-5-%E3%81%AE-2-p.301">Test 5 の 2 (P.301)</a></li>
+<li><a href="#test-4-%E3%81%AE-1-p.300">Test 4 の 1 (P.300)</a></li>
+<li><a href="#test-4-%E3%81%AE-2-p.300">Test 4 の 2 (P.300)</a></li>
+<li><a href="#test-3-%E3%81%AE-3-p.299">Test 3 の 3 (P.299)</a></li>
+<li><a href="#session-26-exercise1-p.280">Session 26 Exercise1 (P.280)</a></li>
+<li><a href="#temperley-lieb-algebra%E3%81%AEtrace">Temperley-Lieb Algebraのtrace</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="categorytheory_圏論勉強会ノート"><a href="" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会ノート</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory" class="uri" title="Go to wiki page">CategoryTheory</a>:圏論勉強会ノート</p>
+<hr>
+<p>宿題の回答など説明が長くなるものをこのページに書きます。</p>
+<hr>
+<h2 id="グラフの圏-graphでxxxを満たすxを求める">グラフの圏 Graphで、X×X＝Xを満たすXを求める</h2>
+<p>有限なグラフに限れば、以下の3通り。</p>
+<ul>
+<li>何もないグラフ</li>
+<li>点が1つだけのグラフ</li>
+<li>ループが1つだけのグラフ</li>
+</ul>
+<p>【証明】</p>
+<ul>
+<li>関手 A, D: Graph → Set を定める。(Setは集合の圏）
+<ul>
+<li>任意の対象 X について、A(X) は X の矢印部分の集合を、D(X)はXの点の部分の集合を指す。</li>
+<li>任意の X ∈ Graph に対して、Set内の射 s, t: A(X) → D(X) が常に、たかだか2つだけ存在する。</li>
+</ul></li>
+<li>Graph の object X, Y について、X × Y が存在する とは、下記2条件がともに成り立つことと同義とみなせる：
+<ul>
+<li>A(X×Y) ＝ A(X) × A(Y)</li>
+<li>D(X×Y) ＝ D(X) × D(Y)</li>
+</ul></li>
+<li>X×X＝X となる object X を仮定すると、
+<ul>
+<li>A(X×X)＝A(X)×A(X)＝A(X)</li>
+<li>D(X×X)＝D(X)×D(X)＝D(X)</li>
+</ul></li>
+<li>A(X), D(X) ∈ Set であり、かつ Set の対象で X × X ＝ X を満たす X は（有限集合なら） 0 と 1しかない。
+<ul>
+<li>∴ A(X)、D(X)＝ 0 or 1</li>
+</ul></li>
+<li>以上のA(X)とD(X)の組み合わせのうち、正しく s, t が定義できるのは次の3通り
+<ul>
+<li>(A(X), D(X)) |→ (0, 0)
+<ul>
+<li>… Xは、何もないグラフ</li>
+</ul></li>
+<li>(A(X), D(X)) |→ (0, 1)
+<ul>
+<li>… Xは、点が1つだけのグラフ</li>
+</ul></li>
+<li>(A(X), D(X)) |→ (1, 1)
+<ul>
+<li>… Xは、ループが1つだけのグラフ</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr>
+<h2 id="test-5-の-1-p.301">Test 5 の 1 (P.301)</h2>
+<p>11通り。</p>
+<ul>
+<li><a href="http://www.osk.3web.ne.jp/~usitukai/images/kenron060709/DSCN0151.JPG" class="uri">http://www.osk.3web.ne.jp/~usitukai/images/kenron060709/DSCN0151.JPG</a></li>
+<li>考え方
+<ul>
+<li>2つのarrow A, A’ とそれぞれをドメインとする射 s, t, s’, t’ を考える。
+<ul>
+<li>s＝t, s’＝t’の場合、それぞれがくっついてるか離れてるかで2通り。</li>
+<li>s＝t, s’≠t’の場合、s = s’, s = t’, とそのどちらでもないのと3通り。</li>
+<li>s≠t, s’≠t’の場合、
+<ul>
+<li>2つの点を共有する場合、s = s’ と s = t’ の2通り。</li>
+<li>1点だけ共有する場合、s = s’ と s = t’ と t = s’ の3通り。</li>
+<li>全く共有しない場合、1通り。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="test-5-の-2-p.301">Test 5 の 2 (P.301)</h2>
+<p>D ＝ ［・］ , A ＝ ［・→・］ , I ＝ ［・→・→・］</p>
+<p>I × I ＝ 2D + 2A + I</p>
+<p>なんでかっていうと、I × I はこんなの</p>
+<pre><code> ・　・　・
+ 　／　／
+ ・　・　・
+ 　／　／
+ ・　・　・</code></pre>
+<p>／ は斜め上向きの矢印。</p>
+<hr>
+<h2 id="test-4-の-1-p.300">Test 4 の 1 (P.300)</h2>
+<ul>
+<li>B×C=1 であることから、任意のobject X と f:X→B に対して B×Cへの射 は!bxc : X → B×C は uniqueに存在する。</li>
+<li>productの性質から、p1: B×C→B は常に unique に存在して、p1 o !bxc = fが常に成り立つ。</li>
+</ul>
+<p>以上から、任意のobject XからBへの射 f は必ず存在してunique。</p>
+<p>よって B＝1。</p>
+<h2 id="test-4-の-2-p.300">Test 4 の 2 (P.300)</h2>
+<ul>
+<li><ol type="a">
+<li></li>
+</ol>
+<ul>
+<li>このcategoryにおいて、1 は loop 1個。
+<ul>
+<li>1 → B＋D の数：1個
+<ul>
+<li>loopが対応するのは B の 先頭のところだけ</li>
+</ul></li>
+<li>1 → C の数：0個
+<ul>
+<li>loopが対応するのは どこにもない。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><ol type="a" start="2">
+<li></li>
+</ol>
+<ul>
+<li><a href="http://www.osk.3web.ne.jp/~usitukai/images/kenron060709/DSCN0148.JPG" class="uri">http://www.osk.3web.ne.jp/~usitukai/images/kenron060709/DSCN0148.JPG</a></li>
+</ul></li>
+<li><ol type="a" start="3">
+<li></li>
+</ol>
+<ul>
+<li><a href="http://www.osk.3web.ne.jp/~usitukai/images/kenron060709/DSCN0149.JPG" class="uri">http://www.osk.3web.ne.jp/~usitukai/images/kenron060709/DSCN0149.JPG</a></li>
+</ul></li>
+</ul>
+<hr>
+<h2 id="test-3-の-3-p.299">Test 3 の 3 (P.299)</h2>
+<p>後で書く。</p>
+<hr>
+<h2 id="session-26-exercise1-p.280">Session 26 Exercise1 (P.280)</h2>
+<ul>
+<li>f: X -&gt; A, g: X -&gt; B から定まる X -&gt; A×B の射を &lt;f,g&gt;（横ベクトルのつもり）</li>
+<li>f: A -&gt; X, g: B -&gt; X から定まる A＋B -&gt; X の射を [f,g]（縦ベクトルのつもり）</li>
+<li>a: A -&gt; A, b: A -&gt; B, c: B -&gt; A, d: B -&gt; B から定まる A＋B -&gt; A×B の射を {a,b,c,d}（２×２行列のつもり）</li>
+<li>identity map {1,0,0,1} を I、その逆射をα（ie. I・α = α・I = id）</li>
+<li>A×B からの projection を p1,p2</li>
+<li>A＋B への injection を j1,j2</li>
+</ul>
+<p>とする。</p>
+<p>以下 domain,codomain を明記しないので適宜判断してください。</p>
+<p>【１】</p>
+<pre><code> [&lt;a,b&gt;,&lt;c,d&gt;] = &lt;[a,c],[b,d]&gt; = {a,b,c,d}</code></pre>
+<p>【２】</p>
+<pre><code> {a,b,c,d}・p1 = &lt;a b&gt;
+ {a,b,c,d}・p2 = &lt;c d&gt;
+ j1・{a,b,c,d} = [a c]
+ j2・{a,b,c,d} = [b d]</code></pre>
+<p>特に</p>
+<pre><code> I・p1 = &lt;1 0&gt;
+ I・p2 = &lt;0 1&gt;
+ j1・I = [1 0]
+ j2・I = [0 1]</code></pre>
+<p>【３】</p>
+<pre><code> &lt;f g&gt;・h = &lt;f・h g・h&gt;
+ h・[f g] = [h・f h・g]</code></pre>
+<p>【４】</p>
+<pre><code> &lt;f・p1  g・p2&gt;・I = &lt;f・p1・I  g・p2・I&gt;（【３】より）
+ = &lt;f・[1 0]  g・[0 1]&gt;（【２】より）
+ = &lt;[f・1 f・0]  [g・0 g・1]&gt;（【３】より）
+ = &lt;[f 0]  [0 g]&gt;（id と 0-map の性質）
+ = {f 0 0 g}（【１】より）
+
+ I・[j1・f  j2・g] = [I・j1・f  I・j2・g]（【３】より）
+ = [&lt;1 0&gt;・f  &lt;0 1&gt;・g]（【２】より）
+ = [&lt;1・f 0・f&gt;  &lt;0・g 1・g&gt;]（【３】より）
+ = [&lt;f 0&gt; &lt;0 g&gt;]（id と 0-map の性質）
+ = {f 0 0 g}（【１】より）</code></pre>
+<p>まとめて</p>
+<pre><code> &lt;f・p1  g・p2&gt;・I = I・[j1・f  j2・g] = {f 0 0 g}（対角行列）</code></pre>
+<p>これは identity map が(×)関手と(＋)関手間の自然変換であることを示している。</p>
+<p>【５】</p>
+<pre><code> {f 0 0 1}・α・{1 0 0 g} = {f 0 0 1}・α・I・[j1 j2・g]（【４】より）
+ = {f 0 0 1}・[j1 j2・g]（αは I の逆射）
+ = [{f 0 0 1}・j1  {f 0 0 1}・j2・g]（【３】より）
+ = [&lt;f 0&gt;  &lt;0 1&gt;・g]（【２】より）
+ = [&lt;f 0&gt;  &lt;0・g 1・g&gt;]（【３】より）
+ = [&lt;f 0&gt; &lt;0 g&gt;]（id と 0-map の性質）
+ = {f 0 0 g}（【１】より）</code></pre>
+<p>同様に</p>
+<pre><code> {1 0 0 g}・α・{f 0 0 1} = {f 0 0 g}</code></pre>
+<p>まとめて</p>
+<pre><code> {f 0 0 1}・α・{1 0 0 g} = {1 0 0 g}・α・{f 0 0 1} = {f 0 0 g}</code></pre>
+<p>【６】</p>
+<pre><code> f1: X -&gt; A, g1: A -&gt; C, f1: X -&gt; B, g2: B -&gt; D に対して
+ &lt;g1・f1 g2・f2&gt;: X -&gt; C×D を X -&gt; A×B -&gt; C×D で分解して考えると
+ 
+ &lt;g1・f1 g2・f2&gt; = &lt;g1・p1 g2・p2&gt;・&lt;f1 f2&gt;
+ = {g1 0 0 g2}・α・&lt;f1 f2&gt;（【４】より）</code></pre>
+<p>同様に</p>
+<pre><code> f1: C -&gt; A, g1: A -&gt; X, f1: D -&gt; B, g2: B -&gt; X に対して
+ 
+ [g1・f1 g2・f2] = [g1 g2]・[j1・f1 j2・f2]
+ = [g1 g2]・α・{f1 0 0 f2}（【４】より）</code></pre>
+<p>【７】</p>
+<pre><code> f + g = [g 1]・α・&lt;1 f&gt;（定義）
+ = ([1 1]・α・{g 0 0 1})・α・({1 0 0 f}・α・&lt;1 1&gt;)（【６】より）
+ = [1 1]・α・({g 0 0 1}・α・{1 0 0 f})・α・&lt;1 1&gt;（結合律）
+ = [1 1]・α・({1 0 0 f}・α・{g 0 0 1})・α・&lt;1 1&gt;（【５】より）
+ = ([1 1]・α・{1 0 0 f})・α・({g 0 0 1}・α・&lt;1 1&gt;)（結合律）
+ = [1 f]・α・&lt;g 1&gt;（【６】より）
+ = [f 1]・α・&lt;1 g&gt;（図式をひっくり返して眺めてみると）
+ = g + f（定義）</code></pre>
+<p>つまり f+g = g+f</p>
+<p>【Exercise1 の証明】</p>
+<p>{g1 g2 g3 g4}・α・{f1 f3 f2 f4} の(1,1)成分である [g1 g2]・α・&lt;f1 f2&gt; を変形する。</p>
+<pre><code> [g1 g2]・α・&lt;f1 f2&gt; = ([g1 1]・α・{1 0 0 g2})・α・({f1 0 0 1}・α・&lt;1 f2&gt;)（【６】より）
+ = [g1 1]・α・({1 0 0 g2}・α・{f1 0 0 1})・α・&lt;1 f2&gt;（結合律）
+ = [g1 1]・α・({f1 0 0 1}・α・{1 0 0 g2})・α・&lt;1 f2&gt;（【５】より）
+ = ([g1 1]・α・{f1 0 0 1})・α・({1 0 0 g2}・α・&lt;1 f2&gt;)（結合律）
+ = [g1・f1 1]・α・&lt;1 g2・f2&gt;（【６】より）
+ = g2・f2 + g1・f1（定義）
+ = g1・f1 + g2・f2（【７】より）</code></pre>
+<hr>
+<h2 id="temperley-lieb-algebraのtrace">Temperley-Lieb Algebraのtrace</h2>
+<p>U_i1・U_i2・U_i3・… の trace を計算する Haskellプログラム</p>
+<p>n はドット数（テキストでは３）、xs は U_i1・U_i2・U_i3・… を表現するリスト [i1,i2,i3,…]</p>
+<pre><code> trace n xs = n' + c  where
+   (_,(n',c)) = until (null.fst) f (xs,(n,0))
+   f (xs,(m,c)) = ([low..m-2]++xs',(m-1, if low==m then c'+1 else c'))  where
+     (xs',low,c') = foldl g ([],m,c) xs
+     g (xs,low,c) x
+       | x &lt; low-1 = (x:xs,           low, c)
+       | x &gt; low+1 = ([low..x-2]++xs, x,   c+1)
+       | otherwise = (xs,             x,   if (x==low) then c+1 else c)
+ {-
+ -- The Ear
+ &gt; trace 3 [1,2]
+ 1
+ -- Unit
+ &gt; trace 3 []
+ 3
+ -}</code></pre>
+<hr>
+<p>Last modified : 2008/06/18 17:21:08 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a%e3%83%8e%e3%83%bc%e3%83%88" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

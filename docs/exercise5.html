@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise5"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/StartHaskell2/exercise5</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/StartHaskell2/exercise5">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/StartHaskell2/exercise5">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/StartHaskell2/exercise5">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/StartHaskell2/exercise5</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E9%AB%98%E9%9A%8E%E9%96%A2%E6%95%B0%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C">『高階関数』　練習問題</a><ul>
+<li><a href="#%E9%83%A8%E5%88%86%E9%81%A9%E7%94%A8%E3%81%95%E3%82%8C%E3%81%9F%E9%96%A2%E6%95%B0%E3%81%AE%E5%9E%8B">部分適用された関数の型</a></li>
+<li><a href="#%E3%82%B3%E3%83%A9%E3%83%83%E3%83%84%E6%95%B0%E5%88%97">コラッツ数列</a></li>
+<li><a href="#%E9%96%A2%E6%95%B0%E9%81%A9%E7%94%A8%E3%81%A8%E9%96%A2%E6%95%B0%E5%90%88%E6%88%90">関数適用と関数合成</a></li>
+<li><a href="#%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB">ポイントフリースタイル</a></li>
+<li><a href="#applytwice">applyTwice</a></li>
+<li><a href="#fold">fold</a></li>
+<li><a href="#zipwith-scanl-%E3%81%A8%E3%81%82%E3%81%AE%E6%95%B0%E5%88%97">zipWith, scanl と、あの数列</a></li>
+</ul></li>
+<li><a href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C%E3%83%AA%E3%83%B3%E3%82%AF%E9%9B%86">練習問題リンク集</a></li>
+</ul>
+</div>
+
+<h1 id="高階関数練習問題">『高階関数』　練習問題</h1>
+<h2 id="部分適用された関数の型">部分適用された関数の型</h2>
+<p>以下の式の型はなんですか。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">max</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">takeWhile</span> (<span class="fu">&lt;</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="fu">zipWith</span> (<span class="fu">+</span>)</a></code></pre></div>
+<p>ヒント: それぞれの関数の型は以下のとおり</p>
+<ul>
+<li><a href="https://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html#v:takeWhile">takeWhile</a></li>
+<li><a href="https://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html#v:zipWith">zipWith</a></li>
+</ul>
+<hr>
+<h2 id="コラッツ数列">コラッツ数列</h2>
+<p>コラッツ数列を返す関数を実装してみよう。</p>
+<p>与えられた数nに、以下の操作を繰り返し適用して、数列を生成する。</p>
+<ul>
+<li>nが偶数なら、n/2 を返す</li>
+<li>nが奇数なら、2*n+1 を返す</li>
+</ul>
+<p>たとえば 13 から始めた場合、以下のような数列が得られる。</p>
+<pre><code>13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1</code></pre>
+<p>このような数列（コラッツ数列）は、最終的には必ず1にたどり着くと予想されているが、未解決問題となっている。 <a href="https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%A9%E3%83%83%E3%83%84%E3%81%AE%E5%95%8F%E9%A1%8C">コラッツ問題 Wikipedia</a></p>
+<p>コラッツ数列を返す関数を実装してみよう。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">collatz ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</a></code></pre></div>
+<p>実行例</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1">ghci<span class="fu">&gt;</span> collatz <span class="dv">13</span></a>
+<a class="sourceLine" id="cb4-2" title="2">[<span class="dv">13</span>,<span class="dv">40</span>,<span class="dv">20</span>,<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">16</span>,<span class="dv">8</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>]</a></code></pre></div>
+<p>1 から 100 までの数で、コラッツ数列がもっとも長いものは何ですか。</p>
+<hr>
+<h2 id="関数適用と関数合成">関数適用と関数合成</h2>
+<p>以下の関数の括弧を、関数適用($)で書き換えてみよう。(p.83, p.84)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">g ::</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb5-2" title="2">g xs <span class="fu">=</span> <span class="fu">tail</span> (<span class="fu">tail</span> (<span class="fu">tail</span> (<span class="fu">tail</span> xs)))</a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="ot">f ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</a>
+<a class="sourceLine" id="cb5-5" title="5">f xs <span class="fu">=</span> <span class="fu">take</span> <span class="dv">10</span> (<span class="fu">map</span> (<span class="fu">*</span><span class="dv">3</span>) (<span class="fu">filter</span> <span class="fu">even</span> xs))</a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="ot">sqrtSums ::</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb5-8" title="8">sqrtSum <span class="fu">=</span> <span class="fu">length</span> (<span class="fu">takeWhile</span> (<span class="fu">&lt;</span><span class="dv">1000</span>) (<span class="fu">scanl1</span> (<span class="fu">+</span>) (<span class="fu">map</span> <span class="fu">sqrt</span> [<span class="dv">1</span><span class="fu">..</span>]))) <span class="fu">+</span> <span class="dv">1</span></a></code></pre></div>
+<p>同じものを関数合成(.)を使って書き直してみよう。</p>
+<hr>
+<h2 id="ポイントフリースタイル">ポイントフリースタイル</h2>
+<p>以下の関数をポイントフリースタイルで書き直してみよう。 (p.87)</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="ot">f ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb6-2" title="2">f n <span class="fu">=</span> <span class="dv">2</span><span class="fu">*</span>n <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="ot">g ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb6-5" title="5">g n m <span class="fu">=</span> <span class="dv">2</span><span class="fu">*</span>n <span class="fu">+</span> m</a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="ot">h ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb6-8" title="8">h n xs <span class="fu">=</span> <span class="fu">fst</span> (<span class="fu">splitAt</span> n xs)</a>
+<a class="sourceLine" id="cb6-9" title="9"></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="ot">i ::</span> (a,a) <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb6-11" title="11">i (x,y) <span class="fu">=</span> [x,y]</a>
+<a class="sourceLine" id="cb6-12" title="12"></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="ot">j ::</span> (a,a,a) <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb6-14" title="14">j (x,y,z) <span class="fu">=</span> [x,y,z]</a></code></pre></div>
+<hr>
+<h2 id="applytwice">applyTwice</h2>
+<p>applyTwice は、以下のような関数でした。(p65)</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="ot">applyTwice ::</span> (a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</a>
+<a class="sourceLine" id="cb7-2" title="2">applyTwice f x <span class="fu">=</span> f (f x)</a></code></pre></div>
+<p>例えば、以下のように使えます。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">&gt;</span> applyTwice (<span class="fu">+</span><span class="dv">1</span>) <span class="dv">0</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="dv">2</span></a></code></pre></div>
+<p>さて、以下の式は、なにを返しますか？ それはなぜですか？</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" title="1">applyTwice applyTwice (<span class="fu">+</span><span class="dv">1</span>) <span class="dv">0</span></a>
+<a class="sourceLine" id="cb9-2" title="2"></a>
+<a class="sourceLine" id="cb9-3" title="3">applyTwice applyTwice applyTwice (<span class="fu">+</span><span class="dv">1</span>) <span class="dv">0</span></a>
+<a class="sourceLine" id="cb9-4" title="4"></a>
+<a class="sourceLine" id="cb9-5" title="5">applyTwice applyTwice applyTwice applyTwice (<span class="fu">+</span><span class="dv">1</span>) <span class="dv">0</span></a></code></pre></div>
+<p>また、以下の式を計算しようとすると、おそらく返ってきません。(Ctrl + c で中断)</p>
+<p>それはなぜですか？ この式が計算できたとしたら、その値はいくつだと考えられますか？</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" title="1">applyTwice applyTwice applyTwice applyTwice applyTwice (<span class="fu">+</span><span class="dv">1</span>) <span class="dv">0</span></a></code></pre></div>
+<hr>
+<h2 id="fold">fold</h2>
+<p>foldl と foldr を用いて、以下の2つの関数を作成しました。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" title="1">hoge f y xs <span class="fu">=</span> <span class="fu">foldl</span> (\g x a <span class="ot">-&gt;</span> g <span class="fu">$</span> f x a) <span class="fu">id</span> xs y</a>
+<a class="sourceLine" id="cb11-2" title="2"></a>
+<a class="sourceLine" id="cb11-3" title="3">piyo f y xs <span class="fu">=</span> <span class="fu">foldr</span> (\x g a <span class="ot">-&gt;</span> g <span class="fu">$</span> f a x) <span class="fu">id</span> xs y</a></code></pre></div>
+<p>これらの関数の型はどうなりますか？ foldl や foldr はどうでしたか？</p>
+<p>これらの関数は、どのように動きますか？</p>
+<p>これらの関数は、無限リストに対しても使えますか？</p>
+<hr>
+<h2 id="zipwith-scanl-とあの数列">zipWith, scanl と、あの数列</h2>
+<p>次の2つの無限リストは、どのような数列を表しますか？ なぜそのようになりますか？</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" title="1">alist <span class="fu">=</span> <span class="dv">0</span> <span class="fu">:</span> <span class="dv">1</span> <span class="fu">:</span> <span class="fu">zipWith</span> (<span class="fu">+</span>) alist (<span class="fu">tail</span> alist)</a>
+<a class="sourceLine" id="cb12-2" title="2"></a>
+<a class="sourceLine" id="cb12-3" title="3">blist <span class="fu">=</span> <span class="dv">0</span> <span class="fu">:</span> <span class="fu">scanl</span> (<span class="fu">+</span>) <span class="dv">1</span> blist</a></code></pre></div>
+<h1 id="練習問題リンク集">練習問題リンク集</h1>
+<ul>
+<li><a href="https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter07/Chapter07-ja.md">スタートHaskell 2011 高階関数 練習問題</a></li>
+</ul></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/StartHaskell2/exercise5">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise5?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/StartHaskell2/exercise5">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise5" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

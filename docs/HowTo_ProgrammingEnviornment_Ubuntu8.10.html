@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#howto_programmingenviornment_ubuntu8.10"><span>HowTo_ProgrammingEnviornment_Ubuntu8.10</span></a><ul>
+<li><a href="#ubuntu-8.10-i386%E7%89%88%E4%B8%8A%E3%81%ABhaskell%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%82%8B">Ubuntu 8.10 (i386版)上にHaskellプログラミング環境を作る</a><ul>
+<li><a href="#ghc-6.10.1%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">ghc-6.10.1のインストール</a></li>
+<li><a href="#%E3%81%99%E3%81%90%E3%81%AB%E3%82%82%E4%BD%BF%E3%81%84%E3%81%9D%E3%81%86%E3%81%AA%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E9%96%8B%E7%99%BA%E7%94%A8%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">すぐにも使いそうなライブラリの開発用パッケージ</a></li>
+<li><a href="#haskell%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%83%84%E3%83%BC%E3%83%AB">Haskellのパッケージツール．</a></li>
+<li><a href="#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90%E9%96%A2%E9%80%A3">ドキュメント作成関連</a></li>
+<li><a href="#%E5%88%86%E6%95%A3%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">分散バージョン管理システム</a></li>
+<li><a href="#%E6%97%A5%E6%9C%AC%E8%AA%9E">日本語</a></li>
+<li><a href="#emacs">Emacs</a></li>
+</ul></li>
+<li><a href="#ubuntu-8.04-%E4%B8%8A%E3%81%ABhaskell%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E3%82%8B">Ubuntu 8.04 上にHaskellプログラミング環境を作る</a><ul>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB">コンパイラのインストール</a></li>
+<li><a href="#%E9%96%8B%E7%99%BA%E7%94%A8%E3%83%84%E3%83%BC%E3%83%AB%E3%81%8A%E3%82%88%E3%81%B3%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E7%BE%A4">開発用ツールおよびライブラリ群</a></li>
+<li><a href="#%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF">エディタ</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="howto_programmingenviornment_ubuntu8.10"><a href="" class="uri" title="Go to wiki page">HowTo_ProgrammingEnviornment_Ubuntu8.10</a></h1>
+<p><a href="HowTo.html" class="uri" title="Go to wiki page">HowTo</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/ProgrammingEnviornment" class="uri" title="Go to wiki page">ProgrammingEnviornment</a>:Ubuntu8.10</p>
+<hr>
+<p>以下は 2009/02/04 16:03:25 JST 現在の情報である。</p>
+<h2 id="ubuntu-8.10-i386版上にhaskellプログラミング環境を作る">Ubuntu 8.10 (i386版)上にHaskellプログラミング環境を作る</h2>
+<h3 id="ghc-6.10.1のインストール">ghc-6.10.1のインストール</h3>
+<p>ubuntuのパッケージにghc6というのがあるのだが，最新のリリースバージョンではないとか，最小構成になっているので少し使いにくいとか，いろいろ不満がでる．それで，コンパイル済のバイナリがはいった，tarballからインストールする．これは非常に簡単です．</p>
+<h4 id="libedit2版のtarballを取得">libedit2版のtarballを取得</h4>
+<p>いきなりダウンロードするならwgetで</p>
+<pre><code>  $ wget http://www.haskell.org/ghc/dist/6.10.1/ghc-6.10.1-i386-unknown-linux-libedit2.tar.bz2</code></pre>
+<h4 id="展開移動">展開，移動</h4>
+<pre><code>  $ tar xf ghc-6.10.1-i386-unknown-linux-libedit2.tar.bz2
+  $ cd ghc-6.10.1</code></pre>
+<h4 id="configure-と-make-install">configure と make install</h4>
+<p>/usr/local配下へのインストールでよいなら，引数なしで configure</p>
+<pre><code>  $ ./configure
+  $ sudo make install</code></pre>
+<p>本体のインストールはこれで終り</p>
+<h4 id="バージョンチェック">バージョンチェック</h4>
+<p>インストールが終了したら一応確認</p>
+<pre><code>  $ ghc -V
+  The Glorious Glasgow Haskell Compilation System, version 6.10.1</code></pre>
+<p>これでOK</p>
+<h3 id="すぐにも使いそうなライブラリの開発用パッケージ">すぐにも使いそうなライブラリの開発用パッケージ</h3>
+<p>libgmp3-dev 多倍長整数演算ライブラリ</p>
+<pre><code>  $ sudo apt-get install libgmp3-dev</code></pre>
+<p>zlib1g-dev データ圧縮伸長ライブラリ</p>
+<pre><code>  $ sudo apt-get install zlib1g-dev</code></pre>
+<p>libedit-dev 行編集用ライブラリ</p>
+<pre><code>  $ sudo apt-get install libedit-dev</code></pre>
+<p>libcurl4-gnutls-dev curl関連ライブラリ．darcsの構築インストールに必要</p>
+<pre><code>  $ sudo apt-get install libcurl4-gnutls-dev</code></pre>
+<h3 id="haskellのパッケージツール">Haskellのパッケージツール．</h3>
+<p>cabalコマンドはaptシステムに似たツールで，Haskellの種々のパッケージのインストールなどに便利．これをインストールしておくと，cabal install &lt;package&gt; でパッケージがインストールできる．このときHaskellのライブラリについてだけだが，依存関係をチェックして，必要なパッケージをダウンロードしてインストールすることまでやってくれる．ぜひインストールする．</p>
+<pre><code>  $ wget http://hackage.haskell.org/packages/archive/cabal-install/0.6.0/cabal-install-0.6.0.tar.gz
+  $ tar xf cabal-install-0.6.0.tar.gz
+  $ cd cabal-install-0.6.0
+  $ sh bootstrap.sh</code></pre>
+<p>cabalおよび，cabalコマンドを使ってインストールされるライブラリ，実行ファイルはデフォルトでは $HOME/.cabal/ 配下に置かれる．そこの bin/ へ PATH を通しておく．</p>
+<pre><code>  $ export PATH=$HOME/.cabal/bin:$PATH</code></pre>
+<p>cabalはHackage Databaseの情報を取得する．これを更新しておく．</p>
+<pre><code>  $ cabal update</code></pre>
+<p>ローカルにインストールしたパッケージを最新の状態にしておきたければ，cabal upgrade を使えばよい．</p>
+<pre><code>  $ cabal upgrade</code></pre>
+<h3 id="ドキュメント作成関連">ドキュメント作成関連</h3>
+<p>hscolour：Haskellのソースコードを色付きのHTMLにしてくれるので，Hack用ドキュメントを作るときなどに便利</p>
+<pre><code>  $ cabal install hscolour</code></pre>
+<h3 id="分散バージョン管理システム">分散バージョン管理システム</h3>
+<p>Haskeller なら darcs にきまっとる ;)</p>
+<pre><code>  $ cabal install darcs</code></pre>
+<h3 id="日本語">日本語</h3>
+<p>UTF8限定だけど，とりあえずこれをインストールしておこう．それ以外のエンコードについては iconv というパッケージを使うという手もあるかも．</p>
+<pre><code>  $ cabal install utf8-string</code></pre>
+<h3 id="emacs">Emacs</h3>
+<p>Haskellで開発するならエディタはEmacs + haskell-modeがよいと思う．で，nobsun の好みにより，emacs-snapshot をインストールする．</p>
+<pre><code>  $ sudo apt-get install emacs-snapshot emacs-snapshot-el</code></pre>
+<h4 id="haskell-mode">haskell-mode</h4>
+<p>Ubuntu 8.10 には haskell-mode というパッケージがあるんだが，ふつうにこれを入れようとすると，ghc6 を入れられてしまう．そこで tarball からインストールする．</p>
+<pre><code>  $ cd lib/elisp
+  $ wget http://www.iro.umontreal.ca/~monnier/elisp/haskell-mode.tar.gz
+  $ tar xvf haskell-mode.tar.gz</code></pre>
+<p>/lib/elisp 配下に展開されたとして，~/.emacs の設定は</p>
+<pre><code>  (load "~/lib/elisp/haskell-mode-2.4/haskell-site-file")
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)</code></pre>
+<p>とする．</p>
+<h4 id="ghci-haskeline">ghci-haskeline</h4>
+<p>編集する分にはhaskell-modeは快適なんだが，バッファ内でのghciセッションの時に妙な ^J が入っておもしろくない．これは libedit の問題らしい．そこで，Emacsのバッファ内では，ghci-haskeline を使うようにする．</p>
+<pre><code>  $ cabal install ghci-haskeline</code></pre>
+<p>で .emacs に以下を追加する</p>
+<pre><code>  (setq haskell-program-name "~/.cabal/bin/ghci-haskeline")</code></pre>
+<p>これで ^J は駆逐できるはず．</p>
+<hr>
+<p>以下は 2008/09/22 14:02:44 JST 現在の情報である。</p>
+<h2 id="ubuntu-8.04-上にhaskellプログラミング環境を作る">Ubuntu 8.04 上にHaskellプログラミング環境を作る</h2>
+<p>Ubuntu 8.04 をインストールした直後の状態からHaskellプログラミング環境を作る。 Ubuntu には ghc6 というパッケージおよびghc関連のパッケージが数多く用意されて いるが、これらはどれも最新ではない。自分でいろいろなパッケージを持ってきて、 自分でコンパイルして使いたいので、ghc 関連のものはUbuntuパッケージを使わない 方針でいく。それ以外のツールは最新を追いかけることはないので、 Ubuntuのパッケージを使う。</p>
+<h3 id="コンパイラのインストール">コンパイラのインストール</h3>
+<p>Glasgow Haskell Compiler を使う</p>
+<h4 id="libc6">libc6</h4>
+<p>まず最初は、ghc-6.8.3 をバイナリ tarball からインストールするのであるが、 libc ヘッダファイルなどがなかったりするので、ghc-6.8.3 のインストール前の configure スクリプトが途中でこける。なにはともあれ、libc6-dev</p>
+<pre><code>$ sudo apt-get install libc6-dev</code></pre>
+<h4 id="patch">patch</h4>
+<p>2008/11/12現在ではHEADのビルドにpatchが使われるようなのでインストールしておく。</p>
+<pre><code>$ sudo apt-get install patch</code></pre>
+<h4 id="ghc-6.8.3-のインストール">ghc 6.8.3 のインストール</h4>
+<p>最初はi386-Linux汎用版のバイナリをインストールする(Ubuntuのghc6パッケージは使わない)</p>
+<pre><code>$ wget http://www.haskell.org/ghc/dist/6.8.3/ghc-6.8.3-i386-unknown-linux.tar.bz2
+$ cd ghc-6.8.3
+$ ./configure
+$ sudo make install</code></pre>
+<h3 id="開発用ツールおよびライブラリ群">開発用ツールおよびライブラリ群</h3>
+<h4 id="gnuの開発ツール群">GNUの開発ツール群</h4>
+<pre><code>$ sudo apt-get install autoconf
+$ sudo apt-get install automake
+$ sudo apt-get install libtool </code></pre>
+<h4 id="ドキュメント系のライブラリ群">ドキュメント系のライブラリ群</h4>
+<pre><code>$ sudo apt-get install zlib1g-dev
+$ sudo apt-get install curl
+$ sudo apt-get install docbook-xsl</code></pre>
+<h4 id="分散バージョン管理システム-1">分散バージョン管理システム</h4>
+<p>darcs を使うことが多い(git も最近使われつつある)。 最新のdarcsをインストールする(Ubuntuのdarcsパッケージは<strong>使わない</strong>)</p>
+<p>darcs-2.1.0 をインストール(2008/10/12 13:44:45 JSTバージョンを変更)</p>
+<pre><code>$ wget http://darcs.net/darcs-2.1.0.tar.gz
+$ cd darcs-2.1.0
+$ autoconf
+$ ./configure
+$ make
+$ sudo make install</code></pre>
+<h4 id="字句解析器生成器-alex">字句解析器生成器 Alex</h4>
+<p>最新のAlexをソースからビルドする(Ubuntu の alex パッケージは<strong>使わない</strong>)</p>
+<p>alex 2.2</p>
+<pre><code>$ wget http://www.haskell.org/alex/dist/2.2/alex-2.2.tar.gz
+$ tar xvf alex-2.2.tar.gz
+$ cd alex-2.2
+$ runghc Setup configure
+$ runghc Setup build
+$ sudo runghc Setup install</code></pre>
+<h4 id="構文解析器生成器-happy">構文解析器生成器 Happy</h4>
+<p>最新のHappyをソースからビルドする(Ubuntu の happy パッケージは<strong>使わない</strong>)</p>
+<p>happy 1.17</p>
+<pre><code>$ wget http://haskell.org/happy/dist/1.17/happy-1.17.tar.gz
+$ tar xvf happy-1.17.tar.gz 
+$ cd happy-1.17
+$ runghc Setup configure
+$ runghc Setup build
+$ sudo runghc Setup install</code></pre>
+<h3 id="エディタ">エディタ</h3>
+<p>Emacs と haskell-mode を使う</p>
+<h4 id="emacs-23">Emacs 23</h4>
+<p><a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a> の単なる好みにより Emacs 22 ではなく、Emacs 23 を使うことにする。</p>
+<pre><code>$ sudo apt-get install emacs-snapshot
+$ sudo apt-get install emacs-snapshot-el</code></pre>
+<h4 id="haskell-mode-1">haskell-mode</h4>
+<p>Emacs を使ってプログラムを書くなら必須でしょう。</p>
+<pre><code>$ sudo apt-get install haskell-mode</code></pre>
+<p>.emacs の設定例。</p>
+<pre><code>(append auto-mode-alist
+        '(("\\.hs$" . 'haskell-mode)
+          ("\\.hi$" . 'haskell-mode)
+          ("\\.lhs$" . 'literate-haskell-mode))))
+
+(autoload 'haskell-mode "haskell-mode"
+  "Majour mode for editing Haskell scripts." t)
+(autoload 'literate-haskell-mode "haskell-mode"
+  "Majour mode for editing literate Haskell scripts." t)
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
+
+(setq haskell-literate-default 'latex)
+(setq haskell-doc-idle-delay 0)</code></pre>
+<hr>
+<p>Last modified : 2009/08/05 22:44:31 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/HowTo_ProgrammingEnviornment_Ubuntu8.10" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

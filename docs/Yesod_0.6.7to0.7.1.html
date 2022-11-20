@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Yesod_0.6.7to0.7.1"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Yesod_0.6.7to0.7.1</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Yesod_0.6.7to0.7.1">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Yesod_0.6.7to0.7.1">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Yesod_0.6.7to0.7.1">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Yesod_0.6.7to0.7.1</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#yesod_0.6.7to0.7.1"><span>Yesod_0.6.7to0.7.1</span></a><ul>
+<li><a href="#%E3%81%8B%E3%82%890.7.1%E3%81%B8%E3%81%AE%E7%A7%BB%E8%A1%8C">0.6.7から0.7.1への移行</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="yesod_0.6.7to0.7.1"><a href="" class="uri" title="Go to wiki page">Yesod_0.6.7to0.7.1</a></h1>
+<p><a href="Yesod.html" class="uri" title="Go to wiki page">Yesod</a>:0.6.7to0.7.1</p>
+<hr>
+<h2 id="から0.7.1への移行">0.6.7から0.7.1への移行</h2>
+<p><a href="http://docs.yesodweb.com/book/migrate6to7">Migration Guide</a>は一度ざっと目を通しておく。 全部をこの段階で理解する必要はない。 キーワードだけ知っておくと、あとで修正の時にここに戻ってきて対応方法が分る。</p>
+<hr>
+<h4 id="まずは.cablと.ghcをバックアップとっておく">1. まずは.cablと.ghcをバックアップとっておく</h4>
+<pre><code>$ tar zcvf .cabal.tgz ~/.cabal
+$ tar zcvf .ghc.tgz ~/.ghc</code></pre>
+<p>これさえとっておけば、いつでも現環境に戻れる。</p>
+<h4 id="でtestプロジェクトをscaffoldしておく">2. 0.6.7でtestプロジェクトをscaffoldしておく</h4>
+<pre><code>$ yesod
+   :</code></pre>
+<p>これは後でyesod-.0.7.1をインストールした時に全く同じtestプロジェクトをscaffoldしてdiff -rすることでロジックの手動変更点を知るのに使うことになる。</p>
+<h4 id="alexhappyやhaskell-platformからクリーンインストール">3. alex/happyやhaskell-platformからクリーンインストール</h4>
+<pre><code>$ rm -rf ~/.cabal ~/.ghc</code></pre>
+<p>一応yesod-0.7.1にupdateして作業しても行けるらしいけど、 最初にうまくいかなかったので私はクリーンインストールしなおした。 以下を再インストール。</p>
+<pre><code>cabal-install-0.8.2
+alex-2.3.3
+happy-1.18.5
+haskell-platform-2010.2.0.0
+haskell-mode
+ghc-mod
+yesod</code></pre>
+<p>としたところでソースの修正</p>
+<h4 id="yesod-0.7.1によりtestプロジェクトをscaffold">4. yesod-0.7.1によりtestプロジェクトをscaffold</h4>
+<pre><code>$ yesod
+  :</code></pre>
+<p>これで先に0.6.7でscaffoldしたものとディレクトリ再帰diffして、差分を適用していく。hamletなどのテンプレートにある差は後で一括に自動変換するので今は無視してよい。 Control.hsやSettings.hsなどの修正が発生する。 また、production.hsなどの新しいファイルがあったりするのでそこもcabal化するなら用 意する。</p>
+<p>実はMigration Guideの説明はほぼこの差分に終始しているのでGuideは読み込む必要はなくて、この段階で見返せば意味が分かりやすいかも。</p>
+<h4 id="hamletcassiusjuliusテンプレートの変換">5. hamlet/cassius/juliusテンプレートの変換</h4>
+<p>yesod-0.7.*を入れると付いてくるhamlet6to7という変換ツールで行うが、 その前に</p>
+<pre><code>$ grep -r '^#if' *</code></pre>
+<p>でひっかかたもののうち、hamletのGHC7分岐だけは手で補正する必要がある。</p>
+<pre><code>#if GHC7
+  [hamlet|
+#else
+  [$hamlet|
+#endif
+...
+|]</code></pre>
+<p>というやつが&lt;div id=“else”…&gt;と解釈しようとして [$hamlet|にぶつかることでエラーになるので事前に除去するのが楽。 私の場合はGHC6.12.3を使っているので</p>
+<pre><code>  [$hamlet|
+...
+|]</code></pre>
+<p>としてGHC7分岐を除去しました。一通り対応したらhamlet6to7を掛ける。</p>
+<pre><code>$ hamlet6to7 *.hs
+$ hamlet6to7 Handler/*.hs
+$ hamlet6to7 hamlet/*.hamlet
+$ hamlet6to7 cassius/*.cassius
+$ hamlet6to7 julius/*.julius</code></pre>
+<p>当然だけど、2回実行するとコードが変ってしまうのでくれぐれも1回だけやること。:-) 終ったらさっきのGHC7分岐を戻したきゃ戻せばいい。</p>
+<h4 id="ライブラリプラグインのインストール">6. ライブラリ/プラグインのインストール</h4>
+<p>ここで一応走らせてみる。</p>
+<pre><code>runhaskell devel-server.hs</code></pre>
+<p>あとは順にエラーがおきているライブラリをinstallしていく。 なお、ライブラリのバージョンも以前のバージョンに合わせておいた方がよい。 ライブラリバージョンの相違でハマるとワケワカになる。 以前のバージョンが不明なら.cabal.tgzをどこかに展開して.cabal.old/libの下を確認すれば良い。 私のアプリの場合は以下なんかを入れた。</p>
+<pre><code>cabal install persistent-postgresql
+cabal install web-encodings-0.3.0.4
+cabal install split-0.1.3
+cabal install highlighting-kate-0.2.7.1
+cabal install texmath-0.4
+cabal install pandoc-1.6.0.1
+cabal install yesod-newsfeed
+cabal install Diff-0.1.2
+cabal install utility-ht-0.0.5.1
+cabal install yesod-sitemap
+cabal install mtl-2.0.1.0</code></pre>
+<p>postgresqlのバインディングなどyesodプロジェクトからの配布物は最新のを使う。</p>
+<p>ちなみにOAuthは0.6.7を入れてしまうのでソースからtwitterAuthとimportを除去しちゃう。 つまりとりあえず対応せず、後日プラグインが0.7.*対応したらあらためて取り込む。</p>
+<h4 id="ロジックの修正">7. ロジックの修正</h4>
+<p>あとは自分の書いたコードでエラーが発生した所をデバッグしていく。 ただひたすらゴリゴリと。 ブラウザでの動作確認は必要。 例えば、*.hsがMyApp/Helpers/…とかにもあって、hamletテンプレを含んでいるのに 変換し忘れてた場合、コンパイルは通るけど動作はアウトになるはず。 また、旧テンプレートで空行は暗黙的なインデントがあるように見做されていたが、 新テンプレートではインデントがトップにリセットされるのでここも注意。 事前に空行をつぶしておいても良いし、hamlet6to7を掛けてから目視で修正してもいい。 新テンプレでは<strong>\</strong>がついてて目で分りやすくなっているから私は後で修正した。</p>
+<h4 id="備考">8. 備考</h4>
+<p>おそらくある程度の規模のアプリの場合は一発ではうまくいかないと思う。 特にライブラリやプラグインは対応してなかったり、 ghc-pkg hideしたりしないといけなかったりで何度かやり直すハメになる。 それでも.cabalと.ghcをバックアップしておけばやり直せるので何度でもチャレンジできるので恐れずにやってしまいましょう。 私は結局調査やらやりなおしやらで2つのアプリの移行に3晩ついやしました。 最後は手慣れたので作業自体は1-2時間程度で済みましたが。</p>
+<hr>
+<p>Last modified : 2011/02/22 10:30:43 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Yesod_0.6.7to0.7.1">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Yesod_0.6.7to0.7.1?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Yesod_0.6.7to0.7.1">Delete this page</a></li>
+      
+    </ul>
+    
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

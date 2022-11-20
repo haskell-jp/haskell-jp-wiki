@@ -1,0 +1,1725 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/cut-sea"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/cut-sea</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/cut-sea">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/cut-sea">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/cut-sea">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/cut-sea</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#cut-sea"><span>cut-sea</span></a><ul>
+<li><a href="#haskell%E3%81%AE%E9%96%A2%E6%95%B0%E5%90%88%E6%88%90%E3%81%A7%E3%81%B2%E3%81%A3%E3%81%8B%E3%81%8B%E3%81%A3%E3%81%A6%E3%81%9F%E3%81%93%E3%81%A8"><span>Haskellの関数合成でひっかかってたこと</span></a></li>
+<li><a href="#yesod_internationalization"><span>Yesod_Internationalization</span></a></li>
+<li><a href="#yesod"><span>Yesod</span></a></li>
+<li><a href="#%E3%82%88%E3%81%8F%E3%82%8F%E3%81%8B%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93"><span>よくわかりません</span></a></li>
+<li><a href="#applicative">Applicative</a></li>
+<li><a href="#%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E5%A4%89%E6%95%B0%E3%81%8C%E6%AC%B2%E3%81%97%E3%81%84%E7%90%86%E7%94%B1"><span>グローバル変数が欲しい理由？</span></a></li>
+<li><a href="#real-world-haskell">Real World Haskell</a></li>
+<li><a href="#geb">GEB</a></li>
+<li><a href="#ghc-head">GHC-HEAD</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B20">ものまね鳥をまねる(20)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B19">ものまね鳥をまねる(19)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B18">ものまね鳥をまねる(18)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B17">ものまね鳥をまねる(17)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B16">ものまね鳥をまねる(16)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B15">ものまね鳥をまねる(15)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B14">ものまね鳥をまねる(14)</a></li>
+<li><a href="#unfoldr">unfoldr</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B13">ものまね鳥をまねる(13)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B12">ものまね鳥をまねる(12)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B11">ものまね鳥をまねる(11)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B10">ものまね鳥をまねる(10)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B9">ものまね鳥をまねる(9)</a></li>
+<li><a href="#gtk2hs">Gtk2HS</a></li>
+<li><a href="#wxhaskell">wxHaskell</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B8">ものまね鳥をまねる(8)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B7">ものまね鳥をまねる(7)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B6">ものまね鳥をまねる(6)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B5">ものまね鳥をまねる(5)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B4">ものまね鳥をまねる(4)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B3">ものまね鳥をまねる(3)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B2">ものまね鳥をまねる(2)</a></li>
+<li><a href="#%E3%82%82%E3%81%AE%E3%81%BE%E3%81%AD%E9%B3%A5%E3%82%92%E3%81%BE%E3%81%AD%E3%82%8B">ものまね鳥をまねる</a></li>
+<li><a href="#gauchefest">GaucheFest</a></li>
+<li><a href="#ghc%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E7%B6%9A3">GHCのビルド(続^3)</a></li>
+<li><a href="#ghc%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E7%B6%9A%E3%80%85">GHCのビルド(続々)</a></li>
+<li><a href="#ghc%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E7%B6%9A">GHCのビルド(続)</a></li>
+<li><a href="#ghc%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89">GHCのビルド</a></li>
+<li><a href="#monad-m-a---m-b---a---m-c---a---m-b-c">(Monad m) =&gt; (a -&gt; m b) -&gt; (a -&gt; m c) -&gt; (a -&gt; m (b, c))</a></li>
+<li><a href="#section">&amp;&amp;&amp;</a></li>
+<li><a href="#ghc-6.8.3"><span>GHC 6.8.3</span></a></li>
+<li><a href="#split">split</a></li>
+<li><a href="#haskell%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%A8%E3%81%8B">Haskellのプログラムにおける設定ファイルとか</a></li>
+<li><a href="#%E6%97%A5%E6%9C%AC%E8%AA%9E%E6%96%87%E5%AD%97">日本語文字</a></li>
+<li><a href="#%E3%83%A2%E3%83%8A%E3%83%89">モナド</a></li>
+<li><a href="#xhtml">XHtml</a></li>
+<li><a href="#utf8">UTF8</a></li>
+<li><a href="#unfoldr-1">unfoldr</a></li>
+<li><a href="#read">read</a></li>
+<li><a href="#%E3%81%AF%E3%81%AA%E3%82%93%E3%81%A0"><strong>,</strong>はなんだ？</a></li>
+<li><a href="#make">make</a></li>
+<li><a href="#cabal">Cabal</a></li>
+<li><a href="#cgi">CGI</a></li>
+<li><a href="#printenv-with">printenv with (&lt;*&gt;)</a></li>
+<li><a href="#printenv-with-1">printenv with (&gt;&gt;=)</a></li>
+<li><a href="#printenv">printenv</a></li>
+<li><a href="#%E3%81%BE%E3%81%9A%E3%81%AFecho%E3%82%B5%E3%83%BC%E3%83%90%E3%81%8B%E3%82%89">まずはEchoサーバから</a></li>
+<li><a href="#%E5%86%8D%E5%85%A5%E9%96%80">再入門</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="cut-sea"><a href="" class="uri" title="Go to wiki page">cut-sea</a></h1>
+<hr>
+<p><a href="Haskell.html" class="uri" title="Go to wiki page">Haskell</a>再入門</p>
+<hr>
+<h3 id="haskellの関数合成でひっかかってたこと"><a href="http://d.hatena.ne.jp/ruicc/20111004/1317752261">Haskellの関数合成でひっかかってたこと</a></h3>
+<p>まずここでやりたいのは</p>
+<pre><code>h(x,y) = f(g(x,y))</code></pre>
+<p>だそうだ。ただし、これはHaskellコードではない。つまり(x,y)はタプルじゃなくて、 他言語によくある関数引数のリストを表現しているもの。 つまりやりたいのは</p>
+<pre><code>h x y = f $ g x y</code></pre>
+<p>というhをfとgで表現したい、ということだ。</p>
+<h4 id="コンビネータのつくりかた">コンビネータのつくりかた</h4>
+<p>大抵の場合、コンビネータを作ること自体はさして難しくない。 このblogの場合だと、</p>
+<pre><code>h f g x y = f $ g x y</code></pre>
+<p>これで出来上がりだ。 hはfとgを合成するという点に注目して、中値演算にすればさらにいい感じになる場合もある。</p>
+<pre><code>(&lt;+-) f g x y = f $ g x y</code></pre>
+<p>こうすれば(+2) &lt;+- (*)というのがいきなり書けるようになる。<br>
+ここでgが3引数だろうと4引数だろうと同じ要領で書けることにも注目してもらいたい。</p>
+<h4 id="point-freeにしてみる">point freeにしてみる</h4>
+<p>blog主はこいつをpoint freeで書こうとしている。 blogでの出発点はh x y = f $ g x yなんだけど、別にそれでもかまわない。 ここからpoint freeにしてみよう。</p>
+<pre><code>h x y = f $ g x y
+      ↓
+h x = f . g x</code></pre>
+<p>ここまでは問題ない。 blog主もここまでは迷わずできてる。 ここで次の形にするためには省略された括弧を付けてみるとよい。</p>
+<pre><code>h x = (f .) (g x)</code></pre>
+<blockquote>
+<p>これが分からない人は、以下の順で考えると良い。</p>
+<pre><code>h x = f . (g x)
+      ↓
+h x = (.) f (g x)
+      ↓
+h x = ((.) f) (g x)
+      ↓
+h x = (f .) (g x)</code></pre>
+</blockquote>
+<p>どうかな？ (f .)をf’とでもすればもう分かるはず。</p>
+<pre><code>h x = f' $ g x
+      ↓
+h = f' . g
+      ↓
+h = (f .) . g</code></pre>
+<p>というわけでめでたしめでたし・・・<br>
+</p>
+<p>ちょっと待った！ 本当にそれでいいの？そんなんで納得しちゃっていいのか？</p>
+<p>確かに変換は分かった。 それで正しく動作することも確認できた。<br>
+しかし、これはコンパイルされたコードのように、人間が読んだり書いたりするにはちょっと無理があるんじゃないか？ という声が出てきてもよさそうに思う。</p>
+<pre><code>h x y = f $ g x y</code></pre>
+<p>はっきり言って最初のこのコードの方がずっと読みやすいし、変更もしやすそう！って初心者なら思うはず。</p>
+<pre><code>h = (f .) . g</code></pre>
+<p>このコードはどう読みゃいいのさ！？</p>
+<h4 id="point-freeの思考">point freeの思考</h4>
+<p>まずよく知ってるつもりになっているBコンビネータ、つまり(.)について考察してみよう。 型だけで議論する。(但し(.)の実装は当然知ってて欲しい。)</p>
+<pre><code>(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c</code></pre>
+<p>Bコンビネータは通常 f . g のようにして使う。 ここでは(f .)という最初の引数だけを適用したものを考えよう。</p>
+<pre><code>f :: b -&gt; c
+(f.) :: (a -&gt; b) -&gt; a -&gt; c</code></pre>
+<p>fの型がb -&gt; cなら(f.)は(a -&gt; b) -&gt; a -&gt; cとなる。 型における(-&gt;)が右結合であることに注意して括弧を補完すると以下の形になる。</p>
+<pre><code>(f.) :: (a -&gt; b) -&gt; (a -&gt; c)</code></pre>
+<p>つまり、(f.)は(a -&gt; b)な関数を(a -&gt; c)な関数に変換する。 要は返り値がちょっと違う版の関数に変換するのだ。 bとcとの間の変換はfが取り扱う。<br>
+いくつか例を挙げると</p>
+<pre><code>((map toUpper).) :: 文字列を返すような関数を大文字で返す版にする
+(length .) :: リストを返すような関数をリストの長さを返す版にする
+(const .) :: 1引数の関数を2引数の版にする(2番目の引数はダミー)</code></pre>
+<p>などなど。</p>
+<p>このように(.)に左からfを適用すると最終的に得られる型を変えた版の関数を生成することができるわけだが、 さらにもう一度適用したらどうなるだろう？</p>
+<pre><code>((f.).) :: ???</code></pre>
+<p>メモ用紙でコリコリやればすぐに分かる。 (f.)の型は(a -&gt; b) -&gt; (a -&gt; c)なので、(a1 -&gt; (a -&gt; b)) -&gt; (a1 -&gt; (a -&gt; c))となる。 やはり型における(-&gt;)は右結合なので、それぞれの内側の括弧ははずせる。</p>
+<pre><code>((f.).) :: (a -&gt; a1 -&gt; b) -&gt; (a -&gt; a1 -&gt; c)</code></pre>
+<p>というわけで、((f.).)は2引数関数の返り値の型を変えた版を生成する。 あとはもう分かると思うんだけど、結論から言えば、(.)を右からn回適用すればn引数の関数の返り値をfで変換する版の関数を生成できてしまうのだ。</p>
+<h4 id="一般化gしてfする">一般化「gしてfする」</h4>
+<p>Bコンビネータをpoint freeで思考する人は「gしてfする」というのが出てくるとすぐさま「f . g」が出てくる。 よく言われるようにUNIX系コマンドのフィルタのようなイメージも同時に浮かぶようだ。(但しデータの流れは右から左に抜けるけどね) しかしgの引数の数に対して一般化するとこうだ。</p>
+<blockquote>
+<p>「gしてfする」は((..(f.)..).) gである。<br>
+ただし、fの後ろの(.)の数はgの引数の数と同じだけ噛ます。</p>
+</blockquote>
+<p>だから変換の末に(f.).gが得られたのではなく、「gしてfする」がいきなり(f.).gと書けてしまうのだ。</p>
+<pre><code>(&lt;+-) f g = (f.). g</code></pre>
+<p>もちろんこの慣用句が身についていると大抵この手の合成は新たに作成するという発想にすらならない。<br>
+今回のblog postの場合にはfは2を足し、gは2引数を掛けていた。 考え方としては「掛けてから2を足す」なので、(+2) . (*) で筋としてはほぼ良い。 ただgにある関数が2個の引数を取るので、「掛けてから2を足す」は((+2).) . (*)となる。 というわけで、この思考に慣れてくると変換の末に到達するのではなく、いきなり思考をそのまま書き下す形でpoint freeな式が出てくるようになる。</p>
+<h4 id="gは">(.g)は？</h4>
+<p>さて、(f.)を考察し始めた時にすでに気になっているだろうと思うので、今度は(.g)を考えてみよう。 つまり今度は(.)の第2引数であるgだけを適用したものが何を表現しているのか考える。</p>
+<pre><code>g :: a -&gt; b
+(.g) :: (b -&gt; c) -&gt; (a -&gt; c)</code></pre>
+<p>というわけでご想像通り、今度は入力となる引数の型を変換した版の関数を生成してくれる。 (.)を知っていればそれほど驚く結果ではないはずだ。 ところが(f.)の時のように(.)を複数回適用しようとすると困る。</p>
+<pre><code>(.(.g)) :: ((a -&gt; c1) -&gt; c) -&gt; ((b -&gt; c1) -&gt; c)</code></pre>
+<p>残念ならが左への(.)適用の繰り返しはそうそう直感的に分かりやすいものではなくなる。 しかし、ここで再び右側に(.)を追加するものを考えると状況が変わる。</p>
+<pre><code>(.g) :: (a -&gt; c) -&gt; (a1 -&gt; c)
+((.g).) :: (a1 -&gt; a -&gt; c) -&gt; (a1 -&gt; a2 -&gt; c)
+(((.g).).) :: (a1 -&gt; a2 -&gt; a -&gt; c) -&gt; (a1 -&gt; a2 -&gt; a3 -&gt; c)</code></pre>
+<p>どうだろう？<br>
+これは(.g)の右に(.)をn回適用すると(n+1)番目の引数の型をちょっと変えた版の関数を生成してくれるのだ。</p>
+<pre><code>times3 x y z = x * y * z</code></pre>
+<p>という関数があった時に、ちょっと引数の型を変えた版を作ってみる。</p>
+<pre><code>ghci&gt; (.(+2)) times3 1 2 3
+18
+ghci&gt; ((.read).) times3 1 "2" 3
+6
+ghci&gt; (((.length).).) times3 1 2 [1..4]
+8</code></pre>
+<p>複数の引数にそれぞれちょっとした変換を加えたい？</p>
+<pre><code>??? :: (a1 -&gt; a2 -&gt; a3 -&gt; c) -&gt; (a1' -&gt; a2' -&gt; a3 -&gt; c)</code></pre>
+<p>これも問題ない。</p>
+<pre><code>ghci&gt; ((.(+2)).((.read).)) times3 1 "2" 3
+18</code></pre>
+<p>任意個の引数を取る関数の任意の引数をちょっと変更するような関数も簡単だ。 最後のは3引数の関数に対して、「2番目の引数をreadで変換して1番目の引数を2水増ししてから計算するような版に変換」という思考から直接書き下せる。</p>
+<p>というわけで、Bコンビネータのやっていることを考えると当然と言えば当然だが、 関数の引数や返り値を軽くラップした亜種版くらいは使い捨てのように生成できるようになる。<br>
+これをわざわざトップレベルに定義した方がよいのか、使い捨てで良いのかについては実際に書いているコードによると思う。 一度しか使わないのであれば私は大抵使い捨てる。 名前を考えるのが面倒だからというただそれだけの理由だけど。</p>
+<h4 id="最後に">最後に</h4>
+<p>とりあえずここでは(.)の慣用句について紹介したけど、 point freeでザクザク書ける関数プログラマはこの手の慣用句をいくつか知っていて、 それで当たり前のようにpoint freeで書き下しているようだ。(多分)</p>
+<p>そもそも、なぜpoint freeで考えるのか？ そのメリットについては、また別の話なのでそのうち気が向いたら書く。 <a href="" class="uri" title="Go to wiki page">cut-sea</a>:2011/10/05 18:39:36 JST</p>
+<hr>
+<h3 id="yesod_internationalization"><a href="Yesod_Internationalization.html" class="uri" title="Go to wiki page">Yesod_Internationalization</a></h3>
+<p>少し試してみたけど簡単に使えたっぽい。 どんどん便利になっていくなぁ。 いいわ<a href="Yesod.html" class="uri" title="Go to wiki page">Yesod</a>。</p>
+<hr>
+<h3 id="yesod"><a href="http://docs.yesodweb.com/">Yesod</a></h3>
+<p>0.6.0をインストールしてみた。 こっちね -&gt; <a href="Yesod.html" class="uri" title="Go to wiki page">Yesod</a></p>
+<hr>
+<h3 id="よくわかりません"><a href="http://d.hatena.ne.jp/r-west/">よくわかりません</a></h3>
+<p>誰だか存じ上げませんでした。<br>
+すごく分かりやすいです。<br>
+こういう風に順を追ってちゃんと説明できる人好きだな。</p>
+<p>あ、ちなみに今のリンク先はあんま関係ないです。 過去のYコンビネータの説明やらなんやらです。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2010/04/07 14:03:58 JST</p>
+<hr>
+<h3 id="applicative">Applicative</h3>
+<p>typeclassopediaを読んでて、そういや(&lt;*&gt;)をSとして使ってた自分。 朝食摂取しながらサンドウィッチの包みで検証したのでメモっておく。</p>
+<blockquote>
+<h5 id="applicative-fのfが型-aの時">Applicative fのfが型(-&gt;)aの時</h5>
+<p>(&lt;*&gt;)::f (b-&gt;c)-&gt;f b-&gt;f c</p>
+<pre><code>     →(((-&gt;) a) (b-&gt;c))-&gt;(((-&gt;) a) b)-&gt;(((-&gt;) a) c)
+     →(a-&gt;(b-&gt;c))-&gt;(a-&gt;b)-&gt;(a-&gt;c)
+     →(a-&gt;b-&gt;c)-&gt;(a-&gt;b)-&gt;(a-&gt;c)</code></pre>
+<p>pure::b-&gt;f b</p>
+<pre><code>    ::b-&gt;(((-&gt;) a) b)
+    ::b-&gt;(a-&gt;b)
+    ::b-&gt;a-&gt;b</code></pre>
+<p>つまり、(&lt;*&gt;)がSでpureがK! Applicative ((-&gt;)a)はSKコンビネータをプリミティブオペレータとする合成戦略を実現している。</p>
+</blockquote>
+<p>あと</p>
+<blockquote>
+<p>fmap g x = pure g &lt;*&gt; x</p>
+<p>は</p>
+<p>pure g &lt;*&gt; x = (&lt;*&gt;) (pure g) x</p>
+<pre><code>             = S (K g) x
+             = (S (K g)) x
+             = (B S K g) x
+             = B S K g x
+             = (B S K) g x</code></pre>
+<p>こいつが fmap g xと同じになるので、fmap g x = (B S K) g xなのでfmapはまさにBSKとなっている。</p>
+</blockquote>
+<p>Kがpure(=return)ってのは確かに、プログラムを書いていて、 引数を一個消して一階層上の関数合成のレイヤに持ち込んだときにできるDSLのconstとなるのと感覚が非常に合致している。 なんか少しスッキリ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2010/03/31 10:15:21 JST</p>
+<blockquote>
+<p>ちなみにBはおなじみ(.)に相当するので、 fmap = B S K = (.) &lt;*&gt; return</p>
+<pre><code>             = (&lt;*&gt;) . return</code></pre>
+<p>つまり、「fmapはreturnして(&lt;*&gt;)すること」と読める。 まんまです。</p>
+</blockquote>
+<p>さらにスッキリ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2010/03/31 10:25:02 JST</p>
+<hr>
+<h3 id="グローバル変数が欲しい理由"><a href="http://d.hatena.ne.jp/kazu-yamamoto/20090110/1231552839">グローバル変数が欲しい理由？</a></h3>
+<p>これについてちょっと考えてみやう！<br>
+こっちね -&gt; <a href="グローバル変数が欲しい理由？.html" class="uri" title="Go to wiki page">グローバル変数が欲しい理由？</a></p>
+<hr>
+<h3 id="real-world-haskell">Real World Haskell</h3>
+<p>今週いただきました。 amazonで予約したやつがまだ来てないのに。<br>
+しかし分厚いなー。 やっぱ楽しいや。<br>
+Haskellの本ってこれまでどうも学術的と思われるような本ばっかだったので、 この本は良いよー。 まさにPracticalな感じでほんきに存在意義があると思う。 この泥臭さが好きだなー。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/12/05 23:53:29 JST</p>
+<hr>
+<h3 id="geb">GEB</h3>
+<p>ゲーデル・エッシャー・バッハね。 ものまね鳥を一個スタックに積んでこちらを読む。</p>
+<p>ものまね鳥で階数の話が出てて、 だからどうしたと思ってスルーしたりもしたが、 早速それっぽい所にヒットしたか。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/11/25 22:21:03 JST</p>
+<hr>
+<h3 id="ghc-head">GHC-HEAD</h3>
+<p>しばらくぶりに追っかけ。<br>
+とおもったらエラーが発生。<br>
+patchが無いと言われた。</p>
+<p><strong>え？Ubuntuってデフォでpatch入ってないの？</strong></p>
+<p>しょうがないのでパッケージシステムからインストールして、再度ビルド中。 今度はちゃんと最後まで行くんだろうか。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/11/12 22:57:50 JST</p>
+<ul>
+<li>いった。6.11.20081111になってる。ってことは11/11版か、ホヤホヤだな。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/11/13 09:54:45 JST</li>
+</ul>
+<hr>
+<h3 id="ものまね鳥をまねる20">ものまね鳥をまねる(20)</h3>
+<p>やっぱりことあるごとに他人にアピールしておくものだ。<br>
+声を掛けてた人が区の図書館から、この本を入手して「カリーの森」は難しくなかったよ言って少し説明してくれた。 分ったわけじゃないけど、とりあえず予想通り、ゲーデルとか数学の世界で起った数学基礎論とか、 歴史的な経緯とかの知識があった方が分りやすいだろうね、ということに。<br>
+で、その人が言うには「ゲーデル・エッシャー・バッハ」が一番分りやすかったとのことで、 あのイエローページみたいなやつかと少し萎え萎えなんだが、読んでみるかなぁと。<br>
+ちなみにその人は数学科出身。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/11/12 22:16:32 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる19">ものまね鳥をまねる(19)</h3>
+<p>カリーの森で足止め。<br>
+<em>議論</em>のあたりを誰か説明してくれー。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/10/21 10:00:35 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる18">ものまね鳥をまねる(18)</h3>
+<p>なんと、ようやくスマリヤンがなぜこのような比喩を使ったのかが解った。<br>
+この様な、というのは「鳥に呼び掛けたら鳥の名前を応える」というやつ。</p>
+<p>「ものまね鳥をまねる」でググるとamazonを除けば <a href="http://d.hatena.ne.jp/propella/20070426/p1">背徳的なものまね鳥</a>なんかが結構最初の方に引っ掛かって、 私もその方が何か分りやすそう、とか思ってたんだけどカリーの森でナゾが解ける。</p>
+<p>残念ながら「鳥が交尾して鳥を産む」という比喩はヒッジョーにマズい。 これは破綻しちゃうんだ。スゲー！やっぱちゃんと考えられた比喩だったんだ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/10/15 10:09:25 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる17">ものまね鳥をまねる(17)</h3>
+<p>激ムズ。<br>
+少し調べてみたんだけど、こんな難問出すなー。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/10/14 10:17:41 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる16">ものまね鳥をまねる(16)</h3>
+<p>賢人鳥の章も終えた。<br>
+結構これもK的な簡単さがあったな。 問題も読んだ瞬間になんだか自明というか、 単に言い換えてるだけというか、 そういう簡単な感じがする。</p>
+<p>で、今朝はそのままカリーの森に突入。<br>
+まだはっきりとはしないけど、コンビネータにその森特有の意味を持たせて、 ロジックを築いていく(？)という応用編に突入ということでいいかな？ 第IV部ということで、ここで部がかわったし。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/10/10 09:59:37 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる15">ものまね鳥をまねる(15)</h3>
+<p>Ｏが面白い。<br>
+へたすりゃ賢人鳥Θより興味深いかも。<br>
+ちなみに、ΘはΘx=x(Θx)ね。ＯはＯxy=y(xy)である。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/10/09 13:46:37 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる14">ものまね鳥をまねる(14)</h3>
+<p>賢人鳥系の問題をはじめてるけど、最初はとっかかりが無くてなかなか解けなかった。<br>
+再帰してて自分自身が右辺にも来ちゃってるから、 以前、解いた「任意の鳥が好きな鳥」というやつの表現を使うというのは思いついたんだけど、 そのパターンが多くてノートを漁っても、なかなかすぐ見つけらんなくて解けない。 また少しずつ慣れてはきてるけど。 なんか章が変わる度に毎度振り回されてる気がする。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/10/08 20:31:05 JST</p>
+<hr>
+<h3 id="unfoldr">unfoldr</h3>
+<p>今日仕事で「こりゃHaskellならunfoldrだよな」って思ったんだけど、 まぁC#でforeachを使いまくってゴテゴテと書いていた。</p>
+<p>で、帰ってからHaskellでポイントだけ再実装してみたんだけど、unfoldrだと引数が一個足りない？？</p>
+<pre><code>module Main where
+
+import Data.List
+
+type ProductsId = String
+type Quantity = Int
+type PackLimit = Int
+
+data OrdersProducts = Op {prod :: ProductsId, q :: Quantity} deriving (Show)
+
+original_order :: [OrdersProducts]
+original_order = [Op "A" 5, Op "B" 7, Op "C" 3, Op "D" 12, Op "E" 2, Op "F" 2, Op "G" 1]
+
+unfoldr2 :: (b -&gt; c -&gt; Maybe(a,b,c)) -&gt; b -&gt; c -&gt; [a]
+unfoldr2 f b c =
+    case f b c of
+      Just (a,b',c') -&gt; a : unfoldr2 f b' c'
+      Nothing        -&gt; []
+
+makePlan :: PackLimit -&gt; [OrdersProducts] -&gt; [[OrdersProducts]]
+makePlan limit = unfoldr2 breaker []
+    where
+      breaker [] [] = Nothing
+      breaker wk [] = Just (wk,[],[])
+      breaker wk (r:rs) | qt == limit = Just (wk++[r],[],rs)
+                        | qt &lt;  limit = breaker (wk++[r]) rs
+                        | qt &gt;  limit = Just (wk++[Op (prod r) (q r-over)],[],Op (prod r) over:rs)
+          where
+            qt = foldr ((+).q) 0 wk + q r
+            over = qt - limit</code></pre>
+<p>あーそーだ。</p>
+<pre><code>makePlan :: PackLimit -&gt; ([OrdersProducts],[OrdersProducts]) -&gt; [[OrdersProducts]]
+makePlan limit = unfoldr breaker
+    where
+      breaker ([],[]) = Nothing
+      breaker (wk,[]) = Just (wk,([],[]))
+      breaker (wk,(r:rs)) | qt == limit = Just (wk++[r],([],rs))
+                          | qt &lt;  limit = breaker ((wk++[r]),rs)
+                          | qt &gt;  limit = Just (wk++[Op (prod r) (q r-over)],([],Op (prod r) over:rs))
+          where
+            qt = foldr ((+).q) 0 wk + q r
+            over = qt - limit</code></pre>
+<p>これでいんじゃん。アホだ。</p>
+<p>それよか内部定義の型とかって調べられたりしないかな。 例えば</p>
+<pre><code>*Main&gt; :t makePlan.breaker</code></pre>
+<p>みたいに。 トップレベルで実装してからwhere句に移動させるのタルいし。<a href="" class="uri" title="Go to wiki page">cut-sea</a></p>
+<ul>
+<li>これって mapAccumL じゃね？</li>
+<li>mapAccumLでも可能だけど、unfoldrだねって結論が出た。(ｗ</li>
+<li><p>いや、これは mapAccumL でしょ。breaker から breaker を呼ぶのはいただけないです。 – [1..100]&gt;&gt;=pen</p>
+<pre><code>makePlan :: PackLimit -&gt; [OrdersProducts] -&gt; [[OrdersProducts]]
+makePlan limit rs = concat $ snd $ mapAccumL f ([],0) $ map Just rs ++ [Nothing]
+  where
+    f (wks,_) Nothing               = (([],0),[wks])
+    f (wks,t) (Just r) | t' &lt; limit = ((wks++[r],t'),[])
+                       | otherwise  = ((wks',b),ws)
+      where
+        t' = t + q r
+        (a,b) = divMod t' limit
+        ws = [wks++[r{q=limit-t}]] ++ replicate (a-1) [r{q=limit}]
+        wks' = if b == 0 then [] else [r{q=b}]</code></pre></li>
+<li><p>読みやすさを追求するなら，パスを分けるという手もあるかな．．．<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a></p>
+<pre><code>makePlan :: PackLimit -&gt; [OrderedProducts] -&gt; [[OrderedProducts]]
+makePlan n = map (compo . group) . splits n . concatMap decompo
+
+splits :: Int -&gt; [a] -&gt; [[a]]
+splits n = unfoldr phi
+  where phi [] = Nothing
+        phi xs = Just $ splitAt n xs
+
+decompo :: OrderedProducts -&gt; [ProductId]
+decompo (Op i q) = replicate q i
+
+compo :: [[ProductId]] -&gt; [OrderedProducts]
+compo = map $ uncurry Op . (head &amp;&amp;&amp; length)</code></pre></li>
+</ul>
+<hr>
+<h3 id="ものまね鳥をまねる13">ものまね鳥をまねる(13)</h3>
+<p>今朝、無事通過。<br>
+そのまま勢いで「賢人鳥のギャラリー」に突入。 ざっと先読みして太字を追うと、 <strong>1階の鳥</strong>とか<strong>固有鳥</strong>とか<strong>正規結合子</strong>とか<strong>類似性</strong>とか<strong>拡張的</strong>とか<strong>まばらである</strong>とか 今迄の空気じゃないタームが並んでいて楽しみだ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/10/01 22:00:09 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる12">ものまね鳥をまねる(12)</h3>
+<p>やられた。<br>
+これまでも誤字はあったものの、読んでて気付くレベルだった。 まさか問題が間違ってるとはなぁ。<br>
+長く悩んでどうにも降参しちゃって答を見たんだが、直感的にはその形になる様に思えず、 答から逆算してみたら案の定問題が間違ってやがった。<br>
+今日は1問すら進まなかったよ。 今朝の段階で今の章が終わると思ってたのに。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/30 22:40:07 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる11">ものまね鳥をまねる(11)</h3>
+<p>なるほど。<br>
+当り前なんだけど、重複している引数を1つに消し込みたかったら、 やはり重複効果のある鳥を使えばよいんだ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/24 12:39:11 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる10">ものまね鳥をまねる(10)</h3>
+<p>今日から重複効果のある鳥なんだけど、以前より使って良い鳥が増えた分、むしろ簡単かもしれん。<br>
+それでいて、自明っぽい問題じゃないから面白い。 なんとなく、よりハイレベルのユーティリテュがあるおかげで以前より難しいはずの問題がさらっと解ける感じDeath。</p>
+<p>だけど、ある鳥を別の鳥で表現することにあまり意味を感じなくなってきた。<br>
+ちょっと誤解をまねきそうなので補足すると、ある鳥がB系とT系で表現できるとか M系を必要とするかなどを理解する(ちゅーか直感的に判る感覚を身に付ける)のはいいと思うんだけど、 だからと言ってRを使って表現したかCを使って表現したかなどはどーでもいーよなーっとか。</p>
+<p>ただ手を動かして解くことでたまに発見することや理解したと思えることがちょこちょこ出てくるので、 パスるのも良くないよなーってことで、ちまちまと問題と格闘してしまうのであった。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/22 10:40:59 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる9">ものまね鳥をまねる(9)</h3>
+<p>今朝ようやく多数の鳥が登場する章をくぐり抜けたのであった。 最初戸惑ったflip系の変換も慣れると意外とサクサク解ける。 それでも少し頭を捻らなきゃならないレベルだったので楽しめた。</p>
+<p>で、来週から何かと言うと「ものまね鳥、ウグイス、ホシムクドリ」というわけで重複効果ですな。 つまりこれで結合、置換、複製の各パターンが出揃うわけだ。 その次に来るのは「賢人鳥のギャラリー」ってことで、再帰系だ。 Yだけはすでに出てきてたけど、再帰パターンになる鳥の仲間だっけかな。(テキトー)</p>
+<p>そこまででようやく基本のキが終わるようなもんだろうか。長ぇ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/20 00:16:15 JST</p>
+<hr>
+<h3 id="gtk2hs">Gtk2HS</h3>
+<p>今度は最近完成したとのアナウンスが流れ、amazonでも予約できるようになっているReal World Haskellで紹介されているGtk2HS。<br>
+</p>
+<p>とりあえず片っ端からパッケージでlib系を入れておいてからINSTALLドキュメントに従ってインストールしたらサンプルプログラムが結構サクッと動作した。</p>
+<p>こっちのがドキュメントやらサンプルやらがあっていいかも。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/18 03:16:30 JST</p>
+<hr>
+<h3 id="wxhaskell">wxHaskell</h3>
+<p>HaskellでGUIを書こうとした場合に何が最短だろうか？と調べたらwxHaskellっぽい？<br>
+開発が止まってるという話を聞いたんだけど、今もソースは更新されてるみたいなのでいいんじゃないかしらん。 とりあえずwxcoreとwxをインストールしたら無事サンプルが動作。<br>
+wxWidgetを2.8が最新だったもんだから最初それを使ってたんだけど、どうにもエラーが出てまともに起動せず。 wxHaskellの方のchangesを見たら2.6への適合はやったとあるが、それが最後の模様。 というわけで2.6にダウングレードしてwxcore/wxの再インストールをした次第。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/17 23:42:06 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる8">ものまね鳥をまねる(8)</h3>
+<p>自分が導出した式と回答にある式の相互変換をするために少し時間がかかったけど、うまくつながった。<br>
+解けるとどうということはないが、案外気付かないものかも。<br>
+これまでも何度か経験したことではあるんだけど、 見えないものが見えるようになった瞬間というのは結構うれしい。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/17 07:00:08 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる7">ものまね鳥をまねる(7)</h3>
+<p>B系の結合鳥をやってて、これは結構簡単だったんで油断してた。<br>
+この2、3日はRとかCとかFなどの置換鳥をやってるんだが、これが結構難しい。</p>
+<p>コツらしきものを掴んだと思ったら次の問題ではうまくいかないし、 これは答だろうと思って到達しても回答にあるのと形が違ってると、 さらにそれが対応するのか確認しないとどうも気持ち悪いしってことでやってるんだが、 結合鳥の時と違って結構対応確認も手間取るしで、遅々として進まない。</p>
+<p>多分全体から見ると今は一番つまらない箇所なんだろうけど、 それでも結構楽しんでやれているのは幸いだ。<br>
+まだまだ問題がいっぱいあるので、いつこの森を抜けられるのか分らんが、 パズルを解くのが直接の目的じゃないのでじっくりやる。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/13 23:50:59 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる6">ものまね鳥をまねる(6)</h3>
+<p>ようやく大勢の鳥たちがぞくぞくと登場する章に突入。 さっそくルリツグミB登場。 今朝解いた問題は以前証明したものをBも利用して再証明するということで、 だいぶパターンに慣れてきた感じ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/05 10:03:39 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる5">ものまね鳥をまねる(5)</h3>
+<p>ようやく最初の章がおわった。<br>
+</p>
+<p>ここまでで登場した鳥は、M,I,L,K。(ミルク？)</p>
+<p>難しいので、解けない問題は答を見て、翌日再チャレンジでやってる。 KとかIの問題は簡単なんだが、MとLが絡む問題は思いつく必要がある(今のところ？)ことがあって、 どうにも解けなかったりする。<br>
+トータルで今までのところ3問くらいは自力で解けなかったかな。</p>
+<p>とりあえず今日ようやく賢人鳥が登場した。<br>
+賢人鳥はいわゆるYコンビネータ。<br>
+本書の比喩では「xの名を呼びかけるとxが好む鳥の名を語って答えてくれる鳥」。。。<br>
+なんだけど、これって本当に答えてくれてるのか？？</p>
+<p>で、ここは1問だけなんだけど、問題に取りかかる前に、早速MとLの関係に悩み中。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/09/03 10:25:24 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる4">ものまね鳥をまねる(4)</h3>
+<p>今朝は結構すんなり2問目が解けた。 すんなりっていってもメモ用紙3枚くらいに色々書いてゴミにしたけど。</p>
+<p>あと<a href="http://users.bigpond.net.au/d.keenan/Lambda/index.htm">To Dissect a Mockingbird</a>ってのが結構いい。 印刷して読んでみているところ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/08/13 10:27:57 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる3">ものまね鳥をまねる(3)</h3>
+<p>ざっと一通りは読んだが、読んだだけーなので、 今度は改めて問題を解いていく。<br>
+手を動かして進めましょうということでノートを購入。</p>
+<p>朝食を取りながら一問目に挑戦するも…。orz</p>
+<p>やっぱムズイ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/08/12 10:09:08 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる2">ものまね鳥をまねる(2)</h3>
+<p>少しずつ、おもしろくなってきた。<br>
+SとKってなんかイビツな基本の結合子だと思ってたけど、 なるほど、そういうことかとナットク。<br>
+いろんな結合子が無数に作れる中で、 引数の複製と消滅という特異な機能をもっているってのがまず第一にある模様。 じゃあ他のでもいいじゃんとなりそうだが、実際そうらしく、 何を基本の結合子として全てを表現するかという試みは、 それはそれでいくつものパターンでやっているみたい。 しかしその中でなぜSとKがこうも有名なのかというのは、まだちょっと分ってない。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/07/25 02:34:23 JST</p>
+<hr>
+<h3 id="ものまね鳥をまねる">ものまね鳥をまねる</h3>
+<p>入手。<br>
+昨日GaucheFestから帰ったら来てた。 さっそく読みはじめたが、こりゃ紙とエンピツが必需品だな。 ひさびさに筆記用具をとりだしてちまちまとはじめたが、 裏紙じゃなくて、ノートが欲しくなってきた。どしよ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/07/21 00:01:56 JST</p>
+<hr>
+<h3 id="gauchefest">GaucheFest</h3>
+<p>なんだけど<a href="Haskell.html" class="uri" title="Go to wiki page">Haskell</a>で書いてた。<br>
+逆に<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>はGauche<a href="cut-sea.html" class="uri" title="Go to wiki page">?</a>で。</p>
+<p>とりあえず(&lt;*&gt;)と(&amp;&amp;&amp;)を使った処理をfirst sketchでポイントフリー的に考えられるようになりつつある。<br>
+ただ、考え方それ自体はともかく、実際にパラった時に複数の流れの どれがどうなってたか一度に頭の中に置いておけないんだよなぁ。</p>
+<pre><code>(&lt;*&gt;) :: (a-&gt;b-&gt;c) -&gt; (a-&gt;b) -&gt; (a-&gt;c)
+(f &lt;*&gt; g) x = f x $ g x
+
+(&lt;.&gt;) :: (a-&gt;b) -&gt; (a-&gt;c) -&gt; (a-&gt;(b,c))
+(f &lt;.&gt; g) x = (f x, g x)</code></pre>
+<p>利用するコンビネータとしてB以外では上記の2つを用意。 上のは(&lt;*&gt;)=Sで下のは(&amp;&amp;&amp;)でControl.Applicativeにあるけど、 今回はとりあえず自作した。 (&lt;.&gt;)としたのは、あとから(&amp;&amp;&amp;)がそうだったんだと知っただけ。</p>
+<p>で、</p>
+<pre><code>(&lt;-&gt;) :: Gate -&gt; Gate -&gt; Gate
+f &lt;-&gt; g = g.((++).fst&lt;*&gt;snd).f
+
+(&lt;|&gt;) :: Gate -&gt; Gate -&gt; Gate
+f &lt;|&gt; g = (((++).fst&lt;*&gt;fst.g.snd)&lt;.&gt;(snd.g.snd)).f</code></pre>
+<p>こんな感じのコードを以前だったらリファクタリングの結果として到達することはあったけど、 なんとか考えながらではあるものの書き下せるようになってきてる。</p>
+<p>上記のは一応</p>
+<pre><code>infixr 4 &lt;|&gt;
+infixr 5 &lt;-&gt;
+infixr 6 &lt;.&gt;
+infixr 7 &lt;*&gt;</code></pre>
+<p>としてる。 <a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/07/19 17:38:54 JST</p>
+<hr>
+<h3 id="ghcのビルド続3">GHCのビルド(続^3)</h3>
+<p>インストールしてみて分ったけど、ghc-pkg listがえらく不足してた。</p>
+<pre><code>tar zxvf ~/POOL/Haskell/ghc-6.8.3-src.tar.bz2
+tar zxvf ~/POOL/Haskell/ghc-6.8.3-src-extralibs.tar.bz2</code></pre>
+<p>の両方を展開しておいてから./configure+mk/config.mk編集+gmakeで</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="d0b3a5a4fda3b5b190bebbb9a3b9">[email&nbsp;protected]</a>&gt; ghc-pkg list
+/usr/local/lib/ghc-6.8.3/package.conf:
+    Cabal-1.2.4.0, HUnit-1.2.0.0, QuickCheck-1.1.0.0, array-0.1.0.0,
+    base-3.0.2.0, bytestring-0.9.0.1.1, cgi-3001.1.6.0,
+    containers-0.1.0.2, directory-1.0.0.1, fgl-5.4.2.0,
+    filepath-1.1.0.0, (ghc-6.8.3), haskell-src-1.0.1.2,
+    haskell98-1.0.1.0, hpc-0.5.0.1, html-1.0.1.1, mtl-1.1.0.1,
+    network-2.2.0.0, old-locale-1.0.0.0, old-time-1.0.0.0,
+    packedstring-0.1.0.0, parallel-1.0.0.1, parsec-2.1.0.1,
+    pretty-1.0.0.0, process-1.0.0.1, random-1.0.0.0,
+    regex-base-0.72.0.1, regex-compat-0.71.0.1, regex-posix-0.72.0.2,
+    rts-1.0, stm-2.1.1.1, template-haskell-2.2.0.0, time-1.1.2.1,
+    unix-2.3.0.1, xhtml-3000.2.0.0</code></pre>
+<p>なレベルでなかなかよさげ。 あとは自分でHackageDBから持ってくるか。 ただ、インストール先がどうにも気に入らないので、そこを調べてからかなぁ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/07/04 07:52:57 JST</p>
+<hr>
+<h3 id="ghcのビルド続々">GHCのビルド(続々)</h3>
+<p>./configureした後にmk/config.mkを手でいじった。</p>
+<pre><code>#-----------------------------------------------------------------------------
+# GMP Library (version 2.0.x or above)
+#
+HaveLibGmp      = YES
+LibGmp          = installed
+
+GMP_INCLUDE_DIRS=/usr/pkg/include
+GMP_LIB_DIRS=/usr/pkg/lib</code></pre>
+<p>あまりよくわかってないけど、上記のように編集してからgmakeすると以下のようにgmpを一応リンクしてくれた。</p>
+<pre><code>ghc-6.8.3:
+        -lc.12 =&gt; /usr/lib/libc.so.12
+        -lutil.7 =&gt; /usr/lib/libutil.so.7
+        -lm.0 =&gt; /usr/lib/libm387.so.0
+        -lm.0 =&gt; /usr/lib/libm.so.0
+        -lgmp.3 =&gt; /usr/pkg/lib/libgmp.so.3
+        -lrt.0 =&gt; /usr/lib/librt.so.0
+        -lpthread.0 =&gt; /usr/lib/libpthread.so.0</code></pre>
+<p>ああ、ちなみにbuildしたやつをinstall済みなので、 現在buildに使われているghcはもうghc-6.8.3になってる。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/07/02 07:56:29 JST</p>
+<hr>
+<h3 id="ghcのビルド続">GHCのビルド(続)</h3>
+<p>/usr/local/include以下にgmp.hを入れたり、gmpを先にビルドしてinstallしておいてからやったりしたけどそれはダメだった。</p>
+<p>その後、いくつかいじってしまったので 現在再確認のためまたまた条件を絞ってビルド中だけど、 今朝起きたらビルドできてたっぽいのでメモ。</p>
+<p>GHC-6.8.3のビルドをするにあたり、システムには動くGHCが必要なわけだけど、 そいつが私の環境の場合にはpkgsrcというNetBSDのパッケージシステムから入れたものである。 具体的にはghc-6.8.2という直前のversionが入っているので、そいつを利用してビルドすることになるんだと思う。</p>
+<p>で、まずそのGHCについてなんだけど、 /usr/pkg/lib/ghc-6.8.2というディレクトリにGHCのすべてのファイルが入っているようだ。<br>
+</p>
+<p>例えば/usr/pkg/bin/ghcなんかは/usr/pkg/lib/ghc-6.8.2/ghc-6.8.2というexeにシンボリックリンクされているし、 /usr/pkg/lib/ghc-6.8.2/incldueやらlibやらがある構成になっている。</p>
+<p>ただし、pkgsrcでビルドした際にどうやらgmpはgmpで別にインストールしているから、 GHCとしてはそいつを利用する方向でビルド&amp;インストールしたんだろう。<br>
+正しい姿がどうなのか知らないけど、 gmpを別のpkgsrcからインストールされたものを 利用したせいじゃないかと思うんだけど /usr/pkg/lib/ghc-6.8.2/include配下にgmp.hが無いというのが直接の問題のようだ。<br>
+つまり、ここにgmp.hがあれば良いとうことのようで、 ln -s /usr/pkg/include/gmp.h /usr/pkg/lib/ghc-6.8.2/include/gmp.hとして おいてやるとビルドに成功するというオチっぽい (これ<em>だけ</em>なのかどうかを現在再確認中)。</p>
+<ul>
+<li>ちなみにこれでビルドしたやつをインストールすると/usr/local/lib/ghc-6.8.3/incldueの下にはめでたくgmp.hが入るので次回からは大丈夫なのかな？？ 本体に肝心のlibgmp.soがリンクされてないっぽいけど。。。</li>
+<li><a href="shelarcy.html" class="uri" title="Go to wiki page">shelarcy</a>(2008/07/01 20:55:07 JST): gmp は処理系自身の実装ではなくて、 <a href="https://hackage.haskell.org/trac/ghc/wiki/GMPMemoryManagement">Integer 型を実装するための効率のよい組み込み演算の提供に使われています</a>。なので、Integer 型を使わない限り、libgmp.so はリンクされていなくても構いません。</li>
+</ul>
+<p>これなら./configure;gmakeで問題ないみたいだ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/28 08:00:31 JST</p>
+<p>とりあえずビルド自体はおっけーそうだ。 ちなみにmake installもgmake installじゃないと通らなかった。これは初めての体験かも。 しかし足りない。 pkgsrcから入れたのが</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="9deff2f2e9ddf3f6f4eef4">[email&nbsp;protected]</a>&gt; ldd /usr/pkg/lib/ghc-6.8.2/ghc-6.8.2 
+/usr/pkg/lib/ghc-6.8.2/ghc-6.8.2:
+        -lc.12 =&gt; /usr/lib/libc.so.12
+        -ltermcap.0 =&gt; /usr/lib/libtermcap.so.0
+        -lreadline.5 =&gt; /usr/pkg/lib/libreadline.so.5
+        -lutil.7 =&gt; /usr/lib/libutil.so.7
+        -lm.0 =&gt; /usr/lib/libm387.so.0
+        -lm.0 =&gt; /usr/lib/libm.so.0
+        -lgmp.3 =&gt; /usr/pkg/lib/libgmp.so.3
+
+        -lrt.0 =&gt; /usr/lib/librt.so.0
+        -lpthread.0 =&gt; /usr/lib/libpthread.so.0
+<a href="email-protection.html" class="__cf_email__" data-cfemail="c9bba6a6bd89a7a2a0baa0">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>に対して</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="cab8a5a5be8aa4a1a3b9a3">[email&nbsp;protected]</a>&gt; ldd ghc-6.8.3 
+ghc-6.8.3:
+        -lc.12 =&gt; /usr/lib/libc.so.12
+        -lutil.7 =&gt; /usr/lib/libutil.so.7
+        -lm.0 =&gt; /usr/lib/libm387.so.0
+        -lm.0 =&gt; /usr/lib/libm.so.0
+        -lrt.0 =&gt; /usr/lib/librt.so.0
+        -lpthread.0 =&gt; /usr/lib/libpthread.so.0</code></pre>
+<p>である。 –with-gmp-includesと–with-gmp-librariesの両オプションを付けても結果は同じ。 termcapとreadlineはともかくgmpが見られてないのはどうもマズいんでないの？と思うんだけどどうなんでしょう？<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/28 09:21:35 JST</p>
+<hr>
+<h3 id="ghcのビルド">GHCのビルド</h3>
+<p>うまくいくかどうかはわからんがメモっていく。</p>
+<ol type="1">
+<li><a href="http://darcs.haskell.org/">darcsリポジトリ</a>からtarballを取得。 現時点では最新が ghc-HEAD-2008-06-06-ghc-corelibs-testsuite.tar.gz なのでそれ。 testsuiteの入ってないのとか圧縮形式の違うのがあるが、とりあえず一番でかいのを戴いてくる。</li>
+<li>tar zxvf ghc-HEAD-2008-06-06-ghc-corelibs-testsuite.tar.gzするとghcというディレクトリができる。_darcsというサブディレクトリもできているようなのでdarcsリポジトリからpullしてきた状態になってんだろう。</li>
+<li>cd ghc;darcs pull -aとする。多分さらに新しい分があったらpatchを持ってくるのかな。</li>
+<li><p>chmod +x darcs-allとするが、こいつはperlスクリプトらしい。どうも</p>
+<pre><code>#! /usr/bin/perl -w</code></pre>
+<p>となってるので</p>
+<pre><code>#! /usr/pkg/bin/perl -w</code></pre>
+<p>と修正しておく。</p></li>
+<li><p>./darcs-all pull -aとしてみるとなんか進行しているっぽい。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="2b485e5f06584e4a6b4540425842">[email&nbsp;protected]</a>&gt; ./darcs-all pull -a
+== running darcs pull -a
+Pulling from "http://darcs.haskell.org/ghc"...
+This is the GHC darcs repository (HEAD branch)
+
+For more information, visit the GHC developer wiki at
+  http://hackage.haskell.org/trac/ghc
+**********************
+No remote changes to pull in!
+== nofib not present or not a repository; skipping
+== running darcs pull -a --repodir testsuite
+Pulling from "http://darcs.haskell.org/testsuite"...
+This is the GHC testsuite darcs repository (HEAD branch)
+
+For more information, visit the GHC developer wiki at
+  http://hackage.haskell.org/trac/ghc
+**********************
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/array
+Pulling from "http://darcs.haskell.org/packages/array"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/base
+Pulling from "http://darcs.haskell.org/packages/base"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/bytestring
+Pulling from "http://darcs.haskell.org/packages/bytestring"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/Cabal
+Pulling from "http://darcs.haskell.org/packages/Cabal"...
+This is GHC's branch of the main Cabal repo.
+
+NB. DO NOT push new Cabal patches to this repo, instead use the main Cabal repo at
+  http://darcs.haskell.org/cabal
+
+Patches to this repo must pass GHC's validate script before being pushed.
+**********************
+No remote changes to pull in!
+== running darcs pull -a --repodir libraries/containers
+Pulling from "http://darcs.haskell.org/packages/containers"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/directory
+Pulling from "http://darcs.haskell.org/packages/directory"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/editline
+Pulling from "http://darcs.haskell.org/packages/editline"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/filepath
+Pulling from "http://darcs.haskell.org/packages/filepath"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/ghc-prim
+Pulling from "http://darcs.haskell.org/packages/ghc-prim"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/haskell98
+Pulling from "http://darcs.haskell.org/packages/haskell98"...
+No remote changes to pull in!
+== running darcs pull -a --repodir libraries/hpc
+Pulling from "http://darcs.haskell.org/packages/hpc"...
+No remote changes to pull in!
+== running darcs pull -a --repodir libraries/integer-gmp
+Pulling from "http://darcs.haskell.org/packages/integer-gmp"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/old-locale
+Pulling from "http://darcs.haskell.org/packages/old-locale"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/old-time
+Pulling from "http://darcs.haskell.org/packages/old-time"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/packedstring
+Pulling from "http://darcs.haskell.org/packages/packedstring"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/pretty
+Pulling from "http://darcs.haskell.org/packages/pretty"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/process
+Pulling from "http://darcs.haskell.org/packages/process"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/random
+Pulling from "http://darcs.haskell.org/packages/random"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/template-haskell
+Pulling from "http://darcs.haskell.org/packages/template-haskell"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/unix
+Pulling from "http://darcs.haskell.org/packages/unix"...
+Finished pulling and applying.
+== running darcs pull -a --repodir libraries/Win32
+Pulling from "http://darcs.haskell.org/packages/Win32"...
+No remote changes to pull in!
+<a href="email-protection.html" class="__cf_email__" data-cfemail="e6859392cb958387a6888d8f958f">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>ずらずらとこんな感じでしばらくしたら終了。</p></li>
+<li><p>./darcs-all –extra getとしたらさらになんか取得しているっぽい。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="99faecedb4eafcf8d9f7f2f0eaf0">[email&nbsp;protected]</a>&gt; ./darcs-all --extra get
+warning: adding --partial, to override use --complete
+warning: array already present; omitting
+warning: base already present; omitting
+warning: bytestring already present; omitting
+warning: Cabal already present; omitting
+warning: containers already present; omitting
+warning: directory already present; omitting
+warning: editline already present; omitting
+warning: filepath already present; omitting
+warning: ghc-prim already present; omitting
+warning: haskell98 already present; omitting
+warning: hpc already present; omitting
+warning: integer-gmp already present; omitting
+warning: old-locale already present; omitting
+warning: old-time already present; omitting
+warning: packedstring already present; omitting
+warning: pretty already present; omitting
+warning: process already present; omitting
+warning: random already present; omitting
+warning: template-haskell already present; omitting
+warning: unix already present; omitting
+warning: Win32 already present; omitting
+== running darcs get --partial http://darcs.haskell.org/packages/ALUT
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/GLUT
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/HUnit
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/ObjectIO
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/OpenAL
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/OpenGL
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/QuickCheck
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/cgi
+Copying patch 3 of 3... done.
+Applying patch 2 of 2... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/fgl
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/haskell-src
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/html
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/mtl
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/network
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/parsec
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/parallel
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/regex-base
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/regex-compat
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/regex-posix
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/stm
+Copying patch 3 of 3... done.
+Applying patch 2 of 2... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/time
+Copying patch 3 of 3... done.
+Applying patch 2 of 2... done.
+Finished getting.
+== running darcs get --partial http://darcs.haskell.org/packages/xhtml
+Copying patch 2 of 2... done.
+Applying patch 1 of 1... done.
+Finished getting.
+<a href="email-protection.html" class="__cf_email__" data-cfemail="4427313069372125042a2f2d372d">[email&nbsp;protected]</a>&gt; </code></pre></li>
+<li><p>./darcs-all –testsuite getをしたけど。</p>
+<pre><code>warning: adding --partial, to override use --complete
+warning: testsuite already present; omitting
+warning: array already present; omitting
+warning: base already present; omitting
+warning: bytestring already present; omitting
+warning: Cabal already present; omitting
+warning: containers already present; omitting
+warning: directory already present; omitting
+warning: editline already present; omitting
+warning: filepath already present; omitting
+warning: ghc-prim already present; omitting
+warning: haskell98 already present; omitting
+warning: hpc already present; omitting
+warning: integer-gmp already present; omitting
+warning: old-locale already present; omitting
+warning: old-time already present; omitting
+warning: packedstring already present; omitting
+warning: pretty already present; omitting
+warning: process already present; omitting
+warning: random already present; omitting
+warning: template-haskell already present; omitting
+warning: unix already present; omitting
+warning: Win32 already present; omitting
+<a href="email-protection.html" class="__cf_email__" data-cfemail="680b1d1c451b0d09280603011b01">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>すでにあるから端折ったよってことらしい。</p></li>
+<li><p>./darcs-all –nofib getもoptionalなんだけどやっておく。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="accfd9d881dfc9cdecc2c7c5dfc5">[email&nbsp;protected]</a>&gt; ./darcs-all --nofib get
+warning: adding --partial, to override use --complete
+== running darcs get --partial http://darcs.haskell.org/nofib
+This is the nofib darcs repository (HEAD branch)
+
+For more information, visit the GHC developer wiki at
+  http://hackage.haskell.org/trac/ghc
+**********************
+Copying patch 3 of 3... done.
+Applying patch 2 of 2... done.
+Finished getting.
+warning: array already present; omitting
+warning: base already present; omitting
+warning: bytestring already present; omitting
+warning: Cabal already present; omitting
+warning: containers already present; omitting
+warning: directory already present; omitting
+warning: editline already present; omitting
+warning: filepath already present; omitting
+warning: ghc-prim already present; omitting
+warning: haskell98 already present; omitting
+warning: hpc already present; omitting
+warning: integer-gmp already present; omitting
+warning: old-locale already present; omitting
+warning: old-time already present; omitting
+warning: packedstring already present; omitting
+warning: pretty already present; omitting
+warning: process already present; omitting
+warning: random already present; omitting
+warning: template-haskell already present; omitting
+warning: unix already present; omitting
+warning: Win32 already present; omitting
+<a href="email-protection.html" class="__cf_email__" data-cfemail="e88b9d9cc59b8d89a88683819b81">[email&nbsp;protected]</a>&gt;</code></pre></li>
+<li>cd gmp; tar zxvf gmp-4.2.1.tar.gz; cd ..としておく。<br>
+解凍してなければソースツリーにあるのは使われないってことらしいので、 解凍しておいてやる。実際/usr/pkgのものを使ってもらわなくてもいい。 /usr/pkg配下はpkgsrcからのインストールでガチガチに管理されてっから、 へたにそっち見られるよか自前で持ってるやつを使ってもらうのが望ましい。 ってことでやってみたら魔の時間帯を切り抜けたっぽい。gmakeして8minくらいでgmp.hがねぇって言われてたから。</li>
+<li><p>sh bootでいよいよbuild開始かしらん。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="573422237a24323617393c3e243e">[email&nbsp;protected]</a>&gt; sh boot
+Booting .
+configure.ac:904: warning: AC_CACHE_VAL(fp_gcc_version, ...): suspicious cache-id, must contain _cv_ to be cached
+../../lib/autoconf/general.m4:1973: AC_CACHE_VAL is expanded from...
+../../lib/autoconf/general.m4:1993: AC_CACHE_CHECK is expanded from...
+aclocal.m4:548: FP_HAVE_GCC is expanded from...
+configure.ac:904: the top level
+configure.ac:904: warning: AC_CACHE_VAL(fp_gcc_version, ...): suspicious cache-id, must contain _cv_ to be cached
+../../lib/autoconf/general.m4:1973: AC_CACHE_VAL is expanded from...
+../../lib/autoconf/general.m4:1993: AC_CACHE_CHECK is expanded from...
+aclocal.m4:548: FP_HAVE_GCC is expanded from...
+configure.ac:904: the top level
+configure.ac:904: warning: AC_CACHE_VAL(fp_gcc_version, ...): suspicious cache-id, must contain _cv_ to be cached
+../../lib/autoconf/general.m4:1973: AC_CACHE_VAL is expanded from...
+../../lib/autoconf/general.m4:1993: AC_CACHE_CHECK is expanded from...
+aclocal.m4:548: FP_HAVE_GCC is expanded from...
+configure.ac:904: the top level
+Booting libraries/ALUT
+Booting libraries/GLUT
+Booting libraries/OpenAL
+Booting libraries/OpenGL
+Booting libraries/base
+Booting libraries/directory
+/usr/pkg/share/aclocal/rep.m4:7: warning: underquoted definition of AM_PATH_REP
+/usr/pkg/share/aclocal/rep.m4:7:   run info '(automake)Extending aclocal'
+/usr/pkg/share/aclocal/rep.m4:7:   or see http://sources.redhat.com/automake/automake.html#Extending-aclocal
+Booting libraries/editline
+Booting libraries/network
+Booting libraries/old-time
+Booting libraries/process
+Booting libraries/regex-posix
+Booting libraries/time
+Booting libraries/unix
+configure.ac:67: warning: AC_CACHE_VAL(cv_func_usleep_return_type, ...): suspicious cache-id, must contain _cv_ to be cached
+../../lib/autoconf/general.m4:1973: AC_CACHE_VAL is expanded from...
+../../lib/autoconf/general.m4:1993: AC_CACHE_CHECK is expanded from...
+configure.ac:67: the top level
+configure.ac:67: warning: AC_CACHE_VAL(cv_func_usleep_return_type, ...): suspicious cache-id, must contain _cv_ to be cached
+../../lib/autoconf/general.m4:1973: AC_CACHE_VAL is expanded from...
+../../lib/autoconf/general.m4:1993: AC_CACHE_CHECK is expanded from...
+configure.ac:67: the top level
+configure.ac:67: warning: AC_CACHE_VAL(cv_func_usleep_return_type, ...): suspicious cache-id, must contain _cv_ to be cached
+../../lib/autoconf/general.m4:1973: AC_CACHE_VAL is expanded from...
+../../lib/autoconf/general.m4:1993: AC_CACHE_CHECK is expanded from...
+configure.ac:67: the top level
+<a href="email-protection.html" class="__cf_email__" data-cfemail="f2918786df819793b29c999b819b">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>いくつかwarningが出てるけど、errorとかではないんでいいのかな。</p></li>
+<li><p>gmakeとするGNU makeじゃないとダメらしい</p>
+<pre><code>/usr/pkg/bin/ghc -optc-O -optc-Iparser -optc-I. -optc-O -H32m -O  -istage1/utils  -istage1/basicTypes  -istage1/types  -istage1/hsSyn  -istage1/prelude  -istage1/rename  -istage1/typecheck  -istage1/deSugar  -istage1/coreSyn  -istage1/vectorise  -istage1/specialise  -istage1/simplCore  -istage1/stranal  -istage1/stgSyn  -istage1/simplStg  -istage1/codeGen  -istage1/main  -istage1/profiling  -istage1/parser  -istage1/cprAnalysis  -istage1/iface  -istage1/cmm  -istage1/nativeGen -Wall -fno-warn-name-shadowing -fno-warn-orphans -Istage1 -cpp -fglasgow-exts -Rghc-timing -I. -Iparser -Iutil -fno-generics -package unix -ignore-package lang -Rghc-timing  -H16M '-#include "cutils.h"' -DUSING_COMPAT -i../compat -ignore-package Cabal -package directory -package pretty -package containers    -c parser/cutils.c -o stage1/parser/cutils.o
+In file included from /usr/pkg/lib/ghc-6.8.2/include/Stg.h:150,
+                 from /usr/pkg/lib/ghc-6.8.2/include/Rts.h:19,
+
+                 from parser/cutils.c:6:0: 
+
+/usr/pkg/lib/ghc-6.8.2/include/Regs.h:28:17:
+     error: gmp.h: No such file or directory
+In file included from /usr/pkg/lib/ghc-6.8.2/include/Stg.h:150,
+                 from /usr/pkg/lib/ghc-6.8.2/include/Rts.h:19,
+
+                 from parser/cutils.c:6:0: 
+
+/usr/pkg/lib/ghc-6.8.2/include/Regs.h:121:0:
+     error: expected specifier-qualifier-list before 'MP_INT'
+
+In file included from parser/cutils.c:6:0: 
+
+/usr/pkg/lib/ghc-6.8.2/include/Rts.h:203:0:
+     error: expected ')' before '*' token
+
+/usr/pkg/lib/ghc-6.8.2/include/Rts.h:204:0:
+     error: expected ')' before '*' token
+&lt;&lt;ghc: 27182068 bytes, 4 GCs, 159744/159744 avg/max bytes residency (1 samples), 16M in use, 0.00 INIT (0.00 elapsed), 0.05 MUT (0.37 elapsed), 0.02 GC (0.07 elapsed) :ghc&gt;&gt;
+gmake[1]: *** [stage1/parser/cutils.o] エラー 1
+gmake: *** [stage1] エラー 1
+<a href="email-protection.html" class="__cf_email__" data-cfemail="2b485e5f06584e4a6b4540425842">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>というわでエラーでストップ。 やっぱりgmp.hがみつからないと言われる。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="472432336a34222607292c2e342e">[email&nbsp;protected]</a>&gt; ll /usr/pkg/include/gmp.h
+-r--r--r--  1 root  wheel  82613 Apr 19 08:48 /usr/pkg/include/gmp.h
+<a href="email-protection.html" class="__cf_email__" data-cfemail="82e1f7f6aff1e7e3c2ece9ebf1eb">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>こいつが分らないのか、それともソースツリーにあるgmpディレクトリ下のが見つからないと言ってるのか(後者はないだろうと思うけど)。</p></li>
+</ol>
+<ul>
+<li><p>これについては下記の指摘を受けてgmpを展開しておいて再挑戦。なんかうまく進行してたが今度も、</p>
+<pre><code>/usr/pkg/bin/ghc -H32m -O  -istage1/utils  -istage1/basicTypes  -istage1/types  -istage1/hsSyn  -istage1/prelude  -istage1/rename  -istage1/typecheck  -istage1/deSugar  -istage1/coreSyn  -istage1/vectorise  -istage1/specialise  -istage1/simplCore  -istage1/stranal  -istage1/stgSyn  -istage1/simplStg  -istage1/codeGen  -istage1/main  -istage1/profiling  -istage1/parser  -istage1/cprAnalysis  -istage1/iface  -istage1/cmm  -istage1/nativeGen -Wall -fno-warn-name-shadowing -fno-warn-orphans -Istage1 -cpp -fglasgow-exts -Rghc-timing -I. -Iparser -Iutil -fno-generics -package unix -ignore-package lang -Rghc-timing  -H16M '-#include "cutils.h"' -DUSING_COMPAT -i../compat -ignore-package Cabal -package directory -package pretty -package containers    -c utils/Interval.hs -o stage1/utils/Interval.o  -ohi stage1/utils/Interval.hi
+&lt;&lt;ghc: 47759964 bytes, 7 GCs, 108544/159744 avg/max bytes residency (2 samples), 19M in use, 0.00 INIT (0.00 elapsed), 0.09 MUT (0.43 elapsed), 0.02 GC (0.04 elapsed) :ghc&gt;&gt;
+/usr/pkg/bin/ghc -optc-O -optc-Iparser -optc-I. -optc-O -H32m -O  -istage1/utils  -istage1/basicTypes  -istage1/types  -istage1/hsSyn  -istage1/prelude  -istage1/rename  -istage1/typecheck  -istage1/deSugar  -istage1/coreSyn  -istage1/vectorise  -istage1/specialise  -istage1/simplCore  -istage1/stranal  -istage1/stgSyn  -istage1/simplStg  -istage1/codeGen  -istage1/main  -istage1/profiling  -istage1/parser  -istage1/cprAnalysis  -istage1/iface  -istage1/cmm  -istage1/nativeGen -Wall -fno-warn-name-shadowing -fno-warn-orphans -Istage1 -cpp -fglasgow-exts -Rghc-timing -I. -Iparser -Iutil -fno-generics -package unix -ignore-package lang -Rghc-timing  -H16M '-#include "cutils.h"' -DUSING_COMPAT -i../compat -ignore-package Cabal -package directory -package pretty -package containers    -c parser/cutils.c -o stage1/parser/cutils.o
+In file included from /usr/pkg/lib/ghc-6.8.2/include/Stg.h:150,
+                 from /usr/pkg/lib/ghc-6.8.2/include/Rts.h:19,
+
+                 from parser/cutils.c:6:0: 
+
+/usr/pkg/lib/ghc-6.8.2/include/Regs.h:28:17:
+     error: gmp.h: No such file or directory
+In file included from /usr/pkg/lib/ghc-6.8.2/include/Stg.h:150,
+                 from /usr/pkg/lib/ghc-6.8.2/include/Rts.h:19,
+
+                 from parser/cutils.c:6:0: 
+
+/usr/pkg/lib/ghc-6.8.2/include/Regs.h:121:0:
+     error: expected specifier-qualifier-list before 'MP_INT'
+
+In file included from parser/cutils.c:6:0: 
+
+/usr/pkg/lib/ghc-6.8.2/include/Rts.h:203:0:
+     error: expected ')' before '*' token
+
+/usr/pkg/lib/ghc-6.8.2/include/Rts.h:204:0:
+     error: expected ')' before '*' token
+&lt;&lt;ghc: 27177664 bytes, 4 GCs, 159744/159744 avg/max bytes residency (1 samples), 16M in use, 0.00 INIT (0.00 elapsed), 0.04 MUT (0.65 elapsed), 0.02 GC (0.03 elapsed) :ghc&gt;&gt;
+gmake[1]: *** [stage1/parser/cutils.o] エラー 1
+gmake: *** [stage1] エラー 1
+<a href="email-protection.html" class="__cf_email__" data-cfemail="d1b2a4a5fca2b4b091bfbab8a2b8">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>うーん。やっぱ見つからないっていわれる。時間がかかったのはgmpのbuildがはいったからかな。</p></li>
+<li><a href="shelarcy.html" class="uri" title="Go to wiki page">shelarcy</a>: ghc-&lt;version&gt;/gmpディレクトリ下のファイルが解凍されていなければ、ソースツリーにある gmp は使われていないはずです。エラーメッセージを元に調べてみましたが、どうやら gmp が一般的でない場所にインストールされていると gmp を発見できなくて ghc のビルドに失敗するようですね。configure の –with-gmp-includes オプションや –with-gmp-libraries オプションを使ってください。 <a href="http://www.nabble.com/building-against-gmp-in-a-nonstandard-location-td16075621.html" class="uri">http://www.nabble.com/building-against-gmp-in-a-nonstandard-location-td16075621.html</a>
+<ul>
+<li>これは見て知ってたんですが、指定しても結局見つけてくれないんです。–with-gmp-includesでも–with-gmp-includes=/usr/pkg/include形でも結果は一緒。 ですが、gmpディレクトリの下のを解凍しておけばいいのですね？ということで解凍して試してみます。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/22 11:18:54 JST</li>
+</ul></li>
+<li><p>それと current (HEAD) のソースですが、testsuit や nofib （ベンチマーク）を必要としなかったり、本当の意味での最新版が欲しいのでなければ <a href="https://www.haskell.org/ghc/dist/current/dist/" class="uri">http://www.haskell.org/ghc/dist/current/dist/</a> から取得した方が楽です。こちらは既に sh boot まで適用済みなので、./configure &amp; make だけでビルドできますし。</p></li>
+</ul>
+<hr>
+<h3 id="monad-m-a---m-b---a---m-c---a---m-b-c">(Monad m) =&gt; (a -&gt; m b) -&gt; (a -&gt; m c) -&gt; (a -&gt; m (b, c))</h3>
+<p>先日のは</p>
+<pre><code>(&lt;*|*&gt;) :: (Monad m) =&gt; (a -&gt; c) -&gt; (a -&gt; m b) -&gt; (a -&gt; m (c, b))
+g &lt;*|*&gt; f = uncurry (=&lt;&lt;) . ((return.).(,).g &amp;&amp;&amp; f)</code></pre>
+<p>だったけど、今度は両方mつき。</p>
+<pre><code>(Monad m) =&gt; (a -&gt; m b) -&gt; (a -&gt; m c) -&gt; (a -&gt; m (b, c))</code></pre>
+<p>これが望み。 ちゅーわけで実装したら、</p>
+<pre><code>(&lt;*&amp;*&gt;) :: (Monad m) =&gt; (a -&gt; m b) -&gt; (a -&gt; m c) -&gt; (a -&gt; m (b, c))
+(&lt;*&amp;*&gt;) f g x = f x &gt;&gt;= (\y -&gt; (g x &gt;&gt;= (\z -&gt; return (y , z))))</code></pre>
+<p>これが分りやすかったやつだけど、なんとかコンビネータつかって理解しようと思ったら</p>
+<pre><code>f &lt;*&amp;*&gt; g = (=&lt;&lt;).((&lt;*&gt;).(((=&lt;&lt;).(return.).(,)).).(const id) &lt;*&gt; (const . g)) &lt;*&gt; f</code></pre>
+<p>まるでいみふめー。</p>
+<p>さらに欲しいのは</p>
+<pre><code>(Monad m,Monad m1,Monad m2) =&gt; (a -&gt; m1 b) -&gt; (a -&gt; m2 c) -&gt; (a -&gt; m (b, c))</code></pre>
+<p>だったんだけど、なんか頭イタ。</p>
+<pre><code>   m b &gt;&gt;= (return.).(,)
+  /           /
+a            /
+  \         /
+   m c &gt;&gt;= +</code></pre>
+<p>絵で書けばこんな感じっぽい？ 最初のは</p>
+<pre><code>   m b &gt;&gt;= (return.).(,)
+  /           /
+a            /
+  \         /
+   c ------+</code></pre>
+<p>こんな感じだったと思えばいいのかな。 これ見ると最初のと同じくらいスッキリ書けてもいい気がしますが、どでしょ？</p>
+<pre><code>f :: a -&gt; IO b
+f = undefined
+
+g :: a -&gt; Maybe b
+g = undefined</code></pre>
+<p>こうしておいて、</p>
+<pre><code>*FSDB&gt; :t (return.).(,) =&lt;&lt; f
+(return.).(,) =&lt;&lt; f :: (Monad m) =&gt; a -&gt; m (IO b, a)</code></pre>
+<p>これはもう慣れたが、</p>
+<pre><code>*FSDB&gt; :t ((return.).(,) =&lt;&lt; f) =&lt;&lt; g
+((return.).(,) =&lt;&lt; f) =&lt;&lt; g :: a -&gt; (IO b, Maybe b1)</code></pre>
+<p>うーん。これ行けるのか？</p>
+<ol type="1">
+<li>g x が Maybe aになる</li>
+<li>a が渡ってきて a -&gt; m (IO b, a)だったから m (IO b, Maybe a)</li>
+</ol>
+<p>ってことか、ああ、なるほど。<br>
+</p>
+<ul>
+<li>いや、なるほどじゃねぇや。右の=&lt;&lt;から左に渡ってくるのが Maybe aのaだから a -&gt; m (IO b, a)に適用されてやっぱ m (IO a, b)になるんでは？ なぜぽ？<br>
+さらに遡れば、((return.).(,) =&lt;&lt; f)の場合は f xがIO aになるわけだから、aが渡ってきて、も一つ引数もらってm (a,b)なモナドを返す関数になるのでは？<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/20 01:44:50 JST</li>
+<li><p>とりあえず勘違い一個。</p>
+<pre><code>(((return.).(,)) =&lt;&lt; f) 'c'</code></pre>
+<p>これは((((return.).(,)) =&lt;&lt; f) ‘c’)であって</p>
+<pre><code>(((return.).(,)) =&lt;&lt; f 'c')</code></pre>
+<p>これは((((return.).(,)) =&lt;&lt; (f ‘c’))だから別だった。<br>
+けど、そうだとしてもやっぱり何故(return.).(,)に渡ってくるのが生のbじゃなくてIO bなんじゃ？？<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/20 01:56:13 JST</p></li>
+</ul>
+<p>これが簡単にできるなら次は</p>
+<pre><code>(Monad m1, Monad m2, Monad m) =&gt; (m1 a, m2 b) -&gt; m (a, b)</code></pre>
+<p>とかやってみたくなるな。<br>
+とか言いつつ眠いので今日はおしまい。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/20 01:32:01 JST</p>
+<hr>
+<h3 id="section">&amp;&amp;&amp;</h3>
+<p>(&lt;*&gt;)でなんとかしたいなと思ってる状況で、 片翼がMonadになってしまっているケースに遭遇。</p>
+<p>どうなるかリファクタリングしたんだけど、書き方がどうにも納得出来ず、 というかイメージがさっぱりなので <a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>に相談したら次のコードを提示してくれた。</p>
+<pre><code>foo = uncurry (&gt;&gt;=) . (getModificationTime &amp;&amp;&amp; (return.).(,))</code></pre>
+<p>一応収穫は(f.).gのイメージが出来た(上の(return.).(,)んとこ)ことと あと&amp;&amp;&amp;の呪文を覚えたこと。<br>
+といってもこれもSの亜種だよなぁって話だけど。</p>
+<pre><code>*FSDB&gt; :t (&amp;&amp;&amp;)
+(&amp;&amp;&amp;) :: (Arrow a) =&gt; a b c -&gt; a b c' -&gt; a b (c, c')</code></pre>
+<p>あと</p>
+<pre><code>*FSDB&gt; :t (***)
+(***) :: (Arrow a) =&gt; a b c -&gt; a b' c' -&gt; a (b, b') (c, c')</code></pre>
+<p>なんてのもあるらしい。<br>
+あ、ghcのbuildはまだ。gmp.hが見つからないって叱られる。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/19 08:47:45 JST</p>
+<p>整理してみると、こうなる。</p>
+<pre><code>(&lt;*|*&gt;) :: (Monad m) =&gt; (a -&gt; c) -&gt; (a -&gt; m b) -&gt; (a -&gt; m (c, b))
+g &lt;*|*&gt; f = uncurry (=&lt;&lt;) . ((return.).(,).g &amp;&amp;&amp; f)
+
+{--
+
+*FSDB&gt; :t (id &lt;*|*&gt; getModificationTime)
+(id &lt;*|*&gt; getModificationTime) :: FilePath -&gt; IO (FilePath, ClockTime)
+
+*FSDB&gt; (id &lt;*|*&gt; getModificationTime) "/home/cut-sea/data/mbdb/data/%78"
+("/home/cut-sea/data/mbdb/data/%78",Sat Jun 14 19:24:59 JST 2008)
+
+*FSDB&gt; mapM (id &lt;*|*&gt; getModificationTime) ["/home/cut-sea/data/mbdb/data/%78"]
+[("/home/cut-sea/data/mbdb/data/%78",Sat Jun 14 19:24:59 JST 2008)]
+
+*FSDB&gt; mapM (id &lt;*|*&gt; getModificationTime) ["/home/cut-sea/data/mbdb/data/%78","/home/cut-sea/data/mbdb/data/%31%32%33"]
+[("/home/cut-sea/data/mbdb/data/%78",Sat Jun 14 19:24:59 JST 2008),("/home/cut-sea/data/mbdb/data/%31%32%33",Wed Jun 18 00:03:04 JST 2008)]
+--}</code></pre>
+<p>もう一つ欲しくなってきたな。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/19 10:03:38 JST</p>
+<hr>
+<h3 id="ghc-6.8.3"><a href="https://haskell.org/ghc/docs/6.8.3/html/users_guide/release-6-8-3.html">GHC 6.8.3</a></h3>
+<p>リリースされたのかな。<br>
+まだリリースノート見てないけど、 今回からNetBSDも正式対応されているらしいとの噂を聞いてるので、 ビルドしてみようと思ふ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/18 08:42:54 JST</p>
+<ul>
+<li><a href="https://hackage.haskell.org/trac/ghc/wiki/Platforms">NetBSDあった。</a><a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/18 08:46:24 JST</li>
+</ul>
+<hr>
+<h3 id="split">split</h3>
+<p>unfoldrを使ってみた。</p>
+<pre><code>split p xs = unfoldr (break' p) xs
+    where
+    break' :: (a -&gt; Bool) -&gt; [a] -&gt; Maybe ([a],[a])
+    break' p [] = Nothing
+    break' p xs = case break p xs of
+                  (_,[])    -&gt; Just (xs,[])
+                  (ys,_:zs) -&gt; Just (ys,zs)</code></pre>
+<p>しかし、こういう分割系の関数で、ことごとくseparatorが残り要素に含まれてて スゲー不便だと思うのはオレだけか？</p>
+<ul>
+<li>セパレータを使うならそうだけど。セパレータがない場合もいくらでもあるよね。たとえば、CamelCaseで書かれている空白のない文字列を単語に分解するとか。(2008/06/16 09:10:00 JST)</li>
+</ul>
+<p>残りデータが同じものを返してたら、 自分で頭ハネることになって二度手間だと思うんだが。</p>
+<pre><code>*FSDB&gt; split (=='/') "home/cut-sea/data/mbdb"
+["home","cut-sea","data","mbdb"]
+*FSDB&gt; split (=='/') "/home/cut-sea/data/mbdb"
+["","home","cut-sea","data","mbdb"]</code></pre>
+<p>どうもunfoldrはまだ良く分らん。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/16 07:51:04 JST</p>
+<hr>
+<h3 id="haskellのプログラムにおける設定ファイルとか">Haskellのプログラムにおける設定ファイルとか</h3>
+<p>Scheme<a href="cut-sea.html" class="uri" title="Go to wiki page">?</a>とかだとS式で設定ファイルを書いておいて、readしちゃうってのは良くやる。</p>
+<pre><code>data Database = Database {prefix::String, encoding::String} deriving (Show,Read)
+
+dbParse :: String -&gt; Database
+dbParse s = (read s)::Database
+
+dbTest :: String -&gt; IO ()
+dbTest = putStrLn . prefix . dbParse</code></pre>
+<p>プログラムはこんなのをロードしてみる。 でもって、</p>
+<pre><code>Database {prefix="/home/cut-sea/data/hogeDB", encoding="UTF-8"}</code></pre>
+<p>Config.hsには上記のDBの設定を書いておく。 ghcの対話環境で、</p>
+<pre><code>*Main&gt; let f = readFile "Config.hs"
+*Main&gt; f &gt;&gt;= dbTest
+/home/cut-sea/data/hogeDB
+*Main&gt; </code></pre>
+<p>readとshowがread/write不変なので簡単と思ってて、まぁ上記の通りすれば、 ちゃんと設定ファイルからDatabaseのデータをコンストラクトできるんだけど、 設定ファイルにコメントを書いたりするともうダメポ。</p>
+<ul>
+<li>コメントを読み飛ばすreaderを自前で書くしかないよねきっと。 単純な構造の設定なら簡単だとおもうよ。–nobsun(2008/06/14 23:38:12 JST)</li>
+<li>うーん。コメントが何行入るか分らない場合だと、(read s)::Typeのsにどこまで切り出すか分らないですよね？
+<ul>
+<li>一度にやろうとせずに、コメントを全部とりのぞいてから、read するようにすればいいだけじゃない？(2008/06/16 09:14:06 JST)</li>
+<li>コメント対応read。ちょいださだけど<a href="Programming_玉手箱_文字列.html" class="uri" title="Go to wiki page">Programming_玉手箱_文字列</a>(2008/06/17 15:50:22 JST)</li>
+</ul></li>
+</ul>
+<p>例えばConfig.hsにdbの設定だけじゃなくてサイトの名称やらURIのベースなんかを書く場合とかでは、 getContentsで済ませられないからreadをoverrideするだけじゃなくて設定ファイルパーサを書かなきゃならないのか。 一番良いのは<a href="Haskell.html" class="uri" title="Go to wiki page">Haskell</a>のコードで設定を書いておいて、ファイルのロードだけで済ませられれば良かったんだけど、 考えてみれば、それが出来るとしたら対話型インタプリタ上で定義が出来るようなものだから無理っちゃ無理なのか。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/15 07:09:51 JST</p>
+<p>式を一つ読むっていうreadはできないのかしらん。 まじめにパースしなきゃならんなんてこたないと思うのね。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/14 09:05:12 JST</p>
+<p>もしかしたら</p>
+<pre><code>myDatabase = Database {prefix="/home/cut-sea/data/hogeDB", encoding="UTF-8"}</code></pre>
+<p>としてメインプログラムでimportしるってのが常套手段なのか？ なんかそれで良さげな気がしてきたな。</p>
+<ul>
+<li>ダメじゃん。コンパイルされたら一緒に巻き込まれちゃう。コンフィグファイルの意味なしだよ。それじゃ。 なんか小回り効かないな。皆どうしてるんだろう？<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/14 22:03:16 JST</li>
+</ul>
+<p>ただし、その設定ファイルに色んな項目を入れたらimportとかモジュール宣言が ずらずら並んでおよそ設定ファイルらしくなくなるけど。。。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/14 09:09:50 JST</p>
+<p>Cabalのpackage.confは人手で作成するものじゃないからかも知らんが、 リストにしてつらつら並べてるな。ただしコメントはない。<br>
+やっぱこれは設定ファイルってのとは違うよなぁ。 システムの管理ファイルだから成立してるんだ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/14 09:18:53 JST</p>
+<hr>
+<h3 id="日本語文字">日本語文字</h3>
+<p>正直じゃまくさい。<br>
+ここが細かいことを気にしなくても扱えるとスゲーうれしいんだけど。<br>
+どう書く.orgの<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>の解を見ながらようやく使えそうな気配。</p>
+<pre><code>{-*******************************************************
+       {- encoding: utf-8; mode: haskell -}
+              File System DataBase
+*******************************************************-}
+
+module Main where
+
+import Control.Applicative
+import Network.URI
+import Codec.Binary.UTF8.String
+import qualified System.IO.UTF8 as U
+
+escape = escapeURIString (const False) . encodeString
+
+unescape = decodeString . unEscapeString
+
+sample0 = "~url quote../ほげ"
+sample1 = "!(foo*)"
+
+main = mapM_ (U.putStrLn . ((++) . unescape &lt;*&gt; (" &lt;- "++)) . escape) [sample0,sample1]</code></pre>
+<p>これで</p>
+<pre><code>*Main&gt; main
+~url quote../ほげ &lt;- %7E%75%72%6C%20%71%75%6F%74%65%2E%2E%2F%E3%81%BB%E3%81%92
+!(foo*) &lt;- %21%28%66%6F%6F%2A%29
+*Main&gt; </code></pre>
+<p>エスケープしてファイル名にして問題無いものに無害化されているのと、 それをアンエスケープして元に戻せることを確認。</p>
+<p>ちなみにEmacs上でやるときはset-buffer-file-system-encodingをutf-8に。<br>
+terminal上でもUTF-8に移行しておいて良かったーってことなのかどうか知らんけど 問題なさげ。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="7516000158061014351b1e1c061c">[email&nbsp;protected]</a>&gt; runghc Test.hs
+~url quote../ほげ &lt;- %7E%75%72%6C%20%71%75%6F%74%65%2E%2E%2F%E3%81%BB%E3%81%92
+!(foo*) &lt;- %21%28%66%6F%6F%2A%29
+<a href="email-protection.html" class="__cf_email__" data-cfemail="80e3f5f4adf3e5e1c0eeebe9f3e9">[email&nbsp;protected]</a>&gt; </code></pre>
+<p>fsdbを実装しようと思ったんだけど、とりあえずこれを使えば行けそうかな。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/13 05:26:19 JST</p>
+<hr>
+<h3 id="モナド">モナド</h3>
+<p>なんとなく分ってきた。 ので、もう少し頭の中が整理できたら何か書くかも。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/11 09:55:31 JST</p>
+<hr>
+<h3 id="xhtml">XHtml</h3>
+<p>ライブラリは薄いラッパーを作成中。</p>
+<pre><code>*Main&gt; h1 "H1"
+&lt;h1
+&gt;H1&lt;/h1
+&gt;
+*Main&gt; h1 $ toHtml "Normal Header"
+&lt;h1
+&gt;Normal Header&lt;/h1
+&gt;
+*Main&gt; bold "BOLD"
+&lt;b
+&gt;BOLD&lt;/b
+&gt;</code></pre>
+<p>となる。ちょっとだけ楽チンになる予定だろうか(自信なし)。</p>
+<p>一旦了。</p>
+<pre><code>module Main where
+
+import HtmlLite
+import CGI
+
+myLink = anchor![(identifier "toGoogle"),(name "toGoogle"),(href "http://www.google.co.jp")]$"click here"
+main = cgiMain $ const $ putHtml myLink</code></pre>
+<p>で、</p>
+<pre><code>*Main&gt; main
+q: 
+Content-type: text/html; charset="UTF-8"
+
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+&gt;&lt;a id="toGoogle" name="toGoogle" href="http://www.google.co.jp"
+  &gt;click here&lt;/a
+  &gt;&lt;/html
+&gt;</code></pre>
+<p>はじめて、「あ、K!」と思えた。<br>
+というのはどーでもいくて、XHTML的にはbodyタグ必須かー。どーしよ。 便利なutilityとしてbody内部だけ書けばいいやつを追加すっかぁ? いやいや、pageみたいなのを作るか。<a href="" class="uri" title="Go to wiki page">cut-sea</a></p>
+<hr>
+<h3 id="utf8">UTF8</h3>
+<blockquote>
+<p>入力出力はUTF-8のライブラリでwrapしないと、うれしさ半分だな。 もっかい使い方を調べてみるか。</p>
+</blockquote>
+<p>って書いたけど、<a href="nobsun_utf8.html" class="uri" title="Go to wiki page">nobsun_utf8</a>にあんじゃん。<br>
+ただし今のバージョンだとライブラリパスが少し変ったらしいので、</p>
+<pre><code>import System.IO.UTF8   -- ここ変更になった
+import Prelude hiding (getContents,getLine,readFile
+                      ,putStr,putStrLn,writeFile)
+import System.IO hiding (getContents,getLine,readFile
+                        ,putStr,putStrLn,writeFile
+                        ,hGetContents,hGetLine</code></pre>
+<p>ですね。</p>
+<pre><code>*Main&gt; main
+お名前をどうぞ．
+伊東 勝利
+ようこそ，伊東 勝利さん．</code></pre>
+<p>おお、いけたいけた。<br>
+じゃあ例のCGIだとどうか</p>
+<pre><code>*Main&gt; main
+q: who=%E4%BC%8A%E6%9D%B1%20%E5%8B%9D%E5%88%A9
+Content-type: text/html; charset="UTF-8"
+
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+&gt;&lt;h3
+  &gt;&amp;#12371;&amp;#12435;&amp;#12395;&amp;#12385;&amp;#12431; 伊東 勝利 &amp;#12373;&amp;#12435;&lt;/h3
+  &gt;&lt;/html
+&gt;</code></pre>
+<p>あら、文字化けと思ってたけど、良く見たら実体参照だったのか。<br>
+クライアントからPOSTされた文字列はちゃんと自分でエスケープしてから 送らないといけなかったんだっけ。</p>
+<pre><code>*Main&gt; stringToHtml "伊東 勝利"
+&amp;#20234;&amp;#26481; &amp;#21213;&amp;#21033;
+*Main&gt; stringToHtml "&lt;&amp;&gt;"
+&amp;lt;&amp;amp;&amp;gt;</code></pre>
+<p>stringToHtmlは勝手にescapeしてんね。</p>
+<pre><code>Convert a String to Html, converting characters that need to be escaped to HTML entities.</code></pre>
+<p>うーん。完全にフレームワークに頼ってて基本を忘れてんなぁ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/10 02:59:39 JST</p>
+<pre><code>q: who=%3C%E4%BC%8A%E6%9D%B1+%E5%8B%9D%E5%88%A9%3E
+Content-type: text/html; charset="UTF-8"
+
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+&gt;&lt;h3
+  &gt;&amp;#12371;&amp;#12435;&amp;#12395;&amp;#12385;&amp;#12431; &amp;lt;伊東 勝利&amp;gt; &amp;#12373;&amp;#12435;&lt;/h3
+  &gt;&lt;/html
+&gt;</code></pre>
+<p>あ、ちゃんとエスケープされてる。</p>
+<pre><code>gosh&gt; (use text.html-lite)
+#&lt;undef&gt;
+gosh&gt; (html-escape-string "伊東 勝利")
+"伊東 勝利"
+gosh&gt; (html-escape-string "&lt;&gt;")
+"&amp;lt;&amp;gt;"
+gosh&gt; (html-escape-string "こんにちわ")
+"こんにちわ"</code></pre>
+<p>あ、そっか別にエスケープって日本語は関係ないんだっけ。<br>
+単にタグなんかになってしまう文字をエスケープするだけだ。 属性値とかでURLになってしまうようなのは別途uriencodeは必要だけど。</p>
+<p>ってことは問題はなんでリテラルで埋め込んだ日本語だけが実体参照にしちゃうのかだけど。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/10 03:46:10 JST</p>
+<hr>
+<h3 id="unfoldr-1">unfoldr</h3>
+<p>unfoldrが少し分りかけてきた。</p>
+<pre><code>lines' s = unfoldr f s
+    where
+    f b = if (b=="") then Nothing else Just $ break' (=='\n') b</code></pre>
+<p>breakでpredicateがTrueになったとこまで含めるバージョンってないすか？<br>
+spanもbreakも</p>
+<pre><code>*Main&gt; break (=='\n') "Hello,\nWorld"
+("Hello,","\nWorld")
+*Main&gt; span (/='\n') "Hello,\nWorld"
+("Hello,","\nWorld")</code></pre>
+<p>って改行コードが後続に含まれてしまふのでつ。仕方なくbreak’を実装。</p>
+<pre><code>break' p xs = break'' [] xs
+    where
+    break'' res []     = (res, [])
+    break'' res (x:xs) = if p x then (res++[x],xs) else break'' (res++[x]) xs</code></pre>
+<p>これで</p>
+<pre><code>*Main&gt; break' (=='\n') "Hello,\nWorld"
+("Hello,\n","World")</code></pre>
+<p>ようやくlines’の実装にunfoldrに使えた。 unfoldrの感覚が掴みたかっただけだけど、えらい遠回りしてしまった。</p>
+<ul>
+<li><p>あら、linesは改行を含まないのかー。いーけどこんな風にすればおけー。</p>
+<pre><code>split p xs = break'' [] xs
+    where
+    break'' res []     = (res, [])
+    break'' res (x:xs) = if p x then (res,xs) else break'' (res++[x]) xs</code></pre></li>
+</ul>
+<p>しかし我ながら話があっちゃこっちゃと…分裂気味かも。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/10 01:53:15 JST</p>
+<p>あ、そうそう。なんで、unfoldに話が飛んだかというと、</p>
+<ol type="1">
+<li>下の件でパーサ書かなくていーんだよなーって思ったけど、</li>
+<li>どの段階でread c::Typeってするんだ？と思い、</li>
+<li>多分1行に1式とかってやるんだろうなぁと思って、</li>
+<li>linesかーと思って、</li>
+<li>String-&gt;[String]ってことはunfoldrで書けるんだよなーと思った<br>
+</li>
+</ol>
+<p>のでした。<br>
+よかった脈絡あった。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/10 02:04:01 JST</p>
+<hr>
+<h3 id="read">read</h3>
+<p>Cabalのpackage.confを見てて、そういやreadは？と思ったので確認。</p>
+<pre><code>data Color = Red | Blue | White | RGB (Int,Int,Int) deriving (Show, Read)</code></pre>
+<p>ってな具合にRead classのinstanceにしておいて</p>
+<pre><code>*Main&gt; read "RGB (0x7f,0x8e,0x4e)" :: Color
+RGB (127,142,78)</code></pre>
+<p>ってことでいいのね。<br>
+良かった。 設定ファイルのためのパーサを書かなくていいんだよね。</p>
+<pre><code>*Main&gt; let s = (show "hoge")
+*Main&gt; s
+"\"hoge\""
+*Main&gt; read s::String
+"hoge"
+*Main&gt; let c = show $ RGB (0x80,0x8c,0x8c)
+*Main&gt; c
+"RGB (128,140,140)"
+*Main&gt; read c::Color
+RGB (128,140,140)</code></pre>
+<p>うむ。read/showでread/write不変ってことで再確認。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/10 00:55:20 JST</p>
+<hr>
+<h3 id="はなんだ"><strong>,</strong>はなんだ？</h3>
+<pre><code>Prelude&gt; :t (,)
+(,) :: a -&gt; b -&gt; (a, b)</code></pre>
+<p>についてです。どーんと大盤振舞い。(ｗ</p>
+<pre><code>Prelude&gt; :t (,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,)
+(,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,) :: a
+                                                                   -&gt; b
+                                                                   -&gt; c
+                                                                   -&gt; d
+                                                                   -&gt; e
+                                                                   -&gt; f
+                                                                   -&gt; g
+                                                                   -&gt; h
+                                                                   -&gt; i
+                                                                   -&gt; j
+                                                                   -&gt; k
+                                                                   -&gt; l
+                                                                   -&gt; m
+                                                                   -&gt; n
+                                                                   -&gt; o
+                                                                   -&gt; p
+                                                                   -&gt; q
+                                                                   -&gt; r
+                                                                   -&gt; s
+                                                                   -&gt; t
+                                                                   -&gt; u
+                                                                   -&gt; v
+                                                                   -&gt; w
+                                                                   -&gt; x
+                                                                   -&gt; y
+                                                                   -&gt; z
+                                                                   -&gt; t28
+                                                                   -&gt; t29
+                                                                   -&gt; t30
+                                                                   -&gt; t31
+                                                                   -&gt; t32
+                                                                   -&gt; t33
+                                                                   -&gt; t34
+                                                                   -&gt; t35
+                                                                   -&gt; t36
+                                                                   -&gt; t37
+                                                                   -&gt; t38
+                                                                   -&gt; t39
+                                                                   -&gt; t40
+                                                                   -&gt; t41
+                                                                   -&gt; t42
+                                                                   -&gt; t43
+                                                                   -&gt; t44
+                                                                   -&gt; t45
+                                                                   -&gt; t46
+                                                                   -&gt; t47
+                                                                   -&gt; t48
+                                                                   -&gt; t49
+                                                                   -&gt; t50
+                                                                   -&gt; t51
+                                                                   -&gt; t52
+                                                                   -&gt; t53
+                                                                   -&gt; t54
+                                                                   -&gt; t55
+                                                                   -&gt; t56
+                                                                   -&gt; t57
+                                                                   -&gt; t58
+                                                                   -&gt; t59
+                                                                   -&gt; t60
+                                                                   -&gt; t61
+                                                                   -&gt; t62
+                                                                   -&gt; t63
+                                                                   -&gt; (a,
+                                                                       b,
+                                                                       c,
+                                                                       d,
+                                                                       e,
+                                                                       f,
+                                                                       g,
+                                                                       h,
+                                                                       i,
+                                                                       j,
+                                                                       k,
+                                                                       l,
+                                                                       m,
+                                                                       n,
+                                                                       o,
+                                                                       p,
+                                                                       q,
+                                                                       r,
+                                                                       s,
+                                                                       t,
+                                                                       u,
+                                                                       v,
+                                                                       w,
+                                                                       x,
+                                                                       y,
+                                                                       z,
+                                                                       t28,
+                                                                       t29,
+                                                                       t30,
+                                                                       t31,
+                                                                       t32,
+                                                                       t33,
+                                                                       t34,
+                                                                       t35,
+                                                                       t36,
+                                                                       t37,
+                                                                       t38,
+                                                                       t39,
+                                                                       t40,
+                                                                       t41,
+                                                                       t42,
+                                                                       t43,
+                                                                       t44,
+                                                                       t45,
+                                                                       t46,
+                                                                       t47,
+                                                                       t48,
+                                                                       t49,
+                                                                       t50,
+                                                                       t51,
+                                                                       t52,
+                                                                       t53,
+                                                                       t54,
+                                                                       t55,
+                                                                       t56,
+                                                                       t57,
+                                                                       t58,
+                                                                       t59,
+                                                                       t60,
+                                                                       t61,
+                                                                       t62,
+                                                                       t63)
+Prelude&gt; </code></pre>
+<p>型がppされたー。ってツッコむトコ違うっ！</p>
+<p>はてさて<strong>,</strong>はなんだろう？ <strong>,</strong>に<strong>,</strong>を適用して合成したわけじゃないよねぇ。</p>
+<p>ちなみにどんだけヒマなんだと思いつつ</p>
+<pre><code>:t (,,,,,,,,,,,, .. ,,,,,,,,,,,)
+               :
+              t8964,
+               :
+              t8965,
+               :
+              t8966)
+Prelude&gt; </code></pre>
+<p>あたりまで確認。 一回に時間がかかるのでヤメた。 なにやらppもあやふやだし。</p>
+<pre><code>Prelude&gt; :t (,)
+(,) :: a -&gt; b -&gt; (a, b)
+Prelude&gt; :t (,,)
+(,,) :: a -&gt; b -&gt; c -&gt; (a, b, c)</code></pre>
+<p>を見比べながら…</p>
+<pre><code>Prelude&gt; :t (,)(,)
+(,)(,) :: b1 -&gt; (a -&gt; b -&gt; (a, b), b1)
+Prelude&gt; :t (,).(,)
+(,).(,) :: a -&gt; b -&gt; (b1 -&gt; (a, b1), b)</code></pre>
+<p>うーん。(,)だけから合成して(,,)を作れるわけでもないか。 そもそも構造が別だから出来上ったものは(,)だけの組み合わせだし。<br>
+で、<strong>,</strong>って何？<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/09 23:44:47 JST</p>
+<hr>
+<h3 id="make">make</h3>
+<p>また捜してしまったのでメモ。</p>
+<pre><code> ghc -o app.cgi -optl-static --make App.hs</code></pre>
+<h3 id="cabal">Cabal</h3>
+<p>Cabalによる<a href="Haskell.html" class="uri" title="Go to wiki page">Haskell</a>のパ(ハ?)ッケージインストールなんだが、</p>
+<pre><code>runghc Setup.hs configure
+runghc Setup.hs build
+runghc Setup.hs install</code></pre>
+<p>とすると/usr/local/の下に入る。それはまぁいいとして、 そのディレクトリが…</p>
+<pre><code>/usr/local/lib/&lt;pkg-dir&gt;/ghc-6.8.2/...</code></pre>
+<p>みたいに散らかしやがるのに今気付いた。サイテー！！ ghc-6.8.2の下にまとめてくれよ、と。<br>
+冗談ぽく書いてるけど結構ムッときた。 どうにも他のアプリで共有できるものにも見えないしなぁ。 もしかしてpkgsrcでbuildしたもの(ghc-pkg)がおかしいのかしら。 それとも元々そーゆーもの？</p>
+<ul>
+<li><p>とりあえず/usr/localってのはdefaultでそういうものなのは普通で、 NetBSDのpackageが例外だと思うので、–prefix=/usr/pkgで指定は良し。 問題は…</p>
+<blockquote>
+<p>–libsubdir=dir</p>
+<pre><code>    A subdirectory of libdir in which libraries are actually installed.
+ For example, in the simple build system on Unix, the default libdir is /usr/local/lib,
+ and libsubdir contains the package identifier and compiler,
+ e.g. mypkg-0.2/ghc-6.4, so libraries would be installed in /usr/local/lib/mypkg-0.2/ghc-6.4. </code></pre>
+</blockquote>
+<p>ぐぇぇ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/09 23:18:24 JST</p></li>
+</ul>
+<p>というわけで手で移動させたらimportできなくなった。(当然)<br>
+/usr/pkg/lib/ghc-6.8.2/packages.confにいかにもHaskellのコードっぽく パッケージのメタデータが格納されていらっしゃるので、このパスを修正。 そしたらimportできるようになったらしい。ふう。 しかし、parsecが2.1.0.0があるのに3.0を入れてしまったんだけど、 どっちが見えることになるんだろう。</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="036076772e706662436d686a706a">[email&nbsp;protected]</a>&gt; ghc-pkg describe parsec
+name: parsec
+version: 2.1.0.0
+      ：</code></pre>
+<p>ってことは2.1.0.0なんだろうか？ それとも</p>
+<pre><code><a href="email-protection.html" class="__cf_email__" data-cfemail="3b584e4f16485e5a7b5550524852">[email&nbsp;protected]</a>&gt; ghc-pkg latest parsec
+parsec-3.0.0</code></pre>
+<p>で3.0.0が使われるのか。 依存関係があるならイモヅルで引っ張られるのかもしれないが、 自分がimportした時はどうなるのやら。</p>
+<ul>
+<li>あーでも<a href="Haskell.html" class="uri" title="Go to wiki page">Haskell</a>本体とは別の話だよなぁ。イモヅルはないか。 ってことは、どっちが見えるんだろう。</li>
+</ul>
+<p>他のパッケージのメタデータの中にも2.1.0.0の参照っぽいのが入ってるので、 気軽に削るのもマズそうだ。 メタデータ見てたらhaddockとかいうのパスには実際には何もなさげなんだけど、いーんだろうか？<br>
+つか、今頃気付いたけど、 <a href="https://www.haskell.org/cabal/release/latest/doc/users-guide/">ガイド</a>ちゃんと読めってことですね。</p>
+<p>とりあえず6.8.3からNetBSDがサポされるらしいので、 その時には自分でbuildしようとは思ってたりする。 と、ゆーわけで早く出してたもれ。</p>
+<p>あ、そうだ。 えらい寄り道したけど、元々DB関係のライブラリをあさってたんだった。<br>
+buildに失敗(BerkeleyDB-0.3)したり、依存するライブラリ(その他もろもろ)が多かったり、 なんか似たようなのがイロイロあるみたいに見えるんだけど、 標準でコレいっとけみたいなのはドイツだ？<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/09 22:18:57 JST</p>
+<hr>
+<h3 id="cgi">CGI</h3>
+<p>ライブラリを自作した。<br>
+Gauche<a href="cut-sea.html" class="uri" title="Go to wiki page">?</a>のCGIライブラリみたいに、 開発中とかでREQUEST_METHODが無い場合は 標準入力からQUERY_STRINGを受け取れるようにした。 これがやっぱり便利。</p>
+<pre><code>-- まずはお試し
+*Main&gt; cgiMain test2
+q: 
+Content-type: text/html; charset="UTF-8"
+
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+&gt;&lt;h3
+  &gt;&amp;#12371;&amp;#12435;&amp;#12395;&amp;#12385;&amp;#12431;&amp;#12289;&amp;#12354;&amp;#12435;&amp;#12383;&amp;#35504;?&lt;/h3
+  &gt;&lt;/html
+&gt;
+
+-- クエリとしてwho=cut-seaを与えてみる
+*Main&gt; cgiMain test2
+q: who=cut-sea       -- ← ここでqueryを与える
+Content-type: text/html; charset="UTF-8"
+
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+&gt;&lt;h3
+  &gt;&amp;#12371;&amp;#12435;&amp;#12395;&amp;#12385;&amp;#12431; cut-sea &amp;#12373;&amp;#12435;&lt;/h3
+  &gt;&lt;/html
+&gt;
+*Main&gt; </code></pre>
+<p>入力出力はUTF-8のライブラリでwrapしないと、うれしさ半分だな。 もっかい使い方を調べてみるか。<br>
+以下がサンプル。 ようやくCGIが書ける準備がでけた。のか？</p>
+<p>text/plainのサンプル</p>
+<pre><code>{- printenv -}
+test1 req = getEnvironment &gt;&gt;=  putText . concat . map (\(k,v)-&gt;k++" = "++v++"\n") . sort
+
+main = cgiMain test1</code></pre>
+<p>text/htmlのサンプル</p>
+<pre><code>{- hello -}
+test2 req = case getparam "who" req of
+                 Just w   -&gt; putHtml $ h3 $ toHtml $ "こんにちわ " ++ w ++ " さん"
+                 Nothing  -&gt; putHtml $ h3 $ toHtml "こんにちわ、あんた誰?"
+main = cgiMain test1</code></pre>
+<p>toHtmlが邪魔くせえ。 でもinstance HTML Stringしようとしたけどムリくさかったしなぁ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/09 08:32:06 JST</p>
+<ul>
+<li>? Text.XHtmlモジュール使ってるんなら，String は HTML クラスのインスタンスだよ．すでに．だから，toHtmlメソッドが使えるんだと思うけど．．．<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a></li>
+<li>あーそっか。勘違い。そうですね。<br>
+私がやりたかったのは<strong>h1 “ほげ”</strong>としたかったので、 Htmlとして文字列をそのまま使いたかったのでした。<br>
+が、コンストラクタか…。 うーん。避けるとしたらh1とかとは別にtH1みたいなのを用意するしかないのかな。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/09 14:03:15 JST</li>
+</ul>
+<hr>
+<h3 id="printenv-with">printenv with (&lt;*&gt;)</h3>
+<p>Sコンビネータも使ってみる。</p>
+<pre><code>#!/usr/bin/env runghc
+
+import System.Environment
+import Data.List
+import Control.Applicative
+
+main = putStrLn "Content-type: text/plain\n\n" &gt;&gt; getEnvironment &gt;&gt;= mapM_ (putStrLn . ((++) . fst &lt;*&gt; (" = "++) . snd)) . sort</code></pre>
+<p>逆に長くなってるやんけ、と言われそうだけど、いーんです。</p>
+<pre><code>*Main Control.Applicative&gt; ((*).fst&lt;*&gt;snd) (2,3)
+6
+*Main Control.Applicative&gt; (zip&lt;*&gt;tail) [1..10]
+[(1,2),(2,3),(3,4),(4,5),(5,6),(6,7),(7,8),(8,9),(9,10)]
+*Main Control.Applicative&gt; (zip&lt;*&gt;drop 3) [1..10]
+[(1,4),(2,5),(3,6),(4,7),(5,8),(6,9),(7,10)]</code></pre>
+<p>ふーん。じゃあmyLast。</p>
+<pre><code>myLast n = (over &lt;*&gt; drop n)
+           where
+           over x [] = x
+           over (x:xs) (y:ys) = over xs ys</code></pre>
+<p>なるほど、Sコンビネータってそういうことか。 とナットク。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/07 16:06:45 JST</p>
+<ul>
+<li>over はfoldl をつかえばかっこいいかも</li>
+</ul>
+<!-- -->
+<pre><code>over = foldl (const . tail)</code></pre>
+<p>こうか。</p>
+<pre><code>myLast n = (foldl (const . tail) &lt;*&gt; drop n)</code></pre>
+<p>なるほどね。 まだ K は全然イメージが出来てないな。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/08 01:50:51 JST</p>
+<ul>
+<li><p>こう :)</p>
+<pre><code>lastn = (foldl (const . tail) &lt;*&gt;) . drop</code></pre></li>
+<li><p>うーん。 Sを片側にしちゃうとこれまたイメージが湧かない。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/08 02:32:45 JST</p></li>
+</ul>
+<hr>
+<h3 id="printenv-with-1">printenv with (&gt;&gt;=)</h3>
+<p>もちっとらしく書いてみる。</p>
+<pre><code>#!/usr/bin/env runghc
+
+import System.Environment
+import Data.List
+
+main = putStrLn "Content-type: text/plain\n\n" &gt;&gt; getEnvironment &gt;&gt;= mapM_ (\(k,v)-&gt;putStrLn$k++" = "++v) . sort</code></pre>
+<p>というわけで<strong>ほぼ</strong>ワンライナー。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/07 12:56:24 JST</p>
+<ul>
+<li><p>らしく，ワンライナーにこだわるなら</p>
+<pre><code>main=putStr.unlines.(unlines["Content-Type: text/plain"]:).map(uncurry((.(" = "++)).(++))).sort=&lt;&lt;getEnvironment</code></pre></li>
+<li><p>どう思考したらこう書けるようになります？<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/08 02:56:52 JST</p></li>
+</ul>
+<hr>
+<h3 id="printenv">printenv</h3>
+<p>一番簡単なところから始めてみる。</p>
+<pre><code>#!/usr/bin/env runghc
+
+import System.Environment
+import Data.List
+
+main = do es &lt;- getEnvironment
+          putStrLn "Content-type: text/plain\n\n"
+          mapM_ putEnv $ sort es
+    where
+    putEnv (k,v) = putStrLn $ k ++ " = " ++ v</code></pre>
+<ul>
+<li>System.EnvironmentはgetEnvironmentのため</li>
+<li><p>Data.Listはsortのため</p></li>
+<li><p>この課題の場合，プログラムと外界とのインタラクションは1つです．すなわち，環境変数を外界から入力するのと，その一覧を出力するという1回だけですよね．それなら，出力は一箇所にまとめて 出力 &lt;- 加工 &lt;- 入力 のようにしたほうが読みやすくなると思いますよ．<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a></p>
+<pre><code>main = putStr . unlines . addHeader . map showEnv . sort =&lt;&lt; getEnvironment
+showEnv (k,v) = k ++ " = " ++ v
+addHeader = (unlines ["Content-Type: text/plain"] :)</code></pre></li>
+</ul>
+<p>cgiとして動かそうとするとerrorになる。 httpd/error_logにはrunghc: cannot find ghcとあるから起動時に runghcってのはどうもghcをcallしてるだけなんでしょう。 apacheから見つけらんないのかな。</p>
+<pre><code>% runghc --help
+runghc: syntax: runghc [-f GHC-PATH | --] [GHC-ARGS] [--] FILE ARG...</code></pre>
+<p>で、-f /usr/pkg/bin/ghc って与えるものらしいのだけど、ダメっぽい。</p>
+<pre><code>% ghc printenv.hs -o penv</code></pre>
+<p>としてバイナリをアップしておけば問題なく動作する。 最後は勿論それで良いんだけど、開発中はコンパイル面倒だな。 解決法は知らねぇ。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/07 12:39:26 JST</p>
+<hr>
+<h3 id="まずはechoサーバから">まずはEchoサーバから</h3>
+<p>朝<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>に注文したら書いてくれたので、さっそく試してみた。 が、動かないよぉ。<br>
+</p>
+<p>悲しいのでNetwork.Socketを使って実装してみた。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/06/05 05:30:42 JST</p>
+<p>こっちね -&gt; <a href="Programming_Network.html" class="uri" title="Go to wiki page">Programming_Network</a></p>
+<hr>
+<h3 id="再入門">再入門</h3>
+<p>しました。 今度は目標が見えているので最後まで頑張る。<a href="" class="uri" title="Go to wiki page">cut-sea</a>:2008/05/24 11:00:00 JST</p>
+<hr>
+<hr>
+<p>Last modified : 2011/10/06 07:23:11 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/cut-sea">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/cut-sea?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/cut-sea">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/cut-sea" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

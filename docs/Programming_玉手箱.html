@@ -1,0 +1,1252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_玉手箱</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_玉手箱</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_%E7%8E%89%E6%89%8B%E7%AE%B1"><span>Programming_玉手箱</span></a><ul>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E9%95%B7%E3%81%95%E3%81%AE%E6%AF%94%E8%BC%83">リストの長さの比較</a></li>
+<li><a href="#pos">pos+</a></li>
+<li><a href="#%E9%80%A3%E7%B6%9A%E3%81%97%E3%81%9F-n-%E8%A6%81%E7%B4%A0%E3%81%AE%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E3%83%AA%E3%82%B9%E3%83%88">連続した n 要素のリストのリスト</a></li>
+<li><a href="#graph-%E3%81%AE%E7%B5%B1%E5%90%88">Graph の統合</a><ul>
+<li><a href="#%E6%9C%A8%E3%81%AE%E7%B5%B1%E5%90%88">木の統合</a></li>
+</ul></li>
+<li><a href="#%E9%9B%86%E5%90%88%E3%81%AE%E7%B5%B1%E5%90%88">集合の統合</a></li>
+<li><a href="#xzip">xzip</a></li>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%82%92%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%8C%96%E3%81%99%E3%82%8B">リストをグループ化する</a><ul>
+<li><a href="#n-%E7%95%AA%E9%A3%9B%E3%81%B0%E3%81%97%E6%AF%8E%E3%81%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%AB%E5%88%86%E3%81%91%E3%82%8B">n 番飛ばし毎にグループに分ける</a></li>
+<li><a href="#n-%E5%80%8B%E3%81%9A%E3%81%A4%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%8C%96%E3%81%99%E3%82%8B">n 個ずつグループ化する</a></li>
+</ul></li>
+<li><a href="#%E7%B5%84%E5%90%88%E3%81%9B%E8%AB%96%E7%9A%84%E3%81%AA%E7%94%9F%E6%88%90%E9%96%A2%E6%95%B0">組合せ論的な生成関数</a><ul>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E4%BA%8C%E5%88%86%E5%89%B2%E3%81%AE%E7%94%9F%E6%88%90">リストの二分割の生成</a></li>
+<li><a href="#%E9%A0%86%E5%88%97%E3%81%AE%E7%94%9F%E6%88%90">順列の生成</a></li>
+<li><a href="#%E9%87%8D%E8%A4%87%E9%A0%86%E5%88%97%E3%81%AE%E7%94%9F%E6%88%90">重複順列の生成</a></li>
+<li><a href="#%E7%B5%84%E5%90%88%E3%81%9B%E3%81%AE%E7%94%9F%E6%88%90">組合せの生成</a></li>
+<li><a href="#%E9%87%8D%E8%A4%87%E7%B5%84%E5%90%88%E3%81%9B%E3%81%AE%E7%94%9F%E6%88%90">重複組合せの生成</a></li>
+</ul></li>
+<li><a href="#%E9%A0%86%E5%88%97%E3%81%AE%E7%94%9F%E6%88%90-1">順列の生成</a></li>
+<li><a href="#%E6%97%A2%E7%B4%84%E5%88%86%E6%95%B0">既約分数</a></li>
+<li><a href="#%E6%8B%A1%E5%BC%B5%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E3%81%AE%E4%BA%92%E9%99%A4%E6%B3%95">拡張ユークリッドの互除法</a></li>
+<li><a href="#%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E9%99%A4%E5%8E%BB">コメントの除去</a></li>
+<li><a href="#%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E5%AF%BE%E5%BF%9Cread">コメント対応read</a></li>
+<li><a href="#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E7%BD%AE%E6%8F%9B">正規表現置換</a></li>
+<li><a href="#words4apachelog">words4ApacheLog</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E5%85%88%E9%A0%AD%E3%81%8B%E3%82%89%E7%AD%89%E3%81%97%E3%81%84%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%8A%9C%E3%81%8D%E5%87%BA%E3%81%99">文字列の先頭から等しい文字列を抜き出す</a><ul>
+<li><a href="#%E3%81%8A%E7%B4%84%E6%9D%9F%E3%81%AE%E6%9C%AB%E5%B0%BE%E5%86%8D%E5%B8%B0%E7%89%88">お約束の末尾再帰版</a></li>
+</ul></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E4%B8%80%E8%87%B4%E3%81%99%E3%82%8B%E9%83%A8%E5%88%86%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%8A%BD%E5%87%BA%E3%81%99%E3%82%8B">文字列から一致する部分文字列を抽出する</a></li>
+<li><a href="#csv">CSV</a></li>
+<li><a href="#%E8%87%AA%E5%88%86%E8%87%AA%E8%BA%AB%E3%81%AE%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%99%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0">自分自身のソースコードをプリントするプログラム</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97-c-%E3%81%8C%E6%96%87%E5%AD%97%E5%88%97-a-b-%E3%81%8B%E3%82%89%E6%A7%8B%E6%88%90%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8B">文字列 C が文字列 A, B から構成されているか</a></li>
+<li><a href="#%E9%96%A2%E6%95%B0%E5%9E%8B%E8%A1%A8">関数型表</a></li>
+<li><a href="#%E4%B8%8A%E5%90%91%E3%81%8D%E3%81%AB%E3%82%82%E8%BE%BF%E3%82%8C%E3%82%8B%E6%9C%A8">上向きにも辿れる木</a></li>
+<li><a href="#%E5%B9%B3%E8%A1%A1%E6%9C%A8">平衡木</a><ul>
+<li><a href="#%E8%B5%A4%E9%BB%92%E6%9C%A8">赤黒木</a></li>
+<li><a href="#avl-%E6%9C%A8">AVL 木</a></li>
+</ul></li>
+<li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BF%E3%82%A4%E3%83%97%E3%81%8B%E3%82%89%E5%86%8D%E5%B8%B0%E3%82%92%E5%88%86%E9%9B%A2">データタイプから再帰を分離</a></li>
+<li><a href="#%E6%8E%A2%E7%B4%A2">探索</a><ul>
+<li><a href="#%E6%B7%B1%E3%81%95%E5%84%AA%E5%85%88%E6%8E%A2%E7%B4%A2">深さ優先探索</a></li>
+<li><a href="#%E5%B9%85%E5%84%AA%E5%85%88%E6%8E%A2%E7%B4%A2">幅優先探索</a></li>
+</ul></li>
+<li><a href="#graphical-sequence">Graphical Sequence</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_玉手箱"><a href="" class="uri" title="Go to wiki page">Programming_玉手箱</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:玉手箱</p>
+<hr>
+<p>ちょっとしたお題やパズル，クイズなどを集めたものです．</p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e9%95%b7%e3%81%95%e3%81%ae%e6%af%94%e8%bc%83" class="uri" title="Go to wiki page">リストの長さの比較</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/pos+" class="uri" title="Go to wiki page">pos+</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%80%a3%e7%b6%9a%e3%81%97%e3%81%9f%20n%20%e8%a6%81%e7%b4%a0%e3%81%ae%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e3%83%aa%e3%82%b9%e3%83%88" title="Go to wiki page">連続した n 要素のリストのリスト</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Graph%20%e3%81%ae%e7%b5%b1%e5%90%88" title="Go to wiki page">Graph の統合</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%9c%a8%e3%81%ae%e7%b5%b1%e5%90%88" class="uri" title="Go to wiki page">木の統合</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%9b%86%e5%90%88%e3%81%ae%e7%b5%b1%e5%90%88" class="uri" title="Go to wiki page">集合の統合</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/xzip" class="uri" title="Go to wiki page">xzip</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e5%8c%96%e3%81%99%e3%82%8b" class="uri" title="Go to wiki page">リストをグループ化する</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/n%20%e7%95%aa%e9%a3%9b%e3%81%b0%e3%81%97%e6%af%8e%e3%81%ab%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e3%81%ab%e5%88%86%e3%81%91%e3%82%8b" title="Go to wiki page">n 番飛ばし毎にグループに分ける</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/n%20%e5%80%8b%e3%81%9a%e3%81%a4%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e5%8c%96%e3%81%99%e3%82%8b" title="Go to wiki page">n 個ずつグループ化する</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b5%84%e5%90%88%e3%81%9b%e8%ab%96%e7%9a%84%e3%81%aa%e7%94%9f%e6%88%90%e9%96%a2%e6%95%b0" class="uri" title="Go to wiki page">組合せ論的な生成関数</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e4%ba%8c%e5%88%86%e5%89%b2%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">リストの二分割の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">順列の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%87%8d%e8%a4%87%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">重複順列の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b5%84%e5%90%88%e3%81%9b%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">組合せの生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%87%8d%e8%a4%87%e7%b5%84%e5%90%88%e3%81%9b%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">重複組合せの生成</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">順列の生成</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b4%a0%e5%9b%a0%e6%95%b0%e5%88%86%e8%a7%a3" class="uri" title="Go to wiki page">素因数分解</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%97%a2%e7%b4%84%e5%88%86%e6%95%b0" class="uri" title="Go to wiki page">既約分数</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%8b%a1%e5%bc%b5%e3%83%a6%e3%83%bc%e3%82%af%e3%83%aa%e3%83%83%e3%83%89%e3%81%ae%e4%ba%92%e9%99%a4%e6%b3%95" class="uri" title="Go to wiki page">拡張ユークリッドの互除法</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%a1%e3%83%b3%e3%83%88%e3%81%ae%e9%99%a4%e5%8e%bb" class="uri" title="Go to wiki page">コメントの除去</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%a1%e3%83%b3%e3%83%88%e5%af%be%e5%bf%9cread" class="uri" title="Go to wiki page">コメント対応read</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%ad%a3%e8%a6%8f%e8%a1%a8%e7%8f%be%e7%bd%ae%e6%8f%9b" class="uri" title="Go to wiki page">正規表現置換</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/words4ApacheLog" class="uri" title="Go to wiki page">words4ApacheLog</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%e3%81%ae%e5%85%88%e9%a0%ad%e3%81%8b%e3%82%89%e7%ad%89%e3%81%97%e3%81%84%e6%96%87%e5%ad%97%e5%88%97%e3%82%92%e6%8a%9c%e3%81%8d%e5%87%ba%e3%81%99" class="uri" title="Go to wiki page">文字列の先頭から等しい文字列を抜き出す</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%81%8a%e7%b4%84%e6%9d%9f%e3%81%ae%e6%9c%ab%e5%b0%be%e5%86%8d%e5%b8%b0%e7%89%88" class="uri" title="Go to wiki page">お約束の末尾再帰版</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%e3%81%8b%e3%82%89%e4%b8%80%e8%87%b4%e3%81%99%e3%82%8b%e9%83%a8%e5%88%86%e6%96%87%e5%ad%97%e5%88%97%e3%82%92%e6%8a%bd%e5%87%ba%e3%81%99%e3%82%8b" class="uri" title="Go to wiki page">文字列から一致する部分文字列を抽出する</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CSV" class="uri" title="Go to wiki page">CSV</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e8%87%aa%e5%88%86%e8%87%aa%e8%ba%ab%e3%81%ae%e3%82%bd%e3%83%bc%e3%82%b9%e3%82%b3%e3%83%bc%e3%83%89%e3%82%92%e3%83%97%e3%83%aa%e3%83%b3%e3%83%88%e3%81%99%e3%82%8b%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" class="uri" title="Go to wiki page">自分自身のソースコードをプリントするプログラム</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%20C%20%e3%81%8c%e6%96%87%e5%ad%97%e5%88%97%20A,%20B%20%e3%81%8b%e3%82%89%e6%a7%8b%e6%88%90%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b" title="Go to wiki page">文字列 C が文字列 A, B から構成されているか</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%96%a2%e6%95%b0%e5%9e%8b%e8%a1%a8" class="uri" title="Go to wiki page">関数型表</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e4%b8%8a%e5%90%91%e3%81%8d%e3%81%ab%e3%82%82%e8%be%bf%e3%82%8c%e3%82%8b%e6%9c%a8" class="uri" title="Go to wiki page">上向きにも辿れる木</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%b9%b3%e8%a1%a1%e6%9c%a8" class="uri" title="Go to wiki page">平衡木</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e8%b5%a4%e9%bb%92%e6%9c%a8" class="uri" title="Go to wiki page">赤黒木</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/AVL%20%e6%9c%a8" title="Go to wiki page">AVL 木</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%87%e3%83%bc%e3%82%bf%e3%82%bf%e3%82%a4%e3%83%97%e3%81%8b%e3%82%89%e5%86%8d%e5%b8%b0%e3%82%92%e5%88%86%e9%9b%a2" class="uri" title="Go to wiki page">データタイプから再帰を分離</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">探索</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%b7%b1%e3%81%95%e5%84%aa%e5%85%88%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">深さ優先探索</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%b9%85%e5%84%aa%e5%85%88%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">幅優先探索</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Graphical%20Sequence" title="Go to wiki page">Graphical Sequence</a></p>
+<hr>
+<p><a href="" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e9%95%b7%e3%81%95%e3%81%ae%e6%af%94%e8%bc%83" class="uri" title="Go to wiki page">リストの長さの比較</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/pos+" class="uri" title="Go to wiki page">pos+</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%80%a3%e7%b6%9a%e3%81%97%e3%81%9f%20n%20%e8%a6%81%e7%b4%a0%e3%81%ae%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e3%83%aa%e3%82%b9%e3%83%88" title="Go to wiki page">連続した n 要素のリストのリスト</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Graph%20%e3%81%ae%e7%b5%b1%e5%90%88" title="Go to wiki page">Graph の統合</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%9c%a8%e3%81%ae%e7%b5%b1%e5%90%88" class="uri" title="Go to wiki page">木の統合</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%9b%86%e5%90%88%e3%81%ae%e7%b5%b1%e5%90%88" class="uri" title="Go to wiki page">集合の統合</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/xzip" class="uri" title="Go to wiki page">xzip</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e5%8c%96%e3%81%99%e3%82%8b" class="uri" title="Go to wiki page">リストをグループ化する</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/n%20%e7%95%aa%e9%a3%9b%e3%81%b0%e3%81%97%e6%af%8e%e3%81%ab%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e3%81%ab%e5%88%86%e3%81%91%e3%82%8b" title="Go to wiki page">n 番飛ばし毎にグループに分ける</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/n%20%e5%80%8b%e3%81%9a%e3%81%a4%e3%82%b0%e3%83%ab%e3%83%bc%e3%83%97%e5%8c%96%e3%81%99%e3%82%8b" title="Go to wiki page">n 個ずつグループ化する</a></li>
+</ul>
+<hr>
+<h2 id="リストの長さの比較">リストの長さの比較</h2>
+<p>リスト同士の長さを比較するというより、むしろ指定した値と指定したリスト の長さを比較するという方がよくありそう。これならリストに無限リストを渡 されても大丈夫。</p>
+<pre><code>shorterThan, longerThan :: Int -&gt; [a] -&gt; Bool 
+shorterThan n = null . drop (n-1)
+longerThan  n = not . null . drop n</code></pre>
+<p>あれっ。これ名前は逆の方がいいかな？ Curry 化されてなきゃ。逆だろうな。 逆にするなら、</p>
+<pre><code>cmpLen :: Int -&gt; [a] -&gt; Ordering
+cmpLen 0 [] = EQ 
+cmpLen n ls = case splitAt (n-1) ls of
+                (_,[])  -&gt; GT
+                (_,[_]) -&gt; EQ
+                _       -&gt; LT</code></pre>
+<p>というのを定義しておけばいいかな。</p>
+<hr>
+<h2 id="pos">pos+</h2>
+<p>整数のリストをもらって、おのおのの要素にその位置を示す数を加えてかえす – Ansi Common Lisp Ex 3.5</p>
+<pre><code>posAdd :: [Int] -&gt; [Int]
+posAdd = zipWith (+) [0..]</code></pre>
+<hr>
+<h2 id="連続した-n-要素のリストのリスト">連続した n 要素のリストのリスト</h2>
+<pre><code>contElems 3 [1,2,3,4,5] → [ [1,2,3],[2,3,4],[3,4,5] ]</code></pre>
+<p>2ch よりの話題 80さんと同じもの</p>
+<pre><code>contElems :: Int -&gt; [a] -&gt; [[a]]
+contElems n = (!! n) . transpose . map inits . tails</code></pre>
+<hr>
+<h2 id="graph-の統合">Graph の統合</h2>
+<p><a href="http://practical-scheme.net/wiliki/wiliki.cgi?Scheme:%EF%BF%BD%EA%A5%B9%EF%BF%BD%C8%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD">WiLiKi:Scheme:リスト処理</a>「木の統合」での話題から。</p>
+<blockquote>
+<p>ノード(シンボル)の親子関係の集合が与えられているとき、それらを全て満たす木の集合を求める。</p>
+<p>親子関係はこんなリストで与えられている:</p>
+<p>(親 子1 子2 …)</p>
+<p>子の親は常にユニーク。循環は無いものとする。兄弟関係(親を共有する子の順序)は保存する。入力には同じシンボルが「親」に二度以上出現しないものとする。</p>
+<p>例えば、最初のセットが ((A B C) (B D E) (F G) (H F I) (J A))の場合、出力は：</p>
+<p>((J (A (B (D) (E)) (C))) (H (F (G)) (I)))</p>
+</blockquote>
+<h3 id="木の統合">木の統合</h3>
+<p>先ずは簡単な木の場合</p>
+<pre><code>import List
+type Vertex = Char
+type Relation = (Vertex, [Vertex])
+
+data Tree a =  Tree a [Tree a] deriving (Show, Read)
+
+roots :: [Relation] -&gt; [Vertex]
+roots rels = filter (not . flip elem children) parents
+             where children = nub $ concat $ map snd rels
+                   parents  = map fst rels
+
+makeTree :: [Relation] -&gt; Vertex -&gt; Tree Char
+makeTree rels v = Tree v $ map (makeTree rels) $ lookupTos v rels
+
+lookupTos :: Vertex -&gt; [Relation] -&gt; [Vertex]
+lookupTos v []                  = []
+lookupTos v (r:rs) | v == fst r = snd r
+                   | otherwise  = lookupTos v rs
+
+makeForest :: [Relation] -&gt; [Tree Char]
+makeForest rels = map (makeTree rels) $ roots rels</code></pre>
+<hr>
+<h2 id="集合の統合">集合の統合</h2>
+<p><a href="http://www.namikilab.tuat.ac.jp/~sasada/diary/200308.html#d20">はずかしいだいありー</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20030821#p02">ヒビルテ</a>、<a href="http://practical-scheme.net/wiliki/wiliki.cgi?Scheme:%EF%BF%BD%EA%A5%B9%EF%BF%BD%C8%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD">WiLiKi:Scheme:リスト処理</a>より、</p>
+<blockquote>
+<p>(子)リストのリストがあって、子リストにはシンボルが2個以上入ってたとする。たとえば、((A B) (C D) (E F) (A G) (H F I)) のような感じ。</p>
+<p>これを、同じシンボルを含む子リストはまとめたいとする。たとえば、例で言えば ((A B G) (C D) (E F H I)) のようなリストを返す。</p>
+</blockquote>
+<p>nobsun の解</p>
+<pre><code>import List
+
+solve :: Eq a =&gt; [[a]] -&gt; [[a]]
+solve = foldr foo [] 
+
+foo :: Eq a =&gt; [a] -&gt; [[a]] -&gt; [[a]]
+foo x [] = [x]
+foo x <a href="email-protection.html" class="__cf_email__" data-cfemail="c0a3a3b380">[email&nbsp;protected]</a>(c:cs)
+ = case bar x c of
+     [] -&gt; c:foo x cs
+     xc -&gt; foo xc cs
+
+bar :: Eq a =&gt; [a] -&gt; [a] -&gt; [a]
+bar ps qs = case intersect ps qs of
+              [] -&gt; []
+              is -&gt; union ps qs</code></pre>
+<p><a href="http://www.lab2.kuis.kyoto-u.ac.jp/~hanatani/tdiary/?date=20030822">Y. Hanatani さんによるスマートな解</a></p>
+<pre><code>import List
+ 
+solve xs = foldr solve' xs (concat xs)
+ 
+solve' x xs = case partition (elem x) xs of
+              (p, q) -&gt; foldl union [] p : q</code></pre>
+<ul>
+<li>(concat xs) の代わりに (nub (concat xs)) あるいは (foldl union [] xs) でもいいっかもしれない。– nobsun</li>
+</ul>
+<hr>
+<h2 id="xzip">xzip</h2>
+<p><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20030617">ヒビルテ</a>より</p>
+<blockquote>
+<p>長さの等しい二つのリスト[a1; a2…; an]と [b1; b2…; bn]を受け取って, [(a1, bn); (a2, bn - 1); …; (an, b1)] を返す関数を書きなさい。ただし、</p>
+<ul>
+<li>nをあらかじめ知ることはできない</li>
+<li>与えられた二つのリスト以外のリストを使ってはならない</li>
+<li>再帰呼び出しは高々(n + 1)回しか行ってはならない</li>
+<li>全体の計算量はO(n)でなければならない</li>
+</ul>
+</blockquote>
+<p>nobsun の最初の解</p>
+<pre><code>xzip xs ys = zip xs (reverse ys)</code></pre>
+<p>(reverse ys) で中間リストをつくっているので駄目？再帰呼び出しも2n回になるのかなぁ</p>
+<p>あおきさんの解</p>
+<pre><code>xzip xs ys = f where (f,s) = xzip' xs ys
+
+xzip' [] ys = ([], ys)
+xzip' (x:xs) ys = ((x,y):list, ys')
+                  where (list, (y:ys')) = xzip' xs ys </code></pre>
+<p>なるほどですね。</p>
+<p>で、nobsun の改良解？</p>
+<pre><code>import List (mapAccumR)
+xzip xs ys = snd $ xzip' xs ys
+             where xzip' = flip $ mapAccumR f 
+                   f (y:ys) x = (ys,(x,y))</code></pre>
+<hr>
+<h2 id="リストをグループ化する">リストをグループ化する</h2>
+<h3 id="n-番飛ばし毎にグループに分ける">n 番飛ばし毎にグループに分ける</h3>
+<p>blog:Everyday:2005-01-11</p>
+<pre><code>f n = foldr (\x y -&gt; (x:last y):init y) (replicate n [])
+
+f5 n = transpose . unfoldr phi
+    where phi [] = Nothing
+          phi xs = Just $ splitAt n xs</code></pre>
+<h3 id="n-個ずつグループ化する">n 個ずつグループ化する</h3>
+<p>blog:Everyday:2005-01-13</p>
+<pre><code>f1 n = unfoldr phi
+    where phi [] = Nothing
+          phi xs = Just $ splitAt n xs</code></pre>
+<hr>
+<p><a href="" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b5%84%e5%90%88%e3%81%9b%e8%ab%96%e7%9a%84%e3%81%aa%e7%94%9f%e6%88%90%e9%96%a2%e6%95%b0" class="uri" title="Go to wiki page">組合せ論的な生成関数</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e4%ba%8c%e5%88%86%e5%89%b2%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">リストの二分割の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">順列の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%87%8d%e8%a4%87%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">重複順列の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b5%84%e5%90%88%e3%81%9b%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">組合せの生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%87%8d%e8%a4%87%e7%b5%84%e5%90%88%e3%81%9b%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">重複組合せの生成</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">順列の生成</a></p>
+<hr>
+<h2 id="組合せ論的な生成関数">組合せ論的な生成関数</h2>
+<p>「順列の生成」に触発されて、いろいろつくってみた。2003/11/24 08:09:32 JST–nobsun</p>
+<h3 id="リストの二分割の生成">リストの二分割の生成</h3>
+<p>たとえば、[1,2,3]というリストの全二分割は、 [([],[1,2,3]),([1],[2,3]),([1,2],[3]),([1,2,3],[])]</p>
+<pre><code>divid :: [a] -&gt; [([a],[a])]
+
+divid <a href="email-protection.html" class="__cf_email__" data-cfemail="9fe7e7ecdf">[email&nbsp;protected]</a>(x:xs) = ([],xxs) : [(x:ys,zs) | (ys,zs) &lt;- divid xs]
+divid []         = [([],[])]</code></pre>
+<p>あれっ。これでいいじゃん。</p>
+<pre><code>divid xs = zip (inits xs) (tails xs)</code></pre>
+<p>えっ。なに？逆？</p>
+<pre><code>inits = map fst . divid
+tails = map snd . divid</code></pre>
+<h3 id="順列の生成">順列の生成</h3>
+<p>n 種類のものから、r 個取り出して並べる。辞書順に生成される。</p>
+<pre><code>perm :: [a] -&gt; Int -&gt; [[a]]
+perm [] _ = []
+perm xs 0 = [[]]
+perm xs 1 = map (:[]) xs
+perm xs n = concatMap (pm n) $ divid xs
+ where pm _ (_,[])      = []
+       pm n (hs,(t:ts)) = map (t:) $ perm (hs ++ ts) (n-1)</code></pre>
+<blockquote>
+<p>length (perm ns r) == nＰr (n = length ns)</p>
+</blockquote>
+<p>別の書き方で</p>
+<pre><code>perm [] = [[]]
+perm xs = concat [map (x:) (perm xs') | (x, xs') &lt;- f xs]
+  where f [] = []
+        f (x:xs) = (x, xs):[(x', x:xs') | (x', xs') &lt;- f xs]</code></pre>
+<p>Eq a なときの順列</p>
+<pre><code>perm' :: Eq a =&gt; [a] -&gt; [[a]]
+perm' [] = [[]]
+perm' xs = concat [map (x:) (perm' xs') | (x, xs') &lt;- nubBy g $ f xs]
+  where f [] = []
+        f (x:xs) = (x, xs):[(x', x:xs') | (x', xs') &lt;- f xs]
+        g (x, _) (y, _) = x == y</code></pre>
+<h3 id="重複順列の生成">重複順列の生成</h3>
+<p>n 種類のものから、重複を許して、r 個取り出してならべる。</p>
+<pre><code>rperm :: [a] -&gt; Int -&gt; [[a]]
+rperm [] _ = []
+rperm xs 0 = [[]]
+rperm xs 1 = [[x] | x &lt;- xs]
+rperm xs n = [ x:ys | x &lt;- xs, ys &lt;- rperm xs (n-1) ]</code></pre>
+<blockquote>
+<p>length (rperm ns r) == nΠr (n = length ns) == n^r</p>
+</blockquote>
+<ul>
+<li><p>2ch で覚えた方法</p>
+<pre><code>rperm = ((foldl ((=&lt;&lt;) . (. (return .) . (:)) . (&gt;&gt;=) ) [[]]) .) . (flip replicate) </code></pre>
+<ul>
+<li>邪悪な香りがして、ぞくぞくきますねぇ。^^；</li>
+<li>rperm [] 0 の結果が上と違うけど、どちらが正しいの?
+<ul>
+<li>0^0 は 0 か 1 かと同じ話ですよね。不定ということでどうでしょうか。</li>
+<li>空集合から空集合への写像の数は１つらしいので rperm [] _ の行はない方がいいでしょうか。それと rperm xs 1 の行も必要ないですよね。他のほとんどの項目の *** xs 1 の行についても同様です。</li>
+</ul></li>
+</ul></li>
+<li><p>HHLに同じ事をする関数があった</p>
+<pre><code>import Control.Monad
+rperm = flip replicateM</code></pre></li>
+</ul>
+<h3 id="組合せの生成">組合せの生成</h3>
+<p>n 種類のものから、r 個取り出して組み合せる。</p>
+<pre><code>comb :: [a] -&gt; Int -&gt; [[a]]
+comb [] _     = []
+comb xs 0     = [[]]
+comb xs 1     = map (:[]) xs
+comb (x:xs) n = map (x:) (comb xs (n-1)) ++ comb xs n
+
+comb xs 1 のパターンを外せるが他のパターンの順序を変えないといけない。
+
+comb _ 0     = [[]]
+comb [] _     = []
+comb (x:xs) n = map (x:) (comb xs (n-1)) ++ comb xs n</code></pre>
+<blockquote>
+<p>length (comb ns r) == nＣr (n = length ns)</p>
+</blockquote>
+<p>選んだ残りのものも利用したいとき</p>
+<pre><code>choice  :: Int -&gt; [a] -&gt; [([a], [a])]
+choice 0 xs = [([], xs)]
+choice n [] = []
+choice n (x:xs) = [(x:ys, zs) | (ys, zs) &lt;- choice (n-1) xs] ++
+                  [(ys, x:zs) | (ys, zs) &lt;- choice n xs]</code></pre>
+<h3 id="重複組合せの生成">重複組合せの生成</h3>
+<p>n 種類のものから、重複を許して、r 個取り出して組み合わせる。</p>
+<pre><code>rcomb :: [a] -&gt; Int -&gt; [[a]]
+rcomb [] _ = []
+rcomb xs 0 = [[]]
+rcomb xs 1 = [[x] | x &lt;- xs]
+rcomb <a href="email-protection.html" class="__cf_email__" data-cfemail="8ef6f6fdce">[email&nbsp;protected]</a>(x:xs) n = map (x:) (rcomb xxs (n-1)) ++ rcomb xs n</code></pre>
+<blockquote>
+<p>length (rcomb ns r) == nＨr (n = length ns)</p>
+</blockquote>
+<pre><code>rcomb' [] _ = []
+rcomb' xs 0 = [[]]
+rcomb' xs n = xs &gt;&gt;= (flip map (rcomb xs (n-1))) . (:)
+-- rcomb' xs n = xs &gt;&gt;= (rcomb xs (n-1) &gt;&gt;=) . ((flip (:) [] .) . (:))</code></pre>
+<hr>
+<h2 id="順列の生成-1">順列の生成</h2>
+<p>かってに書いてもいいのかな? 問題があったら消して下さい &gt;&gt; nobsun</p>
+<ul>
+<li>Welcome! Wikiなんですから、どんどん書いちゃってくださいな。–nobsun</li>
+</ul>
+<p>2chの<a href="http://pc2.2ch.net/test/read.cgi/tech/1013846140/819-">関数型プログラミング言語Haskell</a> で話題になっているものを転記。</p>
+<p>819</p>
+<pre><code>permutation' [] = [[]]
+permutation' xs = foldr (++) [] (map f (rotate_list xs))
+  where
+  f (x:xs) = map (x:) (permutation' xs)
+  rotate_list xs = take (length xs) (iterate rotate_left xs)
+    where
+    rotate_left [] = []
+    rotate_left (x:xs) = xs ++ [x]
+
+permutation [] = [[]]
+permutation xs = foldr (++) [] (map f (selected_list xs))
+  where
+  f (x:xs) = map (x:) (permutation xs)
+  selected_list xs = take (length xs) (zipWith select (repeat xs) [0..])
+    where
+    select [] _ = []
+    select xs n = z : ys ++ zs
+      where
+      (ys,(z:zs)) = splitAt n xs
+
+上の permutation' は速いですが順列が昇順に出力されません．下の
+permutation は昇順に出力されますが， splitAt のあたりが遅いのか，速度
+で劣ります．</code></pre>
+<p>821</p>
+<pre><code>permutation [] = [[]]
+permutation xs = concat [map (x:) $ permutation (delete x xs) | x &lt;- xs]</code></pre>
+<p>823</p>
+<pre><code>deleteの2倍以上速いと思う。
+
+permutations :: [a] -&gt; [[a]]
+permutations (x:xs) = concat $ map (insap [] x) $ permutations xs
+where
+  insap :: [a] -&gt; a -&gt; [a] -&gt; [[a]]
+  insap xs y (z:zs) = (xs ++ [y] ++ (z:zs)):(insap (xs ++ [z]) y zs)
+  insap xs y [] = [xs ++ [y]]
+permutations [] = [[]]</code></pre>
+<p>826</p>
+<pre><code> insap xs y <a href="email-protection.html" class="__cf_email__" data-cfemail="bac0c0c9fa">[email&nbsp;protected]</a>(z:zs) = (xs++y:zzs):insap (xs++[z]) y zs
+
+とやると僅かだけど、早くなるかも。</code></pre>
+<p>828</p>
+<pre><code>permutation xs = p xs []
+ where
+  p [] [] = [[]]
+  p [] ys = []
+  p (x:xs) ys = (map (x:) $ p (xs ++ reverse ys) []) ++ p xs (x:ys)
+
+deleteより少し速い。xs ++ reverse ysを効率的にやればもう少しいけるかもね。</code></pre>
+<p>830</p>
+<pre><code>Haskellよく知らないけど前にLispでやったから多分
+
+ permutation' [] = [[]]
+ permutation' xs = foldr (++) [] (map rotate_list (f xs))
+   where
+   f (x:xs) = map (x:) (permutation' xs)
+   rotate_list xs = take (length xs) (iterate rotate_left xs)
+     where
+     rotate_left [] = []
+     rotate_left (x:xs) = xs ++ [x]</code></pre>
+<p>830</p>
+<pre><code>末尾再帰はループになるのかな？
+
+selected-list xs = p xs [] []
+ where
+  p [] ys r = reverse r
+  p (x:xs) ys r = p xs (x:ys) ((x:((reverse ys) ++ xs)):r)</code></pre>
+<hr>
+<ul>
+<li><p><a href="" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b4%a0%e5%9b%a0%e6%95%b0%e5%88%86%e8%a7%a3" class="uri" title="Go to wiki page">素因数分解</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%97%a2%e7%b4%84%e5%88%86%e6%95%b0" class="uri" title="Go to wiki page">既約分数</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%8b%a1%e5%bc%b5%e3%83%a6%e3%83%bc%e3%82%af%e3%83%aa%e3%83%83%e3%83%89%e3%81%ae%e4%ba%92%e9%99%a4%e6%b3%95" class="uri" title="Go to wiki page">拡張ユークリッドの互除法</a></li>
+</ul>
+<hr>
+<h2 id="素因数分解">素因数分解</h2>
+<p>ついでに、素因数分解</p>
+<pre><code>primes = map head $ iterate sieve [2..]
+sieve (p:xs) = [ x | x &lt;- xs, x `mod` p /= 0]
+
+factors n = fc [] (prms n primes) n
+            where
+             prms n ps = takeWhile (ceiling (sqrt (fromInteger (n+1))) &gt; ) ps
+             fc rs [] n         = reverse (n:rs)
+             fc rs <a href="email-protection.html" class="__cf_email__" data-cfemail="0474747744">[email&nbsp;protected]</a>(p:ps) n = case n `divMod` p of
+                                    (1,0) -&gt; reverse (n:rs)
+                                    (m,0) -&gt; fc (p:rs) (prms m pps) m
+                                    _     -&gt; fc rs ps n </code></pre>
+<ul>
+<li><p>篩で無駄な割り算を減らしてみる。</p>
+<pre><code>primes' :: [Integer]
+primes' = 2:sieve' [3] [5,7..]
+
+sieve' :: [Integer] -&gt; [Integer] -&gt; [Integer]
+sieve' (p:ps) xs = p:sieve' (ps++ps') [x | x &lt;- qs, mod x p /= 0]
+  where (ps', qs) = span (&lt;(p*p)) xs</code></pre></li>
+<li><p>primesが全然primesになっていないのと、素数の2乗の素因数分解ができないのが気になる</p></li>
+<li>修正しますた</li>
+<li><p>primes をまじめに計算すると遅いので、これで十分かも</p>
+<pre><code>primes' = 2 : zipWith (+) primes' (1 : 2 : cycle [2, 4])</code></pre>
+<ul>
+<li>primes’ = 2:3:(3の倍数を除く奇数)ですか。オーダとしては、primes’’ = 2:[3,5..] としてもいいのか、なるほど。</li>
+</ul></li>
+<li><p>primes’’’ = 2:3:5:scanl (+) 7 (cycle [4,2,4,2,4,6,2,6]) – やりすぎですか、そうですか。</p></li>
+</ul></li>
+</ul>
+<p>prms っていらないんじゃないの？</p>
+<pre><code>factors n = fc [] primes n
+            where
+               fc rs <a href="email-protection.html" class="__cf_email__" data-cfemail="4e3e3e3d0e">[email&nbsp;protected]</a>(p:ps) n = case n `divMod` p of
+                                      (1,0) -&gt; reverse (n:rs)
+                                      (q,0) -&gt; fc (p:rs) pps q
+                                      _     -&gt; fc rs ps n </code></pre>
+<p>でいいような。</p>
+<ul>
+<li><p>prms なくてもいいけど、ないと遅くなるでしょう。 n の平方根より大きい値で割っても意味ないし</p></li>
+<li><p>reverseはいらないし(lazyにfactoring)、(1, 0)とのマッチはおこりません。 – yts</p>
+<pre><code>primes = sieve [2..] 
+  where sieve (p:xs) = p:sieve [x | x &lt;- xs,  x `mod` p /= 0]
+factors n = f n (g n primes)
+  where f x [] = [x]
+        f x <a href="email-protection.html" class="__cf_email__" data-cfemail="2757575467">[email&nbsp;protected]</a>(p:ps) = case x `divMod` p of
+            (m, 0) -&gt; p:f m (g m pps)
+            _      -&gt; f x ps
+        g n = takeWhile ((&lt;= n).(^2))</code></pre></li>
+<li>f x pps の定義で、x が変化しない場合も takeWhile を実行するのは無駄ではないでしょうか
+<ul>
+<li>確かに。スタートアップで削っておけば十分ですね。修正しました。 –yts</li>
+</ul></li>
+<li><p>sieve の中と factors で 2 回割り算するのはもったいない。</p>
+<pre><code>factors n = f n (2:[3,5..])
+  where
+    f n (m:ms) | n &lt;= 1         = []
+               | n &lt; m * m      = [n]
+               | n `mod` m == 0 = m:f (n `div` m) (m:ms)
+               | otherwise      = f n ms</code></pre></li>
+</ul>
+<hr>
+<h2 id="既約分数">既約分数</h2>
+<p><a href="http://www.hyuki.com/diary/dia0312.html#i30">結城浩の日記</a>より</p>
+<blockquote>
+<p>問題：正の整数Nが与えられているとき、以下の条件を満たす既約分数p/qを「すべて」求めるアルゴリズムを示してください。条件は：</p>
+<ul>
+<li>p, qは整数(pは0以上で、qは1以上N以下).</li>
+<li>gcd(p, q) = 1 (pとqの最大公約数は1).</li>
+<li>0 &lt;= p/q &lt;= 1.</li>
+</ul>
+</blockquote>
+<pre><code>ss = map s [0..]
+
+s 0 = False : True : cycle [False]
+s n = cycle $ map (!! n) $ take n ss
+
+irr 0 = []
+irr n = irr (n-1) ++ [(n,i) | (p,i) &lt;- zip (ss !! n) [0..n], p]</code></pre>
+<p>『算譜の記』のコメントにかかれたssを利用しない版 s を利用したもの</p>
+<pre><code>s 0 = False : True : cycle [False]
+s 1 = cycle [True]
+s n = map (!! n) $ map s $ cycle [0..n-1]
+
+irr 0 = []
+irr 1 = [(1,0),(1,1)]
+irr n = irr (n-1) ++ [(n,i) |  (p,i) &lt;- zip (s n) [0..n-1], p]</code></pre>
+<p>強引に一行化</p>
+<pre><code>irr n = concat $ foldl (\x n -&gt; [(n,i) | i &lt;- [1..n-1], (\y -&gt; elem y $ map snd $ x !! (y-1)) $ min i (n-i)] : x) [[(1,0),(1,1)]] [2..n]
+
+irr n = foldl (\x n -&gt; [(n,i) | i &lt;- [1..n-1], (\y -&gt; elem (n-y,y) x) $ min i (n-i)] ++ x) [(1,0),(1,1)] [2..n]</code></pre>
+<hr>
+<h2 id="拡張ユークリッドの互除法">拡張ユークリッドの互除法</h2>
+<pre><code>euclid x y = euclid' x y 1 0 0 1
+  where
+    euclid' x 0 a b _ _ = ((a, b), x)
+    euclid' x y a b c d = euclid' y r c d (a-c*q) (b-d*q)
+      where (q, r) = quotRem x y
+
+Main&gt; euclid 5 7
+((3,-2),1)    -- 5 * 3 - 7 * 2 == 1</code></pre>
+<hr>
+<p><a href="" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%a1%e3%83%b3%e3%83%88%e3%81%ae%e9%99%a4%e5%8e%bb" class="uri" title="Go to wiki page">コメントの除去</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%a1%e3%83%b3%e3%83%88%e5%af%be%e5%bf%9cread" class="uri" title="Go to wiki page">コメント対応read</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%ad%a3%e8%a6%8f%e8%a1%a8%e7%8f%be%e7%bd%ae%e6%8f%9b" class="uri" title="Go to wiki page">正規表現置換</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/words4ApacheLog" class="uri" title="Go to wiki page">words4ApacheLog</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%e3%81%ae%e5%85%88%e9%a0%ad%e3%81%8b%e3%82%89%e7%ad%89%e3%81%97%e3%81%84%e6%96%87%e5%ad%97%e5%88%97%e3%82%92%e6%8a%9c%e3%81%8d%e5%87%ba%e3%81%99" class="uri" title="Go to wiki page">文字列の先頭から等しい文字列を抜き出す</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%81%8a%e7%b4%84%e6%9d%9f%e3%81%ae%e6%9c%ab%e5%b0%be%e5%86%8d%e5%b8%b0%e7%89%88" class="uri" title="Go to wiki page">お約束の末尾再帰版</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%e3%81%8b%e3%82%89%e4%b8%80%e8%87%b4%e3%81%99%e3%82%8b%e9%83%a8%e5%88%86%e6%96%87%e5%ad%97%e5%88%97%e3%82%92%e6%8a%bd%e5%87%ba%e3%81%99%e3%82%8b" class="uri" title="Go to wiki page">文字列から一致する部分文字列を抽出する</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CSV" class="uri" title="Go to wiki page">CSV</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e8%87%aa%e5%88%86%e8%87%aa%e8%ba%ab%e3%81%ae%e3%82%bd%e3%83%bc%e3%82%b9%e3%82%b3%e3%83%bc%e3%83%89%e3%82%92%e3%83%97%e3%83%aa%e3%83%b3%e3%83%88%e3%81%99%e3%82%8b%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" class="uri" title="Go to wiki page">自分自身のソースコードをプリントするプログラム</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%20C%20%e3%81%8c%e6%96%87%e5%ad%97%e5%88%97%20A,%20B%20%e3%81%8b%e3%82%89%e6%a7%8b%e6%88%90%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b" title="Go to wiki page">文字列 C が文字列 A, B から構成されているか</a></p>
+<hr>
+<h2 id="コメントの除去">コメントの除去</h2>
+<pre><code>{-# LANGUAGE EmptyDataDecls #-}
+module Text.Decomment (CommentStyle(..), QuoteStyle(..), decomment) where
+
+import Control.Arrow
+import Data.List
+import Data.Maybe
+
+class CommentStyle c where
+  commentLeadings  :: c -&gt; [String]
+  commentOpenings  :: c -&gt; [String]
+  commentClosing   :: c -&gt; String -&gt; String
+  commentNestable  :: c -&gt; Bool
+
+class QuoteStyle q where
+  quoteOpenings  :: q -&gt; [Char]
+  quoteClosing   :: q -&gt; Char -&gt; Char
+  quoteEscape    :: q -&gt; Char
+
+splitWithPrefix :: Eq a =&gt; [a] -&gt; [a] -&gt; Maybe ([a],[a])
+splitWithPrefix [] xs = Just ([],xs)
+splitWithPrefix (p:ps) <a href="email-protection.html" class="__cf_email__" data-cfemail="2159595261">[email&nbsp;protected]</a>(x:xs)
+  | p == x     = splitWithPrefix ps xs &gt;&gt;= return . ((x:) *** id)
+  | otherwise  = Nothing
+
+splitQuoted :: Eq a =&gt; a -&gt; a -&gt; [a] -&gt; ([a], [a])
+splitQuoted esc qm []   = ([],[])
+splitQuoted esc qm (c:cs)
+           | c == qm    = ([],cs)    
+           | c == esc   = case cs of 
+                            []     -&gt; ([c],[])
+                            c':cs' -&gt; ((c:).(c':) *** id) $ splitQuoted esc qm cs'
+           | otherwise  = ((c:) *** id) $ splitQuoted esc qm cs
+
+decomment :: (CommentStyle s, QuoteStyle s) =&gt; s -&gt; String -&gt; String
+decomment s ""         = ""
+decomment s <a href="email-protection.html" class="__cf_email__" data-cfemail="2d4e4e5e6d">[email&nbsp;protected]</a>(c:cs) = case mapMaybe (flip splitWithPrefix ccs) $ commentLeadings s of
+  (_,xs):_ -&gt; decomment s $ snd $ break ('\n'==) xs
+  []       -&gt; case mapMaybe (flip splitWithPrefix ccs) $ commentOpenings s of
+                (p,xs):_ -&gt; decommentC s [p] xs
+                []       -&gt; if elem c (quoteOpenings s) then c:decommentQ s c cs 
+                            else c:decomment s cs
+
+decommentC :: (CommentStyle s, QuoteStyle s) =&gt; s -&gt; [String] -&gt; String -&gt; String
+decommentC s [] xs = ' ':decomment s xs
+decommentC s <a href="email-protection.html" class="__cf_email__" data-cfemail="c0b0b0b380">[email&nbsp;protected]</a>(p:ps) <a href="email-protection.html" class="__cf_email__" data-cfemail="98e0e0ebd8">[email&nbsp;protected]</a>(x:xs)
+  | commentNestable s  = case splitWithPrefix (commentClosing s p) xxs of
+      Just (_,ys) -&gt; decommentC s ps ys
+      Nothing     -&gt; case mapMaybe (flip splitWithPrefix xxs) $ commentOpenings s of
+                       [] -&gt; decommentC s pps xs
+                       (p',yys):_ -&gt; decommentC s (p':pps) yys
+  | otherwise   = case mapMaybe (splitWithPrefix (commentClosing s p)) $ tails xs of
+      (_,ys):_ -&gt; ' ':decomment s ys
+      []       -&gt; ""
+
+decommentQ :: (CommentStyle s, QuoteStyle s) =&gt; s -&gt; Char -&gt; String -&gt; String
+decommentQ s c xs = case splitQuoted (quoteEscape s) (quoteClosing s c) xs of
+                      (ys,zs) -&gt; ys ++ '"':decomment s zs</code></pre>
+<p><a href="nobsun_decomment.html" class="uri" title="Go to wiki page">nobsun_decomment</a>参照</p>
+<h2 id="コメント対応read">コメント対応read</h2>
+<pre><code>read' :: Read a =&gt; String -&gt; a
+read' = read . uncomment
+
+uncomment :: String -&gt; String
+uncomment ""                 = ""
+uncomment ('-':'-':rs)       = case break ('\n'==) rs of (ss,ts) -&gt; uncomment ts
+uncomment ('{':'-':rs)       = uncommentC 1 rs
+uncomment ('\'':'"':'\'':rs) = '\'':'"':'\'':uncomment rs
+uncomment ('\\':'"':rs)      = '\\':'"':uncomment rs
+uncomment ('"':rs)           = '"':uncommentQ rs
+uncomment (c:rs)             = c : uncomment rs
+
+uncommentQ :: String -&gt; String
+uncommentQ ""             = ""
+uncommentQ ('\\':'"':rs)  = '\\':'"':uncommentQ rs
+uncommentQ ('"':rs)       = '"': uncomment rs
+uncommentQ (c:rs)         = c:uncommentQ rs
+
+uncommentC :: Int -&gt; String -&gt; String
+uncommentC _ ""            = ""
+uncommentC 0 rs            = uncomment rs
+uncommentC k ('-':'}':rs)  = uncommentC (k-1) rs
+uncommentC k ('{':'-':rs)  = uncommentC (k+1) rs
+uncommentC k (c:rs)        = uncommentC k rs
+
+sample0 = "[1 -- hoge\n,2\n,3\n{- ,4 \n -}\n]"</code></pre>
+<p>実行例</p>
+<pre><code>*Main&gt; putStrLn sample0
+[1 -- hoge
+,2
+,3
+{- ,4 
+ -}
+]
+*Main&gt; read' sample0 :: [Int]
+[1,2,3]</code></pre>
+<hr>
+<h2 id="正規表現置換">正規表現置換</h2>
+<pre><code>import Text.Regex
+
+sub re s str = case matchRegexAll re str of
+                  Just (b, _, a, _) -&gt; b ++ s ++ a
+                  _ -&gt; str
+
+gsub re s str = case matchRegexAll re str of
+                  Just (b, _, a, _) -&gt; b ++ s ++ gsub re s a
+                  _ -&gt; str</code></pre>
+<hr>
+<h2 id="words4apachelog">words4ApacheLog</h2>
+<p>前に挙げたdividWithQuoteByをつかうとApacheのcombined 形式の access.log の項目も分解できる。単純な空白区切りの words に</p>
+<pre><code>testdata = "127.0.0.1 - - [12/Dec/2003:16:07:36 +0900] \"GET /cgi-bin/kahua.cgi HTTP/1.1\" 200 2301 \"-\" \"Mozilla/5.0 (X11; U; Linux i686; ja-JP; rv:1.5) Gecko/20031127 Firebird/0.7\""</code></pre>
+<p>を食わせると</p>
+<pre><code>Main&gt; mapM_ putStrLn $ words testdata
+127.0.0.1
+-
+-
+[12/Dec/2003:16:07:36
++0900]
+"GET
+/cgi-bin/kahua.cgi
+HTTP/1.1"
+200
+2301
+"-"
+"Mozilla/5.0
+(X11;
+U;
+Linux
+i686;
+ja-JP;
+rv:1.5)
+Gecko/20031127
+Firebird/0.7"</code></pre>
+<p>でも、</p>
+<pre><code>words4ApacheLog :: String -&gt; [String]
+words4ApacheLog = dividWithQuoteBy [('\"', '\"'),('[',']')] isSpace</code></pre>
+<p>としておいて、これをくわせると。</p>
+<pre><code>Prelude&gt; mapM_ putStrLn $ words4ApacheLog testdata
+127.0.0.1
+-
+-
+[12/Dec/2003:16:07:36 +0900]
+"GET /cgi-bin/kahua.cgi HTTP/1.1"
+200
+2301
+"-"
+"Mozilla/5.0 (X11; U; Linux i686; ja-JP; rv:1.5) Gecko/20031127 Firebird/0.7"</code></pre>
+<ul>
+<li>つまり、dividWithQuoteBy の逆を書けば汎用 encoding 関数が書けるんですね – shelarcy</li>
+</ul>
+<hr>
+<h2 id="文字列の先頭から等しい文字列を抜き出す">文字列の先頭から等しい文字列を抜き出す</h2>
+<p><a href="http://rwiki.jin.gr.jp/cgi-bin/rw-cgi.rb?cmd=view;name=2%EF%BF%BD%C4%A4%EF%BF%BD%CA%B8%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C6%AC%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CA%B8%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C8%B4%EF%BF%BD%EF%BF%BD%EF%BF%BD%D0%A4%EF%BF%BD">rwiki</a>より。ナイーブな実装</p>
+<pre><code>same_prefix xs ys = map fst $ takeWhile (uncurry (==)) $ zip xs ys</code></pre>
+<p>ちょっとだけはやいかも</p>
+<pre><code>same_prefix (x:xs) (y:ys) | x == y    = x : same_prefix xs ys
+                          | otherwise = []
+same_prefix _ _ = []</code></pre>
+<h3 id="お約束の末尾再帰版">お約束の末尾再帰版</h3>
+<pre><code>same_prefix = same_prefix_iter []
+ where
+  same_prefix_iter xiferp (x:xs) (y:ys) | x == y    = same_prefix_iter (x:xiferp) xs ys
+                                        | otherwise = reverse xiferp
+  same_prefix_iter xiferp _  _ = reverse xiferp</code></pre>
+<hr>
+<h2 id="文字列から一致する部分文字列を抽出する">文字列から一致する部分文字列を抽出する</h2>
+<pre><code>import List
+
+main :: IO ()
+main = getContents &gt;&gt;= mapM_ print . sameString
+
+sameString :: String -&gt; [(String, Int)]
+sameString = sortBy (\(_,x) (_,y) -&gt; compare y x)
+           . map (rv . last)
+           . groupBy similar
+           . sort . map (rv . last)
+           . groupBy similar
+           . getPrefix . sort . tails
+
+rv :: (String, Int) -&gt; (String, Int)
+rv (s, i) = (reverse s, i)
+
+similar :: (String, Int) -&gt; (String, Int) -&gt; Bool
+similar (s1, i1) (s2, i2)
+    | i1 /= i2 = False
+    | otherwise = and $ map (uncurry (==)) $ zip s1 s2
+
+getPrefix :: [String] -&gt; [(String, Int)]
+getPrefix ss = concat $ snd $ mapAccumL f ([], []) ss
+
+f :: (String, [Int]) -&gt; String -&gt; ((String, [Int]), [(String, Int)])
+f (cs, xs) ss = ((ss, p), q)
+  where (p, q) = g cs xs ss
+
+g :: String -&gt; [Int] -&gt; String -&gt; ([Int], [(String, Int)])
+g (c:cs) (x:xs) (s:ss) | c == s = ((x+1):p, map (\(s, n) -&gt; (c:s, n)) q)
+  where (p, q) = g cs xs ss
+g cs xs ss = (map (\_ -&gt; 1) ss, zip (drop 1 $ inits cs) (takeWhile (1&lt;) xs))</code></pre>
+<hr>
+<h2 id="csv">CSV</h2>
+<p>一年以上まえの「算譜の記」より。</p>
+<blockquote>
+<p>「データ行を与えられたセパレータ文字(CSVの場合は’,’)で区切られた値を表現する文字列に分解する」関数。ただし、引用内のセパレータ文字はセパレータとしない。引用を表現する文字対(引用開始文字、引用終了文字)は複数与えることができるものとする。</p>
+<pre><code>dividWithQuoteBy :: [(Char,Char)] -&gt; (Char -&gt; Bool) -&gt; String -&gt; [String]
+dividWithQuoteBy _ _ "" = [""]
+dividWithQuoteBy qs p <a href="email-protection.html" class="__cf_email__" data-cfemail="accfcfdfec">[email&nbsp;protected]</a>(c:cs)
+ = if p c
+     then "" : dividWithQuoteBy qs p cs
+     else case break (pOr p q) ccs of
+            (_,[]) -&gt; [ccs]
+            (xs,<a href="email-protection.html" class="__cf_email__" data-cfemail="5029292310">[email&nbsp;protected]</a>(y:ys)) 
+              -&gt; case lookup y qs of
+                   Nothing -&gt; xs : dividWithQuoteBy qs p ys
+                   Just eq 
+                     -&gt; case break (eq ==) ys of
+                          (_,[])   -&gt; error ("Invalid format: no "++show eq)
+                          (zs,w:ws)-&gt; case dividWithQuoteBy qs p ws of
+                                        []     -&gt; [ccs]
+                                        ts:uus -&gt; (xs++[y]++zs++[w]++ts) : uus
+   where q x = case lookup x qs of {Nothing -&gt; False; _-&gt; True}
+         pOr f g x = if f x then True else g x</code></pre>
+<p>これを利用すると CSVフォーマットのデータ行を分解するのは例えば、</p>
+<pre><code>readCSVLine :: String -&gt; [String]
+readCSVLine = dividWithQuoteBy [('\"','\"'),('\'','\'')] (','==)</code></pre>
+</blockquote>
+<hr>
+<h2 id="自分自身のソースコードをプリントするプログラム">自分自身のソースコードをプリントするプログラム</h2>
+<pre><code>main=putStr(x++show x);x="main=putStr(x++show x);x="</code></pre>
+<hr>
+<h2 id="文字列-c-が文字列-a-b-から構成されているか">文字列 C が文字列 A, B から構成されているか</h2>
+<p>ML<a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/485">Haskell-jp:485</a>より</p>
+<p>文字列 C の要素を二つに分けたとき、それらが C 上の順序を保って A, B と等しいか。</p>
+<pre><code>f xs ys = elem (Just ([], [])) . foldl g [Just (xs, ys)]
+  where
+    g xy z = [ case (l, r) of (Just (x:xs, ys), _) | x == z -&gt; Just (xs, ys)
+                              (_, Just (xs, y:ys)) | y == z -&gt; Just (xs, ys)
+                              _ -&gt; Nothing
+             | (l, r) &lt;- zip (xy++[Nothing]) (Nothing:xy)
+             ]
+
+Main&gt; f "aaaaaaaaaa" "aaaaaaaaaab" "aaaaaaaaaaaaaaaaaaaaa"
+False
+(1732 reductions, 5108 cells)
+Main&gt; f "chocolate" "chips" "cchochiolpaste"
+True
+(532 reductions, 1625 cells)</code></pre>
+<ul>
+<li><p>末広がりにならないように斜めにみる。 – yts</p>
+<pre><code>check xs ys zs = last $ next ys zs $ True:zipWith (==) xs zs
+  where
+    next [] zs bs = if length zs == length xs then bs else [False]
+    next (y:ys) (z:zs) (b:bs)
+      = next ys zs $ fix (\bls -&gt;
+            (b &amp;&amp; z == y):[ (bl &amp;&amp; z == x) || (bd &amp;&amp; z == y) 
+                | (bd, (bl, (x, z))) &lt;- zip bs $ zip bls $ zip xs zs])</code></pre></li>
+<li><p>Exploit lazyness! fibなんかもこういうふうにbuild DOWNできます。 – yts</p>
+<pre><code>data Tree a = T a (Tree a) (Tree a)
+check xs ys zs = b
+  where end = T False end end
+        <a href="email-protection.html" class="__cf_email__" data-cfemail="5b2f1b">[email&nbsp;protected]</a>(T b _ _) = checks xs ys zs t
+        checks [] [] [] _ = T True end end
+        checks [] [] _ _ = end
+        checks _ _ [] _ = end
+        checks (x:xs) [] (z:zs) ~(T _ <a href="email-protection.html" class="__cf_email__" data-cfemail="ddb19d">[email&nbsp;protected]</a>(T a al ar) _)
+            = T (z == x &amp;&amp; a) (checks xs [] zs l) (T False ar end)
+        checks [] (y:ys) (z:zs) ~(T _ _ <a href="email-protection.html" class="__cf_email__" data-cfemail="dba99b">[email&nbsp;protected]</a>(T b bl br))
+            = T (z == y &amp;&amp; b) (T False end bl) (checks [] ys zs r)
+        checks <a href="email-protection.html" class="__cf_email__" data-cfemail="b9c1c1caf9">[email&nbsp;protected]</a>(x:xs) <a href="email-protection.html" class="__cf_email__" data-cfemail="4d34343e0d">[email&nbsp;protected]</a>(y:ys) (z:zs) ~(T _ <a href="email-protection.html" class="__cf_email__" data-cfemail="066a46">[email&nbsp;protected]</a>(T a al ar) <a href="email-protection.html" class="__cf_email__" data-cfemail="88fac8">[email&nbsp;protected]</a>(T b bl br))
+            = T (z == x &amp;&amp; a || z == y &amp;&amp; b)
+                  (checks xs yys zs (T a al ar))
+                  (checks xxs ys zs (T b ar br)) -- "ar"</code></pre></li>
+</ul>
+<hr>
+<p><a href="" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%96%a2%e6%95%b0%e5%9e%8b%e8%a1%a8" class="uri" title="Go to wiki page">関数型表</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e4%b8%8a%e5%90%91%e3%81%8d%e3%81%ab%e3%82%82%e8%be%bf%e3%82%8c%e3%82%8b%e6%9c%a8" class="uri" title="Go to wiki page">上向きにも辿れる木</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%b9%b3%e8%a1%a1%e6%9c%a8" class="uri" title="Go to wiki page">平衡木</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e8%b5%a4%e9%bb%92%e6%9c%a8" class="uri" title="Go to wiki page">赤黒木</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/AVL%20%e6%9c%a8" title="Go to wiki page">AVL 木</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%87%e3%83%bc%e3%82%bf%e3%82%bf%e3%82%a4%e3%83%97%e3%81%8b%e3%82%89%e5%86%8d%e5%b8%b0%e3%82%92%e5%88%86%e9%9b%a2" class="uri" title="Go to wiki page">データタイプから再帰を分離</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">探索</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%b7%b1%e3%81%95%e5%84%aa%e5%85%88%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">深さ優先探索</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e5%b9%85%e5%84%aa%e5%85%88%e6%8e%a2%e7%b4%a2" class="uri" title="Go to wiki page">幅優先探索</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Graphical%20Sequence" title="Go to wiki page">Graphical Sequence</a></p>
+<hr>
+<h2 id="関数型表">関数型表</h2>
+<p>関数型の表(Table)。結構、味があるとおもいません？</p>
+<pre><code>type Table k v = k -&gt; Maybe v
+ 
+emptyTable :: Table k v
+emptyTable = const Nothing
+
+lookup :: Table k v -&gt; k -&gt; Maybe v
+lookup = id
+ 
+insert :: Eq k =&gt; Table k v -&gt; (k,v) -&gt; Table k v
+insert tbl (k,v) key = if k == key then Just v else tbl key
+ 
+remove :: Eq k =&gt; Table k v -&gt; k -&gt; Table k v
+remove tbl k key = if k == key then Nothing else tbl key</code></pre>
+<hr>
+<h2 id="上向きにも辿れる木">上向きにも辿れる木</h2>
+<p>zipper代わりに。– yts</p>
+<pre><code>import Data.Maybe (isJust, fromJust)
+data Tree a = Tree a [Tree a] deriving Show
+
+data TreeP a =  TreeP { parent :: Maybe (TreeP a), value :: a, children :: [TreeP a] } 
+mkTreeP pmb (Tree a cs)   = let x = TreeP pmb a (map (mkTreeP (Just x)) cs) in x
+parents = map fromJust . takeWhile isJust . iterate (&gt;&gt;= parent) . return
+
+instance Show a =&gt; Show (TreeP a) where
+  showsPrec d (TreeP p a cs) = showParen (d &gt; 10) $ 
+      ("TreeP " ++) . (f p ++) . showsPrec 11 a . (" " ++) . showList cs
+      where f (Just _) = "(Just &lt;parent&gt;) "; f Nothing = "Nothing "
+
+test00 = Tree 0 [Tree 1 [Tree 2 [Tree 3 []], Tree 4 []]]
+test01 = mkTreeP Nothing test00
+test02 = head . children . head . children $ test01
+test03 = parent test02
+test04 = parents test02</code></pre>
+<ul>
+<li><a href="https://www.haskell.org/hawiki/TheZipper">HaWiki:TheZipper</a></li>
+</ul>
+<hr>
+<h2 id="平衡木">平衡木</h2>
+<h3 id="赤黒木">赤黒木</h3>
+<p><a href="http://www.cse.ogi.edu/~hook/cse532f98/haskell1.htm">Haskell Red-Black Set</a>より。 <a href="http://www.cs.kent.ac.uk/people/staff/smk/redblack/">Red Black Trees</a> に deletion 付きのものがある。</p>
+<pre><code>data Color = R | B
+data RedBlackSet a = E | T Color (RedBlackSet a) a (RedBlackSet a)
+
+balance B (T R (T R a x b) y c) z d = T R (T B a x b) y (T B c z d)
+balance B (T R a x (T R b y c)) z d = T R (T B a x b) y (T B c z d)
+balance B a x (T R (T R b y c) z d) = T R (T B a x b) y (T B c z d)
+balance B a x (T R b y (T R c z d)) = T R (T B a x b) y (T B c z d)
+balance color a x b = T color a x b
+
+empty = E
+
+member x E = False
+member x (T _ a y b)
+   | x &lt; y  = member x a
+   | x &gt; y  = member x b
+   | True   = True
+   
+insert x s = T B a y b
+  where 
+    T _ a y b = ins s
+    ins E = T R E x E
+    ins <a href="email-protection.html" class="__cf_email__" data-cfemail="245764">[email&nbsp;protected]</a>(T color a y b) 
+      | x &lt; y  = balance color (ins a) y b
+      | x &gt; y  = balance color a y (ins b)
+      | True   = s</code></pre>
+<p>balance が美しい。</p>
+<h3 id="avl-木">AVL 木</h3>
+<pre><code>data AVLSet a = E | T H (AVLSet a) a (AVLSet a) deriving Show
+data H = L | B | R deriving Show
+
+balanceL R a x b = (False, T B a x b)
+balanceL B a x b = (True,  T L a x b)
+balanceL L (T L a x b) y c = (False, T B a x (T B b y c))
+balanceL L (T B a x b) y c = (True,  T R a x (T L b y c))
+balanceL L (T R a x (T h b y c)) z d = (False, T B (T h' a x b) y (T h'' c z d))
+  where (h', h'') = case h of L -&gt; (B, R); B -&gt; (B, B); R -&gt; (L, B)
+
+balanceR L a x b = (False, T B a x b)
+balanceR B a x b = (True,  T R a x b)
+balanceR R a x (T R b y c) = (False, T B (T B a x b) y c)
+balanceR R a x (T B b y c) = (True,  T L (T R a x b) y c)
+balanceR R a x (T L (T h b y c) z d) = (False, T B (T h' a x b) y (T h'' c z d))
+  where (h', h'') = case h of R -&gt; (L, B); B -&gt; (B, B); L -&gt; (B, R)
+
+member x E = False
+member x (T _ a y b)
+    | x &lt; y = member x a
+    | x &gt; y = member x b
+    | True  = True
+
+insert x E = T B E x E
+insert x t = snd $ ins x t
+
+ins x E = (True, T B E x E)
+ins x <a href="email-protection.html" class="__cf_email__" data-cfemail="4f3b0f">[email&nbsp;protected]</a>(T h l v r)
+    | x &lt; v = case ins x l of
+                (True,  l) -&gt; balanceL h l v r
+                (False, l) -&gt; (False, T h l v r)
+    | x &gt; v = case ins x r of
+                (True,  r) -&gt; balanceR h l v r
+                (False, r) -&gt; (False, T h l v r)
+    | True  = (False, t)
+
+delete x t = snd $ del x t
+
+del x E = (True, E)
+del x (T h l y r)
+    | x &lt; y = case del x l of
+                (False, l) -&gt; balanceR h l y r
+                (True,  l) -&gt; (True, T h l y r)
+    | x &gt; y = case del x r of
+                (False, r) -&gt; balanceL h l y r
+                (True,  r) -&gt; (True, T h l y r)
+    | True  = case l of
+                E -&gt; (False,r)
+                l -&gt; case rightElem l of
+                       (z, (False, l)) -&gt; balanceR h l z r
+                       (z, (True,  l)) -&gt; (True, T h l z r)
+
+rightElem (T h l x E) = (x, (False,l))
+rightElem (T h l x r) = case rightElem r of
+                          (z, (False, r)) -&gt; (z, balanceL h l x r)
+                          (z, (True,  r)) -&gt; (z, (True, T h l x r))
+
+height E = 0
+height (T _ l _ r) = 1 + max (height l) (height r)
+
+toList E = []
+toList (T _ a x b) = toList a ++ [x] ++ toList b
+
+check = snd . check'
+
+check' E = (0, True)
+check' (T h l _ r) =
+    ( 1 + max a c
+    , b &amp;&amp; d &amp;&amp; (case h of
+                 L -&gt; a == c + 1
+                 R -&gt; a + 1 == c
+                 B -&gt; a == c
+                )
+    )
+  where ((a, b), (c, d)) = (check' l, check' r)
+
+permutation [] = [[]]
+permutation xs = concat [map (x:) $ permutation (List.delete x xs) | x &lt;- xs]
+
+test = and $ map (check . foldl (flip insert) E) $ permutation [1..8]
+test' = and [check $ delete x t | t &lt;- map (foldl (flip insert) E) $ permutation [1..7], x &lt;-[1..7]]</code></pre>
+<p>Red-Black Tree をまねしてみたけど、場合分けが多くなってしまった。 – y.hanatani</p>
+<pre><code>height E = 0
+height (T L l _ _) = 1 + height l
+height (T _ _ _ r) = 1 + height r</code></pre>
+<p>これを使ってGADTで遊ばせてもらいました。その際に気付いたのですが、「balanceL L (T B a x b) y c = (True, T L (T B a x b) y c)」は「balanceL L (T B a x b) y c = (True, (T R a x (T L b y c)」ではないでしょうか。– sakai</p>
+<p>あ、insert だけだとこの規則は使われないですね。delete のときにはsakai氏のおっしゃるとおりです。 – y.hanatani</p>
+<pre><code>data Z = Z
+data S n = S n
+
+data (Ord a) =&gt; T a n where
+    E :: T a Z
+    T :: H l r n -&gt; T a l -&gt; a -&gt; T a r -&gt; T a n
+
+data H l r n where
+    B :: H a a (S a)
+    L :: H (S a) a (S (S a))
+    R :: H a (S a) (S (S a))
+
+balanceL :: H l r n -&gt; T a (S l) -&gt; a -&gt; T a r -&gt; Either (T a n) (T a (S n))
+balanceL R a x b = Left  (T B a x b)
+balanceL B a x b = Right (T L a x b)
+balanceL L (T B a x b) y c = Right (T R a x (T L b y c))
+balanceL L (T L a x b) y c = Left  (T B a x (T B b y c))
+balanceL L (T R a x (T h b y c)) z d =
+    case h of
+    L -&gt; Left (T B (T B a x b) y (T R c z d))
+    B -&gt; Left (T B (T B a x b) y (T B c z d))
+    R -&gt; Left (T B (T L a x b) y (T B c z d))
+
+balanceR :: H l r n -&gt; T a l -&gt; a -&gt; T a (S r) -&gt; Either (T a n) (T a (S n))
+balanceR L a x b = Left  (T B a x b)
+balanceR B a x b = Right (T R a x b)
+balanceR R a x (T B b y c) = Right (T L (T R a x b) y c)
+balanceR R a x (T R b y c) = Left  (T B (T B a x b) y c)
+
+balanceR R a x (T L (T h b y c) z d) =
+    case h of
+    R -&gt; Left (T B (T L a x b) y (T B c z d))
+    B -&gt; Left (T B (T B a x b) y (T B c z d))
+    L -&gt; Left (T B (T B a x b) y (T R c z d))
+
+ins :: (Ord a) =&gt; a -&gt; T a n -&gt; Either (T a n) (T a (S n))
+ins x E = Right (T B E x E)
+ins x <a href="email-protection.html" class="__cf_email__" data-cfemail="4a3e0a">[email&nbsp;protected]</a>(T h l v r) =
+    case x `compare` v of
+    EQ -&gt; Left t
+    LT -&gt; case ins x l of
+          Left l'  -&gt; Left (T h l' v r)
+          Right l' -&gt; balanceL h l' v r
+    GT -&gt; case ins x r of
+          Left r'  -&gt; Left (T h l v r')
+          Right r' -&gt; balanceR h l v r'
+
+data (Ord a) =&gt; AVLSet a = forall n. AVLSet (T a n)
+
+emptySet :: (Ord a) =&gt; AVLSet a
+emptySet = AVLSet E
+
+insert :: (Ord a) =&gt; a -&gt; AVLSet a -&gt; AVLSet a
+insert x (AVLSet t) =
+    case ins x t of
+    Left u  -&gt; AVLSet u
+    Right u -&gt; AVLSet u
+
+toList :: (Ord a) =&gt; AVLSet a -&gt; [a]
+toList (AVLSet t) = f t
+    where f :: forall a n. T a n -&gt; [a]
+          f E = []
+          f (T _ l x r) = f l ++ [x] ++ f r
+
+height :: (Ord a) =&gt; AVLSet a -&gt; Int
+height (AVLSet t) = f t
+    where f :: forall a n. T a n -&gt; Int
+          f E = 0
+          f (T L l _ r) = 1 + f l
+          f (T _ _ _ r) = 1 + f r
+
+test = height $ foldl (flip insert) emptySet [1..100]</code></pre>
+<p>foldによって書いてみる – yts</p>
+<pre><code>fold :: (forall l n r. H l n r -&gt; b -&gt; a -&gt; b -&gt; b) -&gt; b -&gt; T a d -&gt; b
+fold f z <a href="email-protection.html" class="__cf_email__" data-cfemail="522a12">[email&nbsp;protected]</a>(T h l a r) = f h (g l) a (g r) where g = fold f z
+fold f z E = z
+
+member :: (Ord a) =&gt; a -&gt; AVLSet a -&gt; Bool
+member (x :: a) (AVLSet t) = fold f False t
+  where f :: H l r n -&gt; Bool -&gt; a -&gt; Bool -&gt; Bool
+        f _ l a r = case compare x a of
+        EQ -&gt; True; LT -&gt; l; GT -&gt; r
+
+-- toList (AVLSet t) = fold (\h l a r -&gt; l ++ [a] ++ r) [] t
+-- height (AVLSet t) = &lt;snip&gt;</code></pre>
+<hr>
+<h2 id="データタイプから再帰を分離">データタイプから再帰を分離</h2>
+<pre><code>newtype Fix f = Fix (f (Fix f)) 
+type Rec r = r (Fix r)
+type Stream a = Rec ((,) a)
+
+stream (x:xs) = (x, Fix (stream xs))
+tolist (a, (Fix b)) = a:tolist b
+
+test = take 10 $ tolist $ stream [1..]</code></pre>
+<p>もっといい項目名をつけたかったのだけど… – yts</p>
+<hr>
+<h2 id="探索">探索</h2>
+<h3 id="深さ優先探索">深さ優先探索</h3>
+<pre><code>dfs :: (a -&gt; [a]) -&gt; a -&gt; [a]
+dfs f x = x:(f x &gt;&gt;= dfs f)</code></pre>
+<h3 id="幅優先探索">幅優先探索</h3>
+<pre><code>bfs :: (a -&gt; [a]) -&gt; a -&gt; [a]
+bfs f = bfs' . (:[])
+  where bfs' [] = []
+        bfs' xs = xs ++ bfs' (xs &gt;&gt;= f)
+
+-- 一行で書くと
+bfs f = concat . takeWhile (not.null) . iterate (&gt;&gt; f) . (:[])</code></pre>
+<hr>
+<h2 id="graphical-sequence">Graphical Sequence</h2>
+<p><a href="http://mput.dip.jp/mput/?date=20051007#p01">mputの日記</a>より</p>
+<pre><code>isGraphic []     = True
+isGraphic (x:xs) = or [isGraphic $ map (subtract 1) xs ++ ys | (xs,ys) &lt;- choice x xs]</code></pre>
+<p>choice の定義は<a href="Programming_玉手箱_組合せ.html" class="uri" title="Go to wiki page">Programming_玉手箱_組合せ</a>にある．</p>
+<p>–nobsun</p>
+<pre><code>splitAt' :: Int -&gt; [a] -&gt; Maybe ([a], [a])
+splitAt' 0 xs = Just ([], xs)
+splitAt' _ [] = Nothing
+splitAt' n (x:xs) = splitAt' (n-1) xs &gt;&gt;= \(ys, zs) -&gt; Just (x:ys, zs)
+ 
+isGraphical :: [Int] -&gt; Bool
+isGraphical = isGraphical' . reverse . sort
+  where
+    isGraphical' []     = True
+    isGraphical' (x:xs) = case splitAt' x xs of
+                          Just (ys, zs) -&gt; isGraphical $ map (subtract 1) ys ++ zs
+                          Nothing       -&gt; False</code></pre>
+<p>グラフ的な列を列挙。</p>
+<pre><code>genGraphical :: Int -&gt; [[Int]]
+genGraphical 0 = [[]]
+genGraphical n = nub $ concat [[ins m $ map (+1) ys ++ zs | (m, (ys, zs)) &lt;- zip [0..] (splits xs)] | xs &lt;- genGraphical (n-1)]
+  where splits xs = zip (inits xs) (tails xs)
+        ins a [] = [a]
+        ins a <a href="email-protection.html" class="__cf_email__" data-cfemail="e1999992a1">[email&nbsp;protected]</a>(x:xs) | x &lt;= a = a:xxs
+                         | True   = x:ins a xs
+
+graphicals :: [[Int]]
+graphicals = concatMap genGraphical [0..]</code></pre>
+<hr>
+<p>Last modified : 2006/06/13 07:49:57 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

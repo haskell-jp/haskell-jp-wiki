@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Haskell_Report"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Haskell_Report</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Haskell_Report">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Haskell_Report">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Haskell_Report">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Haskell_Report</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#haskell_report"><span>Haskell_Report</span></a><ul>
+<li><a href="#%E6%97%A5%E6%9C%AC%E8%AA%9E%E8%A8%B3%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E6%84%8F%E8%A6%8B%E6%84%9F%E6%83%B3%E8%AA%A4%E8%A8%B3%E3%81%AA%E3%81%A9%E3%81%AE%E6%8C%87%E6%91%98">日本語訳についての意見、感想、誤訳などの指摘</a></li>
+<li><a href="#%E4%BF%AE%E6%AD%A3%E6%B8%88">修正済</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="haskell_report"><a href="" class="uri" title="Go to wiki page">Haskell_Report</a></h1>
+<p><a href="Haskell.html" class="uri" title="Go to wiki page">Haskell</a>:Report</p>
+<hr>
+<p>“Haskell 98 language and libraries: the Revised Report” の日本語訳<a href="http://www.sampou.org/haskell/report-revised-j/">Haskell 98 言語とライブラリ</a> にツッコミをいれるページ。日本語訳に対する意見、感想、それに、誤訳、誤字、脱字、 がありましたら、ここに書き込んでくださいませ。</p>
+<hr>
+<h3 id="日本語訳についての意見感想誤訳などの指摘">日本語訳についての意見、感想、誤訳などの指摘</h3>
+<hr>
+<p>4.5.1 依存性解析</p>
+<pre><code> &gt; 次のどれかの場合、同じ宣 言グループに属する。
+ &lt; 次の*どちらか*の場合、同じ宣 言グループに属する。
+
+ &gt; どちらも同じパターン束縛により束縛される。
+ &lt; *それらはある同一の*パターン束縛により束縛される。*または、*
+ 
+ この文の意味は (x,y）= ... の x と y のような関係のこと？
+
+ &gt; 必要とされる依存性解析を捕捉する。
+ 「捕捉」以外のよい言葉がないか？
+
+ &gt; (d2 内の認識子が d1 内で無束縛ではあらわれない場合)
+ &lt; (d2 内*で束縛される識別子は* d1 内で無束縛ではあらわれない場合)
+ 
+ variable ではなく identifier なのは意図がある？
+ d1,d2 はそれぞれ宣言グループを表している？</code></pre>
+<p>4.5.2 一般化</p>
+<pre><code> &gt; 制約のこの集積の中にあらわれる型変数は被制約型変数とよぶ。
+ &lt; 制約のこの集積の中にあらわれる型変数は被制約型変数と*よばれる*。
+
+ &gt; それらの型シグネチャの文脈はその型変数の名前の付け替えと同一でなければならない。
+ &lt; それらの型シグネチャの文脈は*、型変数の名前の付け替えだけの差異は無視した上で、*同一でなければならない。
+
+ &gt; ある型の文脈は型変数あるいは1つ以上の型への型変数の適用しか制約しない。
+ &lt; ある型の文脈は*1つだけの*型変数あるいは1つ以上の型への型変数の適用しか制約しない。
+ 
+ 「1つ以上の型への型変数の適用」とは (Eq (f a), Functor f) の (f a) みたいなこと？
+
+ &gt; このリスト型で同等性がとれる場合でさえも
+ &lt; *この例のような*リスト型で同等性が*とれられる*場合でさえも
+
+ &gt; リスト上の Eq に対応するインスタンス宣言を用い
+ &lt; *リストの Eq に関する*インスタンス宣言を用い
+
+ &gt; C (m t) という形式の制約が必要であることを示す例がある。
+ &lt; C (m t) という形式の制約が必要であることを示す例*をあげよう*。
+
+ &gt; どのインスタンスとも同じように、単純なな文脈を持たねばならない。
+ &lt; どのインスタンス*もそうであるように*、*単純な*文脈を持たねばならない。
+
+ &gt; すなわち、静的エラーとなる。
+ &lt; *したがって*静的エラーとなる。</code></pre>
+<hr>
+<p><a href="http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=RHG%EF%BF%BD%C9%BD%EF%BF%BD%EF%BF%BD::%EF%BF%BD%EF%BF%BD%EF%BF%BD+Revolution::%EF%BF%BD%D5%A4%C4%A4%EF%BF%BD%EF%BF%BD%EF%BF%BDHaskell%EF%BF%BD%D7%A5%EF%BF%BD%EF%BF%BD%EF%BF%BD%DF%A5%EF%BF%BD">RHG でのやりとり</a>を受けて、kindの訳語を類から種に変えないの？</p>
+<blockquote>
+<h4 id="kind-の訳語について-nobsun20060921-131037-jst">kind の訳語について (<a href="nobsun.html" class="uri" title="Go to wiki page">nobsun</a>–2006/09/21 13:10:37 JST)</h4>
+<p>原文では，型の型のことを kind と表現している． 拙訳では「類」という訳語をあてたのだが，「この訳語はいかがなものか」と いう議論．</p>
+<p>「類」を使ったのは，</p>
+<ul>
+<li>数学用語では
+<ul>
+<li>Stirling number of the first kind: 第1種スターリング数</li>
+<li>Chebyshev polynomial of the first kind: 第1種チェビチェフ多項式</li>
+</ul></li>
+</ul>
+<p>のように，「型の型」とは直接結びつかないように見える例しか探せなかった．</p>
+<ul>
+<li>「種」と書くと，乱数の seed をイメージしてまうような気がした</li>
+</ul>
+<p>という，要するに訳者の不勉強による理由． どうやら，型理論の分野では「種」という訳語を使うらしいので，少しだけ調べ てみたら，</p>
+<ul>
+<li><a href="http://nicosia.is.s.u-tokyo.ac.jp/pub/essay/hagiya/7bits/shoumei_kata">萩谷昌己：「証明を型にはめると」</a></li>
+<li><a href="https://www.amazon.co.jp/exec/obidos/ASIN/476490201X/philoprogramm-22/ref=nosim/">龍田真：「型理論」</a></li>
+</ul>
+<p>では「種」という訳語が使われていた．</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/exec/obidos/ASIN/4320026594/philoprogramm-22/ref=nosim/">大堀淳：「プログラミング言語の基礎理論」</a></li>
+</ul>
+<p>では「種類」という訳語が使われていた．やっぱり，「類」じゃあマズいか．</p>
+</blockquote>
+<hr>
+<h3 id="修正済">修正済</h3>
+<p>(2009/03/13 14:58:17 JST 修正)</p>
+<h4 id="単相性制限">4.5.5 単相性制限</h4>
+<pre><code> &gt; 規則 1. 与えられた宣言が
+ &lt; 規則 1. 与えられた宣言グループが
+
+ &gt; (型変数は、いくつかの型クラスに属さなければならない場合、制約をうけることを思いだすこと。
+ &lt; (*型変数が被制約とは、ある型クラスに属さなければならないという意味である*ことを思いだすこと。
+
+ &gt; 規則 1 は二つのどちらも非常に重要な理由により必要である。
+ &lt; 規則 1 は二つのどちらも非常に*微妙な？油断できない？subtle？*理由により必要である。
+
+ &gt; 規則 1 は不要な再計算を防ぐ。
+ &lt; 規則 1 は*予想外の*再計算を防ぐ。
+
+ &gt; len は一度だけ計算されるべきだものと見られるが
+ &lt; len は一度だけ計算される*べきもの*と見られるが
+
+ &gt; なぜなら曖昧さを引き継いでいるからである。
+ &lt; なぜなら*内在的に？本質的に？inherently？*曖昧だからである。
+
+ &gt; sを使用するのは、どの多重定義の時かを決定することはできず。 
+ &lt; sを使用するのは、どの多重定義の時かを決定することはできず*、*
+ （この文の意味するところが原文を読んでもわかりません）
+
+ &gt; いかなるインポートされたモジュールによってでは 決定されないと主張するものである。
+ &lt; それをインポートした方のモジュールでは 決定されないと主張するものである。
+
+ &gt; ユーザは完全な多重定義を保持するために型シグネチャを付与することを注意深くなければならない。
+ &lt; ユーザは完全な多重定義を保持するために型シグネチャを付与すること*に*注意深くなければならない。
+
+ &gt; 標準プレリュードをこのことの例を多く含んでいる。
+ &lt; 標準プレリュード*は*このことの例を多く含んでいる。</code></pre>
+<ul>
+<li>提案していただいた訳とはすこし違うところもありますが、修正しました。ご指摘ありがとうございます。–nobsun</li>
+</ul>
+<hr>
+<p>(2009/03/09 11:55:19 JST 修正)</p>
+<h4 id="モナドの伝統的な記法">モナドの伝統的な記法？</h4>
+<p>意味からすると「3.14 do 式」で伝統的だと説明されている式は逆ではないでしょうか。 つまり “to be written in a more traditional way” がかかるのは前者(&gt;&gt;=の方) ではないかと。</p>
+<p>勝手に語を補ったイメージとしては、“It allows (that) an expression (such as A …) (is) as B.” のような解釈かなと思ったのですが…。</p>
+<pre><code> 原文) It allows an expression such as A
+ to be written in a more traditional way as: B
+ 
+ 旧) 次のような式が許されている。
+ これは、伝統的な書きかたでは B となる。
+ 
+ 修正案) これにより、伝統的には以下のように書かれていた式は、
+ 以下のようにも表わすことができる。</code></pre>
+<ul>
+<li><p>(2008/07/20 17:39:04 JST): conventinal と traditional が対応しているのではないかと 考えてそのように翻訳しました．do式 = traditional という気分なんです． つまり，do式の構文は，伝統的な命令型言語の構文に似ているという気分．．． いずれにせよもうすこしこなれた日本語の方がよさそうですね．もうすこし 考えてみます．–nobsun</p></li>
+<li><p>(2009/03/09 11:55:19 JST) 日本語をすこし修正しました．</p></li>
+</ul>
+<hr>
+<p>Last modified : 2009/03/13 23:40:02 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Haskell_Report">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Haskell_Report?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Haskell_Report">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Haskell_Report" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/Calendar"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/Calendar</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/Calendar">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/Calendar">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/Calendar">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/Calendar</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#haskell%E5%8B%89%E5%BC%B7%E4%BC%9A%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC">Haskell勉強会カレンダー</a><ul>
+<li><a href="#haskell%E9%96%A2%E4%BF%82%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E4%B8%BB%E5%82%AC%E8%80%85%E3%81%B8">Haskell関係のイベント主催者へ</a><ul>
+<li><a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%82%92%E8%BF%BD%E5%8A%A0%E7%B7%A8%E9%9B%86%E3%81%99%E3%82%8B%E6%A8%A9%E9%99%90%E3%82%92%E5%BE%97%E3%82%8B%E3%81%AB%E3%81%AF">イベントを追加・編集する権限を得るには</a></li>
+<li><a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E8%BF%BD%E5%8A%A0%E6%99%82%E3%81%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85">イベント追加時の注意事項</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%82%8Bzapier%E3%81%AEzapifttt%E3%81%AEapplet%E3%81%B8%E3%81%AEurl">使用しているZapierのZap・IFTTTのAppletへのURL</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="haskell勉強会カレンダー">Haskell勉強会カレンダー</h1>
+<p>下記のリンクからGoogleカレンダーに追加すれば閲覧できるでしょう:</p>
+<p><a href="https://calendar.google.com/calendar/u/0?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ" class="uri">https://calendar.google.com/calendar/u/0?cid=b3RvdGplaTc5NTYwZm0yZ3VubTVxMDVyamNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ</a></p>
+<h2 id="haskell関係のイベント主催者へ">Haskell関係のイベント主催者へ</h2>
+<h3 id="イベントを追加編集する権限を得るには">イベントを追加・編集する権限を得るには</h3>
+<p><a href="https://twitter.com/igrep">@igrep</a> など、カレンダーの追加権限を持っている人にGoogleアカウントのメールアドレスを教えてください。イベント内容を確認の上、追加権限を与えます。</p>
+<h3 id="イベント追加時の注意事項">イベント追加時の注意事項</h3>
+<p>「Haskell勉強会」カレンダーに新しくイベントを追加すると、igrepが設定したZapierやIFTTTによって、Twitterの<a href="https://twitter.com/haskell_jp">@haskell_jp</a>アカウントや<a href="https://haskell.jp/signin-slack.html">Haskell-jp Slack Workspace</a>の#event-announcementチャンネルにて<strong>告知</strong>されます。</p>
+<p>その際、イベントの説明に書いた内容が、そのまま<strong>TwitterやSlackでの発言に転記</strong>されます。 通例、Connpassで作成したイベントなどをConnpassの機能を使ってGoogleカレンダーにそのまま登録した場合、URLが説明に書かれるので、URLを書いておく想定で転記しています。ハッシュタグなど、必要に応じて短いメッセージを加えるのもよいでしょう。ただし、<strong>Twitterの文字数制限は特にチェックしていない</strong>のでご注意ください！</p>
+<h3 id="使用しているzapierのzapiftttのappletへのurl">使用しているZapierのZap・IFTTTのAppletへのURL</h3>
+<h4 id="zapier">Zapier</h4>
+<ul>
+<li><a href="https://zapier.com/shared/b9d74dff723dbb5572e0d7d8b694d33286ba096d">1週間後に始まるHaskell勉強会をHaskell-jpのSlackに</a></li>
+<li><a href="https://zapier.com/shared/19c3b672e4ce56cd26c30f40b8451b171ad5c55d">新しいHaskell勉強会をHaskell-jpのSlackに</a></li>
+<li><a href="https://zapier.com/shared/47d27773bf63d2a6f5aa4ad4c547c9a76d11642d">明日始まるHaskell勉強会をHaskell-jpのSlackに</a></li>
+<li><a href="https://zapier.com/shared/e1f6f57665ad8df57087dbbc80435f237490a7d1">明日始まるHaskell勉強会をTwitterで告知</a></li>
+</ul>
+<h4 id="ifttt">IFTTT</h4>
+<p>※IFTTTについては残念ながら個人アカウントで作ったAppletのURLを共有する手段は現状ないみたいです。残念！</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/Calendar">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/Calendar?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/Calendar">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/Calendar" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

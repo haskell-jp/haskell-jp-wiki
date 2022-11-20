@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_玉手箱_組合せ</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_玉手箱_組合せ</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_%E7%8E%89%E6%89%8B%E7%AE%B1_%E7%B5%84%E5%90%88%E3%81%9B"><span>Programming_玉手箱_組合せ</span></a><ul>
+<li><a href="#%E7%B5%84%E5%90%88%E3%81%9B%E8%AB%96%E7%9A%84%E3%81%AA%E7%94%9F%E6%88%90%E9%96%A2%E6%95%B0">組合せ論的な生成関数</a><ul>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E4%BA%8C%E5%88%86%E5%89%B2%E3%81%AE%E7%94%9F%E6%88%90">リストの二分割の生成</a></li>
+<li><a href="#%E9%A0%86%E5%88%97%E3%81%AE%E7%94%9F%E6%88%90">順列の生成</a></li>
+<li><a href="#%E9%87%8D%E8%A4%87%E9%A0%86%E5%88%97%E3%81%AE%E7%94%9F%E6%88%90">重複順列の生成</a></li>
+<li><a href="#%E7%B5%84%E5%90%88%E3%81%9B%E3%81%AE%E7%94%9F%E6%88%90">組合せの生成</a></li>
+<li><a href="#%E9%87%8D%E8%A4%87%E7%B5%84%E5%90%88%E3%81%9B%E3%81%AE%E7%94%9F%E6%88%90">重複組合せの生成</a></li>
+</ul></li>
+<li><a href="#%E9%A0%86%E5%88%97%E3%81%AE%E7%94%9F%E6%88%90-1">順列の生成</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_玉手箱_組合せ"><a href="" class="uri" title="Go to wiki page">Programming_玉手箱_組合せ</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e7%8e%89%e6%89%8b%e7%ae%b1" class="uri" title="Go to wiki page">玉手箱</a>:組合せ</p>
+<hr>
+<p><a href="Programming_玉手箱.html" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b5%84%e5%90%88%e3%81%9b%e8%ab%96%e7%9a%84%e3%81%aa%e7%94%9f%e6%88%90%e9%96%a2%e6%95%b0" class="uri" title="Go to wiki page">組合せ論的な生成関数</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%83%aa%e3%82%b9%e3%83%88%e3%81%ae%e4%ba%8c%e5%88%86%e5%89%b2%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">リストの二分割の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">順列の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%87%8d%e8%a4%87%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">重複順列の生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e7%b5%84%e5%90%88%e3%81%9b%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">組合せの生成</a></li>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%87%8d%e8%a4%87%e7%b5%84%e5%90%88%e3%81%9b%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">重複組合せの生成</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e9%a0%86%e5%88%97%e3%81%ae%e7%94%9f%e6%88%90" class="uri" title="Go to wiki page">順列の生成</a></p>
+<hr>
+<h2 id="組合せ論的な生成関数">組合せ論的な生成関数</h2>
+<p>「順列の生成」に触発されて、いろいろつくってみた。2003/11/24 08:09:32 JST–nobsun</p>
+<h3 id="リストの二分割の生成">リストの二分割の生成</h3>
+<p>たとえば、[1,2,3]というリストの全二分割は、 [([],[1,2,3]),([1],[2,3]),([1,2],[3]),([1,2,3],[])]</p>
+<pre><code>divid :: [a] -&gt; [([a],[a])]
+
+divid <a href="email-protection.html" class="__cf_email__" data-cfemail="ed95959ead">[email&nbsp;protected]</a>(x:xs) = ([],xxs) : [(x:ys,zs) | (ys,zs) &lt;- divid xs]
+divid []         = [([],[])]</code></pre>
+<p>あれっ。これでいいじゃん。</p>
+<pre><code>divid xs = zip (inits xs) (tails xs)</code></pre>
+<p>えっ。なに？逆？</p>
+<pre><code>inits = map fst . divid
+tails = map snd . divid</code></pre>
+<h3 id="順列の生成">順列の生成</h3>
+<p>n 種類のものから、r 個取り出して並べる。辞書順に生成される。</p>
+<pre><code>perm :: [a] -&gt; Int -&gt; [[a]]
+perm [] _ = []
+perm xs 0 = [[]]
+perm xs 1 = map (:[]) xs
+perm xs n = concatMap (pm n) $ divid xs
+ where pm _ (_,[])      = []
+       pm n (hs,(t:ts)) = map (t:) $ perm (hs ++ ts) (n-1)</code></pre>
+<blockquote>
+<p>length (perm ns r) == nＰr (n = length ns)</p>
+</blockquote>
+<p>別の書き方で</p>
+<pre><code>perm [] = [[]]
+perm xs = concat [map (x:) (perm xs') | (x, xs') &lt;- f xs]
+  where f [] = []
+        f (x:xs) = (x, xs):[(x', x:xs') | (x', xs') &lt;- f xs]</code></pre>
+<p>Eq a なときの順列</p>
+<pre><code>perm' :: Eq a =&gt; [a] -&gt; [[a]]
+perm' [] = [[]]
+perm' xs = concat [map (x:) (perm' xs') | (x, xs') &lt;- nubBy g $ f xs]
+  where f [] = []
+        f (x:xs) = (x, xs):[(x', x:xs') | (x', xs') &lt;- f xs]
+        g (x, _) (y, _) = x == y</code></pre>
+<h3 id="重複順列の生成">重複順列の生成</h3>
+<p>n 種類のものから、重複を許して、r 個取り出してならべる。</p>
+<pre><code>rperm :: [a] -&gt; Int -&gt; [[a]]
+rperm [] _ = []
+rperm xs 0 = [[]]
+rperm xs 1 = [[x] | x &lt;- xs]
+rperm xs n = [ x:ys | x &lt;- xs, ys &lt;- rperm xs (n-1) ]</code></pre>
+<blockquote>
+<p>length (rperm ns r) == nΠr (n = length ns) == n^r</p>
+</blockquote>
+<ul>
+<li><p>2ch で覚えた方法</p>
+<pre><code>rperm = ((foldl ((=&lt;&lt;) . (. (return .) . (:)) . (&gt;&gt;=) ) [[]]) .) . (flip replicate) </code></pre>
+<ul>
+<li>邪悪な香りがして、ぞくぞくきますねぇ。^^；</li>
+<li>rperm [] 0 の結果が上と違うけど、どちらが正しいの?
+<ul>
+<li>0^0 は 0 か 1 かと同じ話ですよね。不定ということでどうでしょうか。</li>
+<li>空集合から空集合への写像の数は１つらしいので rperm [] _ の行はない方がいいでしょうか。それと rperm xs 1 の行も必要ないですよね。他のほとんどの項目の *** xs 1 の行についても同様です。</li>
+</ul></li>
+</ul></li>
+<li><p>HHLに同じ事をする関数があった</p>
+<pre><code>import Control.Monad
+rperm = flip replicateM</code></pre></li>
+</ul>
+<h3 id="組合せの生成">組合せの生成</h3>
+<p>n 種類のものから、r 個取り出して組み合せる。</p>
+<pre><code>comb :: [a] -&gt; Int -&gt; [[a]]
+comb [] _     = []
+comb xs 0     = [[]]
+comb xs 1     = map (:[]) xs
+comb (x:xs) n = map (x:) (comb xs (n-1)) ++ comb xs n
+
+comb xs 1 のパターンを外せるが他のパターンの順序を変えないといけない。
+
+comb _ 0     = [[]]
+comb [] _     = []
+comb (x:xs) n = map (x:) (comb xs (n-1)) ++ comb xs n</code></pre>
+<blockquote>
+<p>length (comb ns r) == nＣr (n = length ns)</p>
+</blockquote>
+<p>選んだ残りのものも利用したいとき</p>
+<pre><code>choice  :: Int -&gt; [a] -&gt; [([a], [a])]
+choice 0 xs = [([], xs)]
+choice n [] = []
+choice n (x:xs) = [(x:ys, zs) | (ys, zs) &lt;- choice (n-1) xs] ++
+                  [(ys, x:zs) | (ys, zs) &lt;- choice n xs]</code></pre>
+<h3 id="重複組合せの生成">重複組合せの生成</h3>
+<p>n 種類のものから、重複を許して、r 個取り出して組み合わせる。</p>
+<pre><code>rcomb :: [a] -&gt; Int -&gt; [[a]]
+rcomb [] _ = []
+rcomb xs 0 = [[]]
+rcomb xs 1 = [[x] | x &lt;- xs]
+rcomb <a href="email-protection.html" class="__cf_email__" data-cfemail="5921212a19">[email&nbsp;protected]</a>(x:xs) n = map (x:) (rcomb xxs (n-1)) ++ rcomb xs n</code></pre>
+<blockquote>
+<p>length (rcomb ns r) == nＨr (n = length ns)</p>
+</blockquote>
+<pre><code>rcomb' [] _ = []
+rcomb' xs 0 = [[]]
+rcomb' xs n = xs &gt;&gt;= (flip map (rcomb xs (n-1))) . (:)
+-- rcomb' xs n = xs &gt;&gt;= (rcomb xs (n-1) &gt;&gt;=) . ((flip (:) [] .) . (:))</code></pre>
+<hr>
+<h2 id="順列の生成-1">順列の生成</h2>
+<p>かってに書いてもいいのかな? 問題があったら消して下さい &gt;&gt; nobsun</p>
+<ul>
+<li>Welcome! Wikiなんですから、どんどん書いちゃってくださいな。–nobsun</li>
+</ul>
+<p>2chの<a href="http://pc2.2ch.net/test/read.cgi/tech/1013846140/819-">関数型プログラミング言語Haskell</a> で話題になっているものを転記。</p>
+<p>819</p>
+<pre><code>permutation' [] = [[]]
+permutation' xs = foldr (++) [] (map f (rotate_list xs))
+  where
+  f (x:xs) = map (x:) (permutation' xs)
+  rotate_list xs = take (length xs) (iterate rotate_left xs)
+    where
+    rotate_left [] = []
+    rotate_left (x:xs) = xs ++ [x]
+
+permutation [] = [[]]
+permutation xs = foldr (++) [] (map f (selected_list xs))
+  where
+  f (x:xs) = map (x:) (permutation xs)
+  selected_list xs = take (length xs) (zipWith select (repeat xs) [0..])
+    where
+    select [] _ = []
+    select xs n = z : ys ++ zs
+      where
+      (ys,(z:zs)) = splitAt n xs
+
+上の permutation' は速いですが順列が昇順に出力されません．下の
+permutation は昇順に出力されますが， splitAt のあたりが遅いのか，速度
+で劣ります．</code></pre>
+<p>821</p>
+<pre><code>permutation [] = [[]]
+permutation xs = concat [map (x:) $ permutation (delete x xs) | x &lt;- xs]</code></pre>
+<p>823</p>
+<pre><code>deleteの2倍以上速いと思う。
+
+permutations :: [a] -&gt; [[a]]
+permutations (x:xs) = concat $ map (insap [] x) $ permutations xs
+where
+  insap :: [a] -&gt; a -&gt; [a] -&gt; [[a]]
+  insap xs y (z:zs) = (xs ++ [y] ++ (z:zs)):(insap (xs ++ [z]) y zs)
+  insap xs y [] = [xs ++ [y]]
+permutations [] = [[]]</code></pre>
+<p>826</p>
+<pre><code> insap xs y <a href="email-protection.html" class="__cf_email__" data-cfemail="6a1010192a">[email&nbsp;protected]</a>(z:zs) = (xs++y:zzs):insap (xs++[z]) y zs
+
+とやると僅かだけど、早くなるかも。</code></pre>
+<p>828</p>
+<pre><code>permutation xs = p xs []
+ where
+  p [] [] = [[]]
+  p [] ys = []
+  p (x:xs) ys = (map (x:) $ p (xs ++ reverse ys) []) ++ p xs (x:ys)
+
+deleteより少し速い。xs ++ reverse ysを効率的にやればもう少しいけるかもね。</code></pre>
+<p>830</p>
+<pre><code>Haskellよく知らないけど前にLispでやったから多分
+
+ permutation' [] = [[]]
+ permutation' xs = foldr (++) [] (map rotate_list (f xs))
+   where
+   f (x:xs) = map (x:) (permutation' xs)
+   rotate_list xs = take (length xs) (iterate rotate_left xs)
+     where
+     rotate_left [] = []
+     rotate_left (x:xs) = xs ++ [x]</code></pre>
+<p>830</p>
+<pre><code>末尾再帰はループになるのかな？
+
+selected-list xs = p xs [] []
+ where
+  p [] ys r = reverse r
+  p (x:xs) ys r = p xs (x:ys) ((x:((reverse ys) ++ xs)):r)</code></pre>
+<hr>
+<p>Last modified : 2006/06/13 07:30:44 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e7%b5%84%e5%90%88%e3%81%9b" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

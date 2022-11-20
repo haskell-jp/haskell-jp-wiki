@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Programming_玉手箱_文字列</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Programming_玉手箱_文字列</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#programming_%E7%8E%89%E6%89%8B%E7%AE%B1_%E6%96%87%E5%AD%97%E5%88%97"><span>Programming_玉手箱_文字列</span></a><ul>
+<li><a href="#%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E9%99%A4%E5%8E%BB">コメントの除去</a></li>
+<li><a href="#%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E5%AF%BE%E5%BF%9Cread">コメント対応read</a></li>
+<li><a href="#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E7%BD%AE%E6%8F%9B">正規表現置換</a></li>
+<li><a href="#words4apachelog">words4ApacheLog</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E5%85%88%E9%A0%AD%E3%81%8B%E3%82%89%E7%AD%89%E3%81%97%E3%81%84%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%8A%9C%E3%81%8D%E5%87%BA%E3%81%99">文字列の先頭から等しい文字列を抜き出す</a><ul>
+<li><a href="#%E3%81%8A%E7%B4%84%E6%9D%9F%E3%81%AE%E6%9C%AB%E5%B0%BE%E5%86%8D%E5%B8%B0%E7%89%88">お約束の末尾再帰版</a></li>
+</ul></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E3%82%89%E4%B8%80%E8%87%B4%E3%81%99%E3%82%8B%E9%83%A8%E5%88%86%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%8A%BD%E5%87%BA%E3%81%99%E3%82%8B">文字列から一致する部分文字列を抽出する</a></li>
+<li><a href="#csv">CSV</a></li>
+<li><a href="#%E8%87%AA%E5%88%86%E8%87%AA%E8%BA%AB%E3%81%AE%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E3%81%99%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0">自分自身のソースコードをプリントするプログラム</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97-c-%E3%81%8C%E6%96%87%E5%AD%97%E5%88%97-a-b-%E3%81%8B%E3%82%89%E6%A7%8B%E6%88%90%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8B">文字列 C が文字列 A, B から構成されているか</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="programming_玉手箱_文字列"><a href="" class="uri" title="Go to wiki page">Programming_玉手箱_文字列</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/Programming" class="uri" title="Go to wiki page">Programming</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e7%8e%89%e6%89%8b%e7%ae%b1" class="uri" title="Go to wiki page">玉手箱</a>:文字列</p>
+<hr>
+<p><a href="Programming_玉手箱.html" class="uri" title="Go to wiki page">Programming_玉手箱</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%a1%e3%83%b3%e3%83%88%e3%81%ae%e9%99%a4%e5%8e%bb" class="uri" title="Go to wiki page">コメントの除去</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%82%b3%e3%83%a1%e3%83%b3%e3%83%88%e5%af%be%e5%bf%9cread" class="uri" title="Go to wiki page">コメント対応read</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%ad%a3%e8%a6%8f%e8%a1%a8%e7%8f%be%e7%bd%ae%e6%8f%9b" class="uri" title="Go to wiki page">正規表現置換</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/words4ApacheLog" class="uri" title="Go to wiki page">words4ApacheLog</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%e3%81%ae%e5%85%88%e9%a0%ad%e3%81%8b%e3%82%89%e7%ad%89%e3%81%97%e3%81%84%e6%96%87%e5%ad%97%e5%88%97%e3%82%92%e6%8a%9c%e3%81%8d%e5%87%ba%e3%81%99" class="uri" title="Go to wiki page">文字列の先頭から等しい文字列を抜き出す</a></p>
+<ul>
+<li><a href="https://wiki.haskell.jp/Old/sampou.org/%e3%81%8a%e7%b4%84%e6%9d%9f%e3%81%ae%e6%9c%ab%e5%b0%be%e5%86%8d%e5%b8%b0%e7%89%88" class="uri" title="Go to wiki page">お約束の末尾再帰版</a></li>
+</ul>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%e3%81%8b%e3%82%89%e4%b8%80%e8%87%b4%e3%81%99%e3%82%8b%e9%83%a8%e5%88%86%e6%96%87%e5%ad%97%e5%88%97%e3%82%92%e6%8a%bd%e5%87%ba%e3%81%99%e3%82%8b" class="uri" title="Go to wiki page">文字列から一致する部分文字列を抽出する</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CSV" class="uri" title="Go to wiki page">CSV</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e8%87%aa%e5%88%86%e8%87%aa%e8%ba%ab%e3%81%ae%e3%82%bd%e3%83%bc%e3%82%b9%e3%82%b3%e3%83%bc%e3%83%89%e3%82%92%e3%83%97%e3%83%aa%e3%83%b3%e3%83%88%e3%81%99%e3%82%8b%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0" class="uri" title="Go to wiki page">自分自身のソースコードをプリントするプログラム</a></p>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/%e6%96%87%e5%ad%97%e5%88%97%20C%20%e3%81%8c%e6%96%87%e5%ad%97%e5%88%97%20A,%20B%20%e3%81%8b%e3%82%89%e6%a7%8b%e6%88%90%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b" title="Go to wiki page">文字列 C が文字列 A, B から構成されているか</a></p>
+<hr>
+<h2 id="コメントの除去">コメントの除去</h2>
+<pre><code>{-# LANGUAGE EmptyDataDecls #-}
+module Text.Decomment (CommentStyle(..), QuoteStyle(..), decomment) where
+
+import Control.Arrow
+import Data.List
+import Data.Maybe
+
+class CommentStyle c where
+  commentLeadings  :: c -&gt; [String]
+  commentOpenings  :: c -&gt; [String]
+  commentClosing   :: c -&gt; String -&gt; String
+  commentNestable  :: c -&gt; Bool
+
+class QuoteStyle q where
+  quoteOpenings  :: q -&gt; [Char]
+  quoteClosing   :: q -&gt; Char -&gt; Char
+  quoteEscape    :: q -&gt; Char
+
+splitWithPrefix :: Eq a =&gt; [a] -&gt; [a] -&gt; Maybe ([a],[a])
+splitWithPrefix [] xs = Just ([],xs)
+splitWithPrefix (p:ps) <a href="email-protection.html" class="__cf_email__" data-cfemail="3a4242497a">[email&nbsp;protected]</a>(x:xs)
+  | p == x     = splitWithPrefix ps xs &gt;&gt;= return . ((x:) *** id)
+  | otherwise  = Nothing
+
+splitQuoted :: Eq a =&gt; a -&gt; a -&gt; [a] -&gt; ([a], [a])
+splitQuoted esc qm []   = ([],[])
+splitQuoted esc qm (c:cs)
+           | c == qm    = ([],cs)    
+           | c == esc   = case cs of 
+                            []     -&gt; ([c],[])
+                            c':cs' -&gt; ((c:).(c':) *** id) $ splitQuoted esc qm cs'
+           | otherwise  = ((c:) *** id) $ splitQuoted esc qm cs
+
+decomment :: (CommentStyle s, QuoteStyle s) =&gt; s -&gt; String -&gt; String
+decomment s ""         = ""
+decomment s <a href="email-protection.html" class="__cf_email__" data-cfemail="accfcfdfec">[email&nbsp;protected]</a>(c:cs) = case mapMaybe (flip splitWithPrefix ccs) $ commentLeadings s of
+  (_,xs):_ -&gt; decomment s $ snd $ break ('\n'==) xs
+  []       -&gt; case mapMaybe (flip splitWithPrefix ccs) $ commentOpenings s of
+                (p,xs):_ -&gt; decommentC s [p] xs
+                []       -&gt; if elem c (quoteOpenings s) then c:decommentQ s c cs 
+                            else c:decomment s cs
+
+decommentC :: (CommentStyle s, QuoteStyle s) =&gt; s -&gt; [String] -&gt; String -&gt; String
+decommentC s [] xs = ' ':decomment s xs
+decommentC s <a href="email-protection.html" class="__cf_email__" data-cfemail="1969696a59">[email&nbsp;protected]</a>(p:ps) <a href="email-protection.html" class="__cf_email__" data-cfemail="027a7a7142">[email&nbsp;protected]</a>(x:xs)
+  | commentNestable s  = case splitWithPrefix (commentClosing s p) xxs of
+      Just (_,ys) -&gt; decommentC s ps ys
+      Nothing     -&gt; case mapMaybe (flip splitWithPrefix xxs) $ commentOpenings s of
+                       [] -&gt; decommentC s pps xs
+                       (p',yys):_ -&gt; decommentC s (p':pps) yys
+  | otherwise   = case mapMaybe (splitWithPrefix (commentClosing s p)) $ tails xs of
+      (_,ys):_ -&gt; ' ':decomment s ys
+      []       -&gt; ""
+
+decommentQ :: (CommentStyle s, QuoteStyle s) =&gt; s -&gt; Char -&gt; String -&gt; String
+decommentQ s c xs = case splitQuoted (quoteEscape s) (quoteClosing s c) xs of
+                      (ys,zs) -&gt; ys ++ '"':decomment s zs</code></pre>
+<p><a href="nobsun_decomment.html" class="uri" title="Go to wiki page">nobsun_decomment</a>参照</p>
+<h2 id="コメント対応read">コメント対応read</h2>
+<pre><code>read' :: Read a =&gt; String -&gt; a
+read' = read . uncomment
+
+uncomment :: String -&gt; String
+uncomment ""                 = ""
+uncomment ('-':'-':rs)       = case break ('\n'==) rs of (ss,ts) -&gt; uncomment ts
+uncomment ('{':'-':rs)       = uncommentC 1 rs
+uncomment ('\'':'"':'\'':rs) = '\'':'"':'\'':uncomment rs
+uncomment ('\\':'"':rs)      = '\\':'"':uncomment rs
+uncomment ('"':rs)           = '"':uncommentQ rs
+uncomment (c:rs)             = c : uncomment rs
+
+uncommentQ :: String -&gt; String
+uncommentQ ""             = ""
+uncommentQ ('\\':'"':rs)  = '\\':'"':uncommentQ rs
+uncommentQ ('"':rs)       = '"': uncomment rs
+uncommentQ (c:rs)         = c:uncommentQ rs
+
+uncommentC :: Int -&gt; String -&gt; String
+uncommentC _ ""            = ""
+uncommentC 0 rs            = uncomment rs
+uncommentC k ('-':'}':rs)  = uncommentC (k-1) rs
+uncommentC k ('{':'-':rs)  = uncommentC (k+1) rs
+uncommentC k (c:rs)        = uncommentC k rs
+
+sample0 = "[1 -- hoge\n,2\n,3\n{- ,4 \n -}\n]"</code></pre>
+<p>実行例</p>
+<pre><code>*Main&gt; putStrLn sample0
+[1 -- hoge
+,2
+,3
+{- ,4 
+ -}
+]
+*Main&gt; read' sample0 :: [Int]
+[1,2,3]</code></pre>
+<hr>
+<h2 id="正規表現置換">正規表現置換</h2>
+<pre><code>import Text.Regex
+
+sub re s str = case matchRegexAll re str of
+                  Just (b, _, a, _) -&gt; b ++ s ++ a
+                  _ -&gt; str
+
+gsub re s str = case matchRegexAll re str of
+                  Just (b, _, a, _) -&gt; b ++ s ++ gsub re s a
+                  _ -&gt; str</code></pre>
+<hr>
+<h2 id="words4apachelog">words4ApacheLog</h2>
+<p>前に挙げたdividWithQuoteByをつかうとApacheのcombined 形式の access.log の項目も分解できる。単純な空白区切りの words に</p>
+<pre><code>testdata = "127.0.0.1 - - [12/Dec/2003:16:07:36 +0900] \"GET /cgi-bin/kahua.cgi HTTP/1.1\" 200 2301 \"-\" \"Mozilla/5.0 (X11; U; Linux i686; ja-JP; rv:1.5) Gecko/20031127 Firebird/0.7\""</code></pre>
+<p>を食わせると</p>
+<pre><code>Main&gt; mapM_ putStrLn $ words testdata
+127.0.0.1
+-
+-
+[12/Dec/2003:16:07:36
++0900]
+"GET
+/cgi-bin/kahua.cgi
+HTTP/1.1"
+200
+2301
+"-"
+"Mozilla/5.0
+(X11;
+U;
+Linux
+i686;
+ja-JP;
+rv:1.5)
+Gecko/20031127
+Firebird/0.7"</code></pre>
+<p>でも、</p>
+<pre><code>words4ApacheLog :: String -&gt; [String]
+words4ApacheLog = dividWithQuoteBy [('\"', '\"'),('[',']')] isSpace</code></pre>
+<p>としておいて、これをくわせると。</p>
+<pre><code>Prelude&gt; mapM_ putStrLn $ words4ApacheLog testdata
+127.0.0.1
+-
+-
+[12/Dec/2003:16:07:36 +0900]
+"GET /cgi-bin/kahua.cgi HTTP/1.1"
+200
+2301
+"-"
+"Mozilla/5.0 (X11; U; Linux i686; ja-JP; rv:1.5) Gecko/20031127 Firebird/0.7"</code></pre>
+<ul>
+<li>つまり、dividWithQuoteBy の逆を書けば汎用 encoding 関数が書けるんですね – shelarcy</li>
+</ul>
+<hr>
+<h2 id="文字列の先頭から等しい文字列を抜き出す">文字列の先頭から等しい文字列を抜き出す</h2>
+<p><a href="http://rwiki.jin.gr.jp/cgi-bin/rw-cgi.rb?cmd=view;name=2%EF%BF%BD%C4%A4%EF%BF%BD%CA%B8%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C6%AC%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%CA%B8%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%C8%B4%EF%BF%BD%EF%BF%BD%EF%BF%BD%D0%A4%EF%BF%BD">rwiki</a>より。ナイーブな実装</p>
+<pre><code>same_prefix xs ys = map fst $ takeWhile (uncurry (==)) $ zip xs ys</code></pre>
+<p>ちょっとだけはやいかも</p>
+<pre><code>same_prefix (x:xs) (y:ys) | x == y    = x : same_prefix xs ys
+                          | otherwise = []
+same_prefix _ _ = []</code></pre>
+<h3 id="お約束の末尾再帰版">お約束の末尾再帰版</h3>
+<pre><code>same_prefix = same_prefix_iter []
+ where
+  same_prefix_iter xiferp (x:xs) (y:ys) | x == y    = same_prefix_iter (x:xiferp) xs ys
+                                        | otherwise = reverse xiferp
+  same_prefix_iter xiferp _  _ = reverse xiferp</code></pre>
+<hr>
+<h2 id="文字列から一致する部分文字列を抽出する">文字列から一致する部分文字列を抽出する</h2>
+<pre><code>import List
+
+main :: IO ()
+main = getContents &gt;&gt;= mapM_ print . sameString
+
+sameString :: String -&gt; [(String, Int)]
+sameString = sortBy (\(_,x) (_,y) -&gt; compare y x)
+           . map (rv . last)
+           . groupBy similar
+           . sort . map (rv . last)
+           . groupBy similar
+           . getPrefix . sort . tails
+
+rv :: (String, Int) -&gt; (String, Int)
+rv (s, i) = (reverse s, i)
+
+similar :: (String, Int) -&gt; (String, Int) -&gt; Bool
+similar (s1, i1) (s2, i2)
+    | i1 /= i2 = False
+    | otherwise = and $ map (uncurry (==)) $ zip s1 s2
+
+getPrefix :: [String] -&gt; [(String, Int)]
+getPrefix ss = concat $ snd $ mapAccumL f ([], []) ss
+
+f :: (String, [Int]) -&gt; String -&gt; ((String, [Int]), [(String, Int)])
+f (cs, xs) ss = ((ss, p), q)
+  where (p, q) = g cs xs ss
+
+g :: String -&gt; [Int] -&gt; String -&gt; ([Int], [(String, Int)])
+g (c:cs) (x:xs) (s:ss) | c == s = ((x+1):p, map (\(s, n) -&gt; (c:s, n)) q)
+  where (p, q) = g cs xs ss
+g cs xs ss = (map (\_ -&gt; 1) ss, zip (drop 1 $ inits cs) (takeWhile (1&lt;) xs))</code></pre>
+<hr>
+<h2 id="csv">CSV</h2>
+<p>一年以上まえの「算譜の記」より。</p>
+<blockquote>
+<p>「データ行を与えられたセパレータ文字(CSVの場合は’,’)で区切られた値を表現する文字列に分解する」関数。ただし、引用内のセパレータ文字はセパレータとしない。引用を表現する文字対(引用開始文字、引用終了文字)は複数与えることができるものとする。</p>
+<pre><code>dividWithQuoteBy :: [(Char,Char)] -&gt; (Char -&gt; Bool) -&gt; String -&gt; [String]
+dividWithQuoteBy _ _ "" = [""]
+dividWithQuoteBy qs p <a href="email-protection.html" class="__cf_email__" data-cfemail="c3a0a0b083">[email&nbsp;protected]</a>(c:cs)
+ = if p c
+     then "" : dividWithQuoteBy qs p cs
+     else case break (pOr p q) ccs of
+            (_,[]) -&gt; [ccs]
+            (xs,<a href="email-protection.html" class="__cf_email__" data-cfemail="c3babab083">[email&nbsp;protected]</a>(y:ys)) 
+              -&gt; case lookup y qs of
+                   Nothing -&gt; xs : dividWithQuoteBy qs p ys
+                   Just eq 
+                     -&gt; case break (eq ==) ys of
+                          (_,[])   -&gt; error ("Invalid format: no "++show eq)
+                          (zs,w:ws)-&gt; case dividWithQuoteBy qs p ws of
+                                        []     -&gt; [ccs]
+                                        ts:uus -&gt; (xs++[y]++zs++[w]++ts) : uus
+   where q x = case lookup x qs of {Nothing -&gt; False; _-&gt; True}
+         pOr f g x = if f x then True else g x</code></pre>
+<p>これを利用すると CSVフォーマットのデータ行を分解するのは例えば、</p>
+<pre><code>readCSVLine :: String -&gt; [String]
+readCSVLine = dividWithQuoteBy [('\"','\"'),('\'','\'')] (','==)</code></pre>
+</blockquote>
+<hr>
+<h2 id="自分自身のソースコードをプリントするプログラム">自分自身のソースコードをプリントするプログラム</h2>
+<pre><code>main=putStr(x++show x);x="main=putStr(x++show x);x="</code></pre>
+<hr>
+<h2 id="文字列-c-が文字列-a-b-から構成されているか">文字列 C が文字列 A, B から構成されているか</h2>
+<p>ML<a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/485">Haskell-jp:485</a>より</p>
+<p>文字列 C の要素を二つに分けたとき、それらが C 上の順序を保って A, B と等しいか。</p>
+<pre><code>f xs ys = elem (Just ([], [])) . foldl g [Just (xs, ys)]
+  where
+    g xy z = [ case (l, r) of (Just (x:xs, ys), _) | x == z -&gt; Just (xs, ys)
+                              (_, Just (xs, y:ys)) | y == z -&gt; Just (xs, ys)
+                              _ -&gt; Nothing
+             | (l, r) &lt;- zip (xy++[Nothing]) (Nothing:xy)
+             ]
+
+Main&gt; f "aaaaaaaaaa" "aaaaaaaaaab" "aaaaaaaaaaaaaaaaaaaaa"
+False
+(1732 reductions, 5108 cells)
+Main&gt; f "chocolate" "chips" "cchochiolpaste"
+True
+(532 reductions, 1625 cells)</code></pre>
+<ul>
+<li><p>末広がりにならないように斜めにみる。 – yts</p>
+<pre><code>check xs ys zs = last $ next ys zs $ True:zipWith (==) xs zs
+  where
+    next [] zs bs = if length zs == length xs then bs else [False]
+    next (y:ys) (z:zs) (b:bs)
+      = next ys zs $ fix (\bls -&gt;
+            (b &amp;&amp; z == y):[ (bl &amp;&amp; z == x) || (bd &amp;&amp; z == y) 
+                | (bd, (bl, (x, z))) &lt;- zip bs $ zip bls $ zip xs zs])</code></pre></li>
+<li><p>Exploit lazyness! fibなんかもこういうふうにbuild DOWNできます。 – yts</p>
+<pre><code>data Tree a = T a (Tree a) (Tree a)
+check xs ys zs = b
+  where end = T False end end
+        <a href="email-protection.html" class="__cf_email__" data-cfemail="750135">[email&nbsp;protected]</a>(T b _ _) = checks xs ys zs t
+        checks [] [] [] _ = T True end end
+        checks [] [] _ _ = end
+        checks _ _ [] _ = end
+        checks (x:xs) [] (z:zs) ~(T _ <a href="email-protection.html" class="__cf_email__" data-cfemail="741834">[email&nbsp;protected]</a>(T a al ar) _)
+            = T (z == x &amp;&amp; a) (checks xs [] zs l) (T False ar end)
+        checks [] (y:ys) (z:zs) ~(T _ _ <a href="email-protection.html" class="__cf_email__" data-cfemail="126052">[email&nbsp;protected]</a>(T b bl br))
+            = T (z == y &amp;&amp; b) (T False end bl) (checks [] ys zs r)
+        checks <a href="email-protection.html" class="__cf_email__" data-cfemail="225a5a5162">[email&nbsp;protected]</a>(x:xs) <a href="email-protection.html" class="__cf_email__" data-cfemail="9de4e4eedd">[email&nbsp;protected]</a>(y:ys) (z:zs) ~(T _ <a href="email-protection.html" class="__cf_email__" data-cfemail="274b67">[email&nbsp;protected]</a>(T a al ar) <a href="email-protection.html" class="__cf_email__" data-cfemail="a1d3e1">[email&nbsp;protected]</a>(T b bl br))
+            = T (z == x &amp;&amp; a || z == y &amp;&amp; b)
+                  (checks xs yys zs (T a al ar))
+                  (checks xxs ys zs (T b ar br)) -- "ar"</code></pre></li>
+</ul>
+<hr>
+<p>Last modified : 2008/06/19 03:30:16 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Programming_%e7%8e%89%e6%89%8b%e7%ae%b1_%e6%96%87%e5%ad%97%e5%88%97" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

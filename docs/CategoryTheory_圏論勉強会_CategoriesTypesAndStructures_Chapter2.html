@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/CategoryTheory_圏論勉強会_CategoriesTypesAndStructures_Chapter2</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/CategoryTheory_圏論勉強会_CategoriesTypesAndStructures_Chapter2</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#categorytheory_%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A_categoriestypesandstructures_chapter2"><span>CategoryTheory_圏論勉強会_CategoriesTypesAndStructures_Chapter2</span></a><ul>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E5%8D%81%E4%B9%9D%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第二十九回圏論勉強会</a><ul>
+<li><a href="#categories-types-and-structures-chapter-2%E3%82%88%E3%82%8A">“Categories, Types and Structures” Chapter 2より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十回圏論勉強会</a><ul>
+<li><a href="#skype">Skype</a></li>
+<li><a href="#categories-types-and-structures-section-2.2">“Categories, Types and Structures” Section 2.2</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%80%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十一回圏論勉強会</a><ul>
+<li><a href="#categories-types-and-structures-section-2.3%E3%82%88%E3%82%8A">“Categories, Types and Structures” Section 2.3より</a></li>
+<li><a href="#%E6%AC%A1%E4%BC%9A">2次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%8C%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十二回圏論勉強会</a><ul>
+<li><a href="#%E4%BB%8A%E5%9B%9E%E3%81%AE%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB">今回のトラブル</a></li>
+<li><a href="#categories-types-and-structures-section-2.3.2-%E3%81%AE-excercise">“Categories, Types and Structures” Section 2.3.2 の Excercise</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%B8%89%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十三回圏論勉強会</a><ul>
+<li><a href="#categories-types-and-structures-section-2.3.3-%E3%81%AE-excercise-%E3%82%88%E3%82%8A">“Categories, Types and Structures” Section 2.3.3 の Excercise より</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E5%9B%9B%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十四回圏論勉強会</a><ul>
+<li><a href="#categories-types-and-structures-section-2.3.6-%E3%81%AE-proposition">“Categories, Types and Structures” Section 2.3.6 の Proposition</a></li>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E4%BC%9A">二次会</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E4%BA%94%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十五回圏論勉強会</a><ul>
+<li><a href="#%E9%9B%91%E8%AB%87">雑談</a></li>
+<li><a href="#categories-types-and-structures-section-2.3-%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E5%BE%A9%E7%BF%92">“Categories, Types and Structures” Section 2.3 ちょっと復習</a></li>
+<li><a href="#categories-types-and-structures-section-2.4">“Categories, Types and Structures” Section 2.4</a></li>
+</ul></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E5%8D%81%E5%85%AD%E5%9B%9E%E5%9C%8F%E8%AB%96%E5%8B%89%E5%BC%B7%E4%BC%9A">第三十六回圏論勉強会</a><ul>
+<li><a href="#%E9%9B%91%E8%AB%87-1">雑談</a></li>
+<li><a href="#categories-types-and-structures-section-2.4.1.2">“Categories, Types and Structures” Section 2.4.1.2</a></li>
+<li><a href="#%E6%AC%A1%E4%BC%9A-1">2次会</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<h1 id="categorytheory_圏論勉強会_categoriestypesandstructures_chapter2"><a href="" class="uri" title="Go to wiki page">CategoryTheory_圏論勉強会_CategoriesTypesAndStructures_Chapter2</a></h1>
+<p><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory" class="uri" title="Go to wiki page">CategoryTheory</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a" class="uri" title="Go to wiki page">圏論勉強会</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/CategoriesTypesAndStructures" class="uri" title="Go to wiki page">CategoriesTypesAndStructures</a>:Chapter2</p>
+<hr>
+<h2 id="第二十九回圏論勉強会">第二十九回圏論勉強会</h2>
+<p>2007-5-20(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 10：00〜17:00 の予定</p>
+<pre><code>        スクリーン
+      -------------
+       豊福  日下部   
+       +----------+ 
+ 檜山  |          | 
+       +----------+ 
+      久井 shelarcy </code></pre>
+<h3 id="categories-types-and-structures-chapter-2より">“Categories, Types and Structures” Chapter 2より</h3>
+<p>写真：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200705/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200705/ct/</a></p>
+<h2 id="第三十回圏論勉強会">第三十回圏論勉強会</h2>
+<p>2007-6-24(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 10：00〜19:09</p>
+<pre><code>        スクリーン
+      -------------
+       shelarcy   
+       +----------+ 
+ 酒井  |          |
+ 檜山  |          | 
+       +----------+ 
+       日下部 </code></pre>
+<ul>
+<li>今井さんはSkypeで参加</li>
+</ul>
+<p>写真：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/</a></p>
+<h3 id="skype">Skype</h3>
+<p>を使って遠隔地と連携（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350232.JPG">会場の様子</a>）</p>
+<ul>
+<li>今回初めてやったということもあって、色々と手間取った</li>
+<li>会場側に満足なビデオとマイクを完備しているノート PC がなかった
+<ul>
+<li>マイクの音声にノイズが……</li>
+<li>Mac (PowerBook) の内臓マイクは案外使えた
+<ul>
+<li>音声がクリア</li>
+<li>周囲で話しても、音声を拾ってくれる</li>
+</ul></li>
+<li>ただし、Mac では USB カメラが使えなかった
+<ul>
+<li>ドライバがないせい？ メーカー未確認品</li>
+<li>USB カメラとは認識されるけど、Skype のビデオデバイスに出てこない</li>
+</ul></li>
+</ul></li>
+<li>プロジェクター + Skype の環境に不慣れ
+<ul>
+<li>プロジェクター向けの画面は狭いので、ビデオが大きいと画面を占領してしまう (文字でのチャットが見えない)</li>
+<li>かといって必要ないときに画面を隠してしまうと、今度は通話を切って再度通話を行おうとする時に、通話のためのダイアログも隠れてしまう
+<ul>
+<li>この結果、通話をつなげれないことが何度かあった</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="categories-types-and-structures-section-2.2">“Categories, Types and Structures” Section 2.2</h3>
+<ul>
+<li>2.2.3
+<ul>
+<li>Exercise <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image0.jpg">解答</a>
+<ul>
+<li>この図が可換であることを示せばOK</li>
+</ul></li>
+</ul></li>
+<li>2.2.4
+<ul>
+<li>Exercise
+<ul>
+<li><ol type="1">
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image1.jpg">解答</a></li>
+</ol></li>
+<li><ol type="1" start="2">
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image2.jpg">解答</a></li>
+</ol>
+<ul>
+<li>h’ o h = id を示している。h o h’ = id も同様。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>2.2.5
+<ul>
+<li>Exercise 1こめ
+<ul>
+<li>1.+ 2. <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image3.jpg">解答1</a>, <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/image4.jpg">解答2</a>,
+<ul>
+<li>n個の直積について示すのが面倒なので、とりあえず3個の直積について、結合的であることを示す。</li>
+</ul></li>
+<li>後は同様に、k個の直積に対して k+1個の直積が帰納的に作れることを言えば、2の証明も言えたことになる。</li>
+<li><ol type="1" start="3">
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350234.JPG">解答1</a>, <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350235.JPG">解答2</a></li>
+</ol>
+<ul>
+<li>解答１：a → a×t と、 a×t → a を縦に並べてお絵かきしてみる</li>
+<li>解答２：２つをつなげると、２つの恒等射が作れる</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Exercise 2こめ
+<ul>
+<li><ol type="1">
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350236.JPG">板書1</a>、<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350237.JPG">解答2</a></li>
+</ol>
+<ul>
+<li>いきなり問題がハードに…</li>
+<li>acceptable Goedel numbering とか、type two recursive functional とかが謎</li>
+</ul></li>
+<li><ol type="1" start="2">
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350238.JPG">板書1</a>, <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200706/ct/CA350239.JPG">板書2</a></li>
+</ol>
+<ul>
+<li>突然、直接関係のない問題へ
+<ul>
+<li>上の問題考えてるときに突然思いついた？</li>
+</ul></li>
+<li>例えば、2つの整数の組を1次元に落とし込むようなイメージで考えるとわかりやすいかも</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>2.2.6</p>
+<ul>
+<li>Examples
+<ul>
+<li>3つめの例の意図はつかめるが、文章が意味不明…
+<ul>
+<li>coalesced ＝ こうあれすど</li>
+<li>やっぱこのテキストはよくない？</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>ここで time up</p>
+<h2 id="第三十一回圏論勉強会">第三十一回圏論勉強会</h2>
+<p>2007-7-8(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 10：00〜19:10</p>
+<pre><code>        スクリーン
+      -------------
+       shelarcy   
+       +----------+ 
+ 豊福  |          |
+ 酒井  |          | 
+       +----------+ 
+       檜山 久井</code></pre>
+<p>写真：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200707/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200707/ct/</a></p>
+<h3 id="categories-types-and-structures-section-2.3より">“Categories, Types and Structures” Section 2.3より</h3>
+<h3 id="次会">2次会</h3>
+<ul>
+<li>最近の興味
+<ul>
+<li>問題を解くのに Arrow を使っている人をよく見かけるので、気になっている
+<ul>
+<li>Arrow って何に使える？
+<ul>
+<li>問題を解くのに！ コードをきれいにできそう</li>
+<li><a href="http://page.freett.com/shelarcy/log/2007/diary_05.html#grapefruit">GUI（Functional Reactive Programming）では使ってる</a>けど、他の場面では使っていない。連載で触れるのは、まだまだ先にかな？
+<ul>
+<li>（モナド変換子とか <a href="http://mono.kmc.gr.jp/~oxy/w/?Recursive+Monads">MonadFix （μdo）</a>とかの話をまだやっていないし……）</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Template Haskell が気になっている
+<ul>
+<li>そういえば、<a href="https://www.haskell.org/pipermail/cvs-ghc/2007-June/036147.html">GHC 6.6.1 では型に対する quote が使えるのに、ドキュメントではまだ実装されていないというように書かれている</a>……</li>
+</ul></li>
+<li>MIT の Eager Haskell
+<ul>
+<li><a href="http://csg.csail.mit.edu/projects/languages/ph.shtml">pH : Parallel Haskell</a>の前身
+<ul>
+<li>逆でした。<a href="https://portal.acm.org/citation.cfm?id=581690.581694">Eager Haskell の方が pH より後</a></li>
+<li>Parallel Haskell とは言っても、GHC とか GPH の拡張機能とは別のものなので注意</li>
+<li>どちらかというと、データ並列 Haskell や並行 Haskell、Fortress などの間を取った感じ</li>
+</ul></li>
+<li>GHC の最近の実装のように、Semantics を変えずに eager にしているわけじゃない</li>
+<li>lenient evaluation（ゆるゆる評価、って訳す？） と言って、確か「カリー化などの変数の束縛は lazy に行うけれど、let 式など式の評価は eager に行う」という感じになっている
+<ul>
+<li>“Implicit Parallel Programming in pH” (<a href="https://www.amazon.co.jp/Implicit-Parallel-Programming-Rishiyur-Nikhil/dp/1558606440">amazon.co.jp</a>) に詳しい説明があったはず</li>
+</ul></li>
+<li>↑はpHの説明で Eager Haskell は semantics を変えていないと思うけど? – sakai
+<ul>
+<li>はい、そうですね。Eager Haskell を基にして pH を作ったと思ってたので、すっかり勘違いしていました。</li>
+<li><a href="http://csg.csail.mit.edu/pubs/haskell.html" class="uri">http://csg.csail.mit.edu/pubs/haskell.html</a> の The Eager Haskell Evaluation Mechanism に説明がありますね。確かに lazy に fallback されるなら、semantics は変えなくて良さそうです。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>最近の haskell-jp の話題
+<ul>
+<li>(この話題は始める前や昼食前にもでたのですが、散らばると分かりにくいので一箇所にまとめておきます。)</li>
+<li><a href="http://d.hatena.ne.jp/takkan_m/20070704">haskellに対する“4F”</a>
+<ul>
+<li><a href="本物のプログラマはHaskellを使う.html" class="uri" title="Go to wiki page">本物のプログラマはHaskellを使う</a>は、背景を含めた解説をやっているので重い</li>
+<li>連載とは別に、クックブックとかレシピブックとか、その辺のものがあると良いかも</li>
+</ul></li>
+<li>テスト・デバッグの話題
+<ul>
+<li>新しいメーリング・リストになってからのアーカイブがないせいで、「どんな方法がありますか？」的な話題が何度も繰り返されるのはもったいないかも。
+<ul>
+<li>でっちあげました。<a href="http://www.tom.sfc.keio.ac.jp/~sakai/w3ml/w3ml.cgi/haskell-jp-2/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/w3ml/w3ml.cgi/haskell-jp-2/</a></li>
+</ul></li>
+<li>連載で重い解説が続いたし、<a href="http://page.freett.com/shelarcy/log/2007/diary_07.html#huduki42007">プログラムにミスがあった</a>ので、このあたりで軽くテストの話をやっておくかな？
+<ul>
+<li>デバッガはそれだけで一つの話になりそうなので、別の回に分ける必要があるだろうけれど</li>
+<li><a href="http://article.gmane.org/gmane.comp.lang.haskell.general/14356/">データの一貫性(Consistency)の話</a>とかやろうとすると、どのみちテストの話は避けて通れないし</li>
+<li>でも、せっかく並行 Haskell の話をやったんだし、先にもう少しライブラリの解説をした方が話が良いかも。（並列プログラミングの技法を解説した前回とは違い、そう重くはならないだろうし。）</li>
+</ul></li>
+<li>豊福さんはこの辺の話題には特に興味なし。主に問題を解くのにしか使っていないせい？</li>
+</ul></li>
+</ul></li>
+<li>デバッグにも色々と方法はある
+<ul>
+<li>print デバッグ
+<ul>
+<li><a href="Trace.html" class="uri" title="Go to wiki page">Trace</a></li>
+<li>モナド
+<ul>
+<li>モナド変換子を使う
+<ul>
+<li><p><a href="https://www.haskell.org/ghc/docs/6.6.1/html/libraries/mtl/Control-Monad-Trans.html">lift や liftIO</a></p>
+<pre><code>Control.Monad.State&gt; runStateT ((return 22) &gt;&gt;= \x -&gt; lift (print x) &gt;&gt; return (x + 1)) 33
+22
+(23,33)
+Control.Monad.State&gt; runStateT ((return 22) &gt;&gt;= \x -&gt; liftIO (print x) &gt;&gt; return (x + 1)) 33
+22
+(23,33)</code></pre></li>
+</ul></li>
+<li>unsafe**
+<ul>
+<li>e.g. <a href="https://www.haskell.org/ghc/docs/6.6.1/html/libraries/base/Control-Monad-ST.html#v:unsafeIOToST">unsafeIOToST</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>デバッガ
+<ul>
+<li><a href="http://cvs.haskell.org/Hugs/pages/users_guide/observe.html">Hugs Hood</a></li>
+<li>GHC 6.8 から使える <a href="https://www.haskell.org/ghc/dist/current/docs/users_guide/ghci-debugger.html">GHCi Debugger</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="第三十二回圏論勉強会">第三十二回圏論勉強会</h2>
+<p>2007-8-12(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 10：00〜18:30</p>
+<pre><code>        スクリーン
+      -------------
+     shelarcy   
+ +----------+    +----------+
+ |          |    |          |
+ |          |    +----------+
+ +----------+      檜山
+         酒井    +----------+ 
+                 |スパゲティ|
+                 +----------+
+                   豊福</code></pre>
+<ul>
+<li>今井さん、久井さんはSkypeで参加</li>
+</ul>
+<h3 id="今回のトラブル">今回のトラブル</h3>
+<ul>
+<li>エアコンがつかない
+<ul>
+<li>ブレーカーが落ちている？
+<ul>
+<li>会場を去るときに確認したところ、落ちてはいなかった</li>
+</ul></li>
+<li>エアコンが壊れている？</li>
+<li>室温
+<ul>
+<li>午前中、一人でいるときはまだましだった。</li>
+<li>人数が増え、PC も増え、外の気温がピークに達することで、非常に蒸すことに</li>
+<li>なので、16:30には喫茶店に会場を移しました</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="categories-types-and-structures-section-2.3.2-の-excercise">“Categories, Types and Structures” Section 2.3.2 の Excercise</h3>
+<h2 id="第三十三回圏論勉強会">第三十三回圏論勉強会</h2>
+<p>2007-9-9(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 10：00〜17:00</p>
+<h3 id="categories-types-and-structures-section-2.3.3-の-excercise-より">“Categories, Types and Structures” Section 2.3.3 の Excercise より</h3>
+<h2 id="第三十四回圏論勉強会">第三十四回圏論勉強会</h2>
+<p>2007-10-28(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 14：30〜19:30</p>
+<pre><code>        スクリーン
+      -------------
+   shelarcy    檜山   
+ +--------------------+
+ |                    |
+ +--------------------+
+  豊福    今井   酒井</code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<p>写真(板書): <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200710/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200710/ct/</a></p>
+<p>写真(お絵かき): <a href="https://picasaweb.google.co.jp/takeo.bono/Kenron071028" class="uri">http://picasaweb.google.co.jp/takeo.bono/Kenron071028</a></p>
+<h3 id="categories-types-and-structures-section-2.3.6-の-proposition">“Categories, Types and Structures” Section 2.3.6 の Proposition</h3>
+<ul>
+<li>（最近皆さんマンネリのせいか書き込みないですね。見ててつまらないのでもうちょっと書いて。という私もあまり書かないですが以下ネタふりだけ）
+<ul>
+<li>マンネリっつか、忙しくて書く暇がなかなか。
+<ul>
+<li>２次会を無線LAN入るところにして、その場で書くとかすると…良いかなぁ。飲めないなぁ。</li>
+</ul></li>
+</ul></li>
+<li>はすケロ
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20060803#p02" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/?date=20060803#p02</a></li>
+</ul></li>
+<li>CCCの絵算の出典は？</li>
+<li>不動点</li>
+</ul>
+<h3 id="二次会">二次会</h3>
+<ul>
+<li>Morph Endo (IFPC 2007) 今頃読んでます
+<ul>
+<li>KMP検索
+<ul>
+<li><a href="https://www.haskell.org/ghc/docs/6.8.1/html/libraries/bytestring-0.9.0.1/Data-ByteString.html#18">一応 BysteString の findSubstring、findSubstrings は KMP 検索</a>
+<ul>
+<li>でも、<a href="http://darcs.haskell.org/ghc-6.8/libraries/bytestring/Data/ByteString.hs">Api を変える予定があるので非推奨になっている</a></li>
+</ul></li>
+<li><a href="https://www.haskell.org/pipermail/haskell-cafe/2007-September/031609.html">より高速な実装 + Lazy ByteString と Data.Sequence の Seq に対する KMP 検索の実装</a></li>
+</ul></li>
+</ul></li>
+<li>もやしもん</li>
+<li>Haskell-jp ML 不活発</li>
+<li>モナドを構成する随伴関手
+<ul>
+<li>Eilenberg-Moore Construction</li>
+<li>Kleisli Constuction</li>
+<li>任意のモナドは随伴関手対に分解できるらしい
+<ul>
+<li>逆は当然成り立ちます。（任意の随伴関手対からモナドが構成できる）</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="第三十五回圏論勉強会">第三十五回圏論勉強会</h2>
+<p>2007-12-9(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜18:30</p>
+<pre><code>        スクリーン
+      -------------
+  梅沢 shelarcy  日下部  穂苅
+ +------------------------------+
+ |                              |
+ +------------------------------+
+          今井   酒井 檜山/豊福</code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<p>写真 : <a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/</a></p>
+<h3 id="雑談">雑談</h3>
+<ul>
+<li>domain theory
+<ul>
+<li>横内『プログラム意味論』
+<ul>
+<li>いつの間にか絶版に。</li>
+<li>龍田先生の『型理論』も絶版になったらしい。</li>
+</ul></li>
+<li>Gunter『Semantics of Programming Languages』 （<a href="https://www.amazon.co.jp/o/ASIN/0262071436/249-5785574-9933122">amazon</a>）</li>
+</ul></li>
+<li>ネットゲーム
+<ul>
+<li><a href="http://www.4gamer.net/games/044/G004408/20071026031/" class="uri">http://www.4gamer.net/games/044/G004408/20071026031/</a> ←きれい
+<ul>
+<li>3Dアニメーションの技術はどうたらこうたら
+<ul>
+<li>LOD (Level of Detail) (<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0001.JPG">板書（？）</a>)
+<ul>
+<li>いつの間にか衝突判定の話に</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>セカンドライフ？
+<ul>
+<li>日本でもアメリカでもこけたらしい
+<ul>
+<li>でも、電通も企業もそれなりの利益はあったらしい
+<ul>
+<li>セカンドライフに島を出すと、それが新聞・雑誌に露出するので、間接的に広告効果が</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>論理と計算と圏の関係（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0007.JPG">板書</a>）
+<ul>
+<li>シーケント計算は何に対応するの？</li>
+</ul></li>
+</ul>
+<h3 id="categories-types-and-structures-section-2.3-ちょっと復習">“Categories, Types and Structures” Section 2.3 ちょっと復習</h3>
+<ul>
+<li>前回までやってた V×V ＜ V は、Church encoding の話だったのでは （<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0003.JPG">板書</a>）</li>
+</ul>
+<h3 id="categories-types-and-structures-section-2.4">“Categories, Types and Structures” Section 2.4</h3>
+<ul>
+<li>compact とは？（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0009.JPG">板書</a>）
+<ul>
+<li>compact ＝ finite？
+<ul>
+<li>自然数のイメージなのか （板書右）</li>
+</ul></li>
+</ul></li>
+<li>Exercise
+<ul>
+<li><ol type="1">
+<li>{{y|x0≦y}|x0∈X0} がScott Domain上のT0位相の基底となっていることを示せ。</li>
+</ol>
+<ul>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0011.JPG">Scott Domain上にあることを示す解答</a></li>
+<li><a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0015.JPG">T0位相になっていることを示す解答</a></li>
+</ul></li>
+<li><ol type="1" start="2">
+<li>finiteな要素の有限集合のleast upper bound は、存在すれば常にfiniteであることを示せ。</li>
+</ol>
+<ul>
+<li>1, で Scott Domain であることを示す際にすでに示した。のでパス。</li>
+</ul></li>
+<li><ol type="1" start="3">
+<li>下記命題の反例を示せ。（<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200712/ct/RIMG0017.JPG">解答</a>）</li>
+</ol>
+<ul>
+<li><ol type="i">
+<li>x0 が compact なら {y|y≦x0} は有限</li>
+</ol>
+<ul>
+<li>反例：解答上部</li>
+</ul></li>
+<li><ol type="i" start="2">
+<li>x0 が compact かつ y ≦ x0 なら y は compact</li>
+</ol>
+<ul>
+<li>反例：解答下部
+<ul>
+<li>ω+1は compact だが、ω は compact でない</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="第三十六回圏論勉強会">第三十六回圏論勉強会</h2>
+<p>2008-1-13(日) <a href="http://begi.net/modules/xfsection/article.php?articleid=1">びぎねっと トレーニングルーム</a> 13:00〜19:00</p>
+<pre><code>        スクリーン
+      -------------
+  梅沢  shelarcy
+ +----------------------+
+ |                      |
+ +----------------------+
+  酒井 今井 日下部 檜山</code></pre>
+<ul>
+<li>久井さんはSkypeで参加</li>
+</ul>
+<p>写真（仮） : <a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080113" class="uri">http://picasaweb.google.co.jp/takeo.bono/Kenron080113</a></p>
+<p>写真（ミラー）：<a href="http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200801/ct/" class="uri">http://www.tom.sfc.keio.ac.jp/~sakai/d/data/200801/ct/</a></p>
+<h3 id="雑談-1">雑談</h3>
+<ul>
+<li>exponentialとは？(<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154857606663228434">板書</a>)
+<ul>
+<li>射 A → B としてとりうる全体を対象B^Aとして表す
+<ul>
+<li>直積との対応がcurry化に相当</li>
+</ul></li>
+<li>メタプログラム？
+<ul>
+<li>具体的な射だったものをひっくるめて対象として扱っているあたりはメタといえばメタ</li>
+<li>そういや最近<a href="http://d.hatena.ne.jp/m-hiyama/20080109/1199863428">オブジェクトとクラスとメタクラス</a>の話が
+<ul>
+<li>レイフィケーション は初めて知った
+<ul>
+<li>reification … メタな世界→メタでない世界</li>
+<li>c.f. reflection … メタでない世界→メタな世界</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>復習：<a href="https://www.amazon.co.jp/dp/0521478170/">“Conceptual Mathematics”</a>
+<ul>
+<li>objective category と subjective category? (Session 6)
+<ul>
+<li>現実世界の圏（objective category）の中に、それを観測し、考察する圏（subjective category）がある
+<ul>
+<li>Science（実際にはscience“s”）とは、現実世界をある側面から見て統一的な法則をsubjective categoryにて求めたもの</li>
+</ul></li>
+<li>たとえば、現実世界の圏がSetで、それをより小さな圏にて考察する
+<ul>
+<li>で、現実世界の圏で対象Xだったものが、考察対象の圏ではドメインとしての対象Aと、コドメインとしての対象Bとの間の“map”として捉えられる事がある</li>
+<li>このとき、Aは対象とするもののリストであり、Bは対応する性質とみなすことができる
+<ul>
+<li>こう考えると、h:A→Bは、もはや「インデックスと値の組」以上の意味を持つ</li>
+</ul></li>
+</ul></li>
+<li>この勉強会でやったとき、確か米田の補題の話になったようなならなかったような
+<ul>
+<li>もう覚えてない</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>ブチ切り
+<ul>
+<li>どういう意味？
+<ul>
+<li>強制リセット</li>
+</ul></li>
+</ul></li>
+<li>静止画のストリーミングがほしい
+<ul>
+<li>Skypeビデオなんかは画質が荒くて勉強会のやり取りに向かない
+<ul>
+<li>30秒に1枚でもいいので、高画質＋音声でやり取りしたい</li>
+</ul></li>
+</ul></li>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154880473069112354">イタリア人の書いた世界地図</a>
+<ul>
+<li>脈絡不明</li>
+</ul></li>
+</ul>
+<h3 id="categories-types-and-structures-section-2.4.1.2">“Categories, Types and Structures” Section 2.4.1.2</h3>
+<ul>
+<li>（順序関係に基づいての）関数の単調性、連続性の定義</li>
+<li>Exercise: この連続性の定義と、Scott位相で関数が連続であることが同値になる事を証明せよ
+<ul>
+<li>参考：<a href="http://mathworld.wolfram.com/ContinuousMap.html">位相空間での continous map</a></li>
+<li>解答
+<ul>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154852517126982658">順序関係で連続 ならば Scott位相としても連続</a></li>
+<li>Scott位相として連続 ならば 順序関係でも連続
+<ul>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154880481659046978">１．背理法を使って</a></li>
+<li><a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154885317792222290">２．背理法を使わずに</a></li>
+</ul></li>
+<li>補足：上記証明で使った定理とその証明（<a href="https://picasaweb.google.co.jp/takeo.bono/Kenron080113/photo#5154893521179757666">板書</a>）</li>
+</ul></li>
+</ul></li>
+<li>前回の復習（2.4.1.1）
+<ul>
+<li>algebraicでない位相のtrivialでない例？
+<ul>
+<li>実数直線 … algebraicでないが、そもそもコンパクトでない</li>
+</ul></li>
+<li>Exercise の3の反例？（前回のログ参照）
+<ul>
+<li>(i)の例：王様と、無限にいる平民
+<ul>
+<li>王様はコンパクト（数学的な意味で）</li>
+<li>王様と平民との間には絶対的な格差がある
+<ul>
+<li>平民の間に序列があろうがなかろうがそれは問題ではない</li>
+</ul></li>
+</ul></li>
+<li>(ii)の例：(i)の例＋王様同士の間の序列
+<ul>
+<li>王様よりちょっと偉い別の王様がいる
+<ul>
+<li>明治以前は天皇が存命中に退位して、更に上の上皇になる事があったが、そんな感じ</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="次会-1">2次会</h3>
+<ul>
+<li>今回5行しか進まなかった…
+<ul>
+<li>このテキストいつ終わるんだろう
+<ul>
+<li>というか、最後までやるの？</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr>
+<p>Last modified : 2008/06/11 13:48:49 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/CategoryTheory_%e5%9c%8f%e8%ab%96%e5%8b%89%e5%bc%b7%e4%bc%9a_CategoriesTypesAndStructures_Chapter2" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

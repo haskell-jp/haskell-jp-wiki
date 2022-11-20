@@ -1,0 +1,1362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/openspace.timedia.co.jp/marthon/RRB-all"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/openspace.timedia.co.jp/marthon/RRB-all</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/openspace.timedia.co.jp/marthon/RRB-all">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/openspace.timedia.co.jp/marthon/RRB-all">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/openspace.timedia.co.jp/marthon/RRB-all">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/openspace.timedia.co.jp/marthon/RRB-all</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E8%A4%87%E8%A3%BD%E3%81%99%E3%82%8B">文字列を複製する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%8F%8D%E5%BE%A9%E3%81%99%E3%82%8B">文字列を反復する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E9%95%B7%E3%81%95%E3%82%92%E5%BE%97%E3%82%8B">文字列の長さを得る</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B">文字列を検索する</a><ul>
+<li><a href="#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%81%8C%E5%90%AB%E3%81%BE%E3%82%8C%E3%82%8B%E3%81%8B%E3%81%A9%E3%81%86%E3%81%8B%E8%AA%BF%E3%81%B9%E3%82%8B">パターンが含まれるかどうか調べる</a></li>
+<li><a href="#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%81%8C%E5%87%BA%E7%8F%BE%E3%81%99%E3%82%8B%E6%9C%80%E5%88%9D%E3%81%AE%E3%83%90%E3%82%A4%E3%83%88%E4%BD%8D%E7%BD%AE%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">パターンが出現する最初のバイト位置を調べる</a></li>
+<li><a href="#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%81%8C%E5%87%BA%E7%8F%BE%E3%81%99%E3%82%8B%E6%9C%80%E5%BE%8C%E3%81%AE%E3%83%90%E3%82%A4%E3%83%88%E4%BD%8D%E7%BD%AE%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">パターンが出現する最後のバイト位置を調べる</a></li>
+<li><a href="#%E3%83%9E%E3%83%83%E3%83%81%E3%81%AE%E8%A9%B3%E3%81%97%E3%81%84%E6%83%85%E5%A0%B1%E3%82%92%E5%BE%97%E3%82%8B">マッチの詳しい情報を得る</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E4%B8%AD%E3%81%AB%E8%A4%87%E6%95%B0%E3%83%9E%E3%83%83%E3%83%81%E3%81%99%E3%82%8B">文字列中に複数マッチする</a></li>
+<li><a href="#%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%82%92%E5%90%AB%E3%82%80%E8%A1%8C%E3%81%AE%E3%81%BF%E3%82%92%E5%87%A6%E7%90%86%E3%81%99%E3%82%8B">パターンを含む行のみを処理する</a></li>
+</ul></li>
+<li><a href="#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E5%87%BA%E7%8F%BE%E5%9B%9E%E6%95%B0%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">特定の文字・文字列の出現回数を調べる</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E5%87%BA%E7%8F%BE%E9%A0%BB%E5%BA%A6%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">文字列の出現頻度を調べる</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%AF%94%E8%BC%83%E3%81%99%E3%82%8B">文字列を比較する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%8C%E7%A9%BA%E8%A1%8C%E3%81%8B%E8%AA%BF%E3%81%B9%E3%82%8B">文字列が空行か調べる</a></li>
+<li><a href="#%E6%95%B0%E5%80%A4%E3%82%92%E8%A1%A8%E3%81%99%E6%96%87%E5%AD%97%E5%88%97%E3%81%8B%E8%AA%BF%E3%81%B9%E3%82%8B">数値を表す文字列か調べる</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%95%B0%E5%80%A4%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B">文字列を数値に変換する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E3%81%8C%E5%A4%A7%E6%96%87%E5%AD%97%E3%81%8B%E5%B0%8F%E6%96%87%E5%AD%97%E3%81%8B%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">文字が大文字か小文字かを調べる</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E3%82%92%E5%A4%A7%E6%96%87%E5%AD%97%E5%B0%8F%E6%96%87%E5%AD%97%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B">文字を大文字・小文字に変換する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E4%B8%80%E9%83%A8%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99">文字列の一部を取り出す</a></li>
+<li><a href="#%E6%9C%80%E5%88%9D%E3%81%AB%E3%83%9E%E3%83%83%E3%83%81%E3%81%97%E3%81%9F%E9%83%A8%E5%88%86%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99">最初にマッチした部分を取り出す</a></li>
+<li><a href="#%E3%83%9E%E3%83%83%E3%83%81%E3%81%97%E3%81%9F%E9%83%A8%E5%88%86%E3%81%99%E3%81%B9%E3%81%A6%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99">マッチした部分すべてを取り出す</a></li>
+<li><a href="#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%AE%E3%81%AB%E3%83%9E%E3%83%83%E3%83%81%E3%81%97%E3%81%9F%E9%83%A8%E5%88%86%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99">正規表現の「()」にマッチした部分を取り出す</a></li>
+<li><a href="#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%AB%E3%83%9E%E3%83%83%E3%83%81%E3%81%97%E3%81%9F%E9%83%A8%E5%88%86%E3%81%AE%E5%89%8D%E5%BE%8C%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99">正規表現にマッチした部分の前後の文字列を取り出す</a></li>
+<li><a href="#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E3%82%92%E5%90%AB%E3%82%80%E9%83%A8%E5%88%86%E3%81%AE%E9%95%B7%E3%81%95%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">特定の文字を含む部分の長さを調べる</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%AE%B5%E8%90%BD%E3%81%AB%E5%88%86%E3%81%91%E3%82%8B">文字列を段落に分ける</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E8%A1%8C%E3%81%AB%E5%88%86%E3%81%91%E3%82%8B">文字列を行に分ける</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%8D%98%E8%AA%9E%E3%81%AB%E5%88%86%E3%81%91%E3%82%8B">文字列を単語に分ける</a></li>
+<li><a href="#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%A7%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E5%88%86%E5%89%B2%E3%81%99%E3%82%8B">正規表現で文字列を分割する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%96%87%E5%AD%97%E3%81%94%E3%81%A8%E3%81%AB%E5%87%A6%E7%90%86%E3%81%99%E3%82%8B">文字列を文字ごとに処理する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E9%80%A3%E7%B5%90%E3%81%99%E3%82%8B">文字列を連結する</a></li>
+<li><a href="#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%AB%E3%83%9E%E3%83%83%E3%83%81%E3%81%97%E3%81%9F%E9%83%A8%E5%88%86%E3%82%92%E7%BD%AE%E6%8F%9B%E3%81%99%E3%82%8B">正規表現にマッチした部分を置換する</a></li>
+<li><a href="#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E7%BD%AE%E6%8F%9B%E3%81%99%E3%82%8B">特定の文字(列)を置換する</a></li>
+<li><a href="#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E3%82%92%E3%82%A8%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%E3%81%99%E3%82%8B">特定の文字をエスケープする</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E3%82%92%E4%BA%8C%E9%87%8D%E3%81%AB%E3%81%97%E3%81%A6%E3%82%A8%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%E3%81%99%E3%82%8B">文字を二重にしてエスケープする</a></li>
+<li><a href="#%E4%B8%8D%E5%8F%AF%E8%A6%96%E6%96%87%E5%AD%97%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B">不可視文字を表示する</a></li>
+<li><a href="#%E7%89%B9%E5%AE%9A%E3%81%AE%E3%82%A8%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%E6%96%B9%E5%BC%8F%E3%81%AB%E3%81%99%E3%82%8B">特定のエスケープ方式にする</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E4%B8%80%E9%83%A8%E3%82%92%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8F">文字列の一部を取り除く</a><ul>
+<li><a href="#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%AB%E3%83%9E%E3%83%83%E3%83%81%E3%81%97%E3%81%9F%E9%83%A8%E5%88%86%E3%82%92%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8F">正規表現にマッチした部分を取り除く</a></li>
+<li><a href="#%E7%89%B9%E5%AE%9A%E3%81%AE%E6%96%87%E5%AD%97%E3%82%92%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8F">特定の文字を取り除く</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E5%85%88%E9%A0%AD%E6%9C%AB%E5%B0%BE%E3%81%AE%E6%96%87%E5%AD%97%E3%82%92%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8F">文字列先頭・末尾の文字を取り除く</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%A6%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8F">インデックスを指定して取り除く</a></li>
+</ul></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E5%85%88%E9%A0%AD%E6%9C%AB%E5%B0%BE%E3%81%8B%E3%82%89%E7%A9%BA%E7%99%BD%E3%82%92%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8F">文字列の先頭・末尾から空白を取り除く</a><ul>
+<li><a href="#%E3%83%8A%E3%82%A4%E3%83%BC%E3%83%96%E3%81%AA%E6%96%B9%E6%B3%95">ナイーブな方法</a></li>
+</ul></li>
+<li><a href="#%E3%82%BF%E3%83%96%E3%81%A8%E5%8D%8A%E8%A7%92%E7%A9%BA%E7%99%BD%E6%96%87%E5%AD%97%E3%82%92%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B">タブと半角空白文字を変換する</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%87%E3%83%B3%E3%83%88%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B">インデントを変更する</a><ul>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%87%E3%83%B3%E3%83%88%E3%81%99%E3%82%8B%E9%96%A2%E6%95%B0">インデントする関数</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%87%E3%83%B3%E3%83%88%E3%82%92%E4%B8%8B%E3%81%92%E3%82%8B%E9%96%A2%E6%95%B0">インデントを下げる関数</a></li>
+</ul></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%81%AE%E6%9C%AB%E5%B0%BE%E3%81%AB%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B">文字列の末尾に文字列を追加する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92n%E6%96%87%E5%AD%97%E3%81%9A%E3%81%A4%E3%81%AB%E5%88%86%E5%89%B2%E3%81%99%E3%82%8B">文字列をn文字ずつに分割する</a></li>
+<li><a href="#%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E6%9C%80%E5%A4%A7n%E6%96%87%E5%AD%97%E3%81%AB%E5%88%87%E3%82%8A%E8%A9%B0%E3%82%81%E3%82%8B">文字列を最大n文字に切り詰める</a></li>
+<li><a href="#%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%83%80%E3%82%A4%E3%82%B8%E3%82%A7%E3%82%B9%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B">メッセージダイジェストを作成する</a></li>
+<li><a href="#%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%E3%81%AE%E3%83%A1%E3%82%BF%E6%96%87%E5%AD%97%E3%82%92%E3%82%A8%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%97%E3%81%99%E3%82%8B">正規表現のメタ文字をエスケープする</a></li>
+<li><a href="#%E3%81%84%E3%82%8D%E3%81%84%E3%82%8D%E3%81%AA%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%E3%82%92%E8%A7%A3%E6%9E%90%E3%81%99%E3%82%8B">いろいろなテキストフォーマットを解析する</a><ul>
+<li><a href="#uri">URI</a></li>
+<li><a href="#%E3%83%A1%E3%83%BC%E3%83%AB">メール</a></li>
+<li><a href="#rd">RD</a></li>
+<li><a href="#rdoc">RDoc</a></li>
+<li><a href="#ruby%E3%81%AE%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89">Rubyのソースコード</a></li>
+<li><a href="#%E3%81%9D%E3%81%AE%E4%BB%96%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0%E8%A8%80%E8%AA%9E%E3%81%AE%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%89">その他、プログラム言語のソースコード</a></li>
+</ul></li>
+<li><a href="#%E3%81%A7%E5%8C%BA%E5%88%87%E3%82%89%E3%82%8C%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BFcsv%E3%82%92%E5%87%A6%E7%90%86%E3%81%99%E3%82%8B">「,」で区切られたデータ（CSV）を処理する</a></li>
+<li><a href="#xml-%E3%82%92%E8%A7%A3%E6%9E%90%E3%81%99%E3%82%8B">XML を解析する</a></li>
+<li><a href="#%E5%80%A4%E3%81%8C%E3%81%84%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%82%E3%82%8A%E3%81%9D%E3%82%8C%E3%82%92%E6%A0%BC%E7%B4%8D%E3%81%97%E3%81%9F%E9%85%8D%E5%88%97%E3%82%92%E4%BD%9C%E3%82%8B">値がいくつかあり、それを格納した配列を作る</a></li>
+<li><a href="#%E5%A4%9A%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B">多次元配列を作成する</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%82%84%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E5%85%A8%E8%A6%81%E7%B4%A0%E3%82%92%E9%A0%86%E3%81%AB%E5%87%A6%E7%90%86%E3%81%99%E3%82%8B">配列やハッシュの全要素を順に処理する</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%AE%E8%A6%81%E7%B4%A0%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B">配列の要素を変更する</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%AE%E8%A6%81%E7%B4%A0%E3%82%92%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB%E3%81%99%E3%82%8B">配列の要素をシャッフルする</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%AE%E8%A6%81%E7%B4%A0%E6%95%B0%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">配列の要素数を調べる</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%AE%E8%A6%81%E7%B4%A0%E3%81%AE%E5%87%BA%E7%8F%BE%E5%9B%9E%E6%95%B0%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">配列の要素の出現回数を調べる</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%8B%E3%82%89%E8%A4%87%E6%95%B0%E3%81%AE%E8%A6%81%E7%B4%A0%E3%82%92%E4%B8%80%E5%BA%A6%E3%81%AB%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B">配列から複数の要素を一度に取得する</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E3%81%A8%E8%A6%81%E7%B4%A0%E3%81%AE%E3%83%9A%E3%82%A2%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B">配列のインデックスと要素のペアを取得する</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%8B%E3%82%89%E9%87%8D%E8%A4%87%E3%81%99%E3%82%8B%E8%A6%81%E7%B4%A0%E3%82%92%E5%8F%96%E3%82%8A%E9%99%A4%E3%81%8F">配列から重複する要素を取り除く</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%8B%E3%82%89%E6%9D%A1%E4%BB%B6%E3%82%92%E6%BA%80%E3%81%9F%E3%81%99%E8%A6%81%E7%B4%A0%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B">配列から条件を満たす要素を取得する</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%AE%E8%A6%81%E7%B4%A0%E3%82%92%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B">配列の要素を検索する</a></li>
+<li><a href="#%E3%81%A4%E3%81%AE%E9%85%8D%E5%88%97%E3%81%AB%E5%85%B1%E9%80%9A%E3%81%99%E3%82%8B%E8%A6%81%E7%B4%A0%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">2つの配列に共通する要素を調べる</a></li>
+<li><a href="#%E3%81%A4%E3%81%AE%E9%85%8D%E5%88%97%E3%81%AE%E5%B7%AE%E3%82%92%E5%8F%96%E3%82%8B">2 つの配列の差を取る</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%82%92%E9%80%A3%E7%B5%90%E3%81%99%E3%82%8B">配列を連結する</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%81%AE%E8%A6%81%E7%B4%A0%E3%81%AE%E9%A0%86%E5%BA%8F%E3%82%92%E9%80%86%E8%BB%A2%E3%81%99%E3%82%8B">配列の要素の順序を逆転する</a><ul>
+<li><a href="#%E4%B8%80%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AE%E5%A0%B4%E5%90%88">一次元配列の場合</a></li>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E5%A0%B4%E5%90%88">リストの場合</a></li>
+</ul></li>
+<li><a href="#%E4%B8%80%E5%AE%9A%E7%AF%84%E5%9B%B2%E3%81%AE%E6%95%B4%E6%95%B0%E3%82%92%E8%A6%81%E7%B4%A0%E3%81%A8%E3%81%99%E3%82%8B%E9%85%8D%E5%88%97%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B">一定範囲の整数を要素とする配列を作成する</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%82%92%E3%81%A4%E3%81%8D%E3%81%A7%E9%80%A3%E7%B5%90%E3%81%97%E3%81%A6%E6%96%87%E5%AD%97%E5%88%97%E3%81%AB%E3%81%99%E3%82%8B">配列を(「,」つきで)連結して文字列にする</a></li>
+<li><a href="#%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AB%E8%A6%81%E7%B4%A0%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B">ハッシュに要素を追加する</a></li>
+<li><a href="#%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E5%86%85%E3%81%AB%E3%82%AD%E3%83%BC%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%99%E3%82%8B%E3%81%8B%E8%AA%BF%E3%81%B9%E3%82%8B">ハッシュ内にキーが存在するか調べる</a></li>
+<li><a href="#%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E8%A6%81%E7%B4%A0%E3%82%92%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B">ハッシュの要素を削除する</a></li>
+<li><a href="#%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%81%AE%E8%A6%81%E7%B4%A0%E3%82%92%E6%8C%BF%E5%85%A5%E3%81%97%E3%81%9F%E9%A0%86%E3%81%AB%E5%8F%96%E3%82%8A%E5%87%BA%E3%81%99">ハッシュの要素を挿入した順に取り出す</a></li>
+<li><a href="#%E9%85%8D%E5%88%97%E3%82%84%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%82%92%E3%82%BD%E3%83%BC%E3%83%88%E3%81%99%E3%82%8B">配列やハッシュをソートする</a></li>
+<li><a href="#%E3%83%8F%E3%83%83%E3%82%B7%E3%83%A5%E3%82%92%E3%83%9E%E3%83%BC%E3%82%B8%E3%81%99%E3%82%8B">ハッシュをマージする</a></li>
+<li><a href="#%E5%B7%A8%E5%A4%A7%E3%81%A7%E7%96%8E%E3%81%AA%E9%85%8D%E5%88%97%E3%82%92%E4%BD%BF%E3%81%86">巨大で疎な配列を使う</a></li>
+<li><a href="#%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%82%84%E3%82%AD%E3%83%A5%E3%83%BC%E3%82%92%E4%BD%BF%E3%81%86">スタックやキューを使う</a></li>
+<li><a href="#%E3%83%91%E3%82%B9%E5%90%8D%E3%81%8C%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%81%AB%E3%83%9E%E3%83%83%E3%83%81%E3%81%99%E3%82%8B%E3%81%8B%E8%AA%BF%E3%81%B9%E3%82%8B">パス名がパターンにマッチするか調べる。</a></li>
+<li><a href="#%E7%8F%BE%E5%9C%A8%E3%81%AE%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E5%90%8D%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B">現在のディレクトリ名を取得する</a></li>
+<li><a href="#%E7%8F%BE%E5%9C%A8%E3%81%AE%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B">現在のディレクトリを変更する</a></li>
+<li><a href="#%E5%9B%9E%E6%95%B0%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%A6%E5%87%A6%E7%90%86%E3%82%92%E7%B9%B0%E3%82%8A%E8%BF%94%E3%81%99">回数を指定して処理を繰り返す</a></li>
+<li><a href="#%E6%9C%80%E5%A4%A7%E5%80%A4%E6%9C%80%E5%B0%8F%E5%80%A4%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B">最大値・最小値を求める</a></li>
+<li><a href="#%E6%95%B0%E5%80%A4%E3%81%AE%E7%B7%8F%E5%92%8C%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B">数値の総和を求める</a></li>
+<li><a href="#%E7%B5%B6%E5%AF%BE%E5%80%A4%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B">絶対値を求める</a></li>
+<li><a href="#%E5%89%B2%E3%82%8A%E7%AE%97%E3%81%AE%E4%BD%99%E3%82%8A%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B">割り算の余りを求める</a></li>
+<li><a href="#%E3%81%B9%E3%81%8D%E4%B9%97%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B">べき乗を求める</a></li>
+<li><a href="#%E6%9C%80%E5%A4%A7%E5%85%AC%E7%B4%84%E6%95%B0%E3%81%A8%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B">最大公約数と最小公倍数を求める</a></li>
+<li><a href="#%E5%B9%B3%E6%96%B9%E6%A0%B9%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B">平方根を求める</a></li>
+<li><a href="#%E4%B8%89%E8%A7%92%E9%96%A2%E6%95%B0%E3%82%92%E8%A8%88%E7%AE%97%E3%81%99%E3%82%8B">三角関数を計算する</a></li>
+<li><a href="#%E7%9B%B4%E4%BA%A4%E5%BA%A7%E6%A8%99%E3%82%92%E5%B1%80%E5%BA%A7%E6%A8%99%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B">直交座標を局座標に変換する</a></li>
+<li><a href="#%E5%AF%BE%E6%95%B0%E8%A8%88%E7%AE%97%E3%82%92%E8%A1%8C%E3%81%86">対数計算を行う</a></li>
+<li><a href="#%E6%B5%AE%E5%8B%95%E5%B0%8F%E6%95%B0%E7%82%B9%E3%82%92%E4%B8%B8%E3%82%81%E3%82%8B">浮動小数点を丸める</a></li>
+<li><a href="#%E8%A4%87%E7%B4%A0%E6%95%B0%E3%82%92%E4%BD%BF%E3%81%86">複素数を使う</a></li>
+<li><a href="#%E6%9C%89%E7%90%86%E6%95%B0%E3%82%92%E4%BD%BF%E3%81%86">有理数を使う</a></li>
+<li><a href="#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3%E5%BC%95%E6%95%B0%E3%82%92%E8%A7%A3%E6%9E%90%E3%81%99%E3%82%8B">コマンドライン引数を解析する</a></li>
+<li><a href="#tcp-%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B">TCP クライアントを作る</a></li>
+<li><a href="#tcp-%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E4%BD%9C%E3%82%8B">TCP サーバを作る</a></li>
+</ul>
+</div>
+
+<hr>
+<h2 id="文字列を複製する">文字列を複製する</h2>
+<pre><code>dup s = s ++ s</code></pre>
+<p>pure functional だと実態が複製されたかどうかは関係ない。</p>
+<h2 id="文字列を反復する">文字列を反復する</h2>
+<pre><code>Prelude&gt; foldr1 (++) $ replicate 3 "abc"
+"abcabcabc"</code></pre>
+<p>replicate に 0 をわたすとこける。</p>
+<pre><code>Prelude&gt; concat $ replicate 3 "abc"
+"abcabcabc"</code></pre>
+<p>でどうよ。</p>
+<pre><code>strReplicate :: Int -&gt; String -&gt; String
+strReplicate n s = iterate (s++) "" !! n</code></pre>
+<p>なんてのはどうよ。</p>
+<pre><code>strReplicate :: Int -&gt; String -&gt; String
+strReplicate n s = iterate (showString s) "" !! n</code></pre>
+<p>もあるよ。scanl でいいんじゃない？ –t15u</p>
+<pre><code>Prelude&gt; scanl (++) [] (repeat "abc") !! 3
+"abcabcabc"</code></pre>
+<p>強引にunfoldrで書いてみた。–さかい</p>
+<pre><code>strReplicate :: Int -&gt; String -&gt; String
+strReplicate _ [] = []
+strReplicate n <a href="email-protection.html" class="__cf_email__" data-cfemail="80f3c0">[email&nbsp;protected]</a>(x:xs) = unfoldr phi (n,s)
+    where phi (m,y:ys) = Just (y,(m,ys))
+          phi (0,[])   = Nothing
+          phi (m,[])   = Just (x,(m-1,xs))
+
+unfoldr phi x = case phi x of
+                  Nothing -&gt; []
+                  Just (a,y) -&gt; a : unfoldr phi y</code></pre>
+<p>うっ。。。–nobsun</p>
+<p>さかいさんのを参考に別版を書いてみました。</p>
+<pre><code>strReplicate :: Int -&gt; String -&gt; String
+strReplicate n s = unfoldr f (n,s,s)
+    where f (_,_,[])   = Nothing
+          f (0,_,_)    = Nothing
+          f (n,[x],s)  = Just (x,(n-1,s,s))
+          f (n,x:xs,s) = Just (x,(n,xs,s))</code></pre>
+<h2 id="文字列の長さを得る">文字列の長さを得る</h2>
+<pre><code>Prelude&gt; length "abc"
+3</code></pre>
+<h2 id="文字列を検索する">文字列を検索する</h2>
+<h3 id="パターンが含まれるかどうか調べる">パターンが含まれるかどうか調べる</h3>
+<pre><code>import Text.Regex
+import Data.Maybe
+
+isMatch pat str = isJust $ matchRegex (mkRegex pat) str</code></pre>
+<h3 id="パターンが出現する最初のバイト位置を調べる">パターンが出現する最初のバイト位置を調べる</h3>
+<h3 id="パターンが出現する最後のバイト位置を調べる">パターンが出現する最後のバイト位置を調べる</h3>
+<h3 id="マッチの詳しい情報を得る">マッチの詳しい情報を得る</h3>
+<h3 id="文字列中に複数マッチする">文字列中に複数マッチする</h3>
+<pre><code>import Text.Regex
+
+rxScan pat str
+    = case matchRegexAll (mkRegex pat) str of
+        Just (before, "", "", _)         -&gt; []
+        Just (before, "", after, _)      -&gt; rxScan pat (tail after)
+        Just (before, matched, after, _) -&gt; matched : rxScan pat after
+        Nothing                          -&gt; []</code></pre>
+<h3 id="パターンを含む行のみを処理する">パターンを含む行のみを処理する</h3>
+<p>パターンを含む行に f を適用し、残りはそのまま。</p>
+<pre><code>grep :: String -&gt; (String -&gt; String) -&gt; [String] -&gt; [String]
+grep pat f ss = [ case matchRegex (mkRegex pat) line of
+                    Just _ -&gt; f line
+                    Nothing -&gt; line
+                | line &lt;- ss
+                ]
+
+grep pat f ss = [ (case matchRegex (mkRegex pat) line of {Just _ -&gt; f; _-&gt; id}) line | line &lt;- ss ]</code></pre>
+<p>ううむ。</p>
+<pre><code>grep pat f = map (\ l -&gt; case matchRegex (mkRegex pat) l of {Nothing-&gt;id;_-&gt;f} $ l)</code></pre>
+<h2 id="特定の文字文字列の出現回数を調べる">特定の文字・文字列の出現回数を調べる</h2>
+<pre><code>count x = length . filter (x==)
+
+count xs [] = 0
+count xs ys = (if isPrefixOf xs ys then (1+) else id) (count $ tail ys)</code></pre>
+<h2 id="文字列の出現頻度を調べる">文字列の出現頻度を調べる</h2>
+<pre><code>count xs [] = 0
+count xs ys = (if isPrefixOf xs ys then (1+) else id) (count xs $ tail ys)</code></pre>
+<p>こういう入力例だと効率がすごく悪い。KMPでやれば少しはましか。</p>
+<pre><code>count "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaab" (take 9999 $ repeat 'a')
+0</code></pre>
+<p>Excelのデータで特定の文字列の出現頻度を調べる。カット＆ペーストでa.txtファイルを作る。</p>
+<pre><code>$KCODE='EUC'
+
+f=open("a.txt")
+txt=f.read
+ar=%w(田中 和田)
+ar.each {|n|
+ print n,"::"
+ puts txt.scan(n).length
+}
+f.close</code></pre>
+<p>出力結果</p>
+<pre><code>$ ruby scan.rb
+田中::5
+和田::2</code></pre>
+<h2 id="文字列を比較する">文字列を比較する</h2>
+<pre><code>Main&gt; "foo" == "bar"
+False
+Main&gt; "foo" == "foo"
+True
+Main&gt; "foo" &lt; "bar"
+False</code></pre>
+<h2 id="文字列が空行か調べる">文字列が空行か調べる</h2>
+<p>本当の空行</p>
+<pre><code>main = getContents &gt;&gt;= print . filter (""==) . lines</code></pre>
+<p>空白のみの行も空行とみなす</p>
+<pre><code>main = getContents &gt;&gt;= print . filter (all isSpace) . lines</code></pre>
+<h2 id="数値を表す文字列か調べる">数値を表す文字列か調べる</h2>
+<pre><code>isNumStr :: String -&gt; Bool
+isNumStr "" = False
+isNumStr <a href="email-protection.html" class="__cf_email__" data-cfemail="572f2f2417">[email&nbsp;protected]</a>(x:xs)
+    | x `elem` "+-" = all isDigit xs
+    | otherwise     = all isDigit xxs</code></pre>
+<p>8進とか？16進とかは？</p>
+<pre><code>isNumStr "" = False
+isNumStr <a href="email-protection.html" class="__cf_email__" data-cfemail="f981818ab9">[email&nbsp;protected]</a>(x:xs)
+    | x `elem` "+-" = isNumStr' xs
+    | otherwise     = isNumStr' xxs
+  where isNumStr' "0" = True
+        isNumStr' ('0':x:xs)
+            | toLower x == 'x' = all isHexDigit xs
+            | toLower x == 'o' = all isOctDigit xs
+            | toLower x == 'b' = all (flip elem "01") xs
+            | otherwise        = all isOctDigit (x:xs)
+        isNumStr' xs = all isDigit xs</code></pre>
+<p>こんなもんでしょうか。 – y.hanatani</p>
+<h2 id="文字列を数値に変換する">文字列を数値に変換する</h2>
+<pre><code>read "123" :: Int</code></pre>
+<h2 id="文字が大文字か小文字かを調べる">文字が大文字か小文字かを調べる</h2>
+<pre><code>Prelude&gt; :module +Char
+Prelude Char&gt; isLower 'a'
+True
+Prelude Char&gt; isLower 'A'
+False
+Prelude Char&gt; isUpper 'a'
+False
+Prelude Char&gt; isUpper 'A'
+True</code></pre>
+<h2 id="文字を大文字小文字に変換する">文字を大文字・小文字に変換する</h2>
+<pre><code>Prelude&gt; :module +Char
+Prelude Char&gt; toUpper 'a'
+'A'
+Prelude Char&gt; toLower 'A'
+'a'
+Prelude Char&gt; map toUpper "aBcDeFg"
+"ABCDEFG"
+Prelude Char&gt; map toLower "aBcDeFg"
+"abcdefg"</code></pre>
+<h2 id="文字列の一部を取り出す">文字列の一部を取り出す</h2>
+<pre><code>Prelude&gt; take 3 . drop 3 $ "abcdefghi"
+"def"</code></pre>
+<h2 id="最初にマッチした部分を取り出す">最初にマッチした部分を取り出す</h2>
+<p>正規表現と同じことをリスト処理関数でやってみる。</p>
+<pre><code>&gt; take 3 $ head $ filter (isPrefixOf "a") $ tails "xxxabcfffpat"
+"abc"</code></pre>
+<p>head が失敗した時がちょっといや。</p>
+<pre><code>&gt; (case filter (isPrefixOf "a") $ tails "xxxabcfffpat" of (x:_) -&gt; Just x; _ -&gt; Nothing) &gt;&gt;= Just . take 3
+Just "abc"</code></pre>
+<p>無理矢理回避してみる。失敗した時は Nothing</p>
+<h2 id="マッチした部分すべてを取り出す">マッチした部分すべてを取り出す</h2>
+<pre><code>import Text.Regex
+import Data.List
+
+matchRegexList rx xs
+    = unfoldr f xs
+      where f x = matchRegexAll rx x &gt;&gt;= (\ (_, m, rest, _) -&gt; Just (m, rest))</code></pre>
+<h2 id="正規表現のにマッチした部分を取り出す">正規表現の「()」にマッチした部分を取り出す</h2>
+<pre><code>import Text.Regex
+import Data.List
+
+matchRegexList' rx xs
+    = concat $ unfoldr f xs
+      where f x = matchRegexAll rx x &gt;&gt;= (\ (_, _, rest, m) -&gt; Just (m, rest))</code></pre>
+<h2 id="正規表現にマッチした部分の前後の文字列を取り出す">正規表現にマッチした部分の前後の文字列を取り出す</h2>
+<pre><code>import Text.Regex
+
+&gt; matchRegexAll (mkRegex "ab*c") "xabbcz" &gt;&gt;= \ (b, _, a, _) -&gt; Just (b, a)
+Just ("x","z")</code></pre>
+<h2 id="特定の文字を含む部分の長さを調べる">特定の文字を含む部分の長さを調べる</h2>
+<pre><code>matchingLength xs ys = length [y | y &lt;- ys, elem y xs]</code></pre>
+<p>これは</p>
+<pre><code>matchingLength xs = length . filter (flip elem xs)</code></pre>
+<p>と同じ。 xs も消せないの？ – t15u</p>
+<ul>
+<li><p>matchingLength :: Eq a =&gt; [a] -&gt; [a] -&gt; Int matchingLength = (length .) . filter . (flip elem)</p>
+<p>この場合型宣言は必要。<a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/haskell/haskell-jp/467"><strong>haskell</strong>-jp:467</a></p></li>
+</ul>
+<h2 id="文字列を段落に分ける">文字列を段落に分ける</h2>
+<pre><code>parags :: [String] -&gt; [[String]]
+parags [] = []
+parags xs = p:parags xs'
+  where
+    (p, xs') = (applySnd (dropWhile (""==)) . break (""==)) xs
+    applySnd f (x,y) = (x,f y)</code></pre>
+<p>これだと、複数の空白だけでなりたつパラグラフできちゃうよ。 こんなのではどうでしょう。</p>
+<pre><code>paragraphs :: String -&gt; [[String]]
+paragraphs = parags . map trimSpace . lines
+
+trimSpace :: String -&gt; String
+trimSpace = reverse . dropWhile isSpace . reverse . dropWhile isSpace
+
+parags :: [String] -&gt; [[String]]
+parags [] = []
+parags xs = p : parags (dropWhile ("" ==) ps)
+            where
+              (p,ps) = break ("" ==) xs</code></pre>
+<p>これじゃ、インデントが消えちゃうじゃん。ダメポ。</p>
+<p>これで動くかな。=&gt; 動くみたい。</p>
+<pre><code>parags = filter (not . null) . map (dropWhile (all isSpace)) . groupBy (\_ x -&gt; not $ all isSpace x)</code></pre>
+<ul>
+<li><a href="http://www.sampou.org/cgi-bin/haskell.cgi?HowTo:List&amp;l=jp">Listライブラリの使い方</a></li>
+</ul>
+<!-- -->
+<pre><code>List&gt; parags $ lines testdata
+[["  A  "," AA  "],["B","BB"],["C"]]</code></pre>
+<p>テストデータ</p>
+<pre><code>testdata = "  \n\n  A  \n AA  \n   \n\nB\nBB\n\n\n\n  \n\nC\n\n"</code></pre>
+<h2 id="文字列を行に分ける">文字列を行に分ける</h2>
+<pre><code>Prelude&gt; lines "foo\nbar\nbaz"
+["foo","bar","baz"]</code></pre>
+<p>lines は Prelude で定義されている</p>
+<pre><code>lines     :: String -&gt; [String]
+lines ""   = []
+lines s    = let (l,s') = break ('\n'==) s
+             in l : case s' of []      -&gt; []
+                               (_:s'') -&gt; lines s''</code></pre>
+<h2 id="文字列を単語に分ける">文字列を単語に分ける</h2>
+<pre><code>Prelude&gt; words "foo bar baz"
+["foo","bar","baz"]</code></pre>
+<p>words は Prelude で定義されている</p>
+<pre><code>words     :: String -&gt; [String]
+words s    = case dropWhile isSpace s of
+                  "" -&gt; []
+                  s' -&gt; w : words s''
+                        where (w,s'') = break isSpace s'</code></pre>
+<h2 id="正規表現で文字列を分割する">正規表現で文字列を分割する</h2>
+<pre><code>import Text.Regex
+import Data.List
+
+splitWithRx rstr str = splitWithRx' str
+  where
+    rx = mkRegex rstr
+    splitWithRx' str = case matchRegexAll rx str of
+                       Just (b, _, a, _) -&gt; b : splitWithRx' a
+                       Nothing           -&gt; [str]
+
+splitWithRx'' rs str = unfoldr f str
+  where
+    rx = mkRegex rs
+    f s = matchRegexAll rx s &gt;&gt;= (\(b, _, a, _) -&gt; Just (b, a))</code></pre>
+<p>空文字列にマッチする正規表現を与えるのは危険。</p>
+<p>ふたつめの方法だと最後の要素が消えてしまう。最後にマッチするスプリッタ があればうまくいくんだけど。</p>
+<h2 id="文字列を文字ごとに処理する">文字列を文字ごとに処理する</h2>
+<pre><code>Prelude&gt; sequence_ [print x | x &lt;- "abc"]
+'a'
+'b'
+'c'</code></pre>
+<h2 id="文字列を連結する">文字列を連結する</h2>
+<p>リストですから，リストの連結の演算子 ++ で連結できます．</p>
+<pre><code>Prelude&gt; "hello " ++ "wor" ++ "ld"
+"hello world"</code></pre>
+<h2 id="正規表現にマッチした部分を置換する">正規表現にマッチした部分を置換する</h2>
+<pre><code>import Text.Regex
+
+sub re s str = case matchRegexAll re str of
+                  Just (b, _, a, _) -&gt; b ++ s ++ a
+                  _ -&gt; str
+
+gsub re s str = case matchRegexAll re str of
+                  Just (b, _, a, _) -&gt; b ++ s ++ gsub re s a
+                  _ -&gt; str</code></pre>
+<h2 id="特定の文字列を置換する">特定の文字(列)を置換する</h2>
+<p>ruby 版とは挙動が違います。str の中から xs を見つけて ys に置換します。</p>
+<pre><code>tr str [] _ = str
+tr str xs ys = tr' str xs []
+    where tr' str [] _ = ys ++ tr' str xs []
+          tr' (s:str) (z:zs) rs
+             | s == z    = tr' str zs (s:rs)
+             | otherwise = (reverse rs) ++ s:tr' str xs []
+          tr' [] _ rs = reverse rs
+
+&gt; tr "ruby 1.8.1" "." "_"
+"ruby 1_8_1"
+&gt; tr "ruby 1ten6ten8" "ten" "."
+"ruby 1.6.8"</code></pre>
+<h2 id="特定の文字をエスケープする">特定の文字をエスケープする</h2>
+<pre><code>escape xs y = flip (&gt;&gt;=) f
+    where f x | x `elem` xs = y:x:[]
+              | otherwise   = x:[]
+
+unescape x (y:yy:ys)
+    | x == y = yy:unescape x ys
+    | True   = y:unescape x (yy:ys)
+unescape x ys = ys
+
+&gt; escape "!?_" '_' "Hi! How_are_you?"
+"Hi_! How__are__you_?"</code></pre>
+<h2 id="文字を二重にしてエスケープする">文字を二重にしてエスケープする</h2>
+<h2 id="不可視文字を表示する">不可視文字を表示する</h2>
+<h2 id="特定のエスケープ方式にする">特定のエスケープ方式にする</h2>
+<h2 id="文字列の一部を取り除く">文字列の一部を取り除く</h2>
+<h3 id="正規表現にマッチした部分を取り除く">正規表現にマッチした部分を取り除く</h3>
+<pre><code>import Text.Regex
+
+sub rx x = matchRegexAll (mkRegex rx) x
+      &gt;&gt;= (\(before, _, after, _) -&gt; Just (before ++ after))
+
+*Main&gt; sub "a+" "aabbcaa"
+Just "bbcaa"
+*Main&gt; sub "b+" "aabbcc"
+Just "aacc"
+*Main&gt; sub "b*" "aabbcc"
+Just "aabbcc"
+*Main&gt; sub "b+" "aacc"
+Nothing</code></pre>
+<p>+は最長マッチ、*は最短マッチのようだ。 =&gt; これは間違い。 単に先頭でマッチしてしまうだけ。</p>
+<h3 id="特定の文字を取り除く">特定の文字を取り除く</h3>
+<pre><code>import List
+
+delete' :: Eq a =&gt; a -&gt; [a] -&gt; [a]
+delete' _ [] = []
+delete' e (x:xs)
+    | e == x = delete' e xs
+    | True   = x : delete' e xs</code></pre>
+<p>↑これはあほ</p>
+<pre><code>delete' e xs = filter (e/=) xs
+
+List&gt; delete' 'o' "gooooooooogle"
+"ggle"
+
+squeeze :: Eq a =&gt; a -&gt; [a] -&gt; [a]
+squeeze _ []            = []
+squeeze e [x]           = [x]
+squeeze e (x:<a href="email-protection.html" class="__cf_email__" data-cfemail="0f77777c4f">[email&nbsp;protected]</a>(xx:_))
+    | e == x &amp;&amp; e == xx = squeeze e xxs
+    | otherwise         = x : squeeze e xxs
+
+Prelude&gt; squeeze 'g' "gggooogle"
+"gooogle"</code></pre>
+<h3 id="文字列先頭末尾の文字を取り除く">文字列先頭・末尾の文字を取り除く</h3>
+<pre><code>List&gt; init "bar"
+"ba"
+List&gt; tail "bar"
+"ar"</code></pre>
+<h3 id="インデックスを指定して取り除く">インデックスを指定して取り除く</h3>
+<pre><code>applyFst f (x, y) = (f x, y)
+
+main = print $ applyFst init $ splitAt 3 "abcde"
+
+("ab","de")</code></pre>
+<h2 id="文字列の先頭末尾から空白を取り除く">文字列の先頭・末尾から空白を取り除く</h2>
+<h3 id="ナイーブな方法">ナイーブな方法</h3>
+<pre><code>Char&gt; (dropWhile isSpace . reverse . dropWhile isSpace . reverse) " foo bar "
+"foo bar"</code></pre>
+<p>せっかくだから、関数にしよう。</p>
+<pre><code>trimSpace :: String -&gt; String
+trimSpace = dropWhile is Space . reverse . dropWhile isSpace . reverse</code></pre>
+<h2 id="タブと半角空白文字を変換する">タブと半角空白文字を変換する</h2>
+<pre><code>untabify :: Int -&gt; String -&gt; String
+untabify tabstop str = concat (unfoldr phi (0,str))
+    where phi (n, '\t':s)
+              = Just (replicate (tabstop - (n `mod` tabstop)) ' ', (0,s))
+          phi (n, c:s) = Just ([c], (n+1,s))
+          phi (_, [])  = Nothing
+
+tabify :: Int -&gt; String -&gt; String
+tabify tabstop str = f 0 str
+    where f n ('\t':str) = f (n+tabstop) str
+          f n (' ':str)  = f (n+1) str
+          f n str        = case n `divMod` tabstop of
+                           (t,s) -&gt;
+                               replicate t '\t' ++ replicate s ' ' ++
+                               case str of
+                               []   -&gt; []
+                               x:xs -&gt; x : f 0 xs</code></pre>
+<p>Ruby版も同じだと思うけど、逆変換になってないな。</p>
+<p><a href="https://wiki.haskell.jp/Old/openspace.timedia.co.jp/marthon/marathon.cgi?%a5%ec%a5%b7%a5%d41.7">レシピ1.7</a> も参照。</p>
+<h2 id="インデントを変更する">インデントを変更する</h2>
+<h3 id="インデントする関数">インデントする関数</h3>
+<pre><code>-- 文字列の各行を半角空白文字n個分インデントする
+indent0 :: Int -&gt; String -&gt; String
+indent0 n = unlines . map (replicate n ' ' ++) . lines
+
+-- タブ対応版
+indent :: Maybe Int -&gt; Int -&gt; String -&gt; String
+indent (Just tabstop) n = unlines . map f . lines
+    where f line = tabify tabstop (replicate n ' ' ++ untabify tabstop line)
+indent Nothing n = indent0 n</code></pre>
+<h3 id="インデントを下げる関数">インデントを下げる関数</h3>
+<pre><code>-- 文字列の各行を半角空白文字n個分アンインデントする
+unindent0 n = unlines . map (f n) . lines
+    where f 0 s       = s
+          f n (' ':s) = f (n-1) s
+          f n s       = s
+
+-- タブ対応版
+unindent :: Maybe Int -&gt; Int -&gt; String -&gt; String
+unindent (Just tabstop) n = tabify tabstop . unindent0 n . untabify tabstop
+unindent Nothing n = unindent0 n</code></pre>
+<h2 id="文字列の末尾に文字列を追加する">文字列の末尾に文字列を追加する</h2>
+<pre><code>&gt; "abc" ++ "def"
+"abcdef"</code></pre>
+<h2 id="文字列をn文字ずつに分割する">文字列をn文字ずつに分割する</h2>
+<pre><code>import Data.List
+
+divide n xs = case splitAt n xs of
+                (a, []) -&gt; [a]
+                (a, b)  -&gt; a : foo n b
+
+Main&gt; foo 3 ['a'..'z']
+["abc","def","ghi","jkl","mno","pqr","stu","vwx","yz"]</code></pre>
+<h2 id="文字列を最大n文字に切り詰める">文字列を最大n文字に切り詰める</h2>
+<pre><code>*Main&gt; take 5 "abcdefgh"
+"abcde"
+*Main&gt; take 5 "\x3042\x3044\x3046\x3048\x304a\x304b\x304d"
+"\12354\12356\12358\12360\12362"
+*Main&gt; take 5 "abc"
+"abc"
+*Main&gt; take 5 "ab\n\ncde"
+"ab\n\nc"
+*Main&gt; take 5 ""
+""</code></pre>
+<h2 id="メッセージダイジェストを作成する">メッセージダイジェストを作成する</h2>
+<ul>
+<li><a href="http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/md5/" class="uri">http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/md5/</a></li>
+<li><a href="http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/sha1/" class="uri">http://web.comlab.ox.ac.uk/oucl/work/ian.lynagh/sha1/</a></li>
+</ul>
+<h2 id="正規表現のメタ文字をエスケープする">正規表現のメタ文字をエスケープする</h2>
+<pre><code>escape :: [Char] -&gt; Char -&gt; String -&gt; String
+escape meta esc str = concat [ if c == esc || c `elem` meta
+                                 then [esc, c]
+                                 else [c]
+                             | c &lt;- str
+                             ]</code></pre>
+<p>foldr版</p>
+<pre><code>escape :: [Char] -&gt; Char -&gt; String -&gt; String
+escape meta esc = foldr phi []
+    where phi c s = if c == esc || c `elem` meta
+                    then esc:c:s
+                    else c:s</code></pre>
+<h2 id="いろいろなテキストフォーマットを解析する">いろいろなテキストフォーマットを解析する</h2>
+<h3 id="uri">URI</h3>
+<p>Network.URI の parseURI :: String -&gt; Maybe URI でパースできる</p>
+<pre><code>Prelude&gt; :module +Network.URI
+Prelude Network.URI&gt; parseURI "http://<a href="email-protection.html" class="__cf_email__" data-cfemail="bdc8ced8cf93cddccecefdcacaca93d8c5dcd0cdd1d893ded2d0">[email&nbsp;protected]</a>:80/path/to/file?q=query#part"
+Preludeng package network ... linking ... done.
+Preludehttp://<a href="email-protection.html" class="__cf_email__" data-cfemail="ec999f899ec29c8d9f9fac9b9b9bc289948d819c8089c28f8381">[email&nbsp;protected]</a>:80/path/to/file?q=query#part
+Prelude Network.URI&gt; parseURI "http://<a href="email-protection.html" class="__cf_email__" data-cfemail="3c494f594e124c5d4f4f7c4b4b4b1259445d514c5059125f5351">[email&nbsp;protected]</a>:80/path/to/file?q=query#part" &gt;&gt;= scheme
+Prelude Network.URI&gt; parseURI "http://<a href="email-protection.html" class="__cf_email__" data-cfemail="0a7f796f78247a6b79794a7d7d7d246f726b677a666f24696567">[email&nbsp;protected]</a>:80/path/to/file?q=query#part" &gt;&gt;= return . scheme
+Prelude"http"
+Prelude Network.URI&gt; parseURI "http://<a href="email-protection.html" class="__cf_email__" data-cfemail="e99c9a8c9bc799889a9aa99e9e9ec78c91888499858cc78a8684">[email&nbsp;protected]</a>:80/path/to/file?q=query#part" &gt;&gt;= return . authority
+Prelude"<a href="email-protection.html" class="__cf_email__" data-cfemail="e99c9a8c9bc799889a9aa99e9e9ec78c91888499858cc78a8684">[email&nbsp;protected]</a>:80"
+Prelude Network.URI&gt; parseURI "urn:isbn:4797324295"
+Just urn:isbn:4797324295</code></pre>
+<h3 id="メール">メール</h3>
+<h3 id="rd">RD</h3>
+<h3 id="rdoc">RDoc</h3>
+<h3 id="rubyのソースコード">Rubyのソースコード</h3>
+<h3 id="その他プログラム言語のソースコード">その他、プログラム言語のソースコード</h3>
+<h2 id="で区切られたデータcsvを処理する">「,」で区切られたデータ（CSV）を処理する</h2>
+<p>区切り記号での分割</p>
+<pre><code>divide x = unfoldr (\xs -&gt; case break (x==) xs of
+                             (_, []) -&gt; Nothing
+                             (p, q)  -&gt; Just (p, tail q)
+                   )</code></pre>
+<p>実行例:</p>
+<pre><code>Main&gt; divide ',' "ab,cd,ef,g,,hi,,,"
+["ab","cd","ef","g","","hi","",""]</code></pre>
+<p>特に区切り記号のエスケープなどは考えていない。 あ、これじゃ最後の要素がやっぱり消えてしまう。 こういうとき、unfold ってどう使えばいいんだろ。 – Y. Hanatani 2004/08/02 12:41:04 JST</p>
+<h2 id="xml-を解析する">XML を解析する</h2>
+<p><a href="http://projects.haskell.org/HaXml/">HaXml</a> を使ってみる。</p>
+<p><a href="http://i.loveruby.net/d/index.rdf">あおきにっきの RDF</a> から title 要素を抜き出す。</p>
+<pre><code>import Text.XML.HaXml
+import Text.XML.HaXml.Pretty
+import System.IO
+import System.Environment
+
+main = do ~[arg] &lt;- getArgs
+          h &lt;- openFile arg ReadMode
+          str &lt;- hGetContents h
+          case xmlParse "err.txt" str of
+            (Document _ _ (Elem _ _ contents))
+              -&gt; mapM_ print $ map getTitle contents
+          hClose h
+
+getTitle = map content . (keep /&gt; tag "title" /&gt; txt)</code></pre>
+<p>適当に aoki.rdf というのを用意して、</p>
+<pre><code>$ runhugs rdf.hs aoki.rdf | nkf -e
+[あおきにっき つっこみつき]
+[2004-11-14のツッコミ[3] (青木)]
+[るびま 3 号]
+[2004-11-14のツッコミ[2] (たむら)]
+[2004-11-14のツッコミ[1] (arton)]
+[Linux本 (2)]
+[Linuxプログラミング本]
+[daily build]
+[反省]
+[ほしみ]
+[2004-11-12のツッコミ[4] (青木)]
+[2004-11-12のツッコミ[3] (yuco)]
+[2004-11-12のツッコミ[2] (青木)]
+[tDiary / コメント SPAM 避けチェックボックスパッチ]
+[2004-11-12のツッコミ[1] (halchan)]
+[2004-11-08のツッコミ[2] (青木)]</code></pre>
+<h2 id="値がいくつかありそれを格納した配列を作る">値がいくつかあり、それを格納した配列を作る</h2>
+<pre><code>book :: Array Int String
+book = array (0,2) (zip [0..] ["title", "author", "publisher"])</code></pre>
+<p>listArray を使うと zip がいらない。</p>
+<pre><code>book :: Array Int String
+book = listArray (0,2) ["title" , "author" , "publisher"]</code></pre>
+<p>汎用オヤジ版 – t15u</p>
+<pre><code>mkArray :: Int -&gt; [a] -&gt; Array Int a
+mkArray i0 ls = listArray (i0, i0+length ls-1) ls</code></pre>
+<h2 id="多次元配列を作成する">多次元配列を作成する</h2>
+<pre><code>array ((1, 1), (9, 9)) [((x, y), z) | x &lt;- [1..9], y &lt;- [1..9], let z = x == y]</code></pre>
+<p>リスト内包表記の中にletが書けるって初めて知ったよ。</p>
+<p>リストのリストから二次元配列を作ろうと思ったら 添字の順序に注意が必要。 transpose を使うと縦横を反転できる。</p>
+<pre><code>xs = [[1,2,3]
+     ,[4,5,6]
+     ,[7,8,9]
+     ]
+array ((1, 1), (3, 3)) $ zip [(x, y) | y &lt;- [1..3], x &lt;- [1..3]] $ concat xs</code></pre>
+<h2 id="配列やハッシュの全要素を順に処理する">配列やハッシュの全要素を順に処理する</h2>
+<p>リストに直してからあとはお好きなように。</p>
+<p>Data.Array</p>
+<pre><code>elems :: Ix i =&gt; Array i e -&gt; [e]
+assocs :: Ix i =&gt; Array i e -&gt; [(i, e)]</code></pre>
+<p>Data.HashTable</p>
+<pre><code>toList :: HashTable key val -&gt; IO [(key, val)]</code></pre>
+<p>Data.FiniteMap</p>
+<pre><code>fmToList :: FiniteMap key elt -&gt; [(key, elt)]
+keysFM :: FiniteMap key elt -&gt; [key]
+eltsFM :: FiniteMap key elt -&gt; [elt]</code></pre>
+<h2 id="配列の要素を変更する">配列の要素を変更する</h2>
+<pre><code>Array&gt; listArray (1,26) ['a'..'z'] // [(4, '?'), (6, '#')]
+array (1,26) [(1,'a'),(2,'b'),(3,'c'),(4,'?'),(5,'e'),(6,'#'),(7,'g'),(8,'h'),(9
+,'i'),(10,'j'),(11,'k'),(12,'l'),(13,'m'),(14,'n'),(15,'o'),(16,'p'),(17,'q'),(1
+8,'r'),(19,'s'),(20,'t'),(21,'u'),(22,'v'),(23,'w'),(24,'x'),(25,'y'),(26,'z')]</code></pre>
+<h2 id="配列の要素をシャッフルする">配列の要素をシャッフルする</h2>
+<p>リストのシャッフル</p>
+<pre><code>import Random
+
+shuffle :: (RandomGen g) =&gt; g -&gt; [a] -&gt; ([a], g)
+shuffle g l = f (g, l, length l)
+    where f (g,l,0) = ([],g)
+          f (g,l,n) =
+              case randomR (0,n-1) g of
+              (pos,g') -&gt;
+                  case pickup pos l of
+                  (x,l') -&gt;
+                      let (dest,g'') = f (g',l',n-1)
+                      in (x:dest, g'')
+
+pickup :: Int -&gt; [a] -&gt; (a,[a])
+pickup 0 (a:ax) = (a,ax)
+pickup n (a:ax) = case pickup (n-1) ax of
+                  (x,ax') -&gt; (x,a:ax')
+pickup _ _ = error "shouldn't happen"
+
+import Array
+import System.Random
+
+shuffle :: [a] -&gt; IO [a]
+shuffle ls
+ = do { arr' &lt;- mksff n (listArray (0,n) ls)
+      ; return (elems arr')
+      }
+   where 
+     n = length ls - 1
+     mksff i a = if i == 0
+                   then return a
+                   else do { j &lt;- randomRIO (0,i-1)
+                           ; mksff (i-1) (a//[(j,a!i),(i,a!j)])
+                           }</code></pre>
+<h2 id="配列の要素数を調べる">配列の要素数を調べる</h2>
+<p>bounds か length . indices</p>
+<h2 id="配列の要素の出現回数を調べる">配列の要素の出現回数を調べる</h2>
+<pre><code>import Data.FiniteMap
+
+test = "haskeller"
+
+count xs = foldl f emptyFM xs
+    where f fm x = addToFM fm x (1 + lookupWithDefaultFM fm 0 x)
+
+main = print $ fmToList $ count test
+
+[('a',1),('e',2),('h',1),('k',1),('l',2),('r',1),('s',1)]</code></pre>
+<p>配列ならば elems でリストに直してから適用すればいい。</p>
+<h2 id="配列から複数の要素を一度に取得する">配列から複数の要素を一度に取得する</h2>
+<p>-fglasgow-exts</p>
+<pre><code>indexes arr xs = array (1,length xs) [(n, arr ! x) | x &lt;- xs | n &lt;- [1..]]</code></pre>
+<h2 id="配列のインデックスと要素のペアを取得する">配列のインデックスと要素のペアを取得する</h2>
+<pre><code>assocs</code></pre>
+<h2 id="配列から重複する要素を取り除く">配列から重複する要素を取り除く</h2>
+<p>リストから重複する要素を取り除く</p>
+<pre><code>uniq :: Eq a =&gt; [a] -&gt; [a]
+uniq []       = []
+uniq (x : xs) = x : uniq [y | y &lt;- xs, y /= x]
+
+*Main&gt; uniq "abccb"
+"abc"</code></pre>
+<p>nub (名前の由来：謎) 使え</p>
+<pre><code>Prelude&gt; :module List
+Prelude List&gt; nub "abccb"
+"abc"</code></pre>
+<p>隣接している要素のみを比較</p>
+<pre><code>uniq :: Eq a =&gt; [a] -&gt; [a]
+uniq  (x:xx:xs)
+    | x == xx = uniq (x:xs)
+    | otherwise = x:uniq (xx:xs)
+uniq xs = xs
+
+
+*Main&gt; uniq "abccb"
+"abcb"</code></pre>
+<h2 id="配列から条件を満たす要素を取得する">配列から条件を満たす要素を取得する</h2>
+<pre><code>filter</code></pre>
+<p>配列なら elems してから filter</p>
+<h2 id="配列の要素を検索する">配列の要素を検索する</h2>
+<p>www.sampou.org <a href="http://www.sampou.org/cgi-bin/haskell.cgi?HowTo%3aList&amp;l=jp">HowTo:List</a> より</p>
+<pre><code>List&gt; elem 'a' "baca"
+True
+List&gt; elemIndex 'a' "baca"
+Just 1
+List&gt; elemIndices 'a' "baca"
+[1,3]
+List&gt; find even [1,2,3,4]
+Just 2
+List&gt; findIndex even [1,1,2,3]
+Just 3
+List findIndices even [1,2,3,4]
+[1,3]</code></pre>
+<h2 id="つの配列に共通する要素を調べる">2つの配列に共通する要素を調べる</h2>
+<pre><code>List&gt; union [1,2,3] [2,3,4]
+[1,2,3,4]
+List&gt; intersect [1,2,3] [2,3,4]
+[2,3]</code></pre>
+<h2 id="つの配列の差を取る">2 つの配列の差を取る</h2>
+<pre><code>[x | x &lt;- "Hello, World", not $ elem x "abcde"]
+"Hllo, Worl"</code></pre>
+<h2 id="配列を連結する">配列を連結する</h2>
+<p>一次元の Int な配列なら</p>
+<pre><code>append :: Array Int a -&gt; Array Int a -&gt; Array Int a
+append a a' = array (x, y + (w - z) + 1)
+                    (assocs a ++ [((i + y - z + 1), e) | (i, e) &lt;- assocs a'])
+  where
+    (x, y) = bounds a
+    (z, w) = bounds a'</code></pre>
+<p>リストなら</p>
+<pre><code>(++)</code></pre>
+<h2 id="配列の要素の順序を逆転する">配列の要素の順序を逆転する</h2>
+<h3 id="一次元配列の場合">一次元配列の場合</h3>
+<pre><code>import Array
+
+reverseArray a = ixmap (x, y) (\z -&gt; y + x - z) a
+  where
+    (x, y) = bounds a
+
+Main&gt; reverseArray (array (2, 10) [(i, i) | i &lt;- [2..10]])
+array (2,10) [(2,10),(3,9),(4,8),(5,7),(6,6),(7,5),(8,4),(9,3),(10,2)]</code></pre>
+<h3 id="リストの場合">リストの場合</h3>
+<pre><code>Main&gt; reverse [1..9]
+[9,8,7,6,5,4,3,2,1]</code></pre>
+<h2 id="一定範囲の整数を要素とする配列を作成する">一定範囲の整数を要素とする配列を作成する</h2>
+<p>import IX</p>
+<pre><code>&gt; range (1,10)
+[1,2,3,4,5,6,7,8,9,10]</code></pre>
+<h2 id="配列をつきで連結して文字列にする">配列を(「,」つきで)連結して文字列にする</h2>
+<pre><code>List&gt; intersperse ',' "baca"
+"b,a,c,a"
+List&gt; foldr1 (++) $ intersperse ", " ["Haskell", "Scheme", "OCaml"]
+"Haskell, Scheme, OCaml"</code></pre>
+<h2 id="ハッシュに要素を追加する">ハッシュに要素を追加する</h2>
+<p>Data.HashTable</p>
+<pre><code>insert hash key elt</code></pre>
+<p>Data.FiniteMap</p>
+<pre><code>addToFM fm key elt</code></pre>
+<h2 id="ハッシュ内にキーが存在するか調べる">ハッシュ内にキーが存在するか調べる</h2>
+<pre><code>lookup :: HashTable key val -&gt; key -&gt; IO (Maybe val)
+
+lookupFM :: Ord key =&gt; FiniteMap key elt -&gt; key -&gt; Maybe elt</code></pre>
+<h2 id="ハッシュの要素を削除する">ハッシュの要素を削除する</h2>
+<pre><code>delete :: HashTable key val -&gt; key -&gt; IO ()
+
+delFromFM :: Ord key =&gt; FiniteMap key elt -&gt; key -&gt; FiniteMap key elt
+delListFromFM :: Ord key =&gt; FiniteMap key elt -&gt; [key] -&gt; FiniteMap key elt</code></pre>
+<h2 id="ハッシュの要素を挿入した順に取り出す">ハッシュの要素を挿入した順に取り出す</h2>
+<p>リストを併用する</p>
+<h2 id="配列やハッシュをソートする">配列やハッシュをソートする</h2>
+<p>Data.FiniteMap の fmToList の出力結果は sorted.</p>
+<h2 id="ハッシュをマージする">ハッシュをマージする</h2>
+<pre><code>plusFM :: Ord key =&gt; FiniteMap key elt -&gt; FiniteMap key elt -&gt; FiniteMap key elt
+
+*Main Data.FiniteMap&gt; fmToList $ plusFM (listToFM [(1,1)]) (listToFM [(1,2)])
+[(1,2)]</code></pre>
+<p>第二引数の要素が優先されるようです。</p>
+<h2 id="巨大で疎な配列を使う">巨大で疎な配列を使う</h2>
+<p>Data.FiniteMap<br>
+か<br>
+Data.HashTable<br>
+を使う</p>
+<h2 id="スタックやキューを使う">スタックやキューを使う</h2>
+<p>リスト2つを使った実装</p>
+<pre><code>nullQ :: Queue a
+nullQ = Q [] []
+
+addQ :: Queue a -&gt; a -&gt; Queue a
+addQ (Q xs ys) y = Q xs (y:ys)
+
+removeQ :: Queue a -&gt; (a, Queue a)
+removeQ (Q [] [])     = error "Queue is null"
+removeQ (Q (x:xs) ys) = (x, Q xs ys)
+removeQ (Q [] ys) = (head r, Q (tail r) []) where r = reverse ys</code></pre>
+<p>リスト2つを使った実装 その2</p>
+<pre><code>-- invariant: forall (Q xs ys). null xs =&gt; null ys
+data Queue a = Q ![a] ![a]
+
+nullQ :: Queue a
+nullQ = Q [] []
+
+addQ :: Queue a -&gt; a -&gt; Queue a
+addQ (Q [] ys) y = Q [y] ys
+addQ (Q xs ys) y = Q xs (y:ys)
+
+removeQ :: Queue a -&gt; Maybe (a, Queue a)
+removeQ (Q [] _)      = Nothing
+removeQ (Q (x:xs) ys) = Just (x, q xs ys)
+    where q [] ys = Q (reverse ys) []
+          q xs ys = Q xs ys</code></pre>
+<p>リスト1つと関数1つを使った実装</p>
+<pre><code>-- invariant: forall Q xs f. null xs =&gt; f==id
+data Queue a = Q ![a] !([a] -&gt; [a])
+
+nullQ :: Queue a
+nullQ = Q [] id
+
+addQ :: Queue a -&gt; a -&gt; Queue a
+addQ (Q [] f) x = Q [x] f
+addQ (Q xs f) x = Q xs (f . (x:))
+
+removeQ :: Queue a -&gt; Maybe (a, Queue a)
+removeQ (Q [] _)     = Nothing
+removeQ (Q (x:xs) f) = Just (x, q xs f)
+    where q [] f = Q (f []) id
+          q xs f = Q xs f</code></pre>
+<p>Data.Queue みたいなのはない <a href="http://legacy.cs.uu.nl/daan/download/ddata/doc/Queue.html">DData.Queue</a></p>
+<h2 id="パス名がパターンにマッチするか調べる">パス名がパターンにマッチするか調べる。</h2>
+<pre><code>data Fmatch = C Char
+            | R [(Char, Char)]
+            | NR [(Char, Char)]
+            | OC
+            | AC deriving Show
+
+fmatch :: [Fmatch] -&gt; String -&gt; Bool
+fmatch (C x:xs) (y:ys) = x == y &amp;&amp; fmatch xs ys
+fmatch (R (x:xx):xs) (y:ys) = fst x &lt;= y &amp;&amp; y &lt;= snd x &amp;&amp; fmatch (R xx:xs) ys
+fmatch (NR (x:xx):xs) (y:ys) = (y &lt; fst x || snd x &lt; y) &amp;&amp; fmatch (NR xx:xs) ys
+fmatch (OC:xs) (y:ys) = fmatch xs ys
+fmatch (AC:xs) (y:ys) = fmatch (AC:xs) ys || fmatch xs (y:ys)
+fmatch [] [] = True
+fmatch _ _ = False
+
+mkFmatch :: String -&gt; [Fmatch]
+mkFmatch ('?':xs) = OC:mkFmatch xs
+mkFmatch ('*':xs) = AC:mkFmatch xs
+mkFmatch ('[':'^':xs) = cons $ applyFst NR $ mkFmatch' xs
+mkFmatch ('[':xs) = cons $ applyFst R $ mkFmatch' xs
+mkFmatch (x:xs) = C x:mkFmatch xs
+mkFmatch "" = []
+
+mkFmatch' :: String -&gt; ([(Char, Char)], [Fmatch])
+mkFmatch' (x:'-':xx:xs) = applyFst ((x, xx):) $ mkFmatch' xs
+mkFmatch' (']':xs) = ([], mkFmatch xs)
+mkFmatch' (x:xs) = applyFst ((x, x):) $ mkFmatch' xs
+
+
+cons (x, xs) = x:xs
+
+applyFst f (x, y) = (f x, y)</code></pre>
+<h2 id="現在のディレクトリ名を取得する">現在のディレクトリ名を取得する</h2>
+<p>System.Directory の getCurrentDirectory :: IO FilePath を使う</p>
+<pre><code>Prelude&gt; :module +System.Directory
+Prelude System.Directory&gt; getCurrentDirectory &gt;&gt;= putStrLn
+/home/sakai/</code></pre>
+<h2 id="現在のディレクトリを変更する">現在のディレクトリを変更する</h2>
+<p>System.Directory の setCurrentDirectory :: FilePath -&gt; IO () を使う。</p>
+<pre><code>Prelude&gt; :module +System.Directory
+Prelude System.Directory&gt; setCurrentDirectory "/usr"
+Prelude System.Directory&gt; getCurrentDirectory &gt;&gt;= putStrLn
+/usr</code></pre>
+<p>ビット演算を行える型のクラスは Data.Bits のBitsクラスです。</p>
+<pre><code>Prelude&gt; :module +Data.Bits
+Prelude Data.Bits&gt; :info Bits
+-- Bits is a class
+class (Num a) =&gt; Bits a where {
+    (.&amp;.) :: a -&gt; a -&gt; a;
+    (.|.) :: a -&gt; a -&gt; a;
+    xor :: a -&gt; a -&gt; a;
+    complement :: a -&gt; a;
+    shift :: a -&gt; Int -&gt; a {- has default method -};
+    rotate :: a -&gt; Int -&gt; a {- has default method -};
+    bit :: Int -&gt; a {- has default method -};
+    setBit :: a -&gt; Int -&gt; a {- has default method -};
+    clearBit :: a -&gt; Int -&gt; a {- has default method -};
+    complementBit :: a -&gt; Int -&gt; a {- has default method -};
+    testBit :: a -&gt; Int -&gt; Bool {- has default method -};
+    bitSize :: a -&gt; Int;
+    isSigned :: a -&gt; Bool;
+    shiftL :: a -&gt; Int -&gt; a {- has default method -};
+    shiftR :: a -&gt; Int -&gt; a {- has default method -};
+    rotateL :: a -&gt; Int -&gt; a {- has default method -};
+    rotateR :: a -&gt; Int -&gt; a {- has default method -};
+    }</code></pre>
+<p>例:</p>
+<h2 id="回数を指定して処理を繰り返す">回数を指定して処理を繰り返す</h2>
+<pre><code>times n f = foldl (.) id $ replicate n f
+
+Prelude&gt; (foldl (.) id $ replicate 3 (2*)) 1
+8</code></pre>
+<p>Monad だと mapM_ (replicate n f) でいいのかな。</p>
+<h2 id="最大値最小値を求める">最大値・最小値を求める</h2>
+<pre><code>Prelude&gt; max 1 2
+2
+Prelude&gt; min 1 2
+1
+Prelude&gt; maximum [1..3]
+3
+Prelude&gt; minimum [1..3]
+1</code></pre>
+<h2 id="数値の総和を求める">数値の総和を求める</h2>
+<p>sum :: (Num a) =&gt; [a] -&gt; a が便利</p>
+<pre><code>Prelude&gt; sum [1,2,3,4,5]
+15</code></pre>
+<h2 id="絶対値を求める">絶対値を求める</h2>
+<p>abs :: (Num a) =&gt; a -&gt; a を使います。</p>
+<pre><code>Prelude&gt; abs 2
+2
+Prelude&gt; abs 0
+0
+Prelude&gt; abs (-2)
+2
+Prelude&gt; abs 2.3
+2.3
+Prelude&gt; abs (-2.3)
+2.3
+Prelude&gt; :module +Complex
+Prelude Complex&gt; abs (3 :+ 4)
+5.0 :+ 0.0</code></pre>
+<h2 id="割り算の余りを求める">割り算の余りを求める</h2>
+<p>Interal クラスの rem, div, mod, quot, divMod, quotRem といったメソッドを使います。</p>
+<pre><code>Prelude&gt; :info Integral
+-- Integral is a class
+class (Real a, Enum a) =&gt; Integral a where {
+    rem :: a -&gt; a -&gt; a {- has default method -};
+    div :: a -&gt; a -&gt; a {- has default method -};
+    mod :: a -&gt; a -&gt; a {- has default method -};
+    quot :: a -&gt; a -&gt; a {- has default method -};
+    divMod :: a -&gt; a -&gt; (a, a) {- has default method -};
+    quotRem :: a -&gt; a -&gt; (a, a);
+    toInteger :: a -&gt; Integer;
+    }
+Prelude&gt; 5 `div` 2
+2
+Prelude&gt; 5 `mod` 2
+1
+Prelude&gt; (5 `div` 2) * 2 + (5 `mod` 2)
+5
+Prelude&gt; 5 `divMod` 2
+(2,1)
+Prelude&gt; 10 `divMod` (-3)
+(-4,-2)
+Prelude&gt; 10 `quotRem` (-3)
+(-3,1)</code></pre>
+<h2 id="べき乗を求める">べき乗を求める</h2>
+<ul>
+<li>(**) :: (Floating a) =&gt; a -&gt; a -&gt; a</li>
+<li>(^) :: (Num a, Integral b) =&gt; a -&gt; b -&gt; a</li>
+<li>(^^) :: (Fractional a, Integral b) =&gt; a -&gt; b -&gt; a</li>
+</ul>
+<p>の三つの関数があるので、型によって使い分ける。</p>
+<pre><code>Prelude&gt; 3 ^ 4
+81
+Prelude&gt; 4 ^^ (-2)
+6.25e-2
+Prelude&gt; 10 ^ 0
+1
+Prelude&gt; 2 ** 3.5 
+11.313708498984761
+Prelude&gt; 2 ^ 128
+340282366920938463463374607431768211456</code></pre>
+<p>複素数のべき乗も計算できる</p>
+<pre><code>Prelude&gt; :module +Data.Complex
+Prelude Data.Complex&gt; (0 :+ 3) ** (4 :+ 1)
+7.658580080790688 :+ 14.995755028498099</code></pre>
+<h2 id="最大公約数と最小公倍数を求める">最大公約数と最小公倍数を求める</h2>
+<p>最大公約数</p>
+<pre><code>Prelude&gt; 1105 `gcd` 3570
+85</code></pre>
+<p>最小公倍数</p>
+<pre><code>Prelude&gt; 123 `lcm` 33
+1353</code></pre>
+<h2 id="平方根を求める">平方根を求める</h2>
+<p>Floating クラスの sqrt :: a -&gt; a を使います。</p>
+<pre><code>*Main&gt; sqrt 10
+3.1622776601683795
+*Main&gt; sqrt 2.0
+1.4142135623730951
+*Main&gt; :module +Data.Complex
+*Main Data.Complex&gt; 2 ** 0.5
+1.4142135623730951
+*Main Data.Complex&gt; sqrt (-1 :: Complex Double)
+-0.0 :+ 1.0
+*Main Data.Complex&gt; sqrt (-10 :: Complex Double)
+-0.0 :+ 3.1622776601683795</code></pre>
+<h2 id="三角関数を計算する">三角関数を計算する</h2>
+<p>Floatingクラスのメソッドを使います。</p>
+<pre><code>Prelude&gt; :info Floating
+-- Floating is a class
+class (Fractional a) =&gt; Floating a where {
+    pi :: a;
+    log :: a -&gt; a;
+    sqrt :: a -&gt; a {- has default method -};
+    exp :: a -&gt; a;
+    logBase :: a -&gt; a -&gt; a {- has default method -};
+    (**) :: a -&gt; a -&gt; a {- has default method -};
+    cos :: a -&gt; a;
+    tan :: a -&gt; a {- has default method -};
+    sin :: a -&gt; a;
+    acos :: a -&gt; a;
+    atan :: a -&gt; a;
+    asin :: a -&gt; a;
+    cosh :: a -&gt; a;
+    tanh :: a -&gt; a {- has default method -};
+    sinh :: a -&gt; a;
+    acosh :: a -&gt; a;
+    atanh :: a -&gt; a;
+    asinh :: a -&gt; a;
+    }
+
+deg2rad :: (Floating a) =&gt; a -&gt; a
+deg2rad deg = deg / (360 / (pi * 2))
+
+*Main&gt; sin (deg2rad 30)
+0.49999999999999994</code></pre>
+<h2 id="直交座標を局座標に変換する">直交座標を局座標に変換する</h2>
+<p>Data.Complex の polor :: (RealFloat a) =&gt; Complex a -&gt; (a, a) を使うと便利です。</p>
+<pre><code>*Main&gt; :module +Data.Complex
+*Main Data.Complex&gt; polar (3 :+ 4)
+(5.0,0.9272952180016122)</code></pre>
+<h2 id="対数計算を行う">対数計算を行う</h2>
+<p>Floating のメソッドである以下のような関数を使います。</p>
+<ul>
+<li>log :: (Floating a) =&gt; a -&gt; a</li>
+<li>sqrt :: (Floating a) =&gt; a -&gt; a</li>
+<li>exp :: (Floating a) =&gt; a -&gt; a</li>
+<li>logBase :: (Floating a) =&gt; a -&gt; a -&gt; a</li>
+</ul>
+<!-- -->
+<pre><code>*Main&gt; logBase 10 1000
+2.9999999999999996
+*Main&gt; log 10
+2.302585092994046
+*Main&gt; exp (log 10)
+10.000000000000002
+*Main&gt; logBase 2 8
+3.0
+*Main&gt; logBase 2 10
+3.3219280948873626</code></pre>
+<h2 id="浮動小数点を丸める">浮動小数点を丸める</h2>
+<p>RealFrac のround, truncate, floor, ceiling といったメソッドを使います。</p>
+<pre><code>*Main&gt; :info RealFrac
+-- RealFrac is a class
+class (Real a, Fractional a) =&gt; RealFrac a where {
+    properFraction :: forall b. (Integral b) =&gt; a -&gt; (b, a);
+    round :: forall b. (Integral b) =&gt; a -&gt; b {- has default method -};
+    truncate ::
+        forall b. (Integral b) =&gt; a -&gt; b
+        {- has default method -};
+    floor :: forall b. (Integral b) =&gt; a -&gt; b {- has default method -};
+    ceiling ::
+        forall b. (Integral b) =&gt; a -&gt; b
+        {- has default method -};
+    }
+
+*Main&gt; round 1001.2
+1001
+*Main&gt; truncate 1001.2
+1001
+*Main&gt; ceiling 1001.2
+1002
+*Main&gt; floor 1001.2
+1001
+
+*Main&gt; round (-1001.2)
+-1001
+*Main&gt; truncate (-1001.2)
+-1001
+*Main&gt; ceiling (-1001.2)
+-1001
+*Main&gt; floor (-1001.2)
+-1002
+
+*Main&gt; round 1001.5
+1002
+*Main&gt; truncate 1001.5
+1001
+*Main&gt; ceiling 1001.5
+1002
+*Main&gt; floor 1001.5
+1001
+
+*Main&gt; round (-1001.5)
+-1002
+*Main&gt; truncate (-1001.5)
+-1001
+*Main&gt; ceiling (-1001.5)
+-1001
+*Main&gt; floor (-1001.5)
+-1002</code></pre>
+<h2 id="複素数を使う">複素数を使う</h2>
+<p>Complex <a href="https://www.haskell.org/onlinereport/complex.html">http://www.<strong>haskell</strong>.org/onlinereport/complex.html</a></p>
+<p>中置データコンストラクタ :+ で，実部と虚部から作成．極座標表現からは mkPolar ．逆に複素数から絶対値と偏角のタプルを得るには polar ．</p>
+<pre><code>Prelude&gt; :module Complex
+Prelude Complex&gt; 3 :+ 5
+3.0 :+ 5.0
+Prelude Complex&gt; mkPolar 3 (pi / 4)
+2.121320343559643 :+ 2.1213203435596424
+Prelude Complex&gt; polar $ mkPolar 3 (pi / 4)
+(3.0,0.7853981633974482)</code></pre>
+<p>演算については，Complex は Eq, Read, Show, Num, Fractional, RealFloat の各クラスのインスタンスなので，ふつうの算術演算子が使える．</p>
+<p>（※：虚部が負の場合，負号のすぐ外側の括弧は必須）</p>
+<pre><code>Prelude&gt; :module Complex
+Prelude Complex&gt; (3 :+ 5) + (2 :+ (-2))
+5.0 :+ 3.0
+Prelude Complex&gt; (3 :+ 5) - (2 :+ (-2))
+1.0 :+ 7.0
+Prelude Complex&gt; (3 :+ 5) * (2 :+ (-2))
+16.0 :+ 4.0
+Prelude Complex&gt; (3 :+ 5) / (2 :+ (-2))
+(-0.5) :+ 2.0</code></pre>
+<p>射影関数は realPart と imagPart ．</p>
+<pre><code>Prelude&gt; :module Complex
+Prelude Complex&gt; realPart (3 :+ 5)
+3.0
+Prelude Complex&gt; imagPart (3 :+ 5)
+5.0</code></pre>
+<p>そのほか，共軛・cis (与えられた偏角で絶対値が 1 の複素数を返す：名前は θ に対して <strong>C</strong>os θ + <strong>i</strong> <strong>S</strong>in θ を返す，から，だろう（by nobsun）) ・極座標への射影．</p>
+<pre><code>Prelude&gt; :module Complex
+Prelude Complex&gt; conjugate (16 :+ 4)
+16.0 :+ (-4.0)
+Prelude Complex&gt; cis 10
+(-0.8390715290764524) :+ (-0.5440211108893698)
+Prelude Complex&gt; magnitude (1 :+ 1)
+1.4142135623730951
+Prelude Complex&gt; phase (1 :+ 1)
+0.7853981633974483</code></pre>
+<h2 id="有理数を使う">有理数を使う</h2>
+<p>Ratio モジュールの一部</p>
+<p>Ratio モジュール <a href="https://www.haskell.org/onlinereport/ratio.html">http://www.<strong>haskell</strong>.org/onlinereport/ratio.html</a></p>
+<p>中置の抽象データコンストラクタ % で作れる．export されてないので，直接データコンストラクタを使うことはできない．</p>
+<p>演算は，Eq, Ord, Num, Real, Fractional, RealFrac, Enum, Read, Show のインスタンスであるので，</p>
+<h2 id="コマンドライン引数を解析する">コマンドライン引数を解析する</h2>
+<pre><code>data Option = All
+            | Usr_
+            | Usr String
+            | Fmt String
+            | Help deriving Show
+
+cmdOpt :: String -&gt; [Option]
+cmdOpt = cmdOpt' . words
+  where
+    cmdOpt' ("-a":xs) = All : cmdOpt' xs
+    cmdOpt' ("--all":xs) = All : cmdOpt' xs
+    cmdOpt' ("-u":x:xs)
+      | head x == '-' = Usr_ : cmdOpt' (x:xs)
+      | otherwise     = Usr x : cmdOpt' xs
+    cmdOpt' ("--user":x:xs)
+      | head x == '-' = Usr_ : cmdOpt' (x:xs)
+      | otherwise     = Usr x : cmdOpt' xs
+    cmdOpt' ("-f":x:xs) = Fmt x : cmdOpt' xs
+    cmdOpt' ("--format":x:xs) = Fmt x : cmdOpt' xs
+    cmdOpt' ("--help":_) = [Help]</code></pre>
+<p>同じことを二回書く(-aと–allなど)は嫌だなあ。</p>
+<p>こういうときは System.Console.GetOpt を使う。</p>
+<h2 id="tcp-クライアントを作る">TCP クライアントを作る</h2>
+<pre><code>import Network
+import IO
+
+crlf = "\r\n"
+
+main = withSocketsDo sockMain
+
+sockMain = do h &lt;- connectTo "www.sampou.org" (PortNumber 80)
+               hPutStrLn h "GET / HTTP/1.1"
+               hPutStrLn h "HOST: www.sampou.org"
+               hPutStrLn h crlf
+               str &lt;- hGetContents h
+               putStrLn str</code></pre>
+<h2 id="tcp-サーバを作る">TCP サーバを作る</h2>
+<p>送った文字列の長さを返してくれるサーバ</p>
+<pre><code>import Network
+import IO
+
+main = withSocketsDo sockMain
+
+sockMain = do sock &lt;- listenOn (PortNumber 7001)
+              loop sock
+
+loop sock = do (h, _, _) &lt;- accept sock
+               eof &lt;- hIsEOF h
+               if eof then return ()
+                      else do str &lt;- hGetLine h
+                              hPutStrLn h (show (length str))
+                              hClose h
+                              loop sock</code></pre>
+<p>横長</p>
+<pre><code>import Network
+import IO
+
+main = withSocketsDo sockMain
+
+sockMain =listenOn (PortNumber 7001) &gt;&gt;= loop
+
+loop sock = do (h, _, _) &lt;- accept sock
+               eof &lt;- hIsEOF h
+               if eof then return ()
+                      else do hGetLine h　&gt;&gt;= hPutStrLn h . show . length &gt;&gt; hClose h &gt;&gt; loop sock</code></pre>
+<p>明示的な再帰を消してみる。……と思ったけど、これじゃ振る舞いが変わっちゃう。</p>
+<pre><code>import Network
+import IO
+import Monad
+
+main = withSocketsDo $ sequence_ (repeat f)
+
+f = do sock &lt;- listenOn (PortNumber 7001)
+       (h, _, _) &lt;- accept sock
+       eof &lt;- hIsEOF h
+       if eof
+          then return ()
+          else do str &lt;- hGetLine h
+                  hPutStrLn h (show (length str))
+                  hClose h</code></pre>
+<hr>
+<p>最終更新 : 2004/11/20 18:17:33 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/openspace.timedia.co.jp/marthon/RRB-all">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/openspace.timedia.co.jp/marthon/RRB-all?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/openspace.timedia.co.jp/marthon/RRB-all">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/openspace.timedia.co.jp/marthon/RRB-all" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script data-cfasync="false" src="email-decode.min.js"></script><script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

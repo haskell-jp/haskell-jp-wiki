@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise1"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/StartHaskell2/exercise1</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/StartHaskell2/exercise1">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/StartHaskell2/exercise1">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/StartHaskell2/exercise1">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/StartHaskell2/exercise1</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AE%E7%AC%AC%E4%B8%80%E6%AD%A9%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C">『はじめの第一歩』　練習問題</a><ul>
+<li><a href="#%E8%A8%88%E7%AE%97">計算</a></li>
+<li><a href="#%E3%83%AC%E3%83%B3%E3%82%B8">レンジ</a></li>
+<li><a href="#%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E5%88%87%E3%82%8A%E5%87%BA%E3%81%97">リストの切り出し</a></li>
+<li><a href="#%E6%BC%94%E7%AE%97%E5%AD%90">: 演算子</a></li>
+<li><a href="#%E3%82%AA%E3%83%95%E3%82%B5%E3%82%A4%E3%83%89%E3%83%AB%E3%83%BC%E3%83%AB">オフサイドルール</a></li>
+<li><a href="#%E3%81%8B%E3%82%89-10-%E3%81%BE%E3%81%A7%E3%81%AE%E3%81%99%E3%81%B9%E3%81%A6%E3%81%AE%E6%95%B4%E6%95%B0%E3%81%A7%E5%89%B2%E3%82%8A%E5%88%87%E3%82%8C%E3%82%8B%E6%95%B0%E5%AD%97">1 から 10 までのすべての整数で割り切れる数字</a></li>
+<li><a href="#%E3%83%94%E3%82%BF%E3%82%B4%E3%83%A9%E3%82%B9%E6%95%B0">ピタゴラス数</a></li>
+<li><a href="#%E7%99%BE%E3%81%AE%E4%BD%8D%E3%81%A8%E4%B8%80%E3%81%AE%E4%BD%8D%E3%81%AE%E6%95%B0%E5%AD%97%E3%81%8C%E7%AD%89%E3%81%97%E3%81%84%E6%95%B0">百の位と一の位の数字が等しい数</a></li>
+<li><a href="#%E3%81%A7%E5%89%B2%E3%82%8A%E5%88%87%E3%82%8C%E3%82%8B%E6%95%B0%E3%81%AF%E3%81%84%E3%81%8F%E3%81%A4">3で割り切れる数はいくつ</a></li>
+</ul></li>
+<li><a href="#%E7%B7%B4%E7%BF%92%E5%95%8F%E9%A1%8C%E3%83%AA%E3%83%B3%E3%82%AF%E9%9B%86">練習問題リンク集</a></li>
+</ul>
+</div>
+
+<h1 id="はじめの第一歩練習問題">『はじめの第一歩』　練習問題</h1>
+<h2 id="計算">計算</h2>
+<p>次の計算をしなさい.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="fl">18.6</span> ÷ <span class="dv">31</span> <span class="fu">-</span> <span class="fl">2.604</span> ÷ <span class="fl">3.1</span> <span class="fu">-</span> <span class="fl">0.8556</span> ÷ <span class="fl">0.31</span></a></code></pre></div>
+<p>（2003年 日本ジュニア数学オリンピック問題）</p>
+<hr>
+<h2 id="レンジ">レンジ</h2>
+<p>レンジを使って、以下のような文字列(リスト)を作ってみましょう。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="st">"zvrnjfb"</span></a></code></pre></div>
+<hr>
+<h2 id="リストの切り出し">リストの切り出し</h2>
+<p>リストを切り出してみましょう。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> aList <span class="fu">=</span> [<span class="dv">1</span><span class="fu">..</span><span class="dv">20</span>]</a></code></pre></div>
+<p>というリストから</p>
+<ul>
+<li>++</li>
+<li>head</li>
+<li>tail</li>
+<li>init</li>
+<li>last</li>
+<li>take</li>
+</ul>
+<p>の関数を使って以下のリストを作ってみましょう。 (個々の関数すべてを使う必要はありません。また一つの関数を何度使っても良いです。)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1">[<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">19</span>]</a></code></pre></div>
+<hr>
+<h2 id="演算子">: 演算子</h2>
+<p>以下のリストを : 演算子（コロン）を使って書き直してみよう。 (p.8)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" title="1">[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</a></code></pre></div>
+<hr>
+<h2 id="オフサイドルール">オフサイドルール</h2>
+<p>ToDo: なんか if 式とかではまりそうな例をあげる.</p>
+<hr>
+<h2 id="から-10-までのすべての整数で割り切れる数字">1 から 10 までのすべての整数で割り切れる数字</h2>
+<p>1 から 10 までのすべての整数で割り切れる数字の中で最小の値を求めよ.</p>
+<p>（Project Euler, Problem 5 改）</p>
+<hr>
+<h2 id="ピタゴラス数">ピタゴラス数</h2>
+<p>ピタゴラスの三つ組(ピタゴラスの定理を満たす自然数)とは</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1">a <span class="fu">&lt;</span> b <span class="fu">&lt;</span> c かつ a² <span class="fu">+</span> b² <span class="fu">=</span> c²</a></code></pre></div>
+<p>を満たす数の組である.</p>
+<p>a + b + c = 1000 となるピタゴラスの三つ組が一つだけ存在する. この a, b, c を求めよ.</p>
+<p>（Project Euler, Problem 9 改）</p>
+<hr>
+<h2 id="百の位と一の位の数字が等しい数">百の位と一の位の数字が等しい数</h2>
+<p>100 以上 999 以下の3桁の自然数を考える.</p>
+<p>このとき, 例えば 202 や 999 のような, 百の位の数字と一の位の数字が等しい数は, 全部でいくつあるか.</p>
+<p>（2002年 日本数学オリンピック予選問題）</p>
+<hr>
+<h2 id="で割り切れる数はいくつ">3で割り切れる数はいくつ</h2>
+<p>5桁の自然数で, 各桁の数字は 1,2,3 のいずれかであるようなものを考える. これらの自然数のうち, 3 で割りきれるものは全部でいくつあるか.</p>
+<p>（2002年 日本数学オリンピック予選問題）</p>
+<h1 id="練習問題リンク集">練習問題リンク集</h1>
+<ul>
+<li><a href="https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter01/Chapter01-ja.md">スタートHaskell 2011 導入</a></li>
+<li><a href="https://github.com/yuzutechnology/Community-StartHaskell2011/blob/master/exercises/chapter01/Chapter02-ja.md">スタートHaskell 2011 はじめの一歩</a></li>
+</ul></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/StartHaskell2/exercise1">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise1?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/StartHaskell2/exercise1">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/StartHaskell2/exercise1" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

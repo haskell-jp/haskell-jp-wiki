@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Workshop/MiracleHaskell/017"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Workshop/MiracleHaskell/017</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Workshop/MiracleHaskell/017">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Workshop/MiracleHaskell/017">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Workshop/MiracleHaskell/017">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Workshop/MiracleHaskell/017</a></h1>
+  
+  <div id="wikipage"><div id="TOC">
+<ul>
+<li><a href="#%E6%97%A5%E6%99%82">日時</a></li>
+<li><a href="#%E5%86%85%E5%AE%B9">内容</a></li>
+<li><a href="#%E5%AE%BF%E9%A1%8C">宿題</a><ul>
+<li><a href="#%E3%83%92%E3%83%B3%E3%83%88">ヒント</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h2 id="日時">日時</h2>
+<p>2012/10/12</p>
+<h2 id="内容">内容</h2>
+<p>http://learnyouahaskell.com/input-and-output#command-line-arguments から再開します。</p>
+<h2 id="宿題">宿題</h2>
+<p>前回以下のようなソースコードでTODOリストアプリケーションを作りました。 しかし、このプログラムはエラー処理が不足していて、利用者にわかりずらいエラーメッセージが出力されてしまいます。 このプログラムにエラー処理を追加して、もっとわかりやすいエラーメッセージを吐かせてみましょう。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">import</span> <span class="dt">System.Environment</span>   </a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">import</span> <span class="dt">System.Directory</span>  </a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">import</span> <span class="dt">System.IO</span>  </a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">import</span> <span class="dt">Data.List</span>  </a>
+<a class="sourceLine" id="cb1-5" title="5">  </a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="ot">dispatch ::</span> [(<span class="dt">String</span>, [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">IO</span> ())]  </a>
+<a class="sourceLine" id="cb1-7" title="7">dispatch <span class="fu">=</span>  [ (<span class="st">"add"</span>, add)  </a>
+<a class="sourceLine" id="cb1-8" title="8">            , (<span class="st">"view"</span>, view)  </a>
+<a class="sourceLine" id="cb1-9" title="9">            , (<span class="st">"remove"</span>, remove)  </a>
+<a class="sourceLine" id="cb1-10" title="10">            ]  </a>
+<a class="sourceLine" id="cb1-11" title="11">   </a>
+<a class="sourceLine" id="cb1-12" title="12">main <span class="fu">=</span> <span class="kw">do</span>  </a>
+<a class="sourceLine" id="cb1-13" title="13">    (command<span class="fu">:</span>args) <span class="ot">&lt;-</span> getArgs  </a>
+<a class="sourceLine" id="cb1-14" title="14">    <span class="kw">let</span> (<span class="dt">Just</span> action) <span class="fu">=</span> <span class="fu">lookup</span> command dispatch  </a>
+<a class="sourceLine" id="cb1-15" title="15">    action args  </a>
+<a class="sourceLine" id="cb1-16" title="16">  </a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="ot">add ::</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">IO</span> ()  </a>
+<a class="sourceLine" id="cb1-18" title="18">add [fileName, todoItem] <span class="fu">=</span> <span class="fu">appendFile</span> fileName (todoItem <span class="fu">++</span> <span class="st">"\n"</span>)  </a>
+<a class="sourceLine" id="cb1-19" title="19">  </a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="ot">view ::</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">IO</span> ()  </a>
+<a class="sourceLine" id="cb1-21" title="21">view [fileName] <span class="fu">=</span> <span class="kw">do</span>  </a>
+<a class="sourceLine" id="cb1-22" title="22">    contents <span class="ot">&lt;-</span> <span class="fu">readFile</span> fileName  </a>
+<a class="sourceLine" id="cb1-23" title="23">    <span class="kw">let</span> todoTasks <span class="fu">=</span> <span class="fu">lines</span> contents  </a>
+<a class="sourceLine" id="cb1-24" title="24">        numberedTasks <span class="fu">=</span> <span class="fu">zipWith</span> (\n line <span class="ot">-&gt;</span> <span class="fu">show</span> n <span class="fu">++</span> <span class="st">" - "</span> <span class="fu">++</span> line) [<span class="dv">0</span><span class="fu">..</span>] todoTasks  </a>
+<a class="sourceLine" id="cb1-25" title="25">    <span class="fu">putStr</span> <span class="fu">$</span> <span class="fu">unlines</span> numberedTasks  </a>
+<a class="sourceLine" id="cb1-26" title="26">  </a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="ot">remove ::</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">IO</span> ()  </a>
+<a class="sourceLine" id="cb1-28" title="28">remove [fileName, numberString] <span class="fu">=</span> <span class="kw">do</span>  </a>
+<a class="sourceLine" id="cb1-29" title="29">    handle <span class="ot">&lt;-</span> openFile fileName <span class="dt">ReadMode</span>  </a>
+<a class="sourceLine" id="cb1-30" title="30">    (tempName, tempHandle) <span class="ot">&lt;-</span> openTempFile <span class="st">"."</span> <span class="st">"temp"</span>  </a>
+<a class="sourceLine" id="cb1-31" title="31">    contents <span class="ot">&lt;-</span> hGetContents handle  </a>
+<a class="sourceLine" id="cb1-32" title="32">    <span class="kw">let</span> number <span class="fu">=</span> <span class="fu">read</span> numberString  </a>
+<a class="sourceLine" id="cb1-33" title="33">        todoTasks <span class="fu">=</span> <span class="fu">lines</span> contents  </a>
+<a class="sourceLine" id="cb1-34" title="34">        newTodoItems <span class="fu">=</span> delete (todoTasks <span class="fu">!!</span> number) todoTasks  </a>
+<a class="sourceLine" id="cb1-35" title="35">    hPutStr tempHandle <span class="fu">$</span> <span class="fu">unlines</span> newTodoItems  </a>
+<a class="sourceLine" id="cb1-36" title="36">    hClose handle  </a>
+<a class="sourceLine" id="cb1-37" title="37">    hClose tempHandle  </a>
+<a class="sourceLine" id="cb1-38" title="38">    removeFile fileName  </a>
+<a class="sourceLine" id="cb1-39" title="39">    renameFile tempName fileName</a></code></pre></div>
+<h3 id="ヒント">ヒント</h3>
+<p>簡単に使ってみるだけでも、よくわからないエラーがみつかります。</p>
+<pre><code>$ ghc TodoList.hs
+$ ./TodoList
+TodoList: user error (Pattern match failure in do expression at TodoList.hs:13:5-18)
+$ ./TodoList help
+TodoList: TodoList.hs:14:9-47: Irrefutable pattern failed for pattern (Data.Maybe.Just action)</code></pre></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Workshop/MiracleHaskell/017">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Workshop/MiracleHaskell/017?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Workshop/MiracleHaskell/017">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Workshop/MiracleHaskell/017" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>

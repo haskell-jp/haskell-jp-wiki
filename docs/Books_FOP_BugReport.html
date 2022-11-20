@@ -1,0 +1,965 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" data-scrapbook-source="https://wiki.haskell.jp/Old/sampou.org/Books_FOP_BugReport"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Haskell-jp wiki - Old/sampou.org/Books_FOP_BugReport</title>
+    <link href="jquery-ui.min.css" rel="stylesheet" media="print" type="text/css">
+        <link href="custom.css" rel="stylesheet" media="screen, projection" type="text/css">
+    <link href="print.css" rel="stylesheet" media="print" type="text/css">
+    
+    <!--[if IE]><link href="/css/ie.css" rel="stylesheet" media="screen, projection" type="text/css" /><![endif]-->
+  </head>
+  <body>
+    <div id="doc3" class="yui-t1">
+        <div id="yui-main">
+          <div id="maincol" class="yui-b">
+            <div id="userbox">
+  <noscript>
+    <a href="https://wiki.haskell.jp/_login">Login</a>
+    <a href="index.html">Logout</a>
+  </noscript>
+  &nbsp;
+  <a id="loginlink" class="login" href="https://wiki.haskell.jp/_login">Login / Get an account</a>
+  <a id="logoutlink" class="login" href="index.html">Logout <span id="logged_in_user"></span></a>
+</div>
+            <ul class="tabs"><li class="selected"><a href="">view</a></li><li><a href="https://wiki.haskell.jp/_edit/Old/sampou.org/Books_FOP_BugReport">edit</a></li><li><a href="https://wiki.haskell.jp/_history/Old/sampou.org/Books_FOP_BugReport">history</a></li><li><a href="https://wiki.haskell.jp/_discuss/Old/sampou.org/Books_FOP_BugReport">discuss</a></li></ul> 
+            <div id="content">
+  
+  <h1 class="pageTitle"><a href="">Old/sampou.org/Books_FOP_BugReport</a></h1>
+  
+  <div id="wikipage">
+<h1 id="books_fop_bugreport"><a href="" class="uri" title="Go to wiki page">Books_FOP_BugReport</a></h1>
+<p><a href="Books.html" class="uri" title="Go to wiki page">Books</a>:<a href="https://wiki.haskell.jp/Old/sampou.org/FOP" class="uri" title="Go to wiki page">FOP</a>:BugReport</p>
+<hr>
+<p>翻訳やコードのミスなどを報告していただけると嬉しいです。</p>
+<p>新しい報告ほど上になるように以下に書いてください． また，署名日付けを入れてくださいませ。署名日付は$SIG$で入れられます。</p>
+<p>www.sampou.orgから引越してきました。– nobsun (Sun Jan 8 23:21:20 UTC 2012)</p>
+<hr>
+<p>2012/07/05 18:16:42 JST – gotoki_no_joe</p>
+<h4 id="p.142-p.151-p.154">p.142, p.151, p.154</h4>
+<p>fromInt → fromIntegral</p>
+<h4 id="p.143-図-7.3">p.143 図 7.3</h4>
+<p>altRing → altRings</p>
+<h4 id="p.148-図7.9-7.10">p.148 図7.9, 7.10</h4>
+<p>いずれも width = 3 だけにするのが正しい</p>
+<h4 id="p.149-swirlp-の定義">p.149 swirlP の定義</h4>
+<p>rotate → rotateP 原著も同じ誤り</p>
+<h4 id="p.150-l.-4-以降-3-行">p.150 l.-4 以降 3 行</h4>
+<p>and → (&amp;&amp;), or → (||), lift1→ lift2<br>
+原著も同じ誤り</p>
+<h4 id="p.153-l.-2">p.153 l.-2</h4>
+<p>ρを反転する → ρを逆数にする</p>
+<h4 id="p.156-練習問題7.11">p.156 練習問題7.11</h4>
+<p>例に使っている wipe2 が未定義</p>
+<h4 id="p.156-l.-4">p.156 l.-4</h4>
+<pre><code> ファイル表現(...1)からの変換は、実際の色の配列(...2)を生成してソートするのではなく、「添字指定」中にオンザフライで行う。</code></pre>
+<p>Rather than creating and storing an actual array of colours, each represented as a quadruple of floating point numbers, conversion from the file representation (typically 1, 8, 16, or 24 bits per pixel) is done on-the-fly during ‘subscripting’.<br>
+sorting ではなく storing</p>
+<pre><code> ファイル表現(...1)からの変換は、色の配列(...2)を実際に作成して格納する代わりに、「添字指定」中にオンザフライで行う。</code></pre>
+<h4 id="p.157-l.3">p.157 l.3</h4>
+<pre><code> 領域内の点がピクセル位置の離散集合へと写像されることはあまりない。</code></pre>
+<p>Inner points generally do not map to one of the discrete set of pixel locations,</p>
+<pre><code> 領域内の点を写像した先がピクセル位置の離散集合のある要素にぴったり来ることはまずない。</code></pre>
+<h4 id="p.157-l.6">p.157 l.6</h4>
+<p>画像のresamplingにおけるbilinearは「線形補間」でよいのでは。</p>
+<h4 id="p.158-inboundsの定義">p.158 inBoundsの定義</h4>
+<p>reconstructの定義中で、(x,y)が(w-1,h-1)に入っていればcropされずにbilerpArray2が呼び出される。 しかし、x=w-1,y=h-1というギリギリの位置にいるとき、sub (i+1,j) などの呼び出しは out of range になる。 結局Array2に与える関数の定義にも依るが、簡単に解決するには inBoundsの &lt;= fromInt (*-1) を &lt;fromIntegral (*-1) に変えるのが楽。</p>
+<h4 id="p.159-l.6">p.159 l.6</h4>
+<p>形式化手法 → 定式化<br>
+formulation であって formalizationではない。</p>
+<h4 id="p.159-l.8">p.159 l.8</h4>
+<p>Paul Hudakは…を使ってもいる → Paul Hudakも…を使っている</p>
+<hr>
+<p>2012/06/18 17:51:20 JST – gotoki_no_joe</p>
+<p>6章</p>
+<h4 id="p.117">p.117</h4>
+<p>Franと同様に、ここでも観測可能項のレベルへの持ち上げ関数に対応するコンビネータlift,lift2などを提供する。<br>
+Like Fran, we provide combinators for lifting functions to the observable level, lift, lift2, and so on.<br>
+Franと同様に、関数を観測可能項のレベルに持ち上げるコンビネータlift, lift2などを提供する。<br>
+(liftの型を見れば明らか。)</p>
+<h4 id="p.120-l.-3-c10の式">p.120 l.-3 c10の式</h4>
+<p>× rainInCyrus %&gt; 10<br>
+○ rainInCyprus %&gt; konst 10<br>
+’p’の抜けと持ち上げの抜けの2点<br>
+(%&gt;) は Num クラスのメソッドではないので明示的な型変換が必要。</p>
+<h4 id="p.121-l.-9">p.121 l.-9</h4>
+<p>× 2004年 ○ 2003年</p>
+<h4 id="p.122-betweenの定義">p.122 betweenの定義</h4>
+<p>t1とt2にkonstを付ける</p>
+<h4 id="p.129-a4-tex-typo">p.129 (A4) TeX typo</h4>
+<p>× eschk1 ○ exch_{k1}</p>
+<h4 id="p.130-snell_kの式">p.130 snell_kの式</h4>
+<p>× \forall o’ ・(o …<br>
+○ \forall o’ . (o …<br>
+なお、最新版ではdisc_kでなくsnell_kを使った式で説明していますが、 それでは循環定義になるので、disc_kを使ったFOPの定義の方が正解に近いのではないかと思います。</p>
+<h4 id="p.133-l.-3">p.133 l.-3</h4>
+<p>E_BGP -&gt; E_GBP</p>
+<h4 id="p.134-l.-2">p.134 l.-2</h4>
+<p>価値評価過程 x仮定</p>
+<h4 id="p.135-l.2">p.135 l.2</h4>
+<p>次節 (next subsection)<br>
+§6.6には見あたらないし、subsectionは存在しないし、どこのことでしょう。</p>
+<p>8章</p>
+<h4 id="p.161">p.161</h4>
+<p>コアとは、個別の関数を実装するために<br>
+A core is a predesigned block to implement a particular function<br>
+コアとは、何らかの機能を実現するために<br>
+</p>
+<p>ここの function は純関数ではなくてレジスタを含む「機能」のこと。</p>
+<h4 id="p.161続き">p.161続き</h4>
+<p>顧客が自社の FPGA を使う環境を整備することで、さらなるコアの購入を促している。<br>
+to make it easier for their customers to use their FPGAs, thus encouraging the customers to buy more of them.<br>
+</p>
+<p>(全ての機能を各自で開発するのではなく、再利用可能かつ高性能な機能ブロックであるコアのラインアップを充実させることで） 自社の FPGA を顧客にとってより使いやすくすることで、FPGA の購入を促している。<br>
+最終的に販売したいのはコアでなく FPGA そのものという文章だと思う。</p>
+<h4 id="p.169-中ほど">p.169 中ほど</h4>
+<p>「検証可能」(Checkable) は初出なので太字にする。</p>
+<h4 id="p.170-中ほど">p.170 中ほど</h4>
+<p>性質は Bit よりも複雑で多くの情報を含む。<br>
+「性質」は英語でも小文字で property と書いてあるが、ここは「Property 型」としないと意味が通じない。</p>
+<h4 id="問題8.8">問題8.8</h4>
+<p>n でパラメータ化した性質、すなわち 1 から指定した n までのサイズすべてで性質が成り立つかどうかを検証する関数を定義せよ。<br>
+Define a function that verifies a parameterised property for all sizes from 1 up to a specific n.<br>
+サイズによりパラメータ化した性質に対して、サイズ 1 から n までの全てで性質が成り立つかを検証する関数を定義せよ。</p>
+<h4 id="問題-8.10">問題 8.10</h4>
+<p>「3 番目、6 番目、9 番目、」の後ろに “and so on” を表す「…」が必要。</p>
+<h4 id="p.178-l.3">p.178 l.3</h4>
+<p>ここで実装する回路はコンピュータのビット上でしか動作しない。…精緻化<br>
+the circuits that we implement works only on bits. …refine<br>
+(Lava で) 実装できる回路はビットしか扱えない。 …整数をビットでどう表現するかを決めて、その定義に基づいて比較器を具体化する必要がある。</p>
+<h4 id="p.179-中程-typo">p.179 中程 typo</h4>
+<p>バイトニックマージャの定義に bfly <em>を</em>使ってもよい。</p>
+<h4 id="p.179-l.-2">p.179 l.-2</h4>
+<p>また、evens f は 2n-リストから 2n-リストへの写像でなければならない。<br>
+The f parameter must have two-lists (that is, lists of length two) as both input and output, and evens f maps 2n-lists to 2n-lists.<br>
+evens f は 2n-リストから 2n-リストへの写像である。 (must は,and の前までしか効いてない。map には３単元の s が付いているので must はかかっていない。)</p>
+<h4 id="p.181-sec8.9-l.3">p.181 sec8.9 l.3</h4>
+<p>Virtex-II という特別なアーキテクチャの<br>
+specific<br>
+Virtex-II という (特定の) アーキテクチャの<br>
+(Virtex は普通の市販品 FPGA です。)</p>
+<h4 id="p.181-l.-2">p.181 l.-2</h4>
+<p>LUT の出力にレジスタをバイパスさせることによって、組み合わせ論理関数を実装したセルを構成できる。<br>
+A cell can be configured to implement a combinational logic function by making the output of the look-up table bypass register.<br>
+レジスタをバイパスして LUT の出力を取り出すことで、組み合わせ論理関数を実現するようにセルを設定(構成)できる。<br>
+(意訳)</p>
+<h4 id="p.182-l.-5">p.182 l.-5</h4>
+<p>リップル加算器<br>
+ripple-carry adder<br>
+リップルキャリー加算器<br>
+</p>
+<p>(スタッドレスタイヤを「スタッドレス」でなく「スタッド」と略すくらい変。)</p>
+<h4 id="p.183-l.5">p.183 l.5</h4>
+<p>特別な→特定の</p>
+<h4 id="p.183-l.6">p.183 l.6</h4>
+<p>6入力ゲートは3つの4入力LUTにマッピングされる<br>
+a six-input and gate …<br>
+6入力<em>AND</em>ゲート…</p>
+<h4 id="p.183-l.-4">p.183 l.-4</h4>
+<p>Lava にはライブラリを使って直接マッピングを行う技術がある。<br>
+it provides technology mapping directly through libraries.<br>
+Lava ではテクノロジマッピングはライブラリを直接用いて行う。<br>
+c.f. <a href="http://mix.kumikomi.net/index.php/%E3%83%86%E3%82%AF%E3%83%8E%E3%83%AD%E3%82%B8%E3%83%BB%E3%83%9E%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0">http://mix.kumikomi.net/index.php/%E3%83%86%E3%82%AF%E3%83%8E%E3%83%AD%E3%82%B8%E3%83%BB%E3%83%9E%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0</a></p>
+<pre><code>テクノロジ・マッピング【Technology Mapping】 ゲート・レベルのネットリスト（論理ゲート，基本
+セルなど）を，特定の半導体製造技術のライブラリ（マクロセルなど）に割り当てていくこと．</code></pre>
+<h4 id="p.186-l.4">p.186 l.4?</h4>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align:left">記述</td>
+<td style="text-align:left">原文</td>
+<td style="text-align:left">正しい訳語</td>
+<td style="text-align:left">注</td>
+</tr>
+<tr class="even">
+<td style="text-align:left">設計の実体部</td>
+<td style="text-align:left">entity part of the design</td>
+<td style="text-align:left">設計のエンティティ (entity) 部</td>
+<td style="text-align:left">VHDL 用語</td>
+</tr>
+<tr class="odd">
+<td style="text-align:left">設計のアーキテクチャ部</td>
+<td style="text-align:left">achitecture part</td>
+<td style="text-align:left">アーキテクチャ (architecture) 部</td>
+<td style="text-align:left">同上</td>
+</tr>
+<tr class="even">
+<td style="text-align:left">部品</td>
+<td style="text-align:left">components</td>
+<td style="text-align:left">コンポーネント (component)</td>
+<td style="text-align:left">同上</td>
+</tr>
+<tr class="odd">
+<td style="text-align:left">1出力バッファ</td>
+<td style="text-align:left">one output buffer</td>
+<td style="text-align:left">1つの出力バッファ</td>
+<td style="text-align:left">※</td>
+</tr>
+<tr class="even">
+<td style="text-align:left">2入力バッファ</td>
+<td style="text-align:left">two input buffers</td>
+<td style="text-align:left">2つの入力バッファ</td>
+<td style="text-align:left">※ (buffers:複数形)</td>
+</tr>
+</tbody>
+</table>
+<p>※ FPGA内部の信号レベルに比べて大きい、LSIの外とやり取りするための信号レベルを合わせるためのバッファ</p>
+<h4 id="p.187-l.4">p.187 l.4</h4>
+<p>and ゲートの出力は、同じ名前の信号 lava(4) を使って、インバータの入力に接続する。<br>
+The output of the and gate is connected to the input of the inverter by giving both signals the same name, lava(4).<br>
+and ゲートの出力とインバータの入力に同じ信号名 lava(4) を指定することで、両者が結線されていることを表す。<br>
+(この give は名前を付ける意味ではなく、コンポーネントインスタンス文の実引数に渡しているという意味と解釈する。)</p>
+<h4 id="p.187-l.8">p.187 l.8</h4>
+<p>部品は…位置する<br>
+The comments show where each cell is positioned.<br>
+コメントは…配置される<br>
+(componentとcommentを見間違えないでください…)</p>
+<h4 id="p.187-l.9">p.187 l.9</h4>
+<p>直列合成の使い方と矛盾しない<br>
+which is consistent with the use of the left to right serial composition.<br>
+直列合成を用いて指示したとおりになっている。</p>
+<h4 id="p.187-l.-11">p.187 l.-11</h4>
+<p>設計結果の平面図は長方形に詰め込まれる<br>
+the resulting floorplan for the design is packed rectangle in which every cell is used.<br>
+設計に対する実装結果のフロアプラン (floorplan) は packed rectangle になり、その中の全てのセルが使用された。<br>
+(フロアプランは業界用語。再利用できる部品としてIPを作るとき、 配置するときに他の部品との干渉を避けるために長方形に固める。 これをpacked rectangleという(ような気がする)。 この中に未使用セルがあるともったいないが、そうなっていない、と自慢している。)</p>
+<h4 id="p.187-l.-9">p.187 l.-9</h4>
+<p>集合 set セット/組<br>
+数学の集合ではなく、集まりという程度の意味。</p>
+<h4 id="p.187-l.-2">p.187 l.-2</h4>
+<p>結果として生成されるネットリストを置き換える必要がある。<br>
+which means that the resulting netlists have to be automatically placed.<br>
+(VHDLでは設計者が配置を明示して設計する標準的な方法がないため) ネットリストの配置は(高度に賢くはない)自動配置に行わせるしかない。<br>
+(replaced じゃなくて placed)</p>
+<hr>
+<p>2012/04/16 07:45:08 JST – gotoki_no_joe</p>
+<h4 id="p.226-問題10.10">p.226 問題10.10</h4>
+<p>firstの分配公理が成り立つことを証明せよ。<br>
+Prove the functor axiom for first in the arrow defined in the previous exercise. This requires the distributivity axiom.<br>
+firstの関手公理(p.220 l.2)が成り立つことを証明せよ。 証明には分配公理(p.225 l.10)が必要である。</p>
+<p>問題10.9で作るのはArrowであってArrowChoiceではない。</p>
+<h4 id="p.227-l.-7">p.227 l.-7</h4>
+<p>オートマトンについては、出力の一部を入力にフィードバックするというより巧妙なところがある。<br>
+The instance for automata is more subtle. At each stage, part of the output is fed back to the input:<br>
+オートマトンのインスタンスはかなり奇妙だ。 毎回の状態遷移において、出力の一部が入力にフィードバックされる。</p>
+<h4 id="p.228-l.-5">p.228 l.-5</h4>
+<p>アローを定義するλ式を変化させたものである。<br>
+a variation on a lambda expression that defines an arrow.<br>
+アローを定義する、λ式の変種である。<br>
+つまり：<br>
+</p>
+<p>普通のλ式は関数というアローを定義する。「λ、パターン、→、式(パターン内の変数を参照できる)」 と書く。<br>
+パターンの型をb、式の型をcとしたとき、b→c という型の関数式になる。<br>
+</p>
+<p>これの強化版で、あらゆるアローを定義する記法を定義する。「proc、パターン、→、コマンド」と書く。<br>
+型は、アローがaのとき a b c となる。</p>
+<h4 id="p.228-l.-4">p.228 l.-4</h4>
+<p>この場合、入力の形式は()である。<br>
+In this case the input has the form ().<br>
+genSymの例では入力(引数のパターン)は()という形をしている。</p>
+<h4 id="p.232-中段">p.232 中段</h4>
+<p>図10.3の表現を直接表現<br>
+This corresponds rather directly to the graphical presentation of Figure 3.<br>
+図10.3の図式/図表現とほぼ直接対応している</p>
+<h4 id="p.234-上段">p.234 上段</h4>
+<p>関数pureは、木の葉の上の関数を写像する。<br>
+The function pure maps a function over the leaves of the tree.<br>
+pureは木の葉の上の関数を木全体の葉にmapする。</p>
+<h4 id="p.234-2段落目">p.234 2段落目</h4>
+<p>基底(1要素の木)の場合では純粋な関数を提供し、ペアの木の場合では式を提供する。このとき通常はより小さい木に対しても同じアルゴリズムを呼び出す。<br>
+one often provides a pure function for the base case (trees of one element) and an expression for trees of pairs, usually invoking the same algorithm on smaller trees.<br>
+Hom型の値としてこのアローの上でアルゴリズムを記述するには、 基底(:&amp;:の左)には純粋な関数を置き、ペアの木の場合(:&amp;:の右)には式 ―通常は、より小さい木に対して同じアルゴリズムを適用するような記述― を置く。</p>
+<p>以降のscanとかがその具体例になっている。</p>
+<hr>
+<p>2012/03/29 14:40:22 JST – gotoki_no_joe</p>
+<h4 id="p.218-恒等性の公理">p.218 恒等性の公理</h4>
+<p>idA &gt;&gt;&gt; f と f &gt;&gt;&gt; idA と f は対等なので、=の位置を3等分するべき</p>
+<h4 id="p.219-l.10">p.219 l.10</h4>
+<p>× 関数<br>
+○ 関手</p>
+<h4 id="p.231-10.4">p.231 §10.4</h4>
+<p>tick はこのコンテキストでは(先頭以外)「刻み」ではなく「時刻」</p>
+<h4 id="p.232-l.6">p.232 l.6</h4>
+<p>× 2つを合成して1つにしてしまえば確実だが、<br>
+○ loopとdelayを合成した一つの構成要素を作ってこれを強制することもできるが、</p>
+<h4 id="p.237-l.-3">p.237 l.-3</h4>
+<p>× ここで使ったプリミティブで<br>
+○ ここで使ったものよりプリミティブで</p>
+<h4 id="p.68-ex4.1">p.68 ex4.1</h4>
+<p>×同音異名<br>
+○異名同音</p>
+<h4 id="p.71-durm">p.71 durM</h4>
+<p>× durM (Prim (Note d))<br>
+○ durM (Prim (Note _ d))</p>
+<h4 id="p.72-l.-2">p.72 l.-2</h4>
+<p>× d秒<br>
+○ d小節<br>
+原文でもsecondだが、Durationの1は絶対時間の1秒ではなく1小節なはず。</p>
+<h4 id="p.73-l.-2-遅い版のdropm">p.73 l.-2 遅い版のdropM</h4>
+<p>最初にpadMしているが、revMには不要だしtakeMは自前でやるので冗長。</p>
+<h4 id="p.75-中程">p.75 中程</h4>
+<pre><code> 演奏は音楽的イベントの「時系列」である。</code></pre>
+<p>temporally ordered sequence of musical events<br>
+続けて</p>
+<pre><code> 「時系列とは、時刻の順で整列されたリストである。」</code></pre>
+<p>などと定義を入れないと、以降の補題4.1、補題4.2の意味が定まらない。</p>
+<h4 id="p.83-l.6">p.83 l.6</h4>
+<pre><code> より抽象的な概念で、伝統的なピアニッシモ、...などを表現している。</code></pre>
+<p>これは前の文から続いている。機能は両立している。</p>
+<pre><code> HaskoreではNote構成子に音量を表す追加のフィールドが設けてある他に、
+ 伝統的な表記であるピアニッシモ、ピアノ、メゾピアノ、メゾフォルテ、フォルテ、フォルテッシモ
+ (それぞれpp,p,mp,mf,f,ffと略記)を用いる、より抽象的な方法も使える。</code></pre>
+<hr>
+<p>「第５章 融合変換を自動化する」で使われている mag を Haskell Platform 2011.x.x.x に付属の GHC 7.0.x などでもビルドできるようにしたバージョンの（作者自身の手による） darcs repository が以下にあります。</p>
+<ul>
+<li><a href="http://urchin.earth.li/darcs/ganesh/mag/" class="uri">http://urchin.earth.li/darcs/ganesh/mag/</a></li>
+</ul>
+<p>HackageDB にアップロードするにはもう少し時間がかかると思うので、サポートページに darcs repository へのリンクを加えてもらえないでしょうか？</p>
+<p>– shelarcy (Wed Feb 1 19:09:52 UTC 2012)</p>
+<hr>
+<p>2011/12/03 01:07:10 JST – gotoki_no_joe</p>
+<h4 id="p.20-l.15">p.20 l.15</h4>
+<pre><code> 2.5 節では、テスト中に性質のカバレッジを監視する方法を示す。</code></pre>
+<p>カバレッジはテストの実施に対して測るもの。 Section 2.5 shows how to monitor the test coverage of a property under test.</p>
+<pre><code> 2.5 節では、性質によるテストのカバレッジを監視する方法を示す。</code></pre>
+<h4 id="p.21-l.4">p.21 l.4</h4>
+<pre><code> 多重定義がされているからである。</code></pre>
+<p>because it is overloaded</p>
+<pre><code> 型のオーバーロードがある(ため、テストでどの型の値を与えるべきか決定できない)からである。</code></pre>
+<h4 id="p.22-l.7">p.22 l.7</h4>
+<pre><code> 明示的に整列したものだけを限量化
+
+ 明示的に整列したものだけに対して限量化</code></pre>
+<p>この辺りの「限量化する」を「限量する」としたい。</p>
+<h4 id="p.22-リスト">p.22 リスト</h4>
+<p>orderdLists はp.30にようやく定義が現れる。 p.31の訳注5をポイントすると親切かと。</p>
+<h4 id="p.27-タイトル">p.27 タイトル</h4>
+<p>×代数仕様 “algebraic specification” ○代数的仕様</p>
+<h4 id="p.27-さらにそれぞれの観察結果のの行">p.27 「さらに、それぞれの観察結果の…」の行</h4>
+<p>前の行から続いているので段下げなし。次の「当該の等式の左辺を」も同様。</p>
+<h4 id="p.27-l.-8">p.27 l.-8</h4>
+<p>△「それぞれのキュー操作により」○「それぞれのキュー操作について」</p>
+<h4 id="p.29-l.-8">p.29 l.-8</h4>
+<pre><code> また、do { x ← s; e} は {e|x ∈ s} だと考えられる。</code></pre>
+<p>and do { x ← s; e} can be thought of as {e|x ∈ s}.</p>
+<pre><code> また、do { x ← s; e} は {e|x ∈ s} とみなせる。</code></pre>
+<h4 id="p.29-choose-の式">p.29 choose の式</h4>
+<p>× \Longrightarrow ○ \Rightarrow</p>
+<h4 id="上の式の直前の文章">上の式の直前の文章</h4>
+<p>× 基本的は関数は ○ 基本的な関数は</p>
+<h4 id="p.30-l.9">p.30 l.9</h4>
+<pre><code> 多重定義された生成器 arbitrary が、型を基盤にして生成を実行する。これを他と一緒に使うと性質の引数を生成できる。</code></pre>
+<p>Type-based generation is performed by the overloaded generator arbitrary. It is used, among other things, to generate the arguments of properties.</p>
+<pre><code> 多重定義された生成器 arbitrary は、型 (のみ) に基づいて生成を実行する。これは他の生成器とも併用して性質の引数を生成する。</code></pre>
+<h4 id="p.30-l.15">p.30 l.15</h4>
+<pre><code> もう1つの応用として、以下のように集合 {y|y ≧ x} を生成する手段がある。</code></pre>
+<p>As another application, here is one way to generate the set {y|y ≧ x}.</p>
+<pre><code> arbitrary の別の利用法として、以下のように集合 {y|y ≧ x} を生成する事に使える。</code></pre>
+<h4 id="上の直後">上の直後</h4>
+<p>「これは…だからである」は前から続いているので段落を切らない。</p>
+<h4 id="p.31-l.9">p.31 l.9</h4>
+<pre><code> 新しい型を定義する (Haskell の newtype 宣言を使う) と便利である。生成器を新しい型のデフォルト生成器とするわけである。</code></pre>
+<p>it is convenient to define a new type (using Haskell’s newtype facility), and make the generator the default generator for the new type.</p>
+<pre><code> Haskell の newtype 宣言を用いて新しい型を定義し、自作の生成器をその型のデフォルト生成器とすると便利である。</code></pre>
+<h4 id="p.32-l.2">p.32 l.2</h4>
+<pre><code> 型を基盤にしてテストデータを生成すると</code></pre>
+<p>Type-based test data generation can …</p>
+<pre><code> 型のみを基準にしたテストデータの生成では</code></pre>
+<h4 id="p.32-l.21">p.32 l.21</h4>
+<p>「生成される値のサイズを」の行は段落が変わるので字下げする。</p>
+<h4 id="p.32最後の式">p.32最後の式</h4>
+<p>× fromInt ○ fromIntegral (原著も)</p>
+<h4 id="p.33-l.14">p.33 l.14</h4>
+<pre><code> 回避している。</code></pre>
+<p>回避はできていないので、原文は目的表現になっている。</p>
+<pre><code> 回避しようとしている。しかし</code></pre>
+<h4 id="p.34-l.16">p.34 l.16</h4>
+<pre><code> 自明 (ユーザが定義できるという意味で)</code></pre>
+<p>trivial (in some user-definable sense)</p>
+<pre><code> (ユーザが定義する何らかの意味で)自明</code></pre>
+<h4 id="p.35-l.4">p.35 l.4</h4>
+<pre><code> もっと詳しく知るには、classify を複数回使ってみれば良い。</code></pre>
+<p>これでは「習うより慣れろ」という意味になってしまう。 To get more information, we can use the function classify multiple times:</p>
+<pre><code> より多くの情報を得るために、classify を同時に複数使用できる。</code></pre>
+<h4 id="問題-2.5">問題 2.5</h4>
+<pre><code> 2.3 節の Queue の例で使われていたテストデータをねじ曲げてしまわない性質を検査せよ。そのために適切にテストデータを監視する部分を追加せよ。</code></pre>
+<p>Check that the properties used in the Queue example in Section 2.3 do not skew the test data unacceptably, by adding appropriate test data monitors.</p>
+<pre><code> 2.3 節の Queue の例で使われていた性質へ、適切なデータ監視部を追加して、テストデータが過度にねじ曲げられていないか調べよ。</code></pre>
+<h4 id="p.37-l.4">p.37 l.4</h4>
+<pre><code> 次に論理式を見てどのように知識を収集するかを理解する。</code></pre>
+<p>「理解する」の主語は読者？ Then, we look at the formula to see how to gather knowledge.</p>
+<pre><code> 次に、知識をどう集めるか知るために論理式を見る。</code></pre>
+<h4 id="続き">続き</h4>
+<pre><code> 必ず真になる論理式 / 可能なモデル</code></pre>
+<p>a formula which must be true, / possible models</p>
+<pre><code> 値を真にすることが目標の論理式 / モデルの候補</code></pre>
+<h4 id="p.37-l.-9-8">p.37 l.-9,-8</h4>
+<p>×「p を通じて伝播」○「p(の構造) の中を伝播」</p>
+<h4 id="p.38-arbitrary-name-の式">p.38 Arbitrary Name の式</h4>
+<p>文字リテラルのクオートは `a’..`z’ではなく’a’..’z’ (LaTeXのミス)</p>
+<h4 id="p.39-l.11">p.39 l.11</h4>
+<p>「mはpを満たすと読む」の『満たす』は強調</p>
+<h4 id="p.39-l.-4">p.39 l.-4</h4>
+<p>× |=(satisfy) 関数は時として部分付値を生成する ○ models関数は…</p>
+<h4 id="p.40-l.-9">p.40 l.-9</h4>
+<pre><code> このような部分付値のリストが完全であることを検証するためには、少なくとも 1 つの付値が、p を満たすあらゆる全域付値を覆うことができることを確認しなくてはならない。</code></pre>
+<p>To check that a list of such partial valuations is complete, we need to check that any total valuation satisfying p is covered by at least one of the valuations.<br>
+限量の順序が逆。 ∃v∈vs, ∀v’ satisfies p, v `covers` v’ ではなく ∀v’ satisfies p, ∃v∈vs, v `covers` v’</p>
+<pre><code> このような部分付値のリストが完全であることを検証するためには、p を満たす任意の全域付値を、リスト中の少なくとも一つの部分付値が覆うことができることを確認しなくてはならない。</code></pre>
+<h4 id="p.42-l.10">p.42 l.10</h4>
+<p>prop_Exclusiveの定義中 any ではなく or</p>
+<h4 id="p.43-l.12">p.43 l.12</h4>
+<pre><code> しかしながら今見てきたように、仕様を形式化しようという最初の試みは正しいものではなかった。不完全な仕様の価値はあまりない。</code></pre>
+<p>Yet, as we have seen, the first attempt to formalise a specification is likely to be incorrect, and the value of a faulty specification is limited.</p>
+<pre><code> …、仕様を形式化しようとすると最初は正しくないものになりがちであり、そのような不完全な仕様の価値はあまりない。</code></pre>
+<h4 id="p.43-l.-11">p.43 l.-11</h4>
+<pre><code> ランダムテストで 20% 余計に点を取れば分割テストの優位性はきれいになくなっていただろう</code></pre>
+<p>By taking 20% more points in a random test, any advantage a partition test might have had is wiped out.</p>
+<pre><code> ランダムテストのテストケースを 20% 増しにしたところ、分割テストが持っていたかもしれない優位性はすっかりなくなった。</code></pre>
+<p>ちなみに訳本(↓)p.1508には「典型的に、ランダムテストに20%多くポイントをとることによって、分割テストが享受する優位は帳消しになる。」とありました。</p>
+<h4 id="参考文献51">参考文献[51]</h4>
+<p>訳本があります。</p>
+<pre><code> ソフトウェア工学大事典, 監訳 片山卓也, 土居範久, 鳥居宏次, 朝倉書店, 1998</code></pre>
+<p>ランダムテストの項目はpp.1503–1513</p>
+<hr>
+<p>2011/10/28 17:20:37 JST – gotoki_no_joe</p>
+<h4 id="p.274">p.274</h4>
+<pre><code>二分木写像の直列化によって得られる。</code></pre>
+<p>(The type of format is) essentially obtained by linearizing the binary tree mapping,<br>
+(:^:)という構成子が二分木を作る。 format (d1 :^: d2) は、format d1 という写像と format d2 という写像の直列化である。 例えば<br>
+format d1 :: t1 -&gt; t2 -&gt; String<br>
+format d2 :: t3 -&gt; String<br>
+のとき<br>
+format (d1:^:d2) :: t1-&gt;t2-&gt;t3-&gt;String<br>
+のようになる。</p>
+<pre><code>二分木で構造化された写像の直列化によって得られる。</code></pre>
+<h4 id="p.275-typo">p.275 typo</h4>
+<p>誤</p>
+<pre><code> format (d1:^:d2)はformat d1・format d2に単純化できる。</code></pre>
+<p>正</p>
+<pre><code> format' (d1:^:d2)はformat' d1・format' d2に単純化できる。</code></pre>
+<hr>
+<p>2011/10/22 18:13:51 JST – gotoki_no_joe</p>
+<h4 id="p.240">p.240</h4>
+<pre><code>インデントは文字列の先頭ではなく明示的な改行箇所のみに追加される。</code></pre>
+<p>Note that indentation is added only at an explicit newline, not at the beginning of a string.<br>
+「普通に考えると先頭と改行後の両方に入れるはずだが、前者には入れない」という意図があるので</p>
+<pre><code>インデントは明示的な改行箇所のみに追加され、文字列の先頭には入れない。</code></pre>
+<h4 id="p.241">p.241</h4>
+<pre><code>これらの関数は以下のように書くこともできる。</code></pre>
+<p>Alternatively, here is a variant of the above function.<br>
+</p>
+<p>このvariantは「少し動作は違うが同じ(木をドキュメントに変換するという)仕事をする別の関数」の意味なのに日本語は「同一の結果を返す関数の別の書き方」と読めてしまう。</p>
+<pre><code>木をドキュメントに変換するやり方は他にも考えられる。</code></pre>
+<h4 id="p.241-1">p.241</h4>
+<pre><code>さらに別のスタイルを生成すべく、変形版の形式化について考えよう。</code></pre>
+<p>It is easy to formulate variants to generate yet other styles.<br>
+formulateとformalizeの取り違い？<br>
+formulateは等式でプログラミングするHaskellという感覚ではないか。</p>
+<pre><code>さらに別のスタイルを生成する変種を作ることも容易である。</code></pre>
+<h4 id="p.242-l.-9以降">p.242 l.-9以降</h4>
+<p>nestingの直接の訳は「入れ子」だが、この文脈では「インデントの入れ子」「インデント」に意味がずれている。 訳語は「インデント」で統一できる。 (p.240 でnestを導入するとき「インデント」と説明している。)</p>
+<h4 id="p.243-l.1">p.243 l.1</h4>
+<pre><code>その意味でlayoutはtextの逆であり、それは次の規則が示すものにほかならない。</code></pre>
+<p>指示語が重複して、後半の「それ」が何を指しているか不明。実際には「その次の規則」<br>
+In this sense, layout is the inverse of text, which is precisely what the next law states.</p>
+<pre><code>その意味でlayoutはtextの逆関数である。
+この事実は、3つめの規則がさらに明白に示している。</code></pre>
+<h4 id="p.243">p.243</h4>
+<pre><code>これらの構成子は以下のようにドキュメント演算子と関連している。</code></pre>
+<p>These constructors relate to the document operators as follows.</p>
+<pre><code>これらの構成子はドキュメント演算子と以下のような関係がある。</code></pre>
+<h4 id="p.245以降">p.245以降</h4>
+<p>ここのinvariantは「常に満たされる (べき) 性質、条件」で「不変性」ではない。 loop invariantとか。</p>
+<h4 id="p.247">p.247</h4>
+<pre><code>〈〉およびnestを拡張してUnionと対話する方法を指定するところもそのままである。</code></pre>
+<p>そのままではない。 (The definitions of nil, text, line, &lt;&gt;, and nest remain exactly as before,) save that &lt;&gt; and nest must be extended to specify how they interact with Union.<br>
+辞書的には現在分詞だけで用いる saving … 「除外する」の用法が広がったものではないかと想像する。</p>
+<pre><code>ただし、〈〉とnestはUnion構成子を扱えるように拡張する。</code></pre>
+<h4 id="p.250-l.-11">p.250 l.-11</h4>
+<pre><code>各演算を一般化して、連結されたドキュメントのリスト上で動作させることである。</code></pre>
+<p>(A possible fix for the first problem is to add an explicit representation for concatenation,) and to generalize each operation to act on a list of concatenated documents.</p>
+<pre><code>各演算を一般化して、ドキュメントを連結したリストに対して適用できるようにすることである。</code></pre>
+<h4 id="p.250-l.-8">p.250 l.-8</h4>
+<pre><code>この現在のインデントは、入れ子になった演算子が処理されるたびに増加させる。</code></pre>
+<p>(,and maintain a current indentation) which is incremented as nesting operators are processed.<br>
+nesting operatorとはnestという名前のここで定義するHaskell関数のこと。 “nested operator”ではない。</p>
+<pre><code>この現在のインデント(量)は、(以下で定義する)nest演算子が処理されるたびに増加させる。</code></pre>
+<p>前の文の「インデント」も「インデント量」に直したい。</p>
+<h4 id="p.251-be-の式">p.251 be の式</h4>
+<pre><code>(前提条件)</code></pre>
+<p>(hypothesis)<br>
+5章の用語の「仕様」がしっくりくる。</p>
+<h4 id="p.254-l.1">p.254 l.1</h4>
+<p>前の行の続きだからインデントしては おかしい。</p>
+<h4 id="p.254-l.2">p.254 l.2</h4>
+<p>「このfillwords関数」→「以下のfillwords関数」</p>
+<h4 id="p.257-l.4">p.257 l.4</h4>
+<pre><code>最適化されている</code></pre>
+<p>optimal</p>
+<pre><code>最善である</code></pre>
+<p>optimized ではない。</p>
+<h4 id="p.257-l.6">.p.257 l.6</h4>
+<pre><code>Hughes は…アルゴリズムはないとしている。</code></pre>
+<p>のに実は存在する、と続くと、Hughes の論文の証明に誤りがあるように読める。<br>
+Hughes notes that there is no algorithm to choose line breaks for his combinators that is optimal and bounded,<br>
+この“his”が重要。that 以下がかかる対象も、前を読めばおかしいとわかる。</p>
+<pre><code>Hughes のライブラリで用いたコンビネータに関して、改行を選択する最善かつ有界なアルゴリズムは存在しないと述べている。</code></pre>
+<h4 id="p.257-l.-4">p.257 l.-4</h4>
+<p>×「出版」publish ○「論文を発表」</p>
+<h4 id="p.263-l.3">p.263 l.3</h4>
+<pre><code>真偽値を Val データ型に投入する</code></pre>
+<p>interpreter (…) has to inject the Boolean into the Val data type.<br>
+“inject” は集合論の単射のことだと思われる。 (“Data type a la carte” でも同じような用語を使っていた。) 具体的には、<br>
+data Val = BoolVal Bool | IntVal Int とすると、<br>
+BoolVal :: Bool -&gt; Val は真偽値の集合をVal型の要素に単射している。<br>
+IntVal :: Int -&gt; Val も同様。<br>
+このことを表す用語として「投入」は適当でしょうか？</p>
+<h4 id="p.263-l.-11">p.263 l.-11</h4>
+<p>×「コンテナの型」container type ○「コンテナ型」</p>
+<h4 id="p.263-l.-10">p.263 l.-10</h4>
+<pre><code>他の多くのデータ型と同様に、(α → β) → (Term α → Term β) という関数は定義できない</code></pre>
+<p>「他の多くのデータ型」ではそれができるのかできないのか、いずれにも解釈できる。</p>
+<pre><code>他の多くのデータ型では可能な、(α → β) → (Term α → Term β) というような型の関数が定義できない</code></pre>
+<h4 id="p.269-リスト-2-l.2-誤植">p.269 リスト 2 l.2 誤植</h4>
+<p>× (tick “Richard” (RList RPerson))<br>
+○ (tick “Richard”) (RList RPerson)</p>
+<h4 id="p.271">p.271</h4>
+<pre><code>まずは特殊な問い合わせ age および sizeof を定義する。</code></pre>
+<p>もう終盤なのに「まずは」とは？<br>
+It remains to define the ad-hoc queries age and sizeof .</p>
+<pre><code>残っている作業は興味のある仕事だけをする問い合わせ関数 age および sizeof を定義することである。</code></pre>
+<h4 id="p.271-l.-4">p.271 l.-4</h4>
+<pre><code>Haskellにおいて関数の型の値を</code></pre>
+<p>今まで「型のrepresentation」のような話題が続いていたところにこの言い回しは混乱させる。</p>
+<h4 id="p.272-l.14">p.272 l.14</h4>
+<pre><code>正規形は、適切な式のデータ型の要素として与えられているものとする。</code></pre>
+<p>(関数 reify は型表現を引数にとり、その型の Haskell 値の正規形を生成する、) where the normal form is given as an element of a suitable expression data type.<br>
+この give の主語は reify の呼び出し元ではなく reify そのもの。 正規形を呼び出し元が与えるなら、reify は何をするのかわからなくなる。</p>
+<pre><code>ここで、正規形は適切な「式を表す」データ型の要素として返される。</code></pre>
+<h4 id="練習問題12.12">練習問題12.12</h4>
+<pre><code>Term τ に対する表示関数を実装せよ。</code></pre>
+<p>Implement a show function for Term t.<br>
+例えば、型表現も引数に要求する displayTerm :: Type τ → Term τ → String はこの要求を満たさない。 必ず Show クラスのインスタンスにしなければならない。</p>
+<pre><code>型 Term τ を Show クラスのインスタンスにせよ。(すなわち、Term τ に対する show 関数を実装せよ。)</code></pre>
+<h4 id="p.276-節タイトル">p.276 節タイトル</h4>
+<pre><code>関数逆パース</code></pre>
+<p>Functional unparsing<br>
+参考文献[31]のタイトルであるが、 ここで重要なのは functional ではなく statically typed だと思われる。</p>
+<pre><code>「静的型付き printf」もしくは「関数的逆パース」</code></pre>
+<h4 id="p.277">p.277</h4>
+<pre><code>C に結びついた with 節</code></pre>
+<p>The with clause associated with C</p>
+<pre><code>C に付けられた with 節</code></pre>
+<h4 id="p.278-リスト-latex">p.278 リスト LaTeX</h4>
+<p>Pair1, Pair2の行 2 箇所 × ph ○ \phi</p>
+<hr>
+<p>2011/10/21 16:43:34 JST – ksmakoto</p>
+<h4 id="p.185-訳注11">p.185 訳注11</h4>
+<p>試してみればわかることではあるのですが、追加して main = vhdl のような行があると親切ではないかと思います。</p>
+<hr>
+<p>2011/09/03 18:06:46 JST – gotoki_no_joe</p>
+<h4 id="p.62">p.62</h4>
+<pre><code>より正確に言うと、フィールドを取り出す関数のリストについて辞書順になるような順列生成アルゴリズムを2つ調べることになる。</code></pre>
+<p>To be more precise, we will look at two algorithms for permuting a list so that it is lexically ordered with respect to a list of field-extracting functions.</p>
+<pre><code>もっと具体的にいえば、以降では
+「フィールドを取り出す関数のリストに基づいて辞書順にリストをpermuteする」
+2つのアルゴリズムについて考える。</code></pre>
+<h4 id="p.1">p.1</h4>
+<p>priority queue は「順位付きキュー」より「優先度付き」の方が一般的では。</p>
+<h4 id="p.3">p.3</h4>
+<pre><code>全ての子ノードのラベルは少なくとも親のラベルと同じ大きさでなければならない。
+
+ the label of every child node must be at least as big as its parent’s.</code></pre>
+<p>「同じだけ大きくなければならない」としないと、 「少なくとも同じ大きさか、それより小さい」でも意味が通じるので読みにくい。 洒落た訳をしなくてよければ、</p>
+<pre><code>全ての子ノードのラベルは親のラベルと等しいか、それより大きくなければならない。</code></pre>
+<h4 id="p.7">p.7</h4>
+<pre><code>複数の値_で_意図せぬ変更を</code></pre>
+<p>「に」または「へ」</p>
+<h4 id="p.9">p.9</h4>
+<pre><code>実装では、cをaあるいはbとマージし、次に備えて色を変更する。
+
+ The implementation is straightforward,
+ with the join function using the colour to determine whether
+ to merge c with a or b and then changing the colour for next time.</code></pre>
+<p>2行目を落としています。</p>
+<pre><code>実装は今の説明そのままである。
+ここで、join関数(図1.4の join (Fork 色 x a b) c)は
+cに対してaとbのどちらをマージするかを決める材料として色を利用し、
+また次に備えて色を変更する。</code></pre>
+<h4 id="p.11">p.11</h4>
+<pre><code>演習問題1.5の演算列で木を構成すると、...O(n)時間で済む。</code></pre>
+<p>O(n)で済むのは何をすることが、なのか不明。</p>
+<pre><code> the sequences of operations leading up to the trees in Exercise 1.5 take only O(n) time,
+
+問題1.5の木を構成する演算列そのものはO(n)時間で評価できる。</code></pre>
+<h4 id="p.12">p.12</h4>
+<pre><code> ということは、T1はlog m1回を超えることはなく</code></pre>
+<p>This can happen to T_1 no more than log m_1 times,</p>
+<p>主語はT_1ではなくThis、つまり前の文で述べている再帰呼び出しのこと。 「ということは」という接続もおかしい。</p>
+<h4 id="ex1.8">ex1.8</h4>
+<pre><code> すなわち、それぞれのノード内に小型FIFOキューへのスロットを追加せよ。
+
+ In other words, add a third slot to the miniature FIFO queue in each node.
+
+ すなわち、それぞれのノード内の小型FIFOキューに3つめの場所を追加せよ。</code></pre>
+<hr>
+<p>2011/07/22 16:56:48 JST – gotoki_no_joe</p>
+<h4 id="練習問題-3.29">練習問題 3.29</h4>
+<p>誤 List b → 正 List β</p>
+<h4 id="p.58-l.3">p.58 l.3</h4>
+<p>誤 要素のリストを生成するではなく → 正 …するのではなく</p>
+<h4 id="練習問題3.37">練習問題3.37</h4>
+<pre><code>ほかには、Hughesのリスト表現をプログラムの型から導出して直接リスト変換子として表現する方法がある。</code></pre>
+<p>“As an alternative, use Hughes’ representation of lists as list transformers directly, deriving programs of type …”<br>
+この “use” は問題文の要求の一つ。</p>
+<pre><code>別の方法として、「リストをリスト変換子で表す」というHughesの表現を直接的に使って、以下の型を持つプログラムを導け。</code></pre>
+<h4 id="練習問題3.40">練習問題3.40</h4>
+<pre><code>結合的なfに対してlzwの重要な性質が与えられれば、これは実のところunfoldLの普遍性から簡単に導き出せる。</code></pre>
+<p>“In fact, it is a simple consequence of the universal property of unfoldL, given the crucial property of lzw that, for associative f,”</p>
+<pre><code>これは実のところ、unfoldL の普遍性と''以下の'' lzw に関する重要な性質から簡単に導き出せる。
+結合律をみたす f (と任意の e,x,xs,ys) について以下が成り立つ:</code></pre>
+<hr>
+<p>2011/06/27 15:57:35 JST – gotoki_no_joe</p>
+<h4 id="練習問題-3.24">練習問題 3.24</h4>
+<p>logN :: Nat → Nat だと自然対数になってしまうが、それは無理難題。 logN :: Nat → Nat → Nat such that logN a b = c where a^c &lt;= b &lt; a^(c+1) と、 型がtypoだったことにしておくのが無難かと思います。</p>
+<h4 id="同-ヒント">同 ヒント</h4>
+<dl>
+<dt>誤</dt>
+<dd>丸めるように定義せよ。
+</dd>
+<dt>正</dt>
+<dd>誤差を切り捨てるように定義せよ。
+</dd>
+</dl>
+<p>round downは「切り捨て」で、「丸める」は端数処理全般を指す。</p>
+<h4 id="練習問題-3.26">練習問題 3.26</h4>
+<pre><code>引数の２つの複製を分けた版を定義する</code></pre>
+<p>何を分けるのか意味がわかりません。 “We define a version that separates the two copies of the argument”</p>
+<pre><code>1つの引数を複製する代わりに2つの引数に分けた版を定義する</code></pre>
+<h4 id="同">同</h4>
+<p>deduce</p>
+<dl>
+<dt>誤</dt>
+<dd>推論せよ
+</dd>
+<dt>正</dt>
+<dd>導け
+</dd>
+</dl>
+<h4 id="p.172">p.172</h4>
+<dl>
+<dt>誤</dt>
+<dd>2n-1まで行ったら
+</dd>
+<dt>正</dt>
+<dd>2^n-1まで行ったら
+</dd>
+</dl>
+<h4 id="練習問題8.13">練習問題8.13</h4>
+<dl>
+<dt>誤</dt>
+<dd>plus
+</dd>
+<dt>正</dt>
+<dd>puls
+</dd>
+</dl>
+<hr>
+<p>2011/06/15 18:58:41 JST</p>
+<h4 id="p.201">p.201</h4>
+<dl>
+<dt>remaining task, arrange, right way などいろいろ意訳もして</dt>
+<dd><pre><code>After this first step, the remaining task is to arrange the results in the right way.
+We can next use a function concatAll to concatenate the results in each row of the outer matrix:
+
+この最初のステップを行なえば*後は*結果を*適した状態（Stream [β]型に）*に*整理*するだけである.
+*それには*関数 concatAll を使って外側のマトリックスの各行*ごとに*結果を連結する.</code></pre>
+</dd>
+</dl>
+<hr>
+<p>2011/06/15 18:06:16 JST</p>
+<h4 id="p.200">p.200</h4>
+<dl>
+<dt>but は「以外」と訳した方がよいか</dt>
+<dd><pre><code>that does the same job, but without the distraction of the MkMatrix constructor.
+
+この関数は MkMatrix 構成子に煩わされなくて済む点以外は束縛演算と同じ仕事をする。</code></pre>
+</dd>
+<dt>apply を「適用」、according to を「ごとに」（やや意訳）</dt>
+<dd><pre><code>The job of bindm xm f is to apply f to all the values in the matrix xm,
+and to collect together the results into a matrix according to their total cost
+
+bindm xm f の仕事は,マトリックス xm のすべての値に f を適用し,結果を
+全コストごとにまとめて集めてマトリックスとする.</code></pre>
+</dd>
+<dt>plus の訳の抜け？</dt>
+<dd><pre><code>total cost: that is, the cost of the argument of f given by the matrix xm
+plus the cost of computing the result of f .
+
+・・・引数のコストと f の結果を計算するコスト*の和*である.</code></pre>
+</dd>
+</dl>
+<hr>
+<p>2011/06/10 16:20:08 JST – gotoki_no_joe</p>
+<h4 id="p.106-l.5">p.106 l.5</h4>
+<pre><code>を縛る</code></pre>
+<p>これだと「縛る」が何か既出のtechnical termに見えます。 奇をてらわず</p>
+<pre><code>新たな範囲についてcにboundを適用する</code></pre>
+<p>とした方がよいのではないでしょうか。</p>
+<h4 id="p.106-末尾">p.106 末尾</h4>
+<pre><code>以下のプログラムが得られる。</code></pre>
+<p>得られません。最後のパターンは</p>
+<pre><code>fastflipeval′(t : ts) a b = if a′== b then b else fastflipeval′ts a′b
+   where a′= negate (fastflipeval t (negate b) (negate a))</code></pre>
+<p>が正しいです。(原文も誤り)</p>
+<h4 id="練習問題3.3">練習問題3.3</h4>
+<dl>
+<dt>誤</dt>
+<dd>map g
+</dd>
+<dt>正</dt>
+<dd>mapL g
+</dd>
+</dl>
+<h4 id="p.48最終行">p.48最終行</h4>
+<dl>
+<dt>原文</dt>
+<dd>Here, an instance of the type Maybe α may or may not have an instance of the type α：
+</dd>
+<dt>訳例</dt>
+<dd>ここで、Maybe α型のインスタンス(型)は、 α型の<strong>値</strong>を持っても持たなくてもよい(という値をもつ型である)。
+</dd>
+</dl>
+<p>端的には2つめのinstanceが誤訳。</p>
+<hr>
+<p>2011/05/20 20:03:06 JST – gotoki_no_joe</p>
+<h4 id="p.96以降">p.96以降</h4>
+<p>o.005で宣言しているので誤植とはいえないかもしれませんが、 関数合成は\cdotでなく\circで統一して欲しかったところです。 原文の5章は\circにしてあるものをあえて変更したのは理由があるのでしょうか。</p>
+<h4 id="p.98-練習問題5.16">p.98 練習問題5.16</h4>
+<dl>
+<dt>誤</dt>
+<dd>拡張
+</dd>
+<dt>正</dt>
+<dd>展開
+</dd>
+</dl>
+<h4 id="p.99-下から3行目">p.99 下から3行目</h4>
+<pre><code> 「sum, foldr, fstの定義と同様、using節は省略する。」</code></pre>
+<p>『アクティブソースではこれらを省略せよ』という意味にとれる。 また、as well as を誤訳。</p>
+<pre><code> 「紙面節約のためここではusing節およびsum, foldr, fstの定義は示さない(がアクティブソースには必要である)。」</code></pre>
+<p>という意味合い。</p>
+<h4 id="p.101-練習問題5.23">p.101 練習問題5.23</h4>
+<dl>
+<dt>誤</dt>
+<dd>浮動let式に対する
+</dd>
+<dt>正</dt>
+<dd>let式を移動させる (原文では floating <strong>a</strong> let expression となっている。)
+</dd>
+</dl>
+<h4 id="p.102">p.102</h4>
+<pre><code> 「MAGを使った作業では、いつも定義を調整するための実験を繰り返す必要がある。」</code></pre>
+<p>これは上の(変な)lzwの定義を持ち出す言い訳なので、段落を変えるのはおかしい。</p>
+<pre><code> 「MAGを使った作業では、このように対話的に定義を調整しては実験する必要がしばしば生じる。」</code></pre>
+<p>というニュアンス。</p>
+<hr>
+<p>2011/05/07 02:00:56 JST – gotoki_no_joe</p>
+<h4 id="p.89-図5.2">p.89 図5.2</h4>
+<dl>
+<dt>誤</dt>
+<dd><pre><code> definition mindepthp</code></pre>
+</dd>
+<dt>正</dt>
+<dd><pre><code> definition mindepth</code></pre>
+<p>(最後のpが余計)</p>
+</dd>
+</dl>
+<h4 id="p.93-最終行の文">p.93 最終行の文</h4>
+<pre><code> 「〜出現するわけではない」</code></pre>
+<p>は、原文から推測するに</p>
+<pre><code> 「(上で『yが式f yの中だけで使われている式を見つける必要がある』としたが)
+ (書き換え後の式で)xsの出現は、付帯条件の右辺から(そうなって欲しいと)希望する
+ fastreverse xsという形ではなかった」</code></pre>
+<p>というような意味だと思います。</p>
+<h4 id="p.94-の式2つ">p.94 の式2つ</h4>
+<dl>
+<dt>誤</dt>
+<dd><pre><code> foldr (λa b zs → b (a:zs)) (λzs → zs)
+ fastreverse = foldr (λa b zs → b (a:zs)) (λzs → zs) ys</code></pre>
+</dd>
+<dt>正</dt>
+<dd><pre><code> foldr (λa b zs → b (a:zs)) (λzs → zs) xs
+ fastreverse xs ys = foldr (λa b zs → b (a:zs)) (λzs → zs) xs ys</code></pre>
+<p>原文も間違っています。</p>
+</dd>
+</dl>
+<h4 id="練習問題5.12">練習問題5.12</h4>
+<dl>
+<dt>誤</dt>
+<dd><pre><code> flatten (Leaf a) = a</code></pre>
+</dd>
+<dt>正</dt>
+<dd><pre><code> flatten (Leaf a) = [a]</code></pre>
+</dd>
+</dl>
+<h4 id="同最後の文">同、最後の文</h4>
+<p>repeatが誤訳</p>
+<pre><code> 「fastreverseに対して行った上述の導出を繰り返し用いよ。」</code></pre>
+<p>ではなく</p>
+<pre><code> 「本文でfastreverseに対して行ったような導出を(ここで再度)行え。」</code></pre>
+<p>というニュアンス。</p>
+<hr>
+<p>2011/04/15 11:56:42 JST – gotoki_no_joe</p>
+<p>p.86 最終行</p>
+<dl>
+<dt>誤</dt>
+<dd>mid d m
+</dd>
+<dt>正</dt>
+<dd>min d m
+</dd>
+</dl>
+<p>p.87 下から4行目</p>
+<dl>
+<dt>誤</dt>
+<dd>ことに上ではmdの定義を
+</dd>
+<dt>正</dt>
+<dd>ことに上ではmdの仕様を
+</dd>
+</dl>
+<hr>
+<p>2011/02/06 16:05:44 JST – sakai</p>
+<p>p.217</p>
+<dl>
+<dt>誤</dt>
+<dd>addの写像変換子への一般化では，ポイントワイズにした関数を足し合わせる．
+</dd>
+<dt>正</dt>
+<dd>addの写像変換子への一般化では，関数をポイントワイズに足し合わせる．
+</dd>
+</dl>
+<hr>
+<p>2010/08/02 15:44:44 JST</p>
+<p>FOP のサイトにある mag-2.10 のプログラムを GHC 6.12.x でビルドするための patch です。</p>
+<ul>
+<li>(2010/12/08 20:08:29) JST <a href="Books_FOP_MAG.html" class="uri" title="Go to wiki page">Books_FOP_MAG</a> に移動しました。</li>
+</ul>
+<hr>
+<p>2010/07/06 11:50:09 JST</p>
+<p>サポートページに対するつっこみはどこでやったら良いかしら？</p>
+<p>とりあえず第１０章の関連サイトとして、以下のページが挙げられますね。</p>
+<p>Arrow</p>
+<ul>
+<li><a href="https://www.haskell.org/arrows/">Arrow のページ</a></li>
+</ul>
+<p>Arrow 変換子</p>
+<ul>
+<li><a href="https://hackage.haskell.org/package/arrows">arrows: Arrow classes and transformers</a></li>
+</ul>
+<p>Arrow 記法</p>
+<ul>
+<li><a href="https://hackage.haskell.org/package/arrowp">arrowp: preprocessor translating arrow notation into Haskell 98</a></li>
+</ul>
+<p>GHC での Arrow の定義</p>
+<ul>
+<li><a href="https://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Control-Category.html">Control.Category モジュール</a></li>
+<li><a href="https://www.haskell.org/ghc/docs/6.12.2/html/libraries/base-4.2.0.1/Control-Arrow.html">Control.Arrow モジュール</a></li>
+</ul>
+<p>arrows パッケージと arrowp パッケージはいずれも第１０章の著者が作ったパッケージで、かつ <a href="https://www.haskell.org/arrows/download.html">元々は Arrow のページで紹介されていたソフトウェア</a>なので関連サイトとして紹介しておく必要があると思います。</p>
+<ul>
+<li>一部をのぞいて反映しました。–nobsun(2010/07/09 19:07:48 JST)</li>
+</ul>
+<hr>
+<p>2010/06/18 10:33:57 JST –nobsun</p>
+<p>p.iv 4行目</p>
+<dl>
+<dt>誤</dt>
+<dd>ついてのが理解だけが
+</dd>
+<dt>正</dt>
+<dd>ついての理解だけが
+</dd>
+</dl>
+<hr>
+<p>2010/06/03 09:00:03 JST –nobsun</p>
+<p>p.42 prop_Exclusive の型</p>
+<dl>
+<dt>誤</dt>
+<dd><pre><code> prop_Exclusive :: Form -&gt; Property</code></pre>
+</dd>
+<dt>正</dt>
+<dd><pre><code> prop_Exclusive :: Form -&gt; Bool</code></pre>
+</dd>
+</dl>
+<hr>
+<p>Last modified : 2011/12/05 08:59:00 JST</p></div>
+</div>
+            <div id="footer">powered by <a href="https://github.com/jgm/gitit/tree/master/">gitit</a> × <a href="https://haskellonheroku.com/">Haskell on Heroku</a></div>
+          </div>
+        </div>
+        <div id="sidebar" class="yui-b first">
+          <div id="logo">
+  <a href="_-1.html" alt="site logo" title="Go to top page"><img src="logo.png"></a>
+</div>
+                      <div class="sitenav">
+  <fieldset>
+    <legend>Site</legend>
+    <ul>
+      <li><a href="_-1.html">Front page</a></li>
+      <li><a href="_index.html">All pages</a></li>
+      <li><a href="_categories.html">Categories</a></li>
+      <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
+      <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
+              <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
+      
+      
+      <li><a href="Help.html">Help</a></li>
+    </ul>
+    <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
+     <input type="text" name="patterns" id="patterns" value="">
+     <input type="submit" name="search" id="search" value="Search">
+    </form>
+    <form action="https://wiki.haskell.jp/_go" method="post" id="goform">
+      <input type="text" name="gotopage" id="gotopage" value="">
+      <input type="submit" name="go" id="go" value="Go">
+    </form>
+  </fieldset>
+</div>
+          
+                      <div class="pageTools">
+  <fieldset>
+    <legend>This page</legend>
+    <ul>
+      <li><a href="https://wiki.haskell.jp/_showraw/Old/sampou.org/Books_FOP_BugReport">Raw page source</a></li>
+      <li><a href="https://wiki.haskell.jp/Old/sampou.org/Books_FOP_BugReport?printable">Printable version</a></li>
+      <li><a href="https://wiki.haskell.jp/_delete/Old/sampou.org/Books_FOP_BugReport">Delete this page</a></li>
+      
+    </ul>
+    <form action="https://wiki.haskell.jp/Old/sampou.org/Books_FOP_BugReport" method="post" id="exportbox"><select name="format"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
+  </fieldset>
+</div>
+          
+          
+        </div>
+    </div>
+    <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+/* <![CDATA[ */
+  $.get("/_user", {}, function(username, status) {
+     $("#logged_in_user").text(username);
+     if (username == "") {  // nobody logged in
+        $("#logoutlink").hide();
+        $("#loginlink").show();
+     } else {
+        $("#logoutlink").show();
+        $("#loginlink").hide();
+     };
+   });
+/* ]]> */
+</script>
+  
+</body></html>
