@@ -426,13 +426,9 @@
   
   <div id="wikipage">
 <h1 id="ようこそhaskell-jp-wikiへ">ようこそHaskell-jp wikiへ!</h1>
-<h2 id="このサイトについて">このサイトについて</h2>
+<h2 id="このサイトについて">このサイトについて（現在は編集できない状態で公開しています！）</h2>
 <p>このWikiはHaskell関連情報を日本語でまとめるためのポータルサイトです。<br>
-<a href="http://gitit.net/">gitit</a>というWikiエンジン（<strong>もちろんHaskell製</strong>）で運用されています。</p>
-<h2 id="使い方">使い方</h2>
-<p><a href="https://github.com/">GitHub</a>のアカウントを取得した上で、右上の「Login / Get an account」をクリックし、「Authorize application」ボタンを押せば、どなたでも自由に書き込めるようになります。</p>
-<p>新しいページやディレクトリを作る時は、直接WebブラウザのURL欄に以下のような文字列を入力してください。</p>
-<pre><code>https://wiki.haskell.jp/ディレクトリ名/ページ名</code></pre>
+  2022年11月まで<a href="http://gitit.net/">gitit</a>というWikiエンジン（もちろんHaskell製）で運用されておりましたが、ホスティングサービスとして利用していたHerokuの無料プランが廃止されたことや、長期間編集される見込みがないことから、現在はGitHub Pagesを利用して<strong>読み込み専用</strong>で公開しています。編集用のページや編集履歴にアクセスしても404 Not Foundが返ってきます。編集履歴を閲覧したい場合は<a href="https://github.com/haskell-jp/haskell-jp-wiki/commits/master">Gitリポジトリーにおける履歴</a>からご覧ください。編集したい場合は今後は<a href="https://scrapbox.io/haskell-shoen/">haskell-shoen</a>の利用をご検討ください。</p>
 <h2 id="コンテンツ">コンテンツ</h2>
 <ul>
 <li><a href="MailingList.html">メーリングリスト</a></li>
@@ -451,12 +447,7 @@
 <li><p><a href="_.html">www.sampou.org/cgi-bin/haskell.cgiから引っ越してきたページ達</a></p></li>
 </ul>
 <h2 id="おしらせ">おしらせ</h2>
-<p>ベータ運用中です。</p>
-<p><a href="http://www.sampou.org/cgi-bin/haskell.cgi">sampou.org</a> から <a href="_.html" class="uri" title="Go to wiki page">Old/sampou.org/</a> カテゴリへデータを移管完了しました。 一部WikiNameのリンク切れが見つかっており、対策検討中です。</p>
-<h3 id="herokuに移行しました">Herokuに移行しました</h3>
-<p>2014年11月29日以降、<a href="https://github.com/mietek">@mietek</a> さんが作成された<a href="https://haskellonheroku.com/">Haskell on Heroku</a> というbuildpackを利用して、Herokuに移行しました。</p>
-<p>その副作用として、<strong>これまでに保存していたwikiアカウントは利用できなくなり、GitHubのOAuthを利用した登録のみ</strong>となりました。 ご了承ください。</p>
-<p>2017年4月9日: 上記に関連して、編集したデータを保存するリポジトリーを <a href="https://github.com/haskell-jp/haskell-jp-wiki" class="uri">https://github.com/haskell-jp/haskell-jp-wiki</a> に移行しました。</p>
+<p>2022年11月20日、ホスティングサービスとして利用していたHerokuの無料プランの廃止が決まったことや、長期間編集される見込みがないことから、GitHub Pagesを利用して<strong>読み込み専用</strong>で公開することにしました。今後は編集用のページや編集履歴にアクセスしても404 Not Foundが返ってきます。編集履歴を閲覧したい場合は<a href="https://github.com/haskell-jp/haskell-jp-wiki/commits/master">Gitリポジトリーにおける履歴</a>からご覧ください。編集したい場合は今後は<a href="https://scrapbox.io/haskell-shoen/">haskell-shoen</a>の利用をご検討ください。</p>
 <h2 id="ライセンスについて">ライセンスについて</h2>
 <p>本サイトに適用されるライセンスについては <a href="License.html">Licenseページ</a> にまとめています。</p></div>
 </div>
@@ -477,8 +468,6 @@
       <li><a href="https://wiki.haskell.jp/_random">Random page</a></li>
       <li><a href="https://wiki.haskell.jp/_activity">Recent activity</a></li>
               <li><a href="https://wiki.haskell.jp/_upload">Upload a file</a></li>
-      
-      
       <li><a href="Help.html">Help</a></li>
     </ul>
     <form action="https://wiki.haskell.jp/_search" method="get" id="searchform">
@@ -491,7 +480,6 @@
     </form>
   </fieldset>
 </div>
-          
                       <div class="pageTools">
   <fieldset>
     <legend>This page</legend>
@@ -504,8 +492,6 @@
     <form action="https://wiki.haskell.jp/Front%20Page" method="post" id="exportbox"><select name="format" data-cip-id="cIPJQ342845639"><option value="LaTeX" selected="selected">LaTeX</option><option value="ConTeXt">ConTeXt</option><option value="Texinfo">Texinfo</option><option value="reST">reST</option><option value="Markdown">Markdown</option><option value="CommonMark">CommonMark</option><option value="Plain text">Plain text</option><option value="MediaWiki">MediaWiki</option><option value="Org-mode">Org-mode</option><option value="ICML">ICML</option><option value="Textile">Textile</option><option value="AsciiDoc">AsciiDoc</option><option value="Man page">Man page</option><option value="DocBook">DocBook</option><option value="DZSlides">DZSlides</option><option value="Slidy">Slidy</option><option value="S5">S5</option><option value="EPUB">EPUB</option><option value="ODT">ODT</option><option value="DOCX">DOCX</option><option value="RTF">RTF</option></select>&nbsp;<input type="submit" name="export" id="export" value="Export"></form>
   </fieldset>
 </div>
-          
-          
         </div>
     </div>
     <script src="jquery.min.js" type="text/javascript"></script><script src="jquery-ui.min.js" type="text/javascript"></script><script src="footnotes.js" type="text/javascript"></script><script src="MathJax.js" type="text/javascript"></script>
